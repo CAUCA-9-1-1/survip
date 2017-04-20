@@ -6,6 +6,7 @@ import { MaterialModule } from '@angular/material';
 
 import { IgoModule } from 'igo2';
 
+import { SharedModule } from './shared/shared.module';
 import { FormModule } from './form/form.module';
 
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { AppComponent } from './app.component';
     MaterialModule.forRoot(),
     IgoModule.forRoot(),
 
+    SharedModule,
     FormModule
   ],
   providers: [],

@@ -16,6 +16,7 @@ export class MenuItemComponent {
   }
   private _item: MenuItem;
 
+  @Output() focus: EventEmitter<MenuItem> = new EventEmitter();
   @Output() select: EventEmitter<MenuItem> = new EventEmitter();
 
   constructor() { }

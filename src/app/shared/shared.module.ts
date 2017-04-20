@@ -10,6 +10,7 @@ import { IgoModule } from 'igo2';
   ],
   declarations: [],
   exports: [
+    CommonModule,
     IgoModule
   ]
 })
