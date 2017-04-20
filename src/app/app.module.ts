@@ -6,6 +6,8 @@ import { MaterialModule } from '@angular/material';
 
 import { IgoModule } from 'igo2';
 
+import { FormModule } from './form/form.module';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -16,9 +18,10 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-
     MaterialModule.forRoot(),
-    IgoModule.forRoot()
+    IgoModule.forRoot(),
+
+    FormModule
   ],
   providers: [],
   bootstrap: [AppComponent]
