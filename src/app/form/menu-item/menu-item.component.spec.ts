@@ -21,13 +21,10 @@ describe('MenuItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MenuItemComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {
-    component.item = {
-      name: 'foo',
-      title: 'bar'
-    };
     expect(component).toBeTruthy();
   });
 });
