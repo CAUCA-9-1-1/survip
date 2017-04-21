@@ -2,10 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SharedModule } from '../../shared/shared.module';
 
-<<<<<<< 546ab8180cf7c746a61dba0a9c7a3448e71228b2
 import { MenuItemComponent } from '../menu-item/menu-item.component';
-=======
->>>>>>> feat(sidenav): sidenav with demo form menu
 import { MenuComponent } from './menu.component';
 
 describe('MenuComponent', () => {
@@ -18,10 +15,7 @@ describe('MenuComponent', () => {
         SharedModule
       ],
       declarations: [
-<<<<<<< 546ab8180cf7c746a61dba0a9c7a3448e71228b2
         MenuItemComponent,
-=======
->>>>>>> feat(sidenav): sidenav with demo form menu
         MenuComponent
       ]
     })
