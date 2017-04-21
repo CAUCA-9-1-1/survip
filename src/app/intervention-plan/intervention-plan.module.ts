@@ -4,7 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {AdditionalInformationComponent} from './additional-information/additional-information.component';
+import {AddressComponent} from './address/address.component';
 import {ProtocolComponent} from './protocol/protocol.component';
+import {AddressService} from './shared/address.service';
 
 @NgModule({
   imports: [
@@ -14,12 +16,17 @@ import {ProtocolComponent} from './protocol/protocol.component';
   ],
   exports: [
     AdditionalInformationComponent,
+    AddressComponent,
     ProtocolComponent,
     FlexLayoutModule
   ],
   declarations: [
     AdditionalInformationComponent,
+    AddressComponent,
     ProtocolComponent
+  ],
+  providers: [
+    AddressService
   ]
 })
 export class InterventionPlanModule { }
