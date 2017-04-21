@@ -13,7 +13,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,,
+        RouterTestingModule,
         IgoModule.forRoot(),
 
         SharedModule,

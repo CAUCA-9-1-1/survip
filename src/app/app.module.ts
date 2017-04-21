@@ -17,9 +17,6 @@ import {
   InterventionRoutingModule
 } from './pages';
 
-import { SharedModule } from './shared/shared.module';
-import { FormModule } from './form/form.module';
-
 
 @NgModule({
   declarations: [
@@ -37,10 +34,7 @@ import { FormModule } from './form/form.module';
 
     InterventionModule,
     InterventionRoutingModule,
-    AppRoutingModule,
-
-    SharedModule,
-    FormModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
