@@ -1,5 +1,5 @@
 export interface MenuItem {
   name: string;
-  title?: string;
+  title: string;
   tooltip?: string;
 }

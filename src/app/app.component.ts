@@ -13,8 +13,8 @@ export class AppComponent implements OnInit {
   public map = new IgoMap();
   public mapView = {
     projection: 'EPSG:3857',
-    center: [-70.545006, 46.056211],
-    zoom: 15
+    center: [-70.685006, 46.126211],
+    zoom: 14
   };
 
   public menuItems = [
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
       source: {
         url: 'https://mapgearsdev.cauca.ca/app/map/44/0361fdc9-255c-49c0-b76b-92e98d74b788.map',
         params: {
-          layers: 'default',
+          layers: 'layer431,layer432',
           version: '1.3.0'
         },
         projection: 'EPSG:3857'
