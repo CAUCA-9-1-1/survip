@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 
 import {SharedModule} from '../shared/shared.module';
-import {BuildingComponent} from './building/building.component';
-import {BuildingDetailComponent} from './building-detail/building-detail.component';
+import { BuildingComponent } from './building/building.component';
+import { BuildingDetailComponent } from './building-detail/building-detail.component';
+import { ImplantationPlanComponent } from './implantation-plan/implantation-plan.component';
 
 @NgModule({
   imports: [
@@ -10,11 +11,13 @@ import {BuildingDetailComponent} from './building-detail/building-detail.compone
   ],
   exports: [
     BuildingDetailComponent,
-    BuildingComponent
+    BuildingComponent,
+    ImplantationPlanComponent
   ],
   declarations: [
     BuildingDetailComponent,
     BuildingComponent,
+    ImplantationPlanComponent,
   ],
   providers: [
       ]
