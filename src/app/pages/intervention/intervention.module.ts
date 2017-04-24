@@ -7,6 +7,7 @@ import { FormModule } from '../../form/form.module';
 import {InterventionPlanModule} from '../../intervention-plan/intervention-plan.module';
 import {ReportComponent} from './report/report.component';
 import { MapsComponent } from './maps/maps.component';
+import { SurveyComponent } from './survey/survey.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { MapsComponent } from './maps/maps.component';
   ],
   declarations: [
     ReportComponent,
-    MapsComponent
+    MapsComponent,
+    SurveyComponent
   ]
 })
 export class InterventionModule { }
