@@ -6,6 +6,7 @@ import { BuildingDetailComponent } from './building-detail/building-detail.compo
 import { ImplantationPlanComponent } from './implantation-plan/implantation-plan.component';
 import { ContactComponent } from './contact/contact.component';
 import { PersonRequiringAssistanceComponent } from './person-requiring-assistance/person-requiring-assistance.component';
+import { DangerousMaterialComponent } from './dangerous-material/dangerous-material.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { PersonRequiringAssistanceComponent } from './person-requiring-assistanc
     BuildingComponent,
     ImplantationPlanComponent,
     ContactComponent,
-    PersonRequiringAssistanceComponent
+    PersonRequiringAssistanceComponent,
+    DangerousMaterialComponent
   ],
   declarations: [
     BuildingDetailComponent,
