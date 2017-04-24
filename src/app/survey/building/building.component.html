@@ -1,0 +1,38 @@
+<div>
+  <div>Niveau de risque</div>
+  <div>Faible</div>
+</div>
+<div>
+  <div>Affectation</div>
+  <div>1000 - Résidence</div>
+</div>
+<div>
+  <div>Matricule</div>
+  <div>98354671000000000</div>
+</div>
+<div>
+  <div>Alias</div>
+  <div>Ferme de M. Girouard</div>
+</div>
+<div>
+  <div>Intersection</div>
+  <div>Rue 1</div>
+  <div>Rue 2</div>
+</div>
+<div>
+  <div>Parcours</div>
+  <div></div>
+</div>
+<div>
+  <div>Nombre bâtiments :</div>
+  <div>7</div>
+</div>
+<div>
+  <div>Bâtiments</div>
+  <div *ngFor='let building of buildings'>
+    <app-building-detail [building]='building'></app-building-detail>
+  </div>
+</div>
+<div>
+  <button>Compléter section</button>
+</div>
