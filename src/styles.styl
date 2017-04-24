@@ -43,3 +43,13 @@ body {
   font-feature-settings: 'liga' 1;
   -ms-font-feature-settings: 'liga' 1;
 }
+
+.content-under-toolbar {
+  height: calc(100% - 64px);
+}
+
+@media only screen and (max-width: 600px) {
+  .content-under-toolbar {
+    height: calc(100% - 56px);
+  }
+}

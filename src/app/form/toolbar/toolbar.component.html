@@ -1,0 +1,5 @@
+<md-toolbar>
+  <ng-template ngFor let-item [ngForOf]="items">
+    <button (click)="goto(item.path)" md-button>{{item.name}}</button>
+  </ng-template>
+</md-toolbar>

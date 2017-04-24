@@ -1,4 +1,25 @@
-<p>
-  survey works!
-</p>
-<app-survey-dangerous-material></app-survey-dangerous-material>
+<md-sidenav-container>
+  <md-sidenav #sidenav mode="push" align="end">
+    <app-menu [items]="menuItems" (select)="select($event)"></app-menu>
+  </md-sidenav>
+
+  <md-toolbar>
+    <button md-button (click)="back()"><md-icon>keyboard_arrow_left</md-icon>Annuler</button>
+    <span class="spacer"></span>
+    <span>Adresse</span>
+    <span class="spacer"></span>
+    <button md-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
+  </md-toolbar>
+
+  <div [ngSwitch]="selectedMenu">
+    <div *ngSwitchCase="'contacts'">
+      <app-survey-contact></app-survey-contact>
+    </div>
+    <div *ngSwitchCase="'dangerousMaterial'">
+      <app-survey-dangerous-material></app-survey-dangerous-material>
+    </div>
+    <div *ngSwitchDefault>
+      <app-survey-building></app-survey-building>
+    </div>
+  </div>
+</md-sidenav-container>

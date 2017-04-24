@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { MenuItem } from '../shared/menu-item.interface';
 
@@ -16,14 +17,15 @@ export class MenuComponent {
   }
   private _items: MenuItem[];
 
-  constructor() { }
+  @Output() select: EventEmitter<MenuItem> = new EventEmitter();
+
+  constructor(private router: Router) { }
 
   handleItemFocus(item: MenuItem) {
     alert(`${item.name} focused!`);
   }
 
   handleItemSelect(item: MenuItem) {
-    alert(`${item.name} selected!`);
+    this.select.emit(item);
   }
-
 }
