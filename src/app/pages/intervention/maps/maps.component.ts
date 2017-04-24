@@ -17,44 +17,19 @@ export class MapsComponent implements OnInit {
 
   public menuItems = [
     {
-      name: 'batiments',
-      title: 'Bâtiments',
-      tooltip: 'Bâtiments'
+      name: 'maps',
+      title: 'Carte',
+      tooltip: 'Carte'
     },
     {
-      name: 'eau',
-      title: 'Alimentation en eau',
-      tooltip: 'Alimentation en eau'
+      name: 'report',
+      title: 'Rapport',
+      tooltip: 'Rapport'
     },
     {
-      name: 'implantation',
-      title: 'Implantation',
-      tooltip: 'Implantation'
-    },
-    {
-      name: 'matieres',
-      title: 'Matières dangereuses',
-      tooltip: 'Matières dangereuses'
-    },
-    {
-      name: 'pnap',
-      title: 'PNAP',
-      tooltip: 'PNAP'
-    },
-    {
-      name: 'risques',
-      title: 'Risques particuliers',
-      tooltip: 'Risques particuliers'
-    },
-    {
-      name: 'incendie',
-      title: 'Protection incendie',
-      tooltip: 'Protection incendie'
-    },
-    {
-      name: 'contacts',
-      title: 'Personnes contact',
-      tooltip: 'Personnes contact'
+      name: 'survey',
+      title: 'Sondage',
+      tooltip: 'Sondage'
     }
   ];
 
