@@ -5,6 +5,7 @@ import { BuildingComponent } from './building/building.component';
 import { BuildingDetailComponent } from './building-detail/building-detail.component';
 import { ImplantationPlanComponent } from './implantation-plan/implantation-plan.component';
 import { ContactComponent } from './contact/contact.component';
+import { PersonRequiringAssistanceComponent } from './person-requiring-assistance/person-requiring-assistance.component';
 
 @NgModule({
   imports: [
@@ -14,13 +15,15 @@ import { ContactComponent } from './contact/contact.component';
     BuildingDetailComponent,
     BuildingComponent,
     ImplantationPlanComponent,
-    ContactComponent
+    ContactComponent,
+    PersonRequiringAssistanceComponent
   ],
   declarations: [
     BuildingDetailComponent,
     BuildingComponent,
     ImplantationPlanComponent,
     ContactComponent,
+    PersonRequiringAssistanceComponent,
   ],
   providers: [
       ]
