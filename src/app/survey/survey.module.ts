@@ -7,6 +7,7 @@ import { ImplantationPlanComponent } from './implantation-plan/implantation-plan
 import { ContactComponent } from './contact/contact.component';
 import { PersonRequiringAssistanceComponent } from './person-requiring-assistance/person-requiring-assistance.component';
 import { DangerousMaterialComponent } from './dangerous-material/dangerous-material.component';
+import { FireProtectionComponent } from './fire-protection/fire-protection.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { DangerousMaterialComponent } from './dangerous-material/dangerous-mater
     ImplantationPlanComponent,
     ContactComponent,
     PersonRequiringAssistanceComponent,
-    DangerousMaterialComponent
+    DangerousMaterialComponent,
+    FireProtectionComponent
   ],
   declarations: [
     BuildingDetailComponent,
@@ -26,7 +28,9 @@ import { DangerousMaterialComponent } from './dangerous-material/dangerous-mater
     ImplantationPlanComponent,
     ContactComponent,
     PersonRequiringAssistanceComponent,
-    DangerousMaterialComponent
+    FireProtectionComponent,
+    DangerousMaterialComponent,
+    FireProtectionComponent
   ],
   providers: [
       ]
