@@ -19,7 +19,10 @@ import { IgoModule } from 'igo2';
   declarations: [],
   exports: [
     CommonModule,
+    FormsModule,
+    FlexLayoutModule,
     MaterialModule,
+    BrowserModule,
     IgoModule
   ]
 })
