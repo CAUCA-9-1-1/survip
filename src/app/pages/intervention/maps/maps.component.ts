@@ -82,5 +82,4 @@ export class MapsComponent implements OnInit {
       }
     } as WMSLayerOptions).subscribe(layer => this.map.addLayer(layer));
   }
-
 }

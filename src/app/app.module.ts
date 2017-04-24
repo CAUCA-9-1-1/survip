@@ -6,7 +6,6 @@ import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { IgoModule } from 'igo2';
-
 import { SharedModule } from './shared/shared.module';
 import { FormModule } from './form/form.module';
 
@@ -16,7 +15,6 @@ import {
   InterventionModule,
   InterventionRoutingModule
 } from './pages';
-
 
 @NgModule({
   declarations: [
@@ -31,7 +29,6 @@ import {
 
     SharedModule,
     FormModule,
-
     InterventionModule,
     InterventionRoutingModule,
     AppRoutingModule

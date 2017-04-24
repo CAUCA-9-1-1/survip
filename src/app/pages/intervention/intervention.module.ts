@@ -8,7 +8,6 @@ import {InterventionPlanModule} from '../../intervention-plan/intervention-plan.
 import {ReportComponent} from './report/report.component';
 import { MapsComponent } from './maps/maps.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
