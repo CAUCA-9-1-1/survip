@@ -26,6 +26,7 @@ import { DangerousMaterialComponent } from './dangerous-material/dangerous-mater
     ImplantationPlanComponent,
     ContactComponent,
     PersonRequiringAssistanceComponent,
+    DangerousMaterialComponent
   ],
   providers: [
       ]
