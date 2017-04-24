@@ -1,37 +1,82 @@
-<!--<md-input-container>
-  <input mdInput>
-</md-input-container>-->
-<div fxLayout="row">
-  <div>Affectation</div>
-  <div>1000 - Résidence</div>
-</div>
-<div fxLayout="row">
-  <div>Matricule</div>
-  <div>98354671000000000</div>
-</div>
-<div fxLayout="row">
-  <div>Alias</div>
-  <div>Ferme de M. Girouard</div>
-</div>
-<div fxLayout="row">
-  <div>Intersection</div>
-  <div>Rue 1</div>
-  <div>Rue 2</div>
-</div>
-<div fxLayout="row">
-  <div>Parcours</div>
-  <div></div>
-</div>
-<div fxLayout="row">
-  <div>Nombre bâtiments :</div>
-  <div>7</div>
-</div>
-<div>
-  <div>Bâtiments</div>
-  <div *ngFor='let building of buildings'>
-    <app-building-detail [building]='building'></app-building-detail>
+<div class="container" fxLayout="row" fx-layout-sm="column" fxLayoutAlign="start start" style="">
+  <div fxFlexOffset="20px">
+    <div>
+      <md-input-container>
+        <input mdInput disabled placeholder="Niveau de risque" value="Faible" floatPlaceholder="always">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input disabled mdInput placeholder="Affectation" value="1000 - Résidence" floatPlaceholder="always">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input disabled mdInput placeholder="Matricule" value="98354671000000000" floatPlaceholder="always">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input disabled mdInput placeholder="Alias" value="Ferme de M. Girouard" floatPlaceholder="always">
+      </md-input-container>
+    </div>
+  </div>
+  <div>
+    <div>
+      <md-input-container>
+        <input mdInput disabled value="Scott (Avenue)" placeholder="Intersection" floatPlaceholder="always">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input mdInput disabled value="Rapide-Plat Sud (Chemin du)" placeholder="Intersection 2" floatPlaceholder="always">
+      </md-input-container>
+    </div>
   </div>
 </div>
+
+<div fxLayout="row">
+  <md-card>
+    <md-card-title>Parcours</md-card-title>
+    <md-card-content>
+      <md-list>
+        <md-list-item>
+          <p md-line>
+            <span>Caserne 1</span>
+            <span>DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
+          </p>
+          <md-icon md-list-icon>mode_edit</md-icon>
+        </md-list-item>
+        <md-list-item>
+          <p md-line>
+            <span>Caserne 2</span>
+            <span>DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
+          </p>
+          <md-icon md-list-icon>mode_edit</md-icon>
+        </md-list-item>
+        <md-list-item>
+          <p md-line>
+            <span>Caserne 3</span>
+            <span>DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
+          </p>
+          <md-icon md-list-icon>mode_edit</md-icon>
+        </md-list-item>
+      </md-list>
+    </md-card-content>
+  </md-card>
+  <div></div>
+</div>
 <div>
-  <button>Compléter section</button>
+  <md-card>
+    <md-card-title>7 bâtiments</md-card-title>
+    <md-card-content>
+      <div *ngFor='let building of buildings'>
+        <app-survey-building-detail [building]='building'></app-survey-building-detail>
+      </div>
+      <div style="clear:both"></div>
+    </md-card-content>
+  </md-card>
+</div>
+<div fxLayout="row">
+  <button md-raised-button>Compléter section</button>
 </div>

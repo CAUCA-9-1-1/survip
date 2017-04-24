@@ -1,40 +1,41 @@
-<div>{{building.alias}}</div>
-<div fxLayout="row">
-  <div>D.I.E.</div>
-  <div><input type="number" value="627"></div>
-  <div>
-    <md-select placeHolder="">
+<md-card class="card">
+  <md-card-title>{{building.alias}}</md-card-title>
+  <md-card-content>
+  <div fxLayout="row" class="line">
+    <md-input-container>
+      <input mdInput type="number" value="627" placeholder="D.I.E.">
+    </md-input-container>
+    <md-select placeholder="Unité" floatPlaceholder="always" class="selector" [(ngModel)]='selectedDieMeasuring'>
       <md-option value="1">GIMP</md-option>
     </md-select>
   </div>
-</div>
-<div fxLayout="row">
-  <div>Construction</div>
-  <div>
-    <select>
-      <option value="1" selected>Combustible</option>
-      <option value="2">Incombustible</option>
-    </select>
+  <div fxLayout="row" class="line">
+    <md-select placeholder="Construction" floatPlaceholder="always">
+      <md-option value="1" selected>Combustible</md-option>
+      <md-option value="2">Incombustible</md-option>
+    </md-select>
   </div>
-</div>
-<div fxLayout="row">
-  <div>Solives</div>
-  <div>
-    <select>
-      <option value="1" selected>Bois plein</option>
-      <option value="2">Poutrelle ajourée incombustible</option>
-    </select>
+  <div fxLayout="row" class="line">
+    <md-select placeholder="Solives" floatPlaceholder="always">
+      <md-option value="1" selected>Bois plein</md-option>
+      <md-option value="2">Poutrelle ajourée incombustible</md-option>
+    </md-select>
   </div>
-</div>
-<div fxLayout="row">
-  <div>Hauteur</div>
-  <div><input type="number" value="20"></div>
-</div>
-<div fxLayout="row">
-  <div>Nb. étages</div>
-  <div><input type="number" value="2"></div>
-</div>
-<div fxLayout="row">
-  <div>Photo</div>
-  <button>Choisir photo...</button>
-</div>
+  <div fxLayout="row" class="line">
+    <md-input-container>
+      <input mdInput type="number" value="20" placeholder="Hauteur" floatPlaceholder="always">
+    </md-input-container>
+  </div>
+  <div fxLayout="row" class="line">
+    <md-input-container>
+      <input mdInput type="number" value="2" placeholder="Nb. étages" floatPlaceholder="always">
+    </md-input-container>
+  </div>
+  <div fxLayout="row" class="line">
+    <img src="../../../assets/images/protocol.png" class="buildingImage">
+  </div>
+  <div>
+    <button md-raised-button>Choisir photo...<md-icon>photo_camera</md-icon></button>
+  </div>
+  </md-card-content>
+</md-card>
