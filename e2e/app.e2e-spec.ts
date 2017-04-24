@@ -1,6 +1,6 @@
 import { SurviPPage } from './app.po';
 
-describe('survi-p App', () => {
+describe('survip App', () => {
   let page: SurviPPage;
 
   beforeEach(() => {

@@ -6,6 +6,8 @@ import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { IgoModule } from 'igo2';
+import { SharedModule } from './shared/shared.module';
+import { FormModule } from './form/form.module';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing';
@@ -23,10 +25,10 @@ import {
     FormsModule,
     HttpModule,
     RouterModule.forRoot([]),
-
-    MaterialModule.forRoot(),
     IgoModule.forRoot(),
 
+    SharedModule,
+    FormModule,
     InterventionModule,
     InterventionRoutingModule,
     AppRoutingModule

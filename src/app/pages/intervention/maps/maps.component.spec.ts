@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SharedModule } from '../../../shared/shared.module';
+import { FormModule } from '../../../form/form.module';
+
 import { MapsComponent } from './maps.component';
 
 describe('MapsComponent', () => {
@@ -8,6 +11,10 @@ describe('MapsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        SharedModule,
+        FormModule
+      ],
       declarations: [ MapsComponent ]
     })
     .compileComponents();

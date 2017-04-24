@@ -1,3 +1,9 @@
-<igo-map-browser [map]="map" [view]="mapView">
-  <igo-zoom color="primary" [map]="map"></igo-zoom>
-</igo-map-browser>
+<md-sidenav-container>
+  <md-sidenav mode="side" [opened]="true">
+    <app-menu [items]="menuItems"></app-menu>
+  </md-sidenav>
+
+  <igo-map-browser [map]="map" [view]="mapView">
+    <igo-zoom color="primary" [map]="map"></igo-zoom>
+  </igo-map-browser>
+</md-sidenav-container>
