@@ -1,0 +1,15 @@
+<div>
+    <table>
+        <tr>
+            <th>{{'name'}}</th>
+            <th>Numéro</th>
+            <th>Détails</th>
+        </tr>
+        <tr *ngFor="let contact of contacts">
+            <td>{{contact.Name}}</td>
+            <td>{{contact.PhoneNumber}}</td>
+            <td>{{contact.SupplementaryInformation}}</td>
+        </tr>
+    </table>
+</div>
+

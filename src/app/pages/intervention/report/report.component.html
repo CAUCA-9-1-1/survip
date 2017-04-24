@@ -1,3 +1,38 @@
-<p>
-  intervention report works!
-</p>
+<md-sidenav-container>
+  <md-sidenav mode="side" [opened]="true">
+    <app-menu [items]="menuItems"></app-menu>
+  </md-sidenav>
+
+  <div class="full">
+    <img src="" />
+    <div>
+      <h1>Fiche d'intervention du 2030, 127E RUE</h1><br />
+
+      <span>NIVEAU DE RISQUE: <b style="color: red">ÉLEVÉ</b></span>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around">
+    <div fxFlex="50">
+      <app-protocol></app-protocol>
+      <div class="title">Adresse</div>
+      <app-address></app-address>
+      <div class="title">Alimentation en eau</div>
+      <app-water-supply></app-water-supply>
+      <div class="title">Bâtiments</div>
+      <app-building-information></app-building-information>
+      <div class="title">Protection incendie</div>
+      <app-fire-protection></app-fire-protection>
+    </div>
+    <div fxFlex="50">
+      <app-implantation></app-implantation>
+      <div class="title">Risques particuliers</div>
+      <app-specific-risks></app-specific-risks>
+      <div class="title">PNAP</div>
+      <app-person-requiring-assistance></app-person-requiring-assistance>
+      <div class="title">Information supplémentaire</div>
+      <app-additional-information></app-additional-information>
+      <div class="title">Contact(s)</div>
+      <app-contacts></app-contacts>
+    </div>
+  </div>
+</md-sidenav-container>
