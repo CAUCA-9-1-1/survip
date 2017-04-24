@@ -1,26 +1,40 @@
 <div>{{building.alias}}</div>
-<div>
+<div fxLayout="row">
   <div>D.I.E.</div>
   <div><input type="number" value="627"></div>
   <div>
+    <md-select placeHolder="">
+      <md-option value="1">GIMP</md-option>
+    </md-select>
+  </div>
+</div>
+<div fxLayout="row">
+  <div>Construction</div>
+  <div>
     <select>
-      <option value="1" selected>GIMP</option>
+      <option value="1" selected>Combustible</option>
+      <option value="2">Incombustible</option>
     </select>
   </div>
 </div>
-<div>
-  <div>Construction</div>
-  <div></div>
-</div>
-<div>
+<div fxLayout="row">
   <div>Solives</div>
-  <div></div>
+  <div>
+    <select>
+      <option value="1" selected>Bois plein</option>
+      <option value="2">Poutrelle ajourée incombustible</option>
+    </select>
+  </div>
 </div>
-<div>
+<div fxLayout="row">
   <div>Hauteur</div>
-  <!--<div><input type="number" [(ngModel)]='building.height'></div>-->
+  <div><input type="number" value="20"></div>
 </div>
-<div>
+<div fxLayout="row">
   <div>Nb. étages</div>
-  <!--<div><input type="number" [(ngModel)]='building.storeyCount'></div>-->
+  <div><input type="number" value="2"></div>
+</div>
+<div fxLayout="row">
+  <div>Photo</div>
+  <button>Choisir photo...</button>
 </div>
