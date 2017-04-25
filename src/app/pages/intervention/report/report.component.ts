@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WindowRefService } from '../../../shared/window-ref.service';
 
 @Component({
   selector: 'app-intervention-report',
@@ -8,7 +7,7 @@ import { WindowRefService } from '../../../shared/window-ref.service';
 })
 export class ReportComponent implements OnInit {
 
-  constructor(private windowRef: WindowRefService) {}
+  constructor() {}
 
   ngOnInit() {
   }
