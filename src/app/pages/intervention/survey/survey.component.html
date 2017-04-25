@@ -15,7 +15,7 @@
   <div class="content-under-toolbar">
     <div [ngSwitch]="selectedMenu">
       <div *ngSwitchCase="'waterSupply'">
-        <div>Alimentation en eau.</div>
+        <app-survey-fire-hydrant></app-survey-fire-hydrant>
       </div>
       <div *ngSwitchCase="'implantation'">
         <app-survey-implantation-plan></app-survey-implantation-plan>

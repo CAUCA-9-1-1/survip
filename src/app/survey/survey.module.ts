@@ -8,6 +8,7 @@ import { ContactComponent } from './contact/contact.component';
 import { PersonRequiringAssistanceComponent } from './person-requiring-assistance/person-requiring-assistance.component';
 import { DangerousMaterialComponent } from './dangerous-material/dangerous-material.component';
 import { FireProtectionComponent } from './fire-protection/fire-protection.component';
+import { FireHydrantComponent } from './fire-hydrant/fire-hydrant.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,9 @@ import { FireProtectionComponent } from './fire-protection/fire-protection.compo
     ContactComponent,
     PersonRequiringAssistanceComponent,
     DangerousMaterialComponent,
-    FireProtectionComponent
+    FireProtectionComponent,
+    PersonRequiringAssistanceComponent,
+    FireHydrantComponent
   ],
   declarations: [
     BuildingDetailComponent,
@@ -30,7 +33,8 @@ import { FireProtectionComponent } from './fire-protection/fire-protection.compo
     PersonRequiringAssistanceComponent,
     FireProtectionComponent,
     DangerousMaterialComponent,
-    FireProtectionComponent
+    FireProtectionComponent,
+    FireHydrantComponent
   ],
   providers: [
       ]
