@@ -17,6 +17,9 @@
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "ca.cauca.surviprevention"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "ca.cauca.surviprevention"
         }
     },
     "dependent_plugins": {
