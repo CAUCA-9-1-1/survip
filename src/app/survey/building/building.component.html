@@ -1,64 +1,69 @@
-<div class="container" fxLayout="row" fx-layout-sm="column" fxLayoutAlign="start start" style="">
-  <div fxFlexOffset="20px">
-    <div>
-      <md-input-container>
-        <input mdInput disabled placeholder="Niveau de risque" value="Faible" floatPlaceholder="always">
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input disabled mdInput placeholder="Affectation" value="1000 - Résidence" floatPlaceholder="always">
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input disabled mdInput placeholder="Matricule" value="98354671000000000" floatPlaceholder="always">
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input disabled mdInput placeholder="Alias" value="Ferme de M. Girouard" floatPlaceholder="always">
-      </md-input-container>
-    </div>
-  </div>
-  <div>
-    <div>
-      <md-input-container>
-        <input mdInput disabled value="Scott (Avenue)" placeholder="Intersection" floatPlaceholder="always">
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input mdInput disabled value="Rapide-Plat Sud (Chemin du)" placeholder="Intersection 2" floatPlaceholder="always">
-      </md-input-container>
-    </div>
-  </div>
-</div>
+<md-card>
+  <div class="container" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start">
 
-<div fxLayout="row">
-  <md-card>
+    <div fxFlex="33" fxFlex.lt-sm="100%">
+      <div class="full-width" fxLayout="row">
+        <md-input-container class="full-width">
+          <input mdInput disabled placeholder="Niveau de risque" value="Faible">
+        </md-input-container>
+      </div>
+      <div class="full-width" fxLayout="row" >
+        <md-input-container class="full-width">
+          <input disabled mdInput placeholder="Affectation" value="1000 - Résidence">
+        </md-input-container>
+      </div>
+      <div class="full-width" fxLayout="row">
+        <md-input-container class="full-width">
+          <input disabled mdInput placeholder="Matricule" value="98354671000000000">
+        </md-input-container>
+      </div>
+      <div class="full-width" fxLayout="row" >
+        <md-input-container class="full-width">
+          <input disabled mdInput placeholder="Alias" value="Ferme de M. Girouard">
+        </md-input-container>
+      </div>
+    </div>
+
+    <div fxFlex="33" fxFlex.lt-sm="100%">
+      <div class="full-width" fxLayout="row" >
+        <md-input-container class="full-width">
+          <input mdInput disabled value="Scott (Avenue)" placeholder="Intersection">
+        </md-input-container>
+      </div>
+      <div class="full-width" fxLayout="row" >
+        <md-input-container class="full-width">
+          <input mdInput disabled value="Rapide-Plat Sud (Chemin du)" placeholder="Intersection 2">
+        </md-input-container>
+      </div>
+    </div>
+
+  </div>
+</md-card>
+
+<div class="container" fxLayout="row" class="full-width" fxLayoutAlign="start start">
+  <md-card class="full-width">
     <md-card-title>Parcours</md-card-title>
     <md-card-content>
-      <md-list>
+      <md-list class="full-width">
         <md-list-item>
-          <p md-line>
+          <div md-line>
             <span>Caserne 1</span>
-            <span>DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
-          </p>
+            <span fxHide.lt-sm="true">DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
+          </div>
           <md-icon md-list-icon>mode_edit</md-icon>
         </md-list-item>
         <md-list-item>
-          <p md-line>
+          <div md-line>
             <span>Caserne 2</span>
-            <span>DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
-          </p>
+            <span fxHide.lt-sm="true">DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
+          </div>
           <md-icon md-list-icon>mode_edit</md-icon>
         </md-list-item>
         <md-list-item>
-          <p md-line>
+          <div md-line>
             <span>Caserne 3</span>
-            <span>DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
-          </p>
+            <span fxHide.lt-sm="true">DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
+          </div>
           <md-icon md-list-icon>mode_edit</md-icon>
         </md-list-item>
       </md-list>
@@ -66,6 +71,7 @@
   </md-card>
   <div></div>
 </div>
+
 <div>
   <md-card>
     <md-card-title>7 bâtiments</md-card-title>
@@ -77,6 +83,7 @@
     </md-card-content>
   </md-card>
 </div>
-<div fxLayout="row">
-  <button md-raised-button>Compléter section</button>
+
+<div fxLayout="row" class="card-buttons">
+  <button md-raised-button><md-icon>check_circle</md-icon>Compléter section</button>
 </div>
