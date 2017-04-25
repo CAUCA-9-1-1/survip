@@ -2163,7 +2163,7 @@ module.exports = "<p>\n  fire-protection works!\n</p>\n"
 /***/ 391:
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <img src=\"/assets/images/plan_implantation.jpg\" align=\"center\"/>\n</div>"
+module.exports = "<div>\n  <img src=\"./assets/images/plan_implantation.jpg\" align=\"center\"/>\n</div>"
 
 /***/ }),
 
@@ -2177,7 +2177,7 @@ module.exports = "<p>\n  person-requiring-assistance works!\n</p>\n"
 /***/ 393:
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <img src=\"/assets/images/protocol.png\" />\n</div>"
+module.exports = "<div>\n  <img src=\"./assets/images/protocol.png\" />\n</div>"
 
 /***/ }),
 
