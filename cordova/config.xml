@@ -13,7 +13,7 @@
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-statusbar" source="npm" />
     <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="StatusBarBackgroundColor" value="#f5f5f5" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
