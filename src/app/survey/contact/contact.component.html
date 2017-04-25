@@ -1,7 +1,8 @@
 <div>
 
-    <md-card>
-      <md-card-title>Contact(s)</md-card-title>
+  <md-card class="master-card">
+    <md-card-title>Contact(s)</md-card-title>
+    <md-card-content>
 
       <md-card class="detail-card">
           <form>
@@ -111,9 +112,11 @@
         </md-card-actions>
       </md-card>
 
-      <md-card class="detail-card">
-        <button md-raised-button style="width:100%; text-align: center"><md-icon>contact_phone</md-icon>  Ajouter un contact</button>
-        <div style="visibility:hidden;">
+      <md-card class="detail-card empty-card">
+        <div class="centered-card-content">
+          <button md-raised-button><md-icon>contact_phone</md-icon>  Ajouter un contact</button>
+        </div>
+        <div class="hidden-content">
           <div fxLayout="row" class="full-width">
             <md-input-container class="full-width">
               <input mdInput placeholder="Nom"/>
@@ -161,10 +164,17 @@
             </md-input-container>
           </div>
         </div>
+        <md-card-actions class="card-buttons" style="visibility: hidden">
+          <button md-raised-button><md-icon>delete</md-icon>Supprimer</button>
+        </md-card-actions>
       </md-card>
 
-    </md-card>
+      <div style="clear: both"></div>
 
+    </md-card-content>
+  </md-card>
+
+  <div fxLayout="row" class="card-buttons">
+    <button md-raised-button><md-icon style="color: green;">check_circle</md-icon>Compléter la section</button>
+  </div>
 </div>
-
-<div style="clear:both"></div>

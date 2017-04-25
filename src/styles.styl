@@ -95,7 +95,28 @@ body {
   max-height: 21px;
 }
 
+.master-card {
+  padding: 5px !important;
+}
+
 .detail-card {
   float: left;
-  margin: 10px 10px 0px 10px;
+  margin: 5px 5px 0px 2.5px !important;
+}
+
+div.empty-card {
+  position: relative;
+  text-align: center;
+}
+
+div.centered-card-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+div.hidden-content {
+  visibility: hidden;
 }
