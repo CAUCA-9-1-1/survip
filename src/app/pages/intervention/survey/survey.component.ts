@@ -38,7 +38,7 @@ export class SurveyComponent implements OnInit {
       title: 'P.N.A.P.',
     },
     {
-      name: 'specificRisks',
+      name: 'particularRisks',
       title: 'Risques particuliers',
     },
     {
