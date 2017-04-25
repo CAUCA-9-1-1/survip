@@ -12,12 +12,4 @@ export class ReportComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  takePicture() {
-    if (this.windowRef.nativeWindow.cordova) {
-      alert('on cordova');
-    } else {
-      alert('on browser');
-    }
-  }
 }
