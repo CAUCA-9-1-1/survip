@@ -47,10 +47,19 @@ body {
 .content-under-toolbar {
   height: calc(100% - 64px);
   overflow: auto;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: url(./assets/images/bg-feu.jpg);
 }
 
 @media only screen and (max-width: 600px) {
   .content-under-toolbar {
     height: calc(100% - 56px);
   }
+}
+
+/* Correction of angular theme */
+.mat-card {
+  background-color: rgba(255, 255, 255, 0.5);
 }

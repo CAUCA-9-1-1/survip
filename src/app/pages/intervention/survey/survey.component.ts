@@ -4,7 +4,6 @@ import { MdSidenav } from '@angular/material';
 
 import { MenuItem } from '../../../form/shared/menu-item.interface';
 
-
 @Component({
   selector: 'app-survey',
   templateUrl: './survey.component.html',
