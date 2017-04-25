@@ -6,6 +6,7 @@ import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { IgoModule } from 'igo2';
+import { WindowRefService } from './window-ref.service'
 
 @NgModule({
   imports: [
@@ -24,6 +25,10 @@ import { IgoModule } from 'igo2';
     MaterialModule,
     BrowserModule,
     IgoModule
+  ],
+  providers: [
+    WindowRefService
   ]
 })
+
 export class SharedModule { }

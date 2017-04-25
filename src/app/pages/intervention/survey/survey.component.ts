@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { MdSidenav } from '@angular/material';
 
 import { MenuItem } from '../../../form/shared/menu-item.interface';
+import { WindowRefService } from '../../../shared/window-ref.service';
 
 @Component({
   selector: 'app-survey',
@@ -12,54 +13,53 @@ import { MenuItem } from '../../../form/shared/menu-item.interface';
 export class SurveyComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MdSidenav;
 
+  public mode = 'over';
+  public align = 'end';
   public selectedMenu = 'building';
   public menuItems = [
     {
       name: 'building',
       title: 'Bâtiments',
-      tooltip: 'Bâtiments'
     },
     {
       name: 'waterSupply',
       title: 'Alimentation en eau',
-      tooltip: 'Alimentation en eau'
     },
     {
       name: 'implantation',
       title: 'Implantation',
-      tooltip: 'Implantation'
     },
     {
       name: 'dangerousMaterial',
       title: 'Matière dangereuse',
-      tooltip: 'Matière dangereuse'
     },
     {
       name: 'pnap',
       title: 'P.N.A.P.',
-      tooltip: 'P.N.A.P.'
     },
     {
       name: 'specificRisks',
       title: 'Risques particuliers',
-      tooltip: 'Risques particuliers'
     },
     {
       name: 'fireProtection',
       title: 'Protection incendie',
-      tooltip: 'Protection incendie'
     },
     {
       name: 'contacts',
       title: 'Personnes contacts',
-      tooltip: 'Personnes contacts'
     }
   ];
 
-  constructor(private location: Location) { }
+  constructor(private location: Location, private windowRef: WindowRefService) {
+  }
 
   ngOnInit() {
-
+    if (this.windowRef.nativeWindow.innerWidth > 600) {
+      this.mode = 'side';
+      this.align = 'start';
+      this.sidenav.open();
+    }
   }
 
   back() {
@@ -68,6 +68,9 @@ export class SurveyComponent implements OnInit {
 
   select(item: MenuItem) {
     this.selectedMenu = item.name;
-    this.sidenav.close();
+
+    if (this.windowRef.nativeWindow.innerWidth <= 600) {
+      this.sidenav.close();
+    }
   }
 }

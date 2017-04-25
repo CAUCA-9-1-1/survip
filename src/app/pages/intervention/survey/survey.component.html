@@ -1,14 +1,16 @@
 <md-sidenav-container>
-  <md-sidenav #sidenav mode="push" align="end">
+  <md-sidenav #sidenav [mode]="mode" [align]="align">
     <app-menu [items]="menuItems" (select)="select($event)"></app-menu>
   </md-sidenav>
 
   <md-toolbar>
-    <button md-button (click)="back()"><md-icon>keyboard_arrow_left</md-icon>Annuler</button>
+    <button md-button (click)="back()"><md-icon>keyboard_arrow_left</md-icon>Retour</button>
     <span class="spacer"></span>
-    <span>Adresse</span>
+    <span>627 rapide-plat sud</span>
     <span class="spacer"></span>
-    <button md-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
+    <div *ngIf="mode == 'over'">
+      <button md-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
+    </div>
   </md-toolbar>
   <div class="content-under-toolbar">
     <div [ngSwitch]="selectedMenu">
