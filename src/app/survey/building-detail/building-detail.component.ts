@@ -19,9 +19,7 @@ export class BuildingDetailComponent implements OnInit {
 
   takePicture(event) {
     if (this.windowRef.nativeWindow.cordova) {
-      alert('on cordova');
-
-      this.windowRef.nativeNavigator.camera.getPicture(this.onSuccess, this.onFail, {
+      this.windowRef.nativeNavigator.camera.getPicture(this.onSuccess.bind(this), this.onFail.bind(this), {
         quality: 100
       });
     } else {
@@ -32,7 +30,7 @@ export class BuildingDetailComponent implements OnInit {
   onSuccess(imageURI) {
     const image = this.elRef.nativeElement.querySelector('.buildingImage');
 
-    image.src = imageURI;
+    image.src = "data:image/jpeg;base64," + imageURI;
   }
 
   onFail(message) {
