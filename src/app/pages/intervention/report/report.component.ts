@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WindowRefService } from '../../../shared/window-ref.service';
 
 @Component({
   selector: 'app-intervention-report',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportComponent implements OnInit {
 
-  constructor() { }
+  constructor(private windowRef: WindowRefService) {}
 
   ngOnInit() {
   }
 
+  takePicture() {
+    if (this.windowRef.nativeWindow.cordova) {
+      alert('on cordova');
+    } else {
+      alert('on browser');
+    }
+  }
 }
