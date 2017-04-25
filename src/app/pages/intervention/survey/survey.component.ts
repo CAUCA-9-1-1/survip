@@ -55,7 +55,7 @@ export class SurveyComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.windowRef.nativeWindow.innerWidth >= 600) {
+    if (this.windowRef.nativeWindow.innerWidth >= 700) {
       this.mode = 'side';
       this.align = 'start';
       this.sidenav.open();
@@ -69,7 +69,7 @@ export class SurveyComponent implements OnInit {
   select(item: MenuItem) {
     this.selectedMenu = item.name;
 
-    if (this.windowRef.nativeWindow.innerWidth < 600) {
+    if (this.windowRef.nativeWindow.innerWidth < 700) {
       this.sidenav.close();
     }
   }
