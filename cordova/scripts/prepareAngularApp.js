@@ -26,12 +26,14 @@ function setUpCordova(baseWWW) {
 }
 
 module.exports = function(context) {
-    var env = ['DEV', 'TEST', 'PROD'];
+    var env = ['SKIP', 'DEV', 'TEST', 'PROD'];
     var index = readline.keyInSelect(env, 'Pour quel environnement voulez-vous compiler? ', {
         //hideEchoBack: true
     });
 
-    if (index > -1) {
+    if (index === 0 ) {
+        // Do nothing and continue
+    } else if (index > -1) {
         build(context.opts.projectRoot, env[index]);
     }
 };

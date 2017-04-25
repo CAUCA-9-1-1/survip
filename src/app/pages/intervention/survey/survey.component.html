@@ -8,9 +8,9 @@
     <span class="spacer"></span>
     <span>627 rapide-plat sud</span>
     <span class="spacer"></span>
-    <div *ngIf="mode == 'over'">
+    <ng-container *ngIf="mode == 'over'">
       <button md-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
-    </div>
+    </ng-container>
   </md-toolbar>
   <div class="content-under-toolbar">
     <div [ngSwitch]="selectedMenu">
