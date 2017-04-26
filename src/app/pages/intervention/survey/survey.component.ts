@@ -1,5 +1,4 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { MdSidenav } from '@angular/material';
 
 import { MenuItem } from '../../../form/shared/menu-item.interface';
@@ -51,7 +50,7 @@ export class SurveyComponent implements OnInit {
     }
   ];
 
-  constructor(private location: Location, private windowRef: WindowRefService) {
+  constructor(private windowRef: WindowRefService) {
   }
 
   ngOnInit() {
@@ -60,10 +59,6 @@ export class SurveyComponent implements OnInit {
       this.align = 'start';
       this.sidenav.open();
     }
-  }
-
-  back() {
-    this.location.back();
   }
 
   select(item: MenuItem) {

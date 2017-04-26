@@ -3,15 +3,7 @@
     <app-menu [items]="menuItems" (select)="select($event)"></app-menu>
   </md-sidenav>
 
-  <md-toolbar>
-    <button md-button (click)="back()"><md-icon>keyboard_arrow_left</md-icon>Retour</button>
-    <span class="spacer"></span>
-    <span>627 rapide-plat sud</span>
-    <span class="spacer"></span>
-    <ng-container *ngIf="mode == 'over'">
-      <button md-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
-    </ng-container>
-  </md-toolbar>
+  <app-form-toolbarback [title]="'627 rapide-plat sud'"></app-form-toolbarback>
   <div class="content-under-toolbar">
     <div [ngSwitch]="selectedMenu">
       <div *ngSwitchCase="'waterSupply'">

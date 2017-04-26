@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MenuComponent } from './menu/menu.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ToolbarBackComponent } from './toolbar-back/toolbar-back.component';
 
 
 @NgModule({
@@ -13,12 +14,14 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
   ],
   exports: [
     MenuComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ToolbarBackComponent
   ],
   declarations: [
     MenuComponent,
     MenuItemComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ToolbarBackComponent
   ]
 })
 export class FormModule { }
