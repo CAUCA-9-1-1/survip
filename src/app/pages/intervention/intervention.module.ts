@@ -24,4 +24,4 @@ import { SurveyComponent } from './survey/survey.component';
     SurveyComponent,
   ]
 })
-export class InterventionModule { }
+export class InterventionSectionModule { }

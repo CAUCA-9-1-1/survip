@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import {SharedModule} from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { BuildingComponent } from './building/building.component';
 import { BuildingDetailComponent } from './building-detail/building-detail.component';
 import { ImplantationPlanComponent } from './implantation-plan/implantation-plan.component';
@@ -40,6 +40,6 @@ import { ParticularRiskComponent } from './particular-risk/particular-risk.compo
     ParticularRiskComponent
   ],
   providers: [
-      ]
+  ]
 })
 export class SurveyModule { }

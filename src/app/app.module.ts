@@ -11,8 +11,10 @@ import { FormModule } from './form/form.module';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing';
 import {
-  InterventionModule,
-  InterventionRoutingModule
+  InterventionSectionModule,
+  InterventionRoutingModule,
+  PreventionSectionModule,
+  PreventionRoutingModule
 } from './pages';
 
 @NgModule({
@@ -29,8 +31,10 @@ import {
     SharedModule,
     FormModule,
 
-    InterventionModule,
+    InterventionSectionModule,
     InterventionRoutingModule,
+    PreventionSectionModule,
+    PreventionRoutingModule,
     AppRoutingModule
   ],
   providers: [],

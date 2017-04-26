@@ -1,0 +1,20 @@
+<md-sidenav-container>
+  <md-sidenav #sidenav [mode]="mode" [align]="align">
+    <app-menu [items]="menuItems" (select)="select($event)"></app-menu>
+  </md-sidenav>
+
+  <md-toolbar>
+    <button md-button (click)="back()"><md-icon>keyboard_arrow_left</md-icon>Retour</button>
+    <span class="spacer"></span>
+    <span>627 rapide-plat sud</span>
+    <span class="spacer"></span>
+    <ng-container *ngIf="mode == 'over'">
+      <button md-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
+    </ng-container>
+  </md-toolbar>
+  <div class="content-under-toolbar">
+    <ng-container *ngFor="let question of questions">
+      <app-prevention-question [question]="question"></app-prevention-question>
+    </ng-container>
+  </div>
+</md-sidenav-container>

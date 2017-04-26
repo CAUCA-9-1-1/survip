@@ -19,6 +19,10 @@ export class ToolbarComponent implements OnInit {
   {
     name: 'Recherche',
     path: '/intervention/report'
+  },
+  {
+    name: 'Prev.',
+    path: '/prevention/survey'
   }];
 
   constructor(private router: Router) { }
