@@ -6,6 +6,7 @@ import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { IgoModule } from 'igo2';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { WindowRefService } from './window-ref.service';
 
 @NgModule({
@@ -17,7 +18,9 @@ import { WindowRefService } from './window-ref.service';
     BrowserModule,
     IgoModule,
   ],
-  declarations: [],
+  declarations: [
+    PageNotFoundComponent
+  ],
   exports: [
     CommonModule,
     FormsModule,
