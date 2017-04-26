@@ -9,9 +9,9 @@
   </md-tab-group>
   <md-toolbar class="actions">
     <span class="spacer"></span>
-    <button md-button (click)="previous()"><md-icon>navigate_before</md-icon>Question précédente</button>
+    <button md-button (click)="previous()"><md-icon>navigate_before</md-icon>{{'previousQuestion' | translate}}</button>
     <span class="spacer"></span>
-    <button md-button (click)="next()">Question suivante<md-icon>navigate_next</md-icon></button>
+    <button md-button (click)="next()">{{'nextQuestion' | translate}}<md-icon>navigate_next</md-icon></button>
     <span class="spacer"></span>
   </md-toolbar>
 </div>

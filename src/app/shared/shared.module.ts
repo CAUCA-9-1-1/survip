@@ -6,7 +6,7 @@ import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { IgoModule } from 'igo2';
-import { WindowRefService } from './window-ref.service'
+import { WindowRefService } from './window-ref.service';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { WindowRefService } from './window-ref.service'
     FlexLayoutModule,
     MaterialModule,
     BrowserModule,
-    IgoModule
+    IgoModule,
   ],
   declarations: [],
   exports: [
@@ -24,7 +24,7 @@ import { WindowRefService } from './window-ref.service'
     FlexLayoutModule,
     MaterialModule,
     BrowserModule,
-    IgoModule
+    IgoModule,
   ],
   providers: [
     WindowRefService
