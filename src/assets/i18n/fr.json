@@ -17,5 +17,6 @@
   "lastName": "Nom",
   "nextQuestion": "Question suivante",
   "previousQuestion": "Question précédente",
+  "return": "Retour",
   "yes": "Oui"
 }
