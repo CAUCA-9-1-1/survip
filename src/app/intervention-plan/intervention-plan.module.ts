@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import {SharedModule} from '../shared/shared.module';
+
 import {AdditionalInformationComponent} from './additional-information/additional-information.component';
 import {AddressComponent} from './address/address.component';
 import {BuildingInformationComponent} from './building-information/building-information.component';
