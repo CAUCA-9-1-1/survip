@@ -16,4 +16,4 @@ import { QuestionComponent } from './question/question.component';
   providers: [
   ]
 })
-export class PreventionModule { }
+export class PreventionSurveyModule { }

@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { FormModule } from '../form/form.module';
-import { InterventionPlanModule } from '../intervention-plan/intervention-plan.module';
-import { PreventionModule } from '../prevention/prevention.module';
-import { SurveyModule } from '../survey/survey.module';
+import { InterventionReportModule } from '../intervention-report/intervention-report.module';
+import { PreventionSurveyModule } from '../prevention-survey/prevention-survey.module';
+import { InterventionSurveyModule } from '../intervention-survey/intervention-survey.module';
 
 import { InterventionMapsComponent } from './intervention-maps/intervention-maps.component';
 import { InterventionReportComponent } from './intervention-report/intervention-report.component';
@@ -15,9 +15,9 @@ import { PreventionSurveyComponent } from './prevention-survey/prevention-survey
   imports: [
     SharedModule,
     FormModule,
-    InterventionPlanModule,
-    PreventionModule,
-    SurveyModule,
+    InterventionReportModule,
+    PreventionSurveyModule,
+    InterventionSurveyModule,
   ],
   exports: [
   ],

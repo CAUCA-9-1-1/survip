@@ -41,4 +41,4 @@ import { ParticularRiskComponent } from './particular-risk/particular-risk.compo
   providers: [
   ]
 })
-export class SurveyModule { }
+export class InterventionSurveyModule { }

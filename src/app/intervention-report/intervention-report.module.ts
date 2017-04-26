@@ -52,4 +52,4 @@ import {InterventionLayerDirective} from './intervention-layer/intervention-laye
     InterventionService
   ]
 })
-export class InterventionPlanModule { }
+export class InterventionReportModule { }
