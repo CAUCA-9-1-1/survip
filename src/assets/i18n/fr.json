@@ -1,0 +1,11 @@
+{
+  "en": "Anglais",
+  "fr": "Français",
+  "home": "Accueil",
+  "isActive": "Actif",
+  "name": "Nom",
+  "firstName": "Prénom",
+  "lastName": "Nom",
+  "nextQuestion": "Question suivante",
+  "previousQuestion": "Question précédente"
+}

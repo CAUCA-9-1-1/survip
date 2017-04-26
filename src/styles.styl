@@ -43,3 +43,118 @@ body {
   font-feature-settings: 'liga' 1;
   -ms-font-feature-settings: 'liga' 1;
 }
+
+/* General page content */
+.content-under-toolbar {
+  height: calc(100% - 64px);
+  overflow: auto;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: url(./assets/images/bg-borne.jpg);
+}
+
+@media only screen and (orientation: portrait) {
+  .content-under-toolbar {
+    background-image: url(./assets/images/bg-borne-portrait.jpg);
+  }
+}
+
+.card-subtitle{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card-buttons {
+  text-align : right;
+}
+
+.add-button{
+  font-size: 1.2em !important;
+}
+
+.add-button-picture{
+  font-size: 40px;
+  height: 40px !important;
+  width: 40px !important;
+}
+
+.full-width {
+  width:100%;
+}
+
+.select-fix{
+  margin-top: 9px !important
+}
+
+@media only screen and (max-width: 600px) {
+  .content-under-toolbar {
+    height: calc(100% - 56px);
+  }
+}
+
+/* Correction of angular theme */
+.mat-card {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.mat-select {
+  margin: 1em 0;
+}
+
+.mat-select .mat-select-trigger {
+  font-size: 14px;
+  max-height: 21px;
+}
+
+.master-card {
+  padding: 5px !important;
+}
+
+
+.detail-card {
+  float: left;
+  margin: 5px 5px 0px 2.5px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .detail-card {
+    width: 90%;
+    float: none;
+  }
+}
+
+div.empty-card {
+  position: relative;
+  text-align: center;
+}
+
+div.centered-card-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+div.hidden-content {
+  visibility: hidden;
+}
+
+.mat-input-placeholder-wrapper{
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.mat-select-placeholder.mat-floating-placeholder{
+  top: -20px !important;
+}
+
+.mat-select-placeholder {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.complete-section-button {
+  color: darkgreen;
+}

@@ -1,0 +1,90 @@
+<md-card>
+  <div class="container" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start" style="margin:5px">
+
+    <div fxFlex="33" fxFlex.lt-sm="100%">
+      <div class="full-width" fxLayout="row">
+        <md-input-container class="full-width">
+          <input mdInput readonly placeholder="Niveau de risque" value="Élevé">
+        </md-input-container>
+        <img src="./assets/images/risk-high.png" style="height:32px; width: 32px; float: right; margin-top: 10px;" class="">
+      </div>
+      <div class="full-width" fxLayout="row" >
+        <md-input-container class="full-width">
+          <input readonly mdInput placeholder="Affectation" value="1000 - Résidence">
+        </md-input-container>
+      </div>
+      <div class="full-width" fxLayout="row">
+        <md-input-container class="full-width">
+          <input readonly mdInput placeholder="Matricule" value="98354671000000000">
+        </md-input-container>
+      </div>
+      <div class="full-width" fxLayout="row" >
+        <md-input-container class="full-width">
+          <input readonly mdInput placeholder="Alias" value="Ferme de M. Girouard">
+        </md-input-container>
+      </div>
+    </div>
+
+    <div fxFlex="33" fxFlex.lt-sm="100%">
+      <div class="full-width" fxLayout="row" >
+        <md-input-container class="full-width">
+          <input mdInput readonly value="Rapide-Plat Sud (Chemin du)" placeholder="Rue">
+        </md-input-container>
+      </div>
+      <div class="full-width" fxLayout="row" >
+        <md-input-container class="full-width">
+          <input mdInput value="Scott (Avenue)" placeholder="Transversale">
+        </md-input-container>
+      </div>
+    </div>
+
+  </div>
+</md-card>
+
+<div class="container" fxLayout="row" class="full-width" fxLayoutAlign="start start">
+  <md-card class="full-width">
+    <md-card-title>Parcours</md-card-title>
+    <md-card-content>
+      <md-list class="full-width">
+        <md-list-item>
+          <div md-line>
+            <span>Caserne 1</span>
+            <span fxHide.lt-sm="true">DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
+          </div>
+          <md-icon md-list-icon>mode_edit</md-icon>
+        </md-list-item>
+        <md-list-item>
+          <div md-line>
+            <span>Caserne 2</span>
+            <span fxHide.lt-sm="true">DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
+          </div>
+          <md-icon md-list-icon>mode_edit</md-icon>
+        </md-list-item>
+        <md-list-item>
+          <div md-line>
+            <span>Caserne 3</span>
+            <span fxHide.lt-sm="true">DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
+          </div>
+          <md-icon md-list-icon>mode_edit</md-icon>
+        </md-list-item>
+      </md-list>
+    </md-card-content>
+  </md-card>
+  <div></div>
+</div>
+
+<div>
+  <md-card class="master-card">
+    <md-card-title>7 bâtiments</md-card-title>
+    <md-card-content>
+      <div *ngFor='let building of buildings'>
+        <app-survey-building-detail [building]='building'></app-survey-building-detail>
+      </div>
+      <div style="clear:both"></div>
+    </md-card-content>
+  </md-card>
+</div>
+
+<div fxLayout="row" class="card-buttons">
+  <button md-raised-button><md-icon class="complete-section-button">check_circle</md-icon>Compléter section</button>
+</div>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { FlexLayoutModule } from '@angular/flex-layout';
+
+import {SharedModule} from '../shared/shared.module';
 
 import {AdditionalInformationComponent} from './additional-information/additional-information.component';
 import {AddressComponent} from './address/address.component';
@@ -18,12 +17,9 @@ import {ContactsService} from './shared/contacts.service';
 
 @NgModule({
   imports: [
-    CommonModule,
-    BrowserModule,
-    FlexLayoutModule
+    SharedModule
   ],
   exports: [
-    FlexLayoutModule,
     AdditionalInformationComponent,
     AddressComponent,
     BuildingInformationComponent,

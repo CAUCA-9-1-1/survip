@@ -1,0 +1,30 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-camera": {
+            "CAMERA_USAGE_DESCRIPTION": " ",
+            "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "ca.cauca.surviprevention"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "ca.cauca.surviprevention"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "ca.cauca.surviprevention"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "ca.cauca.surviprevention"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "ca.cauca.surviprevention"
+        }
+    }
+}
