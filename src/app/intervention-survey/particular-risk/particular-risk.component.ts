@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-survey-particular-risk',
+  selector: 'app-intervention-survey-particular-risk',
   templateUrl: './particular-risk.component.html',
   styleUrls: ['./particular-risk.component.styl']
 })

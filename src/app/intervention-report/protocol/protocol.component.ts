@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-protocol',
+  selector: 'app-intervention-report-protocol',
   templateUrl: './protocol.component.html',
   styleUrls: ['./protocol.component.styl']
 })

@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-survey-building',
+  selector: 'app-intervention-survey-building',
   templateUrl: './building.component.html',
   styleUrls: ['./building.component.styl']
 })
 export class BuildingComponent implements OnInit {
   buildings: any[] = [
-      {
-        'idBuilding' : 1,
-        'alias' : 'Résidence',
-        'die' : 627,
-        'height' : 20,
-        'storeyCount' : 2
-      },
+    {
+      'idBuilding' : 1,
+      'alias' : 'Résidence',
+      'die' : 627,
+      'height' : 20,
+      'storeyCount' : 2
+    },
     {
       'idBuilding' : 2,
       'alias' : 'Grange-étable',

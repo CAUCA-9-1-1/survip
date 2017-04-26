@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-survey-fire-protection',
+  selector: 'app-intervention-survey-fire-protection',
   templateUrl: './fire-protection.component.html',
   styleUrls: ['./fire-protection.component.styl']
 })

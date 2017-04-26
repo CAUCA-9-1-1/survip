@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-survey-dangerous-material',
+  selector: 'app-intervention-survey-dangerous-material',
   templateUrl: './dangerous-material.component.html',
   styleUrls: ['./dangerous-material.component.styl']
 })

@@ -3,7 +3,7 @@ import {Contact} from '../shared/contact.model';
 import {ContactService} from '../shared/contact.service';
 
 @Component({
-    selector: 'app-contacts',
+    selector: 'app-intervention-report-contacts',
     templateUrl: './contacts.component.html',
     styleUrls: ['./contacts.component.styl']
 })

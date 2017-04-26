@@ -3,7 +3,7 @@ import {Address} from '../shared/address.model';
 import {AddressService} from '../shared/address.service';
 
 @Component({
-  selector: 'app-address',
+  selector: 'app-intervention-report-address',
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.styl']
 })

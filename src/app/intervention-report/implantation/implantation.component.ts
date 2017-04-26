@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-implantation',
+  selector: 'app-intervention-report-implantation',
   templateUrl: './implantation.component.html',
   styleUrls: ['./implantation.component.styl']
 })

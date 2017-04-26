@@ -1,30 +1,46 @@
 <div>
-  <div dxLayout="row" fxLayoutAlign="start">
-    <div fxFlex="20">
-      <span><b>Adresse</b></span>
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around">
+    <div fxFlex="50%">
+      <div fxLayout="row" fxLayoutAlign="space-around">
+        <div fxFlex="40%" fxFlex.lt-md="50%">
+          <span><b>Adresse</b></span>
+        </div>
+        <div fxFlex="60%" fxFlex.lt-md="50%">
+          <span>{{address?.address}}</span>
+        </div>
+      </div>
     </div>
-    <div fxFlex="40">
-      <span>{{address?.address}}</span>
-    </div>
-    <div fxFlex="30">
-      <span><b>Nombre d'adresse</b></span>
-    </div>
-    <div fxFlex="10">
-      <span>{{address?.numberOfAddress}}</span>
+    <div fxFlex="50%">
+      <div fxLayout="row" fxLayoutAlign="space-around">
+        <div fxFlex="40%" fxFlex.lt-md="50%">
+          <span><b>Affectation</b></span>
+        </div>
+        <div fxFlex="60%" fxFlex.lt-md="50%">
+          <span>{{address?.assignment}}</span>
+        </div>
+      </div>
     </div>
   </div>
-  <div dxLayout="row" fxLayoutAlign="start">
-    <div fxFlex="20">
-      <span><b>Affectation</b></span>
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around">
+    <div fxFlex="50%">
+      <div fxLayout="row" fxLayoutAlign="space-around">
+        <div fxFlex="80%" fxFlex.lt-md="50%">
+          <span><b>Nombre d'adresse</b></span>
+        </div>
+        <div fxFlex="20%" fxFlex.lt-md="50%">
+          <span>{{address?.numberOfAddress}}</span>
+        </div>
+      </div>
     </div>
-    <div fxFlex="40">
-      <span>{{address?.assignment}}</span>
-    </div>
-    <div fxFlex="30">
-      <span><b>Nombre de bâtiments</b></span>
-    </div>
-    <div fxFlex="10">
-      <span>{{address?.numberOfBuilding}}</span>
+    <div fxFlex="50%">
+      <div fxLayout="row" fxLayoutAlign="space-around">
+        <div fxFlex="80%" fxFlex.lt-md="50%">
+          <span><b>Nombre de bâtiments</b></span>
+        </div>
+        <div fxFlex="20%" fxFlex.lt-md="50%">
+          <span>{{address?.numberOfBuilding}}</span>
+        </div>
+      </div>
     </div>
   </div>
   <div dxLayout="row">

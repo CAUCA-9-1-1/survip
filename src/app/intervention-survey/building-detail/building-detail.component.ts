@@ -2,7 +2,7 @@ import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import { WindowRefService } from '../../shared/window-ref.service';
 
 @Component({
-  selector: 'app-survey-building-detail',
+  selector: 'app-intervention-survey-building-detail',
   templateUrl: './building-detail.component.html',
   styleUrls: ['./building-detail.component.styl']
 })

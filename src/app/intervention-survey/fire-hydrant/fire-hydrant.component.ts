@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-survey-fire-hydrant',
+  selector: 'app-intervention-survey-fire-hydrant',
   templateUrl: './fire-hydrant.component.html',
   styleUrls: ['./fire-hydrant.component.styl']
 })

@@ -3,32 +3,32 @@
     <app-form-menu [items]="menuItems" (select)="select($event)"></app-form-menu>
   </md-sidenav>
 
-  <app-form-toolbarback [title]="'627 rapide-plat sud'"></app-form-toolbarback>
+  <app-form-toolbar-back [title]="'627 rapide-plat sud'"></app-form-toolbar-back>
   <div class="content-under-toolbar">
     <div [ngSwitch]="selectedMenu">
       <div *ngSwitchCase="'waterSupply'">
-        <app-survey-fire-hydrant></app-survey-fire-hydrant>
+        <app-intervention-survey-fire-hydrant></app-intervention-survey-fire-hydrant>
       </div>
       <div *ngSwitchCase="'implantation'">
-        <app-survey-implantation-plan></app-survey-implantation-plan>
+        <app-intervention-survey-implantation-plan></app-intervention-survey-implantation-plan>
       </div>
       <div *ngSwitchCase="'pnap'">
-        <app-survey-person-requiring-assistance></app-survey-person-requiring-assistance>
+        <app-intervention-survey-person-requiring-assistance></app-intervention-survey-person-requiring-assistance>
       </div>
       <div *ngSwitchCase="'particularRisks'">
-        <app-survey-particular-risk></app-survey-particular-risk>
+        <app-intervention-survey-particular-risk></app-intervention-survey-particular-risk>
       </div>
       <div *ngSwitchCase="'fireProtection'">
-        <app-survey-fire-protection></app-survey-fire-protection>
+        <app-intervention-survey-fire-protection></app-intervention-survey-fire-protection>
       </div>
       <div *ngSwitchCase="'contacts'">
-        <app-survey-contact></app-survey-contact>
+        <app-intervention-survey-contact></app-intervention-survey-contact>
       </div>
       <div *ngSwitchCase="'dangerousMaterial'">
-        <app-survey-dangerous-material></app-survey-dangerous-material>
+        <app-intervention-survey-dangerous-material></app-intervention-survey-dangerous-material>
       </div>
       <div *ngSwitchDefault>
-        <app-survey-building></app-survey-building>
+        <app-intervention-survey-building></app-intervention-survey-building>
       </div>
     </div>
   </div>

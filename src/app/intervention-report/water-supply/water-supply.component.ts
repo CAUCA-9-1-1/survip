@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-water-supply',
+  selector: 'app-intervention-report-water-supply',
   templateUrl: './water-supply.component.html',
   styleUrls: ['./water-supply.component.styl']
 })

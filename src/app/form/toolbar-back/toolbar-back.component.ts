@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-form-toolbarback',
+  selector: 'app-form-toolbar-back',
   templateUrl: './toolbar-back.component.html',
   styleUrls: ['./toolbar-back.component.styl']
 })
