@@ -7,7 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { IgoModule } from 'igo2';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { WindowRefService } from './window-ref.service';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { WindowRefService } from './window-ref.service';
     TranslateModule,
   ],
   declarations: [
-    PageNotFoundComponent
   ],
   exports: [
     CommonModule,
@@ -36,5 +34,4 @@ import { WindowRefService } from './window-ref.service';
     WindowRefService
   ]
 })
-
 export class SharedModule { }

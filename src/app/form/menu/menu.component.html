@@ -1,11 +1,11 @@
 <igo-list navigation="true"> 
   <ng-template ngFor let-item [ngForOf]="items">
-    <app-menu-item
+    <app-form-menu-item
       igoListItem
       color="accent"
       [item]=item
       (focus)="handleItemFocus(item)"
       (select)="handleItemSelect(item)">
-    </app-menu-item>
+    </app-form-menu-item>
   </ng-template>
 </igo-list>

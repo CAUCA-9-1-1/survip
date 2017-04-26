@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MenuItem } from '../shared/menu-item.interface';
 
 @Component({
-  selector: 'app-menu-item',
+  selector: 'app-form-menu-item',
   templateUrl: './menu-item.component.html',
   styleUrls: ['./menu-item.component.styl']
 })

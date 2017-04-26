@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from '../shared/menu-item.interface';
 
 @Component({
-  selector: 'app-menu',
+  selector: 'app-form-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.styl']
 })
