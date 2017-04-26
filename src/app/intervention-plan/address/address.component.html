@@ -10,7 +10,7 @@
       <span><b>Nombre d'adresse</b></span>
     </div>
     <div fxFlex="10">
-      <span>{{address?.number_of_address}}</span>
+      <span>{{address?.numberOfAddress}}</span>
     </div>
   </div>
   <div dxLayout="row" fxLayoutAlign="start">
@@ -24,12 +24,12 @@
       <span><b>Nombre de bâtiments</b></span>
     </div>
     <div fxFlex="10">
-      <span>{{address?.number_of_building}}</span>
+      <span>{{address?.numberOfBuilding}}</span>
     </div>
   </div>
   <div dxLayout="row">
     <div><b>Parcours</b></div>
-    <div *ngFor="let plan of address?.plan_course">{{plan}}</div>
+    <div *ngFor="let plan of address?.planCourse">{{plan}}</div>
   </div>
 </div>
 

@@ -5,14 +5,10 @@ import { IgoModule, LanguageLoader, provideLanguageService,
          provideContextServiceOptions } from 'igo2';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing';
 import { CoreModule } from './core/core.module';
-import {
-  InterventionSectionModule,
-  InterventionRoutingModule,
-  PreventionSectionModule,
-  PreventionRoutingModule
-} from './pages';
+import { PagesModule } from './pages/pages.module';
+import { AppRoutingModule } from './app-routing';
+import { PagesRoutingModule } from './pages/pages-routing';
 
 export function httpLoaderFactory(http: Http) {
   return new LanguageLoader(http, './assets/i18n/', '.json');

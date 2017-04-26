@@ -12,7 +12,7 @@ import { ProtocolComponent } from './protocol/protocol.component';
 import { SpecificRisksComponent } from './specific-risks/specific-risks.component';
 import { WaterSupplyComponent } from './water-supply/water-supply.component';
 import { AddressService } from './shared/address.service';
-import { ContactsService } from './shared/contacts.service';
+import { ContactService } from './shared/contact.service';
 
 import {InterventionService} from './shared/intervention.service';
 import {InterventionLayerDirective} from './intervention-layer/intervention-layer.directive';

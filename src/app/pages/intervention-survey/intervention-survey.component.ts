@@ -1,15 +1,15 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MdSidenav } from '@angular/material';
 
-import { MenuItem } from '../../../form/shared/menu-item.interface';
-import { WindowRefService } from '../../../shared/window-ref.service';
+import { MenuItem } from '../../form/shared/menu-item.interface';
+import { WindowRefService } from '../../shared/window-ref.service';
 
 @Component({
   selector: 'app-survey',
-  templateUrl: './survey.component.html',
-  styleUrls: ['./survey.component.styl']
+  templateUrl: './intervention-survey.component.html',
+  styleUrls: ['./intervention-survey.component.styl']
 })
-export class SurveyComponent implements OnInit {
+export class InterventionSurveyComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MdSidenav;
 
   public mode = 'over';

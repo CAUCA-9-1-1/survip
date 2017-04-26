@@ -4,10 +4,10 @@ import { IgoMap, ContextService } from 'igo2';
 
 @Component({
   selector: 'app-maps',
-  templateUrl: './maps.component.html',
-  styleUrls: ['./maps.component.styl']
+  templateUrl: './intervention-maps.component.html',
+  styleUrls: ['./intervention-maps.component.styl']
 })
-export class MapsComponent implements OnInit {
+export class InterventionMapsComponent implements OnInit {
 
   public map = new IgoMap();
 

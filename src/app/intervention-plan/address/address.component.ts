@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Address} from '../shared/address.interface';
+import {Address} from '../shared/address.model';
 import {AddressService} from '../shared/address.service';
 
 @Component({

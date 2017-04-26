@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Contact} from '../shared/contact.interface';
-import {ContactsService} from '../shared/contacts.service';
+import {Contact} from '../shared/contact.model';
+import {ContactService} from '../shared/contact.service';
 
 @Component({
     selector: 'app-contacts',
@@ -10,7 +10,7 @@ import {ContactsService} from '../shared/contacts.service';
 export class ContactsComponent implements OnInit {
     contacts: Contact[];
 
-    constructor(private contactsService: ContactsService) {
+    constructor(private contactsService: ContactService) {
     }
 
     ngOnInit() {
