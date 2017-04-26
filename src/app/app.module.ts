@@ -6,9 +6,16 @@ import { IgoModule, LanguageLoader, provideLanguageService,
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { PagesModule } from './pages/pages.module';
-import { AppRoutingModule } from './app-routing';
-import { PagesRoutingModule } from './pages/pages-routing';
+import { SharedModule } from './shared/shared.module';
+import { FormModule } from './form/form.module';
+import { InterventionReportModule } from './intervention-report/intervention-report.module';
+import { InterventionSurveyModule } from './intervention-survey/intervention-survey.module';
+import { PreventionSurveyModule } from './prevention-survey/prevention-survey.module';
+
+import { InterventionMapsComponent } from './intervention-maps/intervention-maps.component';
+import { InterventionReportComponent } from './intervention-report/intervention-report.component';
+import { InterventionSurveyComponent } from './intervention-survey/intervention-survey.component';
+import { PreventionSurveyComponent } from './prevention-survey/prevention-survey.component';
 
 export function httpLoaderFactory(http: Http) {
   return new LanguageLoader(http, './assets/i18n/', '.json');
@@ -17,7 +24,11 @@ export function httpLoaderFactory(http: Http) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    InterventionMapsComponent,
+    InterventionReportComponent,
+    InterventionSurveyComponent,
+    PreventionSurveyComponent,
   ],
   imports: [
     IgoModule.forRoot(),

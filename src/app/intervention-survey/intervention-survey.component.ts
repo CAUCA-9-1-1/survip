@@ -1,8 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MdSidenav } from '@angular/material';
 
-import { MenuItem } from '../../form/shared/menu-item.interface';
-import { WindowRefService } from '../../shared/window-ref.service';
+import { MenuItem } from '../form/shared/menu-item.interface';
+import { WindowRefService } from '../shared/window-ref.service';
 
 @Component({
   selector: 'app-survey',
