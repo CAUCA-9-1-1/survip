@@ -16,7 +16,6 @@ import { ParticularRiskComponent } from './particular-risk/particular-risk.compo
     SharedModule,
   ],
   exports: [
-    BuildingDetailComponent,
     BuildingComponent,
     ImplantationPlanComponent,
     ContactComponent,
