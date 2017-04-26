@@ -1,7 +1,5 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { MdSidenav } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 
-import { MenuItem } from '../../../form/shared/menu-item.interface';
 import { WindowRefService } from '../../../shared/window-ref.service';
 
 @Component({
@@ -10,10 +8,9 @@ import { WindowRefService } from '../../../shared/window-ref.service';
   styleUrls: ['./survey.component.styl']
 })
 export class SurveyComponent implements OnInit {
-  @ViewChild('sidenav') sidenav: MdSidenav;
-
   public mode = 'over';
   public align = 'end';
+  public selectedTab = 0;
   public menuItems = [
   {
     name: 'building',
@@ -64,15 +61,17 @@ export class SurveyComponent implements OnInit {
     type: 'boolean'
   }];
 
-  constructor(private windowRef: WindowRefService) {
-
+  constructor() {
   }
 
   ngOnInit() {
-    if (this.windowRef.nativeWindow.innerWidth >= 700) {
-      this.mode = 'side';
-      this.align = 'start';
-      this.sidenav.open();
-    }
+  }
+
+  next() {
+    this.selectedTab++;
+  }
+
+  previous() {
+    this.selectedTab--;
   }
 }

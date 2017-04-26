@@ -1,12 +1,17 @@
-<md-sidenav-container>
-  <md-sidenav #sidenav [mode]="mode" [align]="align">
-    <app-menu [items]="menuItems" (select)="select($event)"></app-menu>
-  </md-sidenav>
-
-  <app-form-toolbarback [title]="'627 rapide-plat sud'"></app-form-toolbarback>
-  <div class="content-under-toolbar">
+<app-form-toolbarback [title]="'627 rapide-plat sud'"></app-form-toolbarback>
+<div class="content-under-toolbar">
+  <md-tab-group [selectedIndex]="selectedTab">
     <ng-container *ngFor="let question of questions">
-      <app-prevention-question [question]="question"></app-prevention-question>
+      <md-tab>
+        <app-prevention-question [question]="question"></app-prevention-question>
+      </md-tab>
     </ng-container>
-  </div>
-</md-sidenav-container>
+  </md-tab-group>
+  <md-toolbar class="actions">
+    <span class="spacer"></span>
+    <button md-button (click)="previous()"><md-icon>navigate_before</md-icon>Question précédente</button>
+    <span class="spacer"></span>
+    <button md-button (click)="next()">Question suivante<md-icon>navigate_next</md-icon></button>
+    <span class="spacer"></span>
+  </md-toolbar>
+</div>
