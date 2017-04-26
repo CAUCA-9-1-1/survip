@@ -20,7 +20,7 @@ function build(basePath, env) {
 function setUpCordova(baseWWW) {
     console.log('Add "cordova.js" inside "index.html"');
     var oldContent = fs.readFileSync(baseWWW + '/index.html', 'utf-8');
-    var newContent = oldContent.replace('</app-root>', '</app-root><script type="text/javascript" src="cordova.js"></script>');
+    var newContent = oldContent.replace('<app-root>', '<script type="text/javascript" src="cordova.js"></script><app-root>');
 
     fs.writeFileSync(baseWWW + '/index.html', newContent, 'utf-8');
 }
