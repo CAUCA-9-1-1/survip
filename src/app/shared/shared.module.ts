@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { IgoModule } from 'igo2';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -17,6 +18,7 @@ import { WindowRefService } from './window-ref.service';
     MaterialModule,
     BrowserModule,
     IgoModule,
+    TranslateModule,
   ],
   declarations: [
     PageNotFoundComponent
@@ -28,6 +30,7 @@ import { WindowRefService } from './window-ref.service';
     MaterialModule,
     BrowserModule,
     IgoModule,
+    TranslateModule,
   ],
   providers: [
     WindowRefService

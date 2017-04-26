@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { SharedModule } from '../../shared/shared.module';
 import { FormModule } from '../../form/form.module';
@@ -10,7 +9,6 @@ import { SurveyComponent } from './survey/survey.component';
 @NgModule({
   imports: [
     SharedModule,
-    TranslateModule,
     FormModule,
     PreventionModule,
   ],

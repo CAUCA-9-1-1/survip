@@ -5,5 +5,18 @@
     </md-card-header>
     <md-card-content>
         {{question.question}}
+
+        <div [ngSwitch]="question.type">
+            <div *ngSwitchCase="'combo'">
+                <md-select placeholder="Sélection">
+                    <md-option>Option 1</md-option>
+                    <md-option>Option 2</md-option>
+                    <md-option>Option 3</md-option>
+                </md-select>
+            </div>
+            <div *ngSwitchCase="'boolean'">
+                <md-slide-toggle>{{'yes' | translate}}</md-slide-toggle>
+            </div>
+        </div>
     </md-card-content>
 </md-card>
