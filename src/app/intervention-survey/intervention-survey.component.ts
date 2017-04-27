@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MdSidenav } from '@angular/material';
 
-import { MenuItem } from '../component/shared/menu-item.interface';
+import { MenuItem } from '../components/shared/menu-item.interface';
 import { WindowRefService } from '../shared/window-ref.service';
 
 @Component({
