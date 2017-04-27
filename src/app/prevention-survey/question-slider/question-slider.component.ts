@@ -10,6 +10,7 @@ import { QuestionService } from '../shared/services/question.service';
 })
 export class QuestionSliderComponent implements OnInit {
   private selectedTab = 0;
+  private onLastQuestion = false;
   private questions: Question[];
 
   constructor(private questionService: QuestionService) { }
@@ -18,21 +19,27 @@ export class QuestionSliderComponent implements OnInit {
     this.loadQuestion();
   }
 
+  complete() {
+    alert('OK, What we do!');
+  }
+
   next() {
     if (this.selectedTab < this.questions.length - 1) {
       this.selectedTab++;
+      this.onLastQuestion = (this.selectedTab === this.questions.length - 1);
     }
   }
 
   previous() {
     if (this.selectedTab > 0) {
       this.selectedTab--;
+      this.onLastQuestion = (this.selectedTab === this.questions.length - 1);
     }
   }
 
   private loadQuestion() {
     this.questionService.getAll().subscribe(result => {
-      this.questions = result.data;
+      this.questions = result.questions;
     });
   }
 }

@@ -12,7 +12,7 @@ export class QuestionService extends BaseService {
   }
 
   getAll() {
-    return this.http.get(this.host + 'questions.json', this.authorization()).map((response: Response) => {
+    return this.http.get(this.host + 'prevention-survey-1.json', this.authorization()).map((response: Response) => {
       const result = response.json();
 
       this.isLogin(result, '/prevention/survey');

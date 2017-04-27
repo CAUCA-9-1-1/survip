@@ -9,6 +9,11 @@
   <span class="spacer"></span>
   <button md-button (click)="previous()"><md-icon>navigate_before</md-icon>{{'previousQuestion' | translate}}</button>
   <span class="spacer"></span>
-  <button md-button (click)="next()">{{'nextQuestion' | translate}}<md-icon>navigate_next</md-icon></button>
+  <ng-container *ngIf="!onLastQuestion">
+    <button md-button (click)="next()">{{'nextQuestion' | translate}}<md-icon>navigate_next</md-icon></button>
+  </ng-container>
+  <ng-container *ngIf="onLastQuestion">
+    <button md-button (click)="complete()"><md-icon>save</md-icon>{{'complete' | translate}}</button>
+  </ng-container>
   <span class="spacer"></span>
 </md-toolbar>

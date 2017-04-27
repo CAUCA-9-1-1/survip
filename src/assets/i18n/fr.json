@@ -15,6 +15,7 @@
   "name": "Nom",
   "firstName": "Prénom",
   "lastName": "Nom",
+  "complete": "Compléter",
   "nextQuestion": "Question suivante",
   "previousQuestion": "Question précédente",
   "return": "Retour",
