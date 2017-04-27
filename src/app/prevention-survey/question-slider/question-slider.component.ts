@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Question } from '../shared/models/question.model';
+import { QuestionService } from '../shared/services/question.service';
+
 @Component({
   selector: 'app-prevention-survey-question-slider',
   templateUrl: './question-slider.component.html',
@@ -7,46 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionSliderComponent implements OnInit {
   private selectedTab = 0;
-  private questions = [{
-    title: 'Avertisseurs de fumée',
-    subTitle: 'Ajouter un nouveau détecteur',
-    question: 'Quelle est son emplacement?',
-    type: 'combo'
-  },
-  {
-    title: 'Avertisseurs de fumée',
-    subTitle: 'Ajouter un nouveau détecteur',
-    question: 'Est-il fonctionnel ?',
-    type: 'boolean'
-  },
-  {
-    title: 'Avertisseurs de fumée',
-    subTitle: 'Ajouter un nouveau détecteur',
-    question: 'L\'emplacement est-il approprié ?',
-    type: 'boolean'
-  },
-  {
-    title: 'Avertisseurs de fumée',
-    subTitle: 'Ajouter un nouveau détecteur',
-    question: 'Est-il alimenté avec une pile ?',
-    type: 'boolean'
-  },
-  {
-    title: 'Avertisseurs de fumée',
-    subTitle: 'Ajouter un nouveau détecteur',
-    question: 'Est-il relié au réseau électrique du bâtiment ?',
-    type: 'boolean'
-  },
-  {
-    title: 'Avertisseurs de fumée',
-    subTitle: 'Ajouter un nouveau détecteur',
-    question: 'Est-il relié à une centrale ?',
-    type: 'boolean'
-  }];
+  private questions: Question[];
 
-  constructor() { }
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
+    this.loadQuestion();
   }
 
   next() {
@@ -59,5 +28,11 @@ export class QuestionSliderComponent implements OnInit {
     if (this.selectedTab > 0) {
       this.selectedTab--;
     }
+  }
+
+  private loadQuestion() {
+    this.questionService.getAll().subscribe(result => {
+      this.questions = result.data;
+    });
   }
 }
