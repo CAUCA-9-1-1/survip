@@ -7,7 +7,7 @@ import { IgoModule, LanguageLoader, provideLanguageService,
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { FormModule } from './form/form.module';
+import { ComponentModule } from './component/component.module';
 import { InterventionReportModule } from './intervention-report/intervention-report.module';
 import { InterventionSurveyModule } from './intervention-survey/intervention-survey.module';
 import { PreventionSurveyModule } from './prevention-survey/prevention-survey.module';
@@ -36,6 +36,7 @@ export function httpLoaderFactory(http: Http) {
     InterventionRoutingModule,
     PreventionSectionModule,
     PreventionRoutingModule,
+    SharedModule,
     AppRoutingModule
   ],
   providers: [

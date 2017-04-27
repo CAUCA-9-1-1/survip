@@ -24,4 +24,4 @@ import { ToolbarBackComponent } from './toolbar-back/toolbar-back.component';
     ToolbarBackComponent
   ]
 })
-export class FormModule { }
+export class ComponentModule { }
