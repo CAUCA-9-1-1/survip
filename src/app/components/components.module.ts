@@ -6,6 +6,8 @@ import { MenuComponent } from './menu/menu.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ToolbarBackComponent } from './toolbar-back/toolbar-back.component';
+import { SearchListComponent } from './search-list/search-list.component';
+import {SearchBoxComponent} from './search-box/search-box.component';
 
 
 @NgModule({
@@ -15,13 +17,15 @@ import { ToolbarBackComponent } from './toolbar-back/toolbar-back.component';
   exports: [
     MenuComponent,
     ToolbarComponent,
-    ToolbarBackComponent
+    ToolbarBackComponent,
+    SearchListComponent
   ],
   declarations: [
     MenuComponent,
     MenuItemComponent,
     ToolbarComponent,
-    ToolbarBackComponent
+    ToolbarBackComponent,
+    SearchListComponent
   ]
 })
 export class ComponentModule { }

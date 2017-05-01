@@ -1,0 +1,17 @@
+<md-nav-list class="search-list">
+  <div class="search-input-container">
+    <md-input-container class="search-input">
+      <input mdInput type="search" placeholder="Recherche..." floatPlaceholder="always" class="search-input">
+    </md-input-container>
+  </div>
+  <md-list-item class="search-item" *ngFor="let item of items" (click)="clickOnItem(item.idLane)">
+    <div class="search-item-text" fxFlex>
+      {{item.laneName}}
+    </div>
+    <div class="search-item-icon" fxFlex="32px">
+      <md-icon>chevron_right</md-icon>
+    </div>
+    <md-divider></md-divider>
+  </md-list-item>
+</md-nav-list>
+<div style="clear:both;"></div>
