@@ -8,6 +8,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ToolbarBackComponent } from './toolbar-back/toolbar-back.component';
 import { SearchListComponent } from './search-list/search-list.component';
 import {SearchBoxComponent} from './search-box/search-box.component';
+import {LaneService} from '../intervention-survey/shared/services/lane.service';
+import { FilterByPipe } from './shared/filter.pipe';
 
 
 @NgModule({
@@ -25,7 +27,11 @@ import {SearchBoxComponent} from './search-box/search-box.component';
     MenuItemComponent,
     ToolbarComponent,
     ToolbarBackComponent,
-    SearchListComponent
+    SearchListComponent,
+    FilterByPipe
+  ],
+  providers: [
+    LaneService
   ]
 })
 export class ComponentModule { }

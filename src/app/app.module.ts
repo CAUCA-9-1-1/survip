@@ -6,6 +6,11 @@ import { IgoModule, LanguageLoader, provideLanguageService,
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './mockdata/in-memory-data.service';
+//import { LaneService} from './intervention-survey/shared/services/lane.service';
+
 import { SharedModule } from './shared/shared.module';
 import { ComponentModule } from './components/components.module';
 import { InterventionReportModule } from './intervention-report/intervention-report.module';

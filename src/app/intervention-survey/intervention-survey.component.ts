@@ -3,6 +3,8 @@ import { MdSidenav } from '@angular/material';
 
 import { MenuItem } from '../components/shared/menu-item.interface';
 import { WindowRefService } from '../shared/window-ref.service';
+// import {LaneService} from './shared/services/lane.service';
+import {LaneService} from './shared/services/lane.service';
 
 @Component({
   selector: 'app-survey',
@@ -50,7 +52,7 @@ export class InterventionSurveyComponent implements OnInit {
     }
   ];
 
-  constructor(private windowRef: WindowRefService) {
+  constructor(private windowRef: WindowRefService, private laneService: LaneService) {
   }
 
   ngOnInit() {
