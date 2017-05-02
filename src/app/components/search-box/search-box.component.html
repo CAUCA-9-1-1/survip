@@ -1,3 +1,7 @@
-<p>
-  search-box works!
-</p>
+<div>
+  <md-input-container (click)="onClick()">
+    <md-icon mdSuffix="">search</md-icon>
+    <input type='text' placeholder="{{placeHolderText}}" value="{{selectedItemDescription}}" mdInput readonly>
+  </md-input-container>
+</div>
+<template #alertContainer></template>

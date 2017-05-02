@@ -18,6 +18,17 @@ export class LaneService implements ServiceForListInterface {
       .catch(this.handleError);
   }
 
+  getDescriptionById(idLane: string): Promise<string> {
+    return this.http.get(this.laneUrl + '?idLane=' + idLane)
+      .toPromise()
+      .then(response => this.getName(response.json().data as Lane[]))
+      .catch(this.handleError);
+  }
+
+  private getName(lanes: Lane[]): string {
+    return lanes[0].fullNameForFireCad;
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

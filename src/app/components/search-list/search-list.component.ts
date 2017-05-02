@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnInit, Output, ChangeDetectorRef, Input} from '@angular/core';
-import {LaneService} from '../../intervention-survey/shared/services/lane.service';
 
 @Component({
   selector: 'app-search-list',
@@ -10,16 +9,20 @@ export class SearchListComponent implements OnInit {
   searchExpression = '';
   @Input() keyField: string;
   @Input() descriptionField: string;
-  @Input() dataService: LaneService;
+  @Input() dataService: ServiceForListInterface;
   @Output() selectedItemChanged = new EventEmitter();
+  @Output() selectionCancelled = new EventEmitter();
   items: any[];
   constructor(private ref: ChangeDetectorRef) { }
   clickOnItem(selectedId: string): void {
-    console.log('selection');
-    console.log(selectedId);
     this.selectedItemChanged.emit(selectedId);
   }
+  clickOnCancel(): void {
+    this.selectionCancelled.emit();
+  }
   ngOnInit() {
+  }
+  loadData() {
     this.dataService.getList().then(items => {
       this.items = items;
     });

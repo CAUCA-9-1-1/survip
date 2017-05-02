@@ -20,7 +20,8 @@ import { FilterByPipe } from './shared/filter.pipe';
     MenuComponent,
     ToolbarComponent,
     ToolbarBackComponent,
-    SearchListComponent
+    SearchListComponent,
+    SearchBoxComponent
   ],
   declarations: [
     MenuComponent,
@@ -28,7 +29,11 @@ import { FilterByPipe } from './shared/filter.pipe';
     ToolbarComponent,
     ToolbarBackComponent,
     SearchListComponent,
-    FilterByPipe
+    SearchBoxComponent,
+    FilterByPipe,
+  ],
+  entryComponents: [
+    SearchListComponent
   ],
   providers: [
     LaneService
