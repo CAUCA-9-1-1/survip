@@ -29,16 +29,13 @@
       </div>
       <div *ngSwitchDefault>
         <!--<app-intervention-survey-building></app-intervention-survey-building>-->
-        <!--<md-input-container>
-          <input mdInput [(ngModel)]="pseudoTest" >
-        </md-input-container>
-        <app-search-list [dataService]="laneService" [descriptionField]="'fullNameForFireCad'" [keyField]="'idLane'" (selectedItemChanged)="onSelectedItemChanged($event)"></app-search-list>-->
+        <div>{{pseudoTest}}</div>
         <app-search-box
           [placeHolderText]='Rue'
           [keyField]="'idLane'"
           [descriptionField]="'fullNameForFireCad'"
           [dataService]="laneService"
-          ([ngModel])="idLane"></app-search-box>
+          [(selectedId)]="pseudoTest"></app-search-box>
       </div>
     </div>
   </div>

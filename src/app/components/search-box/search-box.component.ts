@@ -1,6 +1,6 @@
 import {
   Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnDestroy, OnInit, Output, ViewChild,
-  ViewContainerRef, EventEmitter
+  ViewContainerRef, EventEmitter, AfterViewInit
 } from '@angular/core';
 import {SearchListComponent} from '../search-list/search-list.component';
 
@@ -12,18 +12,25 @@ import {SearchListComponent} from '../search-list/search-list.component';
 export class SearchBoxComponent implements OnInit, OnDestroy {
   @ViewChild('alertContainer', { read: ViewContainerRef }) container;
   componentRef: ComponentRef<any>;
+  currentId: string;
   @Input() placeHolderText: string;
   @Input() descriptionField: string;
   @Input() keyField: string;
-  @Input() selectedId: string;
+  @Input() get selectedId() {
+    return this.currentId;
+  }
+  set selectedId(val) {
+    this.currentId = val;
+    this.selectedIdChange.emit(this.currentId);
+  }
   @Input() dataService: ServiceForListInterface;
   @Output() selectedIdChange = new EventEmitter<string>();
   selectedItemDescription: string;
   constructor(
     private resolver: ComponentFactoryResolver
   ) { }
-
   ngOnInit() {
+    this.showSelectionDescription();
   }
   ngOnDestroy() {
     this.componentRef.destroy();
@@ -32,8 +39,6 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
     this.createComponent();
   }
   private createComponent() {
-    console.log(this.keyField);
-    console.log(this.descriptionField);
     this.container.clear();
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(SearchListComponent);
     this.componentRef = this.container.createComponent(factory);
@@ -48,10 +53,14 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
     this.selectedId = selectedId;
     this.selectedIdChange.emit(selectedId);
     this.destroyComponent();
-    this.dataService
-      .getDescriptionById(selectedId)
-      .then(description => this.selectedItemDescription = description);
+    this.showSelectionDescription();
   };
+
+  private showSelectionDescription() {
+    this.dataService
+      .getDescriptionById(this.selectedId)
+      .then(description => this.selectedItemDescription = description);
+  }
   private onSelectionCancelled() {
     this.destroyComponent();
   };

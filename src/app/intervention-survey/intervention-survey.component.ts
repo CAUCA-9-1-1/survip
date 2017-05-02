@@ -12,7 +12,7 @@ import {LaneService} from './shared/services/lane.service';
   styleUrls: ['./intervention-survey.component.styl']
 })
 export class InterventionSurveyComponent implements OnInit {
-  pseudoTest: string = 'blou';
+  pseudoTest: string = '90bdcc45-fe19-4d5c-ba7f-b1afac6b844b';
   @ViewChild('sidenav') sidenav: MdSidenav;
   public mode = 'over';
   public align = 'end';
@@ -51,9 +51,6 @@ export class InterventionSurveyComponent implements OnInit {
       title: 'Personnes contacts',
     }
   ];
-  onSelectedItemChanged(id: string) {
-    this.pseudoTest = id;
-  }
   constructor(private windowRef: WindowRefService, private laneService: LaneService) {
   }
 
