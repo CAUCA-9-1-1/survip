@@ -1,6 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-import { PreventionSurveyData } from './prevention-survey-data';
+import { SurveyQuestionData } from './survey-question-data';
+import { InspectionQuestionData } from './inspection-question-data';
 import { LaneData } from './lane-data';
 
 export class InMemoryDataService implements InMemoryDbService {
@@ -35,13 +36,15 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     ];
 
-    const preventionSurvey = new PreventionSurveyData().data;
-    const lane = new LaneData().data;
+    const surveyQuestions = new SurveyQuestionData().data;
+    const inspectionQuestion = new InspectionQuestionData().data;
+    const lanes = new LaneData().data;
 
     return {
       'surveys': surveys,
-      'lanes': lane,
-      'prevention-survey': preventionSurvey
+      'lanes': lanes,
+      'survey-question': surveyQuestions,
+      'inspection-question': inspectionQuestion,
     };
   }
 }

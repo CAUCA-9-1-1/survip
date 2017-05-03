@@ -1,13 +1,11 @@
-<md-tab-group [selectedIndex]="selectedTab">
-  <ng-container *ngFor="let question of questions">
+<md-tab-group [selectedIndex]="tabSelected">
+  <ng-container *ngFor="let question of tabs">
     <md-tab>
-      <app-prevention-survey-question [question]="question"></app-prevention-survey-question>
+      <app-prevention-survey-question [question]="question" (change)="onAnswerChange($event)"></app-prevention-survey-question>
     </md-tab>
   </ng-container>
 </md-tab-group>
 <md-toolbar class="actions">
-  <span class="spacer"></span>
-  <button md-button (click)="previous()"><md-icon>navigate_before</md-icon>{{'previousQuestion' | translate}}</button>
   <span class="spacer"></span>
   <ng-container *ngIf="!onLastQuestion">
     <button md-button (click)="next()">{{'nextQuestion' | translate}}<md-icon>navigate_next</md-icon></button>

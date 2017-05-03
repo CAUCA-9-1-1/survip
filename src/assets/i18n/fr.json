@@ -19,5 +19,6 @@
   "nextQuestion": "Question suivante",
   "previousQuestion": "Question précédente",
   "return": "Retour",
-  "yes": "Oui"
+  "yes": "Oui",
+  "no": "Non"
 }

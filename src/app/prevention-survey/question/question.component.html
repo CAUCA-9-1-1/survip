@@ -6,19 +6,24 @@
         {{question.description.fr}}
 
         <div [ngSwitch]="question.questionType">
+            <div *ngSwitchCase="'boolean'">
+                <md-slide-toggle (change)="boolChange($event)">{{'yes' | translate}}</md-slide-toggle>
+            </div>
             <div *ngSwitchCase="'choice'">
-                <md-select placeholder="Sélection">
-                    <md-option>Option 1</md-option>
-                    <md-option>Option 2</md-option>
-                    <md-option>Option 3</md-option>
+                <md-select placeholder="Sélection" (change)="choiceChange($event)">
+                    <md-option *ngFor="let choice of question.choices" [value]="choice.idSurveyChoice">
+                        {{choice.description.fr}}
+                    </md-option>
                 </md-select>
             </div>
-            <div *ngSwitchCase="'boolean'">
-                <md-slide-toggle>{{'yes' | translate}}</md-slide-toggle>
+            <div *ngSwitchCase="'date'">
+                <md-input-container>
+                    <input type="date" mdInput placeholder="" (change)="dateChange($event)">
+                </md-input-container>
             </div>
             <div *ngSwitchCase="'text'">
                 <md-input-container>
-                    <input mdInput placeholder="" value="">
+                    <input mdInput placeholder="" (change)="textChange($event)">
                 </md-input-container>
             </div>
         </div>

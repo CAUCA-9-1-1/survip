@@ -1,7 +1,9 @@
 export class Question {
-    idQuestion: string;
-    title: string;
-    subTitle: string;
-    question: string;
-    type: string;
+    idSurveyQuestion: string;
+    idSurveyQuestionNext: string;
+    idSurveyQuestionNextOnFalse: string;
+    title: object;
+    description: object;
+    questionType: string;
+    isActive: boolean;
 }
