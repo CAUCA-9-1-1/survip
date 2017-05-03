@@ -1,1 +1,13 @@
 <button (click)="onDeleteClicked('ayo')" >what the fuck</button>
+<md-card class="master-card">
+  <md-card-title>{{title}}</md-card-title>
+  <md-card-content>
+    <ng-container *ngFor="let item of items;">
+      <div appCtrlFactory comp="ContactComponent" [item]="item" (deleteClick)="onDeleteClicked($event)"></div>
+    </ng-container>
+    <div style="clear:both"></div>
+  </md-card-content>
+</md-card>
+<div fxLayout="row" class="card-buttons">
+  <button md-raised-button><md-icon style="color: green;" (click)="console.log('yo')" >check_circle</md-icon>Compléter la section</button>
+</div>
