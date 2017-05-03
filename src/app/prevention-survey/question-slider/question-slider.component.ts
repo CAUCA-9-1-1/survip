@@ -14,7 +14,7 @@ export class QuestionSliderComponent implements OnInit {
   private questions: Question[];
   private questionIndex = 0;
   private onLastQuestion = false;
-  private lastAnswer: any = null;
+  private lastAnswer: boolean|string = '';
 
   constructor(private surveyQuestionService: SurveyQuestionService) { }
 
@@ -32,7 +32,7 @@ export class QuestionSliderComponent implements OnInit {
 
   next() {
     if (this.tabSelected < this.questions.length - 1) {
-      const question = this.questions[this.tabSelected];
+      const question = this.questions[this.questionIndex];
       let next = this.questions[(this.questionIndex + 1)].idSurveyQuestion;
 
       if (question.idSurveyQuestionNextOnFalse && question.questionType === 'boolean' && !this.lastAnswer) {
@@ -42,7 +42,7 @@ export class QuestionSliderComponent implements OnInit {
       }
 
       this.questionIndex = this.findQuestion(next);
-      this.lastAnswer = null;
+      this.lastAnswer = (this.questions[this.questionIndex].questionType === 'boolean' ? false : '');
       this.onLastQuestion = (this.questionIndex === this.questions.length - 1);
       this.tabSelected++;
       this.tabs.push(this.questions[this.questionIndex]);
@@ -63,6 +63,7 @@ export class QuestionSliderComponent implements OnInit {
     this.surveyQuestionService.getAll('43deacf8-fef0-4b88-a0fd-29cb1bfa0e04').subscribe(result => {
       this.questions = result.data;
       this.tabs = [this.questions[0]];
+      this.lastAnswer = (this.questions[0].questionType === 'boolean' ? false : '');
     });
   }
 }

@@ -197,6 +197,7 @@ export class SurveyQuestionData {
     },
     'idLanguageContentTitle': '669c32a7-d41d-4a6c-82cf-0978cdaf0424',
     'idSurveyQuestionNext': null,
+    'idSurveyQuestionNextOnFalse': "daef1dba-89f0-41f4-99e3-1cd7d8798349",
     'title': {'idLanguageContent': '669c32a7-d41d-4a6c-82cf-0978cdaf0424', 'fr': 'Extincteurs portatifs'},
     'idLanguageContentDescription': '1b552a81-985f-40ba-8960-16696bd6889d',
     'questionType': 'boolean',
@@ -219,6 +220,7 @@ export class SurveyQuestionData {
     'description': {'idLanguageContent': '02f1bebf-3264-46bd-9684-0ca33b6dd2dc', 'fr': 'Il y a-t-il présence d\'un avertisseur de CO ?'},
     'idLanguageContentTitle': '496864c0-1cf1-4988-86c8-581d08834713',
     'idSurveyQuestionNext': null,
+    'idSurveyQuestionNextOnFalse': '6f5eecc6-a08e-46eb-9952-aa3b4c7c76f4',
     'title': {'idLanguageContent': '496864c0-1cf1-4988-86c8-581d08834713', 'fr': 'Avertisseurs de monoxyde de carbone'},
     'idLanguageContentDescription': '02f1bebf-3264-46bd-9684-0ca33b6dd2dc',
     'questionType': 'boolean',
@@ -254,7 +256,7 @@ export class SurveyQuestionData {
     'idSurveyQuestionNext': null,
     'title': {'idLanguageContent': '8f2784ae-2a6a-4866-841a-556222efe37d', 'fr': 'PNAP'},
     'idLanguageContentDescription': '20acad3d-ff5d-47d0-870b-b9f314d1ab8f',
-    'questionType': 'text',
+    'questionType': 'boolean',
     'sequence': 16
   }, {
     'idSurvey': '43deacf8-fef0-4b88-a0fd-29cb1bfa0e04',
@@ -266,6 +268,7 @@ export class SurveyQuestionData {
     },
     'idLanguageContentTitle': 'c12b4b9e-f34d-4f53-ba01-18cbee357c91',
     'idSurveyQuestionNext': null,
+    'idSurveyQuestionNextOnFalse': '89f41075-33e2-4139-a0b5-0adce2a23342',
     'title': {'idLanguageContent': 'c12b4b9e-f34d-4f53-ba01-18cbee357c91', 'fr': 'Transfert'},
     'idLanguageContentDescription': '2d5d520f-0590-4520-87cb-1ccfa6fb1f23',
     'questionType': 'boolean',
