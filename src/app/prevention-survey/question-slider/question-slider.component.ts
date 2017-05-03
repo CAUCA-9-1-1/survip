@@ -38,7 +38,7 @@ export class QuestionSliderComponent implements OnInit {
   }
 
   private loadQuestion() {
-    this.questionService.getAll().subscribe(result => {
+    this.questionService.get('43deacf8-fef0-4b88-a0fd-29cb1bfa0e04').subscribe(result => {
       this.questions = result.questions;
     });
   }

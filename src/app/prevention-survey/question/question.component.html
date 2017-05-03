@@ -5,8 +5,8 @@
     <md-card-content>
         {{question.description.fr}}
 
-        <div [ngSwitch]="question.question_type">
-            <div *ngSwitchCase="'combo'">
+        <div [ngSwitch]="question.questionType">
+            <div *ngSwitchCase="'choice'">
                 <md-select placeholder="Sélection">
                     <md-option>Option 1</md-option>
                     <md-option>Option 2</md-option>
