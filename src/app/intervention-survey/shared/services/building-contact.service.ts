@@ -8,7 +8,7 @@ import { BuildingContact } from '../models/building-contact';
 
 @Injectable()
 export class BuildingContactService {
-  private url = 'api/buildingContacts';
+  private url = 'api/building-contacts';
   private headers = new Headers({'Content-Type': 'application/json'});
   constructor(private http: Http) { }
   getList(): Promise<BuildingContact[]> {
