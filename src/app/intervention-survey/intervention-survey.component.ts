@@ -3,8 +3,8 @@ import { MdSidenav } from '@angular/material';
 
 import { MenuItem } from '../components/shared/menu-item.interface';
 import { WindowRefService } from '../shared/window-ref.service';
-// import {LaneService} from './shared/services/lane.service';
-import {LaneService} from './shared/services/lane.service';
+import {BuildingContactService} from './shared/services/building-contact.service';
+import {BuildingContact} from './shared/models/building-contact';
 
 @Component({
   selector: 'app-survey',
@@ -12,8 +12,8 @@ import {LaneService} from './shared/services/lane.service';
   styleUrls: ['./intervention-survey.component.styl']
 })
 export class InterventionSurveyComponent implements OnInit {
-  pseudoTest: string = '90bdcc45-fe19-4d5c-ba7f-b1afac6b844b';
   @ViewChild('sidenav') sidenav: MdSidenav;
+  public contacts: BuildingContact[];
   public mode = 'over';
   public align = 'end';
   public selectedMenu = 'building';
@@ -51,15 +51,28 @@ export class InterventionSurveyComponent implements OnInit {
       title: 'Personnes contacts',
     }
   ];
-  constructor(private windowRef: WindowRefService, private laneService: LaneService) {
+  constructor(private windowRef: WindowRefService, private buildingContactService: BuildingContactService) {
   }
 
   ngOnInit() {
+    this.loadBuildingContact();
+
     if (this.windowRef.nativeWindow.innerWidth >= 700) {
       this.mode = 'side';
       this.align = 'start';
       this.sidenav.open();
     }
+  }
+
+  onBuildingContactDeleted(value/*deletedContact: BuildingContact*/) {
+    console.log('in main page!')
+    console.log(value);
+    // this.contacts = this.contacts.filter(contact => contact.idBuildingContact !== deletedContact.idBuildingContact);
+  }
+
+  private loadBuildingContact() {
+    this.buildingContactService.getList()
+      .then(contacts => this.contacts = contacts);
   }
 
   select(item: MenuItem) {

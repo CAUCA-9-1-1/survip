@@ -1,189 +1,56 @@
-<div>
-
-    <md-card class="master-card">
-        <md-card-title>Contact(s)</md-card-title>
-        <md-card-content>
-
-            <md-card class="detail-card">
-                <form>
-                    <div fxLayout="row" class="full-width">
-                        <md-input-container class="full-width">
-                            <input mdInput placeholder="Nom"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container class="full-width">
-                            <input mdInput placeholder="Prénom"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container class="full-width">
-                            <input mdInput placeholder="Ville"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container>
-                            <input mdInput placeholder="Téléphone"/>
-                        </md-input-container>
-                        <md-input-container>
-                            <input mdInput placeholder="Poste"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container>
-                            <input mdInput placeholder="Cellulaire"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container>
-                            <input mdInput placeholder="Urgence"/>
-                        </md-input-container>
-                        <md-input-container>
-                            <input mdInput placeholder="Code"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container>
-                            <input mdInput placeholder="Priorité"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container class="full-width">
-                            <textarea mdInput placeholder="Détails"></textarea>
-                        </md-input-container>
-                    </div>
-                </form>
-                <md-card-actions class="card-buttons">
-                    <button md-raised-button>
-                        <md-icon>delete</md-icon>
-                        Supprimer
-                    </button>
-                </md-card-actions>
-            </md-card>
-
-            <md-card class="detail-card">
-                <form>
-                    <div fxLayout="row" class="full-width">
-                        <md-input-container class="full-width">
-                            <input mdInput placeholder="Nom"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container class="full-width">
-                            <input mdInput placeholder="Prénom"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container class="full-width">
-                            <input mdInput placeholder="Ville"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container>
-                            <input mdInput placeholder="Téléphone"/>
-                        </md-input-container>
-                        <md-input-container>
-                            <input mdInput placeholder="Poste"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container>
-                            <input mdInput placeholder="Cellulaire"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container>
-                            <input mdInput placeholder="Urgence"/>
-                        </md-input-container>
-                        <md-input-container>
-                            <input mdInput placeholder="Code"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container>
-                            <input mdInput placeholder="Priorité"/>
-                        </md-input-container>
-                    </div>
-                    <div fxLayout="row">
-                        <md-input-container class="full-width">
-                            <textarea mdInput placeholder="Détails"></textarea>
-                        </md-input-container>
-                    </div>
-                </form>
-                <md-card-actions class="card-buttons">
-                    <button md-raised-button>
-                        <md-icon>delete</md-icon>
-                        Supprimer
-                    </button>
-                </md-card-actions>
-            </md-card>
-
-      <md-card class="detail-card empty-card">
-        <div class="centered-card-content">
-          <button md-raised-button class="add-button"><md-icon class="add-button-picture">add_circle</md-icon>  Ajouter un contact</button>
+<md-card class="detail-card" *ngIf="item">
+    <form>
+        <div fxLayout="row" class="full-width">
+            <md-input-container class="full-width">
+                <input mdInput placeholder="Nom" [(value)]="item.lastName" />
+            </md-input-container>
         </div>
-        <div class="hidden-content">
-          <div fxLayout="row" class="full-width">
-            <md-input-container class="full-width">
-              <input mdInput placeholder="Nom"/>
-            </md-input-container>
-          </div>
-          <div fxLayout="row">
-            <md-input-container class="full-width">
-              <input mdInput placeholder="Prénom"/>
-            </md-input-container>
-          </div>
-          <div fxLayout="row">
-            <md-input-container class="full-width">
-              <input mdInput placeholder="Ville"/>
-            </md-input-container>
-          </div>
-          <div fxLayout="row">
-            <md-input-container>
-              <input mdInput placeholder="Téléphone"/>
-            </md-input-container>
-            <md-input-container>
-              <input mdInput placeholder="Poste"/>
-            </md-input-container>
-          </div>
-          <div fxLayout="row">
-            <md-input-container>
-              <input mdInput placeholder="Cellulaire"/>
-            </md-input-container>
-          </div>
-          <div fxLayout="row">
-            <md-input-container>
-              <input mdInput placeholder="Urgence"/>
-            </md-input-container>
-            <md-input-container>
-              <input mdInput placeholder="Code"/>
-            </md-input-container>
-          </div>
-          <div fxLayout="row">
-            <md-input-container>
-              <input mdInput placeholder="Priorité"/>
-            </md-input-container>
-          </div>
-          <div fxLayout="row">
-            <md-input-container class="full-width">
-              <textarea mdInput placeholder="Détails"></textarea>
-            </md-input-container>
-          </div>
+        <div fxLayout="row">
+          <md-input-container class="full-width">
+              <input mdInput placeholder="Prénom" [(value)]="item.firstName"/>
+          </md-input-container>
         </div>
-        <md-card-actions class="card-buttons" style="visibility: hidden">
-          <button md-raised-button><md-icon>delete</md-icon>Supprimer</button>
-        </md-card-actions>
-      </md-card>
-
-            <div style="clear: both"></div>
-
-        </md-card-content>
-    </md-card>
-
-    <div fxLayout="row" class="card-buttons">
-        <button md-raised-button>
-            <md-icon style="color: green;">check_circle</md-icon>
-            Compléter la section
+        <div fxLayout="row">
+            <md-input-container class="full-width">
+                <input mdInput placeholder="Ville" value=""/>
+            </md-input-container>
+        </div>
+        <div fxLayout="row">
+            <md-input-container>
+                <input mdInput placeholder="Téléphone" type="tel" [(value)]="item.phoneNumber"/>
+            </md-input-container>
+            <md-input-container>
+                <input mdInput placeholder="Poste" [(value)]="item.phoneNumberExtension"/>
+            </md-input-container>
+        </div>
+        <div fxLayout="row">
+            <md-input-container>
+                <input mdInput placeholder="Cellulaire" type="tel" [(value)]="item.cellphoneNumber"/>
+            </md-input-container>
+        </div>
+        <div fxLayout="row">
+            <md-input-container>
+                <input mdInput placeholder="Urgence" type="tel" [(value)]="item.otherNumber"/>
+            </md-input-container>
+            <md-input-container>
+                <input mdInput placeholder="Code" [(value)]="item.otherNumberExtension"/>
+            </md-input-container>
+        </div>
+        <div fxLayout="row">
+            <md-input-container>
+                <input mdInput placeholder="Priorité" type="number" [(value)]="item.callPriority"/>
+            </md-input-container>
+        </div>
+        <div fxLayout="row">
+            <md-input-container class="full-width">
+                <textarea mdInput maxlength="50" placeholder="Détails" [(value)]="item.details"></textarea>
+            </md-input-container>
+        </div>
+    </form>
+    <md-card-actions class="card-buttons">
+        <button md-raised-button (click)="onDeleteClicked()">
+            <md-icon>delete</md-icon>
+            Supprimer
         </button>
-    </div>
-</div>
+    </md-card-actions>
+</md-card>

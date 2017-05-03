@@ -11,7 +11,6 @@ import {SearchBoxComponent} from './search-box/search-box.component';
 import {LaneService} from '../intervention-survey/shared/services/lane.service';
 import { FilterByPipe } from './shared/filter.pipe';
 
-
 @NgModule({
   imports: [
     SharedModule
@@ -21,7 +20,7 @@ import { FilterByPipe } from './shared/filter.pipe';
     ToolbarComponent,
     ToolbarBackComponent,
     SearchListComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
   ],
   declarations: [
     MenuComponent,
@@ -33,7 +32,7 @@ import { FilterByPipe } from './shared/filter.pipe';
     FilterByPipe,
   ],
   entryComponents: [
-    SearchListComponent
+    SearchListComponent,
   ],
   providers: [
     LaneService

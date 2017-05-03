@@ -10,6 +10,9 @@ import { DangerousMaterialComponent } from './dangerous-material/dangerous-mater
 import { FireProtectionComponent } from './fire-protection/fire-protection.component';
 import { FireHydrantComponent } from './fire-hydrant/fire-hydrant.component';
 import { ParticularRiskComponent } from './particular-risk/particular-risk.component';
+import { CardLayoutComponent } from './card-layout/card-layout.component';
+import { CardLayoutFactoryDirective } from './shared/control-factory.directive';
+import {BuildingContactService} from './shared/services/building-contact.service';
 
 @NgModule({
   imports: [
@@ -24,7 +27,8 @@ import { ParticularRiskComponent } from './particular-risk/particular-risk.compo
     FireProtectionComponent,
     PersonRequiringAssistanceComponent,
     FireHydrantComponent,
-    ParticularRiskComponent
+    ParticularRiskComponent,
+    CardLayoutComponent
   ],
   declarations: [
     BuildingDetailComponent,
@@ -36,9 +40,15 @@ import { ParticularRiskComponent } from './particular-risk/particular-risk.compo
     DangerousMaterialComponent,
     FireProtectionComponent,
     FireHydrantComponent,
-    ParticularRiskComponent
+    ParticularRiskComponent,
+    CardLayoutComponent,
+    CardLayoutFactoryDirective,
+  ],
+  entryComponents: [
+    ContactComponent
   ],
   providers: [
+    BuildingContactService
   ]
 })
 export class InterventionSurveyModule { }

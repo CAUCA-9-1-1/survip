@@ -1,6 +1,6 @@
 <md-sidenav-container>
   <md-sidenav #sidenav [mode]="mode" [align]="align">
-    <app-form-menu [items]="menuItems" (select)="select($event)"></app-form-menu>
+    <app-form-menu [items]="menuItems" (select)="select($event)" ></app-form-menu>
   </md-sidenav>
 
   <app-form-toolbar-back [title]="'627 rapide-plat sud'"></app-form-toolbar-back>
@@ -22,20 +22,18 @@
         <app-intervention-survey-fire-protection></app-intervention-survey-fire-protection>
       </div>
       <div *ngSwitchCase="'contacts'">
-        <app-intervention-survey-contact></app-intervention-survey-contact>
+        <app-card-layout title="Contacts" [items]="contacts" [componentType]="ContactComponent">
+          Loading....
+        </app-card-layout>
       </div>
       <div *ngSwitchCase="'dangerousMaterial'">
         <app-intervention-survey-dangerous-material></app-intervention-survey-dangerous-material>
       </div>
       <div *ngSwitchDefault>
-        <!--<app-intervention-survey-building></app-intervention-survey-building>-->
-        <div>{{pseudoTest}}</div>
-        <app-search-box
-          [placeHolderText]='Rue'
-          [keyField]="'idLane'"
-          [descriptionField]="'fullNameForFireCad'"
-          [dataService]="laneService"
-          [(selectedId)]="pseudoTest"></app-search-box>
+          <button (click)="onBuildingContactDeleted('a')">test</button>
+          <app-card-layout title="Test card layout" [items]="contacts" [componentType]="ContactComponent" (deleteClick)="onBuildingContactDeleted($event)" *ngIf="items">
+            Loading....
+          </app-card-layout>
       </div>
     </div>
   </div>
