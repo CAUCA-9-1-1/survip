@@ -2,7 +2,7 @@ import { Component, EventEmitter, ElementRef, OnInit, Input, Output, ViewChild }
 import { MdDialog } from '@angular/material';
 
 import { WebcamComponent } from '../../../shared/components/webcam/webcam.component';
-import { WindowRefService } from '../../../shared/window-ref.service';
+import { WindowRefService } from '../../../shared/services/window-ref.service';
 
 @Component({
   selector: 'app-take-picture',

@@ -8,7 +8,9 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { IgoModule } from 'igo2';
 import { TakePictureComponent } from './components/take-picture/take-picture.component';
-import { WindowRefService } from './window-ref.service';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ToolbarBackComponent } from './components/toolbar-back/toolbar-back.component';
+import { WindowRefService } from './services/window-ref.service';
 import { WebcamComponent } from './components/webcam/webcam.component';
 
 @NgModule({
@@ -24,6 +26,8 @@ import { WebcamComponent } from './components/webcam/webcam.component';
   ],
   declarations: [
     TakePictureComponent,
+    ToolbarComponent,
+    ToolbarBackComponent,
     WebcamComponent,
   ],
   entryComponents: [
@@ -38,6 +42,8 @@ import { WebcamComponent } from './components/webcam/webcam.component';
     BrowserModule,
     IgoModule,
     TranslateModule,
+    ToolbarComponent,
+    ToolbarBackComponent,
     TakePictureComponent,
   ],
   providers: [

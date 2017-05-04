@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
-import { ComponentModule } from '../components/components.module';
 import { BuildingComponent } from './building/building.component';
 import { BuildingDetailComponent } from './building-detail/building-detail.component';
 import { ImplantationPlanComponent } from './implantation-plan/implantation-plan.component';

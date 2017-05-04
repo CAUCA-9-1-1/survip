@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { MdSidenav } from '@angular/material';
 
 import { MenuItem } from '../components/shared/menu-item.interface';
-import { WindowRefService } from '../shared/window-ref.service';
+import { WindowRefService } from '../shared/services/window-ref.service';
 import {BuildingContactService} from './shared/services/building-contact.service';
 import {BuildingContact} from './shared/models/building-contact';
 import {DialogsService} from '../components/shared/dialogs.service';

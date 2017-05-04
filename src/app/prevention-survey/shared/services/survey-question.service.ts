@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
 
-import { BaseService } from '../../../shared/base.service';
+import { BaseService } from '../../../core/shared/services/base.service';
 import { Question } from '../models/question.model';
 
 @Injectable()
