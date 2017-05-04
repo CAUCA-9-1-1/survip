@@ -27,6 +27,8 @@
     "@ngx-translate/http-loader": "0.0.3",
     "core-js": "^2.4.1",
     "igo2": "^0.3.3",
+    "devextreme": "^16.2.6",
+    "devextreme-angular": "^16.2.6",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {

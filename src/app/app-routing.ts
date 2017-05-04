@@ -7,6 +7,7 @@ import { InterventionMapsComponent } from './intervention-maps/intervention-maps
 import { InterventionReportComponent } from './intervention-report/intervention-report.component';
 import { InterventionSurveyComponent } from './intervention-survey/intervention-survey.component';
 import { PreventionSurveyComponent } from './prevention-survey/prevention-survey.component';
+import { ManagementAddressComponent } from './management-address/management-address.component';
 
 const appRoutes: Routes = [{
   path: '',
@@ -35,6 +36,14 @@ const appRoutes: Routes = [{
   children: [{
     path: 'survey',
     component: PreventionSurveyComponent
+  }]
+},
+{
+  path: 'management',
+  canActivate: [AuthGuard],
+  children: [{
+    path: 'address',
+    component: ManagementAddressComponent
   }]
 },
 {

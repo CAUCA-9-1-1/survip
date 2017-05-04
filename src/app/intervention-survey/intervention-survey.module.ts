@@ -12,7 +12,7 @@ import { FireHydrantComponent } from './fire-hydrant/fire-hydrant.component';
 import { ParticularRiskComponent } from './particular-risk/particular-risk.component';
 import { CardLayoutComponent } from './card-layout/card-layout.component';
 import { CardLayoutFactoryDirective } from './shared/control-factory.directive';
-import {BuildingContactService} from './shared/services/building-contact.service';
+import { BuildingContactService } from './shared/services/building-contact.service';
 
 @NgModule({
   imports: [

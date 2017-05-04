@@ -1,3 +1,7 @@
-<p>
-  country works!
-</p>
+<dx-data-grid
+  [(dataSource)]="dataSource"
+  [columns]="columns"
+  [editing]="editing"
+  [filterRow]="filter"
+  (onRowUpdated)="onRowUpdated($event)">
+</dx-data-grid>

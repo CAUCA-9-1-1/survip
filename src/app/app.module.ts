@@ -15,11 +15,13 @@ import { ComponentModule } from './components/components.module';
 import { InterventionReportModule } from './intervention-report/intervention-report.module';
 import { InterventionSurveyModule } from './intervention-survey/intervention-survey.module';
 import { PreventionSurveyModule } from './prevention-survey/prevention-survey.module';
+import { ManagementAddressModule } from './management-address/management-address.module';
 
 import { InterventionMapsComponent } from './intervention-maps/intervention-maps.component';
 import { InterventionReportComponent } from './intervention-report/intervention-report.component';
 import { InterventionSurveyComponent } from './intervention-survey/intervention-survey.component';
 import { PreventionSurveyComponent } from './prevention-survey/prevention-survey.component';
+import { ManagementAddressComponent } from './management-address/management-address.component';
 
 export function httpLoaderFactory(http: Http) {
   return new LanguageLoader(http, './assets/i18n/', '.json');
@@ -33,6 +35,7 @@ export function httpLoaderFactory(http: Http) {
     InterventionReportComponent,
     InterventionSurveyComponent,
     PreventionSurveyComponent,
+    ManagementAddressComponent,
   ],
   imports: [
     IgoModule.forRoot(),
