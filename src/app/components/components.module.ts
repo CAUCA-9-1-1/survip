@@ -12,7 +12,6 @@ import { LaneService } from '../intervention-survey/shared/services/lane.service
 import { FilterByPipe } from './shared/filter.pipe';
 import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
 import {DialogsService} from './shared/dialogs.service';
-import { TakePictureComponent } from './take-picture/take-picture.component';
 
 @NgModule({
   imports: [
@@ -24,7 +23,6 @@ import { TakePictureComponent } from './take-picture/take-picture.component';
     ToolbarBackComponent,
     SearchListComponent,
     SearchBoxComponent,
-    TakePictureComponent,
     YesNoDialogComponent
   ],
   declarations: [
@@ -36,7 +34,6 @@ import { TakePictureComponent } from './take-picture/take-picture.component';
     SearchBoxComponent,
     FilterByPipe,
     YesNoDialogComponent,
-    TakePictureComponent,
   ],
   entryComponents: [
     SearchListComponent,

@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, Input, ViewChild} from '@angular/core';
-import { WindowRefService } from '../../shared/window-ref.service';
+import { WindowRefService } from '../../../shared/window-ref.service';
 
 @Component({
   selector: 'app-take-picture',

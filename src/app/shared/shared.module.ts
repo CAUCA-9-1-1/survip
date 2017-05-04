@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { IgoModule } from 'igo2';
+import { TakePictureComponent } from './components/take-picture/take-picture.component';
 import { WindowRefService } from './window-ref.service';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { WindowRefService } from './window-ref.service';
     TranslateModule,
   ],
   declarations: [
+    TakePictureComponent,
   ],
   exports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { WindowRefService } from './window-ref.service';
     BrowserModule,
     IgoModule,
     TranslateModule,
+    TakePictureComponent,
   ],
   providers: [
     WindowRefService
