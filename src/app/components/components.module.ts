@@ -10,6 +10,8 @@ import { SearchListComponent } from './search-list/search-list.component';
 import {SearchBoxComponent} from './search-box/search-box.component';
 import {LaneService} from '../intervention-survey/shared/services/lane.service';
 import { FilterByPipe } from './shared/filter.pipe';
+import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
+import {DialogsService} from './shared/dialogs.service';
 
 @NgModule({
   imports: [
@@ -21,6 +23,7 @@ import { FilterByPipe } from './shared/filter.pipe';
     ToolbarBackComponent,
     SearchListComponent,
     SearchBoxComponent,
+    YesNoDialogComponent
   ],
   declarations: [
     MenuComponent,
@@ -30,12 +33,15 @@ import { FilterByPipe } from './shared/filter.pipe';
     SearchListComponent,
     SearchBoxComponent,
     FilterByPipe,
+    YesNoDialogComponent,
   ],
   entryComponents: [
     SearchListComponent,
+    YesNoDialogComponent
   ],
   providers: [
-    LaneService
+    LaneService,
+    DialogsService
   ]
 })
 export class ComponentModule { }
