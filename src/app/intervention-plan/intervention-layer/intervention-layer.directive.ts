@@ -9,11 +9,10 @@ import { InterventionService } from '../shared/intervention.service';
 @Directive({
   selector: '[appInterventionLayer]'
 })
-export class InterventionLayerDirective implements OnInit {
+export class InterventionLayerDirective implements OnInit, OnDestroy {
 
   private component: MapBrowserComponent;
   private interventionSource: ol.source.Vector;
-  private interventionStyle: ol.style.Style;
   private features$$: Subscription;
   private format = new ol.format.GeoJSON();
 
@@ -50,6 +49,10 @@ export class InterventionLayerDirective implements OnInit {
 
     this.features$$ = this.interventionService.features$
       .subscribe(features => this.handleFeatures(features));
+  }
+
+  ngOnDestroy() {
+    this.features$$.unsubscribe();
   }
 
   private handleFeatures(features: Feature[]) {
