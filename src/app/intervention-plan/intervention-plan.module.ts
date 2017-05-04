@@ -14,6 +14,8 @@ import {SpecificRisksComponent} from './specific-risks/specific-risks.component'
 import {WaterSupplyComponent} from './water-supply/water-supply.component';
 import {AddressService} from './shared/address.service';
 import {ContactsService} from './shared/contacts.service';
+import {InterventionLayerDirective} from './intervention-layer/intervention-layer.directive';
+import {InterventionService} from './shared/intervention.service';
 
 @NgModule({
   imports: [
@@ -29,7 +31,8 @@ import {ContactsService} from './shared/contacts.service';
     PersonRequiringAssistanceComponent,
     ProtocolComponent,
     SpecificRisksComponent,
-    WaterSupplyComponent
+    WaterSupplyComponent,
+    InterventionLayerDirective
   ],
   declarations: [
     AdditionalInformationComponent,
@@ -41,11 +44,13 @@ import {ContactsService} from './shared/contacts.service';
     ImplantationComponent,
     ProtocolComponent,
     SpecificRisksComponent,
-    WaterSupplyComponent
+    WaterSupplyComponent,
+    InterventionLayerDirective
   ],
   providers: [
     AddressService,
-    ContactsService
+    ContactsService,
+    InterventionService
   ]
 })
 export class InterventionPlanModule { }
