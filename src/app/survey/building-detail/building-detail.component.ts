@@ -9,7 +9,7 @@ import { WindowRefService } from '../../shared/window-ref.service';
 
 export class BuildingDetailComponent implements OnInit {
   @Input() building: any;
-  selectedDieMeasuring: string = '1';
+  selectedDieMeasuring = '1';
   imageSrc= 'protocol.png';
 
   constructor(private elRef: ElementRef, private windowRef: WindowRefService) { }

@@ -1,6 +1,9 @@
 <app-form-toolbar></app-form-toolbar>
 <div class="content-under-toolbar">
-  <igo-map-browser [map]="map" [view]="mapView">
+  <igo-map-browser
+  	igoMapContext
+    igoLayerContext
+  	[map]="map">
     <igo-zoom color="primary" [map]="map"></igo-zoom>
   </igo-map-browser>
 </div>
