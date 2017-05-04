@@ -20,5 +20,9 @@
   "previousQuestion": "Question précédente",
   "return": "Retour",
   "yes": "Oui",
-  "no": "Non"
+  "no": "Non",
+  "select": "Sélection ...",
+  "take": "Prendre ...",
+  "selectImage": "Sélectionner une image",
+  "takeImage": "Prendre une photo"
 }

@@ -3,7 +3,7 @@
     <app-form-menu [items]="menuItems" (select)="select($event)" ></app-form-menu>
   </md-sidenav>
 
-  <app-form-toolbar-back [title]="'627 rapide-plat sud'"></app-form-toolbar-back>
+  <app-form-toolbar-back [title]="'627 rapide-plat sud'" [mode]="mode" [sidenav]="sidenav"></app-form-toolbar-back>
   <div class="content-under-toolbar">
     <div [ngSwitch]="selectedMenu">
       <div *ngSwitchCase="'waterSupply'">
@@ -28,6 +28,7 @@
         <app-intervention-survey-dangerous-material></app-intervention-survey-dangerous-material>
       </div>
       <div *ngSwitchDefault>
+          <app-intervention-survey-building></app-intervention-survey-building>
       </div>
     </div>
   </div>

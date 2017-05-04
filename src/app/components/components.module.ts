@@ -7,11 +7,12 @@ import { MenuItemComponent } from './menu-item/menu-item.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ToolbarBackComponent } from './toolbar-back/toolbar-back.component';
 import { SearchListComponent } from './search-list/search-list.component';
-import {SearchBoxComponent} from './search-box/search-box.component';
-import {LaneService} from '../intervention-survey/shared/services/lane.service';
+import { SearchBoxComponent } from './search-box/search-box.component';
+import { LaneService } from '../intervention-survey/shared/services/lane.service';
 import { FilterByPipe } from './shared/filter.pipe';
 import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
 import {DialogsService} from './shared/dialogs.service';
+import { TakePictureComponent } from './take-picture/take-picture.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import {DialogsService} from './shared/dialogs.service';
     ToolbarBackComponent,
     SearchListComponent,
     SearchBoxComponent,
+    TakePictureComponent,
     YesNoDialogComponent
   ],
   declarations: [
@@ -34,6 +36,7 @@ import {DialogsService} from './shared/dialogs.service';
     SearchBoxComponent,
     FilterByPipe,
     YesNoDialogComponent,
+    TakePictureComponent,
   ],
   entryComponents: [
     SearchListComponent,

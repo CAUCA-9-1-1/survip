@@ -1,5 +1,4 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import { WindowRefService } from '../../shared/window-ref.service';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-intervention-survey-building-detail',
@@ -12,29 +11,8 @@ export class BuildingDetailComponent implements OnInit {
   selectedDieMeasuring = '1';
   imageSrc= 'protocol.png';
 
-  constructor(private elRef: ElementRef, private windowRef: WindowRefService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  takePicture(event) {
-    if (this.windowRef.nativeWindow.cordova) {
-      this.windowRef.nativeNavigator.camera.getPicture(this.onSuccess.bind(this), this.onFail.bind(this), {
-        quality: 100,
-        destinationType: this.windowRef.nativeWindow.Camera.DestinationType.DATA_URL,
-      });
-    } else {
-      alert('on browser');
-    }
-  }
-
-  onSuccess(imageURI) {
-    const image = this.elRef.nativeElement.querySelector('.buildingImage');
-
-    image.src = 'data:image/jpeg;base64,' + imageURI;
-  }
-
-  onFail(message) {
-    alert('Failed because: ' + message);
   }
 }

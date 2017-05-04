@@ -1,0 +1,12 @@
+<div [ngStyle]="{'width': width}">
+  <button class="add-picture-button" md-raised-button title="{{'selectImage' | translate}}" (click)="select($event)">
+    <span>{{'select' | translate}}</span>
+    <md-icon>image</md-icon>
+  </button>
+  <button class="add-picture-button" md-raised-button title="{{'takeImage' | translate}}" (click)="take($event)">
+    <span>{{'take' | translate}}</span>
+    <md-icon>photo_camera</md-icon>
+  </button>
+  <img #takePictureImage src="./assets/images/protocol.png" />
+  <input type="file" #fileLoader (change)="onChange($event)" />
+</div>

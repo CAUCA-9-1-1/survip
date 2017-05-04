@@ -8,10 +8,18 @@ import { Location } from '@angular/common';
 })
 export class ToolbarBackComponent implements OnInit {
   @Input() title: string;
+  @Input() mode = 'side';
+  @Input() sidenav = null;
 
   constructor(private location: Location) { }
 
   ngOnInit() {
+  }
+
+  open() {
+    if (this.sidenav) {
+      this.sidenav.open();
+    }
   }
 
   back() {
