@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Http } from '@angular/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+import { IgoModule, LanguageLoader, provideLanguageService,
+         provideContextServiceOptions } from 'igo2';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing';
@@ -13,29 +14,31 @@ import {
 } from './pages';
 
 export function httpLoaderFactory(http: Http) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new LanguageLoader(http, './assets/i18n/', '.json');
 }
+
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (httpLoaderFactory),
-        deps: [Http]
-      }
-    }),
-
+    IgoModule.forRoot(),
     InterventionSectionModule,
     InterventionRoutingModule,
     PreventionSectionModule,
     PreventionRoutingModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    provideContextServiceOptions({
+      basePath: './contexts',
+      contextListFile: '_contexts.json'
+    }),
+    provideLanguageService({
+      loader: httpLoaderFactory
+    }),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
