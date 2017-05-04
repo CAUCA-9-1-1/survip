@@ -22,7 +22,12 @@
         <app-intervention-survey-fire-protection></app-intervention-survey-fire-protection>
       </div>
       <div *ngSwitchCase="'contacts'">
-        <app-card-layout title="Contacts" [items]="contacts" [componentType]="ContactComponent" (deleteClick)="onBuildingContactDeleted($event)"></app-card-layout>
+        <app-card-layout title="Contacts"
+                         [items]="contacts"
+                         [componentType]="'ContactComponent'"
+                         (deleteClick)="onBuildingContactDeleted($event)"
+                         (completionClick)="onCompleteSection($event)"
+                         (addClick)="onBuildingContactAdd()"></app-card-layout>
       </div>
       <div *ngSwitchCase="'dangerousMaterial'">
         <app-intervention-survey-dangerous-material></app-intervention-survey-dangerous-material>

@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MdSidenav } from '@angular/material';
+import { UUID } from 'angular2-uuid';
 
 import { MenuItem } from '../components/shared/menu-item.interface';
 import { WindowRefService } from '../shared/services/window-ref.service';
@@ -77,6 +78,19 @@ export class InterventionSurveyComponent implements OnInit {
             this.deleteContact(deletedContact);
           }
         });
+  }
+
+  onBuildingContactAdd() {
+    const contacts: BuildingContact[] = [];
+    Object.assign(contacts, this.contacts);
+    const contact = new BuildingContact();
+    contact.id = UUID.UUID();
+    contacts.push(contact);
+    this.contacts = contacts;
+  }
+
+  onCompleteSection(val) {
+    console.log('complete');
   }
 
   private deleteContact(deletedContact: BuildingContact) {
