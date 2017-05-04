@@ -20,7 +20,7 @@ export class BuildingContactService {
   }
 
   update(contact: BuildingContact): Promise<BuildingContact> {
-    const url = this.url + '/' + contact.idBuildingContact;
+    const url = this.url + '/' + contact.id;
     return this.http
       .put(url, JSON.stringify(contact), {headers: this.headers})
       .toPromise()
@@ -29,7 +29,7 @@ export class BuildingContactService {
   }
 
   delete(contact: BuildingContact): Promise<void> {
-    const url = `${this.url}/${contact.idBuildingContact}`;
+    const url = `${this.url}/${contact.id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)

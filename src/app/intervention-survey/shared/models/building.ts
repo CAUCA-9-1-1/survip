@@ -1,5 +1,5 @@
 export class Building {
-  idBuilding: string;
+  id: string;
   isActive: boolean;
   idLane: string;
   alias: string;

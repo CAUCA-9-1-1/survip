@@ -1,7 +1,7 @@
 export class BuildingContactData {
   public data: any[] = [
   {
-    'idBuildingContact': '29bb0912-e4ce-45f0-8c26-511806d25b51',
+    'id': '29bb0912-e4ce-45f0-8c26-511806d25b51',
     'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b50',
     'firstName': 'Frédéric',
     'lastName': 'Catellier-Poulin',
@@ -15,7 +15,7 @@ export class BuildingContactData {
     'isActive': true
   },
   {
-    'idBuildingContact': '29bb0912-e4ce-45f0-8c26-511806d25b52',
+    'id': '29bb0912-e4ce-45f0-8c26-511806d25b52',
     'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b50',
     'firstName': 'Éric',
     'lastName': 'Mercier',
@@ -29,7 +29,7 @@ export class BuildingContactData {
     'isActive': true
   },
   {
-    'idBuildingContact': '29bb0912-e4ce-45f0-8c26-511806d25b53',
+    'id': '29bb0912-e4ce-45f0-8c26-511806d25b53',
     'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b50',
     'firstName': 'Mathieu',
     'lastName': 'Langevin',

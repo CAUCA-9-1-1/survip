@@ -1,5 +1,5 @@
 export class BuildingContact {
-  idBuildingContact: string;
+  id: string;
   idBuilding: string;
   firstName: string;
   lastName: string;
