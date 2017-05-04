@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IgoModule } from 'igo2';
 import { TakePictureComponent } from './components/take-picture/take-picture.component';
 import { WindowRefService } from './window-ref.service';
+import { WebcamComponent } from './components/webcam/webcam.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,10 @@ import { WindowRefService } from './window-ref.service';
   ],
   declarations: [
     TakePictureComponent,
+    WebcamComponent,
+  ],
+  entryComponents: [
+    WebcamComponent,
   ],
   exports: [
     CommonModule,

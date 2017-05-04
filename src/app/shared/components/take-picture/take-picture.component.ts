@@ -1,4 +1,7 @@
-import {Component, ElementRef, OnInit, Input, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, Input, ViewChild } from '@angular/core';
+import { MdDialog } from '@angular/material';
+
+import { WebcamComponent } from '../../../shared/components/webcam/webcam.component';
 import { WindowRefService } from '../../../shared/window-ref.service';
 
 @Component({
@@ -10,11 +13,28 @@ export class TakePictureComponent implements OnInit {
   @ViewChild('takePictureImage') imgRef: ElementRef;
   @ViewChild('fileLoader') inputRef: ElementRef;
 
-  @Input() width = '200px';
+  @Input() width = '300px';
+  @Input() source = './assets/images/protocol.png';
 
-  constructor(private windowRef: WindowRefService) { }
+  @Input()
+  get horizontal(): boolean { return this._horizontal; }
+  set horizontal(value: boolean) {
+    this._horizontal = value;
+    this.width = (value ? '100%' : this.width);
+  }
+  private _horizontal = false;
+
+  @Input()
+  get useCamera(): boolean { return this._useCamera; }
+  set useCamera(value: boolean) {
+    this._useCamera = value;
+  }
+  private _useCamera = true;
+
+  constructor(private windowRef: WindowRefService, private dialog: MdDialog) { }
 
   ngOnInit() {
+    console.log(this.useCamera);
   }
 
   select(event) {
@@ -35,7 +55,7 @@ export class TakePictureComponent implements OnInit {
         destinationType: this.windowRef.nativeWindow.Camera.DestinationType.DATA_URL,
       });
     } else {
-      alert('a venir');
+      this.dialog.open(WebcamComponent);
     }
   }
 
