@@ -15,8 +15,7 @@ export class CardLayoutComponent implements OnInit {
   ngOnInit() {
   }
   onDeleteClicked(value: any) {
-    console.log( value);
-    this.deleteClick.emit('yeah');
+    this.deleteClick.emit(value);
   }
   onCompleteSection() {
     console.log('yahoo');

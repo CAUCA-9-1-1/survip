@@ -8,13 +8,11 @@ import {BuildingContact} from '../shared/models/building-contact';
 })
 export class ContactComponent implements OnInit {
   @Input() item: BuildingContact;
-    @Output() deleteClicked = new EventEmitter();
+  @Output() deleteClicked = new EventEmitter();
   constructor() { }
   ngOnInit() {
   }
   onDeleteClicked() {
-    console.log('In contact component : ' + this.item);
-    console.log(arguments);
     this.deleteClicked.emit(this.item);
   }
 }

@@ -1,5 +1,4 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-
 import { SurveyQuestionData } from './survey-question-data';
 import { InspectionQuestionData } from './inspection-question-data';
 import { LaneData } from './lane-data';

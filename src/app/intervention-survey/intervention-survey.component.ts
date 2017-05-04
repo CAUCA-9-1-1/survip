@@ -64,10 +64,10 @@ export class InterventionSurveyComponent implements OnInit {
     }
   }
 
-  onBuildingContactDeleted(value/*deletedContact: BuildingContact*/) {
+  onBuildingContactDeleted(deletedContact: BuildingContact) {
     console.log('in main page!')
-    console.log(value);
-    // this.contacts = this.contacts.filter(contact => contact.idBuildingContact !== deletedContact.idBuildingContact);
+    console.log(deletedContact);
+    this.contacts = this.contacts.filter(contact => contact.idBuildingContact !== deletedContact.idBuildingContact);
   }
 
   private loadBuildingContact() {

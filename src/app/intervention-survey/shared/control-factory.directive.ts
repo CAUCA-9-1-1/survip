@@ -36,10 +36,7 @@ export class CardLayoutFactoryDirective implements OnChanges, OnDestroy {
     const compRef = this.vcRef.createComponent(factory);
     compRef.instance['item'] = this.item;
     const clickHandler: EventEmitter<any> = compRef.instance['deleteClicked'];
-    clickHandler.subscribe(event => {
-      console.log('in directive: ' + event);
-      this.deleteClick.emit(event);
-    });
+    clickHandler.subscribe(event => this.deleteClick.emit(event));
     if (this.componentRef) {
       this.componentRef.destroy();
     }
