@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ElementRef, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { MdDialog } from '@angular/material';
 
 import { WebcamComponent } from '../../../shared/components/webcam/webcam.component';
@@ -30,6 +30,9 @@ export class TakePictureComponent implements OnInit {
     this._useCamera = value;
   }
   private _useCamera = true;
+
+  @Output()
+  change: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private windowRef: WindowRefService, private dialog: MdDialog) { }
 
@@ -74,6 +77,8 @@ export class TakePictureComponent implements OnInit {
     } else {
       this.imgRef.nativeElement.src = imageURI.target.result;
     }
+
+    this.change.emit(this.imgRef.nativeElement.src);
   }
 
   onFail(message) {
