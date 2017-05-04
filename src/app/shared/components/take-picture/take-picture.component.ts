@@ -34,7 +34,6 @@ export class TakePictureComponent implements OnInit {
   constructor(private windowRef: WindowRefService, private dialog: MdDialog) { }
 
   ngOnInit() {
-    console.log(this.useCamera);
   }
 
   select(event) {
