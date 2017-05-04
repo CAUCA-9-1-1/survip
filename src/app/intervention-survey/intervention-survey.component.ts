@@ -1,11 +1,10 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MdSidenav, MdDialog, MdDialogRef } from '@angular/material';
+import { MdSidenav } from '@angular/material';
 
 import { MenuItem } from '../components/shared/menu-item.interface';
 import { WindowRefService } from '../shared/window-ref.service';
 import {BuildingContactService} from './shared/services/building-contact.service';
 import {BuildingContact} from './shared/models/building-contact';
-import {YesNoDialogComponent} from '../components/yes-no-dialog/yes-no-dialog.component';
 import {DialogsService} from '../components/shared/dialogs.service';
 
 @Component({
@@ -53,6 +52,7 @@ export class InterventionSurveyComponent implements OnInit {
       title: 'Personnes contacts',
     }
   ];
+
   constructor(
     private windowRef: WindowRefService,
     private buildingContactService: BuildingContactService,
