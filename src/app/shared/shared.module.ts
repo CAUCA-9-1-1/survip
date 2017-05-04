@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +13,7 @@ import { WindowRefService } from './window-ref.service';
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
     MaterialModule,
@@ -25,6 +26,7 @@ import { WindowRefService } from './window-ref.service';
   ],
   exports: [
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
     MaterialModule,

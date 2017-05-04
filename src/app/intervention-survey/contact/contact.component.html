@@ -1,56 +1,57 @@
 <md-card class="detail-card" *ngIf="item">
-    <form>
-        <div fxLayout="row" class="full-width">
+    <form novalidate (ngSubmit)="onSubmit(contactForm)" [formGroup]="contactForm">
+          <div fxLayout="row" class="full-width">
+              <md-input-container class="full-width">
+                  <input mdInput placeholder="Nom"  formControlName="lastName">
+              </md-input-container>
+          </div>
+          <div fxLayout="row">
             <md-input-container class="full-width">
-                <input mdInput placeholder="Nom" [(value)]="item.lastName" />
+                <input mdInput placeholder="Prénom" formControlName="firstName">
             </md-input-container>
-        </div>
-        <div fxLayout="row">
-          <md-input-container class="full-width">
-              <input mdInput placeholder="Prénom" [(value)]="item.firstName"/>
-          </md-input-container>
-        </div>
-        <div fxLayout="row">
-            <md-input-container class="full-width">
-                <input mdInput placeholder="Ville" value=""/>
-            </md-input-container>
-        </div>
-        <div fxLayout="row">
-            <md-input-container>
-                <input mdInput placeholder="Téléphone" type="tel" [(value)]="item.phoneNumber"/>
-            </md-input-container>
-            <md-input-container>
-                <input mdInput placeholder="Poste" [(value)]="item.phoneNumberExtension"/>
-            </md-input-container>
-        </div>
-        <div fxLayout="row">
-            <md-input-container>
-                <input mdInput placeholder="Cellulaire" type="tel" [(value)]="item.cellphoneNumber"/>
-            </md-input-container>
-        </div>
-        <div fxLayout="row">
-            <md-input-container>
-                <input mdInput placeholder="Urgence" type="tel" [(value)]="item.otherNumber"/>
-            </md-input-container>
-            <md-input-container>
-                <input mdInput placeholder="Code" [(value)]="item.otherNumberExtension"/>
-            </md-input-container>
-        </div>
-        <div fxLayout="row">
-            <md-input-container>
-                <input mdInput placeholder="Priorité" type="number" [(value)]="item.callPriority"/>
-            </md-input-container>
-        </div>
-        <div fxLayout="row">
-            <md-input-container class="full-width">
-                <textarea mdInput maxlength="50" placeholder="Détails" [(value)]="item.details"></textarea>
-            </md-input-container>
-        </div>
+          </div>
+          <div fxLayout="row">
+              <md-input-container class="full-width">
+                  <input mdInput placeholder="Ville" value=""/>
+              </md-input-container>
+          </div>
+          <div fxLayout="row">
+              <md-input-container>
+                  <input mdInput placeholder="Téléphone" type="tel" formControlName="phoneNumber">
+              </md-input-container>
+              <md-input-container>
+                  <input mdInput placeholder="Poste" formControlName="phoneNumberExtension">
+              </md-input-container>
+          </div>
+          <div fxLayout="row">
+              <md-input-container>
+                  <input mdInput placeholder="Cellulaire" type="tel" formControlName="cellphoneNumber">
+              </md-input-container>
+          </div>
+          <div fxLayout="row">
+              <md-input-container>
+                  <input mdInput placeholder="Urgence" type="tel" formControlName="otherNumber">
+              </md-input-container>
+              <md-input-container>
+                  <input mdInput placeholder="Code" formControlName="otherNumberExtension">
+              </md-input-container>
+          </div>
+          <div fxLayout="row">
+              <md-input-container>
+                  <input mdInput placeholder="Priorité" type="number" formControlName="callPriority">
+              </md-input-container>
+          </div>
+          <div fxLayout="row">
+              <md-input-container class="full-width">
+                  <textarea mdInput maxlength="50" placeholder="Détails" formControlName="details"></textarea>
+              </md-input-container>
+          </div>
     </form>
     <md-card-actions class="card-buttons">
         <button md-raised-button (click)="onDeleteClicked()">
             <md-icon>delete</md-icon>
             Supprimer
         </button>
+      <div>{{status}}</div>
     </md-card-actions>
 </md-card>

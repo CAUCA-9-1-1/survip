@@ -17,8 +17,7 @@ import { BuildingContactService } from './shared/services/building-contact.servi
 
 @NgModule({
   imports: [
-    SharedModule,
-    ComponentModule,
+    SharedModule
   ],
   exports: [
     BuildingComponent,
