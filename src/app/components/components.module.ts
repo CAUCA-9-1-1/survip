@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { MenuComponent } from './menu/menu.component';
-import { MenuItemComponent } from './menu-item/menu-item.component';
 import { SearchListComponent } from './search-list/search-list.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { LaneService } from '../intervention-survey/shared/services/lane.service';
@@ -16,14 +14,11 @@ import {DialogsService} from './shared/dialogs.service';
     SharedModule
   ],
   exports: [
-    MenuComponent,
     SearchListComponent,
     SearchBoxComponent,
     YesNoDialogComponent
   ],
   declarations: [
-    MenuComponent,
-    MenuItemComponent,
     SearchListComponent,
     SearchBoxComponent,
     FilterByPipe,

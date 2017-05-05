@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
-import {Country} from '../../core/shared/models/country';
-import {CountryService} from '../../core/shared/services/country.service';
+import {Country} from '../../core/models/country';
+import {CountryService} from '../../core/services/country.service';
 
 @Component({
   selector: 'app-management-address-country',

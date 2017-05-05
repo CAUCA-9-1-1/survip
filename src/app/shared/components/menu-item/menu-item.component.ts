@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { MenuItem } from '../shared/menu-item.interface';
+import { MenuItem } from '../../models/menu-item.interface';
 
 @Component({
-  selector: 'app-form-menu-item',
+  selector: 'app-menu-item',
   templateUrl: './menu-item.component.html',
   styleUrls: ['./menu-item.component.styl']
 })

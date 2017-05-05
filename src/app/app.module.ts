@@ -5,7 +5,6 @@ import { IgoModule, LanguageLoader, provideLanguageService,
          provideContextServiceOptions } from 'igo2';
 
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './mockdata/in-memory-data.service';

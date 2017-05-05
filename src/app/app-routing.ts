@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth-guard.service';
-import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { InterventionMapsComponent } from './intervention-maps/intervention-maps.component';
 import { InterventionReportComponent } from './intervention-report/intervention-report.component';
 import { InterventionSurveyComponent } from './intervention-survey/intervention-survey.component';

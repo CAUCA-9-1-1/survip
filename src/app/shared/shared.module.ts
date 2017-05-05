@@ -7,6 +7,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { IgoModule } from 'igo2';
+import { MenuComponent } from './components/menu/menu.component';
+import { MenuItemComponent } from './components/menu-item/menu-item.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { TakePictureComponent } from './components/take-picture/take-picture.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ToolbarBackComponent } from './components/toolbar-back/toolbar-back.component';
@@ -25,6 +28,9 @@ import { WebcamComponent } from './components/webcam/webcam.component';
     TranslateModule,
   ],
   declarations: [
+    MenuComponent,
+    MenuItemComponent,
+    PageNotFoundComponent,
     TakePictureComponent,
     ToolbarComponent,
     ToolbarBackComponent,
@@ -42,6 +48,8 @@ import { WebcamComponent } from './components/webcam/webcam.component';
     BrowserModule,
     IgoModule,
     TranslateModule,
+    MenuComponent,
+    PageNotFoundComponent,
     ToolbarComponent,
     ToolbarBackComponent,
     TakePictureComponent,

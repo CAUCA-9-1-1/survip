@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
 
 import { BaseService } from './base.service';
-import { Country } from '../../shared/models/country';
+import { Country } from '../models/country';
 
 @Injectable()
 export class CountryService extends BaseService {

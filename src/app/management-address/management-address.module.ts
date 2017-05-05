@@ -6,7 +6,7 @@ import { CountryComponent } from './country/country.component';
 import { CountyComponent } from './county/county.component';
 import { RegionComponent } from './region/region.component';
 import { StateComponent } from './state/state.component';
-import { CountryService } from '../core/shared/services/country.service';
+import { CountryService } from '../core/services/country.service';
 
 @NgModule({
   imports: [

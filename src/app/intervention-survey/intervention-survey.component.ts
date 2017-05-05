@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { MdSidenav } from '@angular/material';
 import { UUID } from 'angular2-uuid';
 
-import { MenuItem } from '../components/shared/menu-item.interface';
+import { MenuItem } from '../shared/models/menu-item.interface';
 import { WindowRefService } from '../shared/services/window-ref.service';
 import {BuildingContactService} from './shared/services/building-contact.service';
 import {BuildingContact} from './shared/models/building-contact';
