@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AddressComponent } from './address.component';
+import { SharedModule } from '../../shared/shared.module';
+import { AddressService } from '../shared/address.service';
 
 describe('AddressComponent', () => {
   let component: AddressComponent;
@@ -8,7 +11,9 @@ describe('AddressComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddressComponent ]
+      imports: [ SharedModule, RouterTestingModule ],
+      declarations: [ AddressComponent ],
+      providers: [ AddressService ]
     })
     .compileComponents();
   }));

@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SharedModule } from '../../shared/shared.module';
 import { ContactComponent } from './contact.component';
 
 describe('ContactComponent', () => {
@@ -8,6 +9,7 @@ describe('ContactComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ SharedModule ],
       declarations: [ ContactComponent ]
     })
     .compileComponents();
