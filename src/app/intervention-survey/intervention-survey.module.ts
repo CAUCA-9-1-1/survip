@@ -13,6 +13,7 @@ import { ParticularRiskComponent } from './particular-risk/particular-risk.compo
 import { CardLayoutComponent } from './card-layout/card-layout.component';
 import { CardLayoutFactoryDirective } from './shared/control-factory.directive';
 import { BuildingContactService } from './shared/services/building-contact.service';
+import {BuildingHazardousMaterialService} from './shared/services/building-hazardous-material.service';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { BuildingContactService } from './shared/services/building-contact.servi
     ContactComponent
   ],
   providers: [
-    BuildingContactService
+    BuildingContactService,
+    BuildingHazardousMaterialService
   ]
 })
 export class InterventionSurveyModule { }
