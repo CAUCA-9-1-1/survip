@@ -74,6 +74,14 @@ export function translateLoader(http: Http) {
     SearchBoxComponent
   ],
   providers: [
+    provideContextServiceOptions({
+      basePath: './contexts',
+      contextListFile: '_contexts.json'
+    }),
+    provideLanguageService({
+      loader: translateLoader
+    }),
+
     WindowRefService,
     DialogsService,
 

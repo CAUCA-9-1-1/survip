@@ -42,8 +42,7 @@ import { ManagementAddressComponent } from './management-address/management-addr
     ManagementAddressModule,
     AppRoutingModule
   ],
-  providers: [
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
