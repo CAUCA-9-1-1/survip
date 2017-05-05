@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../shared.module';
 
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from './menu.component';

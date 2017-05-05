@@ -10,7 +10,6 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './mockdata/in-memory-data.service';
 
 import { SharedModule } from './shared/shared.module';
-import { ComponentModule } from './components/components.module';
 import { InterventionReportModule } from './intervention-report/intervention-report.module';
 import { InterventionSurveyModule } from './intervention-survey/intervention-survey.module';
 import { PreventionSurveyModule } from './prevention-survey/prevention-survey.module';

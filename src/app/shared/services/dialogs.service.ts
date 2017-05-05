@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Rx';
-import { YesNoDialogComponent } from '../yes-no-dialog/yes-no-dialog.component';
+import { YesNoDialogComponent } from '../components/yes-no-dialog/yes-no-dialog.component';
 import { MdDialogRef, MdDialog } from '@angular/material';
 import { Injectable } from '@angular/core';
 
