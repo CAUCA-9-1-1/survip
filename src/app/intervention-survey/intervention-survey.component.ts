@@ -22,35 +22,35 @@ export class InterventionSurveyComponent implements OnInit {
   public menuItems = [
     {
       name: 'building',
-      title: 'Bâtiments',
+      title: 'building',
     },
     {
       name: 'waterSupply',
-      title: 'Alimentation en eau',
+      title: 'waterSupply',
     },
     {
       name: 'implantation',
-      title: 'Implantation',
+      title: 'implantation',
     },
     {
       name: 'dangerousMaterial',
-      title: 'Matière dangereuse',
+      title: 'dangerousMaterial',
     },
     {
       name: 'pnap',
-      title: 'P.N.A.P.',
+      title: 'personRequiringAssistance',
     },
     {
       name: 'particularRisks',
-      title: 'Risques particuliers',
+      title: 'particularRisk',
     },
     {
       name: 'fireProtection',
-      title: 'Protection incendie',
+      title: 'fireProtection',
     },
     {
       name: 'contacts',
-      title: 'Personnes contacts',
+      title: 'contacts',
     }
   ];
 
