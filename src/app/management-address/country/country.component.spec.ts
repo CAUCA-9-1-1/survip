@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../../test.module';
+import { DxDataGridModule } from 'devextreme-angular';
 import { CountryComponent } from './country.component';
 
 describe('CountryComponent', () => {
@@ -8,6 +10,7 @@ describe('CountryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ TestModule, DxDataGridModule ],
       declarations: [ CountryComponent ]
     })
     .compileComponents();

@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
 
+import { SharedModule } from '../../../shared/shared.module';
 import { SurveyService } from './survey.service';
 
 describe('SurveyService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SurveyService]
+      imports: [ SharedModule ],
+      providers: [ SurveyService ]
     });
   });
 

@@ -7,7 +7,7 @@ describe('CountryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ SharedModule ],
-      providers: [CountryService]
+      providers: [ CountryService ]
     });
   });
 

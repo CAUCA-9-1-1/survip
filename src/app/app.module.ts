@@ -1,4 +1,10 @@
 import { NgModule } from '@angular/core';
+import { Http } from '@angular/http';
+
+import {
+  LanguageLoader,
+  provideLanguageService,
+  provideContextServiceOptions } from 'igo2';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing';
@@ -18,6 +24,10 @@ import { InterventionReportComponent } from './intervention-report/intervention-
 import { InterventionSurveyComponent } from './intervention-survey/intervention-survey.component';
 import { PreventionSurveyComponent } from './prevention-survey/prevention-survey.component';
 import { ManagementAddressComponent } from './management-address/management-address.component';
+
+export function translateLoader(http: Http) {
+  return new LanguageLoader(http, './assets/locale/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -42,7 +52,15 @@ import { ManagementAddressComponent } from './management-address/management-addr
     ManagementAddressModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    provideContextServiceOptions({
+      basePath: './contexts',
+      contextListFile: '_contexts.json'
+    }),
+    provideLanguageService({
+      loader: translateLoader
+    }),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
