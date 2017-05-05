@@ -2,15 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { Http } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
-import {
-  IgoModule,
-  LanguageLoader,
-  provideLanguageService,
-  provideContextServiceOptions } from 'igo2';
+import { IgoModule } from 'igo2';
 
 import { MenuComponent } from './components/menu/menu.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
@@ -26,10 +21,6 @@ import {SearchBoxComponent} from './components/search-box/search-box.component';
 import {SearchListComponent} from './components/search-list/search-list.component';
 import {FilterByPipe} from './pipes/filter.pipe';
 
-export function translateLoader(http: Http) {
-  return new LanguageLoader(http, './assets/locale/', '.json');
-}
-
 @NgModule({
   imports: [
     CommonModule,
@@ -38,7 +29,7 @@ export function translateLoader(http: Http) {
     FlexLayoutModule,
     MaterialModule,
     BrowserModule,
-    IgoModule.forRoot(),
+    IgoModule,
   ],
   declarations: [
     MenuComponent,
@@ -74,14 +65,6 @@ export function translateLoader(http: Http) {
     SearchBoxComponent
   ],
   providers: [
-    provideContextServiceOptions({
-      basePath: './contexts',
-      contextListFile: '_contexts.json'
-    }),
-    provideLanguageService({
-      loader: translateLoader
-    }),
-
     WindowRefService,
     DialogsService,
 
