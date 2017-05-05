@@ -1,0 +1,40 @@
+<md-sidenav-container>
+  <md-sidenav #sidenav [mode]="mode" [align]="align">
+    <app-menu [items]="menuItems" (select)="select($event)" ></app-menu>
+  </md-sidenav>
+
+  <app-toolbar-back [title]="'627 rapide-plat sud'" [mode]="mode" [sidenav]="sidenav"></app-toolbar-back>
+  <div class="content-under-toolbar">
+    <div [ngSwitch]="selectedMenu">
+      <div *ngSwitchCase="'waterSupply'">
+        <app-intervention-survey-fire-hydrant></app-intervention-survey-fire-hydrant>
+      </div>
+      <div *ngSwitchCase="'implantation'">
+        <app-intervention-survey-implantation-plan></app-intervention-survey-implantation-plan>
+      </div>
+      <div *ngSwitchCase="'pnap'">
+        <app-intervention-survey-person-requiring-assistance></app-intervention-survey-person-requiring-assistance>
+      </div>
+      <div *ngSwitchCase="'particularRisks'">
+        <app-intervention-survey-particular-risk></app-intervention-survey-particular-risk>
+      </div>
+      <div *ngSwitchCase="'fireProtection'">
+        <app-intervention-survey-fire-protection></app-intervention-survey-fire-protection>
+      </div>
+      <div *ngSwitchCase="'contacts'">
+        <app-card-layout title="Contacts"
+                         [items]="contacts"
+                         [componentType]="'ContactComponent'"
+                         (deleteClick)="onBuildingContactDeleted($event)"
+                         (completionClick)="onCompleteSection($event)"
+                         (addClick)="onBuildingContactAdd()"></app-card-layout>
+      </div>
+      <div *ngSwitchCase="'dangerousMaterial'">
+        <app-intervention-survey-dangerous-material></app-intervention-survey-dangerous-material>
+      </div>
+      <div *ngSwitchDefault>
+          <app-intervention-survey-building></app-intervention-survey-building>
+      </div>
+    </div>
+  </div>
+</md-sidenav-container>

@@ -3,17 +3,6 @@ body {
   overflow: hidden;
 }
 
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(assets/fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
-  src: local('Material Icons'),
-       local('MaterialIcons-Regular'),
-       url(assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
-       url(assets/fonts/MaterialIcons-Regular.woff) format('woff'),
-       url(assets/fonts/MaterialIcons-Regular.ttf) format('truetype');
-}
 
 .material-icons {
   font-family: 'Material Icons';
@@ -68,12 +57,14 @@ body {
 
 .add-button{
   font-size: 1.2em !important;
+  padding: 40px !important;
 }
 
 .add-button-picture{
   font-size: 40px;
   height: 40px !important;
   width: 40px !important;
+  padding-right: 20px !important;
 }
 
 .full-width {
@@ -106,6 +97,8 @@ body {
 
 .master-card {
   padding: 5px !important;
+  height: calc(100% - 50px);
+  overflow: auto;
 }
 
 

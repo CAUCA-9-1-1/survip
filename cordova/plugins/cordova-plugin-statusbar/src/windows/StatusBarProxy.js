@@ -25,7 +25,7 @@ var _supported = null; // set to null so we can check first time
 function isSupported() {
     // if not checked before, run check
     if (_supported === null) {
-        var viewMan = Windows.UI.ViewManagement; 
+        var viewMan = Windows.UI.ViewManagement;
         _supported = (viewMan.StatusBar && viewMan.StatusBar.getForCurrentView);
     }
     return _supported;
@@ -39,7 +39,7 @@ function getViewStatusBar() {
 }
 
 function hexToRgb(hex) {
-    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+    // Expand shorthand components (e.g. "03F") to full components (e.g. "0033FF")
     var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
     hex = hex.replace(shorthandRegex, function (m, r, g, b) {
         return r + r + g + g + b + b;

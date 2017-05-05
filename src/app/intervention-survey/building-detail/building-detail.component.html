@@ -1,0 +1,39 @@
+<md-card class="detail-card">
+  <md-card-title>{{building.alias}}</md-card-title>
+  <md-card-content>
+
+    <div fxLayout="row" class="line" class="full-width">
+      <md-input-container class="full-width">
+        <input mdInput type="number" value="627" placeholder="D.I.E.">
+      </md-input-container>
+      <md-select placeholder="Unité" class="selector" [(ngModel)]='selectedDieMeasuring' class="full-width">
+        <md-option value="1">GIMP</md-option>
+      </md-select>
+    </div>
+    <div fxLayout="row" class="line" class="full-width">
+      <md-select placeholder="Construction" class="full-width">
+        <md-option value="1" selected>Combustible</md-option>
+        <md-option value="2">Incombustible</md-option>
+      </md-select>
+    </div>
+    <div fxLayout="row" class="line" class="full-width">
+      <md-select placeholder="Solives" class="full-width">
+        <md-option value="1" selected>Bois plein</md-option>
+        <md-option value="2">Poutrelle ajourée incombustible</md-option>
+      </md-select>
+    </div>
+    <div fxLayout="row" class="line" class="full-width">
+      <md-input-container class="full-width">
+        <input mdInput type="number" value="20" placeholder="Hauteur">
+      </md-input-container>
+    </div>
+    <div fxLayout="row" class="line" class="full-width">
+      <md-input-container class="full-width">
+        <input mdInput type="number" value="2" placeholder="Nb. étages">
+      </md-input-container>
+    </div>
+    <div fxLayout="row" class="line" class="full-width">
+      <app-take-picture></app-take-picture>
+    </div>
+  </md-card-content>
+</md-card>

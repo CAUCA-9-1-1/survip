@@ -1,13 +1,12 @@
 {
-  "Alimentation en eau": "Alimentation en eau",
-  "Bâtiments": "Bâtiments",
-  "Implantation": "Implantation",
-  "Matière dangereuse": "Matière dangereuse",
-  "Personnes contacts": "Personnes contacts",
-  "P.N.A.P.": "P.N.A.P.",
-  "Protection incendie": "Protection incendie",
-  "Risques particuliers": "Risques particuliers",
-
+  "waterSupply": "Alimentation en eau",
+  "building": "Bâtiments",
+  "implantation": "Implantation",
+  "dangerousMaterial": "Matière dangereuse",
+  "contacts": "Personnes contacts",
+  "personRequiringAssistance": "P.N.A.P.",
+  "fireProtection": "Protection incendie",
+  "particularRisk": "Risques particuliers",
   "en": "Anglais",
   "fr": "Français",
   "home": "Accueil",
@@ -15,6 +14,14 @@
   "name": "Nom",
   "firstName": "Prénom",
   "lastName": "Nom",
+  "complete": "Compléter",
   "nextQuestion": "Question suivante",
-  "previousQuestion": "Question précédente"
+  "previousQuestion": "Question précédente",
+  "return": "Retour",
+  "yes": "Oui",
+  "no": "Non",
+  "select": "Sélection ...",
+  "take": "Prendre ...",
+  "selectImage": "Sélectionner une image",
+  "takeImage": "Prendre une photo"
 }
