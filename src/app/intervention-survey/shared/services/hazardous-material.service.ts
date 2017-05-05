@@ -5,7 +5,7 @@ import {Http} from '@angular/http';
 @Injectable()
 export class HazardousMaterialService {
 
-  private url = 'api/lanes';
+  private url = 'api/hazardous-material';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
