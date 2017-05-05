@@ -46,7 +46,8 @@ import {BuildingHazardousMaterialService} from './shared/services/building-hazar
     CardLayoutFactoryDirective,
   ],
   entryComponents: [
-    ContactComponent
+    ContactComponent,
+    DangerousMaterialComponent
   ],
   providers: [
     BuildingContactService,
