@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../../test.module';
 import { CardLayoutComponent } from './card-layout.component';
+import { CardLayoutFactoryDirective } from '../shared/control-factory.directive';
 
 describe('CardLayoutComponent', () => {
   let component: CardLayoutComponent;
@@ -8,7 +10,11 @@ describe('CardLayoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardLayoutComponent ]
+      imports: [ TestModule ],
+      declarations: [
+        CardLayoutComponent,
+        CardLayoutFactoryDirective,
+      ]
     })
     .compileComponents();
   }));

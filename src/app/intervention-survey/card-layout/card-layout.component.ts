@@ -28,7 +28,7 @@ export class CardLayoutComponent implements OnInit, AfterViewInit {
       console.log(item);
       item.style.width = newCardWidth + 'px';
       item.style.height = newCardHeight + 'px';
-      item.style.padding ='0px';
+      item.style.padding = '0px';
       console.log(item);
     }
   }

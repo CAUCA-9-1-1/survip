@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../test.module';
 import { ManagementAddressComponent } from './management-address.component';
 
 describe('ManagementAddressComponent', () => {
@@ -8,6 +9,7 @@ describe('ManagementAddressComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ TestModule ],
       declarations: [ ManagementAddressComponent ]
     })
     .compileComponents();

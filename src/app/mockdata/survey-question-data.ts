@@ -197,7 +197,7 @@ export class SurveyQuestionData {
     },
     'idLanguageContentTitle': '669c32a7-d41d-4a6c-82cf-0978cdaf0424',
     'idSurveyQuestionNext': null,
-    'idSurveyQuestionNextOnFalse': "daef1dba-89f0-41f4-99e3-1cd7d8798349",
+    'idSurveyQuestionNextOnFalse': 'daef1dba-89f0-41f4-99e3-1cd7d8798349',
     'title': {'idLanguageContent': '669c32a7-d41d-4a6c-82cf-0978cdaf0424', 'fr': 'Extincteurs portatifs'},
     'idLanguageContentDescription': '1b552a81-985f-40ba-8960-16696bd6889d',
     'questionType': 'boolean',

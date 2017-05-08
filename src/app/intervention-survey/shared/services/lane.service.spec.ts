@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
 
+import { TestModule } from '../../../test.module';
 import { LaneService } from './lane.service';
 
 describe('LaneService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LaneService]
+      imports: [ TestModule ],
+      providers: [ LaneService ]
     });
   });
 

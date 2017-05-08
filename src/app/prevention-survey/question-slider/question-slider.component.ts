@@ -27,7 +27,7 @@ export class QuestionSliderComponent implements OnInit {
   }
 
   complete() {
-    alert('OK, What we do!');
+    console.log('OK, What we do!');
   }
 
   next() {
@@ -35,22 +35,31 @@ export class QuestionSliderComponent implements OnInit {
       const question = this.questions[this.questionIndex];
       let next = this.questions[(this.questionIndex + 1)].idSurveyQuestion;
 
-      if (question.idSurveyQuestionNextOnFalse && question.questionType === 'boolean' && !this.lastAnswer) {
-        next = question.idSurveyQuestionNextOnFalse;
-      } else if (question.idSurveyQuestionNext) {
-        next = question.idSurveyQuestionNext;
+      if (question) {
+        if (question.idSurveyQuestionNext) {
+          next = question.idSurveyQuestionNext;
+        }
+        if (!this.lastAnswer && question.idSurveyQuestionNextOnFalse && question.questionType === 'boolean') {
+          next = question.idSurveyQuestionNextOnFalse;
+        }
       }
 
       this.questionIndex = this.findQuestion(next);
-      this.lastAnswer = (this.questions[this.questionIndex].questionType === 'boolean' ? false : '');
-      this.onLastQuestion = (this.questionIndex === this.questions.length - 1);
-      this.tabSelected++;
-      this.tabs.push(this.questions[this.questionIndex]);
+
+      if (this.questions[this.questionIndex]) {
+        this.lastAnswer = (this.questions[this.questionIndex].questionType === 'boolean' ? false : '');
+        this.onLastQuestion = (this.questionIndex === this.questions.length - 1);
+        this.tabSelected++;
+        this.tabs.push(this.questions[this.questionIndex]);
+      }
     }
   }
 
   private findQuestion(uuid: string) {
-    for (let i = 0, j = this.questions.length; i < j; i++) {
+    let i = 0;
+    const j = this.questions.length;
+
+    for (i = 0; i < j; i++) {
       if (this.questions[i].idSurveyQuestion === uuid) {
         return i;
       }

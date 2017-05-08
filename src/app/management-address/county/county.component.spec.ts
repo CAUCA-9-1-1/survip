@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../../test.module';
 import { CountyComponent } from './county.component';
 
 describe('CountyComponent', () => {
@@ -8,6 +9,7 @@ describe('CountyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ TestModule ],
       declarations: [ CountyComponent ]
     })
     .compileComponents();

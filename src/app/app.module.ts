@@ -1,8 +1,4 @@
 import { NgModule } from '@angular/core';
-import { Http } from '@angular/http';
-
-import { IgoModule, LanguageLoader, provideLanguageService,
-         provideContextServiceOptions } from 'igo2';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing';
@@ -23,11 +19,6 @@ import { InterventionSurveyComponent } from './intervention-survey/intervention-
 import { PreventionSurveyComponent } from './prevention-survey/prevention-survey.component';
 import { ManagementAddressComponent } from './management-address/management-address.component';
 
-export function httpLoaderFactory(http: Http) {
-  return new LanguageLoader(http, './assets/i18n/', '.json');
-}
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +29,6 @@ export function httpLoaderFactory(http: Http) {
     ManagementAddressComponent,
   ],
   imports: [
-    IgoModule.forRoot(),
     SharedModule,
 
     InMemoryWebApiModule.forRoot(InMemoryDataService, {
@@ -53,13 +43,6 @@ export function httpLoaderFactory(http: Http) {
     AppRoutingModule
   ],
   providers: [
-    provideContextServiceOptions({
-      basePath: './contexts',
-      contextListFile: '_contexts.json'
-    }),
-    provideLanguageService({
-      loader: httpLoaderFactory
-    }),
   ],
   bootstrap: [AppComponent]
 })
