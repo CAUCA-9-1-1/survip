@@ -33,7 +33,9 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
     this.showSelectionDescription();
   }
   ngOnDestroy() {
-    this.componentRef.destroy();
+    if (this.componentRef != null) {
+      this.componentRef.destroy();
+    }
   }
   onClick() {
     this.createComponent();
@@ -57,9 +59,13 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
   };
 
   private showSelectionDescription() {
-    this.dataService
-      .getDescriptionById(this.selectedId)
-      .then(description => this.selectedItemDescription = description);
+    if (this.selectedId == null) {
+      this.selectedItemDescription = '';
+    } else {
+      this.dataService
+        .getDescriptionById(this.selectedId)
+        .then(description => this.selectedItemDescription = description);
+    }
   }
   private onSelectionCancelled() {
     this.destroyComponent();

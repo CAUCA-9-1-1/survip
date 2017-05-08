@@ -20,8 +20,11 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ToolbarBackComponent } from './components/toolbar-back/toolbar-back.component';
 import { WindowRefService } from './services/window-ref.service';
 import { WebcamComponent } from './components/webcam/webcam.component';
-import { DialogsService } from './services/dialogs.service';
-import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
+import {DialogsService} from './services/dialogs.service';
+import {YesNoDialogComponent} from './components/yes-no-dialog/yes-no-dialog.component';
+import {SearchBoxComponent} from './components/search-box/search-box.component';
+import {SearchListComponent} from './components/search-list/search-list.component';
+import {FilterByPipe} from './pipes/filter.pipe';
 
 export function translateLoader(http: Http) {
   return new LanguageLoader(http, './assets/locale/', '.json');
@@ -45,11 +48,15 @@ export function translateLoader(http: Http) {
     ToolbarComponent,
     ToolbarBackComponent,
     WebcamComponent,
-    YesNoDialogComponent
+    YesNoDialogComponent,
+    SearchBoxComponent,
+    SearchListComponent,
+    FilterByPipe
   ],
   entryComponents: [
     WebcamComponent,
-    YesNoDialogComponent
+    YesNoDialogComponent,
+    SearchListComponent
   ],
   exports: [
     CommonModule,
@@ -64,6 +71,7 @@ export function translateLoader(http: Http) {
     ToolbarComponent,
     ToolbarBackComponent,
     TakePictureComponent,
+    SearchBoxComponent
   ],
   providers: [
     WindowRefService,

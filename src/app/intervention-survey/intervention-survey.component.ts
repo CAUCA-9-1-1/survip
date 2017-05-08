@@ -7,6 +7,8 @@ import {BuildingContactService} from './shared/services/building-contact.service
 import {BuildingContact} from './shared/models/building-contact';
 import {DialogsService} from '../shared/services/dialogs.service';
 import {MenuItem} from '../shared/interfaces/menu-item.interface';
+import {BuildingHazardousMaterialService} from './shared/services/building-hazardous-material.service';
+import {BuildingHazardousMaterial} from './shared/models/building-hazardous-material';
 
 @Component({
   selector: 'app-survey',
@@ -16,6 +18,7 @@ import {MenuItem} from '../shared/interfaces/menu-item.interface';
 export class InterventionSurveyComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MdSidenav;
   public contacts: BuildingContact[];
+  public materials: BuildingHazardousMaterial[];
   public mode = 'over';
   public align = 'end';
   public selectedMenu = 'building';
@@ -57,17 +60,45 @@ export class InterventionSurveyComponent implements OnInit {
   constructor(
     private windowRef: WindowRefService,
     private buildingContactService: BuildingContactService,
+    private matService: BuildingHazardousMaterialService,
     private dialogsService: DialogsService) {
   }
 
   ngOnInit() {
     this.loadBuildingContact();
+    this.loadBuildingMaterials();
 
     if (this.windowRef.nativeWindow.innerWidth >= 700) {
       this.mode = 'side';
       this.align = 'start';
       this.sidenav.open();
     }
+  }
+
+  onBuildingMaterialDeleted(deletedMat: BuildingHazardousMaterial) {
+    this.dialogsService
+      .confirm('Suppression d\'une matière dangereuse', 'Êtes-vous sûr de vouloir supprimer cette matière dangereuse?')
+      .subscribe(res => {
+        if (res) {
+          this.deleteMaterial(deletedMat);
+        }
+      });
+  }
+  onBuildingMaterialAdd() {
+    const materials: BuildingHazardousMaterial[] = [];
+    Object.assign(materials, this.materials);
+    const material = new BuildingHazardousMaterial();
+    material.id = UUID.UUID();
+    materials.push(material);
+    this.materials = materials;
+  }
+  private deleteMaterial(deletedMat: BuildingHazardousMaterial) {
+    this.matService.delete(deletedMat)
+      .then(() => this.materials = this.materials.filter(contact => contact.id !== deletedMat.id));
+  }
+  private loadBuildingMaterials() {
+    this.matService.getList()
+      .then(materials => this.materials = materials);
   }
 
   onBuildingContactDeleted(deletedContact: BuildingContact) {
@@ -79,7 +110,6 @@ export class InterventionSurveyComponent implements OnInit {
         }
       });
   }
-
   onBuildingContactAdd() {
     const contacts: BuildingContact[] = [];
     Object.assign(contacts, this.contacts);
@@ -88,19 +118,17 @@ export class InterventionSurveyComponent implements OnInit {
     contacts.push(contact);
     this.contacts = contacts;
   }
-
-  onCompleteSection(val) {
-    console.log('complete');
-  }
-
   private deleteContact(deletedContact: BuildingContact) {
     this.buildingContactService.delete(deletedContact)
       .then(() => this.contacts = this.contacts.filter(contact => contact.id !== deletedContact.id));
   }
-
   private loadBuildingContact() {
     this.buildingContactService.getList()
       .then(contacts => this.contacts = contacts);
+  }
+
+  onCompleteSection(val) {
+    console.log('complete');
   }
 
   select(item: MenuItem) {

@@ -30,7 +30,12 @@
                          (addClick)="onBuildingContactAdd()"></app-card-layout>
       </div>
       <div *ngSwitchCase="'dangerousMaterial'">
-        <app-intervention-survey-dangerous-material></app-intervention-survey-dangerous-material>
+        <app-card-layout title="Matières dangeureuses"
+                         [items]="materials"
+                         [componentType]="'DangerousMaterialComponent'"
+                         (deleteClick)="onBuildingMaterialDeleted($event)"
+                         (completionClick)="onCompleteSection($event)"
+                         (addClick)="onBuildingMaterialAdd()"></app-card-layout>
       </div>
       <div *ngSwitchDefault>
           <app-intervention-survey-building></app-intervention-survey-building>
