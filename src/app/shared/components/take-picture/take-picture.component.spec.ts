@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../../../test.module';
 import { TakePictureComponent } from './take-picture.component';
 
 describe('TakePictureComponent', () => {
@@ -8,7 +9,8 @@ describe('TakePictureComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TakePictureComponent ]
+      imports: [ TestModule ],
+      declarations: []
     })
     .compileComponents();
   }));
