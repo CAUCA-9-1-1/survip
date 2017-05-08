@@ -69,19 +69,20 @@
                     [placeHolderText]="'Voie de circulation'"
                     [keyField]="'idLane'"
                     [descriptionField]="'fullNameForFireCad'"
-                    [dataService]="laneService" [(selectedId)]="item.idLane"></app-search-box>
+                    [dataService]="laneService" formControlName="idLane"></app-search-box>
                 </div>
                 <div *ngIf="item.addressType == 2">
                   <app-search-box
                     [placeHolderText]="'Voie de circulation'"
                     [keyField]="'idLane'"
                     [descriptionField]="'fullNameForFireCad'"
-                    [dataService]="laneService" [(selectedId)]="item.idLane"></app-search-box>
+                    [dataService]="laneService"  formControlName="idLane"></app-search-box>
                   <app-search-box
                     [placeHolderText]="'Transversale'"
                     [keyField]="'idLane'"
                     [descriptionField]="'fullNameForFireCad'"
-                    [dataService]="laneService" [(selectedId)]="item.idLaneIntersection"></app-search-box>                </div>
+                    [dataService]="laneService" formControlName="idLaneIntersection"></app-search-box>
+                </div>
                 <div *ngIf="item.addressType == 3">
                     <div class="table">
                         <div class="cell rowspan2">
