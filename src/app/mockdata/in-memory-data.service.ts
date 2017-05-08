@@ -3,9 +3,12 @@ import { SurveyQuestionData } from './survey-question-data';
 import { InspectionQuestionData } from './inspection-question-data';
 import { LaneData } from './lane-data';
 import { BuildingContactData } from './building-contact-data';
-import {HazardousMaterialData} from './hazardous-material-data';
 import {BuildingHazardousMaterialData} from './building-hazardous-material-data';
 import {UnitOfMeasureData} from './unit-of-measure-data';
+import {InterventionPlanFireHydrantData} from './intervention-plan-fire-hydrant-data';
+import {HazardousMaterialData} from './hazardous-material-data';
+import {FireHydrantTypeData} from './fire-hydrant-type-data';
+import {LocationTypeData} from './location-type-data';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
@@ -46,6 +49,9 @@ export class InMemoryDataService implements InMemoryDbService {
     const hazardousMaterials = new HazardousMaterialData().data;
     const buildingHazardousMaterials = new BuildingHazardousMaterialData().data;
     const unitsOfMeasure = new UnitOfMeasureData().data;
+    const interventionPlanFireHydrants = new InterventionPlanFireHydrantData().data;
+    const fireHydrantTypes = new FireHydrantTypeData().data;
+    const locationTypes = new LocationTypeData().data;
 
     return {
       'surveys': surveys,
@@ -55,7 +61,10 @@ export class InMemoryDataService implements InMemoryDbService {
       'building-contacts': buildingContacts,
       'hazardous-material': hazardousMaterials,
       'building-hazardous-material': buildingHazardousMaterials,
-      'unit-of-measure' : unitsOfMeasure
+      'unit-of-measure': unitsOfMeasure,
+      'intervention-plan-fire-hydrant': interventionPlanFireHydrants,
+      'fire-hydrant-type': fireHydrantTypes,
+      'location-type': locationTypes
     };
   }
 }
