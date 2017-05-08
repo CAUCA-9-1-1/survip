@@ -7,7 +7,12 @@
   <div class="content-under-toolbar">
     <div [ngSwitch]="selectedMenu">
       <div *ngSwitchCase="'waterSupply'">
-        <app-intervention-survey-fire-hydrant></app-intervention-survey-fire-hydrant>
+        <app-card-layout title="Alimentation en eau"
+                         [items]="fireHydrants"
+                         [componentType]="'FireHydrantComponent'"
+                         (deleteClick)="onFireHydrantDeleted($event)"
+                         (completionClick)="onCompleteSection($event)"
+                         (addClick)="onFireHydrantAdd()"></app-card-layout>
       </div>
       <div *ngSwitchCase="'implantation'">
         <app-intervention-survey-implantation-plan></app-intervention-survey-implantation-plan>
