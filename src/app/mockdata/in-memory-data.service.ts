@@ -3,6 +3,9 @@ import { SurveyQuestionData } from './survey-question-data';
 import { InspectionQuestionData } from './inspection-question-data';
 import { LaneData } from './lane-data';
 import { BuildingContactData } from './building-contact-data';
+import {HazardousMaterialData} from './hazardous-material-data';
+import {BuildingHazardousMaterialData} from './building-hazardous-material-data';
+import {UnitOfMeasureData} from './unit-of-measure-data';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
@@ -40,13 +43,19 @@ export class InMemoryDataService implements InMemoryDbService {
     const inspectionQuestion = new InspectionQuestionData().data;
     const lanes = new LaneData().data;
     const buildingContacts =  new BuildingContactData().data;
+    const hazardousMaterials = new HazardousMaterialData().data;
+    const buildingHazardousMaterials = new BuildingHazardousMaterialData().data;
+    const unitsOfMeasure = new UnitOfMeasureData().data;
 
     return {
       'surveys': surveys,
       'lanes': lanes,
       'survey-question': surveyQuestions,
       'inspection-question': inspectionQuestion,
-      'building-contacts': buildingContacts
+      'building-contacts': buildingContacts,
+      'hazardous-material': hazardousMaterials,
+      'building-hazardous-material': buildingHazardousMaterials,
+      'unit-of-measure' : unitsOfMeasure
     };
   }
 }

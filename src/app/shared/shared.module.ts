@@ -17,6 +17,9 @@ import { WindowRefService } from './services/window-ref.service';
 import { WebcamComponent } from './components/webcam/webcam.component';
 import {DialogsService} from './services/dialogs.service';
 import {YesNoDialogComponent} from './components/yes-no-dialog/yes-no-dialog.component';
+import {SearchBoxComponent} from './components/search-box/search-box.component';
+import {SearchListComponent} from './components/search-list/search-list.component';
+import {FilterByPipe} from './pipes/filter.pipe';
 
 @NgModule({
   imports: [
@@ -37,11 +40,15 @@ import {YesNoDialogComponent} from './components/yes-no-dialog/yes-no-dialog.com
     ToolbarComponent,
     ToolbarBackComponent,
     WebcamComponent,
-    YesNoDialogComponent
+    YesNoDialogComponent,
+    SearchBoxComponent,
+    SearchListComponent,
+    FilterByPipe
   ],
   entryComponents: [
     WebcamComponent,
-    YesNoDialogComponent
+    YesNoDialogComponent,
+    SearchListComponent
   ],
   exports: [
     CommonModule,
@@ -57,6 +64,7 @@ import {YesNoDialogComponent} from './components/yes-no-dialog/yes-no-dialog.com
     ToolbarComponent,
     ToolbarBackComponent,
     TakePictureComponent,
+    SearchBoxComponent
   ],
   providers: [
     WindowRefService,
