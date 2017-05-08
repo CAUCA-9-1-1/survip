@@ -1,41 +1,65 @@
 import {
   Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnDestroy, OnInit, Output, ViewChild,
-  ViewContainerRef, EventEmitter, AfterViewInit
+  ViewContainerRef, EventEmitter, forwardRef, OnChanges
 } from '@angular/core';
 import {SearchListComponent} from '../search-list/search-list.component';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'app-search-box',
   templateUrl: './search-box.component.html',
-  styleUrls: ['./search-box.component.styl']
+  styleUrls: ['./search-box.component.styl'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SearchBoxComponent),
+      multi: true
+    }
+  ]
 })
-export class SearchBoxComponent implements OnInit, OnDestroy {
+export class SearchBoxComponent implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
   @ViewChild('alertContainer', { read: ViewContainerRef }) container;
   componentRef: ComponentRef<any>;
-  currentId: string;
+  selectedItemDescription: string;
+
   @Input() placeHolderText: string;
   @Input() descriptionField: string;
   @Input() keyField: string;
-  @Input() get selectedId() {
-    return this.currentId;
-  }
-  set selectedId(val) {
-    this.currentId = val;
-    this.selectedIdChange.emit(this.currentId);
-  }
   @Input() dataService: ServiceForListInterface;
   @Output() selectedIdChange = new EventEmitter<string>();
-  selectedItemDescription: string;
+  @Input('currentId') _currentId: string;
+
+  get currentId() {
+    return this._currentId;
+  }
+  set currentId(val) {
+    this._currentId = val;
+    this.showSelectionDescription();
+    this.propagateChange(this.currentId);
+    this.selectedIdChange.emit(this.currentId);
+  }
+
+  propagateChange: any = () => {};
+  writeValue(value: any) {
+    this.currentId = value;
+  }
+  registerOnChange(fn) {
+    this.propagateChange = fn;
+  }
+  registerOnTouched() {}
+
   constructor(
     private resolver: ComponentFactoryResolver
   ) { }
   ngOnInit() {
-    this.showSelectionDescription();
   }
   ngOnDestroy() {
     if (this.componentRef != null) {
       this.componentRef.destroy();
     }
+  }
+  ngOnChanges(inputs) {
+    this.propagateChange(this.currentId);
   }
   onClick() {
     this.createComponent();
@@ -52,18 +76,18 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
     this.componentRef.instance.selectionCancelled.subscribe(event => this.onSelectionCancelled());
   }
   private onSelectionChanged(selectedId: string) {
-    this.selectedId = selectedId;
+    this.currentId = selectedId;
     this.selectedIdChange.emit(selectedId);
     this.destroyComponent();
     this.showSelectionDescription();
   };
 
   private showSelectionDescription() {
-    if (this.selectedId == null) {
+    if (this.currentId == null) {
       this.selectedItemDescription = '';
     } else {
       this.dataService
-        .getDescriptionById(this.selectedId)
+        .getDescriptionById(this._currentId)
         .then(description => this.selectedItemDescription = description);
     }
   }
