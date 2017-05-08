@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SharedModule } from '../../shared/shared.module';
+import { TestModule } from '../../test.module';
 import { FireHydrantComponent } from './fire-hydrant.component';
 
 describe('FireHydrantComponent', () => {
@@ -9,7 +9,7 @@ describe('FireHydrantComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ SharedModule ],
+      imports: [ TestModule ],
       declarations: [ FireHydrantComponent ]
     })
     .compileComponents();

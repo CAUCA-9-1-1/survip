@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Http } from '@angular/http';
 
 import {
+  IgoModule,
   LanguageLoader,
-  provideLanguageService,
-  provideContextServiceOptions } from 'igo2';
+  provideLanguageService } from 'igo2';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -14,16 +14,13 @@ export function translateLoader(http: Http) {
 
 @NgModule({
   imports: [
-    SharedModule
+    SharedModule,
+    IgoModule.forRoot()
   ],
   exports: [
-    SharedModule
+    SharedModule,
   ],
   providers: [
-    provideContextServiceOptions({
-      basePath: './contexts',
-      contextListFile: '_contexts.json'
-    }),
     provideLanguageService({
       loader: translateLoader
     }),

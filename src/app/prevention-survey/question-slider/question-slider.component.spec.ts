@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../../test.module';
 import { QuestionSliderComponent } from './question-slider.component';
 
 describe('QuestionSliderComponent', () => {
@@ -8,6 +9,7 @@ describe('QuestionSliderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ TestModule ],
       declarations: [ QuestionSliderComponent ]
     })
     .compileComponents();

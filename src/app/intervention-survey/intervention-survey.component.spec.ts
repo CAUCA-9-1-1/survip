@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { SharedModule } from '../shared/shared.module';
+import { TestModule } from '../test.module';
 import { InterventionSurveyComponent } from './intervention-survey.component';
 import { BuildingComponent } from './building/building.component';
 import { BuildingDetailComponent } from './building-detail/building-detail.component';
@@ -22,7 +22,7 @@ describe('InterventionSurveyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ SharedModule, RouterTestingModule ],
+      imports: [ TestModule, RouterTestingModule ],
       declarations: [
         BuildingDetailComponent,
         BuildingComponent,

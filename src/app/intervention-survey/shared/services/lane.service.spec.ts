@@ -1,12 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { SharedModule } from '../../../shared/shared.module';
+import { TestModule } from '../../../test.module';
 import { LaneService } from './lane.service';
 
 describe('LaneService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ SharedModule ],
+      imports: [ TestModule ],
       providers: [ LaneService ]
     });
   });

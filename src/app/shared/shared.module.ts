@@ -2,10 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { Http } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { IgoModule } from 'igo2';
+import {
+  IgoModule,
+  LanguageLoader,
+  provideLanguageService,
+  provideContextServiceOptions } from 'igo2';
 
 import { MenuComponent } from './components/menu/menu.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
@@ -18,6 +23,10 @@ import { WebcamComponent } from './components/webcam/webcam.component';
 import { DialogsService } from './services/dialogs.service';
 import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
 
+export function translateLoader(http: Http) {
+  return new LanguageLoader(http, './assets/locale/', '.json');
+}
+
 @NgModule({
   imports: [
     CommonModule,
@@ -26,7 +35,7 @@ import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.c
     FlexLayoutModule,
     MaterialModule,
     BrowserModule,
-    IgoModule,
+    IgoModule.forRoot(),
   ],
   declarations: [
     MenuComponent,
@@ -58,7 +67,15 @@ import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.c
   ],
   providers: [
     WindowRefService,
-    DialogsService
+    DialogsService,
+
+    provideContextServiceOptions({
+      basePath: './contexts',
+      contextListFile: '_contexts.json'
+    }),
+    provideLanguageService({
+      loader: translateLoader
+    }),
   ]
 })
 export class SharedModule { }
