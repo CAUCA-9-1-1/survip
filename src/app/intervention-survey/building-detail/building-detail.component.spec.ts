@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestModule } from '../../test.module';
 import { BuildingDetailComponent } from './building-detail.component';
-import { SharedModule } from '../../shared/shared.module';
 
 describe('BuildingDetailComponent', () => {
   let component: BuildingDetailComponent;

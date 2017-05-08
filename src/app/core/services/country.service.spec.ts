@@ -2,7 +2,6 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { TestModule } from '../../test.module';
 import { CountryService } from './country.service';
-import { SharedModule } from '../../shared/shared.module';
 
 describe('CountryService', () => {
   beforeEach(() => {
