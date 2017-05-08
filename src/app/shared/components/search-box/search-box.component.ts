@@ -59,13 +59,12 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
   };
 
   private showSelectionDescription() {
-    if (this.selectedId != null) {
+    if (this.selectedId == null) {
+      this.selectedItemDescription = '';
+    } else {
       this.dataService
         .getDescriptionById(this.selectedId)
         .then(description => this.selectedItemDescription = description);
-    }
-    else {
-      this.selectedItemDescription = '';
     }
   }
   private onSelectionCancelled() {
