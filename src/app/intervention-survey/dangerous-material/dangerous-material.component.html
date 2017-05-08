@@ -1,67 +1,70 @@
 <md-card class="detail-card">
-  <form>
+  <form novalidate (ngSubmit)="onSubmit(materialForm)" [formGroup]="materialForm">
     <div fxLayout="row" class="full-width">
-      <md-select placeholder="NIP" class="full-width">
-        <md-option value="1">1202 - Huile de chauffage, légère</md-option>
-      </md-select>
+      <app-search-box class="full-width"
+        [placeHolderText]="'Matière'"
+        [keyField]="'id'"
+        [descriptionField]="'description'"
+        [dataService]="dangMatService"
+        [(selectedId)]="item.idHazardousMaterial"></app-search-box>
     </div>
     <div fxLayout="row">
       <md-input-container>
-        <input mdInput type="number" placeholder="Nombre"/>
+        <input mdInput type="number" placeholder="Nombre" formControlName="quantity">
       </md-input-container>
     </div>
     <div fxLayout="row">
       <md-input-container>
-        <input mdInput placeholder="Contenant"/>
+        <input mdInput placeholder="Contenant" formControlName="container">
       </md-input-container>
     </div>
     <div fxLayout="row">
       <md-input-container class="full-width">
-        <input mdInput placeholder="Capacité" type="number"/>
+        <input mdInput placeholder="Capacité" type="number" formControlName="capacityContainer">
       </md-input-container>
-      <md-select placeholder="Unité">
-        <md-option>Litre</md-option>
-        <md-option>Gallon</md-option>
+      <md-select placeholder="Unité" formControlName="idUnitOfMeasure" *ngIf="units">
+        <md-option *ngFor="let unit of units" [value]="unit.id">{{unit.name}}</md-option>
       </md-select>
     </div>
     <div fxLayout="row">
       <md-input-container>
-        <input mdInput placeholder="Localisation"/>
+        <input mdInput placeholder="Localisation" formControlName="place">
       </md-input-container>
     </div>
     <div fxLayout="row">
       <md-input-container>
-        <input mdInput placeholder="Étage" type="number"/>
+        <input mdInput placeholder="Étage" type="number" formControlName="floor">
       </md-input-container>
     </div>
     <div fxLayout="row">
       <md-input-container>
-        <input mdInput placeholder="Mur"/>
+        <input mdInput placeholder="Mur">
       </md-input-container>
       <md-input-container>
-        <input mdInput placeholder="Section"/>
-      </md-input-container>
-    </div>
-    <div fxLayout="row">
-      <md-input-container>
-        <input mdInput placeholder="État"/>
+        <input mdInput placeholder="Section">
       </md-input-container>
     </div>
     <div fxLayout="row">
       <md-input-container>
-        <input mdInput placeholder="Entrée gaz"/>
+        <input mdInput placeholder="État">
       </md-input-container>
     </div>
     <div fxLayout="row">
       <md-input-container>
-        <input mdInput placeholder="Périmètre"/>
+        <input mdInput placeholder="Entrée gaz" formControlName="gasInlet">
+      </md-input-container>
+    </div>
+    <div fxLayout="row">
+      <md-input-container>
+        <input mdInput placeholder="Périmètre" formControlName="securityPerimeter">
       </md-input-container>
     </div>
     <div fxLayout="row">
       <md-input-container class="full-width">
-        <textarea mdInput placeholder="Autres informations"></textarea>
+        <textarea mdInput placeholder="Autres informations" formControlName="otherInformation"></textarea>
       </md-input-container>
     </div>
+    {{materialForm.value | json}}
   </form>
   <md-card-actions class="card-buttons">
     <button md-raised-button><md-icon>delete</md-icon>Supprimer</button>

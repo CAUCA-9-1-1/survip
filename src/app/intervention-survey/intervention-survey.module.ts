@@ -14,6 +14,8 @@ import { CardLayoutComponent } from './card-layout/card-layout.component';
 import { CardLayoutFactoryDirective } from './shared/control-factory.directive';
 import { BuildingContactService } from './shared/services/building-contact.service';
 import {BuildingHazardousMaterialService} from './shared/services/building-hazardous-material.service';
+import {HazardousMaterialService} from './shared/services/hazardous-material.service';
+import {UnitOfMeasureService} from './shared/services/unit-of-measure.service';
 
 @NgModule({
   imports: [
@@ -47,11 +49,13 @@ import {BuildingHazardousMaterialService} from './shared/services/building-hazar
   ],
   entryComponents: [
     ContactComponent,
-    DangerousMaterialComponent
+    DangerousMaterialComponent,
   ],
   providers: [
     BuildingContactService,
-    BuildingHazardousMaterialService
+    BuildingHazardousMaterialService,
+    HazardousMaterialService,
+    UnitOfMeasureService
   ]
 })
 export class InterventionSurveyModule { }

@@ -10,7 +10,7 @@ export class BuildingHazardousMaterial {
   floor: string;
   idImage: string;
   gasInlet: string;
-  securityPerimer: string;
+  securityPerimeter: string;
   otherInformation: string;
   createdOn: Date;
   isActive: boolean;
