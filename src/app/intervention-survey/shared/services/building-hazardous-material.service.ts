@@ -4,7 +4,6 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { BuildingContact } from '../models/building-contact';
 import {BuildingHazardousMaterial} from '../models/building-hazardous-material';
 
 @Injectable()
