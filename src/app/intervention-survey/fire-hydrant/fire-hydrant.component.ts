@@ -38,7 +38,7 @@ export class FireHydrantComponent implements OnInit, OnChanges {
     { 'value' : 'red' },
     { 'value' : 'yellow' },
     { 'value' : 'white' },
-  ]
+  ];
 
   constructor(
     fireHydrantTypeService: FireHydrantTypeService,
