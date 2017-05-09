@@ -30,21 +30,23 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
     return this.component.map;
   }
 
-  constructor(@Self() component: MapBrowserComponent,
-              private router: Router,
-              private interventionService: InterventionService,
-              private riskLevelService: RiskLevelService) {
-    this.component = component;
+  constructor(@Self() component?: MapBrowserComponent,
+              private router?: Router,
+              private interventionService?: InterventionService,
+              private riskLevelService?: RiskLevelService) {
+    if (component) {
+      this.component = component;
 
-    this.riskLevelService.getAll().subscribe(levels => {
-      levels.forEach(level => {
-        this.fillColors[level.idRiskLevel] = level.color;
-        this.riskCode[level.idRiskLevel] = level.code;
+      this.riskLevelService.getAll().subscribe(levels => {
+        levels.forEach(level => {
+          this.fillColors[level.idRiskLevel] = level.color;
+          this.riskCode[level.idRiskLevel] = level.code;
+        });
+
+        this.addLayer();
+        this.component.map.olMap.on('singleclick', this.click.bind(this));
       });
-
-      this.addLayer();
-      this.component.map.olMap.on('singleclick', this.click.bind(this));
-    });
+    }
   }
 
   ngOnInit() {
