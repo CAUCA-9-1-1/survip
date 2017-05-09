@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestModule } from '../../test.module';
 import { DangerousMaterialComponent } from './dangerous-material.component';
+import {BuildingHazardousMaterialService} from '../shared/services/building-hazardous-material.service';
+import {HazardousMaterialService} from '../shared/services/hazardous-material.service';
+import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
 
 describe('DangerousMaterialComponent', () => {
   let component: DangerousMaterialComponent;
@@ -10,7 +13,8 @@ describe('DangerousMaterialComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ TestModule ],
-      declarations: [ DangerousMaterialComponent ]
+      declarations: [ DangerousMaterialComponent ],
+      providers: [ BuildingHazardousMaterialService, HazardousMaterialService, UnitOfMeasureService ]
     })
     .compileComponents();
   }));

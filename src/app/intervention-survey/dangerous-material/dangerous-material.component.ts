@@ -36,7 +36,9 @@ export class DangerousMaterialComponent implements OnInit, OnChanges {
   }
 
   private setValues() {
-    this.materialForm.patchValue(this.item);
+    if (this.item != null) {
+      this.materialForm.patchValue(this.item);
+    }
   }
 
   createForm() {

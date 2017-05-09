@@ -5,7 +5,6 @@ import {Http} from '@angular/http';
 @Injectable()
 export class LocationTypeService {
   private url = 'api/location-type';
-  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
 

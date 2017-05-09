@@ -1,11 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { BuildingHazardousMaterialService } from './building-hazardous-material.service';
+import {HttpModule} from '@angular/http';
 
 describe('BuildingHazardousMaterialService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [BuildingHazardousMaterialService]
+      imports: [HttpModule],
+      providers: [
+        BuildingHazardousMaterialService
+      ]
     });
   });
 

@@ -6,7 +6,6 @@ import {Http} from '@angular/http';
 export class HazardousMaterialService {
 
   private url = 'api/hazardous-material';
-  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
 

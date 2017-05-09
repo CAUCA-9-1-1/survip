@@ -35,7 +35,9 @@ export class ContactComponent implements OnInit, OnChanges {
   }
 
   private setValues() {
-    this.contactForm.patchValue(this.item);
+    if (this.item != null) {
+      this.contactForm.patchValue(this.item);
+    }
   }
 
   createForm() {

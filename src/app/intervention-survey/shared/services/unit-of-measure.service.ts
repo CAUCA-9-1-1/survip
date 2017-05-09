@@ -6,7 +6,6 @@ import {UnitOfMeasure} from '../models/unit-of-measure';
 export class UnitOfMeasureService {
 
   private url = 'api/unit-of-measure';
-  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
 
