@@ -1,11 +1,11 @@
 import { Directive, Self, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Feature, MapBrowserComponent, IgoMap, VectorLayer } from 'igo2';
 
 import { InterventionService } from '../shared/intervention.service';
 import { RiskLevelService } from '../../shared/services/risk-level.service';
-
 
 @Directive({
   selector: '[appInterventionLayer]'
@@ -18,6 +18,7 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
   private format = new ol.format.GeoJSON();
 
   private fillColors = {};
+  private riskCode = {};
 
   private textStyleOptions = {
     text: 'home',
@@ -30,16 +31,19 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
   }
 
   constructor(@Self() component: MapBrowserComponent,
+              private router: Router,
               private interventionService: InterventionService,
-              private riskLevel: RiskLevelService) {
+              private riskLevelService: RiskLevelService) {
     this.component = component;
 
-    this.riskLevel.getAll().subscribe(levels => {
+    this.riskLevelService.getAll().subscribe(levels => {
       levels.forEach(level => {
-        this.fillColors[level.code] = level.color;
+        this.fillColors[level.idRiskLevel] = level.color;
+        this.riskCode[level.idRiskLevel] = level.code;
       });
 
       this.addLayer();
+      this.component.map.olMap.on('singleclick', this.click.bind(this));
     });
   }
 
@@ -83,7 +87,7 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
   }
 
   private createFeatureStyle(feature: Feature): ol.style.Style {
-    const cls = feature.properties.class || '-1';
+    const cls = feature.properties.idRiskLevel || '-1';
     const fillColor = this.fillColors[cls] || this.fillColors['-1'];
 
     const style = new ol.style.Style({
@@ -97,4 +101,19 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
     return style;
   }
 
+  private click(e) {
+    const clickFeature = this.component.map.olMap.forEachFeatureAtPixel(e.pixel, (feature, layer) => {
+      return feature;
+    });
+
+    if (clickFeature) {
+      const properties = clickFeature.getProperties();
+
+      if (this.riskCode[properties.idRiskLevel] === 3 || this.riskCode[properties.idRiskLevel] === 4) {
+        this.router.navigate(['/intervention/survey', properties.idInterventionPlan]);
+      } else {
+        this.router.navigate(['/prevention/survey', properties.idSurvey]);
+      }
+    }
+  }
 }

@@ -1,6 +1,9 @@
 export class Inspection {
   id: string;
-  title: string;
-  coordinates: number[];
-  property: object;
+  name: object;
+  matricule: string;
+  geojson: object;
+  idRiskLevel: string;
+  idSurvey: string;
+  idInterventionPlan: string;
 }

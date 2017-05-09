@@ -13,20 +13,20 @@ const appRoutes: Routes = [{
   path: '',
   redirectTo: '/intervention/maps',
   pathMatch: 'full'
-},
-{
+}, {
   path: 'intervention',
   canActivate: [AuthGuard],
   children: [{
     path: 'maps',
     component: InterventionMapsComponent
-  },
-  {
+  }, {
     path: 'report',
     component: InterventionReportComponent
-  },
-  {
+  }, {
     path: 'survey',
+    component: InterventionSurveyComponent
+  }, {
+    path: 'survey/:id',
     component: InterventionSurveyComponent
   }]
 },
@@ -36,17 +36,18 @@ const appRoutes: Routes = [{
   children: [{
     path: 'survey',
     component: PreventionSurveyComponent
+  }, {
+    path: 'survey/:id',
+    component: PreventionSurveyComponent
   }]
-},
-{
+}, {
   path: 'management',
   canActivate: [AuthGuard],
   children: [{
     path: 'address',
     component: ManagementAddressComponent
   }]
-},
-{
+}, {
   path: '**',
   component: PageNotFoundComponent
 }];
