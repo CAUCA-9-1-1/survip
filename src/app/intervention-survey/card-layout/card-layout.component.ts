@@ -20,7 +20,7 @@ export class CardLayoutComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit() {
-    const items = this.windowRefService.nativeDocument().getElementsByClassName('detail-card mat-card');
+    const items = this.windowRefService.nativeDocument.getElementsByClassName('detail-card mat-card');
     if (items.length > 1) {
       const newCardHeight = items[0]['offsetHeight'];
       const newCardWidth = items[0]['offsetWidth'];
