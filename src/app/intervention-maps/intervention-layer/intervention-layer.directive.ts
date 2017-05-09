@@ -37,7 +37,7 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
     if (component) {
       this.component = component;
 
-      /*this.riskLevelService.getAll().subscribe(levels => {
+      this.riskLevelService.getAll().subscribe(levels => {
         levels.forEach(level => {
           this.fillColors[level.idRiskLevel] = level.color;
           this.riskCode[level.idRiskLevel] = level.code;
@@ -45,7 +45,7 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
 
         this.addLayer();
         this.component.map.olMap.on('singleclick', this.click.bind(this));
-      });*/
+      });
     }
   }
 
