@@ -18,7 +18,12 @@
         <app-intervention-survey-implantation-plan></app-intervention-survey-implantation-plan>
       </div>
       <div *ngSwitchCase="'pnap'">
-        <app-intervention-survey-person-requiring-assistance></app-intervention-survey-person-requiring-assistance>
+        <app-card-layout title="P.N.A.P."
+                         [items]="pnaps"
+                         [componentType]="'PersonRequiringAssistanceComponent'"
+                         (deleteClick)="onBuildingPnapDeleted($event)"
+                         (completionClick)="onCompleteSection($event)"
+                         (addClick)="onBuildingPnapAdd()"></app-card-layout>
       </div>
       <div *ngSwitchCase="'particularRisks'">
         <app-intervention-survey-particular-risk></app-intervention-survey-particular-risk>
