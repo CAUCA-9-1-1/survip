@@ -63,7 +63,7 @@ export class TakePictureComponent implements OnInit {
 
   onChange(e) {
     const files = e.target.files;
-    const reader = new FileReader();
+    const reader = this.windowRef.nativeClass('FileReader');
 
     if (files.length) {
       reader.addEventListener('load', this.onSuccess.bind(this));
