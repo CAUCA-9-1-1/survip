@@ -1,89 +1,47 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import Observable = ol.Observable;
 
 import { Feature, FeatureFormat, FeatureType } from 'igo2';
 
+import { InspectionService } from '../../shared/services/inspection.service';
 
 @Injectable()
 export class InterventionService {
 
   public features$ = new BehaviorSubject<Feature[]>([]);
 
-  constructor() {
-    const source = 'Intervention';
+  constructor(private inspectionService: InspectionService) {
+    this.getFeatures();
+  }
 
-    const features = [
-      {
-        id: '1',
-        source: source,
-        type: FeatureType.Feature, // --> 'Feature'
-        format: FeatureFormat.GeoJSON, // --> 'GeoJSON'
-        title: 'Inspection 1',
-        projection: 'EPSG:4326',
-        geometry: {
-          type: 'Point' as ol.geom.GeometryType,
-          coordinates: [-70.685006, 46.116211] as [number, number]
-        },
-        properties: {
-          name: 'name 1',
-          address: 'address 1',
-          class: 1
-        }
-      },
-      {
-        id: '2',
-        source: source,
-        type: FeatureType.Feature,
-        format: FeatureFormat.GeoJSON,
-        title: 'Inspection 2',
-        projection: 'EPSG:4326',
-        geometry: {
-          type: 'Point' as ol.geom.GeometryType,
-          coordinates: [-70.695006, 46.136211] as [number, number]
-        },
-        properties: {
-          name: 'name 2',
-          address: 'address 2',
-          class: 1
-        }
-      },
-      {
-        id: '3',
-        source: source,
-        type: FeatureType.Feature,
-        format: FeatureFormat.GeoJSON,
-        title: 'Inspection 3',
-        projection: 'EPSG:4326',
-        geometry: {
-          type: 'Point' as ol.geom.GeometryType,
-          coordinates: [-70.675006, 46.096211] as [number, number]
-        },
-        properties: {
-          name: 'name 3',
-          address: 'address 3',
-          class: 2
-        }
-      },
-      {
-        id: '4',
-        source: source,
-        type: FeatureType.Feature,
-        format: FeatureFormat.GeoJSON,
-        title: 'Inspection 4',
-        projection: 'EPSG:4326',
-        geometry: {
-          type: 'Point' as ol.geom.GeometryType,
-          coordinates: [-70.735006, 46.116211] as [number, number]
-        },
-        properties: {
-          name: 'name 4',
-          address: 'address 4',
-          class: 3
-        }
+  getFeatures() {
+    this.inspectionService.getAll().subscribe(inspections => {
+      const features = [];
+
+      for (const inspect of inspections) {
+        features.push(this.inspectionToMaps(inspect.id, inspect.title, inspect.properties, inspect.coordinates));
       }
-    ];
 
-    this.setFeatures(features);
+      this.setFeatures(features);
+    });
+  }
+
+  private inspectionToMaps(id, title, property, coordinates): Feature {
+    return {
+      id: id,
+      title: title,
+      source: 'inspection',
+      type: FeatureType.Feature,
+      format: FeatureFormat.GeoJSON,
+      projection: 'EPSG:4326',
+      geometry: {
+        type: 'Point' as ol.geom.GeometryType,
+        coordinates: coordinates as [number, number]
+      },
+      properties: property
+    };
   }
 
   setFeatures(features: Feature[]) {

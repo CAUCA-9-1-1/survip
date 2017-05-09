@@ -1,5 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { SurveyQuestionData } from './survey-question-data';
+import { RiskLevelData } from './risk-level-data';
+import { InspectionData } from './inspection-data';
 import { InspectionQuestionData } from './inspection-question-data';
 import { LaneData } from './lane-data';
 import { BuildingContactData } from './building-contact-data';
@@ -43,6 +45,8 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const surveyQuestions = new SurveyQuestionData().data;
+    const riskLevel = new RiskLevelData().data;
+    const inspection = new InspectionData().data;
     const inspectionQuestion = new InspectionQuestionData().data;
     const lanes = new LaneData().data;
     const buildingContacts =  new BuildingContactData().data;
@@ -57,6 +61,8 @@ export class InMemoryDataService implements InMemoryDbService {
       'surveys': surveys,
       'lanes': lanes,
       'survey-question': surveyQuestions,
+      'risklevel': riskLevel,
+      'inspection': inspection,
       'inspection-question': inspectionQuestion,
       'building-contacts': buildingContacts,
       'hazardous-material': hazardousMaterials,

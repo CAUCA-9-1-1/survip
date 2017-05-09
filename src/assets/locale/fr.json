@@ -23,5 +23,8 @@
   "select": "Sélection ...",
   "take": "Prendre ...",
   "selectImage": "Sélectionner une image",
-  "takeImage": "Prendre une photo"
+  "takeImage": "Prendre une photo",
+  "country": "Pays",
+  "codeAlpha2": "Code à 2 lettres",
+  "codeAlpha3": "Code à 3 lettres"
 }

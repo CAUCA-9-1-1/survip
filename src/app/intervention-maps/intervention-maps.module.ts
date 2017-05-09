@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
-import { InterventionService } from './shared/intervention.service';
 import { InterventionLayerDirective } from './intervention-layer/intervention-layer.directive';
+import { InterventionService } from './shared/intervention.service';
+import { InspectionService } from '../shared/services/inspection.service';
+import { RiskLevelService } from '../shared/services/risk-level.service';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { InterventionLayerDirective } from './intervention-layer/intervention-la
     InterventionLayerDirective
   ],
   providers: [
-    InterventionService
+    InterventionService,
+    InspectionService,
+    RiskLevelService,
   ]
 })
 export class InterventionMapsModule { }

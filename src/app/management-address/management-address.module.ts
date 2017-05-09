@@ -13,6 +13,9 @@ import { CountryService } from '../core/services/country.service';
     SharedModule,
     DxDataGridModule
   ],
+  exports: [
+    CountryComponent,
+  ],
   declarations: [
     CountryComponent,
     CountyComponent,

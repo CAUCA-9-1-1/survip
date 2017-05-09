@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Feature, MapBrowserComponent, IgoMap, VectorLayer } from 'igo2';
 
 import { InterventionService } from '../shared/intervention.service';
+import { RiskLevelService } from '../../shared/services/risk-level.service';
 
 
 @Directive({
@@ -16,16 +17,11 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
   private features$$: Subscription;
   private format = new ol.format.GeoJSON();
 
-  private fillColors = {
-    '0': '#dddddd',
-    '1': '#ff0000',
-    '2': '#00ff00',
-    '3': '#0000ff'
-  };
+  private fillColors = {};
 
   private textStyleOptions = {
     text: 'home',
-    font: 'normal 18px Material Icons',
+    font: 'normal 22px Material Icons',
     textBaseline: 'Center'
   };
 
@@ -34,11 +30,27 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
   }
 
   constructor(@Self() component: MapBrowserComponent,
-              private interventionService: InterventionService) {
+              private interventionService: InterventionService,
+              private riskLevel: RiskLevelService) {
     this.component = component;
+
+    this.riskLevel.getAll().subscribe(levels => {
+      levels.forEach(level => {
+        this.fillColors[level.code] = level.color;
+      });
+
+      this.addLayer();
+    });
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.features$$.unsubscribe();
+  }
+
+  private addLayer() {
     const interventionLayer = new VectorLayer({
       title: 'interventions',
       type: 'vector',
@@ -49,10 +61,6 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
 
     this.features$$ = this.interventionService.features$
       .subscribe(features => this.handleFeatures(features));
-  }
-
-  ngOnDestroy() {
-    this.features$$.unsubscribe();
   }
 
   private handleFeatures(features: Feature[]) {
@@ -75,8 +83,8 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
   }
 
   private createFeatureStyle(feature: Feature): ol.style.Style {
-    const cls = feature.properties.class || '0';
-    const fillColor = this.fillColors[cls] || this.fillColors['0'];
+    const cls = feature.properties.class || '-1';
+    const fillColor = this.fillColors[cls] || this.fillColors['-1'];
 
     const style = new ol.style.Style({
       text: new ol.style.Text(Object.assign({
