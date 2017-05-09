@@ -3,7 +3,7 @@ export class InterventionPlanFireHydrantData {
     {
       'id': '1',
       'number': 'ABC-123',
-      'color': '',
+      'color': 'forestgreen',
       'idFireHydrantType': '13c781ac-7084-4d23-baef-cd2ee6a3801d',
       'capacity': 10,
       'idUnitOfMeasure': 'fe6c7ce9-93c8-4787-9f89-98dde45be7f9',
@@ -20,7 +20,7 @@ export class InterventionPlanFireHydrantData {
     {
       'id': '2',
       'number': 'ABC-456',
-      'color': '',
+      'color': 'red',
       'idFireHydrantType': '13c781ac-7084-4d23-baef-cd2ee6a3801d',
       'capacity': 12,
       'idUnitOfMeasure': 'fe6c7ce9-93c8-4787-9f89-98dde45be7f9',
@@ -37,7 +37,7 @@ export class InterventionPlanFireHydrantData {
     {
       'id': '3',
       'number': 'DEF-123',
-      'color': '',
+      'color': 'yellow',
       'idFireHydrantType': '13c781ac-7084-4d23-baef-cd2ee6a3801d',
       'capacity': 10,
       'idUnitOfMeasure': 'fe6c7ce9-93c8-4787-9f89-98dde45be7f9',
@@ -54,7 +54,7 @@ export class InterventionPlanFireHydrantData {
     {
       'id': '4',
       'number': 'DEF-456',
-      'color': '',
+      'color': 'white',
       'idFireHydrantType': '13c781ac-7084-4d23-baef-cd2ee6a3801d',
       'capacity': 10,
       'idUnitOfMeasure': 'fe6c7ce9-93c8-4787-9f89-98dde45be7f9',

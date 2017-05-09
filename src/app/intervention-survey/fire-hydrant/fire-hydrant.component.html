@@ -1,114 +1,106 @@
 <md-card class="detail-card">
-  <form novalidate (ngSubmit)="onSubmit(hydrantForm)" [formGroup]="hydrantForm">
-    <div fxLayout="row" class="full-width">
-        <md-input-container class="full-width">
-            <input mdInput placeholder="Numéro" formControlName="number"/>
-        </md-input-container>
-    </div>
-    <div style="margin-bottom:15px;">
-        <md-button-toggle-group #group="mdButtonToggleGroup">
-            <md-button-toggle value="left" style="color: cornflowerblue">
-                <md-icon style="background-color: cornflowerblue">check_box_outline_blank</md-icon>
-            </md-button-toggle>
-            <md-button-toggle value="left" style="color: forestgreen">
-                <md-icon style="background-color: forestgreen">check_box_outline_blank</md-icon>
-            </md-button-toggle>
-            <md-button-toggle value="left" style="color: orange">
-                <md-icon style="background-color: orange">check_box_outline_blank</md-icon>
-            </md-button-toggle>
-            <md-button-toggle value="left" style="color: red">
-                <md-icon style="background-color: red">check_box_outline_blank</md-icon>
-            </md-button-toggle>
-            <md-button-toggle value="left" style="color: yellow">
-                <md-icon style="background-color: yellow">check_box_outline_blank</md-icon>
-            </md-button-toggle>
-            <md-button-toggle value="left">
-                <md-icon style="background-color: white">check_box_outline_blank</md-icon>
-            </md-button-toggle>
-        </md-button-toggle-group>
-    </div>
-    <div fxLayout="row">
+  <md-card-content>
+    <form novalidate (ngSubmit)="onSubmit(hydrantForm)" [formGroup]="hydrantForm">
+      <div fxLayout="row">
+          <md-input-container class="full-width">
+              <input mdInput placeholder="Numéro" formControlName="number"/>
+          </md-input-container>
+      </div>
+      <div style="margin-bottom:15px;">
+          <md-button-toggle-group #group="mdButtonToggleGroup" formControlName="color">
+              <md-button-toggle *ngFor="let color of FireHydrantColors" [value]="color.value" [style.color]="color.value">
+                  <md-icon [style.background-color]="color.value">check_box_outline_blank</md-icon>
+              </md-button-toggle>
+          </md-button-toggle-group>
+      </div>
+      <div fxLayout="row">
         <md-select placeholder="Type" *ngIf="fireHydrantTypes" formControlName="idFireHydrantType">
-            <md-option *ngFor="let type of fireHydrantTypes" [value]="type.id">{{type.name}}</md-option>
+          <md-option *ngFor="let type of fireHydrantTypes" [value]="type.id">{{type.name}}</md-option>
         </md-select>
-    </div>
-    <div fxLayout="row">
+      </div>
+      <div fxLayout="row">
         <md-input-container>
             <input mdInput placeholder="Capacité" formControlName="capacity">
         </md-input-container>
         <md-select placeholder="Unité" *ngIf="unitsOfMeasure" formControlName="idUnitOfMeasure">
             <md-option *ngFor="let unit of unitsOfMeasure" [value]="unit.id">{{unit.name}}</md-option>
         </md-select>
-    </div>
-    <hr>
+      </div>
 
-    <div class="table">
-        <div class="row">
-            <div class="cell">
-                <md-select formControlName="addressType">
-                  <md-option *ngFor="let type of FIREHYDRANT_TYPE" [value]="type.value">{{type.type}}</md-option>
-                </md-select>
-                <md-radio-group style="flex-direction: row;display: inline-flex;" formControlName="addressType">
-                    <md-radio-button [value]="type.value"
-                                     *ngFor="let type of FIREHYDRANT_TYPE"
-                                     style="margin:7px;">{{type.type}}
-                    </md-radio-button>
-                </md-radio-group>
-            </div>
+      <hr>
+
+      <div fxLayout="row" fxHide fxShow.lt-sm>
+        <md-select formControlName="addressType" class="full-width address-type-select">
+          <md-option *ngFor="let type of FIREHYDRANT_TYPE" [value]="type.value">{{type.type}}</md-option>
+        </md-select>
+      </div>
+      <div fxLayout="row" fxHide.lt-sm>
+        <md-radio-group class="address-type" formControlName="addressType" class="address-type-checkboxes">
+            <md-radio-button [value]="type.value"
+                             *ngFor="let type of FIREHYDRANT_TYPE"
+                             style="margin:7px;">{{type.type}}
+            </md-radio-button>
+        </md-radio-group>
+      </div>
+
+
+      <div *ngIf="item.addressType == 1">
+
+        <div fxLayout="row">
+          <md-input-container>
+              <input mdInput placeholder="No. Civique" formControlName="civicNumber" class="full-width">
+          </md-input-container>
         </div>
-        <div class="row">
-            <div class="cell">
-                <div *ngIf="item.addressType == 1">
-                    <md-select placeholder="Emplacement" *ngIf="locationTypes" formControlName="idLocationType">
-                        <md-option *ngFor="let type of locationTypes" [value]="type.id">{{type.name}}</md-option>
-                    </md-select>
-                    <md-input-container>
-                        <input mdInput placeholder="No. Civique" formControlName="civicNumber">
-                    </md-input-container>
-                  <app-search-box
-                    [placeHolderText]="'Voie de circulation'"
-                    [keyField]="'idLane'"
-                    [descriptionField]="'fullNameForFireCad'"
-                    [dataService]="laneService" formControlName="idLane"></app-search-box>
-                </div>
-                <div *ngIf="item.addressType == 2">
-                  <app-search-box
-                    [placeHolderText]="'Voie de circulation'"
-                    [keyField]="'idLane'"
-                    [descriptionField]="'fullNameForFireCad'"
-                    [dataService]="laneService"  formControlName="idLane"></app-search-box>
-                  <app-search-box
-                    [placeHolderText]="'Transversale'"
-                    [keyField]="'idLane'"
-                    [descriptionField]="'fullNameForFireCad'"
-                    [dataService]="laneService" formControlName="idLaneIntersection"></app-search-box>
-                </div>
-                <div *ngIf="item.addressType == 3">
-                    <div class="table">
-                        <div class="cell rowspan2">
-                            <div>
-                                <md-input-container class="full-width">
-                                    <input mdInput placeholder="Latitude" formControlName="latitude">
-                                </md-input-container>
-                                <md-input-container class="full-width">
-                                    <input mdInput placeholder="Longitude" formControlName="longitude">
-                                </md-input-container>
-                            </div>
-                            <div>
-                                <button md-button>Localiser...</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="item.addressType == 4">
-                    <md-input-container class="full-width">
-                        <textarea mdInput placeholder="Autre emplacement" formControlName="locationDetails"></textarea>
-                    </md-input-container>
-                </div>
-            </div>
+        <div fxLayout="row">
+          <app-search-box class="full-width"
+            [placeHolderText]="'Voie de circulation'"
+            [keyField]="'idLane'"
+            [descriptionField]="'fullNameForFireCad'"
+            [dataService]="laneService" formControlName="idLane"></app-search-box>
         </div>
-    </div>
-  </form>
+      </div>
+
+      <div *ngIf="item.addressType == 2">
+        <div fxLayout="row">
+          <app-search-box class="full-width"
+            [placeHolderText]="'Voie de circulation'"
+            [keyField]="'idLane'"
+            [descriptionField]="'fullNameForFireCad'"
+            [dataService]="laneService"  formControlName="idLane"></app-search-box>
+        </div>
+        <div fxLayout="row">
+          <app-search-box class="full-width"
+            [placeHolderText]="'Transversale'"
+            [keyField]="'idLane'"
+            [descriptionField]="'fullNameForFireCad'"
+            [dataService]="laneService" formControlName="idLaneIntersection"></app-search-box>
+        </div>
+      </div>
+
+      <div *ngIf="item.addressType == 3">
+        <div fxLayout="row">
+            <md-input-container>
+                <input mdInput placeholder="Latitude" formControlName="latitude">
+            </md-input-container>
+        </div>
+        <div fxLayout="row">
+          <md-input-container>
+              <input mdInput placeholder="Longitude" formControlName="longitude">
+          </md-input-container>
+        </div>
+        <div fxLayout="row">
+            <button md-raised-button (click)="onLocaliseClicked()">Localiser...</button>
+        </div>
+      </div>
+
+      <div *ngIf="item.addressType == 4">
+          <md-input-container class="full-width">
+              <textarea mdInput placeholder="Autre emplacement" formControlName="locationDetails"></textarea>
+          </md-input-container>
+      </div>
+
+    </form>
+  </md-card-content>
   <md-card-actions class="card-buttons">
       <button md-raised-button (click)="onDeleteClicked()"><md-icon>delete</md-icon>Supprimer</button>
   </md-card-actions>

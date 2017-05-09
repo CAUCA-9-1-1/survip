@@ -27,9 +27,18 @@ export class FireHydrantComponent implements OnInit, OnChanges {
   public FIREHYDRANT_TYPE = [
     { 'value': 1, 'type': 'Adresse' },
     { 'value': 2, 'type': 'Intersection' },
-    { 'value': 3, 'type': 'Latitude / Longitude' },
+    { 'value': 3, 'type': 'Lat/Long' },
     { 'value': 4, 'type': 'Autre' }
   ];
+
+  public FireHydrantColors = [
+    { 'value' : 'cornflowerblue' },
+    { 'value' : 'forestgreen' },
+    { 'value' : 'orange' },
+    { 'value' : 'red' },
+    { 'value' : 'yellow' },
+    { 'value' : 'white' },
+  ]
 
   constructor(
     fireHydrantTypeService: FireHydrantTypeService,
@@ -86,6 +95,10 @@ export class FireHydrantComponent implements OnInit, OnChanges {
 
   onDeleteClicked() {
     this.deleteClicked.emit(this.item);
+  }
+
+  onLocaliseClicked() {
+    alert('En attente de la nouvelle version de IGO');
   }
 
   private saveIfValid() {
