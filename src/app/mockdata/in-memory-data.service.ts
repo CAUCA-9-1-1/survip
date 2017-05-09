@@ -9,6 +9,7 @@ import {InterventionPlanFireHydrantData} from './intervention-plan-fire-hydrant-
 import {HazardousMaterialData} from './hazardous-material-data';
 import {FireHydrantTypeData} from './fire-hydrant-type-data';
 import {LocationTypeData} from './location-type-data';
+import {PersonRequiringAssistanceTypeData} from './person-requiring-assistance-type-data';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
@@ -52,6 +53,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const interventionPlanFireHydrants = new InterventionPlanFireHydrantData().data;
     const fireHydrantTypes = new FireHydrantTypeData().data;
     const locationTypes = new LocationTypeData().data;
+    const pnapTypes = new PersonRequiringAssistanceTypeData().data;
 
     return {
       'surveys': surveys,
@@ -64,7 +66,8 @@ export class InMemoryDataService implements InMemoryDbService {
       'unit-of-measure': unitsOfMeasure,
       'intervention-plan-fire-hydrant': interventionPlanFireHydrants,
       'fire-hydrant-type': fireHydrantTypes,
-      'location-type': locationTypes
+      'location-type': locationTypes,
+      'person-requiring-assistance-type': pnapTypes
     };
   }
 }
