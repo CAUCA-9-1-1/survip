@@ -70,7 +70,7 @@ export class InMemoryDataService implements InMemoryDbService {
       'fire-hydrant-type': fireHydrantTypes,
       'location-type': locationTypes,
       'person-requiring-assistance-type': pnapTypes,
-      'building-person-requiring-assistance-type': buildingPnaps
+      'building-person-requiring-assistance': buildingPnaps
     };
   }
 }
