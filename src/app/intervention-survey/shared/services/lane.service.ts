@@ -1,3 +1,4 @@
+///<reference path="../../../shared/interfaces/service-for-list.interface.ts"/>
 import {Injectable} from '@angular/core';
 
 import { Headers, Http } from '@angular/http';

@@ -14,6 +14,8 @@ describe('CardLayoutComponent', () => {
       declarations: [
         CardLayoutComponent,
         CardLayoutFactoryDirective,
+      ],
+      providers: [
       ]
     })
     .compileComponents();

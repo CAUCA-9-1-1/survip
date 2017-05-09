@@ -72,7 +72,7 @@ export class FireHydrantComponent implements OnInit, OnChanges {
   }
 
   private setValues() {
-    this.hydrantForm.patchValue(this.item);
+      this.hydrantForm.patchValue(this.item || new InterventionPlanFireHydrant());
   }
 
   private createForm() {
@@ -98,7 +98,7 @@ export class FireHydrantComponent implements OnInit, OnChanges {
   }
 
   onLocaliseClicked() {
-    alert('En attente de la nouvelle version de IGO');
+    console.log('En attente d\'IGO');
   }
 
   private saveIfValid() {

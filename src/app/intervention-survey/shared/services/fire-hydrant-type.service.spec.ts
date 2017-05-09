@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
-
+import { HttpModule } from '@angular/http';
 import { FireHydrantTypeService } from './fire-hydrant-type.service';
 
 describe('FireHydrantTypeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FireHydrantTypeService]
+      imports: [HttpModule],
+      providers: [
+        FireHydrantTypeService]
     });
   });
 

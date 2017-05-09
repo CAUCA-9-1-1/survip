@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { YesNoDialogComponent } from './yes-no-dialog.component';
+import {TestModule} from '../../../test.module';
 
 describe('YesNoDialogComponent', () => {
   let component: YesNoDialogComponent;
@@ -8,7 +9,7 @@ describe('YesNoDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ YesNoDialogComponent ]
+      imports: [TestModule]
     })
     .compileComponents();
   }));

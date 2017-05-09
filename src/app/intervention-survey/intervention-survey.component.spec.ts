@@ -15,6 +15,8 @@ import { ParticularRiskComponent } from './particular-risk/particular-risk.compo
 import { PersonRequiringAssistanceComponent } from './person-requiring-assistance/person-requiring-assistance.component';
 import { CardLayoutFactoryDirective } from './shared/control-factory.directive';
 import { BuildingContactService } from './shared/services/building-contact.service';
+import {BuildingHazardousMaterialService} from './shared/services/building-hazardous-material.service';
+import {InterventionPlanFireHydrantService} from './shared/services/intervention-plan-fire-hydrant.service';
 
 describe('InterventionSurveyComponent', () => {
   let component: InterventionSurveyComponent;
@@ -37,7 +39,11 @@ describe('InterventionSurveyComponent', () => {
         CardLayoutFactoryDirective,
         InterventionSurveyComponent
       ],
-      providers: [ BuildingContactService]
+      providers: [
+        BuildingContactService,
+        BuildingHazardousMaterialService,
+        InterventionPlanFireHydrantService,
+      ]
     })
     .compileComponents();
   }));
