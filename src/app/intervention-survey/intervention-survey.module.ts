@@ -20,6 +20,8 @@ import {FireHydrantTypeService} from './shared/services/fire-hydrant-type.servic
 import {LocationTypeService} from './shared/services/location-type.service';
 import {InterventionPlanFireHydrantService} from './shared/services/intervention-plan-fire-hydrant.service';
 import {LaneService} from './shared/services/lane.service';
+import {PersonRequiringAssistanceTypeService} from './shared/services/person-requiring-assistance-type.service';
+import {BuildingPersonRequiringAssistanceService} from './shared/services/building-person-requiring-assistance.service';
 
 @NgModule({
   imports: [
@@ -55,6 +57,7 @@ import {LaneService} from './shared/services/lane.service';
     ContactComponent,
     DangerousMaterialComponent,
     FireHydrantComponent,
+    PersonRequiringAssistanceComponent
   ],
   providers: [
     BuildingContactService,
@@ -65,6 +68,8 @@ import {LaneService} from './shared/services/lane.service';
     LocationTypeService,
     InterventionPlanFireHydrantService,
     LaneService,
+    PersonRequiringAssistanceTypeService,
+    BuildingPersonRequiringAssistanceService
   ]
 })
 export class InterventionSurveyModule { }
