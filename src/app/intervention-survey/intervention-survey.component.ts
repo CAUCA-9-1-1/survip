@@ -9,6 +9,8 @@ import {DialogsService} from '../shared/services/dialogs.service';
 import {MenuItem} from '../shared/interfaces/menu-item.interface';
 import {BuildingHazardousMaterialService} from './shared/services/building-hazardous-material.service';
 import {BuildingHazardousMaterial} from './shared/models/building-hazardous-material';
+import {InterventionPlanFireHydrant} from './shared/models/intervention-plan-fire-hydrant';
+import {InterventionPlanFireHydrantService} from './shared/services/intervention-plan-fire-hydrant.service';
 
 @Component({
   selector: 'app-survey',
@@ -19,6 +21,7 @@ export class InterventionSurveyComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MdSidenav;
   public contacts: BuildingContact[];
   public materials: BuildingHazardousMaterial[];
+  public fireHydrants: InterventionPlanFireHydrant[];
   public mode = 'over';
   public align = 'end';
   public selectedMenu = 'building';
@@ -61,12 +64,14 @@ export class InterventionSurveyComponent implements OnInit {
     private windowRef: WindowRefService,
     private buildingContactService: BuildingContactService,
     private matService: BuildingHazardousMaterialService,
+    private fireHydrantService: InterventionPlanFireHydrantService,
     private dialogsService: DialogsService) {
   }
 
   ngOnInit() {
     this.loadBuildingContact();
     this.loadBuildingMaterials();
+    this.loadFireHydrants();
 
     if (this.windowRef.nativeWindow.innerWidth >= 700) {
       this.mode = 'side';
@@ -125,6 +130,32 @@ export class InterventionSurveyComponent implements OnInit {
   private loadBuildingContact() {
     this.buildingContactService.getList()
       .then(contacts => this.contacts = contacts);
+  }
+
+  onFireHydrantDeleted(deletedHydrant: InterventionPlanFireHydrant) {
+    this.dialogsService
+      .confirm('Suppression d\'une alimentation en eau', 'Êtes-vous sûr de vouloir supprimer cette alimentation en eau?')
+      .subscribe(res => {
+        if (res) {
+          this.deleteFireHydrant(deletedHydrant);
+        }
+      });
+  }
+  onFireHydrantAdd() {
+    const fireHydrants: InterventionPlanFireHydrant[] = [];
+    Object.assign(fireHydrants, this.fireHydrants);
+    const hydrant = new InterventionPlanFireHydrant();
+    hydrant.id = UUID.UUID();
+    fireHydrants.push(hydrant);
+    this.fireHydrants = fireHydrants;
+  }
+  private deleteFireHydrant(deletedHydrant: InterventionPlanFireHydrant) {
+    this.fireHydrantService.delete(deletedHydrant)
+      .then(() => this.fireHydrants = this.fireHydrants.filter(hydrant => hydrant.id !== deletedHydrant.id));
+  }
+  private loadFireHydrants() {
+    this.fireHydrantService.getList()
+      .then(hydrants => this.fireHydrants = hydrants);
   }
 
   onCompleteSection(val) {

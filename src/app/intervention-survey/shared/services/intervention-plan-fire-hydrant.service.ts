@@ -3,23 +3,23 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-
-import {BuildingHazardousMaterial} from '../models/building-hazardous-material';
+import {InterventionPlanFireHydrant} from '../models/intervention-plan-fire-hydrant';
 
 @Injectable()
-export class BuildingHazardousMaterialService {
-  private url = 'api/building-hazardous-material';
+export class InterventionPlanFireHydrantService {
+
+  private url = 'api/intervention-plan-fire-hydrant';
   private headers = new Headers({'Content-Type': 'application/json'});
   constructor(private http: Http) { }
 
-  getList(): Promise<BuildingHazardousMaterial[]> {
+  getList(): Promise<InterventionPlanFireHydrant[]> {
     return this.http.get(this.url)
       .toPromise()
-      .then(response => response.json().data as BuildingHazardousMaterial[])
+      .then(response => response.json().data as InterventionPlanFireHydrant[])
       .catch(this.handleError);
   }
 
-  update(mat: BuildingHazardousMaterial): Promise<BuildingHazardousMaterial> {
+  update(mat: InterventionPlanFireHydrant): Promise<InterventionPlanFireHydrant> {
     const url = this.url + '/' + mat.id;
     return this.http
       .put(url, JSON.stringify(mat), {headers: this.headers})
@@ -28,7 +28,7 @@ export class BuildingHazardousMaterialService {
       .catch(this.handleError);
   }
 
-  delete(mat: BuildingHazardousMaterial): Promise<void> {
+  delete(mat: InterventionPlanFireHydrant): Promise<void> {
     const url = `${this.url}/${mat.id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()

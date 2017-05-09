@@ -1,407 +1,107 @@
-<div>
-    <md-card class="master-card">
-        <md-card-title>Borne(s)</md-card-title>
-        <md-card-content>
+<md-card class="detail-card">
+  <md-card-content>
+    <form novalidate (ngSubmit)="onSubmit(hydrantForm)" [formGroup]="hydrantForm">
+      <div fxLayout="row">
+          <md-input-container class="full-width">
+              <input mdInput placeholder="Numéro" formControlName="number"/>
+          </md-input-container>
+      </div>
+      <div style="margin-bottom:15px;">
+          <md-button-toggle-group #group="mdButtonToggleGroup" formControlName="color">
+              <md-button-toggle *ngFor="let color of FireHydrantColors" [value]="color.value" [style.color]="color.value">
+                  <md-icon [style.background-color]="color.value">check_box_outline_blank</md-icon>
+              </md-button-toggle>
+          </md-button-toggle-group>
+      </div>
+      <div fxLayout="row">
+        <md-select placeholder="Type" *ngIf="fireHydrantTypes" formControlName="idFireHydrantType">
+          <md-option *ngFor="let type of fireHydrantTypes" [value]="type.id">{{type.name}}</md-option>
+        </md-select>
+      </div>
+      <div fxLayout="row">
+        <md-input-container>
+            <input mdInput placeholder="Capacité" formControlName="capacity">
+        </md-input-container>
+        <md-select placeholder="Unité" *ngIf="unitsOfMeasure" formControlName="idUnitOfMeasure">
+            <md-option *ngFor="let unit of unitsOfMeasure" [value]="unit.id">{{unit.name}}</md-option>
+        </md-select>
+      </div>
 
-            <md-card class="detail-card">
-                <div fxLayout="row" class="full-width">
-                    <md-input-container class="full-width">
-                        <input mdInput placeholder="Numéro"/>
-                    </md-input-container>
-                </div>
-                <div style="margin-bottom:15px;">
-                    <md-button-toggle-group #group="mdButtonToggleGroup">
-                        <md-button-toggle value="left" style="color: cornflowerblue">
-                            <md-icon style="background-color: cornflowerblue">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: forestgreen">
-                            <md-icon style="background-color: forestgreen">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: orange">
-                            <md-icon style="background-color: orange">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: red">
-                            <md-icon style="background-color: red">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: yellow">
-                            <md-icon style="background-color: yellow">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left">
-                            <md-icon style="background-color: white">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                    </md-button-toggle-group>
-                </div>
-                <div fxLayout="row">
-                    <md-select placeholder="Type">
-                        <md-option>Borne fontaine</md-option>
-                        <md-option>Borne sèche</md-option>
-                        <md-option>Citerne</md-option>
-                        <md-option>Lac</md-option>
-                    </md-select>
-                </div>
-                <div fxLayout="row">
-                    <md-input-container>
-                        <input mdInput placeholder="Capacité"/>
-                    </md-input-container>
-                    <md-select placeholder="Unité">
-                        <md-option>G</md-option>
-                        <md-option>GI</md-option>
-                        <md-option>GIPM</md-option>
-                        <md-option>GPM</md-option>
-                        <md-option>Indéterminé</md-option>
-                        <md-option>L</md-option>
-                        <md-option>LPM</md-option>
-                    </md-select>
-                </div>
-                <hr>
+      <hr>
 
-                <div class="table">
-                    <div class="row">
-                        <div class="cell">
+      <div fxLayout="row" fxHide fxShow.lt-sm>
+        <md-select formControlName="addressType" class="full-width address-type-select">
+          <md-option *ngFor="let type of FIREHYDRANT_TYPE" [value]="type.value">{{type.type}}</md-option>
+        </md-select>
+      </div>
+      <div fxLayout="row" fxHide.lt-sm>
+        <md-radio-group class="address-type" formControlName="addressType" class="address-type-checkboxes">
+            <md-radio-button [value]="type.value"
+                             *ngFor="let type of FIREHYDRANT_TYPE"
+                             style="margin:7px;">{{type.type}}
+            </md-radio-button>
+        </md-radio-group>
+      </div>
 
-                            <md-radio-group style="flex-direction: row;display: inline-flex;"
-                                            [(ngModel)]="fireHydrantSelectedType">
-                                <md-radio-button [value]="firehydrant_type.Type"
-                                                 *ngFor="let firehydrant_type of FIREHYDRANT_TYPE"
-                                                 style="margin:7px;">{{firehydrant_type.Type}}
-                                </md-radio-button>
-                            </md-radio-group>
 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="cell">
-                            <div *ngIf="fireHydrantSelectedType == 'Adresse'">
-                                <md-select placeholder="Emplacement">
-                                    <md-option>En face</md-option>
-                                    <md-option>A côté</md-option>
-                                    <md-option>A l'adresse</md-option>
-                                    <md-option>A l'arrière</md-option>
-                                    <md-option>Au bout</md-option>
-                                    <md-option>Au coin</md-option>
-                                    <md-option>Au dessus</md-option>
-                                    <md-option>Au dessous</md-option>
-                                    <md-option>Près</md-option>
-                                    <md-option>Visible du</md-option>
-                                </md-select>
-                                <md-input-container>
-                                    <input mdInput placeholder="No. Civique"/>
-                                </md-input-container>
-                                <md-input-container class="full-width">
-                                    <input mdInput value="Rapide-Plat Sud (Chemin du)"
-                                           placeholder="Voie de circulation">
-                                </md-input-container>
-                            </div>
-                            <div *ngIf="fireHydrantSelectedType == 'Intersection'">
-                                <md-input-container class="full-width">
-                                    <input mdInput value="Rapide-Plat Sud (Chemin du)"
-                                           placeholder="Voie de circulation">
-                                </md-input-container>
-                                <md-input-container class="full-width">
-                                    <input mdInput value="Scott (Avenue)" placeholder="Transversale">
-                                </md-input-container>
-                            </div>
-                            <div *ngIf="fireHydrantSelectedType == 'Latitude / Longitude'">
-                                <div class="table">
-                                    <div class="cell rowspan2">
-                                        <div>
-                                            <md-input-container class="full-width">
-                                                <input mdInput placeholder="Latitude">
-                                            </md-input-container>
-                                            <md-input-container class="full-width">
-                                                <input mdInput placeholder="Longitude">
-                                            </md-input-container>
-                                        </div>
-                                        <div>
-                                            <button md-button>Localiser...</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div *ngIf="fireHydrantSelectedType == 'Autre'">
-                                <md-input-container class="full-width">
-                                    <textarea mdInput placeholder="Autre emplacement"></textarea>
-                                </md-input-container>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <md-card-actions class="card-buttons">
-                    <button md-raised-button><md-icon>delete</md-icon>Supprimer</button>
-                </md-card-actions>
-            </md-card>
+      <div *ngIf="item.addressType == 1">
 
-            <md-card class="detail-card">
-                <div fxLayout="row" class="full-width">
-                    <md-input-container class="full-width">
-                        <input mdInput placeholder="Numéro"/>
-                    </md-input-container>
-                </div>
-                <div style="margin-bottom:15px;">
-                    <md-button-toggle-group #group="mdButtonToggleGroup">
-                        <md-button-toggle value="left" style="color: cornflowerblue">
-                            <md-icon style="background-color: cornflowerblue">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: forestgreen">
-                            <md-icon style="background-color: forestgreen">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: orange">
-                            <md-icon style="background-color: orange">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: red">
-                            <md-icon style="background-color: red">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: yellow">
-                            <md-icon style="background-color: yellow">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left">
-                            <md-icon style="background-color: white">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                    </md-button-toggle-group>
-                </div>
-                <div fxLayout="row">
-                    <md-select placeholder="Type">
-                        <md-option>Borne fontaine</md-option>
-                        <md-option>Borne sèche</md-option>
-                        <md-option>Citerne</md-option>
-                        <md-option>Lac</md-option>
-                    </md-select>
-                </div>
-                <div fxLayout="row">
-                    <md-input-container>
-                        <input mdInput placeholder="Capacité"/>
-                    </md-input-container>
-                    <md-select placeholder="Unité">
-                        <md-option>G</md-option>
-                        <md-option>GI</md-option>
-                        <md-option>GIPM</md-option>
-                        <md-option>GPM</md-option>
-                        <md-option>Indéterminé</md-option>
-                        <md-option>L</md-option>
-                        <md-option>LPM</md-option>
-                    </md-select>
-                </div>
-                <hr>
+        <div fxLayout="row">
+          <md-input-container>
+              <input mdInput placeholder="No. Civique" formControlName="civicNumber" class="full-width">
+          </md-input-container>
+        </div>
+        <div fxLayout="row">
+          <app-search-box class="full-width"
+            [placeHolderText]="'Voie de circulation'"
+            [keyField]="'idLane'"
+            [descriptionField]="'fullNameForFireCad'"
+            [dataService]="laneService" formControlName="idLane"></app-search-box>
+        </div>
+      </div>
 
-                <div class="table">
-                    <div class="row">
-                        <div class="cell">
+      <div *ngIf="item.addressType == 2">
+        <div fxLayout="row">
+          <app-search-box class="full-width"
+            [placeHolderText]="'Voie de circulation'"
+            [keyField]="'idLane'"
+            [descriptionField]="'fullNameForFireCad'"
+            [dataService]="laneService"  formControlName="idLane"></app-search-box>
+        </div>
+        <div fxLayout="row">
+          <app-search-box class="full-width"
+            [placeHolderText]="'Transversale'"
+            [keyField]="'idLane'"
+            [descriptionField]="'fullNameForFireCad'"
+            [dataService]="laneService" formControlName="idLaneIntersection"></app-search-box>
+        </div>
+      </div>
 
-                            <md-radio-group style="flex-direction: row;display: inline-flex;"
-                                            [(ngModel)]="fireHydrantSelectedType">
-                                <md-radio-button [value]="firehydrant_type.Type"
-                                                 *ngFor="let firehydrant_type of FIREHYDRANT_TYPE"
-                                                 style="margin:7px;">{{firehydrant_type.Type}}
-                                </md-radio-button>
-                            </md-radio-group>
+      <div *ngIf="item.addressType == 3">
+        <div fxLayout="row">
+            <md-input-container>
+                <input mdInput placeholder="Latitude" formControlName="latitude">
+            </md-input-container>
+        </div>
+        <div fxLayout="row">
+          <md-input-container>
+              <input mdInput placeholder="Longitude" formControlName="longitude">
+          </md-input-container>
+        </div>
+        <div fxLayout="row">
+            <button md-raised-button (click)="onLocaliseClicked()">Localiser...</button>
+        </div>
+      </div>
 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="cell">
-                            <div *ngIf="fireHydrantSelectedType == 'Adresse'">
-                                <md-select placeholder="Emplacement">
-                                    <md-option>En face</md-option>
-                                    <md-option>A côté</md-option>
-                                    <md-option>A l'adresse</md-option>
-                                    <md-option>A l'arrière</md-option>
-                                    <md-option>Au bout</md-option>
-                                    <md-option>Au coin</md-option>
-                                    <md-option>Au dessus</md-option>
-                                    <md-option>Au dessous</md-option>
-                                    <md-option>Près</md-option>
-                                    <md-option>Visible du</md-option>
-                                </md-select>
-                                <md-input-container>
-                                    <input mdInput placeholder="No. Civique"/>
-                                </md-input-container>
-                                <md-input-container class="full-width">
-                                    <input mdInput value="Rapide-Plat Sud (Chemin du)"
-                                           placeholder="Voie de circulation">
-                                </md-input-container>
-                            </div>
-                            <div *ngIf="fireHydrantSelectedType == 'Intersection'">
-                                <md-input-container class="full-width">
-                                    <input mdInput value="Rapide-Plat Sud (Chemin du)"
-                                           placeholder="Voie de circulation">
-                                </md-input-container>
-                                <md-input-container class="full-width">
-                                    <input mdInput value="Scott (Avenue)" placeholder="Transversale">
-                                </md-input-container>
-                            </div>
-                            <div *ngIf="fireHydrantSelectedType == 'Latitude / Longitude'">
-                                <div class="table">
-                                    <div class="cell rowspan2">
-                                        <div>
-                                            <md-input-container class="full-width">
-                                                <input mdInput placeholder="Latitude">
-                                            </md-input-container>
-                                            <md-input-container class="full-width">
-                                                <input mdInput placeholder="Longitude">
-                                            </md-input-container>
-                                        </div>
-                                        <div>
-                                            <button md-button>Localiser...</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div *ngIf="fireHydrantSelectedType == 'Autre'">
-                                <md-input-container class="full-width">
-                                    <textarea mdInput placeholder="Autre emplacement"></textarea>
-                                </md-input-container>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <md-card-actions class="card-buttons">
-                    <button md-raised-button><md-icon>delete</md-icon>Supprimer</button>
-                </md-card-actions>
-            </md-card>
+      <div *ngIf="item.addressType == 4">
+          <md-input-container class="full-width">
+              <textarea mdInput placeholder="Autre emplacement" formControlName="locationDetails"></textarea>
+          </md-input-container>
+      </div>
 
-            <md-card class="detail-card empty-card">
-                <div class="centered-card-content">
-                    <button md-raised-button class="add-button"><md-icon class="add-button-picture">add_circle</md-icon>  Ajouter une borne</button>
-                </div>
-                <div class="hidden-content">
-                <div fxLayout="row" class="full-width">
-                    <md-input-container class="full-width">
-                        <input mdInput placeholder="Numéro"/>
-                    </md-input-container>
-                </div>
-                <div style="margin-bottom:15px;">
-                    <md-button-toggle-group #group="mdButtonToggleGroup">
-                        <md-button-toggle value="left" style="color: cornflowerblue">
-                            <md-icon style="background-color: cornflowerblue">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: forestgreen">
-                            <md-icon style="background-color: forestgreen">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: orange">
-                            <md-icon style="background-color: orange">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: red">
-                            <md-icon style="background-color: red">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left" style="color: yellow">
-                            <md-icon style="background-color: yellow">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                        <md-button-toggle value="left">
-                            <md-icon style="background-color: white">check_box_outline_blank</md-icon>
-                        </md-button-toggle>
-                    </md-button-toggle-group>
-                </div>
-                <div fxLayout="row">
-                    <md-select placeholder="">
-                        <md-option>Borne fontaine</md-option>
-                        <md-option>Borne sèche</md-option>
-                        <md-option>Citerne</md-option>
-                        <md-option>Lac</md-option>
-                    </md-select>
-                </div>
-                <div fxLayout="row">
-                    <md-input-container>
-                        <input mdInput placeholder=""/>
-                    </md-input-container>
-                    <md-select placeholder="">
-                        <md-option>G</md-option>
-                        <md-option>GI</md-option>
-                        <md-option>GIPM</md-option>
-                        <md-option>GPM</md-option>
-                        <md-option>Indéterminé</md-option>
-                        <md-option>L</md-option>
-                        <md-option>LPM</md-option>
-                    </md-select>
-                </div>
-                <hr>
-
-                <div class="table">
-                    <div class="row">
-                        <div class="cell">
-
-                            <md-radio-group style="flex-direction: row;display: inline-flex;"
-                                            [(ngModel)]="fireHydrantSelectedType">
-                                <md-radio-button [value]="firehydrant_type.Type"
-                                                 *ngFor="let firehydrant_type of FIREHYDRANT_TYPE"
-                                                 style="margin:7px;">{{firehydrant_type.Type}}
-                                </md-radio-button>
-                            </md-radio-group>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="cell">
-                            <div *ngIf="fireHydrantSelectedType == 'Adresse'">
-                                <md-select placeholder="">
-                                    <md-option>En face</md-option>
-                                    <md-option>A côté</md-option>
-                                    <md-option>A l'adresse</md-option>
-                                    <md-option>A l'arrière</md-option>
-                                    <md-option>Au bout</md-option>
-                                    <md-option>Au coin</md-option>
-                                    <md-option>Au dessus</md-option>
-                                    <md-option>Au dessous</md-option>
-                                    <md-option>Près</md-option>
-                                    <md-option>Visible du</md-option>
-                                </md-select>
-                                <md-input-container>
-                                    <input mdInput placeholder="No. Civique"/>
-                                </md-input-container>
-                                <md-input-container class="full-width">
-                                    <input mdInput value="Rapide-Plat Sud (Chemin du)"
-                                           placeholder="Voie de circulation">
-                                </md-input-container>
-                            </div>
-                            <div *ngIf="fireHydrantSelectedType == 'Intersection'">
-                                <md-input-container class="full-width">
-                                    <input mdInput value="Rapide-Plat Sud (Chemin du)"
-                                           placeholder="Voie de circulation">
-                                </md-input-container>
-                                <md-input-container class="full-width">
-                                    <input mdInput value="Scott (Avenue)" placeholder="Transversale">
-                                </md-input-container>
-                            </div>
-                            <div *ngIf="fireHydrantSelectedType == 'Latitude / Longitude'">
-                                <div class="table">
-                                    <div class="cell rowspan2">
-                                        <div>
-                                            <md-input-container class="full-width">
-                                                <input mdInput placeholder="Latitude">
-                                            </md-input-container>
-                                            <md-input-container class="full-width">
-                                                <input mdInput placeholder="Longitude">
-                                            </md-input-container>
-                                        </div>
-                                        <div>
-                                            <button md-button>Localiser...</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div *ngIf="fireHydrantSelectedType == 'Autre'">
-                                <md-input-container class="full-width">
-                                    <textarea mdInput placeholder="Autre emplacement"></textarea>
-                                </md-input-container>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <md-card-actions class="card-buttons">
-                    <button md-raised-button><md-icon>delete</md-icon>Supprimer</button>
-                </md-card-actions>
-                </div>
-            </md-card>
-
-            <div style="clear:both"></div>
-        </md-card-content>
-
-    </md-card>
-
-    <div fxLayout="row" class="card-buttons">
-        <button md-raised-button>
-            <md-icon style="color: green;">check_circle</md-icon>
-            Compléter la section
-        </button>
-    </div>
-</div>
-
+    </form>
+  </md-card-content>
+  <md-card-actions class="card-buttons">
+      <button md-raised-button (click)="onDeleteClicked()"><md-icon>delete</md-icon>Supprimer</button>
+  </md-card-actions>
+</md-card>
