@@ -23,13 +23,10 @@ export class CardLayoutComponent implements OnInit, AfterViewInit {
     if (items.length > 1) {
       const newCardHeight = items[0]['offsetHeight'];
       const newCardWidth = items[0]['offsetWidth'];
-      console.log(newCardHeight + 'px', newCardWidth + 'px');
       const item = document.getElementById('new-card');
-      console.log(item);
       item.style.width = newCardWidth + 'px';
       item.style.height = newCardHeight + 'px';
       item.style.padding = '0px';
-      console.log(item);
     }
   }
   onDeleteClicked(value: any) {
