@@ -24,6 +24,8 @@ import {PersonRequiringAssistanceTypeService} from './shared/services/person-req
 import {BuildingPersonRequiringAssistanceService} from './shared/services/building-person-requiring-assistance.service';
 import {PictureService} from '../shared/services/picture.service';
 import {InterventionPlanService} from './shared/services/intervention-plan.service';
+import {CourseComponent} from './course/course.component';
+import {InterventionPlanCourseService} from './shared/services/intervention-plan-course.service';
 
 @NgModule({
   imports: [
@@ -44,6 +46,7 @@ import {InterventionPlanService} from './shared/services/intervention-plan.servi
     FireProtectionComponent,
     FireHydrantComponent,
     ParticularRiskComponent,
+    CourseComponent,
   ],
   entryComponents: [
     FireHydrantComponent,
@@ -61,6 +64,7 @@ import {InterventionPlanService} from './shared/services/intervention-plan.servi
     BuildingPersonRequiringAssistanceService,
     PictureService,
     InterventionPlanService
+    InterventionPlanCourseService
   ]
 })
 export class InterventionSurveyModule { }
