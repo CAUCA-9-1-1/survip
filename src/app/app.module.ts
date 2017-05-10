@@ -18,6 +18,8 @@ import { InterventionReportComponent } from './intervention-report/intervention-
 import { InterventionSurveyComponent } from './intervention-survey/intervention-survey.component';
 import { PreventionSurveyComponent } from './prevention-survey/prevention-survey.component';
 import { ManagementAddressComponent } from './management-address/management-address.component';
+import {InterventionBuildingComponent} from './intervention-building/intervention-building.component';
+import {InterventionBuildingModule} from './intervention-building/intervention-building.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ManagementAddressComponent } from './management-address/management-addr
     InterventionMapsComponent,
     InterventionReportComponent,
     InterventionSurveyComponent,
+    InterventionBuildingComponent,
     PreventionSurveyComponent,
     ManagementAddressComponent,
   ],
@@ -38,6 +41,7 @@ import { ManagementAddressComponent } from './management-address/management-addr
     InterventionMapsModule,
     InterventionReportModule,
     InterventionSurveyModule,
+    InterventionBuildingModule,
     PreventionSurveyModule,
     ManagementAddressModule,
     AppRoutingModule
