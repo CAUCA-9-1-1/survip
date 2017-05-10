@@ -14,6 +14,7 @@ import {PersonRequiringAssistanceTypeService} from '../intervention-survey/share
 import {BuildingPersonRequiringAssistanceService} from '../intervention-survey/shared/services/building-person-requiring-assistance.service';
 import {PictureService} from '../shared/services/picture.service';
 import { BuildingDetailComponent } from './building-detail/building-detail.component';
+import {InterventionPlanBuildingService} from './shared/services/intervention-plan-building.service';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { BuildingDetailComponent } from './building-detail/building-detail.compo
     LaneService,
     PersonRequiringAssistanceTypeService,
     BuildingPersonRequiringAssistanceService,
-    PictureService
+    PictureService,
+    InterventionPlanBuildingService
   ]
 })
 export class InterventionBuildingModule { }

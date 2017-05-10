@@ -1,7 +1,7 @@
 import {Building} from './building';
 
 export class InterventionPlanBuilding {
-  idInterventionPlanBuilding: string;
+  id: string;
   idInterventionPlan: string;
   idBuilding: string;
   buildingPlanNumber: string;

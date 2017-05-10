@@ -12,6 +12,7 @@ import {BuildingHazardousMaterial} from '../intervention-survey/shared/models/bu
 import {BuildingHazardousMaterialService} from '../intervention-survey/shared/services/building-hazardous-material.service';
 import {BuildingContactService} from '../intervention-survey/shared/services/building-contact.service';
 import {BuildingPersonRequiringAssistanceService} from '../intervention-survey/shared/services/building-person-requiring-assistance.service';
+import {InterventionPlanBuildingService} from './shared/services/intervention-plan-building.service';
 
 @Component({
   selector: 'app-intervention-building',
@@ -39,14 +40,15 @@ export class InterventionBuildingComponent implements OnInit {
     private dialogsService: DialogsService,
     private matService: BuildingHazardousMaterialService,
     private buildingContactService: BuildingContactService,
-    private pnapService: BuildingPersonRequiringAssistanceService
+    private pnapService: BuildingPersonRequiringAssistanceService,
+    private buildingService: InterventionPlanBuildingService
   ) {
   }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
-      console.log(this.id);
+      this.loadInterventionPlanBuilding();
     });
 
     if (this.windowRef.nativeWindow.innerWidth >= 700) {
@@ -54,6 +56,14 @@ export class InterventionBuildingComponent implements OnInit {
       this.align = 'start';
       this.sidenav.open();
     }
+  }
+
+  private loadInterventionPlanBuilding() {
+    this.buildingService.getInterventionPlanBuilding(this.id)
+      .then(building => {
+        console.log(building);
+        this.building = building;
+      });
   }
 
   onBuildingMaterialDeleted(deletedMat: BuildingHazardousMaterial) {
