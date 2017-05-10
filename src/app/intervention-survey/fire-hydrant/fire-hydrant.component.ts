@@ -108,10 +108,10 @@ export class FireHydrantComponent implements OnInit, OnChanges {
   }
 
   private saveForm() {
-    console.log('saving contact...');
+    console.log('saving fire-hydrant...');
     const formModel  = this.hydrantForm.value;
     Object.assign(this.item, formModel);
     this.fireHydrantService.update(this.item)
-      .then(() => console.log('Contact saved.'));
+      .then(() => console.log('Fire-hydrant saved.'));
   }
 }
