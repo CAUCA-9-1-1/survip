@@ -173,12 +173,12 @@ export class InterventionSurveyComponent implements OnInit {
       });
   }
   onBuildingPnapAdd() {
-    const materials: BuildingPersonRequiringAssistance[] = [];
-    Object.assign(materials, this.materials);
+    const pnaps: BuildingPersonRequiringAssistance[] = [];
+    Object.assign(pnaps, this.pnaps);
     const pnap = new BuildingPersonRequiringAssistance();
     pnap.id = UUID.UUID();
-    materials.push(pnap);
-    this.pnaps = materials;
+    pnaps.push(pnap);
+    this.pnaps = pnaps;
   }
   private deletePnap(deletePnap: BuildingPersonRequiringAssistance) {
     this.pnapService.delete(deletePnap)

@@ -75,10 +75,10 @@ export class PersonRequiringAssistanceComponent implements OnInit {
   }
 
   private saveForm() {
-    console.log('saving contact...');
+    console.log('saving pnap...');
     const formModel  = this.pnapForm.value;
     Object.assign(this.item, formModel);
     this.pnapService.update(this.item)
-      .then(() => console.log('Contact saved.'));
+      .then(() => console.log('Pnap saved.'));
   }
 }
