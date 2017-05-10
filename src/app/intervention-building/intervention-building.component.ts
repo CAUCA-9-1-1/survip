@@ -60,10 +60,7 @@ export class InterventionBuildingComponent implements OnInit {
 
   private loadInterventionPlanBuilding() {
     this.buildingService.getInterventionPlanBuilding(this.id)
-      .then(building => {
-        console.log(building);
-        this.building = building;
-      });
+      .then(building => this.building = building);
   }
 
   onBuildingMaterialDeleted(deletedMat: BuildingHazardousMaterial) {
