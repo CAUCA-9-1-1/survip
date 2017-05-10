@@ -1,7 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TestModule } from '../../test.module';
-import { ImplantationPlanComponent } from './implantation-plan.component';
+import {TestModule} from '../../test.module';
+import {ImplantationPlanComponent} from './implantation-plan.component';
+import {PictureService} from '../../shared/services/picture.service';
 
 describe('ImplantationPlanComponent', () => {
   let component: ImplantationPlanComponent;
@@ -9,8 +10,9 @@ describe('ImplantationPlanComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule ],
-      declarations: [ ImplantationPlanComponent ]
+      imports: [TestModule],
+      declarations: [ImplantationPlanComponent],
+      providers: [PictureService],
     })
     .compileComponents();
   }));

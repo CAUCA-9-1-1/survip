@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+
+import { LanguageService } from 'igo2';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private translate: TranslateService) {
-    translate.addLangs(['en', 'fr']);
-    translate.setDefaultLang('fr');
-    // translate.use(translate.getBrowserLang() || 'fr');
-    translate.use('fr');
+  constructor(private language: LanguageService) {
+    language.setLanguage('fr');
   }
 
   ngOnInit() {

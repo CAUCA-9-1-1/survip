@@ -54,7 +54,11 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
   onChange: any = () => {};
   onTouched: any = () => {};
 
-  constructor(private windowRef: WindowRefService, private dialog: MdDialog) { }
+  constructor(private windowRef: WindowRefService, private dialog: MdDialog) {
+    if (!this.windowRef.nativeWindow.cordova) {
+      this.useCamera = false;
+    }
+  }
 
   writeValue(value: any) {
     this.source = value;
