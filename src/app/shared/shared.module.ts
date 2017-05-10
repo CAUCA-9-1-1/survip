@@ -25,6 +25,8 @@ import {YesNoDialogComponent} from './components/yes-no-dialog/yes-no-dialog.com
 import {SearchBoxComponent} from './components/search-box/search-box.component';
 import {SearchListComponent} from './components/search-list/search-list.component';
 import {FilterByPipe} from './pipes/filter.pipe';
+import {CardLayoutComponent} from '../intervention-survey/card-layout/card-layout.component';
+import {CardLayoutFactoryDirective} from '../intervention-survey/shared/control-factory.directive';
 
 export function translateLoader(http: Http) {
   return new LanguageLoader(http, './assets/locale/', '.json');
@@ -51,7 +53,9 @@ export function translateLoader(http: Http) {
     YesNoDialogComponent,
     SearchBoxComponent,
     SearchListComponent,
-    FilterByPipe
+    FilterByPipe,
+    CardLayoutComponent,
+    CardLayoutFactoryDirective,
   ],
   entryComponents: [
     WebcamComponent,
@@ -71,7 +75,8 @@ export function translateLoader(http: Http) {
     ToolbarComponent,
     ToolbarBackComponent,
     TakePictureComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    CardLayoutComponent,
   ],
   providers: [
     WindowRefService,

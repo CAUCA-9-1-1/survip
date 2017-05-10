@@ -31,34 +31,21 @@ import {PictureService} from '../shared/services/picture.service';
   exports: [
     BuildingComponent,
     ImplantationPlanComponent,
-    ContactComponent,
-    PersonRequiringAssistanceComponent,
-    DangerousMaterialComponent,
     FireProtectionComponent,
-    PersonRequiringAssistanceComponent,
     FireHydrantComponent,
     ParticularRiskComponent,
-    CardLayoutComponent
   ],
   declarations: [
     BuildingDetailComponent,
     BuildingComponent,
     ImplantationPlanComponent,
-    ContactComponent,
-    PersonRequiringAssistanceComponent,
     FireProtectionComponent,
-    DangerousMaterialComponent,
     FireProtectionComponent,
     FireHydrantComponent,
     ParticularRiskComponent,
-    CardLayoutComponent,
-    CardLayoutFactoryDirective,
   ],
   entryComponents: [
-    ContactComponent,
-    DangerousMaterialComponent,
     FireHydrantComponent,
-    PersonRequiringAssistanceComponent
   ],
   providers: [
     BuildingContactService,

@@ -3,16 +3,10 @@ import { MdSidenav } from '@angular/material';
 import { UUID } from 'angular2-uuid';
 
 import { WindowRefService } from '../shared/services/window-ref.service';
-import {BuildingContactService} from './shared/services/building-contact.service';
-import {BuildingContact} from './shared/models/building-contact';
 import {DialogsService} from '../shared/services/dialogs.service';
 import {MenuItem} from '../shared/interfaces/menu-item.interface';
-import {BuildingHazardousMaterialService} from './shared/services/building-hazardous-material.service';
-import {BuildingHazardousMaterial} from './shared/models/building-hazardous-material';
 import {InterventionPlanFireHydrant} from './shared/models/intervention-plan-fire-hydrant';
 import {InterventionPlanFireHydrantService} from './shared/services/intervention-plan-fire-hydrant.service';
-import {BuildingPersonRequiringAssistance} from './shared/models/building-person-requiring-assistance';
-import {BuildingPersonRequiringAssistanceService} from './shared/services/building-person-requiring-assistance.service';
 
 @Component({
   selector: 'app-survey',
@@ -21,120 +15,33 @@ import {BuildingPersonRequiringAssistanceService} from './shared/services/buildi
 })
 export class InterventionSurveyComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MdSidenav;
-  public contacts: BuildingContact[];
-  public materials: BuildingHazardousMaterial[];
-  public fireHydrants: InterventionPlanFireHydrant[];
-  public pnaps: BuildingPersonRequiringAssistance[];
   public mode = 'over';
   public align = 'end';
   public selectedMenu = 'building';
   public menuItems = [
-    {
-      name: 'building',
-      title: 'building',
-    },
-    {
-      name: 'waterSupply',
-      title: 'waterSupply',
-    },
-    {
-      name: 'implantation',
-      title: 'implantation',
-    },
-    {
-      name: 'dangerousMaterial',
-      title: 'dangerousMaterial',
-    },
-    {
-      name: 'pnap',
-      title: 'personRequiringAssistance',
-    },
-    {
-      name: 'particularRisks',
-      title: 'particularRisk',
-    },
-    {
-      name: 'fireProtection',
-      title: 'fireProtection',
-    },
-    {
-      name: 'contacts',
-      title: 'contacts',
-    }
+    { name: 'building', title: 'building', },
+    { name: 'waterSupply', title: 'waterSupply', },
+    { name: 'implantation', title: 'implantation', },
+    { name: 'particularRisks', title: 'particularRisk', },
+    { name: 'fireProtection', title: 'fireProtection', },
   ];
+
+  fireHydrants: InterventionPlanFireHydrant[];
 
   constructor(
     private windowRef: WindowRefService,
-    private buildingContactService: BuildingContactService,
-    private matService: BuildingHazardousMaterialService,
-    private fireHydrantService: InterventionPlanFireHydrantService,
-    private pnapService: BuildingPersonRequiringAssistanceService,
-    private dialogsService: DialogsService) {
+    private dialogsService: DialogsService,
+    private fireHydrantService: InterventionPlanFireHydrantService
+  ) {
+    this.loadFireHydrants();
   }
 
   ngOnInit() {
-    this.loadBuildingContact();
-    this.loadBuildingMaterials();
-    this.loadFireHydrants();
-    this.loadBuildingPnaps();
-
     if (this.windowRef.nativeWindow.innerWidth >= 700) {
       this.mode = 'side';
       this.align = 'start';
       this.sidenav.open();
     }
-  }
-
-  onBuildingMaterialDeleted(deletedMat: BuildingHazardousMaterial) {
-    this.dialogsService
-      .confirm('Suppression d\'une matière dangereuse', 'Êtes-vous sûr de vouloir supprimer cette matière dangereuse?')
-      .subscribe(res => {
-        if (res) {
-          this.deleteMaterial(deletedMat);
-        }
-      });
-  }
-  onBuildingMaterialAdd() {
-    const materials: BuildingHazardousMaterial[] = [];
-    Object.assign(materials, this.materials);
-    const material = new BuildingHazardousMaterial();
-    material.id = UUID.UUID();
-    materials.push(material);
-    this.materials = materials;
-  }
-  private deleteMaterial(deletedMat: BuildingHazardousMaterial) {
-    this.matService.delete(deletedMat)
-      .then(() => this.materials = this.materials.filter(contact => contact.id !== deletedMat.id));
-  }
-  private loadBuildingMaterials() {
-    this.matService.getList()
-      .then(materials => this.materials = materials);
-  }
-
-  onBuildingContactDeleted(deletedContact: BuildingContact) {
-    this.dialogsService
-      .confirm('Suppression d\'un contact', 'Êtes-vous sûr de vouloir supprimer ce contact?')
-      .subscribe(res => {
-        if (res) {
-          this.deleteContact(deletedContact);
-        }
-      });
-  }
-  onBuildingContactAdd() {
-    const contacts: BuildingContact[] = [];
-    Object.assign(contacts, this.contacts);
-    const contact = new BuildingContact();
-    contact.id = UUID.UUID();
-    contacts.push(contact);
-    this.contacts = contacts;
-  }
-  private deleteContact(deletedContact: BuildingContact) {
-    this.buildingContactService.delete(deletedContact)
-      .then(() => this.contacts = this.contacts.filter(contact => contact.id !== deletedContact.id));
-  }
-  private loadBuildingContact() {
-    this.buildingContactService.getList()
-      .then(contacts => this.contacts = contacts);
   }
 
   onFireHydrantDeleted(deletedHydrant: InterventionPlanFireHydrant) {
@@ -161,32 +68,6 @@ export class InterventionSurveyComponent implements OnInit {
   private loadFireHydrants() {
     this.fireHydrantService.getList()
       .then(hydrants => this.fireHydrants = hydrants);
-  }
-
-  onBuildingPnapDeleted(deletePnap: BuildingPersonRequiringAssistance) {
-    this.dialogsService
-      .confirm('Suppression d\'un PNAP', 'Êtes-vous sûr de vouloir supprimer ce PNAP?')
-      .subscribe(res => {
-        if (res) {
-          this.deletePnap(deletePnap);
-        }
-      });
-  }
-  onBuildingPnapAdd() {
-    const pnaps: BuildingPersonRequiringAssistance[] = [];
-    Object.assign(pnaps, this.pnaps);
-    const pnap = new BuildingPersonRequiringAssistance();
-    pnap.id = UUID.UUID();
-    pnaps.push(pnap);
-    this.pnaps = pnaps;
-  }
-  private deletePnap(deletePnap: BuildingPersonRequiringAssistance) {
-    this.pnapService.delete(deletePnap)
-      .then(() => this.pnaps = this.pnaps.filter(pnap => pnap.id !== deletePnap.id));
-  }
-  private loadBuildingPnaps() {
-    this.pnapService.getList()
-      .then(pnaps => this.pnaps = pnaps);
   }
 
   onCompleteSection(val) {
