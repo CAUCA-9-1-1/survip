@@ -60,7 +60,14 @@
 </md-card>
 
 <div class="container" fxLayout="row" fxLayoutAlign="start start">
-  <app-intervention-survey-course></app-intervention-survey-course>
+  <md-card class="full-width">
+    <md-card-title>Parcours</md-card-title>
+    <md-card-content>
+      <div *ngFor='let course of courses'>
+        <app-intervention-survey-course [course]="course"></app-intervention-survey-course>
+      </div>
+    </md-card-content>
+  </md-card>
 </div>
 
 <div>

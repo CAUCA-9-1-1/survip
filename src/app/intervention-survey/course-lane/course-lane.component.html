@@ -1,0 +1,18 @@
+<form novalidate (ngSubmit)="onSubmit(courseLaneForm)" [formGroup]="courseLaneForm">
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex="18">
+      <md-input-container class="full-width">
+        <input mdInput type="number" formControlName="sequence" placeholder="Séquence">
+      </md-input-container>
+    </div>
+    <div fxFlex="60">
+      <app-search-box></app-search-box>
+    </div>
+    <div fxFlex="18">
+      <md-select placeholder="Direction" formControlName="direction" class="full-width">
+        <md-option value="L">{{'left' | translate}}</md-option>
+        <md-option value="R">{{'right' | translate}}</md-option>
+      </md-select>
+    </div>
+  </div>
+</form>

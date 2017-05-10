@@ -1,12 +1,27 @@
-<md-card>
-  <md-card-title>Parcours</md-card-title>
-  <md-card-content>
-    <md-list>
-      <md-list-item fxLayout="row" *ngFor='let course of courses'>
-        <div fxFlex="10"><md-icon md-list-icon (click)="edit(course.id)">mode_edit</md-icon></div>
-        <div fxFlex="15">Caserne 3</div>
-        <div fxFlex>{{course.course}}</div>
-      </md-list-item>
-    </md-list>
-  </md-card-content>
-</md-card>
+<div class="popup" #popupFirestation>
+  <div class="content">
+    <form novalidate (ngSubmit)="onSubmit(courseForm)" [formGroup]="courseForm">
+      <md-select placeholder="Caserne" formControlName="idFirestation" class="full-width">
+        <md-option *ngFor="let station of firestations" [value]="station.id">{{station.stationName}}</md-option>
+      </md-select>
+      <div *ngFor="let street of course.streets">
+        <app-intervention-survey-course-lane [street]="street"></app-intervention-survey-course-lane>
+      </div>
+    </form>
+    <md-toolbar>
+      <span class="spacer"></span>
+      <button md-button (click)="stopEdit()"><md-icon>cancel</md-icon> {{'cancel' | translate}}</button>
+    </md-toolbar>
+  </div>
+</div>
+<div class="course" fxLayout="row">
+  <div fxFlex="10" fxFlexAlign="stretch" fxFill><md-icon md-list-icon (click)="startEdit()">mode_edit</md-icon></div>
+  <div fxFlex="15" fxFlexAlign="stretch" fxFill><span>{{firestation}}</span></div>
+  <div fxFlex="75" fxFlexAlign="stretch" fxFill>
+    <span *ngFor="let street of course.streets">
+      {{street.idLane}}
+      <span *ngIf="street.direction">({{street.direction}}) - </span>
+      <span *ngIf="!street.direction"></span>
+    </span>
+  </div>
+</div>

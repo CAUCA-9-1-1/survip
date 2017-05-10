@@ -7,6 +7,9 @@ import {InterventionPlanBuildingForDisplay} from '../shared/models/intervention-
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {InterventionPlanService} from '../shared/services/intervention-plan.service';
 
+import {InterventionPlanCourseService} from '../shared/services/intervention-plan-course.service';
+import {InterventionPlanCourse} from '../shared/models/intervention-plan-course';
+
 @Component({
   selector: 'app-intervention-survey-building',
   templateUrl: './building.component.html',
