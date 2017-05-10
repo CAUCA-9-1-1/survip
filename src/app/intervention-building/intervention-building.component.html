@@ -31,7 +31,7 @@
                          (addClick)="onBuildingMaterialAdd()"></app-card-layout>
       </div>
       <div *ngSwitchDefault>
-        <app-building-detail>
+        <app-building-detail [interventionPlanBuilding]="building" *ngIf="building">
         </app-building-detail>
       </div>
     </div>

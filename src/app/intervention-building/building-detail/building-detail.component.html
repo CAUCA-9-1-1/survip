@@ -1,3 +1,117 @@
-<p>
-  building-detail works!
-</p>
+<md-card class="master-card">
+  <form novalidate (ngSubmit)="onSubmit(buildingForm)" [formGroup]="buildingForm" fxLayout="column">
+
+    <div fxLayout="row">
+      <md-card class="detail-card">
+      <md-card-title>Détails du bâtiment</md-card-title>
+      <md-card-content>
+
+          <div fxLayout="row" class="line" class="full-width">
+            <md-input-container>
+              <input mdInput type="number" placeholder="D.I.E." formControlName="estimatedWaterFlow">
+            </md-input-container>
+            <md-select placeholder="Unité" class="selector" formControlName="idUnitOfMeasureEwf">
+              <md-option *ngFor="let unit of unitsOfMeasure" [value]="unit.id">{{unit.name}}</md-option>
+            </md-select>
+          </div>
+          <div fxLayout="row" class="line" class="full-width">
+            <md-select placeholder="Construction" class="full-width" formControlName="idConstructionType">
+              <md-option *ngFor="let type of constructionTypes" [value]="type.id">{{type.name}}</md-option>
+            </md-select>
+          </div>
+          <div fxLayout="row" class="line" class="full-width">
+            <md-select placeholder="Solives" class="full-width" formControlName="idConstructionTypeForJoist">
+              <md-option value="1" selected>Bois plein</md-option>
+            </md-select>
+          </div>
+          <div fxLayout="row" class="line" class="full-width">
+            <md-input-container class="full-width">
+              <input mdInput type="number" placeholder="Hauteur" formControlName="height">
+            </md-input-container>
+          </div>
+          <div fxLayout="row" class="line" class="full-width">
+            <md-input-container class="full-width">
+              <input mdInput type="number" placeholder="Nb. étages">
+            </md-input-container>
+          </div>
+          <div fxLayout="row" class="line" class="full-width">
+            <app-take-picture></app-take-picture>
+          </div>
+
+        </md-card-content>
+      </md-card>
+    </div>
+
+    <div fxLayout="row">
+      <md-card class="detail-card">
+        <md-card-title>Panneau d'alarme</md-card-title>
+        <md-card-content>
+          <md-select placeholder="Type" formControlName="idAlarmPanelType">
+            <md-option *ngFor="let type of alarmPanelTypes" [value]="type.id">{{type.name}}</md-option>
+          </md-select>
+          <div fxLayout="row" class="full-width">
+            <md-input-container>
+              <input mdInput placeholder="Étage" formControlName="alarmPanelFloor">
+            </md-input-container>
+          </div>
+          <div fxLayout="row" class="full-width">
+            <md-input-container>
+              <input mdInput placeholder="Mur" formControlName="alarmPanelWall">
+            </md-input-container>
+          </div>
+          <div fxLayout="row" class="full-width">
+            <md-input-container>
+              <input mdInput placeholder="Section" formControlName="alarmPanelSector">
+            </md-input-container>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+
+    <div fxLayout="row">
+      <md-card class="detail-card">
+        <md-card-title>Gicleur</md-card-title>
+        <md-card-content>
+          <div fxLayout="row" class="full-width">
+            <md-input-container>
+              <input mdInput placeholder="Emplacement du collecteur" formControlName="sprinklerLocation" style="width:300px;">
+            </md-input-container>
+          </div>
+          <div fxLayout="row" class="full-width">
+            <md-radio-group formControlName="sprinklerType">
+              <md-radio-button value="1" checked>Partiel</md-radio-button>
+              <md-radio-button value="2">Complet</md-radio-button>
+            </md-radio-group>
+          </div>
+          <div fxLayout="row" class="full-width">
+            <md-input-container>
+              <input mdInput placeholder="Étage" formControlName="sprinklerFloor">
+            </md-input-container>
+          </div>
+          <div fxLayout="row" class="full-width">
+            <md-input-container>
+              <input mdInput placeholder="Mur" formControlName="sprinklerWall">
+            </md-input-container>
+          </div>
+          <div fxLayout="row" class="full-width">
+            <md-input-container>
+              <input mdInput placeholder="Section" formControlName="sprinklerSector">
+            </md-input-container>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+
+    <div fxLayout="row">
+      <md-card class="detail-card">
+        <div fxLayout="row" class="full-width" style="width: 300px">
+          <md-input-container class="full-width">
+            <input mdInput class="full-width" placeholder="Emplacement canalisation" formControlName="pipelineLocation">
+          </md-input-container>
+        </div>
+      </md-card>
+    </div>
+
+    <div style="background-color: white">{{buildingForm.value | json}}</div>
+  </form>
+</md-card>
