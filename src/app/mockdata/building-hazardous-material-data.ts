@@ -2,7 +2,7 @@ export class BuildingHazardousMaterialData {
   public data: any[] = [
     {
       'id': '39bb0912-e4ce-45f0-8c26-511806d25b51',
-      'idHazardousMaterial': '1f77fef5-e71d-4d74-9e8f-4c7376a6b49c',
+      'idHazardousMaterial': '7dab2372-c8b0-4921-9939-819725706729',
       'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b50',
       'quantity': 2,
       'container': 'acier',
@@ -19,7 +19,7 @@ export class BuildingHazardousMaterialData {
     },
     {
       'id': '39bb0912-e4ce-45f0-8c26-511806d25b52',
-      'idHazardousMaterial': '20a22bb4-e296-4c47-843e-684a39084cde',
+      'idHazardousMaterial': 'ab85c8aa-2793-4e00-a9da-f1e436e85ca5',
       'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b50',
       'quantity': 4,
       'container': 'aluminium',
@@ -36,7 +36,7 @@ export class BuildingHazardousMaterialData {
     },
     {
       'id': '39bb0912-e4ce-45f0-8c26-511806d25b53',
-      'idHazardousMaterial': '12e4bae5-164e-4f2d-a393-51a5535441a6',
+      'idHazardousMaterial': '316e390a-c571-40fd-a26f-2e08091e7fd1',
       'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b50',
       'quantity': 1,
       'container': 'plomb',

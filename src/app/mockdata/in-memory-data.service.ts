@@ -52,7 +52,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const inspectionQuestion = new InspectionQuestionData().data;
     const lanes = new LaneData().data;
     const buildingContacts =  new BuildingContactData().data;
-    const hazardousMaterials = new HazardousMaterialData().data;
+    const hazardousMaterials = new HazardousMaterialData().data.slice(0, 50);
     const buildingHazardousMaterials = new BuildingHazardousMaterialData().data;
     const unitsOfMeasure = new UnitOfMeasureData().data;
     const interventionPlanFireHydrants = new InterventionPlanFireHydrantData().data;

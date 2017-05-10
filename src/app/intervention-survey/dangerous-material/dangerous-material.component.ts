@@ -75,4 +75,8 @@ export class DangerousMaterialComponent implements OnInit, OnChanges {
     this.matService.update(this.item)
       .then(() => console.log('Mat saved.'));
   }
+
+  onDeleteClicked() {
+    this.deleteClicked.emit(this.item);
+  }
 }
