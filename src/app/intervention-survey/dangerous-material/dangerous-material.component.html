@@ -61,11 +61,11 @@
     </div>
     <div fxLayout="row">
       <md-input-container class="full-width">
-        <textarea mdInput placeholder="Autres informations" formControlName="otherInformation"></textarea>
+        <textarea mdInput placeholder="Autres informations" class="limited-text-area" formControlName="otherInformation"></textarea>
       </md-input-container>
     </div>
   </form>
   <md-card-actions class="card-buttons">
-    <button md-raised-button><md-icon>delete</md-icon>Supprimer</button>
+    <button md-raised-button (click)="onDeleteClicked()"><md-icon>delete</md-icon>Supprimer</button>
   </md-card-actions>
 </md-card>
