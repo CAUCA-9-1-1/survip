@@ -15,6 +15,8 @@ import {PersonRequiringAssistanceTypeData} from './person-requiring-assistance-t
 import {BuildingPersonRequiringAssistanceData} from './building-person-requiring-assistance-data';
 import {PictureData} from './picture-data';
 import {InterventionPlantBuildingData} from './intervention-plan-building-data';
+import {ConstructionTypeData} from './construction-type-data';
+import {AlarmPanelTypeData} from './alarm-panel-type-data';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
@@ -64,6 +66,8 @@ export class InMemoryDataService implements InMemoryDbService {
     const buildingPnaps = new BuildingPersonRequiringAssistanceData().data;
     const pictures = new PictureData().data;
     const interventionPlanBuildings = new InterventionPlantBuildingData().data;
+    const constructionTypes = new ConstructionTypeData().data;
+    const alarmPanelTypes = new AlarmPanelTypeData().data;
 
     return {
       'surveys': surveys,
@@ -82,7 +86,9 @@ export class InMemoryDataService implements InMemoryDbService {
       'person-requiring-assistance-type': pnapTypes,
       'building-person-requiring-assistance': buildingPnaps,
       'picture': pictures,
-      'intervention-plan-building': interventionPlanBuildings
+      'intervention-plan-building': interventionPlanBuildings,
+      'alarm-panel-type': alarmPanelTypes,
+      'construction-type': constructionTypes
     };
   }
 }
