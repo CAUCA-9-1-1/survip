@@ -19,4 +19,7 @@ export class CourseComponent implements OnInit {
     });
   }
 
+  edit(id: string) {
+    console.log(id);
+  }
 }

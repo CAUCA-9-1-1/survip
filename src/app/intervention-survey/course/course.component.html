@@ -2,12 +2,10 @@
   <md-card-title>Parcours</md-card-title>
   <md-card-content>
     <md-list>
-      <md-list-item *ngFor='let course of courses'>
-        <div fxLayout="row">
-          <div fxFlex="10"><md-icon md-list-icon>mode_edit</md-icon></div>
-          <div fxFlex="15">Caserne 3</div>
-          <div fxFlex>DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</div>
-        </div>
+      <md-list-item fxLayout="row" *ngFor='let course of courses'>
+        <div fxFlex="10"><md-icon md-list-icon (click)="edit(course.id)">mode_edit</md-icon></div>
+        <div fxFlex="15">Caserne 3</div>
+        <div fxFlex>{{course.course}}</div>
       </md-list-item>
     </md-list>
   </md-card-content>
