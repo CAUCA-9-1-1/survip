@@ -13,6 +13,7 @@ import {FireHydrantTypeData} from './fire-hydrant-type-data';
 import {LocationTypeData} from './location-type-data';
 import {PersonRequiringAssistanceTypeData} from './person-requiring-assistance-type-data';
 import {BuildingPersonRequiringAssistanceData} from './building-person-requiring-assistance-data';
+import {PictureData} from './picture-data';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
@@ -60,6 +61,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const locationTypes = new LocationTypeData().data;
     const pnapTypes = new PersonRequiringAssistanceTypeData().data;
     const buildingPnaps = new BuildingPersonRequiringAssistanceData().data;
+    const pictures = new PictureData().data;
 
     return {
       'surveys': surveys,
@@ -76,7 +78,8 @@ export class InMemoryDataService implements InMemoryDbService {
       'fire-hydrant-type': fireHydrantTypes,
       'location-type': locationTypes,
       'person-requiring-assistance-type': pnapTypes,
-      'building-person-requiring-assistance': buildingPnaps
+      'building-person-requiring-assistance': buildingPnaps,
+      'picture': pictures,
     };
   }
 }

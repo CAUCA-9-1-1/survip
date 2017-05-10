@@ -1,6 +1,8 @@
 <md-card>
   <md-card-title>Plan d'implantation</md-card-title>
   <md-card-content>
-    <app-take-picture horizontal="horizontal" source="./assets/images/plan_implantation.jpg" useCamera=""></app-take-picture>
+    <form novalidate (ngSubmit)="onSubmit(implantationForm)" [formGroup]="implantationForm">
+      <app-take-picture horizontal="horizontal" useCamera="" formControlName="picture"></app-take-picture>
+    </form>
   </md-card-content>
 </md-card>
