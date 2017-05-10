@@ -12,17 +12,18 @@ export class InterventionPlanBuilding {
   idUnitOfMeasureEwf: string;
   createdOn: Date;
   isActive: boolean;
-  sprinkler_type: string;
-  sprinkler_floor: string;
-  sprinkler_wall: string;
-  sprinkler_sector: string;
-  id_construction_type: string;
-  id_construction_type_for_joist: string;
-  pipeline_location: string;
-  alarm_panel_type: string;
-  alarm_panel_floor: string;
-  alarm_panel_wall: string;
-  alarm_panel_sector: string;
+  sprinklerLocation: string;
+  sprinklerType: string;
+  sprinklerFloor: string;
+  sprinklerWall: string;
+  sprinklerSector: string;
+  idConstructionType: string;
+  idConstructionTypeForJoist: string;
+  pipelineLocation: string;
+  alarmPanelType: string;
+  alarmPanelFloor: string;
+  alarmPanelWall: string;
+  alarmPanelSector: string;
 
   building: Building;
 }
