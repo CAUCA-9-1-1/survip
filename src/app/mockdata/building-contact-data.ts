@@ -39,7 +39,7 @@ export class BuildingContactData {
     'otherNumber': '',
     'otherNumberExtension': '',
     'callPriority': 1,
-    'details': 'Contactable les samedi pairs des années bisextiles.',
+    'details': 'Non disponible le dimanche.',
     'isActive': true
   }
 ];
