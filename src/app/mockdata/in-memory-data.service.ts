@@ -17,6 +17,7 @@ import {PictureData} from './picture-data';
 import {InterventionPlantBuildingData} from './intervention-plan-building-data';
 import {ConstructionTypeData} from './construction-type-data';
 import {AlarmPanelTypeData} from './alarm-panel-type-data';
+import {InterventionPlanData} from './intervention-plan-data';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
@@ -66,6 +67,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const buildingPnaps = new BuildingPersonRequiringAssistanceData().data;
     const pictures = new PictureData().data;
     const interventionPlanBuildings = new InterventionPlantBuildingData().data;
+    const interventionPlans = new InterventionPlanData().data;
     const constructionTypes = new ConstructionTypeData().data;
     const alarmPanelTypes = new AlarmPanelTypeData().data;
 
@@ -87,6 +89,7 @@ export class InMemoryDataService implements InMemoryDbService {
       'building-person-requiring-assistance': buildingPnaps,
       'picture': pictures,
       'intervention-plan-building': interventionPlanBuildings,
+      'intervention-plan': interventionPlans,
       'alarm-panel-type': alarmPanelTypes,
       'construction-type': constructionTypes
     };

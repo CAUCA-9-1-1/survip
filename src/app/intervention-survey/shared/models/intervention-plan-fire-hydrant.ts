@@ -10,6 +10,7 @@
 
 export class InterventionPlanFireHydrant {
   id: string;
+  idInterventionPlan: string;
   number: string;
   color: string;
   idFireHydrantType: string;
