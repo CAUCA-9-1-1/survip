@@ -1,6 +1,6 @@
 import {InterventionPlanFireHydrant} from './intervention-plan-fire-hydrant';
 import {InterventionPlanCourse} from './intervention-plan-course';
-import {InterventionPlanBuilding} from './intervention-plan-building';
+import {InterventionPlanBuildingForDisplay} from './intervention-plan-building-for-display';
 
 export class InterventionPlan {
   id: string;
@@ -16,5 +16,5 @@ export class InterventionPlan {
 
   fireHydrants: InterventionPlanFireHydrant[];
   courses: InterventionPlanCourse[];
-  buildings: InterventionPlanBuilding[];
+  buildings: InterventionPlanBuildingForDisplay[];
 }
