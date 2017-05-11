@@ -6,4 +6,7 @@ export class InterventionPlanBuildingForDisplay {
   alias: string;
   address: string;
   idImage: string;
+  idRiskLevel: string;
+  idLane: string;
+  matricule: string;
 }
