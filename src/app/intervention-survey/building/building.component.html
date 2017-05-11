@@ -3,38 +3,58 @@
 
     <div fxFlex="33" fxFlex.lt-sm="100%">
       <div class="full-width" fxLayout="row">
-        <md-input-container class="full-width">
-          <input mdInput readonly placeholder="Niveau de risque" value="Élevé">
-        </md-input-container>
+
+        <md-select [disabled]="true" placeholder="Niveau de risque" [(ngModel)]="mainBuilding.idRiskLevel">
+          <md-option *ngFor="let risk of riskLevels" [value]="risk.idRiskLevel">{{risk.color}}</md-option>
+        </md-select>
+
         <img src="./assets/images/risk-high.png" style="height:32px; width: 32px; float: right; margin-top: 10px;" class="">
+
       </div>
+
       <div class="full-width" fxLayout="row" >
         <md-input-container class="full-width">
           <input readonly mdInput placeholder="Affectation" value="1000 - Résidence">
         </md-input-container>
       </div>
+
       <div class="full-width" fxLayout="row">
         <md-input-container class="full-width">
-          <input readonly mdInput placeholder="Matricule" value="98354671000000000">
+          <input readonly mdInput placeholder="Matricule" value="{{mainBuilding?.matricule}}">
         </md-input-container>
       </div>
+
       <div class="full-width" fxLayout="row" >
         <md-input-container class="full-width">
-          <input readonly mdInput placeholder="Alias" value="Ferme de M. Girouard">
+          <input readonly mdInput placeholder="Alias" value="{{mainBuilding?.alias}}">
         </md-input-container>
       </div>
+
     </div>
 
-    <div fxFlex="33" fxFlex.lt-sm="100%">
+    <div fxFlex="33" fxFlex.lt-sm="100%" *ngIf="mainBuilding">
       <div class="full-width" fxLayout="row" >
-        <md-input-container class="full-width">
-          <input mdInput readonly value="Rapide-Plat Sud (Chemin du)" placeholder="Rue">
-        </md-input-container>
+
+        <app-search-box
+          [readOnly]="true"
+          [dataService]="laneService"
+          [descriptionField]="'fullNameForFireCad'"
+          [keyField]="'idLane'"
+          [placeHolderText]="'Voie de circulation'"
+          [(ngModel)]="mainBuilding.idLane">
+        </app-search-box>
+
       </div>
       <div class="full-width" fxLayout="row" >
-        <md-input-container class="full-width">
-          <input mdInput value="Scott (Avenue)" placeholder="Transversale">
-        </md-input-container>
+        <form novalidate (ngSubmit)="onSubmit(planForm)" [formGroup]="planForm">
+          <app-search-box
+            [dataService]="laneService"
+            [descriptionField]="'fullNameForFireCad'"
+            [keyField]="'idLane'"
+            [placeHolderText]="'Transversale'"
+            formControlName="idLaneTransversal">
+          </app-search-box>
+        </form>
       </div>
     </div>
 
@@ -73,7 +93,7 @@
   <div></div>
 </div>
 
-<div *ngIf="plan">
+<div>
   <md-card class="master-card">
     <md-card-title>{{plan.buildings.length}} bâtiments</md-card-title>
     <md-card-content>
