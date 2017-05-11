@@ -19,7 +19,7 @@ export class InterventionPlanService extends BaseService {
       });
   }
 
-  /*update(intervention: InterventionPlan): Promise<InterventionPlan> {
+  update(intervention: InterventionPlan): Promise<InterventionPlan> {
     const url = this.url + '/' + intervention.id;
     return this.http
       .put(url, JSON.stringify(intervention), {headers: this.headers})
@@ -27,7 +27,7 @@ export class InterventionPlanService extends BaseService {
       .then(() => intervention)
       .catch(this.handleError);
   }
-
+/*
   delete(intervention: InterventionPlan): Promise<void> {
     const url = `${this.url}/${intervention.id}`;
     return this.http.delete(url, {headers: this.headers})
