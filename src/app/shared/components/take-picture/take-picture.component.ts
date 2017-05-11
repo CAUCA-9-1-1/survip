@@ -47,6 +47,13 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
   }
   private _useCamera = true;
 
+  @Input()
+  get allowImageSelection(): boolean { return this._allowImageSelection; }
+  set allowImageSelection(value: boolean) {
+    this._allowImageSelection = value;
+  }
+  private _allowImageSelection = true;
+
   @Output() beforeSelect = new EventEmitter();
   @Output() beforeTake = new EventEmitter();
   @Output() change = new EventEmitter();
