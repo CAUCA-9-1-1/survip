@@ -7,6 +7,9 @@ import {DialogsService} from '../shared/services/dialogs.service';
 import {MenuItem} from '../shared/interfaces/menu-item.interface';
 import {InterventionPlanFireHydrant} from './shared/models/intervention-plan-fire-hydrant';
 import {InterventionPlanFireHydrantService} from './shared/services/intervention-plan-fire-hydrant.service';
+import {InterventionPlanService} from './shared/services/intervention-plan.service';
+import {InterventionPlan} from './shared/models/intervention-plan';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-survey',
@@ -23,20 +26,42 @@ export class InterventionSurveyComponent implements OnInit {
     { name: 'waterSupply', title: 'waterSupply', },
     { name: 'implantation', title: 'implantation', },
     { name: 'particularRisks', title: 'particularRisk', },
-    { name: 'fireProtection', title: 'fireProtection', },
   ];
-
-  fireHydrants: InterventionPlanFireHydrant[];
+  private sub: any;
+  private id: string;
+  public interventionPlan: InterventionPlan;
+  get fireHydrants(): InterventionPlanFireHydrant[] {
+    if (this.interventionPlan != null) {
+      return this.interventionPlan.fireHydrants;
+    }
+    return null;
+  }
 
   constructor(
+    private route: ActivatedRoute,
     private windowRef: WindowRefService,
     private dialogsService: DialogsService,
+    private interventionPlanService: InterventionPlanService,
     private fireHydrantService: InterventionPlanFireHydrantService
   ) {
-    this.loadFireHydrants();
   }
 
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.loadInterventionPlanBuilding();
+    });
+    this.OpenSideMenuWhenNotOnMobile();
+  }
+
+  private loadInterventionPlanBuilding() {
+    this.interventionPlanService.get(this.id)
+      .subscribe(plan => {
+        this.interventionPlan = plan;
+      });
+  }
+
+  private OpenSideMenuWhenNotOnMobile() {
     if (this.windowRef.nativeWindow.innerWidth >= 700) {
       this.mode = 'side';
       this.align = 'start';
@@ -59,15 +84,11 @@ export class InterventionSurveyComponent implements OnInit {
     const hydrant = new InterventionPlanFireHydrant();
     hydrant.id = UUID.UUID();
     fireHydrants.push(hydrant);
-    this.fireHydrants = fireHydrants;
+    this.interventionPlan.fireHydrants = fireHydrants;
   }
   private deleteFireHydrant(deletedHydrant: InterventionPlanFireHydrant) {
     this.fireHydrantService.delete(deletedHydrant)
-      .then(() => this.fireHydrants = this.fireHydrants.filter(hydrant => hydrant.id !== deletedHydrant.id));
-  }
-  private loadFireHydrants() {
-    this.fireHydrantService.getList()
-      .then(hydrants => this.fireHydrants = hydrants);
+      .then(() => this.interventionPlan.fireHydrants = this.fireHydrants.filter(hydrant => hydrant.id !== deletedHydrant.id));
   }
 
   onCompleteSection(val) {
