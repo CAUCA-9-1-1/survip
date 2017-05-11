@@ -21,7 +21,7 @@
         <app-intervention-survey-particular-risk></app-intervention-survey-particular-risk>
       </div>
       <div *ngSwitchDefault>
-          <app-intervention-survey-building></app-intervention-survey-building>
+          <app-intervention-survey-building [plan]="interventionPlan"></app-intervention-survey-building>
       </div>
     </div>
   </div>

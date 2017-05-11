@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {InterventionPlan} from '../shared/models/intervention-plan';
 
 @Component({
   selector: 'app-intervention-survey-building',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./building.component.styl']
 })
 export class BuildingComponent implements OnInit {
-  buildings: any[] = [
+  @Input() plan: InterventionPlan;
+  /*buildings: any[] = [
     {
       'idBuilding' : 1,
       'alias' : 'Résidence',
@@ -56,7 +58,7 @@ export class BuildingComponent implements OnInit {
       'height' : 20,
       'storeyCount' : 2
     }
-    ];
+    ];*/
 
 
   constructor() { }

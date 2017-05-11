@@ -73,12 +73,12 @@
   <div></div>
 </div>
 
-<div>
+<div *ngIf="plan">
   <md-card class="master-card">
-    <md-card-title>7 bâtiments</md-card-title>
+    <md-card-title>{{plan.buildings.length}} bâtiments</md-card-title>
     <md-card-content>
-      <div *ngFor='let building of buildings'>
-        <app-intervention-survey-building-detail [building]='building'></app-intervention-survey-building-detail>
+      <div *ngFor='let building of plan.buildings'>
+        <app-intervention-survey-building-detail [building]="building"></app-intervention-survey-building-detail>
       </div>
       <div style="clear:both"></div>
     </md-card-content>
