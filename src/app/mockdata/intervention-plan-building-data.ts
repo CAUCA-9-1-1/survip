@@ -29,7 +29,7 @@ export class InterventionPlantBuildingData {
         id: '29bb0912-e4ce-45f0-8c26-511806d25b50',
         isActive: true,
         idLane: '2cfae3aa-da6f-46fb-9ff2-21fa1bde1152',
-        alias: 'Bâtiment principal',
+        alias: 'Résidence',
         createdOn: Date,
         isParent: true,
         matricule: 'abc123',

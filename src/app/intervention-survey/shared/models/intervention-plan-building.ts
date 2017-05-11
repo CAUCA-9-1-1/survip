@@ -5,6 +5,7 @@ export class InterventionPlanBuilding {
   idInterventionPlan: string;
   idBuilding: string;
   idImage: string;
+  isParent: boolean;
   buildingPlanNumber: string;
   additionalInformation: string;
   height: number;
