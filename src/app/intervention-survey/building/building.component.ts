@@ -17,6 +17,7 @@ import {InterventionPlanCourse} from '../shared/models/intervention-plan-course'
 })
 export class BuildingComponent implements OnInit {
   @Input() plan: InterventionPlan;
+  courses: InterventionPlanCourse[];
   riskLevels: RiskLevel[];
   planForm: FormGroup;
   idRiskLevel: string;
@@ -25,10 +26,16 @@ export class BuildingComponent implements OnInit {
     private fb: FormBuilder,
     private planService: InterventionPlanService,
     public laneService: LaneService,
-    private riskLevelService: RiskLevelService) {
+    private riskLevelService: RiskLevelService,
+    private courseService: InterventionPlanCourseService
+  ) {
     this.loadRiskLevels();
     this.createForm();
     this.startWatchingForm();
+
+    this.courseService.getAll().subscribe((courses) => {
+      this.courses = courses;
+    });
   }
 
   get buildings(): InterventionPlanBuildingForDisplay[] {
