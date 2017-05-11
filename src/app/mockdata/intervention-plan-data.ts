@@ -5,7 +5,7 @@ export class InterventionPlanData {
       planNumber: 'BLSK-28893-ABC',
       planName: 'Nom du plan pour cette adresse',
       idLaneTransversal: '',
-      idPictureSitePlan: '',
+      idPictureSitePlan: 'a3852cc7-4354-47c8-8917-7c861fe87f68',
       otherInformation: '',
       createdOn: '',
       revisedOn: '',
@@ -87,13 +87,16 @@ export class InterventionPlanData {
       ],
       buildings: [
         {
-          id: '',
+          id: '1',
           idInterventionPlan: '613723a0-f980-419d-9814-50f5d396eaa2',
-          idBuilding: '',
+          idBuilding: '29bb0912-e4ce-45f0-8c26-511806d25b50',
           isParent: true,
           alias: 'Résidence',
-          address: '705, rue Wintle Nord',
-          idImage: ''
+          address: '705, 197E RUE',
+          idImage: 'a3852cc7-4354-47c8-8917-7c861fe87f68',
+          idLane: '2cfae3aa-da6f-46fb-9ff2-21fa1bde1152',
+          idRiskLevel: 'd251f211-ea12-44c5-9f9c-081e80841128',
+          matricule: '98354671000000000'
         }
       ]
     }
