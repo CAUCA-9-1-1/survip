@@ -7,6 +7,9 @@ import {InterventionPlanBuildingForDisplay} from '../shared/models/intervention-
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {InterventionPlanService} from '../shared/services/intervention-plan.service';
 
+import {InterventionPlanCourseService} from '../shared/services/intervention-plan-course.service';
+import {InterventionPlanCourse} from '../shared/models/intervention-plan-course';
+
 @Component({
   selector: 'app-intervention-survey-building',
   templateUrl: './building.component.html',
@@ -14,6 +17,7 @@ import {InterventionPlanService} from '../shared/services/intervention-plan.serv
 })
 export class BuildingComponent implements OnInit {
   @Input() plan: InterventionPlan;
+  courses: InterventionPlanCourse[];
   riskLevels: RiskLevel[];
   planForm: FormGroup;
   idRiskLevel: string;
@@ -22,10 +26,16 @@ export class BuildingComponent implements OnInit {
     private fb: FormBuilder,
     private planService: InterventionPlanService,
     public laneService: LaneService,
-    private riskLevelService: RiskLevelService) {
+    private riskLevelService: RiskLevelService,
+    private courseService: InterventionPlanCourseService
+  ) {
     this.loadRiskLevels();
     this.createForm();
     this.startWatchingForm();
+
+    this.courseService.getAll().subscribe((courses) => {
+      this.courses = courses;
+    });
   }
 
   get buildings(): InterventionPlanBuildingForDisplay[] {

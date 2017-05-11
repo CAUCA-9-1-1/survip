@@ -26,7 +26,7 @@ export class ImplantationPlanComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('changed');
+    // console.log('changed');
   }
 
   createForm() {

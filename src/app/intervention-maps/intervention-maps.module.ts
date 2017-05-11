@@ -22,10 +22,6 @@ import { RiskLevelService } from '../shared/services/risk-level.service';
     InterventionService,
     InspectionService,
     RiskLevelService,
-    provideContextServiceOptions({
-      basePath: './contexts',
-      contextListFile: '_contexts.json'
-    })
   ]
 })
 export class InterventionMapsModule { }

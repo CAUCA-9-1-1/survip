@@ -14,6 +14,9 @@ import {LocationTypeData} from './location-type-data';
 import {PersonRequiringAssistanceTypeData} from './person-requiring-assistance-type-data';
 import {BuildingPersonRequiringAssistanceData} from './building-person-requiring-assistance-data';
 import {PictureData} from './picture-data';
+import {InterventionPlanCourseData} from './intervention-plan-course-data';
+import {FirestationData} from './firestation-data';
+import {InterventionPlanCourseLaneData} from './intervention-plan-course-lane-data';
 import {InterventionPlantBuildingData} from './intervention-plan-building-data';
 import {ConstructionTypeData} from './construction-type-data';
 import {AlarmPanelTypeData} from './alarm-panel-type-data';
@@ -66,6 +69,9 @@ export class InMemoryDataService implements InMemoryDbService {
     const pnapTypes = new PersonRequiringAssistanceTypeData().data;
     const buildingPnaps = new BuildingPersonRequiringAssistanceData().data;
     const pictures = new PictureData().data;
+    const courses = new InterventionPlanCourseData().data;
+    const courseLanes = new InterventionPlanCourseLaneData().data;
+    const firestation = new FirestationData().data;
     const interventionPlanBuildings = new InterventionPlantBuildingData().data;
     const interventionPlans = new InterventionPlanData().data;
     const constructionTypes = new ConstructionTypeData().data;
@@ -88,6 +94,9 @@ export class InMemoryDataService implements InMemoryDbService {
       'person-requiring-assistance-type': pnapTypes,
       'building-person-requiring-assistance': buildingPnaps,
       'picture': pictures,
+      'intervention-plan-course': courses,
+      'intervention-plan-course-lane': courseLanes,
+      'firestation': firestation,
       'intervention-plan-building': interventionPlanBuildings,
       'intervention-plan': interventionPlans,
       'alarm-panel-type': alarmPanelTypes,

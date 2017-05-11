@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Rx';
 
 import {BaseService} from '../../core/services/base.service';
 import {Picture} from '../interfaces/picture.interface';
@@ -13,7 +14,7 @@ export class PictureService extends BaseService {
     super();
   }
 
-  get(id: string) {
+  get(id: string): Observable<Picture> {
     return this.http.get(this.url + '?id=' + id, this.authorization()).map((response: Response) => {
       //return this.http.get(this.url + '/' + id, this.authorization()).map((response: Response) => {
       const result = response.json();
@@ -21,7 +22,7 @@ export class PictureService extends BaseService {
     });
   }
 
-  update(picture: Picture) {
+  update(picture: Picture): Observable<object> {
     return this.http.post(
       this.url,
       JSON.stringify(picture),

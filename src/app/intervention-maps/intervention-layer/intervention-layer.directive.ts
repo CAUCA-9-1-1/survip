@@ -44,13 +44,11 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
         });
 
         this.addLayer();
-        this.component.map.olMap.on('singleclick', this.click.bind(this));
       });
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngOnDestroy() {
     this.features$$.unsubscribe();
@@ -67,6 +65,14 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
 
     this.features$$ = this.interventionService.features$
       .subscribe(features => this.handleFeatures(features));
+
+    this.component.map.olMap.getViewport().addEventListener('click', (e) => {
+      const eventPixel = this.component.map.olMap.getEventPixel(e);
+
+      this.component.map.olMap.forEachFeatureAtPixel(eventPixel, (feature, layer) => {
+        this.click(feature);
+      });
+    });
   }
 
   private handleFeatures(features: Feature[]) {
@@ -85,6 +91,7 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
     });
 
     olFeature.setStyle(style);
+
     this.interventionSource.addFeature(olFeature);
   }
 
@@ -103,13 +110,9 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
     return style;
   }
 
-  private click(e) {
-    const clickFeature = this.component.map.olMap.forEachFeatureAtPixel(e.pixel, (feature, layer) => {
-      return feature;
-    });
-
-    if (clickFeature) {
-      const properties = clickFeature.getProperties();
+  private click(feature) {
+    if (feature) {
+      const properties = feature.getProperties();
 
       if (this.riskCode[properties.idRiskLevel] === 3 || this.riskCode[properties.idRiskLevel] === 4) {
         this.router.navigate(['/intervention/survey', properties.idInterventionPlan]);

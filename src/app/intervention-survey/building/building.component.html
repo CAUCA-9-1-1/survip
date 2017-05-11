@@ -11,8 +11,7 @@
         <img src="./assets/images/risk-high.png" style="height:32px; width: 32px; float: right; margin-top: 10px;" class="">
 
       </div>
-
-      <div class="full-width" fxLayout="row" >
+      <div class="full-width" fxLayout="row">
         <md-input-container class="full-width">
           <input readonly mdInput placeholder="Affectation" value="1000 - Résidence">
         </md-input-container>
@@ -57,40 +56,18 @@
         </form>
       </div>
     </div>
-
   </div>
 </md-card>
 
-<div class="container" fxLayout="row" class="full-width" fxLayoutAlign="start start">
+<div class="container" fxLayout="row" fxLayoutAlign="start start">
   <md-card class="full-width">
     <md-card-title>Parcours</md-card-title>
     <md-card-content>
-      <md-list class="full-width">
-        <md-list-item>
-          <div md-line>
-            <span>Caserne 1</span>
-            <span fxHide.lt-sm="true">DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
-          </div>
-          <md-icon md-list-icon>mode_edit</md-icon>
-        </md-list-item>
-        <md-list-item>
-          <div md-line>
-            <span>Caserne 2</span>
-            <span fxHide.lt-sm="true">DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
-          </div>
-          <md-icon md-list-icon>mode_edit</md-icon>
-        </md-list-item>
-        <md-list-item>
-          <div md-line>
-            <span>Caserne 3</span>
-            <span fxHide.lt-sm="true">DESSAULES (D) - BRODER (D) - DES CASCADES (G) - JUTRA (G) - YAMASKA (D) - RAPIDE PLAT SUD</span>
-          </div>
-          <md-icon md-list-icon>mode_edit</md-icon>
-        </md-list-item>
-      </md-list>
+      <div *ngFor='let course of courses'>
+        <app-intervention-survey-course [course]="course"></app-intervention-survey-course>
+      </div>
     </md-card-content>
   </md-card>
-  <div></div>
 </div>
 
 <div>
