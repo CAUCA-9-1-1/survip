@@ -4,13 +4,13 @@
       <md-select placeholder="Caserne" formControlName="idFirestation" class="full-width">
         <md-option *ngFor="let station of firestations" [value]="station.id">{{station.stationName}}</md-option>
       </md-select>
-      <div *ngFor="let street of course.streets">
+      <div *ngFor="let street of streets">
         <app-intervention-survey-course-lane [street]="street"></app-intervention-survey-course-lane>
       </div>
     </form>
     <md-toolbar>
       <span class="spacer"></span>
-      <button md-button (click)="stopEdit()"><md-icon>cancel</md-icon> {{'cancel' | translate}}</button>
+      <button md-button (click)="stopEdit()"><md-icon>check</md-icon> {{'ok' | translate}}</button>
     </md-toolbar>
   </div>
 </div>
@@ -18,8 +18,8 @@
   <div fxFlex="10" fxFlexAlign="stretch" fxFill><md-icon md-list-icon (click)="startEdit()">mode_edit</md-icon></div>
   <div fxFlex="15" fxFlexAlign="stretch" fxFill><span>{{firestation}}</span></div>
   <div fxFlex="75" fxFlexAlign="stretch" fxFill>
-    <span *ngFor="let street of course.streets">
-      {{street.idLane}}
+    <span *ngFor="let street of streets">
+      <span [innerText]="street.name.fr"></span>
       <span *ngIf="street.direction">({{street.direction}}) - </span>
       <span *ngIf="!street.direction"></span>
     </span>

@@ -6,7 +6,13 @@
       </md-input-container>
     </div>
     <div fxFlex="60">
-      <app-search-box></app-search-box>
+      <app-search-box
+          formControlName="idLane"
+          placeHolderText="Rue"
+          [dataService]="laneService"
+          keyField="idLane"
+          descriptionField="fullNameForFireCad"
+      ></app-search-box>
     </div>
     <div fxFlex="18">
       <md-select placeholder="Direction" formControlName="direction" class="full-width">

@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {LaneService} from '../shared/services/lane.service';
+import {InterventionPlanCourseLane} from '../shared/models/intervention-plan-course-lane';
+import {InterventionPlanCourseLaneService} from '../shared/services/intervention-plan-course-lane.service';
 
 @Component({
   selector: 'app-intervention-survey-course-lane',
@@ -7,22 +10,26 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./course-lane.component.styl']
 })
 export class CourseLaneComponent implements OnInit {
-  @Input() street: any;
-  @Input() item: object;
+  @Input() street: InterventionPlanCourseLane;
 
   private courseLaneForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private laneService: LaneService,
+    private courseLaneService: InterventionPlanCourseLaneService
+  ) {
     this.createForm();
     this.startWatchingForm();
   }
 
   ngOnInit() {
+    this.setValues();
   }
 
   private setValues() {
-    if (this.item != null) {
-      this.courseLaneForm.patchValue(this.item);
+    if (this.street != null) {
+      this.courseLaneForm.patchValue(this.street);
     }
   }
 
@@ -47,8 +54,8 @@ export class CourseLaneComponent implements OnInit {
   }
 
   private saveForm() {
-    Object.assign(this.item, this.courseLaneForm.value);
+    Object.assign(this.street, this.courseLaneForm.value);
 
-    // this.iService.update(this.item).subscribe(() => console.log('Contact saved.'));
+    this.courseLaneService.update(this.street).subscribe(() => console.log('course lane changed'));
   }
 }

@@ -4,12 +4,17 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FirestationService} from '../shared/services/firestation.service';
 import {Firestation} from '../shared/models/firestation';
 import {InterventionPlanCourse} from '../shared/models/intervention-plan-course';
+import {InterventionPlanCourseLaneService} from '../shared/services/intervention-plan-course-lane.service';
+import {InterventionPlanCourseLane} from '../shared/models/intervention-plan-course-lane';
 
 @Component({
   selector: 'app-intervention-survey-course',
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.styl'],
-  providers: [FirestationService]
+  providers: [
+    FirestationService,
+    InterventionPlanCourseLaneService
+  ]
 })
 export class CourseComponent implements OnInit, OnChanges {
   @ViewChild('popupFirestation') popupRef: ElementRef;
@@ -18,8 +23,13 @@ export class CourseComponent implements OnInit, OnChanges {
   private courseForm: FormGroup;
   private firestations: Firestation[];
   private firestation: string;
+  private streets: InterventionPlanCourseLane[];
 
-  constructor(private firestationService: FirestationService, private fb: FormBuilder) {
+  constructor(
+    private firestationService: FirestationService,
+    private courseLaneService: InterventionPlanCourseLaneService,
+    private fb: FormBuilder
+  ) {
     this.createForm();
     this.startWatchingForm();
   }
@@ -30,6 +40,9 @@ export class CourseComponent implements OnInit, OnChanges {
     });
     this.firestationService.get(this.course.idFirestation).subscribe((station) => {
       this.firestation = station.stationName;
+    });
+    this.courseLaneService.getCourse(this.course.id).subscribe((lanes) => {
+      this.streets = lanes;
     });
 
     this.setValues();
@@ -45,6 +58,10 @@ export class CourseComponent implements OnInit, OnChanges {
 
   stopEdit() {
     this.popupRef.nativeElement.className = 'popup';
+
+    this.courseLaneService.getCourse(this.course.id).subscribe((lanes) => {
+      this.streets = lanes;
+    });
   }
 
   private setValues() {
