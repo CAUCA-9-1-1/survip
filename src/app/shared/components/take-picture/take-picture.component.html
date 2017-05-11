@@ -1,8 +1,10 @@
 <div [ngStyle]="{'width': width}" class="{{horizontal ? 'horizontal' : 'vertical'}}">
-  <button class="add-picture-button" md-raised-button title="{{'selectImage' | translate}}" (click)="select($event);">
-    <span>{{'select' | translate}}</span>
-    <md-icon>image</md-icon>
-  </button>
+  <ng-container *ngIf="allowImageSelection">
+    <button class="add-picture-button" md-raised-button title="{{'selectImage' | translate}}" (click)="select($event);">
+      <span>{{'select' | translate}}</span>
+      <md-icon>image</md-icon>
+    </button>
+  </ng-container>
   <ng-container *ngIf="useCamera">
     <button class="add-picture-button" md-raised-button title="{{'takeImage' | translate}}" (click)="take($event);">
       <span>{{'take' | translate}}</span>
