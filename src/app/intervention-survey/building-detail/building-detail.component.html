@@ -2,10 +2,12 @@
   <md-card-title>{{building?.alias}}</md-card-title>
   <md-card-content>
     <div fxLayout="row" class="line" class="full-width">
-      <app-take-picture [source]=""></app-take-picture>
+      <app-take-picture
+        [allowImageSelection]="false"
+        [source]="picture?.picture"></app-take-picture>
     </div>
   </md-card-content>
   <md-card-actions>
-    <button md-raised-button (click)="onEditClicked()"><md-icon>edit</md-icon>Modifier</button>
+    <button md-raised-button (click)="onEditClicked()"><md-icon>edit</md-icon>Détails du bâtiment...</button>
   </md-card-actions>
 </md-card>
