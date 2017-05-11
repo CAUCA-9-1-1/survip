@@ -96,7 +96,7 @@ export class InMemoryDataService implements InMemoryDbService {
       'picture': pictures,
       'intervention-plan-course': courses,
       'intervention-plan-course-lane': courseLanes,
-      'firestation': firestation
+      'firestation': firestation,
       'intervention-plan-building': interventionPlanBuildings,
       'intervention-plan': interventionPlans,
       'alarm-panel-type': alarmPanelTypes,
