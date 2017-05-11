@@ -16,6 +16,7 @@ export class BuildingComponent implements OnInit {
   @Input() plan: InterventionPlan;
   riskLevels: RiskLevel[];
   planForm: FormGroup;
+  idRiskLevel: string;
 
   constructor(
     private fb: FormBuilder,
@@ -27,14 +28,21 @@ export class BuildingComponent implements OnInit {
     this.startWatchingForm();
   }
 
+  get buildings(): InterventionPlanBuildingForDisplay[] {
+    if (this.plan != null && this.plan.buildings != null) {
+      return this.plan.buildings;
+    }
+    return [];
+  }
+
   get mainBuilding(): InterventionPlanBuildingForDisplay {
-    if (this.plan != null) {
+    if (this.plan != null && this.plan.buildings != null) {
       const result = this.plan.buildings.filter(building => building.isParent === true);
       if (result.length > 0) {
         return result[0];
       }
     }
-    return null;
+    return new InterventionPlanBuildingForDisplay();
   }
 
   private startWatchingForm() {
@@ -61,6 +69,7 @@ export class BuildingComponent implements OnInit {
   private setValues() {
     if (this.plan != null) {
       this.planForm.patchValue(this.plan);
+      this.idRiskLevel = this.mainBuilding.idRiskLevel;
     }
   }
 
