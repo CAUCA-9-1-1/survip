@@ -21,7 +21,7 @@ export class SearchBoxComponent implements OnInit, OnDestroy, ControlValueAccess
   @ViewChild('alertContainer', { read: ViewContainerRef }) container;
   componentRef: ComponentRef<any>;
   selectedItemDescription: string;
-
+  @Input() readOnly: boolean;
   @Input() placeHolderText: string;
   @Input() descriptionField: string;
   @Input() keyField: string;
@@ -50,7 +50,10 @@ export class SearchBoxComponent implements OnInit, OnDestroy, ControlValueAccess
 
   constructor(
     private resolver: ComponentFactoryResolver
-  ) { }
+  ) {
+    this.readOnly = false;
+  }
+
   ngOnInit() {
   }
   ngOnDestroy() {
@@ -61,8 +64,11 @@ export class SearchBoxComponent implements OnInit, OnDestroy, ControlValueAccess
   ngOnChanges(inputs) {
     this.propagateChange(this.currentId);
   }
+
   onClick() {
-    this.createComponent();
+    if (this.readOnly === false) {
+      this.createComponent();
+    }
   }
   private createComponent() {
     this.container.clear();
