@@ -32,10 +32,6 @@ export class BuildingComponent implements OnInit {
     this.loadRiskLevels();
     this.createForm();
     this.startWatchingForm();
-
-    this.courseService.getAll().subscribe((courses) => {
-      this.courses = courses;
-    });
   }
 
   get buildings(): InterventionPlanBuildingForDisplay[] {
@@ -66,8 +62,17 @@ export class BuildingComponent implements OnInit {
       .subscribe(result => this.riskLevels = result);
   }
 
+  loadCourses() {
+    if (this.plan) {
+      this.courseService.getAll(this.plan.id).subscribe((courses) => {
+        this.courses = courses;
+      });
+    }
+  }
+
   ngOnInit() {
     this.setValues();
+    this.loadCourses();
   }
 
   createForm() {
