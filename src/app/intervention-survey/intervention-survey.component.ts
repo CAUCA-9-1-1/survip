@@ -10,6 +10,7 @@ import {InterventionPlanFireHydrantService} from './shared/services/intervention
 import {InterventionPlanService} from './shared/services/intervention-plan.service';
 import {InterventionPlan} from './shared/models/intervention-plan';
 import {ActivatedRoute} from '@angular/router';
+import {InterventionPlanBuildingForDisplay} from './shared/models/intervention-plan-building-for-display';
 
 @Component({
   selector: 'app-survey',
@@ -33,6 +34,15 @@ export class InterventionSurveyComponent implements OnInit {
   get fireHydrants(): InterventionPlanFireHydrant[] {
     if (this.interventionPlan != null) {
       return this.interventionPlan.fireHydrants;
+    }
+    return null;
+  }
+  get mainBuilding(): InterventionPlanBuildingForDisplay {
+    if (this.interventionPlan != null) {
+      const result = this.interventionPlan.buildings.filter(building => building.isParent === true);
+      if (result.length > 0) {
+        return result[0];
+      }
     }
     return null;
   }

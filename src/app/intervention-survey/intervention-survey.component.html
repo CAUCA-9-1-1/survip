@@ -3,7 +3,7 @@
     <app-menu [items]="menuItems" (select)="select($event)" ></app-menu>
   </md-sidenav>
 
-  <app-toolbar-back [title]="'627 rapide-plat sud'" [mode]="mode" [sidenav]="sidenav"></app-toolbar-back>
+  <app-toolbar-back [title]="mainBuilding?.address" [mode]="mode" [sidenav]="sidenav"></app-toolbar-back>
   <div class="content-under-toolbar">
     <div [ngSwitch]="selectedMenu">
       <div *ngSwitchCase="'waterSupply'">
