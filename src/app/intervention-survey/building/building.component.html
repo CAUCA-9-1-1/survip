@@ -4,7 +4,7 @@
     <div fxFlex="33" fxFlex.lt-sm="100%">
       <div class="full-width" fxLayout="row">
 
-        <md-select [disabled]="true" placeholder="Niveau de risque" [(ngModel)]="mainBuilding.idRiskLevel">
+        <md-select [disabled]="true" placeholder="Niveau de risque" [(ngModel)]="idRiskLevel">
           <md-option *ngFor="let risk of riskLevels" [value]="risk.idRiskLevel">{{risk.color}}</md-option>
         </md-select>
 
@@ -95,9 +95,9 @@
 
 <div>
   <md-card class="master-card">
-    <md-card-title>{{plan.buildings.length}} bâtiments</md-card-title>
+    <md-card-title>{{buildings.length}} bâtiment(s)</md-card-title>
     <md-card-content>
-      <div *ngFor='let building of plan.buildings'>
+      <div *ngFor='let building of buildings'>
         <app-intervention-survey-building-detail [building]="building"></app-intervention-survey-building-detail>
       </div>
       <div style="clear:both"></div>
