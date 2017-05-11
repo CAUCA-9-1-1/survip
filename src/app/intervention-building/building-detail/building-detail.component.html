@@ -35,7 +35,7 @@
             </md-input-container>
           </div>
           <div fxLayout="row" class="line" class="full-width">
-            <app-take-picture></app-take-picture>
+            <app-take-picture formControlName="image"></app-take-picture>
           </div>
 
         </md-card-content>
@@ -112,6 +112,5 @@
       </md-card>
     </div>
 
-    <div style="background-color: white">{{buildingForm.value | json}}</div>
   </form>
 </md-card>

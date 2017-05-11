@@ -8,6 +8,9 @@ import {AlarmPanelType} from '../../intervention-survey/shared/models/alarm-pane
 import {ConstructionType} from '../../intervention-survey/shared/models/construction-type';
 import {UnitOfMeasureService} from '../../intervention-survey/shared/services/unit-of-measure.service';
 import {UnitOfMeasure} from '../../intervention-survey/shared/models/unit-of-measure';
+import {PictureService} from '../../shared/services/picture.service';
+import {UUID} from 'angular2-uuid';
+import {Picture} from '../../shared/interfaces/picture.interface';
 
 @Component({
   selector: 'app-building-detail',
@@ -20,6 +23,7 @@ export class BuildingDetailComponent implements OnInit {
   alarmPanelTypes: AlarmPanelType[];
   constructionTypes: ConstructionType[];
   unitsOfMeasure: UnitOfMeasure[];
+  picture: Picture;
   get building() {
     if (this.interventionPlanBuilding != null) {
       return this.interventionPlanBuilding.building;
@@ -32,6 +36,7 @@ export class BuildingDetailComponent implements OnInit {
     private constructionTypeService: ConstructionTypeService,
     private alarmPanelTypeService: AlarmPanelTypeService,
     private unitService: UnitOfMeasureService,
+    private pictureService: PictureService,
     private fb: FormBuilder) {
 
     this.loadAlarmPanelTypes();
@@ -42,6 +47,26 @@ export class BuildingDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.interventionPlanBuilding.idImage === '') {
+      this.createNewPictureAndSetValues();
+    } else {
+      this.loadPictureAndSetValues();
+    }
+  }
+
+  private loadPictureAndSetValues() {
+    this.pictureService.get(this.interventionPlanBuilding.idImage)
+      .subscribe(pic => {
+        this.picture = pic;
+        this.setValues();
+      });
+  }
+
+  private createNewPictureAndSetValues() {
+    this.picture = new Picture();
+    this.picture.id = UUID.UUID();
+    this.picture.picture = '';
+    this.picture.isActive = true;
     this.setValues();
   }
 
@@ -67,10 +92,9 @@ export class BuildingDetailComponent implements OnInit {
   }
 
   private setValues() {
-    console.log('About to patch values.');
-    console.log(this.interventionPlanBuilding);
     if (this.interventionPlanBuilding != null) {
       this.buildingForm.patchValue(this.interventionPlanBuilding);
+      this.buildingForm.patchValue({image: this.picture});
     }
   }
 
@@ -81,7 +105,7 @@ export class BuildingDetailComponent implements OnInit {
       'height': [0],
       'idUnitOfMeasureHeight': [''],
       'estimatedWaterFlow': [0],
-      'idImage': [''],
+      'image': [new Picture()],
       'idUnitOfMeasureEwf': [''],
       'sprinklerLocation': [''],
       'sprinklerType': [''],
@@ -108,7 +132,16 @@ export class BuildingDetailComponent implements OnInit {
     console.log('saving plan building...');
     const formModel  = this.buildingForm.value;
     Object.assign(this.interventionPlanBuilding, formModel);
+    this.savePicture();
     this.planBuildingService.update(this.interventionPlanBuilding)
       .then(() => console.log('Plan building saved.'));
+  }
+
+  private savePicture(): void {
+    const img = this.buildingForm.value['image'];
+    if (img !== this.picture.picture) {
+      this.picture.picture = img;
+      this.pictureService.update(this.picture).subscribe(() => console.log('picture saved.'));
+    }
   }
 }

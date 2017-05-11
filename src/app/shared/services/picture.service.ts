@@ -3,6 +3,7 @@ import {Http, Response} from '@angular/http';
 
 import {BaseService} from '../../core/services/base.service';
 import {Picture} from '../interfaces/picture.interface';
+import {UUID} from 'angular2-uuid';
 
 @Injectable()
 export class PictureService extends BaseService {
@@ -14,9 +15,8 @@ export class PictureService extends BaseService {
 
   get(id: string) {
     return this.http.get(this.url + '?id=' + id, this.authorization()).map((response: Response) => {
+      //return this.http.get(this.url + '/' + id, this.authorization()).map((response: Response) => {
       const result = response.json();
-
-      // this.isLogin(result, '/intervention/maps');
       return result.data[0];
     });
   }

@@ -4,6 +4,7 @@ export class InterventionPlanBuilding {
   id: string;
   idInterventionPlan: string;
   idBuilding: string;
+  idImage: string;
   buildingPlanNumber: string;
   additionalInformation: string;
   height: number;
