@@ -23,6 +23,7 @@ import {LaneService} from './shared/services/lane.service';
 import {PersonRequiringAssistanceTypeService} from './shared/services/person-requiring-assistance-type.service';
 import {BuildingPersonRequiringAssistanceService} from './shared/services/building-person-requiring-assistance.service';
 import {PictureService} from '../shared/services/picture.service';
+import {InterventionPlanService} from './shared/services/intervention-plan.service';
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import {PictureService} from '../shared/services/picture.service';
     LaneService,
     PersonRequiringAssistanceTypeService,
     BuildingPersonRequiringAssistanceService,
-    PictureService
+    PictureService,
+    InterventionPlanService
   ]
 })
 export class InterventionSurveyModule { }
