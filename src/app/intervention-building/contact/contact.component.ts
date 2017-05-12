@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, OnChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {BuildingContact} from '../shared/models/building-contact';
-import {BuildingContactService} from '../shared/services/building-contact.service';
+import {BuildingContact} from '../../intervention-survey/shared/models/building-contact';
+import {BuildingContactService} from '../../intervention-survey/shared/services/building-contact.service';
 
 @Component({
   selector: 'app-intervention-survey-contact',
