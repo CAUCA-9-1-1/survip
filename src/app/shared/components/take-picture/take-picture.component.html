@@ -11,6 +11,8 @@
       <md-icon>photo_camera</md-icon>
     </button>
   </ng-container>
-  <img #takePictureImage src="{{source}}" />
+  <ng-container *ngIf="source">
+    <img #takePictureImage src="{{source}}" />
+  </ng-container>
   <input type="file" #fileLoader (change)="onSelectFile($event);" />
 </div>
