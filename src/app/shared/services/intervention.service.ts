@@ -5,7 +5,7 @@ import Observable = ol.Observable;
 
 import { Feature, FeatureFormat, FeatureType } from 'igo2';
 
-import { InspectionService } from '../../shared/services/inspection.service';
+import { InspectionService } from './inspection.service';
 
 @Injectable()
 export class InterventionService {

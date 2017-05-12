@@ -26,6 +26,7 @@ export class InspectionData {
         'idLanguageContent': '81162bf0-6555-44c2-b09c-070ff3c4e105',
         'fr': 'test 1'
       },
+      'address': '1 rue 1'
     },
     {
       'geojson': {
@@ -53,6 +54,7 @@ export class InspectionData {
         'idLanguageContent': '5b82f44d-2979-4efa-b86a-25ad3a12b7d5',
         'fr': 'test 2'
       },
+      'address': '2 rue 2'
     },
     {
       'geojson': {
@@ -80,6 +82,7 @@ export class InspectionData {
         'idLanguageContent': '222f2746-05e1-4879-86d2-f759d35a8251',
         'fr': 'test 3'
       },
+      'address': '3 rue 3'
     },
     {
       'geojson': {
@@ -107,6 +110,7 @@ export class InspectionData {
         'idLanguageContent': 'd1b6c887-2380-46e4-8214-51eb426f46cb',
         'fr': 'test 4'
       },
+      'address': '4 rue 4'
     },
     {
       'geojson': {
@@ -134,6 +138,7 @@ export class InspectionData {
         'idLanguageContent': '3023f718-a5b7-4d68-ad05-29eebf825fc7',
         'fr': 'test 5'
       },
+      'address': '5 rue 5'
     },
     {
       'geojson': {
@@ -160,6 +165,7 @@ export class InspectionData {
         'idLanguageContent': 'b85c92cd-0af1-4bec-a1b0-9323a72c9f2f',
         'fr': 'test 6'
       },
+      'address': '6 rue 6'
     }
   ];
 }

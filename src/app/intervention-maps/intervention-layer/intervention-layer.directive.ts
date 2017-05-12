@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Feature, MapBrowserComponent, IgoMap, VectorLayer } from 'igo2';
 
-import { InterventionService } from '../shared/intervention.service';
+import { InterventionService } from '../../shared/services/intervention.service';
 import { RiskLevelService } from '../../shared/services/risk-level.service';
 
 @Directive({
