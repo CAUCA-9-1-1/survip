@@ -41,6 +41,12 @@ div.course > div {
 }
 
 .limit-height {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 10vh - 200px);
     overflow: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .limit-height {
+        height: calc(100vh - 10vh - 150px);
+    }
 }

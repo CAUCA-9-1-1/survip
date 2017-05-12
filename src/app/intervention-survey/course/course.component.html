@@ -1,7 +1,7 @@
 <div class="popup" #popupFirestation>
   <div class="content">
     <form novalidate (ngSubmit)="onSubmit(courseForm)" [formGroup]="courseForm">
-      <md-select placeholder="Caserne" formControlName="idFirestation" class="full-width">
+      <md-select placeholder="Caserne" formControlName="idFirestation">
         <md-option *ngFor="let station of firestations" [value]="station.id">{{station.stationName}}</md-option>
       </md-select>
       <div class="limit-height">
