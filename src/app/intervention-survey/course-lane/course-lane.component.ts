@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ComponentRef, ElementRef, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {LaneService} from '../shared/services/lane.service';
 import {InterventionPlanCourseLane} from '../shared/models/intervention-plan-course-lane';
@@ -15,6 +15,7 @@ export class CourseLaneComponent implements OnInit {
   private courseLaneForm: FormGroup;
 
   constructor(
+    private elementRef: ElementRef,
     private fb: FormBuilder,
     private laneService: LaneService,
     private courseLaneService: InterventionPlanCourseLaneService
@@ -25,6 +26,11 @@ export class CourseLaneComponent implements OnInit {
 
   ngOnInit() {
     this.setValues();
+  }
+
+  private removeLine() {
+    this.courseLaneService.delete(this.street.id).subscribe(() => console.log('course lane changed'));
+    this.elementRef.nativeElement.remove();
   }
 
   private setValues() {

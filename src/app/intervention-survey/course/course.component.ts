@@ -6,6 +6,7 @@ import {Firestation} from '../shared/models/firestation';
 import {InterventionPlanCourse} from '../shared/models/intervention-plan-course';
 import {InterventionPlanCourseLaneService} from '../shared/services/intervention-plan-course-lane.service';
 import {InterventionPlanCourseLane} from '../shared/models/intervention-plan-course-lane';
+import {LaneService} from '../shared/services/lane.service';
 
 @Component({
   selector: 'app-intervention-survey-course',
@@ -27,6 +28,7 @@ export class CourseComponent implements OnInit, OnChanges {
 
   constructor(
     private firestationService: FirestationService,
+    private laneService: LaneService,
     private courseLaneService: InterventionPlanCourseLaneService,
     private fb: FormBuilder
   ) {
@@ -41,10 +43,8 @@ export class CourseComponent implements OnInit, OnChanges {
     this.firestationService.get(this.course.idFirestation).subscribe((station) => {
       this.firestation = station.stationName;
     });
-    this.courseLaneService.getCourse(this.course.id).subscribe((lanes) => {
-      this.streets = lanes;
-    });
 
+    this.loadCourseLane();
     this.setValues();
   }
 
@@ -58,9 +58,31 @@ export class CourseComponent implements OnInit, OnChanges {
 
   stopEdit() {
     this.popupRef.nativeElement.className = 'popup';
+    this.loadCourseLane();
+  }
 
+  addCourseLane() {
+    this.streets.push({
+      direction: '',
+      id: '',
+      idInterventionPlanCourse: (this.streets[0] ? this.streets[0].idInterventionPlanCourse : ''),
+      idLane: '',
+      name: '',
+      sequence: (this.streets[0] ? (this.streets[this.streets.length - 1].sequence + 1) : 0)
+    });
+  }
+
+  private loadCourseLane() {
     this.courseLaneService.getCourse(this.course.id).subscribe((lanes) => {
       this.streets = lanes;
+      this.streets.sort((a, b) => {
+        return a.sequence - b.sequence;
+      });
+      this.streets.forEach((street, index) => {
+        this.laneService.getDescriptionById(street.idLane).then((name) => {
+          this.streets[index].name = name;
+        });
+      });
     });
   }
 
