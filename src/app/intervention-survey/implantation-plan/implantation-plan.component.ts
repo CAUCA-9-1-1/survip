@@ -54,8 +54,9 @@ export class ImplantationPlanComponent implements OnInit, OnChanges {
   }
 
   private saveForm() {
-    Object.assign(this.item, this.implantationForm.value);
-
-    this.pictureService.update(this.item).subscribe((response) => console.log('Picture saved.'));
+    if (this.item.picture !== this.implantationForm.value['picture']) {
+      Object.assign(this.item, this.implantationForm.value);
+      this.pictureService.update(this.item).subscribe((response) => console.log('Picture saved.'));
+    }
   }
 }
