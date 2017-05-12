@@ -9,6 +9,7 @@ import { InterventionSurveyComponent } from './intervention-survey/intervention-
 import { PreventionSurveyComponent } from './prevention-survey/prevention-survey.component';
 import { ManagementAddressComponent } from './management-address/management-address.component';
 import {InterventionBuildingComponent} from './intervention-building/intervention-building.component';
+import {InterventionListComponent} from './intervention-list/intervention-list.component';
 
 const appRoutes: Routes = [{
   path: '',
@@ -24,8 +25,8 @@ const appRoutes: Routes = [{
     path: 'report',
     component: InterventionReportComponent
   }, {
-    path: 'survey',
-    component: InterventionSurveyComponent
+    path: 'list',
+    component: InterventionListComponent
   }, {
     path: 'survey/:id',
     component: InterventionSurveyComponent
