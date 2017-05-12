@@ -9,19 +9,24 @@
       </div>
     </form>
     <md-toolbar>
+      <button md-button (click)="addCourseLane()"><md-icon>add</md-icon> {{'add' | translate}}</button>
       <span class="spacer"></span>
       <button md-button (click)="stopEdit()"><md-icon>check</md-icon> {{'ok' | translate}}</button>
     </md-toolbar>
   </div>
 </div>
-<div class="course" fxLayout="row">
-  <div fxFlex="10" fxFlexAlign="stretch" fxFill><md-icon md-list-icon (click)="startEdit()">mode_edit</md-icon></div>
-  <div fxFlex="15" fxFlexAlign="stretch" fxFill><span>{{firestation}}</span></div>
-  <div fxFlex="75" fxFlexAlign="stretch" fxFill>
-    <span *ngFor="let street of streets">
-      <span [innerText]="street.name.fr"></span>
-      <span *ngIf="street.direction">({{street.direction}}) - </span>
-      <span *ngIf="!street.direction"></span>
+<div class="course" fxLayout="row" fxLayout.xs="column">
+  <div fxFlex="20" fxFlexAlign="stretch" fxFill>
+    <md-icon md-list-icon (click)="startEdit()">mode_edit</md-icon>
+    <span>{{firestation}}</span>
+  </div>
+  <div fxFlex="80" fxFlexAlign="stretch" fxFill>
+    <span *ngFor="let street of streets; let last = last">
+      <ng-container *ngIf="street.name">
+        <span [innerText]="street.name"></span>
+        <span *ngIf="street.direction">({{street.direction}})</span>
+        <span *ngIf="!last"> - </span>
+      </ng-container>
     </span>
   </div>
 </div>

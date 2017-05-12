@@ -3,6 +3,6 @@ export class InterventionPlanCourseLane {
   idInterventionPlanCourse: string;
   sequence: number;
   idLane: string;
-  name: object;
+  name: string;
   direction: string;
 }

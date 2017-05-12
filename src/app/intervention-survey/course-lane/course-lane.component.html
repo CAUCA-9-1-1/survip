@@ -5,7 +5,7 @@
         <input mdInput type="number" formControlName="sequence" placeholder="Séquence">
       </md-input-container>
     </div>
-    <div fxFlex="60">
+    <div fxFlex="50">
       <app-search-box
           formControlName="idLane"
           placeHolderText="Rue"
@@ -16,9 +16,11 @@
     </div>
     <div fxFlex="18">
       <md-select placeholder="Direction" formControlName="direction" class="full-width">
+        <md-option value="">Tout droit</md-option>
         <md-option value="L">{{'left' | translate}}</md-option>
         <md-option value="R">{{'right' | translate}}</md-option>
       </md-select>
     </div>
+    <div fxFlex="10" fxFlexAlign="stretch" fxFill><md-icon md-list-icon (click)="removeLine()">remove_circle</md-icon></div>
   </div>
 </form>

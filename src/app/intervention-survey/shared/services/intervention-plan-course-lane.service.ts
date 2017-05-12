@@ -24,10 +24,32 @@ export class InterventionPlanCourseLaneService extends BaseService {
     });
   }
 
+  add(lane: InterventionPlanCourseLane): Observable<object> {
+    return this.http.post(
+      this.url,
+      JSON.stringify(lane),
+      this.authorization()).map((response: Response) => {
+        return response.json();
+      }
+    );
+  }
+
   update(lane: InterventionPlanCourseLane): Observable<object> {
     return this.http.post(
       this.url,
       JSON.stringify(lane),
-      this.authorization()).map((response: Response) => response.json());
+      this.authorization()).map((response: Response) => {
+        return response.json();
+      }
+    );
+  }
+
+  delete(id: string): Observable<object> {
+    return this.http.delete(
+      this.url + '/' + id,
+      this.authorization()).map((response: Response) => {
+        return response.json();
+      }
+    );
   }
 }
