@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BuildingPersonRequiringAssistance} from '../shared/models/building-person-requiring-assistance';
-import {PersonRequiringAssistanceType} from '../shared/models/person-requiring-assistance-type';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {PersonRequiringAssistanceTypeService} from '../shared/services/person-requiring-assistance-type.service';
-import {BuildingPersonRequiringAssistanceService} from '../shared/services/building-person-requiring-assistance.service';
+import {BuildingPersonRequiringAssistance} from '../../intervention-survey/shared/models/building-person-requiring-assistance';
+import {PersonRequiringAssistanceType} from '../../intervention-survey/shared/models/person-requiring-assistance-type';
+import {BuildingPersonRequiringAssistanceService} from '../../intervention-survey/shared/services/building-person-requiring-assistance.service';
+import {PersonRequiringAssistanceTypeService} from '../../intervention-survey/shared/services/person-requiring-assistance-type.service';
 
 @Component({
   selector: 'app-intervention-survey-person-requiring-assistance',

@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {BuildingHazardousMaterial} from '../shared/models/building-hazardous-material';
+import {BuildingHazardousMaterial} from '../../intervention-survey/shared/models/building-hazardous-material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {BuildingHazardousMaterialService} from '../shared/services/building-hazardous-material.service';
-import {HazardousMaterialService} from '../shared/services/hazardous-material.service';
-import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
-import {UnitOfMeasure} from '../shared/models/unit-of-measure';
+import {BuildingHazardousMaterialService} from '../../intervention-survey/shared/services/building-hazardous-material.service';
+import {HazardousMaterialService} from '../../intervention-survey/shared/services/hazardous-material.service';
+import {UnitOfMeasureService} from '../../intervention-survey/shared/services/unit-of-measure.service';
+import {UnitOfMeasure} from '../../intervention-survey/shared/models/unit-of-measure';
 
 @Component({
   selector: 'app-intervention-survey-dangerous-material',

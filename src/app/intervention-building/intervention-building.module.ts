@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
 import {SharedModule} from '../shared/shared.module';
-import {DangerousMaterialComponent} from '../intervention-survey/dangerous-material/dangerous-material.component';
-import {PersonRequiringAssistanceComponent} from '../intervention-survey/person-requiring-assistance/person-requiring-assistance.component';
-import {ContactComponent} from '../intervention-survey/contact/contact.component';
+import {DangerousMaterialComponent} from './dangerous-material/dangerous-material.component';
+import {PersonRequiringAssistanceComponent} from './person-requiring-assistance/person-requiring-assistance.component';
+import {ContactComponent} from './contact/contact.component';
 import {LocationTypeService} from '../intervention-survey/shared/services/location-type.service';
 import {UnitOfMeasureService} from '../intervention-survey/shared/services/unit-of-measure.service';
 import {HazardousMaterialService} from '../intervention-survey/shared/services/hazardous-material.service';
