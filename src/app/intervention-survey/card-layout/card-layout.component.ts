@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, AfterViewInit} from '@angular/core';
 import {WindowRefService} from '../../shared/services/window-ref.service';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-card-layout',
@@ -19,7 +20,14 @@ export class CardLayoutComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
   }
+
   ngAfterViewInit() {
+    this.setNewCardSize();
+    Observable.timer(1000)
+      .subscribe(() => this.setNewCardSize());
+  }
+
+  private setNewCardSize() {
     const items = this.windowRefService.nativeDocument.getElementsByClassName('detail-card mat-card');
     if (items.length > 1) {
       const newCardHeight = items[0]['offsetHeight'];
