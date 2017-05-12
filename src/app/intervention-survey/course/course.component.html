@@ -4,8 +4,10 @@
       <md-select placeholder="Caserne" formControlName="idFirestation" class="full-width">
         <md-option *ngFor="let station of firestations" [value]="station.id">{{station.stationName}}</md-option>
       </md-select>
-      <div *ngFor="let street of streets">
-        <app-intervention-survey-course-lane [street]="street"></app-intervention-survey-course-lane>
+      <div class="limit-height">
+        <div *ngFor="let street of streets">
+          <app-intervention-survey-course-lane [street]="street"></app-intervention-survey-course-lane>
+        </div>
       </div>
     </form>
     <md-toolbar>
