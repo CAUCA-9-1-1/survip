@@ -15,7 +15,7 @@ export class InterventionMapsComponent implements OnInit {
 
   ngOnInit() {
     this.contextService.setContext({
-      'uri': '_default',
+      'uri': 'default',
       'title': 'Default Context',
       'map': {
         'view': {
