@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { Question } from '../shared/models/question.model';
-import { SurveyQuestionService } from '../shared/services/survey-question.service';
+import {Question} from '../shared/models/question.model';
+import {SurveyQuestionService} from '../shared/services/survey-question.service';
 
 @Component({
   selector: 'app-prevention-survey-question-slider',
@@ -13,10 +14,15 @@ export class QuestionSliderComponent implements OnInit {
   private tabSelected = 0;
   private questions: Question[];
   private questionIndex = 0;
+  private previousIndex: object = {};
   private onLastQuestion = false;
+  private onFirstQuestion = true;
   private lastAnswer: boolean|string = '';
 
-  constructor(private surveyQuestionService: SurveyQuestionService) { }
+  constructor(
+    private router: Router,
+    private surveyQuestionService: SurveyQuestionService
+  ) { }
 
   ngOnInit() {
     this.loadQuestion();
@@ -27,10 +33,24 @@ export class QuestionSliderComponent implements OnInit {
   }
 
   complete() {
-    console.log('OK, What we do!');
+    this.router.navigate(['/intervention/maps']);
+  }
+
+  previous() {
+    this.tabSelected--;
+    this.onLastQuestion = false;
+    this.questionIndex = this.previousIndex[this.tabSelected];
+
+    this.tabs.splice(this.tabs.length - 1, 1);
+
+    if (this.tabSelected === 0) {
+      this.onFirstQuestion = true;
+    }
   }
 
   next() {
+    this.onFirstQuestion = false;
+
     if (this.tabSelected < this.questions.length - 1) {
       const question = this.questions[this.questionIndex];
       let next = this.questions[(this.questionIndex + 1)].idSurveyQuestion;
@@ -49,8 +69,9 @@ export class QuestionSliderComponent implements OnInit {
       if (this.questions[this.questionIndex]) {
         this.lastAnswer = (this.questions[this.questionIndex].questionType === 'boolean' ? false : '');
         this.onLastQuestion = (this.questionIndex === this.questions.length - 1);
-        this.tabSelected++;
         this.tabs.push(this.questions[this.questionIndex]);
+        this.tabSelected++;
+        this.previousIndex[this.tabSelected] = this.questionIndex;
       }
     }
   }
@@ -73,6 +94,7 @@ export class QuestionSliderComponent implements OnInit {
       this.questions = result.data;
       this.tabs = [this.questions[0]];
       this.lastAnswer = (this.questions[0].questionType === 'boolean' ? false : '');
+      this.previousIndex[0] = 0;
     });
   }
 }

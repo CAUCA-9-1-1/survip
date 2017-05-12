@@ -7,6 +7,9 @@
 </md-tab-group>
 <md-toolbar class="actions">
   <span class="spacer"></span>
+  <ng-container *ngIf="!onFirstQuestion">
+    <button md-button (click)="previous()">{{'previousQuestion' | translate}}<md-icon>navigate_previous</md-icon></button>
+  </ng-container>
   <ng-container *ngIf="!onLastQuestion">
     <button md-button (click)="next()">{{'nextQuestion' | translate}}<md-icon>navigate_next</md-icon></button>
   </ng-container>
