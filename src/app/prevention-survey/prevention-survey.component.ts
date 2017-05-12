@@ -3,6 +3,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 
 import {InspectionService} from '../shared/services/inspection.service';
 import {Inspection} from '../shared/interfaces/inspection.interface';
+import {InterventionPlanBuildingForDisplay} from '../intervention-survey/shared/models/intervention-plan-building-for-display';
 
 @Component({
   selector: 'app-prevention-survey',
