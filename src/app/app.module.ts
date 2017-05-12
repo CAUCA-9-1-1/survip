@@ -20,6 +20,9 @@ import { PreventionSurveyComponent } from './prevention-survey/prevention-survey
 import { ManagementAddressComponent } from './management-address/management-address.component';
 import {InterventionBuildingComponent} from './intervention-building/intervention-building.component';
 import {InterventionBuildingModule} from './intervention-building/intervention-building.module';
+import {InterventionListModule} from './intervention-list/intervention-list.module';
+import {InterventionListComponent} from './intervention-list/intervention-list.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import {InterventionBuildingModule} from './intervention-building/intervention-b
     InterventionBuildingComponent,
     PreventionSurveyComponent,
     ManagementAddressComponent,
+    InterventionListComponent,
   ],
   imports: [
     SharedModule,
@@ -42,6 +46,7 @@ import {InterventionBuildingModule} from './intervention-building/intervention-b
     InterventionReportModule,
     InterventionSurveyModule,
     InterventionBuildingModule,
+    InterventionListModule,
     PreventionSurveyModule,
     ManagementAddressModule,
     AppRoutingModule

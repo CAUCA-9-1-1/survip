@@ -1,0 +1,10 @@
+<md-nav-list>
+  <md-list-item *ngFor="let inspec of inspections" (click)="console.log('dammit')">
+    <md-icon md-list-icon>folder</md-icon>
+    <h2 md-line>{{inspec.address}}</h2>
+    <p md-line>
+      test
+    </p>
+  </md-list-item>
+</md-nav-list>
+<app-toolbar class="bottom-menu"> </app-toolbar>

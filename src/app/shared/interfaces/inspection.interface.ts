@@ -7,4 +7,6 @@ export class Inspection {
   idSurvey: string;
   idBuilding: string;
   idInterventionPlan: string;
+
+  address: string;
 }

@@ -9,20 +9,16 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
 
   private items = [{
-    name: 'À faire',
-    path: '/intervention/survey'
+    name: 'Liste',
+    path: '/intervention/list'
   },
   {
     name: 'Carto',
     path: '/intervention/maps'
   },
   {
-    name: 'Recherche',
+    name: 'Visualiser',
     path: '/intervention/report'
-  },
-  {
-    name: 'Prev.',
-    path: '/prevention/survey'
   }];
 
   constructor(private router: Router) { }
