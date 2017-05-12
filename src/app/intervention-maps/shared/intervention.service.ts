@@ -21,11 +21,12 @@ export class InterventionService {
       const features = [];
 
       for (const inspect of inspections) {
-        features.push(this.inspectionToMaps(inspect.id, inspect.name.fr, {
+        features.push(this.inspectionToMaps(inspect.id, inspect.name['fr'], {
           idRiskLevel: inspect.idRiskLevel,
+          idInspection: inspect.id,
           idSurvey: inspect.idSurvey,
           idInterventionPlan: inspect.idInterventionPlan,
-        }, inspect.geojson.coordinates));
+        }, inspect.geojson['coordinates']));
       }
 
       this.setFeatures(features);

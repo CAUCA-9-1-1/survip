@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 
-import { provideContextServiceOptions } from 'igo2';
-
 import { SharedModule } from '../shared/shared.module';
 import { InterventionLayerDirective } from './intervention-layer/intervention-layer.directive';
 import { InterventionService } from './shared/intervention.service';

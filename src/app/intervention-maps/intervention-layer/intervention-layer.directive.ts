@@ -117,7 +117,7 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
       if (this.riskCode[properties.idRiskLevel] === 3 || this.riskCode[properties.idRiskLevel] === 4) {
         this.router.navigate(['/intervention/survey', properties.idInterventionPlan]);
       } else {
-        this.router.navigate(['/prevention/survey', properties.idSurvey]);
+        this.router.navigate(['/prevention/survey', properties.idInspection]);
       }
     }
   }

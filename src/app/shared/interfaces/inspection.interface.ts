@@ -5,5 +5,6 @@ export class Inspection {
   geojson: object;
   idRiskLevel: string;
   idSurvey: string;
+  idBuilding: string;
   idInterventionPlan: string;
 }
