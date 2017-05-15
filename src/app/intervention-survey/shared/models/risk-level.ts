@@ -3,4 +3,5 @@ export class RiskLevel {
   name: string;
   color: string;
   code: string;
+  description: string;
 }
