@@ -18,7 +18,7 @@ import {InterventionPlanCourse} from '../shared/models/intervention-plan-course'
 export class BuildingComponent implements OnInit {
   @Input() plan: InterventionPlan;
   courses: InterventionPlanCourse[];
-  riskLevels: RiskLevel[];
+  riskLevel: RiskLevel;
   planForm: FormGroup;
   idRiskLevel: string;
 
@@ -29,7 +29,6 @@ export class BuildingComponent implements OnInit {
     private riskLevelService: RiskLevelService,
     private courseService: InterventionPlanCourseService
   ) {
-    this.loadRiskLevels();
     this.createForm();
     this.startWatchingForm();
   }
@@ -57,9 +56,9 @@ export class BuildingComponent implements OnInit {
       .subscribe(() => this.saveIfValid());
   }
 
-  loadRiskLevels() {
-    this.riskLevelService.getAll()
-      .subscribe(result => this.riskLevels = result);
+  loadRiskLevel() {
+    this.riskLevelService.getById(this.mainBuilding.idRiskLevel)
+      .subscribe(result => this.riskLevel = result);
   }
 
   loadCourses() {
@@ -73,6 +72,7 @@ export class BuildingComponent implements OnInit {
   ngOnInit() {
     this.setValues();
     this.loadCourses();
+    this.loadRiskLevel();
   }
 
   createForm() {
