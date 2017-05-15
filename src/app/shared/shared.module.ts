@@ -10,7 +10,8 @@ import {
   IgoModule,
   LanguageLoader,
   provideLanguageService,
-  provideContextServiceOptions } from 'igo2';
+  provideContextServiceOptions
+} from 'igo2';
 
 import {MenuComponent} from './components/menu/menu.component';
 import {MenuItemComponent} from './components/menu-item/menu-item.component';
@@ -27,7 +28,8 @@ import {SearchListComponent} from './components/search-list/search-list.componen
 import {FilterByPipe} from './pipes/filter.pipe';
 import {CardLayoutComponent} from '../intervention-survey/card-layout/card-layout.component';
 import {CardLayoutFactoryDirective} from '../intervention-survey/shared/control-factory.directive';
-import { PinchZoomDirective } from './directives/pinch-zoom.directive';
+import {PinchZoomDirective} from './directives/pinch-zoom.directive';
+import {FullscreenDialogComponent} from './components/fullscreen-dialog/fullscreen-dialog.component';
 
 export function translateLoader(http: Http) {
   return new LanguageLoader(http, './assets/locale/', '.json');
@@ -51,6 +53,7 @@ export function translateLoader(http: Http) {
     ToolbarComponent,
     ToolbarBackComponent,
     WebcamComponent,
+    FullscreenDialogComponent,
     YesNoDialogComponent,
     SearchBoxComponent,
     SearchListComponent,
@@ -61,6 +64,7 @@ export function translateLoader(http: Http) {
   ],
   entryComponents: [
     WebcamComponent,
+    FullscreenDialogComponent,
     YesNoDialogComponent,
     SearchListComponent
   ],
