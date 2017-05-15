@@ -12,7 +12,7 @@
     </button>
   </ng-container>
   <ng-container *ngIf="source">
-    <img #takePictureImage src="{{source}}" />
+    <img #takePictureImage src="{{source}}" appPinchZoom />
   </ng-container>
   <input type="file" #fileLoader (change)="onSelectFile($event);" />
 </div>
