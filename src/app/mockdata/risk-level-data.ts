@@ -7,7 +7,8 @@ export class RiskLevelData {
         'idLanguageContent': ''
       },
       'idLanguageContentName': '9cf5033c-2ce1-4106-8d6c-f3d665806971',
-      'code': -1
+      'code': -1,
+      'description': 'Non défini'
     },
     {
       'color': 'Black',
@@ -16,7 +17,8 @@ export class RiskLevelData {
         'idLanguageContent': ''
       },
       'idLanguageContentName': '04ff091a-3e72-44af-bfc8-c426841c0eaf',
-      'code': 0
+      'code': 0,
+      'description': 'Indéterminé'
     },
     {
       'color': 'Green',
@@ -25,7 +27,8 @@ export class RiskLevelData {
         'idLanguageContent': ''
       },
       'idLanguageContentName': '2abcf4b6-1da9-4fc9-a075-b06ffba76eea',
-      'code': 1
+      'code': 1,
+      'description': 'Faible'
     },
     {
       'color': 'Yellow',
@@ -34,7 +37,8 @@ export class RiskLevelData {
         'idLanguageContent': ''
       },
       'idLanguageContentName': '916660f1-4a7e-45a1-900f-5c48f085565a',
-      'code': 2
+      'code': 2,
+      'description': 'Moyen'
     },
     {
       'color': 'Orange',
@@ -43,7 +47,8 @@ export class RiskLevelData {
         'idLanguageContent': ''
       },
       'idLanguageContentName': '81365c88-806f-4b13-9679-914043f16351',
-      'code': 3
+      'code': 3,
+      'description': 'Élevé'
     },
     {
       'color': 'Red',
@@ -52,7 +57,8 @@ export class RiskLevelData {
         'idLanguageContent': ''
       },
       'idLanguageContentName': 'a52e7d5d-90bf-4466-8eed-cf230c131208',
-      'code': 4
+      'code': 4,
+      'description': 'Très élevé'
     },
     {
       'color': '',
@@ -61,7 +67,8 @@ export class RiskLevelData {
         'idLanguageContent': ''
       },
       'idLanguageContentName': 'd946cd4b-646f-4fe1-b6cf-4fa8ec23cc05',
-      'code': 99
+      'code': 99,
+      'description': 'Tous les niveaux'
     }
   ];
 }
