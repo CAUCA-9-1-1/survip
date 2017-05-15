@@ -7,13 +7,13 @@ export class ContactService {
         {
             'idContact': '1',
             'name': 'Eric Mercier',
-            'phoneNumber': '418-228-8750',
+            'phoneNumber': '418-555-2767',
             'supplementaryInformation': 'Personne contact proprio'
         },
         {
             'idContact': '2',
             'name': 'Mario Vallieres',
-            'phoneNumber': '418-222-1376',
+            'phoneNumber': '418-555-1254',
             'supplementaryInformation': 'Deuxième personne ressource'
         }];
 
