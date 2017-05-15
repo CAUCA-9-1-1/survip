@@ -12,8 +12,8 @@ export class BuildingContactService {
   private headers = new Headers({'Content-Type': 'application/json'});
   constructor(private http: Http) { }
 
-  getList(): Promise<BuildingContact[]> {
-    return this.http.get(this.url)
+  getListForBuilding(idBuilding: string): Promise<BuildingContact[]> {
+    return this.http.get(this.url + '?idBuilding=' + idBuilding)
       .toPromise()
       .then(response => response.json().data as BuildingContact[])
       .catch(this.handleError);
