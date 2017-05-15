@@ -18,4 +18,17 @@ export class RiskLevelService extends BaseService {
       return result.data;
     });
   }
+
+  getById(idRiskLevel: string) {
+    return this.http.get('api/risklevel?idRiskLevel=' + idRiskLevel, this.authorization()).map((response: Response) => {
+      const result = response.json();
+
+      // this.isLogin(result, '/intervention/maps');
+      if (result.data.length > 0) {
+        return result.data[0];
+      } else {
+        return null;
+      }
+    });
+  }
 }

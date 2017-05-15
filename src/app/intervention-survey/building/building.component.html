@@ -4,11 +4,10 @@
     <div fxFlex="33" fxFlex.lt-sm="100%">
       <div class="full-width" fxLayout="row">
 
-        <md-select [disabled]="true" placeholder="Niveau de risque" [(ngModel)]="idRiskLevel">
-          <md-option *ngFor="let risk of riskLevels" [value]="risk.idRiskLevel">{{risk.color}}</md-option>
-        </md-select>
-
-        <img src="./assets/images/risk-high.png" style="height:32px; width: 32px; float: right; margin-top: 10px;" class="">
+      <md-input-container>
+        <md-icon mdSuffix [style.color]="risklevel?.color" >home</md-icon>
+        <input readonly mdInput placeholder="Niveau de rique" value="{{riskLevel?.description}}">
+      </md-input-container>
 
       </div>
       <div class="full-width" fxLayout="row">
@@ -45,7 +44,7 @@
 
       </div>
       <div class="full-width" fxLayout="row" >
-        <form novalidate (ngSubmit)="onSubmit(planForm)" [formGroup]="planForm">
+        <form novalidate (ngSubmit)="onSubmit(planForm)" [formGroup]="planForm" style="padding:0px; margin-top:-3px">
           <app-search-box
             [dataService]="laneService"
             [descriptionField]="'fullNameForFireCad'"
