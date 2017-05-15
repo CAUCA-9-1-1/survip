@@ -33,6 +33,7 @@ export class InterventionBuildingComponent implements OnInit {
   private sub: any;
   private id: string;
   private building: InterventionPlanBuilding;
+  private hazardousMaterials: BuildingHazardousMaterial[];
 
   constructor(
     private route: ActivatedRoute,
@@ -60,7 +61,10 @@ export class InterventionBuildingComponent implements OnInit {
 
   private loadInterventionPlanBuilding() {
     this.buildingService.getInterventionPlanBuilding(this.id)
-      .then(building => this.building = building);
+      .then(building => {
+        this.building = building;
+        this.loadHazardousMaterials();
+      });
   }
 
   onBuildingMaterialDeleted(deletedMat: BuildingHazardousMaterial) {
@@ -74,17 +78,21 @@ export class InterventionBuildingComponent implements OnInit {
   }
   onBuildingMaterialAdd() {
     const materials: BuildingHazardousMaterial[] = [];
-    Object.assign(materials, this.building.building.hazardousMaterials);
+    Object.assign(materials, this.hazardousMaterials);
     const material = new BuildingHazardousMaterial();
     material.id = UUID.UUID();
     materials.push(material);
-    this.building.building.hazardousMaterials = materials;
+    this.hazardousMaterials = materials;
   }
   private deleteMaterial(deletedMat: BuildingHazardousMaterial) {
     this.matService.delete(deletedMat)
       .then(() =>
-        this.building.building.hazardousMaterials = this.building.building.hazardousMaterials
+        this.hazardousMaterials = this.hazardousMaterials
           .filter(contact => contact.id !== deletedMat.id));
+  }
+  private loadHazardousMaterials() {
+    this.matService.getListForBuilding(this.building.idBuilding)
+      .then(hazMats => this.hazardousMaterials = hazMats);
   }
 
   onBuildingContactDeleted(deletedContact: BuildingContact) {

@@ -24,7 +24,7 @@
       </div>
       <div *ngSwitchCase="'dangerousMaterial'">
         <app-card-layout title="Matières dangeureuses"
-                         [items]="building.building.hazardousMaterials"
+                         [items]="hazardousMaterials"
                          [componentType]="'DangerousMaterialComponent'"
                          (deleteClick)="onBuildingMaterialDeleted($event)"
                          (completionClick)="onCompleteSection($event)"

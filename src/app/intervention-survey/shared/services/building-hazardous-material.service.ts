@@ -12,8 +12,8 @@ export class BuildingHazardousMaterialService {
   private headers = new Headers({'Content-Type': 'application/json'});
   constructor(private http: Http) { }
 
-  getList(): Promise<BuildingHazardousMaterial[]> {
-    return this.http.get(this.url)
+  getListForBuilding(idBuilding: string): Promise<BuildingHazardousMaterial[]> {
+    return this.http.get(this.url + '?idBuilding=' + idBuilding)
       .toPromise()
       .then(response => response.json().data as BuildingHazardousMaterial[])
       .catch(this.handleError);

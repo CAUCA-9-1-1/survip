@@ -50,6 +50,6 @@ export class BuildingHazardousMaterialData {
       'otherInformation': 'Autres.',
       'createdOn': '',
       'isActive': true,
-    },
+    }
   ];
 }
