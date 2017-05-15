@@ -1,8 +1,9 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { MdSidenav } from '@angular/material';
-import { UUID } from 'angular2-uuid';
+import {Component, ViewChild, OnInit} from '@angular/core';
+import {MdSidenav} from '@angular/material';
+import {Observable} from 'rxjs/Rx';
+import {UUID} from 'angular2-uuid';
 
-import { WindowRefService } from '../shared/services/window-ref.service';
+import {WindowRefService} from '../shared/services/window-ref.service';
 import {DialogsService} from '../shared/services/dialogs.service';
 import {MenuItem} from '../shared/interfaces/menu-item.interface';
 import {InterventionPlanFireHydrant} from './shared/models/intervention-plan-fire-hydrant';
@@ -77,6 +78,20 @@ export class InterventionSurveyComponent implements OnInit {
       this.align = 'start';
       this.sidenav.open();
     }
+
+    Observable.fromEvent(this.windowRef.nativeWindow, 'resize')
+      .debounceTime(500)
+      .subscribe((e) => {
+        if (this.windowRef.nativeWindow.innerWidth >= 700 && this.mode !== 'start') {
+          this.mode = 'side';
+          this.align = 'start';
+          this.sidenav.open();
+        } else if (this.windowRef.nativeWindow.innerWidth < 700 && this.mode !== 'over') {
+          this.mode = 'over';
+          this.align = 'end';
+          this.sidenav.close();
+        }
+      });
   }
 
   onFireHydrantDeleted(deletedHydrant: InterventionPlanFireHydrant) {
