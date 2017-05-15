@@ -1,6 +1,5 @@
 import {BuildingContact} from './building-contact';
 import {BuildingPersonRequiringAssistance} from './building-person-requiring-assistance';
-import {BuildingHazardousMaterial} from './building-hazardous-material';
 
 export class Building {
   id: string;
@@ -21,5 +20,4 @@ export class Building {
 
   contacts: BuildingContact[];
   personsRequiringAssistance: BuildingPersonRequiringAssistance[];
-  hazardousMaterials: BuildingHazardousMaterial[];
 }
