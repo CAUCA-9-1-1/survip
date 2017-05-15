@@ -16,11 +16,15 @@ export class HazardousMaterialService {
       .catch(this.handleError);
   }
 
-  getDescriptionById(id: string): Promise<string> {
-    return this.http.get(this.url + '?id=' + id)
-      .toPromise()
-      .then(response => this.getName(response.json().data as HazardousMaterial[]))
-      .catch(this.handleError);
+  getDescriptionById(id: string) {
+    if (id === null || id === '') {
+      return (new Promise((resolve, reject) => resolve(''))).then(() => '');
+    } else {
+      return this.http.get(this.url + '?id=' + id)
+        .toPromise()
+        .then(response => this.getName(response.json().data as HazardousMaterial[]))
+        .catch(this.handleError);
+    }
   }
 
   private getName(lanes: HazardousMaterial[]): string {
