@@ -10,6 +10,12 @@
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "ca.cauca.surviprevention"
         },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "ca.cauca.surviprevention"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "ca.cauca.surviprevention"
+        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "ca.cauca.surviprevention"
         }
