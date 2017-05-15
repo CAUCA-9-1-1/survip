@@ -18,8 +18,8 @@ export class DialogsService {
     let dialogRef: MdDialogRef<FullscreenDialogComponent>;
 
     dialogRef = this.dialog.open(FullscreenDialogComponent, {
-      width: (this.windowRef.nativeWindow.screen.width < 700 ? '100%' : '95%'),
-      height: (this.windowRef.nativeWindow.screen.width < 700 ? '100%' : '95%'),
+      width: (this.windowRef.nativeWindow.innerWidth < 700 ? '100%' : '95%'),
+      height: (this.windowRef.nativeWindow.innerWidth < 700 ? '100%' : '95%'),
     });
     dialogRef.componentInstance.title = title;
     dialogRef.componentInstance.content = content;
