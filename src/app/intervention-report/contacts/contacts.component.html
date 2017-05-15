@@ -1,15 +1,12 @@
-<div>
-    <table>
-        <tr>
-            <th>{{'name' | translate}}</th>
-            <th>Numéro</th>
-            <th>Détails</th>
-        </tr>
-        <tr *ngFor="let contact of contacts">
-            <td>{{contact.name}}</td>
-            <td>{{contact.phoneNumber}}</td>
-            <td>{{contact.supplementaryInformation}}</td>
-        </tr>
-    </table>
-</div>
-
+<table style="width:100%; margin-top: 10px; margin-bottom: 10px">
+  <tr>
+      <th>{{'name' | translate}}</th>
+      <th>Numéro</th>
+      <th>Détails</th>
+  </tr>
+  <tr *ngFor="let contact of contacts">
+      <td>{{contact.name}}</td>
+      <td>{{contact.phoneNumber}}</td>
+      <td>{{contact.supplementaryInformation}}</td>
+  </tr>
+</table>
