@@ -9,8 +9,8 @@ export class BuildingPersonRequiringAssistanceService {
   private headers = new Headers({'Content-Type': 'application/json'});
   constructor(private http: Http) { }
 
-  getList(): Promise<BuildingPersonRequiringAssistance[]> {
-    return this.http.get(this.url)
+  getListForBuilding(idBuilding: string): Promise<BuildingPersonRequiringAssistance[]> {
+    return this.http.get(this.url + '?idBuilding=' + idBuilding)
       .toPromise()
       .then(response => response.json().data as BuildingPersonRequiringAssistance[])
       .catch(this.handleError);

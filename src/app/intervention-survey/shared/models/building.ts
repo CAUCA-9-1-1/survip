@@ -1,6 +1,3 @@
-import {BuildingContact} from './building-contact';
-import {BuildingPersonRequiringAssistance} from './building-person-requiring-assistance';
-
 export class Building {
   id: string;
   isActive: boolean;
@@ -17,7 +14,4 @@ export class Building {
   civicLetter: string;
   civicSupp: string;
   civicLetterSupp: string;
-
-  contacts: BuildingContact[];
-  personsRequiringAssistance: BuildingPersonRequiringAssistance[];
 }

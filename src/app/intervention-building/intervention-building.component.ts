@@ -11,7 +11,8 @@ import {BuildingPersonRequiringAssistance} from '../intervention-survey/shared/m
 import {BuildingHazardousMaterial} from '../intervention-survey/shared/models/building-hazardous-material';
 import {BuildingHazardousMaterialService} from '../intervention-survey/shared/services/building-hazardous-material.service';
 import {BuildingContactService} from '../intervention-survey/shared/services/building-contact.service';
-import {BuildingPersonRequiringAssistanceService} from '../intervention-survey/shared/services/building-person-requiring-assistance.service';
+import {
+  BuildingPersonRequiringAssistanceService} from '../intervention-survey/shared/services/building-person-requiring-assistance.service';
 import {InterventionPlanBuildingService} from './shared/services/intervention-plan-building.service';
 
 @Component({
@@ -34,6 +35,8 @@ export class InterventionBuildingComponent implements OnInit {
   private id: string;
   private building: InterventionPlanBuilding;
   private hazardousMaterials: BuildingHazardousMaterial[];
+  private personsRequiringAssistance: BuildingPersonRequiringAssistance[];
+  private contacts: BuildingContact[];
 
   constructor(
     private route: ActivatedRoute,
@@ -64,6 +67,8 @@ export class InterventionBuildingComponent implements OnInit {
       .then(building => {
         this.building = building;
         this.loadHazardousMaterials();
+        this.loadContacts();
+        this.loadPersons();
       });
   }
 
@@ -81,6 +86,7 @@ export class InterventionBuildingComponent implements OnInit {
     Object.assign(materials, this.hazardousMaterials);
     const material = new BuildingHazardousMaterial();
     material.id = UUID.UUID();
+    material.idBuilding = this.building.idBuilding;
     materials.push(material);
     this.hazardousMaterials = materials;
   }
@@ -106,15 +112,20 @@ export class InterventionBuildingComponent implements OnInit {
   }
   onBuildingContactAdd() {
     const contacts: BuildingContact[] = [];
-    Object.assign(contacts, this.building.building.contacts);
+    Object.assign(contacts, this.contacts);
     const contact = new BuildingContact();
     contact.id = UUID.UUID();
+    contact.idBuilding = this.building.idBuilding;
     contacts.push(contact);
-    this.building.building.contacts = contacts;
+    this.contacts = contacts;
   }
   private deleteContact(deletedContact: BuildingContact) {
     this.buildingContactService.delete(deletedContact)
-      .then(() => this.building.building.contacts = this.building.building.contacts.filter(contact => contact.id !== deletedContact.id));
+      .then(() => this.contacts = this.contacts.filter(contact => contact.id !== deletedContact.id));
+  }
+  private loadContacts() {
+    this.buildingContactService.getListForBuilding(this.building.idBuilding)
+      .then(contacts => this.contacts = contacts);
   }
 
   onBuildingPnapDeleted(deletePnap: BuildingPersonRequiringAssistance) {
@@ -128,16 +139,21 @@ export class InterventionBuildingComponent implements OnInit {
   }
   onBuildingPnapAdd() {
     const pnaps: BuildingPersonRequiringAssistance[] = [];
-    Object.assign(pnaps, this.building.building.personsRequiringAssistance);
+    Object.assign(pnaps, this.personsRequiringAssistance);
     const pnap = new BuildingPersonRequiringAssistance();
     pnap.id = UUID.UUID();
+    pnap.idBuilding = this.building.idBuilding;
     pnaps.push(pnap);
-    this.building.building.personsRequiringAssistance = pnaps;
+    this.personsRequiringAssistance = pnaps;
   }
   private deletePnap(deletePnap: BuildingPersonRequiringAssistance) {
     this.pnapService.delete(deletePnap)
-      .then(() => this.building.building.personsRequiringAssistance = this.building.building.personsRequiringAssistance
+      .then(() => this.personsRequiringAssistance = this.personsRequiringAssistance
         .filter(pnap => pnap.id !== deletePnap.id));
+  }
+  private loadPersons() {
+    this.pnapService.getListForBuilding(this.building.idBuilding)
+      .then(pnaps => this.personsRequiringAssistance = pnaps);
   }
 
   select(item: MenuItem) {

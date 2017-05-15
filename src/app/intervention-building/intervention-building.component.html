@@ -8,7 +8,7 @@
     <div [ngSwitch]="selectedMenu">
       <div *ngSwitchCase="'pnap'">
         <app-card-layout title="P.N.A.P."
-                         [items]="building.building.personsRequiringAssistance"
+                         [items]="personsRequiringAssistance"
                          [componentType]="'PersonRequiringAssistanceComponent'"
                          (deleteClick)="onBuildingPnapDeleted($event)"
                          (completionClick)="onCompleteSection($event)"
@@ -16,7 +16,7 @@
       </div>
       <div *ngSwitchCase="'contacts'">
         <app-card-layout title="Contacts"
-                         [items]="building.building.contacts"
+                         [items]="contacts"
                          [componentType]="'ContactComponent'"
                          (deleteClick)="onBuildingContactDeleted($event)"
                          (completionClick)="onCompleteSection($event)"

@@ -2,8 +2,7 @@ export class BuildingPersonRequiringAssistanceData {
   public data: any[] = [
     {
       'id': '1',
-      'idBuilding': '3',
-      'idBuildingInformation': '3',
+      'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b50',
       'idPersonRequiringAssistanceType': 'd2a08be0-8779-4be3-8c4e-91ce421d2242',
       'dayResidentCount': 1,
       'eveningResidentCount': 3,
@@ -22,8 +21,7 @@ export class BuildingPersonRequiringAssistanceData {
     },
     {
       'id': '2',
-      'idBuilding': '3',
-      'idBuildingInformation': '3',
+      'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b50',
       'idPersonRequiringAssistanceType': 'd2a08be0-8779-4be3-8c4e-91ce421d2242',
       'dayResidentCount': 21,
       'eveningResidentCount': 23,
@@ -42,8 +40,7 @@ export class BuildingPersonRequiringAssistanceData {
     },
     {
       'id': '3',
-      'idBuilding': '3',
-      'idBuildingInformation': '3',
+      'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b50',
       'idPersonRequiringAssistanceType': 'd2a08be0-8779-4be3-8c4e-91ce421d2242',
       'dayResidentCount': 6,
       'eveningResidentCount': 6,
@@ -62,8 +59,7 @@ export class BuildingPersonRequiringAssistanceData {
     },
     {
       'id': '4',
-      'idBuilding': '3',
-      'idBuildingInformation': '3',
+      'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b50',
       'idPersonRequiringAssistanceType': 'd2a08be0-8779-4be3-8c4e-91ce421d2242',
       'dayResidentCount': 1,
       'eveningResidentCount': 1,
