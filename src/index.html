@@ -17,18 +17,10 @@
       top: 0;
       left: 0;
       z-index: -1;
-      text-align: center;
-      background: #fff;
-    }
-
-    .splash-screen span {
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle;
-    }
-
-    .splash-screen img {
-      vertical-align: middle;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-image: url(./assets/images/splashscreen.png);
     }
 
     app-root:empty + .splash-screen {
@@ -40,8 +32,6 @@
 <body>
   <app-root></app-root>
   <div class="splash-screen">
-    <span></span>
-    <img src="./assets/images/splashscreen.png" />
   </div>
 </body>
 </html>
