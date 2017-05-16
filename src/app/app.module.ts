@@ -22,6 +22,8 @@ import {InterventionBuildingComponent} from './intervention-building/interventio
 import {InterventionBuildingModule} from './intervention-building/intervention-building.module';
 import {InterventionListModule} from './intervention-list/intervention-list.module';
 import {InterventionListComponent} from './intervention-list/intervention-list.component';
+import {PreventionReportModule} from './prevention-report/prevention-report.module';
+import {PreventionReportComponent} from './prevention-report/prevention-report.component';
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import {InterventionListComponent} from './intervention-list/intervention-list.c
     InterventionSurveyComponent,
     InterventionBuildingComponent,
     PreventionSurveyComponent,
+    PreventionReportComponent,
     ManagementAddressComponent,
     InterventionListComponent,
   ],
@@ -48,6 +51,7 @@ import {InterventionListComponent} from './intervention-list/intervention-list.c
     InterventionBuildingModule,
     InterventionListModule,
     PreventionSurveyModule,
+    PreventionReportModule,
     ManagementAddressModule,
     AppRoutingModule
   ],
