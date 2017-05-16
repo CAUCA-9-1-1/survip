@@ -2,7 +2,10 @@ import {Directive, Self, OnInit, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
-import {Feature, MapBrowserComponent, IgoMap, VectorLayer} from 'igo2';
+import {
+  Feature, FeatureDataSource, MapBrowserComponent,
+  IgoMap, VectorLayer
+} from 'igo2';
 
 import {InterventionService} from '../../shared/services/intervention.service';
 import {RiskLevelService} from '../../shared/services/risk-level.service';
@@ -56,16 +59,16 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
   }
 
   private addLayer() {
-    /*const interventionLayer = new VectorLayer({
-      id: 'interventions',
-      ol: ol.source.Vector,
-      options: {
-        title: 'interventions',
-        type: 'vector'
-      }
+    const interventionDataSource = new FeatureDataSource({
+      title: 'interventions'
     });
+
+    const interventionLayer = new VectorLayer( interventionDataSource, {
+      zIndex: 20
+    });
+
     this.map.addLayer(interventionLayer, false);
-    this.interventionSource = interventionLayer.olLayer.getSource();*/
+    this.interventionSource = interventionDataSource.ol;
 
     this.features$$ = this.interventionService.features$
       .subscribe(features => this.handleFeatures(features));
