@@ -139,7 +139,5 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
 
     this.onChange(this.imgRef.nativeElement.src);
     this.change.emit(this.imgRef.nativeElement.src);
-
-    dialogRef.close();
   }
 }
