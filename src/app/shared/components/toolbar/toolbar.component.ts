@@ -10,15 +10,18 @@ export class ToolbarComponent implements OnInit {
 
   private items = [{
     name: 'Liste',
-    path: '/intervention/list'
+    path: '/intervention/list',
+    popMenu: false
   },
   {
     name: 'Carto',
-    path: '/intervention/maps'
+    path: '/intervention/maps',
+    popMenu: false
   },
   {
-    name: 'Visualiser',
-    path: '/intervention/report'
+    name: 'Visualiser...',
+    path: '',
+    popMenu: true
   }];
 
   constructor(private router: Router) { }
