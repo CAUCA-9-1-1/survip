@@ -14,6 +14,7 @@ import {BuildingContactService} from '../intervention-survey/shared/services/bui
 import {
   BuildingPersonRequiringAssistanceService} from '../intervention-survey/shared/services/building-person-requiring-assistance.service';
 import {InterventionPlanBuildingService} from './shared/services/intervention-plan-building.service';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-intervention-building',
@@ -60,6 +61,20 @@ export class InterventionBuildingComponent implements OnInit {
       this.align = 'start';
       this.sidenav.open();
     }
+
+    Observable.fromEvent(this.windowRef.nativeWindow, 'resize')
+      .debounceTime(500)
+      .subscribe((e) => {
+        if (this.windowRef.nativeWindow.innerWidth >= 700 && this.mode !== 'start') {
+          this.mode = 'side';
+          this.align = 'start';
+          this.sidenav.open();
+        } else if (this.windowRef.nativeWindow.innerWidth < 700 && this.mode !== 'over') {
+          this.mode = 'over';
+          this.align = 'end';
+          this.sidenav.close();
+        }
+      });
   }
 
   private loadInterventionPlanBuilding() {
