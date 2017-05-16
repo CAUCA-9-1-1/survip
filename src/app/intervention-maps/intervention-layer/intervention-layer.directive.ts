@@ -1,17 +1,16 @@
-import { Directive, Self, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import {Directive, Self, OnInit, OnDestroy} from '@angular/core';
+import {Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 
-import { Feature, MapBrowserComponent, IgoMap, VectorLayer } from 'igo2';
+import {Feature, MapBrowserComponent, IgoMap, VectorLayer} from 'igo2';
 
-import { InterventionService } from '../../shared/services/intervention.service';
-import { RiskLevelService } from '../../shared/services/risk-level.service';
+import {InterventionService} from '../../shared/services/intervention.service';
+import {RiskLevelService} from '../../shared/services/risk-level.service';
 
 @Directive({
   selector: '[appInterventionLayer]'
 })
 export class InterventionLayerDirective implements OnInit, OnDestroy {
-
   private component: MapBrowserComponent;
   private interventionSource: ol.source.Vector;
   private features$$: Subscription;
@@ -30,10 +29,12 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
     return this.component.map;
   }
 
-  constructor(@Self() component?: MapBrowserComponent,
-              private router?: Router,
-              private interventionService?: InterventionService,
-              private riskLevelService?: RiskLevelService) {
+  constructor(
+    @Self() component?: MapBrowserComponent,
+    private router?: Router,
+    private interventionService?: InterventionService,
+    private riskLevelService?: RiskLevelService
+  ) {
     if (component) {
       this.component = component;
 
@@ -55,28 +56,33 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
   }
 
   private addLayer() {
-    const interventionLayer = new VectorLayer({
-      title: 'interventions',
-      type: 'vector',
-      zIndex: 20
+    /*const interventionLayer = new VectorLayer({
+      id: 'interventions',
+      ol: ol.source.Vector,
+      options: {
+        title: 'interventions',
+        type: 'vector'
+      }
     });
     this.map.addLayer(interventionLayer, false);
-    this.interventionSource = interventionLayer.olLayer.getSource();
+    this.interventionSource = interventionLayer.olLayer.getSource();*/
 
     this.features$$ = this.interventionService.features$
       .subscribe(features => this.handleFeatures(features));
 
-    this.component.map.olMap.getViewport().addEventListener('click', (e) => {
-      const eventPixel = this.component.map.olMap.getEventPixel(e);
+    this.map.ol.getViewport().addEventListener('click', (e) => {
+      const eventPixel = this.map.ol.getEventPixel(e);
 
-      this.component.map.olMap.forEachFeatureAtPixel(eventPixel, (feature, layer) => {
+      this.map.ol.forEachFeatureAtPixel(eventPixel, (feature, layer) => {
         this.click(feature);
       });
     });
   }
 
   private handleFeatures(features: Feature[]) {
-    this.interventionSource.clear();
+    if (this.interventionSource) {
+      this.interventionSource.clear();
+    }
 
     if (!features) { return; }
 
@@ -92,7 +98,9 @@ export class InterventionLayerDirective implements OnInit, OnDestroy {
 
     olFeature.setStyle(style);
 
-    this.interventionSource.addFeature(olFeature);
+    if (this.interventionSource) {
+      this.interventionSource.addFeature(olFeature);
+    }
   }
 
   private createFeatureStyle(feature: Feature): ol.style.Style {
