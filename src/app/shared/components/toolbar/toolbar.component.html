@@ -1,5 +1,12 @@
 <md-toolbar>
   <ng-template ngFor let-item [ngForOf]="items">
-    <button (click)="goto(item.path)" md-button>{{item.name}}</button>
+    <button *ngIf="item.popMenu === false" (click)="goto(item.path)" md-button>{{item.name}}</button>
+    <button *ngIf="item.popMenu === true" [mdMenuTriggerFor]="appMenu"  md-button>{{item.name}}</button>
   </ng-template>
 </md-toolbar>
+
+
+<md-menu #appMenu="mdMenu">
+  <button md-menu-item (click)="goto('/intervention/report')">Fiche d'intervention</button>
+  <button md-menu-item (click)="goto('/prevention/report')">Questionnaire d'inspection</button>
+</md-menu>
