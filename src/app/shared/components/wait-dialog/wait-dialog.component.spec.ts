@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import {TestModule} from '../../../test.module';
-import {FullscreenDialogComponent} from './fullscreen-dialog.component';
+import {WaitDialogComponent} from './wait-dialog.component';
 
 describe('CloseDialogComponent', () => {
-  let component: FullscreenDialogComponent;
-  let fixture: ComponentFixture<FullscreenDialogComponent>;
+  let component: WaitDialogComponent;
+  let fixture: ComponentFixture<WaitDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,7 +15,7 @@ describe('CloseDialogComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FullscreenDialogComponent);
+    fixture = TestBed.createComponent(WaitDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
