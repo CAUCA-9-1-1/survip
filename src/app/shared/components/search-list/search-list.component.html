@@ -6,17 +6,21 @@
           <input mdInput type="search" placeholder="Recherche..." floatPlaceholder="always" class="search-input" [(ngModel)]="searchExpression">
         </md-input-container>
       </div>
+
       <div *ngIf="items">
-      <md-list-item class="search-item" *ngFor="let item of items | filterBy: { filter : searchExpression, field : this.descriptionField}" (click)="clickOnItem(item[keyField])">
-        <div class="search-item-text" fxFlex>
-          {{item[descriptionField]}}
+        <div *ngFor="let item of items | filterBy: { filter : searchExpression, field : this.descriptionField}">
+
+          <md-list-item class="search-item"  (click)="clickOnItem(item[keyField])">
+
+            <h3 md-line>{{item[descriptionField]}}</h3>
+            <md-icon>chevron_right</md-icon>
+
+          </md-list-item>
+
+          <md-divider></md-divider>
         </div>
-        <div class="search-item-icon" fxFlex="32px">
-          <md-icon>chevron_right</md-icon>
-        </div>
-        <md-divider></md-divider>
-      </md-list-item>
       </div>
+
     </md-nav-list>
     <div style="clear:both;"></div>
   </div>
