@@ -3,6 +3,7 @@
   <md-card-content>
     <div fxLayout="row" class="line" class="full-width">
       <app-take-picture
+        [allowCamera]="false"
         [allowImageSelection]="false"
         [source]="picture?.picture"></app-take-picture>
     </div>
