@@ -9,11 +9,16 @@ import {WaitDialogComponent} from '../components/wait-dialog/wait-dialog.compone
 
 @Injectable()
 export class DialogsService {
+  private lastDialog = [];
 
   constructor(
     private dialog: MdDialog,
     private windowRef: WindowRefService
   ) { }
+
+  public close() {
+    this.lastDialog[(this.lastDialog.length - 1)].close(true);
+  }
 
   public confirm(title: string, question: string): Observable<boolean> {
     let dialogRef: MdDialogRef<YesNoDialogComponent>;
@@ -21,6 +26,8 @@ export class DialogsService {
     dialogRef = this.dialog.open(YesNoDialogComponent);
     dialogRef.componentInstance.title = title;
     dialogRef.componentInstance.question = question;
+
+    this.lastDialog.push(dialogRef);
 
     return dialogRef.afterClosed();
   }
@@ -35,16 +42,18 @@ export class DialogsService {
     dialogRef.componentInstance.title = title;
     dialogRef.componentInstance.content = content;
 
+    this.lastDialog.push(dialogRef);
+
     return dialogRef.afterClosed();
   }
 
   public wait() {
     let dialogRef: MdDialogRef<WaitDialogComponent>;
 
-    dialogRef = this.dialog.open(WaitDialogComponent, {
-      width: '200px',
-    });
+    dialogRef = this.dialog.open(WaitDialogComponent);
 
-    return dialogRef;
+    this.lastDialog.push(dialogRef);
+
+    return dialogRef.afterClosed();
   }
 }
