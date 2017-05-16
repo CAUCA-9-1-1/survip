@@ -5,7 +5,7 @@
       <md-icon>image</md-icon>
     </button>
   </ng-container>
-  <ng-container *ngIf="useCamera">
+  <ng-container *ngIf="allowCamera">
     <button class="add-picture-button" md-raised-button title="{{'takeImage' | translate}}" (click)="take($event);">
       <span>{{'take' | translate}}</span>
       <md-icon>photo_camera</md-icon>

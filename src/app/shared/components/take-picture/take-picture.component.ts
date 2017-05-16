@@ -42,11 +42,11 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
   private _horizontal = false;
 
   @Input()
-  get useCamera(): boolean { return this._useCamera; }
-  set useCamera(value: boolean) {
-    this._useCamera = value;
+  get allowCamera(): boolean { return this._allowCamera; }
+  set allowCamera(value: boolean) {
+    this._allowCamera = value;
   }
-  private _useCamera = true;
+  private _allowCamera = true;
 
   @Input()
   get allowImageSelection(): boolean { return this._allowImageSelection; }
@@ -67,7 +67,7 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
     private dialog: MdDialog
   ) {
     if (!this.windowRef.nativeWindow.cordova) {
-      this.useCamera = false;
+      this.allowCamera = false;
     }
   }
 
