@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { IgoMap, ContextService } from 'igo2';
+import {
+  IgoMap,
+  ContextService,
+  DetailedContext
+} from 'igo2';
 
 @Component({
   selector: 'app-maps',
@@ -14,6 +18,26 @@ export class InterventionMapsComponent implements OnInit {
   constructor(private contextService: ContextService) {}
 
   ngOnInit() {
+    const layer1 = {
+      'source': {
+        'title': 'Fond de carte du Québec',
+        'type': 'xyz',
+        'url': 'https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png'
+      }
+    };
+
+    const layer2 = {
+      'source': {
+        'title': 'Cauca Town',
+        'type': 'wms',
+        'url': 'https://mapgearsdev.cauca.ca/app/map/44/0361fdc9-255c-49c0-b76b-92e98d74b788.map',
+        'params': {
+          'layers': 'layer431',
+          'version': '1.3.0'
+        }
+      }
+    };
+
     this.contextService.setContext({
       'uri': 'default',
       'title': 'Default Context',
@@ -26,26 +50,7 @@ export class InterventionMapsComponent implements OnInit {
           'maxZoom': 17
         }
       },
-      'layers': [
-        {
-          'title': 'Fond de carte du Québec',
-          'type': 'xyz',
-          'source': {
-            'url': 'https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png'
-          }
-        },
-        {
-          'title': 'Cauca Town',
-          'type': 'wms',
-          'source': {
-            'url': 'https://mapgearsdev.cauca.ca/app/map/44/0361fdc9-255c-49c0-b76b-92e98d74b788.map',
-            'params': {
-              'layers': 'layer431',
-              'version': '1.3.0'
-            }
-          }
-        }
-      ]
-    });
+      'layers': [layer1, layer2]
+    } as DetailedContext);
   }
 }
