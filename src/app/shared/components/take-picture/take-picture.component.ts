@@ -7,6 +7,7 @@ import {MdDialog} from '@angular/material';
 
 import {WebcamComponent} from '../../../shared/components/webcam/webcam.component';
 import {WindowRefService} from '../../../shared/services/window-ref.service';
+import {DialogsService} from "../../services/dialogs.service";
 
 @Component({
   selector: 'app-take-picture',
@@ -54,14 +55,17 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
   }
   private _allowImageSelection = true;
 
-  @Output() beforeSelect = new EventEmitter();
-  @Output() beforeTake = new EventEmitter();
+  @Output() beforeChange = new EventEmitter();
   @Output() change = new EventEmitter();
 
   onChange: any = () => {};
   onTouched: any = () => {};
 
-  constructor(private windowRef: WindowRefService, private dialog: MdDialog) {
+  constructor(
+    private windowRef: WindowRefService,
+    private dialogService: DialogsService,
+    private dialog: MdDialog
+  ) {
     if (!this.windowRef.nativeWindow.cordova) {
       this.useCamera = false;
     }
@@ -85,7 +89,7 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
   select(e) {
     e.preventDefault();
 
-    this.beforeSelect.emit(e);
+    this.beforeChange.emit(e);
 
     if (this.windowRef.nativeWindow.cordova) {
       this.windowRef.nativeNavigator.camera.getPicture(this.onSuccess.bind(this), this.onFail.bind(this), {
@@ -100,7 +104,7 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
   take(e) {
     e.preventDefault();
 
-    this.beforeTake.emit(e);
+    this.beforeChange.emit(e);
 
     if (this.windowRef.nativeWindow.cordova) {
       this.windowRef.nativeNavigator.camera.getPicture(this.onSuccess.bind(this), this.onFail.bind(this), {
@@ -123,6 +127,8 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
   }
 
   onSuccess(imageURI) {
+    const dialogRef = this.dialogService.wait();
+
     if (this.windowRef.nativeWindow.cordova) {
       this.imgRef.nativeElement.src = 'data:image/jpeg;base64,' + imageURI;
     } else {
@@ -131,6 +137,8 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
 
     this.onChange(this.imgRef.nativeElement.src);
     this.change.emit(this.imgRef.nativeElement.src);
+
+    dialogRef.close();
   }
 
   onFail(message) {

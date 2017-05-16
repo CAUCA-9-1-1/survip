@@ -9,8 +9,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {
   IgoModule,
   LanguageLoader,
-  provideLanguageService,
-  provideContextServiceOptions
+  provideLanguageLoader,
 } from 'igo2';
 
 import {MenuComponent} from './components/menu/menu.component';
@@ -30,6 +29,7 @@ import {CardLayoutComponent} from '../intervention-survey/card-layout/card-layou
 import {CardLayoutFactoryDirective} from '../intervention-survey/shared/control-factory.directive';
 import {PinchZoomDirective} from './directives/pinch-zoom.directive';
 import {FullscreenDialogComponent} from './components/fullscreen-dialog/fullscreen-dialog.component';
+import {WaitDialogComponent} from './components/wait-dialog/wait-dialog.component';
 
 export function translateLoader(http: Http) {
   return new LanguageLoader(http, './assets/locale/', '.json');
@@ -55,6 +55,7 @@ export function translateLoader(http: Http) {
     WebcamComponent,
     FullscreenDialogComponent,
     YesNoDialogComponent,
+    WaitDialogComponent,
     SearchBoxComponent,
     SearchListComponent,
     FilterByPipe,
@@ -66,6 +67,7 @@ export function translateLoader(http: Http) {
     WebcamComponent,
     FullscreenDialogComponent,
     YesNoDialogComponent,
+    WaitDialogComponent,
     SearchListComponent
   ],
   exports: [
@@ -88,14 +90,7 @@ export function translateLoader(http: Http) {
   providers: [
     WindowRefService,
     DialogsService,
-
-    provideContextServiceOptions({
-      basePath: './contexts',
-      contextListFile: '_contexts.json'
-    }),
-    provideLanguageService({
-      loader: translateLoader
-    }),
+    provideLanguageLoader(translateLoader),
   ]
 })
 export class SharedModule { }

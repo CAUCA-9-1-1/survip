@@ -31,5 +31,6 @@
   "left": "Gauche",
   "right": "Droite",
   "ok": "OK",
-  "add": "Ajouter"
+  "add": "Ajouter",
+  "pleaseWait": "Veuillez patienter"
 }
