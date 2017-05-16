@@ -1,4 +1,117 @@
 <app-toolbar></app-toolbar>
 <div class="content-under-toolbar">
-  Borne fontaine rouge.
+
+  <md-card>
+    <md-card-title>8717, boulevard Lacroix</md-card-title>
+  </md-card>
+
+  <md-card>
+    <md-card-title>Avertisseurs de fumée</md-card-title>
+    <md-card-content>
+
+      <md-card>
+        <md-card-subtitle>Avertisseur #1</md-card-subtitle>
+        <md-card-content>
+          <div class="report-line">
+            <span class="report-line-text">Fonctionnel :</span><span class="report-line-control"><md-slide-toggle [checked]="true" disabled>Oui</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">Emplacement approprié :</span><span class="report-line-control"><md-slide-toggle [checked]="true" disabled>Oui</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">Fonctionne avec une pile :</span><span class="report-line-control"><md-slide-toggle [checked]="false" disabled>Non</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">Relié au réseau électrique :</span><span class="report-line-control"><md-slide-toggle [checked]="true" disabled>Oui</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">Relié à la centrale :</span><span class="report-line-control"><md-slide-toggle [checked]="false" disabled>Non</md-slide-toggle></span>
+          </div>
+        </md-card-content>
+      </md-card>
+
+      <md-card>
+        <md-card-subtitle>Avertisseur #2</md-card-subtitle>
+        <md-card-content>
+          <div class="report-line">
+            <span class="report-line-text">Fonctionnel :</span><span class="report-line-control"><md-slide-toggle [checked]="true" disabled>Oui</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">Emplacement approprié :</span><span class="report-line-control"><md-slide-toggle [checked]="false" disabled>Non</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">Fonctionne avec une pile :</span><span class="report-line-control"><md-slide-toggle [checked]="true" disabled>Oui</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">Relié au réseau électrique :</span><span class="report-line-control"><md-slide-toggle [checked]="false" disabled>Non</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">Relié à la centrale :</span><span class="report-line-control"><md-slide-toggle [checked]="false" disabled>Non</md-slide-toggle></span>
+          </div>
+        </md-card-content>
+      </md-card>
+
+      <md-card>
+        <md-card-content>
+          <md-input-container readonly>
+            <textarea readonly placeholder="Autres notes avertisseurs fumée" mdInput>Les avertisseurs auront besoin d'être changé d'ici deux ans.</textarea>
+          </md-input-container>
+        </md-card-content>
+      </md-card>
+
+    </md-card-content>
+  </md-card>
+
+  <md-card>
+    <md-card-title>Chauffage</md-card-title>
+    <md-card-content>
+
+      <md-card>
+        <md-card-subtitle>Chauffage #1</md-card-subtitle>
+        <md-card-content>
+          <div>
+            <md-input-container>
+              <input mdInput readonly value="Électrique" placeholder="Type de chauffage">
+            </md-input-container>
+          </div>
+          <div>
+            <md-input-container>
+              <input mdInput readonly value="12 janvier 2017" placeholder="Dernier ramonage">
+            </md-input-container>
+          </div>
+        </md-card-content>
+      </md-card>
+
+    </md-card-content>
+  </md-card>
+
+  <md-card>
+    <md-card-content>
+
+      <md-card>
+
+        <md-card-content>
+
+          <div class="report-line">
+            <span class="report-line-text">Extincteur portatif :</span><span class="report-line-control"><md-slide-toggle [checked]="false" disabled>Non</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">Avertisseur monoxyde :</span><span class="report-line-control"><md-slide-toggle [checked]="true" disabled>Oui</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">PNAP :</span><span class="report-line-control"><md-slide-toggle [checked]="false" disabled>Non</md-slide-toggle></span>
+          </div>
+          <div class="report-line">
+            <span class="report-line-text">Doit être transféré à la prévention :</span><span class="report-line-control"><md-slide-toggle [checked]="false" disabled>Non</md-slide-toggle></span>
+          </div>
+          <md-input-container readonly>
+            <textarea readonly placeholder="Autres notes" mdInput>Voici une note qui peut être qualifiée de autres.</textarea>
+          </md-input-container>
+
+        </md-card-content>
+      </md-card>
+
+    </md-card-content>
+  </md-card>
+
 </div>
