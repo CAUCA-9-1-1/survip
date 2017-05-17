@@ -164,9 +164,7 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
     this.onChange(base64Image);
     this.change.emit(this.imgRef.nativeElement.src);
 
-    if (this.dialogService) {
-      this.dialogService.close();
-    }
+    this.dialogService.close();
   }
 
   private getBase64Image(): string {
