@@ -32,7 +32,7 @@ export class InterventionPlantBuildingData {
         alias: 'Résidence',
         createdOn: Date,
         isParent: true,
-        matricule: 'abc123',
+        matricule: '994125871478250000',
         idRiskLevel: 'd251f211-ea12-44c5-9f9c-081e80841128',
         idUtilisationCode: '',
         coordinates: '',

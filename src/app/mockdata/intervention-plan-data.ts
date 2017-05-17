@@ -92,10 +92,10 @@ export class InterventionPlanData {
           idBuilding: '29bb0912-e4ce-45f0-8c26-511806d25b50',
           isParent: true,
           alias: 'Résidence',
-          address: '705, 197E RUE',
+          address: '8865, BOUL. LACROIX',
           idImage: 'a3852cc7-4354-47c8-8917-7c861fe87f68',
-          idLane: '2cfae3aa-da6f-46fb-9ff2-21fa1bde1152',
-          idRiskLevel: 'd251f211-ea12-44c5-9f9c-081e80841128',
+          idLane: '8f21cafd-c188-4f62-8fe6-e4321a866ca8',
+          idRiskLevel: 'd7c8116b-f337-402e-a997-13236f277a4d',
           matricule: '98354671000000000'
         }
       ]

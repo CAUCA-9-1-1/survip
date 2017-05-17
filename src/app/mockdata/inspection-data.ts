@@ -4,8 +4,8 @@ export class InspectionData {
       'geojson': {
         'type': 'Point',
         'coordinates': [
-          -70.69736804,
-          46.1314788
+          -70.6973680385851,
+          46.131478798472
         ],
       },
       'idRiskLevel': '2f161fc7-1d71-4d00-9a8c-b0faa9692959',
@@ -26,14 +26,14 @@ export class InspectionData {
         'idLanguageContent': '81162bf0-6555-44c2-b09c-070ff3c4e105',
         'fr': 'test 1'
       },
-      'address': '8865, Boulevard Lacroix'
+      'address': '8865, Boul. Lacroix'
     },
     {
       'geojson': {
         'type': 'Point',
         'coordinates': [
-          -70.69806312,
-          46.13043389
+          -70.69962475901790000000,
+          46.12926150949880000000
         ],
       },
       'idRiskLevel': '7b6d48d5-1d4a-4d43-b346-fbc8ad422a45',
@@ -54,14 +54,14 @@ export class InspectionData {
         'idLanguageContent': '5b82f44d-2979-4efa-b86a-25ad3a12b7d5',
         'fr': 'test 2'
       },
-      'address': '8880, Boulevard Lacroix'
+      'address': '8890, Boulevard Lacroix'
     },
     {
       'geojson': {
         'type': 'Point',
         'coordinates': [
-          -70.69875078,
-          46.13092756
+          -70.69875077699920000000,
+          46.13092755891740000000
         ],
       },
       'idRiskLevel': '2f161fc7-1d71-4d00-9a8c-b0faa9692959',
@@ -88,8 +88,8 @@ export class InspectionData {
       'geojson': {
         'type': 'Point',
         'coordinates': [
-          -70.63737132,
-          46.09993157
+          -70.63737132127240000000,
+          46.09993156691590000000
         ],
       },
       'idRiskLevel': '34777bbe-38b3-4df2-b9c2-2a089738dfc0',
@@ -116,8 +116,8 @@ export class InspectionData {
       'geojson': {
         'type': 'Point',
         'coordinates': [
-          -70.63761671,
-          46.09978731
+          -70.63761670716720000000,
+          46.09978731195480000000
         ],
       },
       'idRiskLevel': '34777bbe-38b3-4df2-b9c2-2a089738dfc0',
@@ -144,8 +144,8 @@ export class InspectionData {
       'geojson': {
         'type': 'Point',
         'coordinates': [
-          -70.71355946,
-          46.1353006
+          -70.72167306690550000000,
+          46.13178514970770000000
         ],
       },
       'idRiskLevel': '7b6d48d5-1d4a-4d43-b346-fbc8ad422a45',
@@ -165,7 +165,7 @@ export class InspectionData {
         'idLanguageContent': 'b85c92cd-0af1-4bec-a1b0-9323a72c9f2f',
         'fr': 'test 6'
       },
-      'address': '880, 27e rue Nord'
+      'address': '880, 27e rue nord'
     }
   ];
 }
