@@ -76,18 +76,15 @@
       </div>
 
       <div *ngIf="item?.addressType == 3">
-        <div fxLayout="row">
-            <md-input-container>
-                <input mdInput placeholder="Latitude" formControlName="latitude">
-            </md-input-container>
-        </div>
-        <div fxLayout="row">
-          <md-input-container>
-              <input mdInput placeholder="Longitude" formControlName="longitude">
-          </md-input-container>
-        </div>
-        <div fxLayout="row">
-            <button md-raised-button (click)="onLocaliseClicked()">Localiser...</button>
+        <div class="igo-map-field-container">
+          <igo-map-field
+            formControlName="location"
+            placeholder="Localisation"
+            [decimals]="8"
+            [readonly]="false"
+            [layers]="(map.layers$ | async) | clone"
+            [view]="contextService.context$.value ? (contextService.context$ | async).map.view : undefined">
+          </igo-map-field>
         </div>
       </div>
 

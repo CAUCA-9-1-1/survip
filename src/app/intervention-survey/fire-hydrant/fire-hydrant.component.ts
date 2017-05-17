@@ -9,6 +9,7 @@ import {InterventionPlanFireHydrant} from '../shared/models/intervention-plan-fi
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {InterventionPlanFireHydrantService} from '../shared/services/intervention-plan-fire-hydrant.service';
 import {LaneService} from '../shared/services/lane.service';
+import {ContextService, DetailedContext, IgoMap} from 'igo2';
 
 @Component({
   selector: 'app-intervention-survey-fire-hydrant',
@@ -18,6 +19,8 @@ import {LaneService} from '../shared/services/lane.service';
 export class FireHydrantComponent implements OnInit, OnChanges {
   @Input() item: InterventionPlanFireHydrant;
   @Output() deleteClicked = new EventEmitter();
+
+  public map = new IgoMap();
 
   fireHydrantTypes: FireHydrantType[];
   unitsOfMeasure: UnitOfMeasure[];
@@ -41,12 +44,14 @@ export class FireHydrantComponent implements OnInit, OnChanges {
   ];
 
   constructor(
+    public contextService: ContextService,
     fireHydrantTypeService: FireHydrantTypeService,
     unitOfMeasureService: UnitOfMeasureService,
     locationTypeService: LocationTypeService,
     public laneService: LaneService,
     private fireHydrantService: InterventionPlanFireHydrantService,
     private fb: FormBuilder) {
+
     fireHydrantTypeService.getList()
       .then(types => this.fireHydrantTypes = types);
     unitOfMeasureService.getList()
@@ -64,6 +69,9 @@ export class FireHydrantComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
+    this.contextService.loadContext('_default');
+
     this.setValues();
   }
 
@@ -73,6 +81,7 @@ export class FireHydrantComponent implements OnInit, OnChanges {
 
   private setValues() {
       this.hydrantForm.patchValue(this.item || new InterventionPlanFireHydrant());
+      this.hydrantForm.patchValue({location: [this.item.latitude, this.item.longitude] });
   }
 
   private createForm() {
@@ -87,8 +96,7 @@ export class FireHydrantComponent implements OnInit, OnChanges {
     'civicNumber': [''],
     'idLane': [''],
     'idLaneIntersection': [''],
-    'latitude': [''],
-    'longitude': [''],
+    'location': [''],
     'locationDetails': [''],
     });
   }
@@ -111,6 +119,8 @@ export class FireHydrantComponent implements OnInit, OnChanges {
     console.log('saving fire-hydrant...');
     const formModel  = this.hydrantForm.value;
     Object.assign(this.item, formModel);
+    this.item.latitude = formModel.location[0];
+    this.item.longitude = formModel.location[1];
     this.fireHydrantService.update(this.item)
       .then(() => console.log('Fire-hydrant saved.'));
   }
