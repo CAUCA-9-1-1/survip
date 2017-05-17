@@ -21,7 +21,7 @@ export class DialogsService {
 
     if (modal.length > 0) {
       modal[0].parentNode.removeChild(modal[0]);
-    } else {
+    } else if (this.dialogRef) {
       this.dialogRef.close();
     }
   }
