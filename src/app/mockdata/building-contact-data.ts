@@ -41,6 +41,48 @@ export class BuildingContactData {
       'callPriority': 1,
       'details': 'Non disponible le dimanche.',
       'isActive': true
+    },
+    {
+      'id': '29bb0912-e4ce-45f0-8c26-511806d25b54',
+      'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b55',
+      'firstName': 'Gérard',
+      'lastName': 'Delli',
+      'phoneNumber': '666-555-2884',
+      'phoneNumberExtension': '',
+      'cellphoneNumber': '',
+      'otherNumber': '',
+      'otherNumberExtension': '',
+      'callPriority': 1,
+      'details': 'Absent en janvier/février.',
+      'isActive': true
+    },
+    {
+      'id': '29bb0912-e4ce-45f0-8c26-511806d25b55',
+      'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b56',
+      'firstName': 'Conrad',
+      'lastName': 'Laflamme',
+      'phoneNumber': '222-555-2884',
+      'phoneNumberExtension': '',
+      'cellphoneNumber': '',
+      'otherNumber': '',
+      'otherNumberExtension': '',
+      'callPriority': 1,
+      'details': 'Reponsable.',
+      'isActive': true
+    },
+    {
+      'id': '29bb0912-e4ce-45f0-8c26-511806d25b55',
+      'idBuilding': '29bb0912-e4ce-45f0-8c26-511806d25b56',
+      'firstName': 'Paul',
+      'lastName': 'Ayre',
+      'phoneNumber': '128-555-2884',
+      'phoneNumberExtension': '',
+      'cellphoneNumber': '',
+      'otherNumber': '',
+      'otherNumberExtension': '',
+      'callPriority': 1,
+      'details': 'Propriétaire.',
+      'isActive': true
     }
 ];
 }
