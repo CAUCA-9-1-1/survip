@@ -66,6 +66,10 @@ export class CardLayoutComponent implements OnInit, AfterViewInit {
       item.style.width = items[0]['offsetWidth'] + 'px';
       item.style.height = items[0]['offsetHeight'] + 'px';
       item.style.padding = '0px';
+    } else {
+      item.style.width = '300px';
+      item.style.height = '300px';
+      item.style.padding = '0px';
     }
   }
 
@@ -88,5 +92,6 @@ export class CardLayoutComponent implements OnInit, AfterViewInit {
 
   onAddItemClicked(value: any) {
     this.addClick.emit(value);
+    Observable.timer(200).subscribe(() => this.setNewCardSize());
   }
 }
