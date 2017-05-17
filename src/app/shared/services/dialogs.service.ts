@@ -9,7 +9,7 @@ import {WaitDialogComponent} from '../components/wait-dialog/wait-dialog.compone
 
 @Injectable()
 export class DialogsService {
-  private lastDialog = [];
+  private dialogRef: MdDialogRef<WaitDialogComponent|FullscreenDialogComponent|YesNoDialogComponent>;
 
   constructor(
     private dialog: MdDialog,
@@ -17,7 +17,13 @@ export class DialogsService {
   ) { }
 
   public close() {
-    this.lastDialog[(this.lastDialog.length - 1)].close(true);
+    const modal = this.windowRef.nativeDocument.querySelectorAll('body .modal');
+
+    if (modal.length > 0) {
+      modal[0].parentNode.removeChild(modal[0]);
+    } else {
+      this.dialogRef.close();
+    }
   }
 
   public confirm(title: string, question: string): Observable<boolean> {
@@ -27,7 +33,7 @@ export class DialogsService {
     dialogRef.componentInstance.title = title;
     dialogRef.componentInstance.question = question;
 
-    this.lastDialog.push(dialogRef);
+    this.dialogRef = dialogRef;
 
     return dialogRef.afterClosed();
   }
@@ -42,18 +48,27 @@ export class DialogsService {
     dialogRef.componentInstance.title = title;
     dialogRef.componentInstance.content = content;
 
-    this.lastDialog.push(dialogRef);
+    this.dialogRef = dialogRef;
 
     return dialogRef.afterClosed();
   }
 
   public wait() {
+    const body = this.windowRef.nativeDocument.querySelectorAll('body')[0];
+    const div = this.windowRef.nativeDocument.createElement('div');
+
+    div.className = 'modal';
+    div.innerHTML = '<div class="content"><h1>Veuillez patienter</h1><img src="./assets/images/spinner.gif" /></div>';
+    body.appendChild(div);
+
+    /* Angular MdDialog doesn't close when we come back of other app with cordova
+
     let dialogRef: MdDialogRef<WaitDialogComponent>;
 
     dialogRef = this.dialog.open(WaitDialogComponent);
 
-    this.lastDialog.push(dialogRef);
+    this.dialogRef = dialogRef;
 
-    return dialogRef.afterClosed();
+    return dialogRef.afterClosed();*/
   }
 }

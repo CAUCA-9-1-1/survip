@@ -8,6 +8,7 @@ import {MdDialog} from '@angular/material';
 import {WebcamComponent} from '../../../shared/components/webcam/webcam.component';
 import {WindowRefService} from '../../../shared/services/window-ref.service';
 import {CordovaService} from '../../services/cordova.service';
+import {DialogsService} from '../../services/dialogs.service';
 
 @Component({
   selector: 'app-take-picture',
@@ -64,11 +65,11 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
   onTouched: any = () => {};
 
   constructor(
-    private cordovaRef: CordovaService,
     private windowRef: WindowRefService,
-    private dialog: MdDialog
+    private dialog: MdDialog,
+    private dialogService: DialogsService,
   ) {
-    if (!this.cordovaRef.isActive) {
+    if (!this.windowRef.nativeWindow.cordova) {
       this.allowCamera = false;
     }
   }
@@ -93,9 +94,8 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
 
     this.beforeChange.emit(e);
 
-    if (this.cordovaRef.isActive) {
-      this.cordovaRef.success = this.onSuccess.bind(this);
-      this.cordovaRef.execute('camera', 'getPicture', {
+    if (this.windowRef.nativeWindow.cordova) {
+      this.windowRef.nativeNavigator.camera.getPicture(this.onSuccess.bind(this), this.onFail.bind(this), {
         sourceType: this.windowRef.nativeWindow.Camera.PictureSourceType.PHOTOLIBRARY,
         destinationType: this.windowRef.nativeWindow.Camera.DestinationType.DATA_URL,
       });
@@ -110,8 +110,7 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
     this.beforeChange.emit(e);
 
     if (this.windowRef.nativeWindow.cordova) {
-      this.cordovaRef.success = this.onSuccess.bind(this);
-      this.cordovaRef.execute('camera', 'getPicture', {
+      this.windowRef.nativeNavigator.camera.getPicture(this.onSuccess.bind(this), this.onFail.bind(this), {
         quality: 100,
         destinationType: this.windowRef.nativeWindow.Camera.DestinationType.DATA_URL,
       });
@@ -124,14 +123,20 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
     const files = e.target.files;
     const reader = this.windowRef.nativeClass('FileReader');
 
+    this.dialogService.wait();
+
     if (files.length) {
       reader.addEventListener('load', this.onSuccess.bind(this));
       reader.readAsDataURL(files[0]);
     }
+
+    this.dialogService.close();
   }
 
   onSuccess(imageURI) {
-    if (this.cordovaRef.isActive) {
+    this.dialogService.wait();
+
+    if (this.windowRef.nativeWindow.cordova) {
       this.imgRef.nativeElement.src = 'data:image/jpeg;base64,' + imageURI;
     } else {
       this.imgRef.nativeElement.src = imageURI.target.result;
@@ -139,5 +144,11 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
 
     this.onChange(this.imgRef.nativeElement.src);
     this.change.emit(this.imgRef.nativeElement.src);
+
+    this.dialogService.close();
+  }
+
+  onFail(message) {
+    console.log(message);
   }
 }
