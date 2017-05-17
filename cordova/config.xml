@@ -39,28 +39,28 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <icon src="res/icon/ios/29x29.png" width="29" height="29" />
-        <icon src="res/icon/ios/48x48.png" width="48" height="48" />
-        <icon src="res/icon/ios/57x57.png" width="57" height="57" />
-        <icon src="res/icon/ios/58x58.png" width="58" height="58" />
-        <icon src="res/icon/ios/72x72.png" width="72" height="72" />
-        <icon src="res/icon/ios/96x96.png" width="96" height="96" />
-        <icon src="res/icon/ios/114x114.png" width="114" height="114" />
-        <icon src="res/icon/ios/144x144.png" width="144" height="144" />
-        <splash src="res/screen/ios/768x1024.png" width="768" height="1024" />
-        <splash src="res/screen/ios/1024x768.png" width="1024" height="768" />
-        <splash src="res/screen/ios/1536x2048.png" width="1536" height="2048" />
-        <splash src="res/screen/ios/2048x1536.png" width="2048" height="1536" />
-        <splash src="res/screen/ios/320x480.png" width="320" height="480" />
-        <splash src="res/screen/ios/480x320.png" width="480" height="320" />
-        <splash src="res/screen/ios/640x960.png" width="640" height="960" />
-        <splash src="res/screen/ios/960x640.png" width="960" height="640" />
-        <splash src="res/screen/ios/640x1136.png" width="640" height="1136" />
-        <splash src="res/screen/ios/1136x640.png" width="1136" height="640" />
-        <splash src="res/screen/ios/750x1334.png" width="750" height="1334" />
-        <splash src="res/screen/ios/1334x750.png" width="1334" height="750" />
-        <splash src="res/screen/ios/1242x2208.png" width="1242" height="2208" />
-        <splash src="res/screen/ios/2208x1242.png" width="2208" height="1242" />
+        <icon height="29" src="res/icon/ios/29x29.png" width="29" />
+        <icon height="48" src="res/icon/ios/48x48.png" width="48" />
+        <icon height="57" src="res/icon/ios/57x57.png" width="57" />
+        <icon height="58" src="res/icon/ios/58x58.png" width="58" />
+        <icon height="72" src="res/icon/ios/72x72.png" width="72" />
+        <icon height="96" src="res/icon/ios/96x96.png" width="96" />
+        <icon height="114" src="res/icon/ios/114x114.png" width="114" />
+        <icon height="144" src="res/icon/ios/144x144.png" width="144" />
+        <splash height="1024" src="res/screen/ios/768x1024.png" width="768" />
+        <splash height="768" src="res/screen/ios/1024x768.png" width="1024" />
+        <splash height="2048" src="res/screen/ios/1536x2048.png" width="1536" />
+        <splash height="1536" src="res/screen/ios/2048x1536.png" width="2048" />
+        <splash height="480" src="res/screen/ios/320x480.png" width="320" />
+        <splash height="320" src="res/screen/ios/480x320.png" width="480" />
+        <splash height="960" src="res/screen/ios/640x960.png" width="640" />
+        <splash height="640" src="res/screen/ios/960x640.png" width="960" />
+        <splash height="1136" src="res/screen/ios/640x1136.png" width="640" />
+        <splash height="640" src="res/screen/ios/1136x640.png" width="1136" />
+        <splash height="1334" src="res/screen/ios/750x1334.png" width="750" />
+        <splash height="750" src="res/screen/ios/1334x750.png" width="1334" />
+        <splash height="2208" src="res/screen/ios/1242x2208.png" width="1242" />
+        <splash height="1242" src="res/screen/ios/2208x1242.png" width="2208" />
     </platform>
     <platform name="browser">
         <icon src="res/icon/default.png" />
