@@ -67,6 +67,8 @@
         <splash src="res/screen/universal.png" />
     </platform>
     <hook src="scripts/prepareAngularApp.js" type="before_prepare" />
+    <preference name="android-minSdkVersion" value="21" />
+    <preference name="deployment-target" value="8.0" />
     <preference name="orientation" value="portrait" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#f5f5f5" />
