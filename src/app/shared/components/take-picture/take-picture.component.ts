@@ -66,10 +66,11 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
 
   constructor(
     private windowRef: WindowRefService,
+    private cordova: CordovaService,
     private dialog: MdDialog,
     private dialogService: DialogsService,
   ) {
-    if (!this.windowRef.nativeWindow.cordova) {
+    if (!this.cordova.isActive) {
       this.allowCamera = false;
     }
   }
@@ -89,30 +90,36 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
   }
 
-  select(e) {
+  onSelect(e) {
     e.preventDefault();
 
     this.beforeChange.emit(e);
 
-    if (this.windowRef.nativeWindow.cordova) {
-      this.windowRef.nativeNavigator.camera.getPicture(this.onSuccess.bind(this), this.onFail.bind(this), {
-        sourceType: this.windowRef.nativeWindow.Camera.PictureSourceType.PHOTOLIBRARY,
-        destinationType: this.windowRef.nativeWindow.Camera.DestinationType.DATA_URL,
+    if (this.cordova.isActive) {
+      this.cordova.plugins.camera.getPicture(this.onSuccess.bind(this), this.onFail.bind(this), {
+        sourceType: this.cordova.plugins.camera.PictureSourceType.PHOTOLIBRARY,
+        destinationType: (this.cordova.osVersion > 5 ?
+            this.cordova.plugins.camera.DestinationType.DATA_URL :
+            this.cordova.plugins.camera.DestinationType.FILE_URL
+        )
       });
     } else {
       this.inputRef.nativeElement.click();
     }
   }
 
-  take(e) {
+  onTake(e) {
     e.preventDefault();
 
     this.beforeChange.emit(e);
 
-    if (this.windowRef.nativeWindow.cordova) {
-      this.windowRef.nativeNavigator.camera.getPicture(this.onSuccess.bind(this), this.onFail.bind(this), {
+    if (this.cordova.isActive) {
+      this.cordova.plugins.camera.getPicture(this.onSuccess.bind(this), this.onFail.bind(this), {
         quality: 100,
-        destinationType: this.windowRef.nativeWindow.Camera.DestinationType.DATA_URL,
+        destinationType: (this.cordova.osVersion > 5 ?
+          this.cordova.plugins.camera.DestinationType.DATA_URL :
+          this.cordova.plugins.camera.DestinationType.FILE_URL
+        )
       });
     } else {
       this.dialog.open(WebcamComponent);
@@ -136,19 +143,40 @@ export class TakePictureComponent implements OnInit, ControlValueAccessor {
   onSuccess(imageURI) {
     this.dialogService.wait();
 
-    if (this.windowRef.nativeWindow.cordova) {
-      this.imgRef.nativeElement.src = 'data:image/jpeg;base64,' + imageURI;
+    if (this.cordova.isActive) {
+      this.imgRef.nativeElement.src = (imageURI.indexOf('file://') === 0 ? '' : 'data:image/jpeg;base64,') + imageURI;
     } else {
       this.imgRef.nativeElement.src = imageURI.target.result;
     }
-
-    this.onChange(this.imgRef.nativeElement.src);
-    this.change.emit(this.imgRef.nativeElement.src);
-
-    this.dialogService.close();
   }
 
   onFail(message) {
     console.log(message);
+  }
+
+  public onLoadSource(e) {
+    let base64Image = this.imgRef.nativeElement.src;
+
+    if (base64Image.indexOf('data:image/') === -1) {
+      base64Image = this.getBase64Image();
+    }
+
+    this.onChange(base64Image);
+    this.change.emit(this.imgRef.nativeElement.src);
+
+    if (this.dialogService) {
+      this.dialogService.close();
+    }
+  }
+
+  private getBase64Image(): string {
+    const canvas = this.windowRef.nativeDocument.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = this.imgRef.nativeElement.width;
+    canvas.height = this.imgRef.nativeElement.height;
+    ctx.drawImage(this.imgRef.nativeElement, 0, 0);
+
+    return canvas.toDataURL('image/jpeg');
   }
 }

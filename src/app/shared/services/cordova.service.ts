@@ -8,12 +8,16 @@ export class CordovaService {
 
   @Input()
   public isActive = false;
+  public osVersion = 0;
+  public plugins: any;
   public success = function() {};
   public failed = function() {};
 
   constructor(private windowRef: WindowRefService) {
     if (this.windowRef.nativeWindow.cordova) {
       this.isActive = true;
+      this.plugins = this.windowRef.nativeNavigator;
+      this.osVersion = this.windowRef.nativeWindow.device.version.substr(0, 1);
     }
   }
 

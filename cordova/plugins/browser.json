@@ -7,9 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "ca.cauca.survi.prevention"
-        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "ca.cauca.survi.prevention"
         },
@@ -17,6 +14,12 @@
             "PACKAGE_NAME": "ca.cauca.survi.prevention"
         },
         "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "ca.cauca.survi.prevention"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "ca.cauca.survi.prevention"
+        },
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "ca.cauca.survi.prevention"
         }
     },
