@@ -4,6 +4,7 @@
     "displayName": "SURVIPrevention",
     "cordova": {
         "platforms": [
+            "android",
             "browser"
         ],
         "plugins": {

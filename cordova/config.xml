@@ -73,6 +73,7 @@
     <preference name="StatusBarStyle" value="default" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
+    <engine name="android" spec="^6.2.3" />
     <engine name="browser" spec="~4.1.0" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <plugin name="cordova-plugin-device" spec="^1.1.6" />
