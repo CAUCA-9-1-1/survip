@@ -8,15 +8,15 @@
     },
     "installed_plugins": {
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "ca.cauca.surviprevention"
+            "PACKAGE_NAME": "ca.cauca.survi.prevention"
         },
         "cordova-plugin-camera": {
-            "PACKAGE_NAME": "ca.cauca.surviprevention"
+            "PACKAGE_NAME": "ca.cauca.survi.prevention"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "ca.cauca.surviprevention"
+            "PACKAGE_NAME": "ca.cauca.survi.prevention"
         }
     }
 }
