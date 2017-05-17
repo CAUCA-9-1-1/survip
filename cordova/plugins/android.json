@@ -12,6 +12,9 @@
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "ca.cauca.survi.prevention"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "ca.cauca.survi.prevention"
         }
     },
     "dependent_plugins": {
