@@ -51,8 +51,9 @@ export class QuestionSliderComponent implements OnInit {
   next() {
     this.onFirstQuestion = false;
 
-    if (this.tabSelected < this.questions.length - 1) {
+    if (this.questionIndex < this.questions.length - 1) {
       const question = this.questions[this.questionIndex];
+
       let next = this.questions[(this.questionIndex + 1)].idSurveyQuestion;
 
       if (question) {

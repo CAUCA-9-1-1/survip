@@ -67,12 +67,12 @@
         <splash src="res/screen/universal.png" />
     </platform>
     <hook src="scripts/prepareAngularApp.js" type="before_prepare" />
+    <preference name="orientation" value="portrait" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#f5f5f5" />
     <preference name="StatusBarStyle" value="default" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="orientation" value="portrait" />
     <engine name="browser" spec="~4.1.0" />
     <plugin name="cordova-plugin-camera" spec="~2.4.0" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.0" />
