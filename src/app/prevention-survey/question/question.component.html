@@ -10,7 +10,7 @@
                 <md-slide-toggle (change)="boolChange($event)">{{'yes' | translate}}</md-slide-toggle>
             </div>
             <div *ngSwitchCase="'choice'">
-                <md-select placeholder="Sélection" (change)="choiceChange($event)">
+                <md-select placeholder="Sélection" floatPlaceholder="never" (change)="choiceChange($event)">
                     <md-option *ngFor="let choice of question.choices" [value]="choice.idSurveyChoice">
                         {{choice.description.fr}}
                     </md-option>
