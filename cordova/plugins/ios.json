@@ -12,13 +12,16 @@
             "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
             "PACKAGE_NAME": "ca.cauca.survi.prevention"
         },
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "ca.cauca.survi.prevention"
+        },
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "ca.cauca.survi.prevention"
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "ca.cauca.survi.prevention"
         },
-        "cordova-plugin-splashscreen": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "ca.cauca.survi.prevention"
         }
     },
