@@ -70,7 +70,31 @@ export class FireHydrantComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
-    this.contextService.loadContext('_default');
+    /*this.contextService.loadContext('_default');*/
+
+    const layer1 = {
+      'source': {
+        'title': 'Fond de carte du Québec',
+        'type': 'xyz',
+        'url': 'https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png'
+      }
+    };
+
+    this.contextService.setContext({
+      'uri': 'default',
+      'title': 'Default Context',
+      'map': {
+        'view': {
+          'projection': 'EPSG:3857',
+          'center': [-70.685006, 46.116211],
+          'zoom': 14,
+          'minZoom': 6,
+          'maxZoom': 17
+        }
+      },
+      'layers': [layer1]
+    } as DetailedContext);
+
 
     this.setValues();
   }
@@ -81,7 +105,7 @@ export class FireHydrantComponent implements OnInit, OnChanges {
 
   private setValues() {
       this.hydrantForm.patchValue(this.item || new InterventionPlanFireHydrant());
-      this.hydrantForm.patchValue({location: [this.item.latitude, this.item.longitude] });
+      this.hydrantForm.patchValue({location: [this.item.longitude, this.item.latitude] });
   }
 
   private createForm() {
@@ -119,8 +143,8 @@ export class FireHydrantComponent implements OnInit, OnChanges {
     console.log('saving fire-hydrant...');
     const formModel  = this.hydrantForm.value;
     Object.assign(this.item, formModel);
-    this.item.latitude = formModel.location[0];
-    this.item.longitude = formModel.location[1];
+    this.item.latitude = formModel.location[1];
+    this.item.longitude = formModel.location[0];
     this.fireHydrantService.update(this.item)
       .then(() => console.log('Fire-hydrant saved.'));
   }
