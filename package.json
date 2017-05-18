@@ -1,6 +1,6 @@
 {
-  "name": "survip",
-  "version": "0.0.0",
+  "name": "SURVIPrevention",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
