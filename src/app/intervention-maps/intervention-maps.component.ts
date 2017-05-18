@@ -50,7 +50,7 @@ export class InterventionMapsComponent implements OnInit {
           'maxZoom': 17
         }
       },
-      'layers': [layer1, layer2]
+      'layers': [layer1]
     } as DetailedContext);
   }
 }
