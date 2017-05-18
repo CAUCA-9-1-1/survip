@@ -2,7 +2,6 @@
 
 @include mat-core();
 
-
 /** Generated at http://mcg.mbitson.com **/
 $cause-red: (
         50 : #f6e4e3,
@@ -36,8 +35,6 @@ $cause-red: (
                 A700 : #ffffff,
         )
 );
-
-
 
 $cause-gold: (
         50 : #f9f6ef,
@@ -74,7 +71,7 @@ $cause-gold: (
 
 /** Define the theme. **/
 $cause-primary: mat-palette($cause-red);
-$cause-accent:  mat-palette($cause-gold);
+$cause-accent:  mat-palette($cause-red);
 $cause-theme:   mat-light-theme($cause-primary, $cause-accent);
 
 @include angular-material-theme($cause-theme);
