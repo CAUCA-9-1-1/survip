@@ -94,7 +94,7 @@ export class BuildingDetailComponent implements OnInit {
   private setValues() {
     if (this.interventionPlanBuilding != null) {
       this.buildingForm.patchValue(this.interventionPlanBuilding);
-      this.buildingForm.patchValue({image: this.picture});
+      this.buildingForm.patchValue({image: this.picture.picture});
     }
   }
 
