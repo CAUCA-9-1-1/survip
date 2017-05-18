@@ -93,7 +93,7 @@ export class InterventionPlanData {
           isParent: true,
           alias: 'Résidence',
           address: '8865, BOUL. LACROIX',
-          idImage: 'a3852cc7-4354-47c8-8917-7c861fe87f68',
+          idImage: '048de54d-3bcf-11e7-bf23-5254004f3384',
           idLane: '8f21cafd-c188-4f62-8fe6-e4321a866ca8',
           idRiskLevel: 'd7c8116b-f337-402e-a997-13236f277a4d',
           matricule: '98354671000000000'
@@ -157,7 +157,7 @@ export class InterventionPlanData {
           isParent: true,
           alias: 'Bâtiment principal',
           address: '8780, Boulevard Lacroix',
-          idImage: 'a3852cc7-4354-47c8-8917-7c861fe87f68',
+          idImage: '048de54d-3bcf-11e7-bf23-5254004f3384',
           idLane: '8f21cafd-c188-4f62-8fe6-e4321a866ca8',
           idRiskLevel: 'd251f211-ea12-44c5-9f9c-081e80841128',
           matricule: '98354671000000000'
@@ -169,7 +169,7 @@ export class InterventionPlanData {
           isParent: true,
           alias: 'Grange',
           address: '8780, Boulevard Lacroix',
-          idImage: 'a3852cc7-4354-47c8-8917-7c861fe87f68',
+          idImage: '63a9c6f4-3bd6-11e7-bf23-5254004f3384',
           idLane: '8f21cafd-c188-4f62-8fe6-e4321a866ca8',
           idRiskLevel: 'd251f211-ea12-44c5-9f9c-081e80841128',
           matricule: '98354671000000000'
@@ -181,7 +181,7 @@ export class InterventionPlanData {
           isParent: true,
           alias: 'Hangar',
           address: '8780, Boulevard Lacroix',
-          idImage: 'a3852cc7-4354-47c8-8917-7c861fe87f68',
+          idImage: '54a2bc24-3bd6-11e7-bf23-5254004f3384',
           idLane: '8f21cafd-c188-4f62-8fe6-e4321a866ca8',
           idRiskLevel: 'd251f211-ea12-44c5-9f9c-081e80841128',
           matricule: '98354671000000000'
