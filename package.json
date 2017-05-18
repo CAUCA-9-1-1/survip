@@ -29,6 +29,7 @@
     "core-js": "^2.4.1",
     "devextreme": "^16.2.6",
     "devextreme-angular": "^16.2.6",
+    "hammerjs": "^2.0.8",
     "igo2": "^0.4.3",
     "zone.js": "^0.8.4"
   },

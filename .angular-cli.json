@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "survip"
+    "name": "SURVI-Prevention"
   },
   "apps": [
     {
@@ -23,7 +23,7 @@
       "styles": [
         "../node_modules/openlayers/dist/ol.css",
         "../node_modules/igo2/src/style/igo.styl",
-        "../node_modules/igo2/src/themes/deeppurple-amber.styl",
+        "theme.scss",
         "styles.styl"
       ],
       "scripts": [
