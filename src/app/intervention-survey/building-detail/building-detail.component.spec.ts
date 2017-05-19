@@ -1,7 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
-import { TestModule } from '../../test.module';
-import { BuildingDetailComponent } from './building-detail.component';
+import {TestModule} from '../../test.module';
+import {BuildingDetailComponent} from './building-detail.component';
+import {PictureService} from '../../shared/services/picture.service';
 
 describe('BuildingDetailComponent', () => {
   let component: BuildingDetailComponent;
@@ -9,8 +11,9 @@ describe('BuildingDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule ],
-      declarations: [ BuildingDetailComponent ]
+      imports: [TestModule, RouterTestingModule],
+      declarations: [BuildingDetailComponent],
+      providers: [PictureService]
     })
     .compileComponents();
   }));

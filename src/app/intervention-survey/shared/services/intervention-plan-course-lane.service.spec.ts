@@ -1,10 +1,12 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
+import {HttpModule} from '@angular/http';
 
-import { InterventionPlanCourseLaneService } from './intervention-plan-course-lane.service';
+import {InterventionPlanCourseLaneService} from './intervention-plan-course-lane.service';
 
 describe('InterventionPlanCourseLaneService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpModule],
       providers: [InterventionPlanCourseLaneService]
     });
   });

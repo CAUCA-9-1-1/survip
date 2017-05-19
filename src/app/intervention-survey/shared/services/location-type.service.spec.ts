@@ -1,12 +1,12 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
+import {HttpModule} from '@angular/http';
 
-import { LocationTypeService } from './location-type.service';
-import {TestModule} from '../../../test.module';
+import {LocationTypeService} from './location-type.service';
 
 describe('LocationTypeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TestModule],
+      imports: [HttpModule],
       providers: [LocationTypeService]
     });
   });

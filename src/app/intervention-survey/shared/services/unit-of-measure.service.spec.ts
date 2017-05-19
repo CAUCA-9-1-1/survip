@@ -1,12 +1,12 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
+import {HttpModule} from '@angular/http';
 
-import { UnitOfMeasureService } from './unit-of-measure.service';
-import {TestModule} from '../../../test.module';
+import {UnitOfMeasureService} from './unit-of-measure.service';
 
 describe('UnitOfMeasureService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TestModule],
+      imports: [HttpModule],
       providers: [UnitOfMeasureService]
     });
   });

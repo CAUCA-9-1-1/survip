@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TestModule } from '../../../test.module';
-import { SearchListComponent } from './search-list.component';
+import {TestModule} from '../../../test.module';
+import {SearchListComponent} from './search-list.component';
 
 describe('SearchListComponent', () => {
   let component: SearchListComponent;
@@ -9,8 +9,10 @@ describe('SearchListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule ],
-      declarations: [ SearchListComponent ]
+      imports: [TestModule],
+      declarations: [
+        // SearchListComponent
+      ]
     })
     .compileComponents();
   }));

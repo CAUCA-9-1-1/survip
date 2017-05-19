@@ -1,6 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
-import { InterventionListComponent } from './intervention-list.component';
+import {TestModule} from '../test.module';
+import {InterventionListComponent} from './intervention-list.component';
+import {RiskLevelService} from '../shared/services/risk-level.service';
+import {InspectionService} from '../shared/services/inspection.service';
 
 describe('InterventionListComponent', () => {
   let component: InterventionListComponent;
@@ -8,7 +12,12 @@ describe('InterventionListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InterventionListComponent ]
+      imports: [TestModule, RouterTestingModule],
+      declarations: [InterventionListComponent],
+      providers: [
+        RiskLevelService,
+        InspectionService
+      ]
     })
     .compileComponents();
   }));

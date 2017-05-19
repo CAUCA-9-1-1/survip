@@ -1,12 +1,12 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
+import {HttpModule} from '@angular/http';
 
-import { TestModule } from '../../../test.module';
-import { BuildingContactService } from './building-contact.service';
+import {BuildingContactService} from './building-contact.service';
 
 describe('BuildingContactService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule ],
+      imports: [HttpModule],
       providers: [BuildingContactService]
     });
   });

@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TestModule } from '../../../test.module';
-import { TakePictureComponent } from './take-picture.component';
+import {TestModule} from '../../../test.module';
+import {TakePictureComponent} from './take-picture.component';
 
 describe('TakePictureComponent', () => {
   let component: TakePictureComponent;
@@ -9,8 +9,10 @@ describe('TakePictureComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule ],
-      declarations: []
+      imports: [TestModule],
+      declarations: [
+        // TakePictureComponent
+      ]
     })
     .compileComponents();
   }));

@@ -1,12 +1,12 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
+import {HttpModule} from '@angular/http';
 
-import { InterventionPlanFireHydrantService } from './intervention-plan-fire-hydrant.service';
-import {TestModule} from '../../../test.module';
+import {InterventionPlanFireHydrantService} from './intervention-plan-fire-hydrant.service';
 
 describe('InterventionPlanFireHydrantService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TestModule],
+      imports: [HttpModule],
       providers: [InterventionPlanFireHydrantService]
     });
   });
