@@ -1,6 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CourseLaneComponent } from './course-lane.component';
+import {TestModule} from '../../test.module';
+import {CourseLaneComponent} from './course-lane.component';
+import {LaneService} from '../shared/services/lane.service';
+import {InterventionPlanCourseLaneService} from '../shared/services/intervention-plan-course-lane.service';
 
 describe('CourseLaneComponent', () => {
   let component: CourseLaneComponent;
@@ -8,7 +11,12 @@ describe('CourseLaneComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseLaneComponent ]
+      imports: [TestModule],
+      declarations: [CourseLaneComponent],
+      providers: [
+        LaneService,
+        InterventionPlanCourseLaneService
+      ]
     })
     .compileComponents();
   }));

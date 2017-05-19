@@ -1,11 +1,15 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { CordovaService } from './cordova.service';
+import {CordovaService} from './cordova.service';
+import {WindowRefService} from './window-ref.service';
 
 describe('CordovaService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CordovaService]
+      providers: [
+        CordovaService,
+        WindowRefService
+      ]
     });
   });
 

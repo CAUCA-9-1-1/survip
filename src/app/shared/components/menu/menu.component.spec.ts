@@ -14,7 +14,9 @@ describe('MenuComponent', () => {
         SharedModule,
         RouterTestingModule
       ],
-      declarations: []
+      declarations: [
+        // MenuComponent
+      ]
     })
     .compileComponents();
   }));

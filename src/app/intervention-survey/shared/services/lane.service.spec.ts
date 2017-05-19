@@ -1,13 +1,13 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
+import {HttpModule} from '@angular/http';
 
-import { TestModule } from '../../../test.module';
-import { LaneService } from './lane.service';
+import {LaneService} from './lane.service';
 
 describe('LaneService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule ],
-      providers: [ LaneService ]
+      imports: [HttpModule],
+      providers: [LaneService]
     });
   });
 

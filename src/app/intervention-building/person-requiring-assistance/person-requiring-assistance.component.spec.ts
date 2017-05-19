@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestModule } from '../../test.module';
 import { PersonRequiringAssistanceComponent } from './person-requiring-assistance.component';
+import {PersonRequiringAssistanceTypeService} from '../../intervention-survey/shared/services/person-requiring-assistance-type.service';
+import {BuildingPersonRequiringAssistanceService} from '../../intervention-survey/shared/services/building-person-requiring-assistance.service';
 
 describe('PersonRequiringAssistanceComponent', () => {
   let component: PersonRequiringAssistanceComponent;
@@ -9,8 +11,12 @@ describe('PersonRequiringAssistanceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule ],
-      declarations: [ PersonRequiringAssistanceComponent ]
+      imports: [TestModule],
+      declarations: [PersonRequiringAssistanceComponent],
+      providers: [
+        BuildingPersonRequiringAssistanceService,
+        PersonRequiringAssistanceTypeService
+      ]
     })
     .compileComponents();
   }));

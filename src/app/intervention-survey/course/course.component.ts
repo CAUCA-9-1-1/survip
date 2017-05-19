@@ -40,9 +40,12 @@ export class CourseComponent implements OnInit, OnChanges {
     this.firestationService.getAll().subscribe((stations) => {
       this.firestations = stations;
     });
-    this.firestationService.get(this.course.idFirestation).subscribe((station) => {
-      this.firestation = station.stationName;
-    });
+
+    if (this.course) {
+      this.firestationService.get(this.course.idFirestation).subscribe((station) => {
+        this.firestation = station.stationName;
+      });
+    }
 
     this.loadCourseLane();
     this.setValues();
@@ -73,17 +76,19 @@ export class CourseComponent implements OnInit, OnChanges {
   }
 
   private loadCourseLane() {
-    this.courseLaneService.getCourse(this.course.id).subscribe((lanes) => {
-      this.streets = lanes;
-      this.streets.sort((a, b) => {
-        return a.sequence - b.sequence;
-      });
-      this.streets.forEach((street, index) => {
-        this.laneService.getDescriptionById(street.idLane).then((name) => {
-          this.streets[index].name = name;
+    if (this.course) {
+      this.courseLaneService.getCourse(this.course.id).subscribe((lanes) => {
+        this.streets = lanes;
+        this.streets.sort((a, b) => {
+          return a.sequence - b.sequence;
+        });
+        this.streets.forEach((street, index) => {
+          this.laneService.getDescriptionById(street.idLane).then((name) => {
+            this.streets[index].name = name;
+          });
         });
       });
-    });
+    }
   }
 
   private setValues() {

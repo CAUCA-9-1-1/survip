@@ -12,8 +12,8 @@ describe('CardLayoutComponent', () => {
     TestBed.configureTestingModule({
       imports: [ TestModule ],
       declarations: [
-        CardLayoutComponent,
-        CardLayoutFactoryDirective,
+        // CardLayoutComponent,
+        // CardLayoutFactoryDirective,
       ],
       providers: [
       ]

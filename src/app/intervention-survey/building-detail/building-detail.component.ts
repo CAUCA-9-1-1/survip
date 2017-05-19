@@ -19,8 +19,10 @@ export class BuildingDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.pictureService.get(this.building.idImage)
-      .subscribe(pic => this.picture = pic);
+    if (this.building) {
+      this.pictureService.get(this.building.idImage)
+        .subscribe(pic => this.picture = pic);
+    }
   }
 
   onEditClicked() {

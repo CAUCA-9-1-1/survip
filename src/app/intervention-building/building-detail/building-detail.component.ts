@@ -47,7 +47,7 @@ export class BuildingDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.interventionPlanBuilding.idImage === '') {
+    if (this.interventionPlanBuilding && this.interventionPlanBuilding.idImage === '') {
       this.createNewPictureAndSetValues();
     } else {
       this.loadPictureAndSetValues();
@@ -55,11 +55,13 @@ export class BuildingDetailComponent implements OnInit {
   }
 
   private loadPictureAndSetValues() {
-    this.pictureService.get(this.interventionPlanBuilding.idImage)
-      .subscribe(pic => {
-        this.picture = pic;
-        this.setValues();
-      });
+    if (this.interventionPlanBuilding) {
+      this.pictureService.get(this.interventionPlanBuilding.idImage)
+        .subscribe(pic => {
+          this.picture = pic;
+          this.setValues();
+        });
+    }
   }
 
   private createNewPictureAndSetValues() {

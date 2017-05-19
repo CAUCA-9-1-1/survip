@@ -13,7 +13,9 @@ describe('MenuItemComponent', () => {
       imports: [
         SharedModule
       ],
-      declarations: []
+      declarations: [
+        // MenuItemComponent
+      ]
     })
     .compileComponents();
   }));

@@ -1,7 +1,7 @@
-import { TestBed, inject } from '@angular/core/testing';
-
-import { HazardousMaterialService } from './hazardous-material.service';
+import {TestBed, inject} from '@angular/core/testing';
 import {HttpModule} from '@angular/http';
+
+import {HazardousMaterialService} from './hazardous-material.service';
 
 describe('HazardousMaterialService', () => {
   beforeEach(() => {

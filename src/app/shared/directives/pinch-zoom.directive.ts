@@ -12,13 +12,15 @@ export class PinchZoomDirective {
   private lastPan = [0, 0];
 
   constructor(
-    private el: ElementRef,
     private windowRef: WindowRefService,
+    private dialog: DialogsService,
+    private el: ElementRef,
     private renderer: Renderer2,
-    private dialog: DialogsService
   ) {
-    this.renderer.setStyle(this.el.nativeElement, 'cursor', 'pointer');
-    this.renderer.listen(this.el.nativeElement, 'click', this.fullZoom.bind(this));
+    if (this.renderer) {
+      this.renderer.setStyle(this.el.nativeElement, 'cursor', 'pointer');
+      this.renderer.listen(this.el.nativeElement, 'click', this.fullZoom.bind(this));
+    }
   }
 
   fullZoom(e) {
