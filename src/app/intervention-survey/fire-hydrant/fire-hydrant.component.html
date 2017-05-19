@@ -43,7 +43,7 @@
         </md-radio-group>
       </div>
 
-      <div *ngIf="item?.addressType == 1">
+      <ng-container *ngIf="hydrantForm?.value?.addressType == 1">
         <div fxLayout="row">
           <md-input-container>
               <input mdInput placeholder="No. Civique" formControlName="civicNumber" class="full-width">
@@ -56,9 +56,9 @@
             [descriptionField]="'fullNameForFireCad'"
             [dataService]="laneService" formControlName="idLane"></app-search-box>
         </div>
-      </div>
+      </ng-container>
 
-      <div *ngIf="item?.addressType == 2">
+      <ng-container *ngIf="hydrantForm?.value?.addressType == 2">
         <div fxLayout="row">
           <app-search-box class="full-width"
             [placeHolderText]="'Voie de circulation'"
@@ -73,9 +73,9 @@
             [descriptionField]="'fullNameForFireCad'"
             [dataService]="laneService" formControlName="idLaneIntersection"></app-search-box>
         </div>
-      </div>
+      </ng-container>
 
-      <div *ngIf="item?.addressType == 3">
+      <ng-container *ngIf="hydrantForm?.value?.addressType == 3">
         <div class="igo-map-field-container">
           <igo-map-field
             formControlName="location"
@@ -86,13 +86,13 @@
             [view]="contextService.context$.value ? (contextService.context$ | async).map.view : undefined">
           </igo-map-field>
         </div>
-      </div>
+      </ng-container>
 
-      <div *ngIf="item?.addressType == 4">
+      <ng-container *ngIf="hydrantForm?.value?.addressType == 4">
           <md-input-container class="full-width">
               <textarea mdInput placeholder="Autre emplacement" formControlName="locationDetails"></textarea>
           </md-input-container>
-      </div>
+      </ng-container>
 
     </form>
   </md-card-content>
