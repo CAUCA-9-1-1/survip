@@ -9,7 +9,7 @@ import {InterventionPlanFireHydrant} from '../shared/models/intervention-plan-fi
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {InterventionPlanFireHydrantService} from '../shared/services/intervention-plan-fire-hydrant.service';
 import {LaneService} from '../shared/services/lane.service';
-import {ContextService, DetailedContext, IgoMap} from 'igo2';
+import {ContextLayer, ContextService, DataSourceService, DetailedContext, IgoMap, LayerService} from 'igo2';
 
 @Component({
   selector: 'app-intervention-survey-fire-hydrant',
@@ -44,6 +44,8 @@ export class FireHydrantComponent implements OnInit, OnChanges {
   ];
 
   constructor(
+    private dataSourceService: DataSourceService,
+    private layerService: LayerService,
     public contextService: ContextService,
     fireHydrantTypeService: FireHydrantTypeService,
     unitOfMeasureService: UnitOfMeasureService,
@@ -95,8 +97,23 @@ export class FireHydrantComponent implements OnInit, OnChanges {
       'layers': [layer1]
     } as DetailedContext);
 
-
+    this.addLayerToMap(layer1);
     this.setValues();
+  }
+
+  private addLayerToMap(contextLayer: ContextLayer) {
+    const sourceContext = contextLayer.source;
+    const layerContext = Object.assign({}, contextLayer);
+    delete layerContext.source;
+
+    const dataSourceContext = Object.assign({}, layerContext, sourceContext);
+
+    this.dataSourceService
+      .createAsyncDataSource(dataSourceContext)
+      .subscribe(dataSource =>  {
+        this.map.addLayer(
+          this.layerService.createLayer(dataSource, layerContext));
+      });
   }
 
   ngOnChanges() {
