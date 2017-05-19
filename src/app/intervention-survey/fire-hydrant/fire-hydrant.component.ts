@@ -72,8 +72,6 @@ export class FireHydrantComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
-    /*this.contextService.loadContext('_default');*/
-
     const layer1 = {
       'source': {
         'title': 'Fond de carte du Québec',
@@ -82,13 +80,23 @@ export class FireHydrantComponent implements OnInit, OnChanges {
       }
     };
 
+    let lat: number = Number(this.item.latitude);
+    let long: number = Number(this.item.longitude);
+
+    if (lat === 0) {
+      lat = 46.20083;
+    }
+    if (long === 0) {
+      long = -70.621622;
+    }
+    console.log(long, lat);
     this.contextService.setContext({
       'uri': 'default',
       'title': 'Default Context',
       'map': {
         'view': {
           'projection': 'EPSG:3857',
-          'center': [-70.685006, 46.116211],
+          'center': [long, lat],
           'zoom': 14,
           'minZoom': 6,
           'maxZoom': 17
