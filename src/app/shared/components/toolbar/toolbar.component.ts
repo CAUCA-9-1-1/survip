@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ToolbarComponent implements OnInit {
 
-  private items = [{
+  public items = [{
     name: 'Liste',
     path: '/intervention/list',
     popMenu: false

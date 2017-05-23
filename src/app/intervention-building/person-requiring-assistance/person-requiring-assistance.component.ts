@@ -37,6 +37,8 @@ export class PersonRequiringAssistanceComponent implements OnInit {
     this.setValues();
   }
 
+  onSubmit(form) { }
+
   private loadPnapTypes() {
       this.pnapTypeService.getList()
         .then(types => this.pnapTypes = types);

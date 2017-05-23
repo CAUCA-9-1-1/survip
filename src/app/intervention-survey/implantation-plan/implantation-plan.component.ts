@@ -9,9 +9,9 @@ import {PictureService} from '../../shared/services/picture.service';
   styleUrls: ['./implantation-plan.component.styl']
 })
 export class ImplantationPlanComponent implements OnInit, OnChanges {
-  private implantationForm: FormGroup;
-
   @Input() item: Picture;
+
+  public implantationForm: FormGroup;
 
   constructor(private pictureService: PictureService, private fb: FormBuilder) {
     this.createForm();
@@ -28,6 +28,8 @@ export class ImplantationPlanComponent implements OnInit, OnChanges {
   ngOnChanges() {
     // console.log('changed');
   }
+
+  onSubmit(form) { }
 
   createForm() {
     this.implantationForm = this.fb.group({

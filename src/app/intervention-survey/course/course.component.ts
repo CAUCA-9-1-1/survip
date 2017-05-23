@@ -21,10 +21,10 @@ export class CourseComponent implements OnInit, OnChanges {
   @ViewChild('popupFirestation') popupRef: ElementRef;
   @Input() course: InterventionPlanCourse;
 
-  private courseForm: FormGroup;
-  private firestations: Firestation[];
-  private firestation: string;
-  private streets: InterventionPlanCourseLane[];
+  public courseForm: FormGroup;
+  public firestations: Firestation[];
+  public firestation: string;
+  public streets: InterventionPlanCourseLane[];
 
   constructor(
     private firestationService: FirestationService,
@@ -74,6 +74,8 @@ export class CourseComponent implements OnInit, OnChanges {
       sequence: (this.streets[0] ? (this.streets[this.streets.length - 1].sequence + 1) : 0)
     });
   }
+
+  onSubmit(form) { }
 
   private loadCourseLane() {
     if (this.course) {

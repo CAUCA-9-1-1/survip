@@ -54,6 +54,8 @@ export class BuildingDetailComponent implements OnInit {
     }
   }
 
+  onSubmit(form) { }
+
   private loadPictureAndSetValues() {
     if (this.interventionPlanBuilding) {
       this.pictureService.get(this.interventionPlanBuilding.idImage)

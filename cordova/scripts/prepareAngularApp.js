@@ -7,7 +7,7 @@ function build(basePath, env) {
     const baseWWW = basePath + '/www';
 
     console.log(execSync(
-        "ng build --target=production --" + env.toLowerCase() + " --output-path cordova/www/ --base-href .",
+        "ng build --prod --target=production --" + env.toLowerCase() + " --output-path cordova/www/ --base-href .",
         {
             maxBuffer: 1024*1024,
             cwd: basePath + '/..'
