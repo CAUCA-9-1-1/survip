@@ -10,13 +10,13 @@ import {SurveyQuestionService} from '../shared/services/survey-question.service'
   styleUrls: ['./question-slider.component.styl']
 })
 export class QuestionSliderComponent implements OnInit {
-  private tabs = [];
-  private tabSelected = 0;
+  public tabs = [];
+  public tabSelected = 0;
+  public onLastQuestion = false;
+  public onFirstQuestion = true;
   private questions: Question[];
   private questionIndex = 0;
   private previousIndex: object = {};
-  private onLastQuestion = false;
-  private onFirstQuestion = true;
   private lastAnswer: boolean|string = '';
 
   constructor(

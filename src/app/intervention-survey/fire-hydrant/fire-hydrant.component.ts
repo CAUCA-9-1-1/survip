@@ -128,6 +128,8 @@ export class FireHydrantComponent implements OnInit, OnChanges {
     console.log('changed');
   }
 
+  onSubmit(form) { }
+
   private setValues() {
       this.hydrantForm.patchValue(this.item || new InterventionPlanFireHydrant());
       this.hydrantForm.patchValue({location: [this.item.longitude, this.item.latitude] });

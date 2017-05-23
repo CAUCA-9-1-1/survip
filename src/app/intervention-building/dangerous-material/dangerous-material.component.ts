@@ -56,6 +56,8 @@ export class DangerousMaterialComponent implements OnInit, OnChanges {
     });
   }
 
+  onSubmit(form) { }
+
   private startWatchingForm() {
     this.materialForm.valueChanges
       .debounceTime(500)

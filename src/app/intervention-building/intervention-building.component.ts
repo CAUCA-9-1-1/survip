@@ -34,7 +34,7 @@ export class InterventionBuildingComponent implements OnInit {
   ];
   private sub: any;
   private id: string;
-  private building: InterventionPlanBuilding;
+  public building: InterventionPlanBuilding;
   private hazardousMaterials: BuildingHazardousMaterial[];
   private personsRequiringAssistance: BuildingPersonRequiringAssistance[];
   private contacts: BuildingContact[];

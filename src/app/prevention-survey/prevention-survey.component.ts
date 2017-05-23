@@ -13,7 +13,9 @@ import {BuildingService} from '../shared/services/building.service';
 })
 export class PreventionSurveyComponent implements OnInit {
   private inspection: Inspection;
-  private address: string;
+
+  get address(): string { return this._address; };
+  private _address;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -34,7 +36,7 @@ export class PreventionSurveyComponent implements OnInit {
 
   loadBuilding() {
     this.buildingService.get(this.inspection.idBuilding).subscribe((building) => {
-      this.address = building.address;
+      this._address = building.address;
     });
   }
 }

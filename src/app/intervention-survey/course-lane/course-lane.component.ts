@@ -12,12 +12,12 @@ import {InterventionPlanCourseLaneService} from '../shared/services/intervention
 export class CourseLaneComponent implements OnInit {
   @Input() street: InterventionPlanCourseLane;
 
-  private courseLaneForm: FormGroup;
+  public courseLaneForm: FormGroup;
 
   constructor(
     private elementRef: ElementRef,
     private fb: FormBuilder,
-    private laneService: LaneService,
+    public laneService: LaneService,
     private courseLaneService: InterventionPlanCourseLaneService
   ) {
     this.createForm();
@@ -28,7 +28,9 @@ export class CourseLaneComponent implements OnInit {
     this.setValues();
   }
 
-  private removeLine() {
+  onSubmit(form) { }
+
+  public removeLine() {
     this.courseLaneService.delete(this.street.id).subscribe(() => console.log('course lane changed'));
     this.elementRef.nativeElement.remove();
   }
