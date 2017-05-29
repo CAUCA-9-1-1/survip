@@ -1,54 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import {Component, OnInit} from '@angular/core';
+import {LanguageService} from 'igo2';
 
-import {Country} from '../../core/models/country';
-import {CountryService} from '../../core/services/country.service';
+import {Country} from '../shared/models/country.model';
+import {CountryService} from '../shared/services/country.service';
+import {WindowRefService} from '../../shared/services/window-ref.service';
 
 @Component({
   selector: 'app-management-address-country',
   templateUrl: './country.component.html',
-  styleUrls: ['./country.component.styl']
+  styleUrls: ['./country.component.styl'],
+  providers: [CountryService]
 })
 export class CountryComponent implements OnInit {
   countries: Country[] = [];
-  columns: Object[] = [];
-  editing: Object = {};
-  filter: Object = {};
+  columns: object[] = [];
+  editing: object = {};
+  filter: object = {};
 
-  constructor(private countryService: CountryService, translate: TranslateService) {
+  constructor(private countryService: CountryService, private windowRef: WindowRefService, translate: LanguageService) {
     this.columns = [{
-      dataField: 'id_country',
-      visible: false
-    }, {
       dataField: 'name',
-      sortOrder: 'asc',
-      calculateCellValue: function (data) {
-        return (data.name ? data.name['fr'] : '');
-      },
-      editCellTemplate: function (cellElement, cellInfo) {
-        cellElement.dxTextBox({
-          value: cellInfo.data.name.fr,
-          onValueChanged: function (e) {
-            cellInfo.setValue(e.value);
-          }
-        });
-
-        /*$('<div>').dxMultiLang({
-         value: cellInfo.data.name,
-         onValueChanged: function (e) {
-         cellInfo.setValue(e.value);
-         }
-         }).appendTo(cellElement);*/
-      }
+      caption: 'name',
+      calculateCellValue: this.onCalculateCellValue.bind(this),
+      editCellTemplate: this.onEditCellTemplate.bind(this)
     }, {
-      dataField: 'code_alpha2'
+      dataField: 'codeAlpha2',
+      caption: 'codeAlpha2',
     }, {
-      dataField: 'code_alpha3'
+      dataField: 'codeAlpha3',
+      caption: 'codeAlpha3',
     }, {
-      dataField: 'is_active',
+      dataField: 'isActive',
       dataType: 'boolean',
-      width: '10%',
-      filterValue: true
+      caption: 'isActive',
+      width: '10%'
     }];
 
     this.editing = {
@@ -59,32 +44,20 @@ export class CountryComponent implements OnInit {
       form: {
         colCount: 1,
         items: [{
-          label: {
-            text: 'name'
-          },
           dataField: 'name',
           isRequired: true
         }, {
-          label: {
-            text: 'codeAlpha2'
-          },
-          dataField: 'code_alpha2',
+          dataField: 'codeAlpha2',
           editorOptions: {
             maxLength: 2
           }
         }, {
-          label: {
-            text: 'codeAlpha3'
-          },
-          dataField: 'code_alpha3',
+          dataField: 'codeAlpha3',
           editorOptions: {
             maxLength: 3
           }
         }, {
-          label: {
-            text: 'isActive'
-          },
-          dataField: 'is_active',
+          dataField: 'isActive',
           editorType: 'dxCheckBox'
         }]
       }
@@ -92,16 +65,9 @@ export class CountryComponent implements OnInit {
     this.filter = {
       visible: true
     };
-
-    translate.get(['name', 'codeAlpha2', 'codeAlpha3', 'isActive']).subscribe((res: Object) => {
-      this.columns[1]['caption'] = res['name'];
-      this.columns[2]['caption'] = res['codeAlpha2'];
-      this.columns[3]['caption'] = res['codeAlpha3'];
-      this.columns[4]['caption'] = res['isActive'];
-    });
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.loadAll();
   }
 
@@ -109,7 +75,7 @@ export class CountryComponent implements OnInit {
     console.log('change');
   }*/
 
-  onRowUpdated(e) {
+  public onRowUpdated(e) {
     for (const i in e.data) {
       if (e.data[i]) {
         e.key[i] = e.data[i];
@@ -121,6 +87,19 @@ export class CountryComponent implements OnInit {
         console.error(info.error);
       }
     });
+  }
+
+  private onCalculateCellValue(data) {
+    return (data.name ? data.name['fr'] : '');
+  }
+
+  private onEditCellTemplate(cellElement, cellInfo) {
+    /*$('<div>').dxMultiLang({
+      value: cellInfo.data.name,
+      onValueChanged: function (e) {
+        cellInfo.setValue(e.value);
+      }
+    }).appendTo(cellElement);*/
   }
 
   private loadAll() {

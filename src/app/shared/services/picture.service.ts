@@ -2,16 +2,15 @@ import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
-import {BaseService} from '../../core/services/base.service';
+import {BaseService} from '../../core/base.service';
 import {Picture} from '../interfaces/picture.interface';
-import {UUID} from 'angular2-uuid';
 
 @Injectable()
 export class PictureService extends BaseService {
   private url = 'api/picture';
 
-  constructor(private http: Http) {
-    super();
+  constructor(http: Http) {
+    super(http);
   }
 
   get(id: string): Observable<Picture> {

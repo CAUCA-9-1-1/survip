@@ -1,2 +1,14 @@
-<h3>{{'country' | translate}}</h3>
-<app-management-address-country></app-management-address-country>
+<md-tab-group>
+    <md-tab label="{{'country' | translate}}">
+        <app-management-address-country></app-management-address-country>
+    </md-tab>
+    <md-tab label="{{'state' | translate}}">
+        <app-management-address-state></app-management-address-state>
+    </md-tab>
+    <md-tab label="{{'region' | translate}}">
+        <app-management-address-region></app-management-address-region>
+    </md-tab>
+    <md-tab label="{{'county' | translate}}">
+        <app-management-address-county></app-management-address-county>
+    </md-tab>
+</md-tab-group>

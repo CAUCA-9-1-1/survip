@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 
-import { BaseService } from '../../../core/services/base.service';
-import { Question } from '../models/question.model';
+import {BaseService} from '../../../core/base.service';
+import {Question} from '../models/question.model';
 
 @Injectable()
 export class SurveyQuestionService extends BaseService {
 
-  constructor(private http: Http) {
-    super();
+  constructor(http: Http) {
+    super(http);
   }
 
   getAll(idSurvey: string) {

@@ -1,3 +1,8 @@
-<p>
-  county works!
-</p>
+<dx-data-grid
+    [dataSource]="counties"
+    [filterRow]="filter"
+    [columns]="columns"
+    [editing]="editing"
+    [hoverStateEnabled]="true"
+    (onRowUpdated)="onRowUpdated($event)">
+</dx-data-grid>

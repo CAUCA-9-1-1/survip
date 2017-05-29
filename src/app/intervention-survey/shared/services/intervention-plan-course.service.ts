@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 
-import {BaseService} from '../../../core/services/base.service';
+import {BaseService} from '../../../core/base.service';
 import {InterventionPlanCourse} from '../models/intervention-plan-course';
 
 @Injectable()
 export class InterventionPlanCourseService extends BaseService {
   private url = 'api/intervention-plan-course';
 
-  constructor(private http: Http) {
-    super();
+  constructor(http: Http) {
+    super(http);
   }
 
   getAll(id?: string) {

@@ -23,5 +23,11 @@
   "select": "Selection ...",
   "take": "take ...",
   "selectImage": "Select an image",
-  "takeImage": "Take a picture"
+  "takeImage": "Take a picture",
+  "country": "Country",
+  "codeAlpha2": "Code 2 letters",
+  "codeAlpha3": "Code 3 letters",
+  "county": "County",
+  "state": "Province/State",
+  "region": "Region"
 }
