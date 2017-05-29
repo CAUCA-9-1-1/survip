@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
-import {BaseService} from '../../core/services/base.service';
+import {BaseService} from '../../core/base.service';
 import {Building} from '../interfaces/building.interface';
 
 @Injectable()
 export class BuildingService extends BaseService {
 
-  constructor(private http: Http) {
-    super();
+  constructor(http: Http) {
+    super(http);
   }
 
   get(id: string): Observable<Building> {

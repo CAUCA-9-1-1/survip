@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Headers, Http, Response} from '@angular/http';
 import {InterventionPlan} from '../models/intervention-plan';
-import {BaseService} from '../../../core/services/base.service';
+import {BaseService} from '../../../core/base.service';
 
 @Injectable()
 export class InterventionPlanService extends BaseService {
   private url = 'api/intervention-plan';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {
-    super();
+  constructor(http: Http) {
+    super(http);
   }
 
   get(id: string) {

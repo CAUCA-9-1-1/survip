@@ -6,7 +6,6 @@ import { CountryComponent } from './country/country.component';
 import { CountyComponent } from './county/county.component';
 import { RegionComponent } from './region/region.component';
 import { StateComponent } from './state/state.component';
-import { CountryService } from '../core/services/country.service';
 
 @NgModule({
   imports: [
@@ -15,6 +14,9 @@ import { CountryService } from '../core/services/country.service';
   ],
   exports: [
     CountryComponent,
+    CountyComponent,
+    RegionComponent,
+    StateComponent
   ],
   declarations: [
     CountryComponent,
@@ -22,8 +24,6 @@ import { CountryService } from '../core/services/country.service';
     RegionComponent,
     StateComponent
   ],
-  providers: [
-    CountryService
-  ]
+  providers: []
 })
 export class ManagementAddressModule { }

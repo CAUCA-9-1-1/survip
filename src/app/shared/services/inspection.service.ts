@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
-import {BaseService} from '../../core/services/base.service';
+import {BaseService} from '../../core/base.service';
 import {Inspection} from '../interfaces/inspection.interface';
 
 @Injectable()
 export class InspectionService extends BaseService {
 
-  constructor(private http: Http) {
-    super();
+  constructor(http: Http) {
+    super(http);
   }
 
   getAll(): Observable<Inspection[]> {

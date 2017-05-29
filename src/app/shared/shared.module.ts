@@ -30,6 +30,7 @@ import {CardLayoutFactoryDirective} from '../intervention-survey/shared/control-
 import {PinchZoomDirective} from './directives/pinch-zoom.directive';
 import {FullscreenDialogComponent} from './components/fullscreen-dialog/fullscreen-dialog.component';
 import {WaitDialogComponent} from './components/wait-dialog/wait-dialog.component';
+import {DevextremeComponent} from './components/devextreme/devextreme.component';
 
 export function translateLoader(http: Http) {
   return new LanguageLoader(http, './assets/locale/', '.json');
@@ -62,6 +63,7 @@ export function translateLoader(http: Http) {
     CardLayoutComponent,
     CardLayoutFactoryDirective,
     PinchZoomDirective,
+    DevextremeComponent,
   ],
   entryComponents: [
     WebcamComponent,

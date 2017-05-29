@@ -1,7 +1,8 @@
-<!--<dx-data-grid
-  [dataSource]="dataSource"
-  [columns]="columns"
-  [editing]="editing"
-  [filterRow]="filter"
-  (onRowUpdated)="onRowUpdated($event)">
-</dx-data-grid>-->
+<dx-data-grid
+    [dataSource]="countries"
+    [filterRow]="filter"
+    [columns]="columns"
+    [editing]="editing"
+    [hoverStateEnabled]="true"
+    (onRowUpdated)="onRowUpdated($event)">
+</dx-data-grid>

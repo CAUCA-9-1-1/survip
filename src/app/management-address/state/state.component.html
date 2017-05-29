@@ -1,3 +1,8 @@
-<p>
-  state works!
-</p>
+<dx-data-grid
+    [dataSource]="states"
+    [filterRow]="filter"
+    [columns]="columns"
+    [editing]="editing"
+    [hoverStateEnabled]="true"
+    (onRowUpdated)="onRowUpdated($event)">
+</dx-data-grid>

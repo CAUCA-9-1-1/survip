@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
-import {BaseService} from '../../../core/services/base.service';
+import {BaseService} from '../../../core/base.service';
 import {InterventionPlanCourseLane} from '../models/intervention-plan-course-lane';
 
 @Injectable()
 export class InterventionPlanCourseLaneService extends BaseService {
   private url = 'api/intervention-plan-course-lane';
 
-  constructor(private http: Http) {
-    super();
+  constructor(http: Http) {
+    super(http);
   }
 
   getCourse(id: string): Observable<InterventionPlanCourseLane[]> {
