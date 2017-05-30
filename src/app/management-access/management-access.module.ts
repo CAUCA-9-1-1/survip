@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {DxDataGridModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
+import {FireSafetyDepartmentComponent} from './firesafetydepartment/firesafetydepartment.component';
 import {WebuserComponent} from './webuser/webuser.component';
 
 @NgModule({
@@ -10,10 +11,12 @@ import {WebuserComponent} from './webuser/webuser.component';
     DxDataGridModule
   ],
   exports: [
-    WebuserComponent
+    FireSafetyDepartmentComponent,
+    WebuserComponent,
   ],
   declarations: [
-    WebuserComponent
+    FireSafetyDepartmentComponent,
+    WebuserComponent,
   ],
   providers: []
 })
