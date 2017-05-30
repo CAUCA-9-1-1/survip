@@ -29,5 +29,7 @@
   "codeAlpha3": "Code 3 letters",
   "county": "County",
   "state": "Province/State",
-  "region": "Region"
+  "region": "Region",
+  "city": "City",
+  "cityType": "City type"
 }
