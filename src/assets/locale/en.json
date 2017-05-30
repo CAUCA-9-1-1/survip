@@ -24,6 +24,8 @@
   "take": "take ...",
   "selectImage": "Select an image",
   "takeImage": "Take a picture",
+  "accessManagement": "Management for access",
+  "webuser": "User",
   "addressManagement": "Management for address",
   "country": "Country",
   "codeAlpha2": "Code 2 letters",
