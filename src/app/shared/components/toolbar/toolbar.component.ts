@@ -9,19 +9,9 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
 
   public items = [{
-    name: 'Liste',
-    path: '/intervention/list',
+    name: 'addressManagement',
+    path: '/management/address/',
     popMenu: false
-  },
-  {
-    name: 'Carto',
-    path: '/intervention/maps',
-    popMenu: false
-  },
-  {
-    name: 'Visualiser...',
-    path: '',
-    popMenu: true
   }];
 
   constructor(private router: Router) { }
