@@ -30,6 +30,8 @@
   "county": "Comté",
   "state": "Province/État",
   "region": "Région",
+  "city": "Ville",
+  "cityType": "Type de ville",
   "cancel": "Annuler",
   "left": "Gauche",
   "right": "Droite",
