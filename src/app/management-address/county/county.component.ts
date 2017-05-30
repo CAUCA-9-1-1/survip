@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+
+import {EditDatagrid} from '../../core/devextreme.editdatagrid';
 import {County} from '../shared/models/county.model';
 import {CountyService} from '../shared/services/county.service';
 
@@ -8,13 +10,15 @@ import {CountyService} from '../shared/services/county.service';
   styleUrls: ['./county.component.styl'],
   providers: [CountyService]
 })
-export class CountyComponent implements OnInit {
+export class CountyComponent extends EditDatagrid implements OnInit {
   counties: County[] = [];
   columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private countyService: CountyService) {
+    super();
+
     this.columns = [{
       dataField: 'name',
       caption: 'name',
@@ -68,19 +72,6 @@ export class CountyComponent implements OnInit {
         console.error(info.error);
       }
     });
-  }
-
-  private onCalculateCellValue(data) {
-    return (data.name ? data.name['fr'] : '');
-  }
-
-  private onEditCellTemplate(cellElement, cellInfo) {
-    /*$('<div>').dxMultiLang({
-      value: cellInfo.data.name,
-      onValueChanged: function (e) {
-        cellInfo.setValue(e.value);
-      }
-    }).appendTo(cellElement);*/
   }
 
   private loadAll() {

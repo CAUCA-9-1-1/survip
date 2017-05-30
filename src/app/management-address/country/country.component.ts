@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {LanguageService} from 'igo2';
 
+import {EditDatagrid} from '../../core/devextreme.editdatagrid';
 import {Country} from '../shared/models/country.model';
 import {CountryService} from '../shared/services/country.service';
-import {WindowRefService} from '../../shared/services/window-ref.service';
 
 @Component({
   selector: 'app-management-address-country',
@@ -11,13 +11,15 @@ import {WindowRefService} from '../../shared/services/window-ref.service';
   styleUrls: ['./country.component.styl'],
   providers: [CountryService]
 })
-export class CountryComponent implements OnInit {
+export class CountryComponent extends EditDatagrid implements OnInit {
   countries: Country[] = [];
   columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
-  constructor(private countryService: CountryService, private windowRef: WindowRefService, translate: LanguageService) {
+  constructor(private countryService: CountryService, translate: LanguageService) {
+    super();
+
     this.columns = [{
       dataField: 'name',
       caption: 'name',
@@ -87,19 +89,6 @@ export class CountryComponent implements OnInit {
         console.error(info.error);
       }
     });
-  }
-
-  private onCalculateCellValue(data) {
-    return (data.name ? data.name['fr'] : '');
-  }
-
-  private onEditCellTemplate(cellElement, cellInfo) {
-    /*$('<div>').dxMultiLang({
-      value: cellInfo.data.name,
-      onValueChanged: function (e) {
-        cellInfo.setValue(e.value);
-      }
-    }).appendTo(cellElement);*/
   }
 
   private loadAll() {
