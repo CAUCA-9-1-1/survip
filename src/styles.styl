@@ -6,6 +6,7 @@ body {
 /* General page content */
 .content-under-toolbar {
   height: calc(100% - 64px);
+  padding: 0 20px;
   overflow: auto;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -57,6 +58,7 @@ body {
 @media only screen and (max-width: 600px) {
   .content-under-toolbar {
     height: calc(100% - 56px);
+    padding: 0;
   }
 }
 
@@ -155,4 +157,12 @@ div.hidden-content {
 
 .modal .content img {
   max-width: 60%;
+}
+
+.mat-tab-label-container, .dx-datagrid {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.dx-datagrid .dx-toolbar {
+  background-color: transparent;
 }

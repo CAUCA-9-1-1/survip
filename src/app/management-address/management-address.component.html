@@ -1,20 +1,23 @@
-<md-tab-group>
-    <md-tab label="{{'country' | translate}}">
-        <app-management-address-country></app-management-address-country>
-    </md-tab>
-    <md-tab label="{{'state' | translate}}">
-        <app-management-address-state></app-management-address-state>
-    </md-tab>
-    <md-tab label="{{'region' | translate}}">
-        <app-management-address-region></app-management-address-region>
-    </md-tab>
-    <md-tab label="{{'county' | translate}}">
-        <app-management-address-county></app-management-address-county>
-    </md-tab>
-    <md-tab label="{{'city' | translate}}">
-        <app-management-address-city></app-management-address-city>
-    </md-tab>
-    <md-tab label="{{'cityType' | translate}}">
-        <app-management-address-citytype></app-management-address-citytype>
-    </md-tab>
-</md-tab-group>
+<app-toolbar title="{{'addressManagement' | translate}}"></app-toolbar>
+<div class="content-under-toolbar">
+    <md-tab-group>
+        <md-tab label="{{'country' | translate}}">
+            <app-management-address-country></app-management-address-country>
+        </md-tab>
+        <md-tab label="{{'state' | translate}}">
+            <app-management-address-state></app-management-address-state>
+        </md-tab>
+        <md-tab label="{{'region' | translate}}">
+            <app-management-address-region></app-management-address-region>
+        </md-tab>
+        <md-tab label="{{'county' | translate}}">
+            <app-management-address-county></app-management-address-county>
+        </md-tab>
+        <md-tab label="{{'city' | translate}}">
+            <app-management-address-city></app-management-address-city>
+        </md-tab>
+        <md-tab label="{{'cityType' | translate}}">
+            <app-management-address-citytype></app-management-address-citytype>
+        </md-tab>
+    </md-tab-group>
+</div>
