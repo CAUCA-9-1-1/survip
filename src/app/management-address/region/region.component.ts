@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+
+import {EditDatagrid} from '../../core/devextreme.editdatagrid';
 import {RegionService} from '../shared/services/region.service';
 import {Region} from '../shared/models/region.model';
 
@@ -8,13 +10,15 @@ import {Region} from '../shared/models/region.model';
   styleUrls: ['./region.component.styl'],
   providers: [RegionService]
 })
-export class RegionComponent implements OnInit {
+export class RegionComponent extends EditDatagrid implements OnInit {
   regions: Region[] = [];
   columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private regionService: RegionService) {
+    super();
+
     this.columns = [{
       dataField: 'name',
       caption: 'name',
@@ -73,19 +77,6 @@ export class RegionComponent implements OnInit {
         console.error(info.error);
       }
     });
-  }
-
-  private onCalculateCellValue(data) {
-    return (data.name ? data.name['fr'] : '');
-  }
-
-  private onEditCellTemplate(cellElement, cellInfo) {
-    /*$('<div>').dxMultiLang({
-      value: cellInfo.data.name,
-      onValueChanged: function (e) {
-        cellInfo.setValue(e.value);
-      }
-    }).appendTo(cellElement);*/
   }
 
   private loadAll() {

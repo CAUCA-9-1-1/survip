@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+
+import {EditDatagrid} from '../../core/devextreme.editdatagrid';
 import {CityType} from '../shared/models/citytype.model';
 import {CityTypeService} from '../shared/services/citytype.service';
 
@@ -8,13 +10,15 @@ import {CityTypeService} from '../shared/services/citytype.service';
   styleUrls: ['./citytype.component.styl'],
   providers: [CityTypeService]
 })
-export class CityTypeComponent implements OnInit {
+export class CityTypeComponent extends EditDatagrid implements OnInit {
   cityType: CityType[] = [];
   columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private cityTypeService: CityTypeService) {
+    super();
+
     this.columns = [{
       dataField: 'name',
       caption: 'name',
@@ -68,19 +72,6 @@ export class CityTypeComponent implements OnInit {
         console.error(info.error);
       }
     });
-  }
-
-  private onCalculateCellValue(data) {
-    return (data.name ? data.name['fr'] : '');
-  }
-
-  private onEditCellTemplate(cellElement, cellInfo) {
-    /*$('<div>').dxMultiLang({
-      value: cellInfo.data.name,
-      onValueChanged: function (e) {
-        cellInfo.setValue(e.value);
-      }
-    }).appendTo(cellElement);*/
   }
 
   private loadAll() {

@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+
+import {EditDatagrid} from '../../core/devextreme.editdatagrid';
 import {State} from '../shared/models/state.model';
 import {StateService} from '../shared/services/state.service';
 
@@ -8,13 +10,15 @@ import {StateService} from '../shared/services/state.service';
   styleUrls: ['./state.component.styl'],
   providers: [StateService]
 })
-export class StateComponent implements OnInit {
+export class StateComponent extends EditDatagrid implements OnInit {
   states: State[] = [];
   columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private stateService: StateService) {
+    super();
+
     this.columns = [{
       dataField: 'name',
       caption: 'name',
@@ -73,19 +77,6 @@ export class StateComponent implements OnInit {
         console.error(info.error);
       }
     });
-  }
-
-  private onCalculateCellValue(data) {
-    return (data.name ? data.name['fr'] : '');
-  }
-
-  private onEditCellTemplate(cellElement, cellInfo) {
-    /*$('<div>').dxMultiLang({
-      value: cellInfo.data.name,
-      onValueChanged: function (e) {
-        cellInfo.setValue(e.value);
-      }
-    }).appendTo(cellElement);*/
   }
 
   private loadAll() {
