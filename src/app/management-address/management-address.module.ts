@@ -2,12 +2,14 @@ import {NgModule} from '@angular/core';
 import {DxDataGridModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
-import {CountryComponent} from './country/country.component';
-import {CountyComponent} from './county/county.component';
-import {RegionComponent} from './region/region.component';
-import {StateComponent} from './state/state.component';
 import {CityComponent} from './city/city.component';
 import {CityTypeComponent} from './citytype/citytype.component';
+import {CountryComponent} from './country/country.component';
+import {CountyComponent} from './county/county.component';
+import {LaneComponent} from './lane/lane.component';
+import {RegionComponent} from './region/region.component';
+import {StateComponent} from './state/state.component';
+
 
 @NgModule({
   imports: [
@@ -15,20 +17,22 @@ import {CityTypeComponent} from './citytype/citytype.component';
     DxDataGridModule
   ],
   exports: [
-    CountryComponent,
-    CountyComponent,
-    RegionComponent,
-    StateComponent,
     CityComponent,
     CityTypeComponent,
+    CountryComponent,
+    CountyComponent,
+    LaneComponent,
+    RegionComponent,
+    StateComponent,
   ],
   declarations: [
-    CountryComponent,
-    CountyComponent,
-    RegionComponent,
-    StateComponent,
     CityComponent,
     CityTypeComponent,
+    CountryComponent,
+    CountyComponent,
+    LaneComponent,
+    RegionComponent,
+    StateComponent,
   ],
   providers: []
 })

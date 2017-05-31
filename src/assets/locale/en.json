@@ -26,6 +26,7 @@
   "takeImage": "Take a picture",
   "accessManagement": "Management for access",
   "webuser": "User",
+  "permission": "Permission",
   "fireSafetyDepartment": "Fire safety department",
   "addressManagement": "Management for address",
   "country": "Country",
@@ -35,5 +36,6 @@
   "state": "Province/State",
   "region": "Region",
   "city": "City",
-  "cityType": "City type"
+  "cityType": "City type",
+  "lane": "Lane"
 }
