@@ -1,0 +1,25 @@
+<div fxLayout="row">
+    <div fxFlex="35%">
+        <div class="title">{{'webuser' | translate}}</div>
+        <div class="content">
+            <dx-tree-view
+                [dataSource]="objects"
+                displayExpr="text"
+                itemsExpr="children"
+                keyExpr="idPermissionObject"
+                selectionMode="single"
+                (onItemClick)="onRowSelected($event)">
+            </dx-tree-view>
+        </div>
+    </div>
+    <div fxFlex="65%">
+        <dx-data-grid
+                [dataSource]="features"
+                [filterRow]="filter"
+                [columns]="columns"
+                [editing]="editing"
+                [hoverStateEnabled]="true"
+                (onRowUpdated)="onRowUpdated($event)">
+        </dx-data-grid>
+    </div>
+</div>
