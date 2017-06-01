@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import {MenuItem} from '../../interfaces/menu-item.interface';
+import {MenuItem} from '../../models/menu-item.model';
 
 @Component({
   selector: 'app-menu',

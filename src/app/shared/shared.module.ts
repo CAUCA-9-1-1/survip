@@ -25,12 +25,9 @@ import {YesNoDialogComponent} from './components/yes-no-dialog/yes-no-dialog.com
 import {SearchBoxComponent} from './components/search-box/search-box.component';
 import {SearchListComponent} from './components/search-list/search-list.component';
 import {FilterByPipe} from './pipes/filter.pipe';
-import {CardLayoutComponent} from '../intervention-survey/card-layout/card-layout.component';
-import {CardLayoutFactoryDirective} from '../intervention-survey/shared/control-factory.directive';
 import {PinchZoomDirective} from './directives/pinch-zoom.directive';
 import {FullscreenDialogComponent} from './components/fullscreen-dialog/fullscreen-dialog.component';
 import {WaitDialogComponent} from './components/wait-dialog/wait-dialog.component';
-import {DevextremeComponent} from './components/devextreme/devextreme.component';
 
 export function translateLoader(http: Http) {
   return new LanguageLoader(http, './assets/locale/', '.json');
@@ -60,10 +57,7 @@ export function translateLoader(http: Http) {
     SearchBoxComponent,
     SearchListComponent,
     FilterByPipe,
-    CardLayoutComponent,
-    CardLayoutFactoryDirective,
     PinchZoomDirective,
-    DevextremeComponent,
   ],
   entryComponents: [
     WebcamComponent,
@@ -86,7 +80,6 @@ export function translateLoader(http: Http) {
     ToolbarBackComponent,
     TakePictureComponent,
     SearchBoxComponent,
-    CardLayoutComponent,
     PinchZoomDirective,
   ],
   providers: [
