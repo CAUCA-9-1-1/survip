@@ -40,7 +40,7 @@ export class PermissionComponent implements OnInit {
         displayExpr: 'text',
         valueExpr: 'value'
       },
-      calculateDisplayValue: this.onCalculateDisplayValue.bind(this, 'default_value')
+      calculateDisplayValue: this.onCalculateDisplayValue.bind(this, 'defaultValue')
     }, {
       dataField: 'webuserValue',
       caption: 'webuserValue',
@@ -54,7 +54,7 @@ export class PermissionComponent implements OnInit {
         displayExpr: 'text',
         valueExpr: 'value'
       },
-      calculateDisplayValue: this.onCalculateDisplayValue.bind(this, 'webuser_value')
+      calculateDisplayValue: this.onCalculateDisplayValue.bind(this, 'webuserValue')
     }];
 
     this.editing = {
