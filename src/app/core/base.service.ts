@@ -7,12 +7,14 @@ import {environment} from 'environments/environment';
 export class BaseService {
   public static isInLoginProcess = false;
   protected host = 'http://cadevsprevention1.ad.cauca.ca/api/';
+  private storage: any;
 
   constructor(protected http: Http, protected router?: Router) {
+    this.storage = localStorage;
   }
 
   protected authorization() {
-    const token = localStorage.getItem('currentToken');
+    const token = this.storage.getItem('currentToken');
 
     if (token) {
       return new RequestOptions({
@@ -32,7 +34,7 @@ export class BaseService {
           BaseService.isInLoginProcess = false;
 
           if (infoToken.data.accessToken) {
-            localStorage.setItem('currentToken', infoToken.data.accessToken);
+            this.storage.setItem('currentToken', infoToken.data.accessToken);
           } else if (this.router) {
             this.goToLoginPage(returnUrl);
           }
@@ -72,7 +74,7 @@ export class BaseService {
   }
 
   private login() {
-    localStorage.removeItem('currentToken');
+    this.storage.removeItem('currentToken');
 
     const username = 'admin';
     const password = 'cauca2017';

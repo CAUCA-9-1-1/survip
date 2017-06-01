@@ -1,4 +1,10 @@
 {
+  "cancel": "Annuler",
+  "left": "Gauche",
+  "right": "Droite",
+  "ok": "OK",
+  "add": "Ajouter",
+  "pleaseWait": "Veuillez patienter",
   "waterSupply": "Alimentation en eau",
   "building": "Bâtiments",
   "implantation": "Implantation",
@@ -28,6 +34,7 @@
   "webuser": "Utilisateur",
   "permission": "Permission",
   "fireSafetyDepartment": "Département de sécurité incendie",
+  "apisAction": "Stats des actions",
   "addressManagement": "Gestion pour les adresses",
   "country": "Pays",
   "codeAlpha2": "Code à 2 lettres",
@@ -37,11 +44,5 @@
   "region": "Région",
   "city": "Ville",
   "cityType": "Type de ville",
-  "lane": "Voie",
-  "cancel": "Annuler",
-  "left": "Gauche",
-  "right": "Droite",
-  "ok": "OK",
-  "add": "Ajouter",
-  "pleaseWait": "Veuillez patienter"
+  "lane": "Voie"
 }

@@ -1,20 +1,23 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 
-import { WindowRefService } from './shared/services/window-ref.service';
+import {WindowRefService} from './shared/services/window-ref.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  private storage: any;
 
-  constructor(private router: Router, private windowRef: WindowRefService) { }
+  constructor(private router: Router, private windowRef: WindowRefService) {
+    this.storage = this.windowRef.nativeWindow.localStorage;
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    // if (this.windowRef.getObject('localStorage').getItem('currentUser')) {
-    return true;
-    // }
+    if (this.storage.getItem('currentToken')) {
+      return true;
+    }
 
     // not logged in so redirect to login page with the return url
     // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-    // return false;
+    return false;
   }
 }
