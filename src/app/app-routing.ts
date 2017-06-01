@@ -3,64 +3,26 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {AuthGuard} from './auth-guard.service';
 import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
-import {InterventionMapsComponent} from './intervention-maps/intervention-maps.component';
-import {InterventionReportComponent} from './intervention-report/intervention-report.component';
-import {InterventionSurveyComponent} from './intervention-survey/intervention-survey.component';
-import {PreventionSurveyComponent} from './prevention-survey/prevention-survey.component';
 import {ManagementAddressComponent} from './management-address/management-address.component';
-import {InterventionBuildingComponent} from './intervention-building/intervention-building.component';
-import {InterventionListComponent} from './intervention-list/intervention-list.component';
-import {PreventionReportComponent} from './prevention-report/prevention-report.component';
 import {ManagementAccessComponent} from './management-access/management-access.component';
+import {ManagementBuildingComponent} from './management-building/management-building.component';
 
 const appRoutes: Routes = [{
   path: '',
-  redirectTo: '/intervention/maps',
+  redirectTo: '/management/building',
   pathMatch: 'full'
 }, {
-  path: 'intervention',
-  canActivate: [AuthGuard],
-  children: [{
-    path: 'maps',
-    component: InterventionMapsComponent
-  }, {
-    path: 'report',
-    component: InterventionReportComponent
-  }, {
-    path: 'list',
-    component: InterventionListComponent
-  }, {
-    path: 'survey/:id',
-    component: InterventionSurveyComponent
-  }, {
-    path: 'building/:id',
-    component: InterventionBuildingComponent
-  }]
-},
-{
-  path: 'prevention',
-  canActivate: [AuthGuard],
-  children: [{
-    path: 'survey',
-    component: PreventionSurveyComponent
-  }, {
-    path: 'survey/:id',
-    component: PreventionSurveyComponent
-  }, {
-    path: 'report',
-    component: PreventionReportComponent
-  }
-  ]
-},
-{
   path: 'management',
   canActivate: [AuthGuard],
   children: [{
-    path: 'access',
-    component: ManagementAccessComponent
-  },{
+    path: 'building',
+    component: ManagementBuildingComponent
+  }, {
     path: 'address',
     component: ManagementAddressComponent
+  }, {
+    path: 'access',
+    component: ManagementAccessComponent
   }]
 }, {
   path: '**',

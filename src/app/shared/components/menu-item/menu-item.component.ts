@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {MenuItem} from '../../interfaces/menu-item.interface';
+import {MenuItem} from '../../models/menu-item.model';
 
 
 @Component({
