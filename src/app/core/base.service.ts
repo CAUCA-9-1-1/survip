@@ -5,6 +5,7 @@ import {environment} from 'environments/environment';
 
 @Injectable()
 export class BaseService {
+  public static isInLoginProcess = false;
   protected host = 'http://cadevsprevention1.ad.cauca.ca/api/';
 
   constructor(protected http: Http, protected router?: Router) {
@@ -22,39 +23,57 @@ export class BaseService {
     }
   }
 
-  protected isLogin(result, returnUrl) {
-    if (result.error && !result.login) {
-      this.login().subscribe((infoToken) => {
-        if (infoToken.data.accessToken) {
-          localStorage.setItem('currentToken', infoToken.data.accessToken);
-        } else if (this.router) {
-          this.router.navigate(['/login'], {
-            queryParams: {
-              returnUrl: returnUrl
-            }
-          });
-        }
-      });
+  protected isLogin(result: any, returnUrl?: string, callback?) {
+    if (result.error && result.login === false) {
+      if (!BaseService.isInLoginProcess) {
+        BaseService.isInLoginProcess = true;
+
+        this.login().subscribe((infoToken) => {
+          BaseService.isInLoginProcess = false;
+
+          if (infoToken.data.accessToken) {
+            localStorage.setItem('currentToken', infoToken.data.accessToken);
+          } else if (this.router) {
+            this.goToLoginPage(returnUrl);
+          }
+        });
+      }
     }
   }
 
   protected handleError(error: Response | any) {
-    let errMsg: string;
+    let errorMessage: string;
 
     if (error instanceof Response) {
       const body = error.json() || '';
       const err = body['error'] || JSON.stringify(body);
 
-      // errMsg = ${error.status} + ' - ' + ${error.statusText || ''} + ' ' + ${err};
+      errorMessage = error.status + ' - ' + (error.statusText || '') + ' ' + err;
     } else {
-      errMsg = error.message ? error.message : error.toString();
+      errorMessage = error.message ? error.message : error.toString();
     }
 
-    console.error(error);
-    return Promise.reject(errMsg);
+    console.error(errorMessage);
+    return errorMessage;
+  }
+
+  private goToLoginPage(returnUrl?: string) {
+    let extras = {};
+
+    if (returnUrl) {
+      extras = {
+        queryParams: {
+          returnUrl: returnUrl
+        }
+      };
+    }
+
+    this.router.navigate(['/login'], extras);
   }
 
   private login() {
+    localStorage.removeItem('currentToken');
+
     const username = 'admin';
     const password = 'cauca2017';
 
