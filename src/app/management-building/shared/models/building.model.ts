@@ -2,6 +2,7 @@ export class Building {
   idBuilding: string;
   name: object;
   isActive: boolean;
+  address: string;
   matricule: string;
   civicNumber: string;
   civicLetter: string;

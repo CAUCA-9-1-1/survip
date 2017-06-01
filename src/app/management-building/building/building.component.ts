@@ -8,7 +8,9 @@ import {Building} from '../shared/models/building.model';
   selector: 'app-management-building-building',
   templateUrl: './building.component.html',
   styleUrls: ['./building.component.styl'],
-  providers: [BuildingService]
+  providers: [
+    BuildingService
+  ]
 })
 export class BuildingComponent extends EditDatagrid implements OnInit {
   buildings: Building[] = [];
@@ -25,8 +27,13 @@ export class BuildingComponent extends EditDatagrid implements OnInit {
       calculateCellValue: this.onCalculateCellValue.bind(this),
       editCellTemplate: this.onEditCellTemplate.bind(this)
     }, {
-      dataField: 'ansiCode',
-      caption: 'code'
+      dataField: 'address',
+      caption: 'address'
+    }, {
+      dataField: 'isParent',
+      dataType: 'boolean',
+      caption: 'isParent',
+      width: '10%'
     }, {
       dataField: 'isActive',
       dataType: 'boolean',
@@ -58,7 +65,7 @@ export class BuildingComponent extends EditDatagrid implements OnInit {
   }
 
   ngOnInit() {
-    this.loadAll();
+    this.loadBuiling();
   }
 
   public onRowUpdated(e) {
@@ -75,12 +82,12 @@ export class BuildingComponent extends EditDatagrid implements OnInit {
     });
   }
 
-  private loadAll() {
+  private loadBuiling() {
     this.buildingService.getAll().subscribe(infoBuilding => {
       if (!infoBuilding.success) {
         console.error(infoBuilding.error);
       }
-      console.log(infoBuilding);
+
       this.buildings = infoBuilding.data;
     });
   }
