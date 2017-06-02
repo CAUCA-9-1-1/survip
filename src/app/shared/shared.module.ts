@@ -22,8 +22,6 @@ import {WindowRefService} from './services/window-ref.service';
 import {WebcamComponent} from './components/webcam/webcam.component';
 import {DialogsService} from './services/dialogs.service';
 import {YesNoDialogComponent} from './components/yes-no-dialog/yes-no-dialog.component';
-import {SearchBoxComponent} from './components/search-box/search-box.component';
-import {SearchListComponent} from './components/search-list/search-list.component';
 import {FilterByPipe} from './pipes/filter.pipe';
 import {PinchZoomDirective} from './directives/pinch-zoom.directive';
 import {FullscreenDialogComponent} from './components/fullscreen-dialog/fullscreen-dialog.component';
@@ -54,8 +52,6 @@ export function translateLoader(http: Http) {
     FullscreenDialogComponent,
     YesNoDialogComponent,
     WaitDialogComponent,
-    SearchBoxComponent,
-    SearchListComponent,
     FilterByPipe,
     PinchZoomDirective,
   ],
@@ -64,7 +60,6 @@ export function translateLoader(http: Http) {
     FullscreenDialogComponent,
     YesNoDialogComponent,
     WaitDialogComponent,
-    SearchListComponent
   ],
   exports: [
     CommonModule,
@@ -79,7 +74,6 @@ export function translateLoader(http: Http) {
     ToolbarComponent,
     ToolbarBackComponent,
     TakePictureComponent,
-    SearchBoxComponent,
     PinchZoomDirective,
   ],
   providers: [

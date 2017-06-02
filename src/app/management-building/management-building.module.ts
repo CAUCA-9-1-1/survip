@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {DxDataGridModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
-import {BuildingComponent} from './building/building.component';
+import {ListComponent} from './list/list.component';
 
 
 @NgModule({
@@ -11,10 +11,10 @@ import {BuildingComponent} from './building/building.component';
     DxDataGridModule
   ],
   exports: [
-    BuildingComponent
+    ListComponent
   ],
   declarations: [
-    BuildingComponent
+    ListComponent
   ]
 })
 export class ManagementBuildingModule { }

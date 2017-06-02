@@ -10,6 +10,8 @@ import {ManagementAccessModule} from './management-access/management-access.modu
 import {ManagementAccessComponent} from './management-access/management-access.component';
 import {ManagementBuildingModule} from './management-building/management-building.module';
 import {ManagementBuildingComponent} from './management-building/management-building.component';
+import {ManagementSurveyModule} from './management-survey/management-survey.module';
+import {ManagementSurveyComponent} from './management-survey/management-survey.component';
 
 
 @NgModule({
@@ -18,12 +20,14 @@ import {ManagementBuildingComponent} from './management-building/management-buil
     ManagementAddressComponent,
     ManagementAccessComponent,
     ManagementBuildingComponent,
+    ManagementSurveyComponent,
   ],
   imports: [
     SharedModule,
     ManagementAddressModule,
     ManagementAccessModule,
     ManagementBuildingModule,
+    ManagementSurveyModule,
     AppRoutingModule
   ],
   providers: [
