@@ -9,7 +9,7 @@ import {Building} from '../shared/models/building.model';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.styl'],
   providers: [
-    BuildingService
+    BuildingService,
   ]
 })
 export class ListComponent extends EditDatagrid implements OnInit {

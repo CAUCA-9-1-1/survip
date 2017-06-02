@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {LanguageService} from 'igo2';
 
 import {EditDatagrid} from '../../core/devextreme.editdatagrid';
 import {Survey} from '../shared/models/survey.model';
@@ -16,7 +17,7 @@ export class ListComponent extends EditDatagrid implements OnInit {
   editing: object = {};
   filter: object = {};
 
-  constructor(private surveyService: SurveyService) {
+  constructor(private surveyService: SurveyService, private translate: LanguageService) {
     super();
 
     this.columns = [{

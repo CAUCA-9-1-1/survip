@@ -6,6 +6,6 @@
         [hoverStateEnabled]="true"
         (onRowUpdated)="onRowUpdated($event)">
     <div *dxTemplate="let data of 'editByLanguage'">
-        <a class="x-link" (click)="onLanguageModify(data.data.idSurvey, data.column.index)">modify</a>
+        <a class="dx-link" (click)="onLanguageModify(data.data.idSurvey, data.column.index)">{{'modify' | translate}}</a>
     </div>
 </dx-data-grid>
