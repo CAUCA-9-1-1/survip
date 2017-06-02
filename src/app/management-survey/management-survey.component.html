@@ -1,6 +1,9 @@
-<!--<dx-data-grid
-  [(dataSource)]="dataSource"
-  [columns]="columns"
-  [editing]="editing"
-  (onRowUpdated)="onRowUpdated($event)">
-</dx-data-grid>-->
+<app-toolbar title="{{'surveyManagement' | translate}}"></app-toolbar>
+<div class="content-under-toolbar">
+    <md-tab-group>
+        <md-tab label="{{'survey' | translate}}">
+            <app-management-survey-list></app-management-survey-list>
+        </md-tab>
+    </md-tab-group>
+</div>
+

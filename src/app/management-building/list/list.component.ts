@@ -5,14 +5,14 @@ import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 
 @Component({
-  selector: 'app-management-building-building',
-  templateUrl: './building.component.html',
-  styleUrls: ['./building.component.styl'],
+  selector: 'app-management-building-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.styl'],
   providers: [
     BuildingService
   ]
 })
-export class BuildingComponent extends EditDatagrid implements OnInit {
+export class ListComponent extends EditDatagrid implements OnInit {
   buildings: Building[] = [];
   columns: object[] = [];
   editing: object = {};
