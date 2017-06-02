@@ -77,9 +77,9 @@ export function translateLoader(http: Http) {
     PinchZoomDirective,
   ],
   providers: [
-    WindowRefService,
     DialogsService,
     provideLanguageLoader(translateLoader),
+    WindowRefService,
   ]
 })
 export class SharedModule { }

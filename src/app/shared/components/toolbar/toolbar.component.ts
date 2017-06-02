@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
 
   public items = [{
+    name: 'surveyManagement',
+    path: '/management/survey/',
+    popMenu: false
+  }, {
     name: 'buildingManagement',
     path: '/management/building/',
     popMenu: false
