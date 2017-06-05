@@ -6,5 +6,6 @@
 export const environment = {
   envName: 'local',
   production: false,
-  apiUrl: 'http://localhost/'
+  apiUrl: 'http://localhost:8080/',
+  languages: ['fr', 'en']
 };
