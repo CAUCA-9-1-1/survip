@@ -12,24 +12,11 @@ import {CountyService} from '../shared/services/county.service';
 })
 export class CountyComponent extends EditDatagrid implements OnInit {
   counties: County[] = [];
-  columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private countyService: CountyService) {
     super();
-
-    this.columns = [{
-      dataField: 'name',
-      caption: 'name',
-      calculateCellValue: this.onCalculateCellValue.bind(this),
-      editCellTemplate: this.onEditCellTemplate.bind(this)
-    }, {
-      dataField: 'isActive',
-      dataType: 'boolean',
-      caption: 'isActive',
-      width: '10%'
-    }];
 
     this.editing = {
       mode: 'form',

@@ -1,8 +1,15 @@
 <dx-data-grid
-    [dataSource]="lanes"
-    [filterRow]="filter"
-    [columns]="columns"
-    [editing]="editing"
-    [hoverStateEnabled]="true"
-    (onRowUpdated)="onRowUpdated($event)">
+        [dataSource]="lanes"
+        [filterRow]="filter"
+        [columns]="columns"
+        [editing]="editing"
+        [hoverStateEnabled]="true"
+        (onRowUpdated)="onRowUpdated($event)">
+    <dxi-column
+            dataField="name"
+            caption="{{'name' | translate}}"
+            [calculateCellValue]="onCalculateCellValue"
+            [editCellTemplate]="onEditCellTemplate">
+    </dxi-column>
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 </dx-data-grid>

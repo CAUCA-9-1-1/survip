@@ -12,24 +12,11 @@ import {LaneService} from '../shared/services/lane.service';
 })
 export class LaneComponent extends EditDatagrid implements OnInit {
   lanes: Lane[] = [];
-  columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private laneService: LaneService) {
     super();
-
-    this.columns = [{
-      dataField: 'name',
-      caption: 'name',
-      calculateCellValue: this.onCalculateCellValue.bind(this),
-      editCellTemplate: this.onEditCellTemplate.bind(this)
-    }, {
-      dataField: 'isActive',
-      dataType: 'boolean',
-      caption: 'isActive',
-      width: '10%'
-    }];
 
     this.editing = {
       mode: 'form',

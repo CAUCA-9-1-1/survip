@@ -12,27 +12,11 @@ import {Region} from '../shared/models/region.model';
 })
 export class RegionComponent extends EditDatagrid implements OnInit {
   regions: Region[] = [];
-  columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private regionService: RegionService) {
     super();
-
-    this.columns = [{
-      dataField: 'name',
-      caption: 'name',
-      calculateCellValue: this.onCalculateCellValue.bind(this),
-      editCellTemplate: this.onEditCellTemplate.bind(this)
-    }, {
-      dataField: 'code',
-      caption: 'code'
-    }, {
-      dataField: 'isActive',
-      dataType: 'boolean',
-      caption: 'isActive',
-      width: '10%'
-    }];
 
     this.editing = {
       mode: 'form',

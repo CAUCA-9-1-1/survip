@@ -12,27 +12,11 @@ import {StateService} from '../shared/services/state.service';
 })
 export class StateComponent extends EditDatagrid implements OnInit {
   states: State[] = [];
-  columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private stateService: StateService) {
     super();
-
-    this.columns = [{
-      dataField: 'name',
-      caption: 'name',
-      calculateCellValue: this.onCalculateCellValue.bind(this),
-      editCellTemplate: this.onEditCellTemplate.bind(this)
-    }, {
-      dataField: 'ansiCode',
-      caption: 'code'
-    }, {
-      dataField: 'isActive',
-      dataType: 'boolean',
-      caption: 'isActive',
-      width: '10%'
-    }];
 
     this.editing = {
       mode: 'form',
