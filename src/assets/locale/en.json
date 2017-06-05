@@ -27,6 +27,8 @@
   "takeImage": "Take a picture",
   "surveyManagement": "Management survey",
   "survey": "Survey",
+  "surveyType": "Survey type",
+  "question": "Question",
   "buildingManagement": "Management for building",
   "accessManagement": "Management for access",
   "webuser": "User",

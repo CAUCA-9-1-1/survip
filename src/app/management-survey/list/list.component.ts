@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {LanguageService} from 'igo2';
+import {environment} from 'environments/environment';
 
 import {EditDatagrid} from '../../core/devextreme.editdatagrid';
 import {Survey} from '../shared/models/survey.model';
@@ -17,7 +19,7 @@ export class ListComponent extends EditDatagrid implements OnInit {
   editing: object = {};
   filter: object = {};
 
-  constructor(private surveyService: SurveyService, private translate: LanguageService) {
+  constructor(private router: Router, private surveyService: SurveyService, private translate: LanguageService) {
     super();
 
     this.columns = [{
@@ -44,15 +46,15 @@ export class ListComponent extends EditDatagrid implements OnInit {
       width: '10%'
     }];
 
-    const langs = ['fr', 'en'];
-    const nb = langs.length;
+    const nb = environment.languages.length;
     for (let i = 0; i < nb; i++) {
       this.columns.push({
         alignment: 'center',
-        caption: langs[i],
+        caption: environment.languages[i],
         cellTemplate: 'editByLanguage'
       });
     }
+
     this.editing = {
       mode: 'form',
       allowUpdating: true,
@@ -64,6 +66,9 @@ export class ListComponent extends EditDatagrid implements OnInit {
           dataField: 'name',
           isRequired: true
         }, {
+          dataField: 'surveyType',
+          isRequired: true
+        }, {
           dataField: 'isActive',
           editorType: 'dxCheckBox'
         }]
@@ -72,6 +77,16 @@ export class ListComponent extends EditDatagrid implements OnInit {
     this.filter = {
       visible: true
     };
+
+    this.translate.translate.get(['name', 'surveyType', 'isActive'].concat(environment.languages)).subscribe((result: object) => {
+      this.columns[0]['caption'] = result['name'];
+      this.columns[1]['caption'] = result['surveyType'];
+      this.columns[2]['caption'] = result['isActive'];
+
+      for (let i = 0; i < nb; i++) {
+        this.columns[(i + 3)]['caption'] = result[environment.languages['nb']];
+      }
+    });
   }
 
   ngOnInit() {
@@ -93,9 +108,14 @@ export class ListComponent extends EditDatagrid implements OnInit {
   }
 
   private onLanguageModify(id_survey, lang) {
-    const langs = ['fr', 'en'];
-    console.log(id_survey);
-    console.log(langs[lang - 3]);
+    const language_code = environment.languages[lang - 3];
+
+    this.router.navigate(['management/survey'], {
+      queryParams: {
+        id_survey: id_survey,
+        language_code: language_code
+      }
+    });
   }
 
   private loadSurvey() {

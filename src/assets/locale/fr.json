@@ -33,6 +33,8 @@
   "takeImage": "Prendre une photo",
   "surveyManagement": "Gestion des questionnaires",
   "survey": "Questionnaire",
+  "surveyType": "Type de questionnaire",
+  "question": "Question",
   "buildingManagement": "Gestion des bâtiments",
   "accessManagement": "Gestion pour les accès",
   "webuser": "Utilisateur",

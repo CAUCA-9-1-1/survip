@@ -6,10 +6,11 @@ import {environment} from 'environments/environment';
 @Injectable()
 export class BaseService {
   public static isInLoginProcess = false;
-  protected host = 'http://cadevsprevention1.ad.cauca.ca/api/';
+  protected host = environment.apiUrl;
   private storage: any;
 
   constructor(protected http: Http, protected router?: Router) {
+    console.log();
     this.storage = localStorage;
   }
 
