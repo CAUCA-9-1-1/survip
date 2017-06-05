@@ -40,6 +40,8 @@
   "questionType": "Type de question",
   "options": "Options",
   "buildingManagement": "Gestion des bâtiments",
+  "address": "Adresse",
+  "isParent": "Batîment principal",
   "accessManagement": "Gestion pour les accès",
   "webuser": "Utilisateur",
   "defaultValue": "Valeur par défaut",
