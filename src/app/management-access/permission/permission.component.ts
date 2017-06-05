@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {LanguageService} from 'igo2';
 
 import {PermissionWebuser} from '../shared/models/permissionwebuser.model';
 import {PermissionWebuserService} from '../shared/services/permissionwebuser.service';
@@ -17,45 +18,34 @@ import {PermissionObject} from '../shared/models/permissionobject.model';
 export class PermissionComponent implements OnInit {
   features: PermissionWebuser[] = [];
   objects: PermissionObject[] = [];
-  columns: object[] = [];
   editing: object = {};
   filter: object = {};
+  labels: object = {};
+  defaultLookup: object = {};
+  webuserLookup: object = {};
 
   constructor(
     private featureService: PermissionWebuserService,
-    private objectService: PermissionObjectService
+    private objectService: PermissionObjectService,
+    private translate: LanguageService
   ) {
-    this.columns = [{
-      dataField: 'description',
-      caption: 'description'
-    }, {
-      dataField: 'defaultValue',
-      caption: 'defaultValue',
-      width: '20%',
-      lookup: {
-        dataSource: [
-          {'value': true, 'text': 'yes'},
-          {'value': false, 'text': 'no'}
-        ],
-        displayExpr: 'text',
-        valueExpr: 'value'
-      },
-      calculateDisplayValue: this.onCalculateDisplayValue.bind(this, 'defaultValue')
-    }, {
-      dataField: 'webuserValue',
-      caption: 'webuserValue',
-      width: '20%',
-      lookup: {
-        dataSource: [
-          {'value': null, 'text': 'seeParent'},
-          {'value': true, 'text': 'yes'},
-          {'value': false, 'text': 'no'}
-        ],
-        displayExpr: 'text',
-        valueExpr: 'value'
-      },
-      calculateDisplayValue: this.onCalculateDisplayValue.bind(this, 'webuserValue')
-    }];
+    this.defaultLookup = {
+      dataSource: [
+        {'value': true, 'text': 'yes'},
+        {'value': false, 'text': 'no'}
+      ],
+      displayExpr: 'text',
+      valueExpr: 'value'
+    };
+    this.webuserLookup = {
+      dataSource: [
+        {'value': null, 'text': 'seeParent'},
+        {'value': true, 'text': 'yes'},
+        {'value': false, 'text': 'no'}
+      ],
+      displayExpr: 'text',
+      valueExpr: 'value'
+    };
 
     this.editing = {
       mode: 'cell',
@@ -66,6 +56,17 @@ export class PermissionComponent implements OnInit {
     this.filter = {
       visible: true
     };
+
+    const labels = ['yes', 'no', 'seeParent', 'description', 'defaultValue', 'webuserValue'];
+    this.translate.translate.get(labels).subscribe((result: object) => {
+      this.labels = result;
+      this.defaultLookup['dataSource'][0]['text'] = result['yes'];
+      this.defaultLookup['dataSource'][1]['text'] = result['no'];
+
+      this.webuserLookup['dataSource'][0]['text'] = result['seeParent'];
+      this.webuserLookup['dataSource'][1]['text'] = result['yes'];
+      this.webuserLookup['dataSource'][2]['text'] = result['no'];
+    });
   }
 
   public ngOnInit() {
@@ -111,6 +112,6 @@ export class PermissionComponent implements OnInit {
   }
 
   private onCalculateDisplayValue(column, data) {
-    return (data[column] === true ? 'yes' : (data[column] === false ? 'no' : 'seeParent'));
+    return (data[column] === true ? this.labels['yes'] : (data[column] === false ? this.labels['no'] : this.labels['seeParent']));
   }
 }

@@ -1,8 +1,10 @@
 <dx-data-grid
-    [dataSource]="users"
-    [filterRow]="filter"
-    [columns]="columns"
-    [editing]="editing"
-    [hoverStateEnabled]="true"
-    (onRowUpdated)="onRowUpdated($event)">
+        [dataSource]="users"
+        [filterRow]="filter"
+        [editing]="editing"
+        [hoverStateEnabled]="true"
+        (onRowUpdated)="onRowUpdated($event)">
+    <dxi-column dataField="attributes.firstName" caption="{{'firstName' | translate}}"></dxi-column>
+    <dxi-column dataField="attributes.lastName" caption="{{'lastName' | translate}}"></dxi-column>
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 </dx-data-grid>

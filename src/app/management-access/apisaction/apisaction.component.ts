@@ -10,20 +10,9 @@ import {ApisActionService} from '../shared/services/apisaction.service';
 })
 export class ApisactionComponent implements OnInit {
   actions: ApisAction[] = [];
-  columns: object[] = [];
   filter: object = {};
 
   constructor(private actionService: ApisActionService) {
-    this.columns = [{
-      dataField: 'idWebuser',
-      caption: 'webuser'
-    }, {
-      dataField: 'actionTime',
-      caption: 'time'
-    }, {
-      dataField: 'actionObject',
-      caption: 'object'
-    }];
     this.filter = {
       visible: true
     };

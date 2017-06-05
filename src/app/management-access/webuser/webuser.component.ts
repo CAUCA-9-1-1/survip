@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+
 import {Webuser} from '../shared/models/webuser.model';
 import {WebuserService} from '../shared/services/webuser.service';
 
@@ -10,24 +11,10 @@ import {WebuserService} from '../shared/services/webuser.service';
 })
 export class WebuserComponent implements OnInit {
   users: Webuser[] = [];
-  columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private webuserService: WebuserService) {
-    this.columns = [{
-      dataField: 'attributes.firstName',
-      caption: 'firstname'
-    }, {
-      dataField: 'attributes.lastName',
-      caption: 'lastname'
-    }, {
-      dataField: 'isActive',
-      dataType: 'boolean',
-      caption: 'isActive',
-      width: '10%'
-    }];
-
     this.editing = {
       mode: 'form',
       allowUpdating: true,
