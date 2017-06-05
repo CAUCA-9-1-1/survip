@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DxDataGridModule, DxTreeViewModule} from 'devextreme-angular';
+import {DxDataGridModule, DxFormModule, DxTreeViewModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {ListComponent} from './list/list.component';
@@ -9,6 +9,7 @@ import {QuestionComponent} from './question/question.component';
   imports: [
     SharedModule,
     DxDataGridModule,
+    DxFormModule,
     DxTreeViewModule,
   ],
   exports: [
