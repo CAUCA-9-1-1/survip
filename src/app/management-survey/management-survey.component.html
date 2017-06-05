@@ -6,7 +6,7 @@
     </div>
     <div *ngIf="selectedSurvey">
         <h1>{{'question' | translate}}</h1>
-        <app-management-survey-question></app-management-survey-question>
+        <app-management-survey-question [survey]="selectedSurvey"></app-management-survey-question>
     </div>
 </div>
 

@@ -1,0 +1,36 @@
+<div fxLayout="row">
+  <div fxFlex="35%">
+    <div class="title">{{'question' | translate}}</div>
+    <div class="content">
+      <dx-tree-view
+              [dataSource]="questions"
+              displayExpr="description.fr"
+              keyExpr="idSurveyQuestion"
+              selectionMode="single"
+              (onItemClick)="onRowSelected($event)">
+      </dx-tree-view>
+    </div>
+  </div>
+  <div fxFlex="65%">
+    <div *ngIf="selectedQuestion">
+      <dx-form [formData]="selectedQuestion" (onFieldDataChanged)="onFormUpdated($event)">
+        <dxi-item label="{{'title' | translate}}" dataField="title.fr"></dxi-item>
+        <dxi-item label="{{'description' | translate}}" dataField="description.fr"></dxi-item>
+        <dxi-item
+                label="{{'questionType' | translate}}"
+                dataField="questionType"
+                editorType="dxSelectBox"
+                [editorOptions]="questionType"></dxi-item>
+        <dxi-item label="{{'nextQuestion' | translate}}" dataField="idSurveyQuestionNext"></dxi-item>
+      </dx-form>
+      <label>{{'options' | translate}}</label>
+      <dx-data-grid
+              [dataSource]="choices"
+              [columns]="columns"
+              [editing]="editing"
+              [hoverStateEnabled]="true"
+              (onRowUpdated)="onRowUpdated($event)">
+      </dx-data-grid>
+    </div>
+  </div>
+</div>

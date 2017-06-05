@@ -5,8 +5,13 @@ export class EditDatagrid {
 
   constructor() { }
 
-  protected onCalculateCellValue(data) {
-    return (data.name ? data.name['fr'] : '');
+  protected onCalculateCellValue(field, data) {
+    if (typeof (data) === 'undefined') {
+      data = field;
+      field = 'name';
+    }
+
+    return (data[field] ? data[field]['fr'] : '');
   }
 
   protected onEditCellTemplate(cellElement, cellInfo) {
