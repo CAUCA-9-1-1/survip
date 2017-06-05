@@ -5,6 +5,19 @@
         [editing]="editing"
         [hoverStateEnabled]="true"
         (onRowUpdated)="onRowUpdated($event)">
+    <dxi-column
+            dataField="name"
+            caption="{{'name' | translate}}"
+            [calculateCellValue]="onCalculateCellValue"
+            [editCellTemplate]="onEditCellTemplate">
+    </dxi-column>
+    <dxi-column dataField="surveyType" caption="{{'address' | translate}}"></dxi-column>
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+
+    <div *ngFor="let lang of languages">
+        <dxi-column alignment="center" caption="{{lang | translate}}" cellTemplate="editByLanguage"></dxi-column>
+    </div>
+
     <div *dxTemplate="let data of 'editByLanguage'">
         <a class="dx-link" (click)="onLanguageModify(data.data.idSurvey, data.column.index)">{{'modify' | translate}}</a>
     </div>
