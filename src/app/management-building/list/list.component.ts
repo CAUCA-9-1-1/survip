@@ -14,32 +14,11 @@ import {Building} from '../shared/models/building.model';
 })
 export class ListComponent extends EditDatagrid implements OnInit {
   buildings: Building[] = [];
-  columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private buildingService: BuildingService) {
     super();
-
-    this.columns = [{
-      dataField: 'name',
-      caption: 'name',
-      calculateCellValue: this.onCalculateCellValue.bind(this),
-      editCellTemplate: this.onEditCellTemplate.bind(this)
-    }, {
-      dataField: 'address',
-      caption: 'address'
-    }, {
-      dataField: 'isParent',
-      dataType: 'boolean',
-      caption: 'isParent',
-      width: '10%'
-    }, {
-      dataField: 'isActive',
-      dataType: 'boolean',
-      caption: 'isActive',
-      width: '10%'
-    }];
 
     this.editing = {
       mode: 'form',

@@ -34,6 +34,8 @@
   "questionType": "Question type",
   "options": "Options",
   "buildingManagement": "Management for building",
+  "address": "Address",
+  "isParent": "Principal building",
   "accessManagement": "Management for access",
   "webuser": "User",
   "defaultValue": "Default value",
