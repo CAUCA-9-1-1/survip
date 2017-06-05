@@ -13,30 +13,11 @@ import {CountryService} from '../shared/services/country.service';
 })
 export class CountryComponent extends EditDatagrid implements OnInit {
   countries: Country[] = [];
-  columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private countryService: CountryService, translate: LanguageService) {
     super();
-
-    this.columns = [{
-      dataField: 'name',
-      caption: 'name',
-      calculateCellValue: this.onCalculateCellValue.bind(this),
-      editCellTemplate: this.onEditCellTemplate.bind(this)
-    }, {
-      dataField: 'codeAlpha2',
-      caption: 'codeAlpha2',
-    }, {
-      dataField: 'codeAlpha3',
-      caption: 'codeAlpha3',
-    }, {
-      dataField: 'isActive',
-      dataType: 'boolean',
-      caption: 'isActive',
-      width: '10%'
-    }];
 
     this.editing = {
       mode: 'form',

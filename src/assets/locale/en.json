@@ -51,6 +51,7 @@
   "county": "County",
   "state": "Province/State",
   "region": "Region",
+  "code": "Code",
   "city": "City",
   "cityType": "City type",
   "lane": "Lane"

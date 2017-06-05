@@ -12,24 +12,11 @@ import {CityService} from '../shared/services/city.service';
 })
 export class CityComponent extends EditDatagrid implements OnInit {
   cities: City[] = [];
-  columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private cityService: CityService) {
     super();
-
-    this.columns = [{
-      dataField: 'name',
-      caption: 'name',
-      calculateCellValue: this.onCalculateCellValue.bind(this),
-      editCellTemplate: this.onEditCellTemplate.bind(this)
-    }, {
-      dataField: 'isActive',
-      dataType: 'boolean',
-      caption: 'isActive',
-      width: '10%'
-    }];
 
     this.editing = {
       mode: 'form',

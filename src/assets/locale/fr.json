@@ -57,6 +57,7 @@
   "county": "Comté",
   "state": "Province/État",
   "region": "Région",
+  "code": "Code",
   "city": "Ville",
   "cityType": "Type de ville",
   "lane": "Voie"

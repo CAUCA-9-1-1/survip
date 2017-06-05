@@ -1,8 +1,16 @@
 <dx-data-grid
-    [dataSource]="countries"
-    [filterRow]="filter"
-    [columns]="columns"
-    [editing]="editing"
-    [hoverStateEnabled]="true"
-    (onRowUpdated)="onRowUpdated($event)">
+        [dataSource]="countries"
+        [filterRow]="filter"
+        [editing]="editing"
+        [hoverStateEnabled]="true"
+        (onRowUpdated)="onRowUpdated($event)">
+    <dxi-column
+            dataField="name"
+            caption="{{'name' | translate}}"
+            [calculateCellValue]="onCalculateCellValue"
+            [editCellTemplate]="onEditCellTemplate">
+    </dxi-column>
+    <dxi-column dataField="codeAlpha2" caption="{{'codeAlpha2' | translate}}"></dxi-column>
+    <dxi-column dataField="codeAlpha3" caption="{{'codeAlpha3' | translate}}"></dxi-column>
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 </dx-data-grid>
