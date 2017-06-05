@@ -13,6 +13,8 @@ export class ManagementSurveyComponent implements OnInit {
     this.activeRoute.queryParams.subscribe((params: Params) => {
       if (params.id_survey) {
         this.selectedSurvey = params.id_survey;
+      } else {
+        this.selectedSurvey = null;
       }
     });
   }

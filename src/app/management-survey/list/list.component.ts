@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LanguageService} from 'igo2';
 import {environment} from 'environments/environment';
 
 import {EditDatagrid} from '../../core/devextreme.editdatagrid';
@@ -15,45 +14,23 @@ import {SurveyService} from '../shared/services/survey.service';
 })
 export class ListComponent extends EditDatagrid implements OnInit {
   surveys: Survey[] = [];
-  columns: object[] = [];
+  surveyTypeLookup: object = {};
+  languages: string[] = environment.languages;
   editing: object = {};
   filter: object = {};
 
-  constructor(private router: Router, private surveyService: SurveyService, private translate: LanguageService) {
+  constructor(private router: Router, private surveyService: SurveyService) {
     super();
 
-    this.columns = [{
-      dataField: 'name',
-      caption: 'name',
-      calculateCellValue: this.onCalculateCellValue.bind(this),
-      editCellTemplate: this.onEditCellTemplate.bind(this)
-    }, {
-      dataField: 'surveyType',
-      caption: 'surveyType',
-      lookup: {
-        dataSource: [
-          {value: 'residential', text: 'residential'},
-          {value: 'general', text: 'general'},
-          {value: 'agricultural', text: 'agricultural'}
-        ],
+    this.surveyTypeLookup = {
+      dataSource: [
+        {value: 'residential', text: 'residential'},
+        {value: 'general', text: 'general'},
+        {value: 'agricultural', text: 'agricultural'}
+      ],
         displayExpr: 'text',
         valueExpr: 'value'
-      }
-    }, {
-      dataField: 'isActive',
-      dataType: 'boolean',
-      caption: 'isActive',
-      width: '10%'
-    }];
-
-    const nb = environment.languages.length;
-    for (let i = 0; i < nb; i++) {
-      this.columns.push({
-        alignment: 'center',
-        caption: environment.languages[i],
-        cellTemplate: 'editByLanguage'
-      });
-    }
+    };
 
     this.editing = {
       mode: 'form',
@@ -77,16 +54,6 @@ export class ListComponent extends EditDatagrid implements OnInit {
     this.filter = {
       visible: true
     };
-
-    this.translate.translate.get(['name', 'surveyType', 'isActive'].concat(environment.languages)).subscribe((result: object) => {
-      this.columns[0]['caption'] = result['name'];
-      this.columns[1]['caption'] = result['surveyType'];
-      this.columns[2]['caption'] = result['isActive'];
-
-      for (let i = 0; i < nb; i++) {
-        this.columns[(i + 3)]['caption'] = result[environment.languages['nb']];
-      }
-    });
   }
 
   ngOnInit() {
