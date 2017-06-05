@@ -12,24 +12,11 @@ import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartme
 })
 export class FireSafetyDepartmentComponent extends EditDatagrid implements OnInit {
   departments: FireSafetyDepartment[] = [];
-  columns: object[] = [];
   editing: object = {};
   filter: object = {};
 
   constructor(private fireSafetyDepartmentService: FireSafetyDepartmentService) {
     super();
-
-    this.columns = [{
-      dataField: 'name',
-      caption: 'name',
-      calculateCellValue: this.onCalculateCellValue.bind(this),
-      editCellTemplate: this.onEditCellTemplate.bind(this)
-    }, {
-      dataField: 'isActive',
-      dataType: 'boolean',
-      caption: 'isActive',
-      width: '10%'
-    }];
 
     this.editing = {
       mode: 'form',
