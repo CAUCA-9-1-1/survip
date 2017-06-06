@@ -1,29 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response, RequestOptions} from '@angular/http';
+import {Headers, Response, RequestOptions} from '@angular/http';
 import {Router} from '@angular/router';
 import {environment} from 'environments/environment';
 
+import {HttpService} from './http.service';
+import {WindowRefService} from '../shared/services/window-ref.service';
+
 @Injectable()
 export class BaseService {
-  public static isInLoginProcess = false;
-  protected host = environment.apiUrl;
+  private static isInLoginProcess = false;
   private storage: any;
+  private windowRef = new WindowRefService();
+  protected host = environment.apiUrl;
 
-  constructor(protected http: Http, protected router?: Router) {
-    console.log();
-    this.storage = localStorage;
-  }
-
-  protected authorization() {
-    const token = this.storage.getItem('currentToken');
-
-    if (token) {
-      return new RequestOptions({
-        headers: new Headers({
-          'Authorization': 'Token ' + token
-        })
-      });
-    }
+  constructor(protected http: HttpService, protected router?: Router) {
+    this.storage = this.windowRef.nativeObject('localStorage');
   }
 
   protected isLogin(result: any, returnUrl?: string, callback?) {
@@ -42,22 +33,6 @@ export class BaseService {
         });
       }
     }
-  }
-
-  protected handleError(error: Response | any) {
-    let errorMessage: string;
-
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body['error'] || JSON.stringify(body);
-
-      errorMessage = error.status + ' - ' + (error.statusText || '') + ' ' + err;
-    } else {
-      errorMessage = error.message ? error.message : error.toString();
-    }
-
-    console.error(errorMessage);
-    return errorMessage;
   }
 
   private goToLoginPage(returnUrl?: string) {

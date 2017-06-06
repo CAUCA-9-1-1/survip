@@ -1,21 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Response} from '@angular/http';
 import {Router} from '@angular/router';
 
 import {BaseService} from '../../../core/base.service';
+import {HttpService} from '../../../core/http.service';
 import {PermissionWebuser} from '../models/permissionwebuser.model';
 
 @Injectable()
 export class PermissionWebuserService extends BaseService {
 
-  constructor(http: Http, router: Router) {
+  constructor(http: HttpService, router: Router) {
     super(http, router);
   }
 
   public get(idPermissionObject) {
-    const url = this.host + 'permissionwebuser/' + idPermissionObject;
-
-    return this.http.get(url, this.authorization()).map((response: Response) => {
+    return this.http.get('permissionwebuser/' + idPermissionObject).map((response: Response) => {
       const result = response.json();
 
       this.isLogin(result, '/management/access');
@@ -26,9 +25,8 @@ export class PermissionWebuserService extends BaseService {
 
   public update(permission: PermissionWebuser) {
     return this.http.put(
-      this.host + 'permissionwebuser',
-      JSON.stringify(permission),
-      this.authorization()
+      'permissionwebuser',
+      JSON.stringify(permission)
     ).map((response: Response) => response.json());
   }
 }

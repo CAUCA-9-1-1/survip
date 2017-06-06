@@ -1,19 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Response} from '@angular/http';
 import {Router} from '@angular/router';
 
 import {BaseService} from '../../../core/base.service';
+import {HttpService} from '../../../core/http.service';
 import {CityType} from '../models/citytype.model';
 
 @Injectable()
 export class CityTypeService extends BaseService {
 
-  constructor(http: Http, router: Router) {
+  constructor(http: HttpService, router: Router) {
     super(http, router);
   }
 
   public getAll() {
-    return this.http.get(this.host + 'citytype', this.authorization()).map((response: Response) => {
+    return this.http.get('citytype').map((response: Response) => {
       const result = response.json();
 
       this.isLogin(result, '/management/address');
@@ -23,9 +24,8 @@ export class CityTypeService extends BaseService {
 
   public update(cityType: CityType) {
     return this.http.put(
-      this.host + 'citytype',
+      'citytype',
       JSON.stringify(cityType),
-      this.authorization()
     ).map((response: Response) => response.json());
   }
 }
