@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ApisactionComponent } from './apisaction.component';
+import {TestModule} from '../../test.module';
+import {ApisactionComponent} from './apisaction.component';
+
 
 describe('ApisactionComponent', () => {
   let component: ApisactionComponent;
@@ -8,6 +10,7 @@ describe('ApisactionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ TestModule ],
       declarations: [ ApisactionComponent ]
     })
     .compileComponents();

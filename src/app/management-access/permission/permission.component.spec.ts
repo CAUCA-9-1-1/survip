@@ -1,7 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TestModule } from '../../test.module';
-import { PermissionComponent } from './permission.component';
+import {TestModule} from '../../test.module';
+import {PermissionComponent} from './permission.component';
+
 
 describe('PermissionComponent', () => {
   let component: PermissionComponent;

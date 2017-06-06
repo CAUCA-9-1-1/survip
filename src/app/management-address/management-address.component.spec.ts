@@ -1,10 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TestModule } from '../test.module';
-import { DxDataGridModule } from 'devextreme-angular';
-import { ManagementAddressComponent } from './management-address.component';
-import { CountryComponent } from './country/country.component';
-import { CountryService } from '../core/services/country.service';
+import {TestModule} from '../test.module';
+import {ManagementAddressComponent} from './management-address.component';
+import {CountryComponent} from './country/country.component';
+import {CountryService} from './shared/services/country.service';
+import {StateComponent} from './state/state.component';
+import {RegionComponent} from './region/region.component';
+import {LaneComponent} from './lane/lane.component';
+import {CountyComponent} from './county/county.component';
+import {CityTypeComponent} from './citytype/citytype.component';
+import {CityComponent} from './city/city.component';
 
 describe('ManagementAddressComponent', () => {
   let component: ManagementAddressComponent;
@@ -12,12 +17,17 @@ describe('ManagementAddressComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule, DxDataGridModule ],
+      imports: [ TestModule ],
       declarations: [
         ManagementAddressComponent,
-        CountryComponent
-      ],
-      providers: [ CountryService ]
+        CountryComponent,
+        StateComponent,
+        RegionComponent,
+        LaneComponent,
+        CountyComponent,
+        CityTypeComponent,
+        CityComponent,
+      ]
     })
     .compileComponents();
   }));

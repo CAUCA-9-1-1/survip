@@ -1,4 +1,5 @@
 import {TestBed, inject} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 import {TestModule} from '../../../test.module';
 import {FireSafetyDepartmentService} from './firesafetydepartment.service';
