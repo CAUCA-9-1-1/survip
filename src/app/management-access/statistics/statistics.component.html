@@ -5,8 +5,8 @@
   </dx-form>
   <div fxLayout="row">
     <div fxFlex="50%">
-      <dx-chart class="full-width" [dataSource]="connectionByDate">
-        <dxi-series name="{{'connectionByDate' | translate}}" valueField="total" argumentField="days"></dxi-series>
+      <dx-chart [dataSource]="requestByTable">
+        <dxi-series name="{{'requestByTable' | translate}}" valueField="total" argumentField="table" type="bar"></dxi-series>
         <dxo-legend horizontalAlignment="left" itemTextPosition="right" orientation="horizontal"></dxo-legend>
         <dxo-tooltip enabled="true" [customizeTooltip]="onCustomizeTooltip"></dxo-tooltip>
         <dxo-size [height]="400"></dxo-size>
@@ -14,7 +14,21 @@
     </div>
     <div fxFlex="50%">
       <dx-chart class="full-width" [dataSource]="requestByTable">
-        <dxi-series name="{{'requestByTable' | translate}}" valueField="total" argumentField="table" type="bar"></dxi-series>
+        <dxi-series name="{{'requestGET' | translate}}" valueField="get"></dxi-series>
+        <dxi-series name="{{'requestPUT' | translate}}" valueField="put"></dxi-series>
+        <dxi-series name="{{'requestPOST' | translate}}" valueField="post"></dxi-series>
+        <dxi-series name="{{'requestDELETE' | translate}}" valueField="delete"></dxi-series>
+        <dxo-common-series-settings argumentField="table" type="fullStackedBar"></dxo-common-series-settings>
+        <dxo-legend horizontalAlignment="left" itemTextPosition="right" orientation="horizontal"></dxo-legend>
+        <dxo-tooltip enabled="true" [customizeTooltip]="onCustomizeTooltip"></dxo-tooltip>
+        <dxo-size [height]="400"></dxo-size>
+      </dx-chart>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <div fxFlex="50%">
+      <dx-chart [dataSource]="connectionByDate">
+        <dxi-series name="{{'connectionByDate' | translate}}" valueField="total" argumentField="days"></dxi-series>
         <dxo-legend horizontalAlignment="left" itemTextPosition="right" orientation="horizontal"></dxo-legend>
         <dxo-tooltip enabled="true" [customizeTooltip]="onCustomizeTooltip"></dxo-tooltip>
         <dxo-size [height]="400"></dxo-size>
