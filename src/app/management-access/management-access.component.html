@@ -1,6 +1,6 @@
 <app-toolbar title="{{'accessManagement' | translate}}"></app-toolbar>
 <div class="content-under-toolbar">
-    <md-tab-group>
+    <md-tab-group (selectChange)="onSelectionChanged($event)">
         <md-tab label="{{'permission' | translate}}">
             <app-management-access-permission></app-management-access-permission>
         </md-tab>
@@ -12,6 +12,9 @@
         </md-tab>
         <md-tab label="{{'apisAction' | translate}}">
             <app-management-access-apisaction></app-management-access-apisaction>
+        </md-tab>
+        <md-tab label="{{'statistics' | translate}}">
+            <app-management-access-statistics></app-management-access-statistics>
         </md-tab>
     </md-tab-group>
 </div>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+
+import {StatisticsComponent} from './statistics/statistics.component';
 
 @Component({
   selector: 'app-management-access',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./management-access.component.styl']
 })
 export class ManagementAccessComponent implements OnInit {
+  @ViewChild(StatisticsComponent) stats: StatisticsComponent;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSelectionChanged(e) {
+    if (e.index === 4 && typeof (this.stats) === 'object') {
+      if (typeof (this.stats.onShowing) === 'function') {
+        this.stats.onShowing();
+      }
+    }
+  }
 }

@@ -1,0 +1,24 @@
+<div class="background">
+  <dx-form [formData]="period" colCount="2" (onFieldDataChanged)="onFormUpdated($event)">
+    <dxi-item label="{{'periodStart' | translate}}" dataField="start" editorType="dxDateBox"></dxi-item>
+    <dxi-item label="{{'periodEnd' | translate}}" dataField="end" editorType="dxDateBox"></dxi-item>
+  </dx-form>
+  <div fxLayout="row">
+    <div fxFlex="50%">
+      <dx-chart class="full-width" [dataSource]="connectionByDate">
+        <dxi-series name="{{'connectionByDate' | translate}}" valueField="total" argumentField="days"></dxi-series>
+        <dxo-legend horizontalAlignment="left" itemTextPosition="right" orientation="horizontal"></dxo-legend>
+        <dxo-tooltip enabled="true" [customizeTooltip]="onCustomizeTooltip"></dxo-tooltip>
+        <dxo-size [height]="400"></dxo-size>
+      </dx-chart>
+    </div>
+    <div fxFlex="50%">
+      <dx-chart class="full-width" [dataSource]="requestByTable">
+        <dxi-series name="{{'requestByTable' | translate}}" valueField="total" argumentField="table" type="bar"></dxi-series>
+        <dxo-legend horizontalAlignment="left" itemTextPosition="right" orientation="horizontal"></dxo-legend>
+        <dxo-tooltip enabled="true" [customizeTooltip]="onCustomizeTooltip"></dxo-tooltip>
+        <dxo-size [height]="400"></dxo-size>
+      </dx-chart>
+    </div>
+  </div>
+</div>
