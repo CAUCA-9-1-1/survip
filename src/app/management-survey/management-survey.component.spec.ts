@@ -1,8 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TestModule } from '../test.module';
-import { DxDataGridModule } from 'devextreme-angular';
-import { ManagementSurveyComponent } from './management-survey.component';
+import {TestModule} from '../test.module';
+import {ManagementSurveyComponent} from './management-survey.component';
+import {ListComponent} from './list/list.component';
+import {QuestionComponent} from './question/question.component';
 
 describe('ManagementSurveyComponent', () => {
   let component: ManagementSurveyComponent;
@@ -10,8 +11,12 @@ describe('ManagementSurveyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule, DxDataGridModule ],
-      declarations: [ ManagementSurveyComponent ]
+      imports: [ TestModule ],
+      declarations: [
+        ManagementSurveyComponent,
+        ListComponent,
+        QuestionComponent
+      ]
     })
     .compileComponents();
   }));

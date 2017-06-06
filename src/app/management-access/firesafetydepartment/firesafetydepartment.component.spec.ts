@@ -1,22 +1,23 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TestModule } from '../../test.module';
-import { StateComponent } from './firesafetydepartment.component';
+import {TestModule} from '../../test.module';
+import {FireSafetyDepartmentComponent} from './firesafetydepartment.component';
 
-describe('StateComponent', () => {
-  let component: StateComponent;
-  let fixture: ComponentFixture<StateComponent>;
+
+describe('FireSafetyDepartmentComponent', () => {
+  let component: FireSafetyDepartmentComponent;
+  let fixture: ComponentFixture<FireSafetyDepartmentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ TestModule ],
-      declarations: [ StateComponent ]
+      declarations: [ FireSafetyDepartmentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StateComponent);
+    fixture = TestBed.createComponent(FireSafetyDepartmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

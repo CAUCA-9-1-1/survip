@@ -1,10 +1,12 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { ChoiceService } from './choice.service';
+import {TestModule} from '../../../test.module';
+import {ChoiceService} from './choice.service';
 
 describe('ChoiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [ TestModule ],
       providers: [ChoiceService]
     });
   });

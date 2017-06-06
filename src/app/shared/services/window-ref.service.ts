@@ -1,23 +1,27 @@
 import { Injectable } from '@angular/core';
 
 function getWindow(): any {
-  return (window || {});
+  if (typeof(window) === 'object') {
+    return window;
+  }
+
+  return {};
 }
 
 function getNavigator(): any {
-  return (navigator || {});
+  if (typeof(navigator) === 'object') {
+    return navigator;
+  }
+
+  return {};
 }
 
 function getDocument(): any {
-  return (document || {});
-}
+  if (typeof(document) === 'object') {
+    return document;
+  }
 
-function getClass(name: string): any {
-  return new (window[name] || function() {});
-}
-
-function getObject(name: string): any {
-  return new (window[name] || {});
+  return {};
 }
 
 @Injectable()
@@ -35,10 +39,22 @@ export class WindowRefService {
   }
 
   public nativeClass(name: string): any {
-    return getClass(name);
+    const window: any = getWindow();
+
+    if (typeof (window[name]) !== 'undefined') {
+      return new window[name]();
+    }
+
+    return {};
   }
 
   public nativeObject(name: string): any {
-    return getObject(name);
+    const window: any = getWindow();
+
+    if (typeof (window[name]) !== 'undefined') {
+      return window[name];
+    }
+
+    return {};
   }
 }
