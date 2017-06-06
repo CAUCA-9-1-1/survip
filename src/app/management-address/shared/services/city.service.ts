@@ -4,16 +4,17 @@ import {Router} from '@angular/router';
 
 import {BaseService} from '../../../core/base.service';
 import {City} from '../models/city.model';
+import {HttpService} from "../../../core/http.service";
 
 @Injectable()
 export class CityService extends BaseService {
 
-  constructor(http: Http, router: Router) {
+  constructor(http: HttpService, router: Router) {
     super(http, router);
   }
 
   public getAll() {
-    return this.http.get(this.host + 'city', this.authorization()).map((response: Response) => {
+    return this.http.get('city').map((response: Response) => {
       const result = response.json();
 
       this.isLogin(result, '/management/address');
@@ -23,9 +24,8 @@ export class CityService extends BaseService {
 
   public update(city: City) {
     return this.http.put(
-      this.host + 'city',
+      'city',
       JSON.stringify(city),
-      this.authorization()
     ).map((response: Response) => response.json());
   }
 }

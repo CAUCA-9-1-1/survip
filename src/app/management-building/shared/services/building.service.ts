@@ -1,19 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Response} from '@angular/http';
 import {Router} from '@angular/router';
 
 import {BaseService} from '../../../core/base.service';
+import {HttpService} from '../../../core/http.service';
 import {Building} from '../models/building.model';
 
 @Injectable()
 export class BuildingService extends BaseService {
 
-  constructor(http: Http, router: Router) {
+  constructor(http: HttpService, router: Router) {
     super(http, router);
   }
 
   public getAll() {
-    return this.http.get(this.host + 'building', this.authorization()).map((response: Response) => {
+    return this.http.get('building').map((response: Response) => {
       const result = response.json();
 
       this.isLogin(result, '/management/building');
@@ -23,9 +24,8 @@ export class BuildingService extends BaseService {
 
   public update(building: Building) {
     return this.http.put(
-      this.host + 'building',
+      'building',
       JSON.stringify(building),
-      this.authorization()
     ).map((response: Response) => response.json());
   }
 }

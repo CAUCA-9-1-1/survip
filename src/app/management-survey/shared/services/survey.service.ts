@@ -1,19 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Response} from '@angular/http';
 import {Router} from '@angular/router';
 
 import {BaseService} from '../../../core/base.service';
+import {HttpService} from '../../../core/http.service';
 import {Survey} from '../models/survey.model';
 
 @Injectable()
 export class SurveyService extends BaseService {
 
-  constructor(http: Http, router: Router) {
+  constructor(http: HttpService, router: Router) {
     super(http, router);
   }
 
   public getAll() {
-    return this.http.get(this.host + 'survey', this.authorization()).map((response: Response) => {
+    return this.http.get('survey').map((response: Response) => {
       const result = response.json();
 
       this.isLogin(result, '/management/survey');
@@ -23,9 +24,8 @@ export class SurveyService extends BaseService {
 
   public update(survey: Survey) {
     return this.http.put(
-      this.host + 'survey',
-      JSON.stringify(survey),
-      this.authorization()
+      'survey',
+      JSON.stringify(survey)
     ).map((response: Response) => response.json());
   }
 }
