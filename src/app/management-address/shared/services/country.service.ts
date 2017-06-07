@@ -1,23 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import {Router} from '@angular/router';
 
-import { BaseService } from '../../../core/base.service';
 import {HttpService} from '../../../core/http.service';
-import { Country } from '../models/country.model';
+import {Country} from '../models/country.model';
 
 @Injectable()
-export class CountryService extends BaseService {
+export class CountryService {
 
-  constructor(http: HttpService, router: Router) {
-    super(http, router);
-  }
+  constructor(private http: HttpService) { }
 
   public getAll() {
     return this.http.get('country').map((response: Response) => {
       const result = response.json();
 
-      this.isLogin(result, '/management/address');
       return result;
     });
   }

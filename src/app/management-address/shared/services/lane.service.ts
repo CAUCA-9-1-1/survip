@@ -1,23 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import {Router} from '@angular/router';
 
-import {BaseService} from '../../../core/base.service';
 import {HttpService} from '../../../core/http.service';
 import {Lane} from '../models/lane.model';
 
 @Injectable()
-export class LaneService extends BaseService {
+export class LaneService {
 
-  constructor(http: HttpService, router: Router) {
-    super(http, router);
-  }
+  constructor(private http: HttpService) { }
 
   public getAll() {
     return this.http.get('lane').map((response: Response) => {
       const result = response.json();
 
-      this.isLogin(result, '/management/address');
       return result;
     });
   }

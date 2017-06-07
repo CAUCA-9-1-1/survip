@@ -1,15 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 
-import {BaseService} from '../../core/base.service';
 import {HttpService} from '../../core/http.service';
 
 @Injectable()
-export class RiskLevelService extends BaseService {
+export class RiskLevelService {
 
-  constructor(http: HttpService) {
-    super(http);
-  }
+  constructor(private http: HttpService) { }
 
   getAll() {
     return this.http.get('risklevel').map((response: Response) => {

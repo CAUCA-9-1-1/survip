@@ -1,23 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import {Router} from '@angular/router';
 
-import {BaseService} from '../../../core/base.service';
 import {HttpService} from '../../../core/http.service';
 import {FireSafetyDepartment} from '../models/firesafetydepartment.model';
 
 @Injectable()
-export class FireSafetyDepartmentService extends BaseService {
+export class FireSafetyDepartmentService {
 
-  constructor(http: HttpService, router: Router) {
-    super(http, router);
-  }
+  constructor(private http: HttpService) { }
 
   public getAll() {
     return this.http.get('firesafetydepartment').map((response: Response) => {
       const result = response.json();
 
-      this.isLogin(result, '/management/access');
       return result;
     });
   }

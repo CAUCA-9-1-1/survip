@@ -1,52 +1,59 @@
 import {Injectable} from '@angular/core';
-import {Headers, Response, RequestOptions} from '@angular/http';
-import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
+import {
+  Http,
+  RequestOptionsArgs,
+  Response,
+  Headers,
+  XHRBackend, RequestOptions
+} from '@angular/http';
 import {environment} from 'environments/environment';
 
-import {HttpService} from './http.service';
+import {AuthorizeRequestOptions} from './authorize-request-options';
 import {WindowRefService} from '../shared/services/window-ref.service';
 
 @Injectable()
-export class BaseService {
+export class HttpAuthService extends Http {
   private static isInLoginProcess = false;
   private storage: any;
+  private location: any;
   private windowRef = new WindowRefService();
-  protected host = environment.apiUrl;
+  protected apiUrl = environment.apiUrl;
 
-  constructor(protected http: HttpService, protected router?: Router) {
+  constructor(
+    backend: XHRBackend,
+    defaultOptions: AuthorizeRequestOptions
+  ) {
+    super(backend, defaultOptions);
+
     this.storage = this.windowRef.nativeObject('localStorage');
+    this.location = this.windowRef.nativeObject('location');
   }
 
-  protected isLogin(result: any, returnUrl?: string, callback?) {
-    if (result.error && result.login === false) {
-      if (!BaseService.isInLoginProcess) {
-        BaseService.isInLoginProcess = true;
+  protected checkLogin(result: Response) {
+    const body = result.json() || '';
+
+    if (body.error && body.login === false) {
+      if (!HttpAuthService.isInLoginProcess) {
+        HttpAuthService.isInLoginProcess = true;
 
         this.login().subscribe((infoToken) => {
-          BaseService.isInLoginProcess = false;
+          HttpAuthService.isInLoginProcess = false;
 
           if (infoToken.data.accessToken) {
             this.storage.setItem('currentToken', infoToken.data.accessToken);
-          } else if (this.router) {
-            this.goToLoginPage(returnUrl);
+            this.reload();
+          } else {
+            throw new Error('need to login');
           }
         });
       }
     }
   }
 
-  private goToLoginPage(returnUrl?: string) {
-    let extras = {};
-
-    if (returnUrl) {
-      extras = {
-        queryParams: {
-          returnUrl: returnUrl
-        }
-      };
-    }
-
-    this.router.navigate(['/login'], extras);
+  private reload() {
+    this.location.reload();
   }
 
   private login() {
@@ -56,7 +63,7 @@ export class BaseService {
     const password = 'cauca2017';
 
     if (username && password) {
-      return this.http.put(
+      return this.put(
         'auth',
         JSON.stringify({
           username: 'admin',
@@ -68,8 +75,8 @@ export class BaseService {
       });
     }
 
-    return this.http.put(
-      this.host + 'auth',
+    return this.put(
+      'auth',
       '',
       this.secretkey()
     ).map((response: Response) => {
