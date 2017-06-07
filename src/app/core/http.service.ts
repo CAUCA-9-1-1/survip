@@ -2,22 +2,19 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {
-  Http,
   RequestOptionsArgs,
   Response,
   Headers,
   XHRBackend
 } from '@angular/http';
-import {environment} from 'environments/environment';
 
+import {HttpAuthService} from './http-auth.service';
 import {AuthorizeRequestOptions} from './authorize-request-options';
 import {LoaderService} from '../shared/services/loader.service';
 
 @Injectable()
-export class HttpService extends Http {
+export class HttpService extends HttpAuthService {
   private static count = 0;
-  private static isInLoginProcess = false;
-  apiUrl = environment.apiUrl;
 
   constructor(
     backend: XHRBackend,
@@ -109,14 +106,8 @@ export class HttpService extends Http {
 
   private onSuccess(result: Response): void {
     if (result instanceof Response) {
-      const body = result.json() || '';
-
-      if (body.error && body.login === false) {
-        console.log('need to login and retry');
-      }
+      this.checkLogin(result);
     }
-
-    console.log('Request successful');
   }
 
   private onError(error: Response | any): void {
@@ -131,7 +122,7 @@ export class HttpService extends Http {
       errorMessage = error.message ? error.message : error.toString();
     }
 
-    console.error('Error: ' + errorMessage);
+    console.error(errorMessage);
   }
 
   private onEnd(): void {

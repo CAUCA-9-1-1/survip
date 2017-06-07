@@ -1,23 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import {Router} from '@angular/router';
 
-import {BaseService} from '../../../core/base.service';
 import {HttpService} from '../../../core/http.service';
 import {PermissionWebuser} from '../models/permissionwebuser.model';
 
 @Injectable()
-export class PermissionWebuserService extends BaseService {
+export class PermissionWebuserService {
 
-  constructor(http: HttpService, router: Router) {
-    super(http, router);
-  }
+  constructor(private http: HttpService) { }
 
   public get(idPermissionObject) {
     return this.http.get('permissionwebuser/' + idPermissionObject).map((response: Response) => {
       const result = response.json();
 
-      this.isLogin(result, '/management/access');
       return result;
     });
   }

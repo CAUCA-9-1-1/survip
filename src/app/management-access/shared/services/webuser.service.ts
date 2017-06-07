@@ -1,23 +1,18 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {Router} from '@angular/router';
+import {Response} from '@angular/http';
 
-import {BaseService} from '../../../core/base.service';
 import {HttpService} from '../../../core/http.service';
 import {Webuser} from '../models/webuser.model';
 
 @Injectable()
-export class WebuserService extends BaseService {
+export class WebuserService {
 
-  constructor(http: HttpService, router: Router) {
-    super(http, router);
-  }
+  constructor(private http: HttpService) { }
 
   public getAll() {
     return this.http.get('webuser').map((response: Response) => {
       const result = response.json();
 
-      this.isLogin(result, '/management/access');
       return result;
     });
   }
