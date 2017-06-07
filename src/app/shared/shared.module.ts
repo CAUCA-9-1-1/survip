@@ -39,57 +39,62 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
 }
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    FlexLayoutModule,
-    MaterialModule,
-    BrowserModule,
-    IgoModule.forRoot(),
-  ],
   declarations: [
-    MenuComponent,
-    MenuItemComponent,
-    LoaderComponent,
     PageNotFoundComponent,
-    TakePictureComponent,
+    LoaderComponent,
     ToolbarComponent,
+    /*MenuComponent,
+    MenuItemComponent,
+    TakePictureComponent,
     ToolbarBackComponent,
     WebcamComponent,
     FullscreenDialogComponent,
     YesNoDialogComponent,
     WaitDialogComponent,
     FilterByPipe,
-    PinchZoomDirective,
+    PinchZoomDirective,*/
   ],
   entryComponents: [
-    WebcamComponent,
+    /*WebcamComponent,
     FullscreenDialogComponent,
     YesNoDialogComponent,
-    WaitDialogComponent,
+    WaitDialogComponent,*/
   ],
   exports: [
+    IgoModule,
     CommonModule,
+    MaterialModule,
+    FlexLayoutModule,
+
+    LoaderComponent,
+    ToolbarComponent,
+    /*
     ReactiveFormsModule,
     FormsModule,
-    FlexLayoutModule,
-    MaterialModule,
     BrowserModule,
-    IgoModule,
-    LoaderComponent,
     MenuComponent,
     PageNotFoundComponent,
-    ToolbarComponent,
+
     ToolbarBackComponent,
     TakePictureComponent,
-    PinchZoomDirective,
+    PinchZoomDirective,*/
+  ],
+  imports: [
+    IgoModule.forRoot(),
+    CommonModule,
+    MaterialModule,
+    FlexLayoutModule,
+    /*
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserModule,
+    */
   ],
   providers: [
-    DialogsService,
     provideLanguageLoader(translateLoader),
-    WindowRefService,
     LoaderService,
+    WindowRefService,
+    DialogsService,
     {
       provide: HttpService,
       useFactory: httpServiceFactory,

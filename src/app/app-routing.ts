@@ -10,7 +10,7 @@ import {ManagementSurveyComponent} from './management-survey/management-survey.c
 
 const appRoutes: Routes = [{
   path: '',
-  redirectTo: '/management/building',
+  redirectTo: '/management/survey',
   pathMatch: 'full'
 }, {
   path: 'management',
