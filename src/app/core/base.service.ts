@@ -57,7 +57,7 @@ export class BaseService {
 
     if (username && password) {
       return this.http.put(
-        this.host + 'auth',
+        'auth',
         JSON.stringify({
           username: 'admin',
           password: 'cauca2017'
