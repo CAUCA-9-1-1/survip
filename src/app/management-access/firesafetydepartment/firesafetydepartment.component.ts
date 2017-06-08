@@ -1,73 +1,92 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {environment} from 'environments/environment';
+import {DxDataGridComponent} from 'devextreme-angular';
+import {LanguageService} from 'igo2';
 
-import {EditDatagrid} from '../../core/devextreme.editdatagrid';
+import {DataGrid} from '../../core/devextreme/datagrid';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
+import {County} from '../../management-address/shared/models/county.model';
+import {CountyService} from '../../management-address/shared/services/county.service';
 
 @Component({
   selector: 'app-management-access-firesafetydepartment',
   templateUrl: './firesafetydepartment.component.html',
   styleUrls: ['./firesafetydepartment.component.styl'],
-  providers: [FireSafetyDepartmentService]
+  providers: [
+    FireSafetyDepartmentService,
+    CountyService,
+  ]
 })
-export class FireSafetyDepartmentComponent extends EditDatagrid implements OnInit {
+export class FireSafetyDepartmentComponent extends DataGrid implements OnInit {
+  @ViewChild(DxDataGridComponent) deptGrid: DxDataGridComponent;
+
   departments: FireSafetyDepartment[] = [];
-  editing: object = {};
-  filter: object = {};
+  counties: County[] = [];
+  selectedName: object = {};
+  languages: object[] = [];
 
-  constructor(private fireSafetyDepartmentService: FireSafetyDepartmentService) {
+  constructor(
+    private fireSafetyDepartmentService: FireSafetyDepartmentService,
+    private countyService: CountyService,
+    private translate: LanguageService
+  ) {
     super();
-
-    this.editing = {
-      mode: 'form',
-      allowUpdating: true,
-      allowAdding: true,
-      allowDeleting: true,
-      form: {
-        colCount: 1,
-        items: [{
-          dataField: 'name',
-          isRequired: true
-        }, {
-          dataField: 'isActive',
-          editorType: 'dxCheckBox'
-        }]
-      }
-    };
-    this.filter = {
-      visible: true
-    };
   }
 
   public ngOnInit() {
-    this.loadAll();
+    this.loadDeparment();
+    this.loadCounty();
+    this.translate.translate.get(environment.languages).subscribe((labels) => {
+      environment.languages.forEach((lang) => {
+        this.languages.push({
+          code: lang,
+          name: labels[lang],
+        });
+      });
+    });
   }
 
-  /* ngOnChanges() {
-    console.log('change');
-  }*/
+  public onNameChanged(e) {
+    this.selectedName = e.value;
+    this.deptGrid.instance.cellValue(0, 'name', e.value);
+  }
 
-  public onRowUpdated(e) {
-    for (const i in e.data) {
-      if (e.data[i]) {
-        e.key[i] = e.data[i];
-      }
-    }
+  public onEditingStart(e) {
+    this.selectedName = e.data.name;
+  }
 
-    this.fireSafetyDepartmentService.update(e.key).subscribe(info => {
-      if (!info.success) {
-        console.error(info.error);
+  public onInitNewRow(e) {
+    e.data.isActive = true;
+  }
+
+  public onRowInserted(e) {
+    this.fireSafetyDepartmentService.create(e.data).subscribe(info => {
+      if (info.success) {
+        this.loadDeparment();
       }
     });
   }
 
-  private loadAll() {
-    this.fireSafetyDepartmentService.getAll().subscribe(infoDept => {
-      if (!infoDept.success) {
-        console.error(infoDept.error);
-      }
+  public onRowUpdated(e) {
+    e.data.idFireSafetyDepartment = e.key.idFireSafetyDepartment;
 
+    this.fireSafetyDepartmentService.update(e.data).subscribe();
+  }
+
+  public onRowRemoved(e) {
+    this.fireSafetyDepartmentService.remove(e.key.idFireSafetyDepartment).subscribe();
+  }
+
+  private loadDeparment() {
+    this.fireSafetyDepartmentService.getAll().subscribe(infoDept => {
       this.departments = infoDept.data;
+    });
+  }
+
+  private loadCounty() {
+    this.countyService.getAll().subscribe(infoCounty => {
+      this.counties = infoCounty.data;
     });
   }
 }

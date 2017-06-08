@@ -19,7 +19,12 @@
                 [editing]="editing"
                 [hoverStateEnabled]="true"
                 (onRowUpdated)="onRowUpdated($event)">
-            <dxi-column dataField="description" caption="{{'description' | translate}}"></dxi-column>
+            <dxi-column
+                    dataField="description"
+                    caption="{{'description' | translate}}"
+                    sortOrder="asc"
+                    sortIndex="0">
+            </dxi-column>
             <dxi-column
                     dataField="defaultValue"
                     caption="{{'defaultValue' | translate}}"

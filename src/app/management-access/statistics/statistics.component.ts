@@ -57,20 +57,12 @@ export class StatisticsComponent implements OnInit {
 
   private loadConnectionByDate() {
     this.statisticService.get('connectionByDate/' + this.period['start'] + '/' + this.period['end']).subscribe(infoStats => {
-      if (!infoStats.success) {
-        console.error(infoStats.error);
-      }
-
       this.connectionByDate = infoStats.data;
     });
   }
 
   private loadRequestByTable() {
     this.statisticService.get('requestByTable/' + this.period['start'] + '/' + this.period['end']).subscribe(infoStats => {
-      if (!infoStats.success) {
-        console.error(infoStats.error);
-      }
-
       this.requestByTable = infoStats.data;
     });
   }

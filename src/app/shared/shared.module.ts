@@ -5,6 +5,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {Http, RequestOptions, XHRBackend} from '@angular/http';
 import {MaterialModule} from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
+import {DxTextBoxModule} from 'devextreme-angular';
 
 import {
   IgoModule,
@@ -32,6 +33,7 @@ import {LoaderComponent} from './components/loader/loader.component';
 import {HttpService} from '../core/http/http.service';
 import {LoaderService} from './services/loader.service';
 import {AuthorizeRequestOptions} from '../core/http/authorize-request-options';
+import {MultilangComponent} from './components/multilang/multilang.component';
 
 export function translateLoader(http: Http) {
   return new LanguageLoader(http, './assets/locale/', '.json');
@@ -45,6 +47,7 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
     PageNotFoundComponent,
     LoaderComponent,
     ToolbarComponent,
+    MultilangComponent,
     /*MenuComponent,
     MenuItemComponent,
     TakePictureComponent,
@@ -63,14 +66,15 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
     WaitDialogComponent,*/
   ],
   exports: [
-    IgoModule,
     CommonModule,
     BrowserModule,
     MaterialModule,
     FlexLayoutModule,
+    IgoModule,
 
     LoaderComponent,
     ToolbarComponent,
+    MultilangComponent,
     /*
     ReactiveFormsModule,
     FormsModule,
@@ -83,11 +87,12 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
     PinchZoomDirective,*/
   ],
   imports: [
-    IgoModule.forRoot(),
     CommonModule,
     BrowserModule,
     MaterialModule,
     FlexLayoutModule,
+    IgoModule.forRoot(),
+    DxTextBoxModule,
     /*
     ReactiveFormsModule,
     FormsModule,
