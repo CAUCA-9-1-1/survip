@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LanguageService} from 'igo2';
 
-import {EditDatagrid} from '../../core/devextreme.editdatagrid';
+import {DataGrid} from '../../core/devextreme/datagrid';
 import {Country} from '../shared/models/country.model';
 import {CountryService} from '../shared/services/country.service';
 
@@ -11,7 +11,7 @@ import {CountryService} from '../shared/services/country.service';
   styleUrls: ['./country.component.styl'],
   providers: [CountryService]
 })
-export class CountryComponent extends EditDatagrid implements OnInit {
+export class CountryComponent extends DataGrid implements OnInit {
   countries: Country[] = [];
   editing: object = {};
   filter: object = {};

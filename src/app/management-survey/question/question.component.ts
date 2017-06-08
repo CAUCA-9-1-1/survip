@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {EditDatagrid} from '../../core/devextreme.editdatagrid';
+import {DataGrid} from '../../core/devextreme/datagrid';
 import {Question} from '../shared/models/question.model';
 import {QuestionService} from '../shared/services/question.service';
 import {ChoiceService} from '../shared/services/choice.service';
@@ -15,7 +15,7 @@ import {Choice} from '../shared/models/choice.model';
     ChoiceService
   ]
 })
-export class QuestionComponent extends EditDatagrid implements OnInit {
+export class QuestionComponent extends DataGrid implements OnInit {
   @Input() survey = '';
 
   questions: Question[] = [];

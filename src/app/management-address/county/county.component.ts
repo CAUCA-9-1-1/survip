@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {EditDatagrid} from '../../core/devextreme.editdatagrid';
+import {DataGrid} from '../../core/devextreme/datagrid';
 import {County} from '../shared/models/county.model';
 import {CountyService} from '../shared/services/county.service';
 
@@ -10,7 +10,7 @@ import {CountyService} from '../shared/services/county.service';
   styleUrls: ['./county.component.styl'],
   providers: [CountyService]
 })
-export class CountyComponent extends EditDatagrid implements OnInit {
+export class CountyComponent extends DataGrid implements OnInit {
   counties: County[] = [];
   editing: object = {};
   filter: object = {};

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {EditDatagrid} from '../../core/devextreme.editdatagrid';
+import {DataGrid} from '../../core/devextreme/datagrid';
 import {State} from '../shared/models/state.model';
 import {StateService} from '../shared/services/state.service';
 
@@ -10,7 +10,7 @@ import {StateService} from '../shared/services/state.service';
   styleUrls: ['./state.component.styl'],
   providers: [StateService]
 })
-export class StateComponent extends EditDatagrid implements OnInit {
+export class StateComponent extends DataGrid implements OnInit {
   states: State[] = [];
   editing: object = {};
   filter: object = {};
