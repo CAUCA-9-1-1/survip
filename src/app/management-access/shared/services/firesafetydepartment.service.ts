@@ -17,10 +17,21 @@ export class FireSafetyDepartmentService {
     });
   }
 
+  public create(dept: FireSafetyDepartment) {
+    return this.http.post(
+      'firesafetydepartment',
+      JSON.stringify(dept)
+    ).map((response: Response) => response.json());
+  }
+
   public update(dept: FireSafetyDepartment) {
     return this.http.put(
       'firesafetydepartment',
       JSON.stringify(dept)
     ).map((response: Response) => response.json());
+  }
+
+  public remove(idFireSafetyDepartment: string) {
+    return this.http.delete('firesafetydepartment/' + idFireSafetyDepartment).map((response: Response) => response.json());
   }
 }

@@ -7,8 +7,18 @@
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
-    <dxi-column dataField="attributes.firstName" caption="{{'firstName' | translate}}"></dxi-column>
-    <dxi-column dataField="attributes.lastName" caption="{{'lastName' | translate}}"></dxi-column>
+    <dxi-column
+            dataField="attributes.firstName"
+            caption="{{'firstName' | translate}}"
+            sortOrder="asc"
+            sortIndex="0">
+    </dxi-column>
+    <dxi-column
+            dataField="attributes.lastName"
+            caption="{{'lastName' | translate}}"
+            sortOrder="asc"
+            sortIndex="1"
+    ></dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxi-column [visible]="false" dataField="username" caption="{{'username' | translate}}"></dxi-column>
@@ -20,38 +30,37 @@
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-        <dxo-form colCount="1">
-            <dxi-item itemType="group" colCount="2" caption="{{'webuser' | translate}}">
-                <dxi-item dataField="username" [isRequired]="true"></dxi-item>
-                <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
-                <dxi-item dataField="password" [editorOptions]="{mode: 'password'}">
-                    <dxi-validation-rule type="custom" message="{{'passwordError' | translate}}" [validationCallback]="onPasswordChanged"></dxi-validation-rule>
-                </dxi-item>
-                <dxi-item dataField="confirmPassword" [editorOptions]="{mode: 'password'}">
-                    <dxi-validation-rule type="compare" [comparisonTarget]="onPasswordCompare"></dxi-validation-rule>
-                </dxi-item>
-                <dxi-item dataField="attributes.resetPassword" editorType="dxCheckBox"></dxi-item>
-                <dxi-item itemType="empty"></dxi-item>
-                <dxi-item colSpan="2">
-                    <dx-data-grid
-                            [dataSource]="userDepartments"
-                            [hoverStateEnabled]="true"
-                            (onInitNewRow)="onNewUserDepartment($event)"
-                            (onRowUpdated)="onUserDepartmentUpdated($event)"
-                            (onRowInserted)="onUserDepartmentInserted($event)"
-                            (onRowUpdated)="onUserDepartmentUpdated($event)"
-                            (onRowRemoved)="onUserDepartmentRemoved($event)">
-                        <dxi-column dataField="idFireSafetyDepartment" caption="{{'fireSafetyDepartment' | translate}}">
-                            <dxo-lookup [dataSource]="departments" displayExpr="name.fr" valueExpr="idFireSafetyDepartment">
-                            </dxo-lookup>
-                        </dxi-column>
-                        <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
-
-                        <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true"></dxo-editing>
-                    </dx-data-grid>
-                </dxi-item>
+        <dxo-popup title="{{'webuser' | translate}}" [showTitle]="true"></dxo-popup>
+        <dxo-form colCount="2">
+            <dxi-item dataField="username" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+            <dxi-item dataField="password" [editorOptions]="{mode: 'password'}">
+                <dxi-validation-rule type="custom" message="{{'passwordError' | translate}}" [validationCallback]="onPasswordChanged"></dxi-validation-rule>
             </dxi-item>
-            <dxi-item itemType="group" colCount="2" caption="{{'personnalInformation' | translate}}">
+            <dxi-item dataField="confirmPassword" [editorOptions]="{mode: 'password'}">
+                <dxi-validation-rule type="compare" [comparisonTarget]="onPasswordCompare"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="attributes.resetPassword" editorType="dxCheckBox"></dxi-item>
+            <dxi-item itemType="empty"></dxi-item>
+            <dxi-item colSpan="2">
+                <dx-data-grid
+                        [dataSource]="userDepartments"
+                        [hoverStateEnabled]="true"
+                        (onInitNewRow)="onNewUserDepartment($event)"
+                        (onRowUpdated)="onUserDepartmentUpdated($event)"
+                        (onRowInserted)="onUserDepartmentInserted($event)"
+                        (onRowUpdated)="onUserDepartmentUpdated($event)"
+                        (onRowRemoved)="onUserDepartmentRemoved($event)">
+                    <dxi-column dataField="idFireSafetyDepartment" caption="{{'fireSafetyDepartment' | translate}}">
+                        <dxo-lookup [dataSource]="departments" displayExpr="name.fr" valueExpr="idFireSafetyDepartment">
+                        </dxo-lookup>
+                    </dxi-column>
+                    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+
+                    <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true"></dxo-editing>
+                </dx-data-grid>
+            </dxi-item>
+            <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
                 <dxi-item dataField="attributes.firstName" [isRequired]="true"></dxi-item>
                 <dxi-item dataField="attributes.lastName" [isRequired]="true"></dxi-item>
                 <dxi-item dataField="attributes.email" [editorOptions]="{mode: 'email'}">

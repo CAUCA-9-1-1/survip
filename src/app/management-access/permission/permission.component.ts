@@ -84,29 +84,17 @@ export class PermissionComponent implements OnInit {
       }
     }
 
-    this.featureService.update(e.key).subscribe(info => {
-      if (!info.success) {
-        console.error(info.error);
-      }
-    });
+    this.featureService.update(e.key).subscribe();
   }
 
   public onRowSelected(e) {
     this.featureService.get(e.itemData.idPermissionObject).subscribe(infoFeature => {
-      if (!infoFeature.success) {
-        console.error(infoFeature.error);
-      }
-
       this.features = infoFeature.data;
     });
   }
 
   private loadObject() {
     this.objectService.getAll().subscribe(infoObject => {
-      if (!infoObject.success) {
-        console.error(infoObject.error);
-      }
-
       this.objects = infoObject.data;
     });
   }
