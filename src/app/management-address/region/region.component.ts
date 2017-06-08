@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {EditDatagrid} from '../../core/devextreme.editdatagrid';
+import {DataGrid} from '../../core/devextreme/datagrid';
 import {RegionService} from '../shared/services/region.service';
 import {Region} from '../shared/models/region.model';
 
@@ -10,7 +10,7 @@ import {Region} from '../shared/models/region.model';
   styleUrls: ['./region.component.styl'],
   providers: [RegionService]
 })
-export class RegionComponent extends EditDatagrid implements OnInit {
+export class RegionComponent extends DataGrid implements OnInit {
   regions: Region[] = [];
   editing: object = {};
   filter: object = {};

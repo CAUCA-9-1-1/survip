@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {environment} from 'environments/environment';
 
-import {EditDatagrid} from '../../core/devextreme.editdatagrid';
+import {DataGrid} from '../../core/devextreme/datagrid';
 import {Survey} from '../shared/models/survey.model';
 import {SurveyService} from '../shared/services/survey.service';
 
@@ -12,7 +12,7 @@ import {SurveyService} from '../shared/services/survey.service';
   styleUrls: ['./list.component.styl'],
   providers: [SurveyService]
 })
-export class ListComponent extends EditDatagrid implements OnInit {
+export class ListComponent extends DataGrid implements OnInit {
   surveys: Survey[] = [];
   surveyTypeLookup: object = {};
   languages: string[] = environment.languages;

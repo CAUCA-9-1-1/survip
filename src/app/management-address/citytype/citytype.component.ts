@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {EditDatagrid} from '../../core/devextreme.editdatagrid';
+import {DataGrid} from '../../core/devextreme/datagrid';
 import {CityType} from '../shared/models/citytype.model';
 import {CityTypeService} from '../shared/services/citytype.service';
 
@@ -10,7 +10,7 @@ import {CityTypeService} from '../shared/services/citytype.service';
   styleUrls: ['./citytype.component.styl'],
   providers: [CityTypeService]
 })
-export class CityTypeComponent extends EditDatagrid implements OnInit {
+export class CityTypeComponent extends DataGrid implements OnInit {
   cityType: CityType[] = [];
   editing: object = {};
   filter: object = {};

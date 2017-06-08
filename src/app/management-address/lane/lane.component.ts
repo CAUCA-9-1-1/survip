@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {EditDatagrid} from '../../core/devextreme.editdatagrid';
+import {DataGrid} from '../../core/devextreme/datagrid';
 import {Lane} from '../shared/models/lane.model';
 import {LaneService} from '../shared/services/lane.service';
 
@@ -10,7 +10,7 @@ import {LaneService} from '../shared/services/lane.service';
   styleUrls: ['./lane.component.styl'],
   providers: [LaneService]
 })
-export class LaneComponent extends EditDatagrid implements OnInit {
+export class LaneComponent extends DataGrid implements OnInit {
   lanes: Lane[] = [];
   editing: object = {};
   filter: object = {};

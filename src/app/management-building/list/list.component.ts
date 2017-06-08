@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {EditDatagrid} from '../../core/devextreme.editdatagrid';
+import {DataGrid} from '../../core/devextreme/datagrid';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 
@@ -12,7 +12,7 @@ import {Building} from '../shared/models/building.model';
     BuildingService,
   ]
 })
-export class ListComponent extends EditDatagrid implements OnInit {
+export class ListComponent extends DataGrid implements OnInit {
   buildings: Building[] = [];
   editing: object = {};
   filter: object = {};
