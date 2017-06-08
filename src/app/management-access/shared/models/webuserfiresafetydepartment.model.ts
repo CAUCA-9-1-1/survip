@@ -1,7 +1,7 @@
 export class FireSafetyDepartment {
   idFireSafetyDepartment: string;
   name: object;
-  idCounty: string;
+  id_county: string;
   language: string;
   isActive: boolean;
 }

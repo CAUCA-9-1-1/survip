@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 
-import {HttpService} from '../../../core/http/http.service';
+import {HttpService} from '../../../core/http.service';
 import {FireSafetyDepartment} from '../models/firesafetydepartment.model';
 
 @Injectable()
@@ -22,5 +22,13 @@ export class FireSafetyDepartmentService {
       'firesafetydepartment',
       JSON.stringify(dept)
     ).map((response: Response) => response.json());
+  }
+
+  public getByUser(idWebuser: string) {
+    return this.http.get('webuserfiresafetydepartment/' + idWebuser).map((response: Response) => {
+      const result = response.json();
+
+      return result;
+    });
   }
 }
