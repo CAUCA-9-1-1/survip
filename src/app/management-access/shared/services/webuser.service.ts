@@ -17,10 +17,21 @@ export class WebuserService {
     });
   }
 
+  public create(user: Webuser) {
+    return this.http.post(
+      'webuser',
+      JSON.stringify(user)
+    ).map((response: Response) => response.json());
+  }
+
   public update(user: Webuser) {
     return this.http.put(
       'webuser',
       JSON.stringify(user)
     ).map((response: Response) => response.json());
+  }
+
+  public remove(idWebuser: string) {
+    return this.http.delete('webuser/' + idWebuser).map((response: Response) => response.json());
   }
 }

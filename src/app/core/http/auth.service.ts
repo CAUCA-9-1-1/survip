@@ -31,9 +31,7 @@ export class AuthService extends Http {
     this.location = this.windowRef.nativeObject('location');
   }
 
-  protected checkLogin(result: Response) {
-    const body = result.json() || '';
-
+  protected checkLogin(body: any) {
     if (body.error && body.login === false) {
       if (!AuthService.isInLoginProcess) {
         AuthService.isInLoginProcess = true;
