@@ -13,6 +13,7 @@ import {
   provideLanguageLoader,
 } from 'igo2';
 
+import {} from '../core/extends-prototype';
 import {MenuComponent} from './components/menu/menu.component';
 import {MenuItemComponent} from './components/menu-item/menu-item.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';

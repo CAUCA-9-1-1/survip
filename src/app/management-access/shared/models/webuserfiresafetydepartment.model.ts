@@ -1,7 +1,6 @@
-export class FireSafetyDepartment {
+export class WebuserFireSafetyDepartment {
+  idWebuserFireSafetyDepartment: string;
   idFireSafetyDepartment: string;
-  name: object;
-  id_county: string;
-  language: string;
+  idWebuser: string;
   isActive: boolean;
 }

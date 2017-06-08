@@ -106,7 +106,10 @@ export class HttpService extends AuthService {
 
   private onSuccess(result: Response): void {
     if (result instanceof Response) {
-      this.checkLogin(result);
+      const body = result.json() || {};
+
+      this.checkLogin(body);
+      this.checkError(body);
     }
   }
 
@@ -122,11 +125,17 @@ export class HttpService extends AuthService {
       errorMessage = error.message ? error.message : error.toString();
     }
 
-    console.error(errorMessage);
+    throw new Error(errorMessage);
   }
 
   private onEnd(): void {
     this.hideLoader();
+  }
+
+  private checkError(body) {
+    if (!body.success) {
+      throw new Error(body.error);
+    }
   }
 
   private showLoader(): void {

@@ -13,7 +13,6 @@ import {ManagementBuildingComponent} from './management-building/management-buil
 import {ManagementSurveyModule} from './management-survey/management-survey.module';
 import {ManagementSurveyComponent} from './management-survey/management-survey.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

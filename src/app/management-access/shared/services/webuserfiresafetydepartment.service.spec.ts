@@ -1,18 +1,17 @@
 import {TestBed, inject} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
 
 import {TestModule} from '../../../test.module';
-import {FireSafetyDepartmentService} from './firesafetydepartment.service';
+import {WebuserFireSafetyDepartmentService} from './webuserfiresafetydepartment.service';
 
-describe('FireSafetyDepartmentService', () => {
+describe('WebuserFireSafetyDepartmentService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ TestModule ],
-      providers: [ FireSafetyDepartmentService ]
+      providers: [ WebuserFireSafetyDepartmentService ]
     });
   });
 
-  it('should ...', inject([FireSafetyDepartmentService], (service: FireSafetyDepartmentService) => {
+  it('should ...', inject([WebuserFireSafetyDepartmentService], (service: WebuserFireSafetyDepartmentService) => {
     expect(service).toBeTruthy();
   }));
 });
