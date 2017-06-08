@@ -8,12 +8,12 @@ import {
   XHRBackend
 } from '@angular/http';
 
-import {HttpAuthService} from './http-auth.service';
+import {AuthService} from './auth.service';
 import {AuthorizeRequestOptions} from './authorize-request-options';
-import {LoaderService} from '../shared/services/loader.service';
+import {LoaderService} from '../../shared/services/loader.service';
 
 @Injectable()
-export class HttpService extends HttpAuthService {
+export class HttpService extends AuthService {
   private static count = 0;
 
   constructor(

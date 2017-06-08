@@ -9,6 +9,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {
   IgoModule,
   LanguageLoader,
+  LanguageService,
   provideLanguageLoader,
 } from 'igo2';
 
@@ -27,9 +28,9 @@ import {PinchZoomDirective} from './directives/pinch-zoom.directive';
 import {FullscreenDialogComponent} from './components/fullscreen-dialog/fullscreen-dialog.component';
 import {WaitDialogComponent} from './components/wait-dialog/wait-dialog.component';
 import {LoaderComponent} from './components/loader/loader.component';
-import {HttpService} from '../core/http.service';
+import {HttpService} from '../core/http/http.service';
 import {LoaderService} from './services/loader.service';
-import {AuthorizeRequestOptions} from '../core/authorize-request-options';
+import {AuthorizeRequestOptions} from '../core/http/authorize-request-options';
 
 export function translateLoader(http: Http) {
   return new LanguageLoader(http, './assets/locale/', '.json');
@@ -63,6 +64,7 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
   exports: [
     IgoModule,
     CommonModule,
+    BrowserModule,
     MaterialModule,
     FlexLayoutModule,
 
@@ -71,7 +73,7 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
     /*
     ReactiveFormsModule,
     FormsModule,
-    BrowserModule,
+
     MenuComponent,
     PageNotFoundComponent,
 
@@ -82,16 +84,17 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
   imports: [
     IgoModule.forRoot(),
     CommonModule,
+    BrowserModule,
     MaterialModule,
     FlexLayoutModule,
     /*
     ReactiveFormsModule,
     FormsModule,
-    BrowserModule,
     */
   ],
   providers: [
     provideLanguageLoader(translateLoader),
+    LanguageService,
     LoaderService,
     WindowRefService,
     DialogsService,

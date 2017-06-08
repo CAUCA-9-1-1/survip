@@ -11,10 +11,10 @@ import {
 import {environment} from 'environments/environment';
 
 import {AuthorizeRequestOptions} from './authorize-request-options';
-import {WindowRefService} from '../shared/services/window-ref.service';
+import {WindowRefService} from '../../shared/services/window-ref.service';
 
 @Injectable()
-export class HttpAuthService extends Http {
+export class AuthService extends Http {
   private static isInLoginProcess = false;
   private storage: any;
   private location: any;
@@ -35,11 +35,11 @@ export class HttpAuthService extends Http {
     const body = result.json() || '';
 
     if (body.error && body.login === false) {
-      if (!HttpAuthService.isInLoginProcess) {
-        HttpAuthService.isInLoginProcess = true;
+      if (!AuthService.isInLoginProcess) {
+        AuthService.isInLoginProcess = true;
 
         this.login().subscribe((infoToken) => {
-          HttpAuthService.isInLoginProcess = false;
+          AuthService.isInLoginProcess = false;
 
           if (infoToken.data.accessToken) {
             this.storage.setItem('currentToken', infoToken.data.accessToken);

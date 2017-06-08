@@ -1,5 +1,5 @@
 import { BaseRequestOptions } from '@angular/http';
-import {WindowRefService} from '../shared/services/window-ref.service';
+import {WindowRefService} from '../../shared/services/window-ref.service';
 
 export class AuthorizeRequestOptions extends BaseRequestOptions {
   private windowRef = new WindowRefService();
