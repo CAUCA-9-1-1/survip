@@ -20,7 +20,7 @@ export class CountryService {
   public create(country: Country) {
     return this.http.post(
       'country',
-      JSON.stringify(Country)
+      JSON.stringify(country)
     ).map((response: Response) => response.json());
   }
 

@@ -17,10 +17,21 @@ export class StateService {
     });
   }
 
+  public create(state: State) {
+    return this.http.post(
+      'state',
+      JSON.stringify(state)
+    ).map((response: Response) => response.json());
+  }
+
   public update(state: State) {
     return this.http.put(
       'state',
       JSON.stringify(state)
     ).map((response: Response) => response.json());
+  }
+
+  public remove(idState: string) {
+    return this.http.delete('state/' + idState).map((response: Response) => response.json());
   }
 }
