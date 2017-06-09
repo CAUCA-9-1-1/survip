@@ -1,7 +1,10 @@
 <dx-data-grid
         [dataSource]="countries"
         [hoverStateEnabled]="true"
-        (onRowUpdated)="onRowUpdated($event)">
+        (onInitNewRow)="onInitNewRow($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
             dataField="name"
             caption="{{'name' | translate}}"
