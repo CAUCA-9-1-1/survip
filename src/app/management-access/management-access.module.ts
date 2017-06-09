@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DxDataGridModule, DxChartModule, DxFormModule, DxTreeViewModule, DxTextBoxModule} from 'devextreme-angular';
+import {DxDataGridModule, DxChartModule, DxFormModule, DxTreeViewModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {ApisactionComponent} from './apisaction/apisaction.component';
@@ -14,7 +14,6 @@ import {WebuserComponent} from './webuser/webuser.component';
     DxDataGridModule,
     DxChartModule,
     DxFormModule,
-    DxTextBoxModule,
     DxTreeViewModule,
   ],
   exports: [
