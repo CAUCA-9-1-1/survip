@@ -23,7 +23,6 @@ export class FireSafetyDepartmentComponent extends DataGrid implements OnInit {
 
   departments: FireSafetyDepartment[] = [];
   counties: County[] = [];
-  selectedName: object = {};
   languages: object[] = [];
 
   constructor(
@@ -47,13 +46,8 @@ export class FireSafetyDepartmentComponent extends DataGrid implements OnInit {
     });
   }
 
-  public onNameChanged(e) {
-    this.selectedName = e.value;
-    this.deptGrid.instance.cellValue(0, 'name', e.value);
-  }
-
-  public onEditingStart(e) {
-    this.selectedName = e.data.name;
+  public onNameChanged(row, e) {
+    row.setValue(e.value);
   }
 
   public onInitNewRow(e) {

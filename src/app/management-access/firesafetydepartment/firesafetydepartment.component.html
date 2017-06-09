@@ -1,7 +1,6 @@
 <dx-data-grid
         [dataSource]="departments"
         [hoverStateEnabled]="true"
-        (onEditingStart)="onEditingStart($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
@@ -10,7 +9,7 @@
             dataField="name"
             caption="{{'name' | translate}}"
             [calculateCellValue]="onCalculateCellValue"
-            [editCellTemplate]="onEditCellTemplate"
+            editCellTemplate="editname"
             sortOrder="asc"
             sortIndex="0">
     </dxi-column>
@@ -33,12 +32,14 @@
         <dxo-popup title="{{'fireSafetyDepartment' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="1">
-            <dxi-item dataField="name" [isRequired]="true">
-                <app-multilang [(value)]="selectedName" (onValueChanged)="onNameChanged($event)"></app-multilang>
-            </dxi-item>
+            <dxi-item dataField="name" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idCounty" [isRequired]="true"></dxi-item>
             <dxi-item dataField="language"></dxi-item>
             <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
+
+    <div *dxTemplate="let rowname of 'editname'">
+        <app-multilang [value]="rowname.row.data.name" (onValueChanged)="rowname.setValue($event.value);"></app-multilang>
+    </div>
 </dx-data-grid>

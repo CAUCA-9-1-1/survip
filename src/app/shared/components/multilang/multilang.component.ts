@@ -15,7 +15,7 @@ export class MultilangComponent implements OnInit {
   set value(val: object) {
     this.tabs.selectedIndex = 0;
     this.languages.forEach((lang) => {
-      this._value[lang] = (val && val[lang] ? val[lang] : '--');
+      this._value[lang] = (val && val[lang] ? val[lang] : '');
     });
 
     this._value['idLanguageContent'] = (val && val['idLanguageContent'] ? val['idLanguageContent'] : '');
