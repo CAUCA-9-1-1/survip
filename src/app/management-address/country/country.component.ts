@@ -13,71 +13,35 @@ import {CountryService} from '../shared/services/country.service';
 })
 export class CountryComponent extends DataGrid implements OnInit {
   countries: Country[] = [];
-  editing: object = {};
-  filter: object = {};
 
-  constructor(private countryService: CountryService, translate: LanguageService) {
+  constructor(private countryService: CountryService) {
     super();
-
-    this.editing = {
-      mode: 'form',
-      allowUpdating: true,
-      allowAdding: true,
-      allowDeleting: true,
-      form: {
-        colCount: 1,
-        items: [{
-          dataField: 'name',
-          isRequired: true
-        }, {
-          dataField: 'codeAlpha2',
-          editorOptions: {
-            maxLength: 2
-          }
-        }, {
-          dataField: 'codeAlpha3',
-          editorOptions: {
-            maxLength: 3
-          }
-        }, {
-          dataField: 'isActive',
-          editorType: 'dxCheckBox'
-        }]
-      }
-    };
-    this.filter = {
-      visible: true
-    };
   }
 
   public ngOnInit() {
-    this.loadAll();
+    this.loadCountry();
   }
 
-  /* ngOnChanges() {
-    console.log('change');
-  }*/
-
-  public onRowUpdated(e) {
-    for (const i in e.data) {
-      if (e.data[i]) {
-        e.key[i] = e.data[i];
-      }
-    }
-
-    this.countryService.update(e.key).subscribe(info => {
-      if (!info.success) {
-        console.error(info.error);
+  public onRowInserted(e) {
+    this.countryService.create(e.data).subscribe(info => {
+      if (info.success) {
+        this.loadCountry();
       }
     });
   }
 
-  private loadAll() {
-    this.countryService.getAll().subscribe(infoCountry => {
-      if (!infoCountry.success) {
-        console.error(infoCountry.error);
-      }
+  public onRowUpdated(e) {
+    e.data.idCountry = e.key.idCountry;
 
+    this.countryService.update(e.data).subscribe();
+  }
+
+  public onRowRemoved(e) {
+    this.countryService.remove(e.key.idCountry).subscribe();
+  }
+
+  private loadCountry() {
+    this.countryService.getAll().subscribe(infoCountry => {
       this.countries = infoCountry.data;
     });
   }
