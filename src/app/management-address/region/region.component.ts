@@ -1,75 +1,64 @@
 import {Component, OnInit} from '@angular/core';
 
 import {DataGrid} from '../../core/devextreme/datagrid';
-import {RegionService} from '../shared/services/region.service';
 import {Region} from '../shared/models/region.model';
+import {RegionService} from '../shared/services/region.service';
+import {State} from '../shared/models/state.model';
+import {StateService} from '../shared/services/state.service';
 
 @Component({
   selector: 'app-management-address-region',
   templateUrl: './region.component.html',
   styleUrls: ['./region.component.styl'],
-  providers: [RegionService]
+  providers: [
+    RegionService,
+    StateService,
+  ]
 })
 export class RegionComponent extends DataGrid implements OnInit {
   regions: Region[] = [];
-  editing: object = {};
-  filter: object = {};
+  states: State[] = [];
 
-  constructor(private regionService: RegionService) {
+  constructor(private regionService: RegionService, private stateService: StateService) {
     super();
-
-    this.editing = {
-      mode: 'form',
-      allowUpdating: true,
-      allowAdding: true,
-      allowDeleting: true,
-      form: {
-        colCount: 1,
-        items: [{
-          dataField: 'name',
-          isRequired: true
-        }, {
-          dataField: 'code'
-        }, {
-          dataField: 'isActive',
-          editorType: 'dxCheckBox'
-        }]
-      }
-    };
-    this.filter = {
-      visible: true
-    };
   }
 
   public ngOnInit() {
-    this.loadAll();
+    this.loadRegion();
+    this.loadState();
   }
 
-  /* ngOnChanges() {
-    console.log('change');
-  }*/
+  public onInitNewRow(e) {
+    e.data.isActive = true;
+  }
 
-  public onRowUpdated(e) {
-    for (const i in e.data) {
-      if (e.data[i]) {
-        e.key[i] = e.data[i];
-      }
-    }
-
-    this.regionService.update(e.key).subscribe(info => {
-      if (!info.success) {
-        console.error(info.error);
+  public onRowInserted(e) {
+    this.regionService.create(e.data).subscribe(info => {
+      if (info.success) {
+        this.loadRegion();
       }
     });
   }
 
-  private loadAll() {
-    this.regionService.getAll().subscribe(infoRegion => {
-      if (!infoRegion.success) {
-        console.error(infoRegion.error);
-      }
+  public onRowUpdated(e) {
+    e.data.idRegion = e.key.idRegion;
 
+    this.regionService.update(e.data).subscribe();
+  }
+
+  public onRowRemoved(e) {
+    this.regionService.remove(e.key.idRegion).subscribe();
+  }
+
+  private loadRegion() {
+    this.regionService.getAll().subscribe(infoRegion => {
       this.regions = infoRegion.data;
+    });
+  }
+
+  private loadState() {
+    this.stateService.getAll().subscribe(infoState => {
+      this.states = infoState.data;
     });
   }
 }
