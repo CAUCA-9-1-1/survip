@@ -22,6 +22,10 @@ export class CountryComponent extends DataGrid implements OnInit {
     this.loadCountry();
   }
 
+  public onInitNewRow(e) {
+    e.data.isActive = true;
+  }
+
   public onRowInserted(e) {
     this.countryService.create(e.data).subscribe(info => {
       if (info.success) {
