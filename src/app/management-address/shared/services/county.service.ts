@@ -17,10 +17,21 @@ export class CountyService {
     });
   }
 
+  public create(county: County) {
+    return this.http.post(
+      'county',
+      JSON.stringify(county)
+    ).map((response: Response) => response.json());
+  }
+
   public update(county: County) {
     return this.http.put(
       'county',
       JSON.stringify(county),
     ).map((response: Response) => response.json());
+  }
+
+  public remove(idCounty: string) {
+    return this.http.delete('county/' + idCounty).map((response: Response) => response.json());
   }
 }

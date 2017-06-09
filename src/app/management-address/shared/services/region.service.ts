@@ -17,10 +17,21 @@ export class RegionService {
     });
   }
 
+  public create(region: Region) {
+    return this.http.post(
+      'region',
+      JSON.stringify(region)
+    ).map((response: Response) => response.json());
+  }
+
   public update(region: Region) {
     return this.http.put(
       'region',
       JSON.stringify(region)
     ).map((response: Response) => response.json());
+  }
+
+  public remove(idRegion: string) {
+    return this.http.delete('region/' + idRegion).map((response: Response) => response.json());
   }
 }
