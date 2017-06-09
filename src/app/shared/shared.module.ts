@@ -5,7 +5,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {Http, RequestOptions, XHRBackend} from '@angular/http';
 import {MaterialModule} from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
-import {DxTextBoxModule} from 'devextreme-angular';
+import {DxTabsModule, DxTagBoxModule, DxTextBoxModule} from 'devextreme-angular';
 
 import {
   IgoModule,
@@ -92,6 +92,7 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
     MaterialModule,
     FlexLayoutModule,
     IgoModule.forRoot(),
+    DxTabsModule,
     DxTextBoxModule,
     /*
     ReactiveFormsModule,
