@@ -17,10 +17,21 @@ export class CountryService {
     });
   }
 
+  public create(country: Country) {
+    return this.http.post(
+      'country',
+      JSON.stringify(Country)
+    ).map((response: Response) => response.json());
+  }
+
   public update(country: Country) {
     return this.http.put(
       'country',
       JSON.stringify(country),
     ).map((response: Response) => response.json());
+  }
+
+  public remove(idCountry: string) {
+    return this.http.delete('country/' + idCountry).map((response: Response) => response.json());
   }
 }
