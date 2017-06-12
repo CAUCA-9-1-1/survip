@@ -1,14 +1,50 @@
 <dx-data-grid
         [dataSource]="cities"
-        [filterRow]="filter"
-        [editing]="editing"
         [hoverStateEnabled]="true"
-        (onRowUpdated)="onRowUpdated($event)">
+        (onInitNewRow)="onInitNewRow($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
             dataField="name"
             caption="{{'name' | translate}}"
             [calculateCellValue]="onCalculateCellValue"
-            [editCellTemplate]="onEditCellTemplate">
+            editCellTemplate="editname"
+            sortOrder="asc"
+            sortIndex="1">
+    </dxi-column>
+    <dxi-column
+            dataField="idCityType"
+            caption="{{'cityType' | translate}}">
+        <dxo-lookup [dataSource]="citiesType" displayExpr="name.fr" valueExpr="idCityType">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+            dataField="idCounty"
+            caption="{{'county' | translate}}"
+            sortOrder="asc"
+            sortIndex="0">
+        <dxo-lookup [dataSource]="counties" displayExpr="name.fr" valueExpr="idCounty">
+        </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'region' | translate}}" [showTitle]="true"></dxo-popup>
+
+        <dxo-form colCount="1">
+            <dxi-item dataField="name" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="idCityType" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="idCounty" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="code" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="code3_letter" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="email_address"></dxi-item>
+            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+        </dxo-form>
+    </dxo-editing>
+
+    <div *dxTemplate="let rowname of 'editname'">
+        <app-multilang [value]="rowname.row.data.name" (onValueChanged)="rowname.setValue($event.value);"></app-multilang>
+    </div>
 </dx-data-grid>
