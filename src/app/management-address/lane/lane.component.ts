@@ -3,71 +3,62 @@ import {Component, OnInit} from '@angular/core';
 import {DataGrid} from '../../core/devextreme/datagrid';
 import {Lane} from '../shared/models/lane.model';
 import {LaneService} from '../shared/services/lane.service';
+import {City} from '../shared/models/city.model';
+import {CityService} from '../shared/services/city.service';
 
 @Component({
   selector: 'app-management-address-lane',
   templateUrl: './lane.component.html',
   styleUrls: ['./lane.component.styl'],
-  providers: [LaneService]
+  providers: [
+    LaneService,
+    CityService,
+  ]
 })
 export class LaneComponent extends DataGrid implements OnInit {
   lanes: Lane[] = [];
-  editing: object = {};
-  filter: object = {};
+  cities: City[] = [];
 
-  constructor(private laneService: LaneService) {
+  constructor(private laneService: LaneService, private cityService: CityService) {
     super();
-
-    this.editing = {
-      mode: 'form',
-      allowUpdating: true,
-      allowAdding: true,
-      allowDeleting: true,
-      form: {
-        colCount: 1,
-        items: [{
-          dataField: 'name',
-          isRequired: true
-        }, {
-          dataField: 'isActive',
-          editorType: 'dxCheckBox'
-        }]
-      }
-    };
-    this.filter = {
-      visible: true
-    };
   }
 
   public ngOnInit() {
-    this.loadAll();
+    this.loadLane();
+    this.loadCity();
   }
 
-  /* ngOnChanges() {
-    console.log('change');
-  }*/
+  public onInitNewRow(e) {
+    e.data.isActive = true;
+  }
 
-  public onRowUpdated(e) {
-    for (const i in e.data) {
-      if (e.data[i]) {
-        e.key[i] = e.data[i];
-      }
-    }
-
-    this.laneService.update(e.key).subscribe(info => {
-      if (!info.success) {
-        console.error(info.error);
+  public onRowInserted(e) {
+    this.laneService.create(e.data).subscribe(info => {
+      if (info.success) {
+        this.loadLane();
       }
     });
   }
 
-  private loadAll() {
-    this.laneService.getAll().subscribe(infoLane => {
-      if (!infoLane.success) {
-        console.error(infoLane.error);
-      }
+  public onRowUpdated(e) {
+    e.data.idLane = e.key.idLane;
 
+    this.laneService.update(e.data).subscribe();
+  }
+
+  public onRowRemoved(e) {
+    this.laneService.remove(e.key.idLane).subscribe();
+  }
+
+  private loadLane() {
+    this.laneService.getAll().subscribe(infoLane => {
       this.lanes = infoLane.data;
+    });
+  }
+
+  private loadCity() {
+    this.cityService.getAll().subscribe(infoCity => {
+      this.cities = infoCity.data;
     });
   }
 }

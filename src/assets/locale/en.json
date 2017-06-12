@@ -74,5 +74,8 @@
   "code": "Code",
   "city": "City",
   "cityType": "City type",
-  "lane": "Lane"
+  "lane": "Lane",
+  "publicLaneCode": "Public lane code",
+  "genericCode": "Generic code",
+  "code3Letter": "Code 3 letters"
 }
