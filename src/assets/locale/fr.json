@@ -80,5 +80,8 @@
   "code": "Code",
   "city": "Ville",
   "cityType": "Type de ville",
-  "lane": "Voie"
+  "lane": "Voie",
+  "publicLaneCode": "Code de voie public",
+  "genericCode": "Code générique",
+  "code3Letter": "Code à 3 lettres"
 }

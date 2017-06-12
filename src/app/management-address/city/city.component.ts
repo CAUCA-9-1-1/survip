@@ -56,7 +56,7 @@ export class CityComponent extends DataGrid implements OnInit {
   }
 
   public onRowRemoved(e) {
-    this.cityService.remove(e.key.idRegion).subscribe();
+    this.cityService.remove(e.key.idCity).subscribe();
   }
 
   private loadCity() {
