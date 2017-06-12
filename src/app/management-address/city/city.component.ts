@@ -3,71 +3,77 @@ import {Component, OnInit} from '@angular/core';
 import {DataGrid} from '../../core/devextreme/datagrid';
 import {City} from '../shared/models/city.model';
 import {CityService} from '../shared/services/city.service';
+import {CityType} from '../shared/models/citytype.model';
+import {CityTypeService} from '../shared/services/citytype.service';
+import {County} from '../shared/models/county.model';
+import {CountyService} from '../shared/services/county.service';
 
 @Component({
   selector: 'app-management-address-city',
   templateUrl: './city.component.html',
   styleUrls: ['./city.component.styl'],
-  providers: [CityService]
+  providers: [
+    CityService,
+    CityTypeService,
+    CountyService,
+  ]
 })
 export class CityComponent extends DataGrid implements OnInit {
   cities: City[] = [];
-  editing: object = {};
-  filter: object = {};
+  citiesType: CityType[] = [];
+  counties: County[] = [];
 
-  constructor(private cityService: CityService) {
+  constructor(
+    private cityService: CityService,
+    private cityTypeService: CityTypeService,
+    private countyService: CountyService
+  ) {
     super();
-
-    this.editing = {
-      mode: 'form',
-      allowUpdating: true,
-      allowAdding: true,
-      allowDeleting: true,
-      form: {
-        colCount: 1,
-        items: [{
-          dataField: 'name',
-          isRequired: true
-        }, {
-          dataField: 'isActive',
-          editorType: 'dxCheckBox'
-        }]
-      }
-    };
-    this.filter = {
-      visible: true
-    };
   }
 
   public ngOnInit() {
-    this.loadAll();
+    this.loadCity();
+    this.loadCityType();
+    this.loadCounty();
   }
 
-  /* ngOnChanges() {
-    console.log('change');
-  }*/
+  public onInitNewRow(e) {
+    e.data.isActive = true;
+  }
 
-  public onRowUpdated(e) {
-    for (const i in e.data) {
-      if (e.data[i]) {
-        e.key[i] = e.data[i];
-      }
-    }
-
-    this.cityService.update(e.key).subscribe(info => {
-      if (!info.success) {
-        console.error(info.error);
+  public onRowInserted(e) {
+    this.cityService.create(e.data).subscribe(info => {
+      if (info.success) {
+        this.loadCity();
       }
     });
   }
 
-  private loadAll() {
-    this.cityService.getAll().subscribe(infoCity => {
-      if (!infoCity.success) {
-        console.error(infoCity.error);
-      }
+  public onRowUpdated(e) {
+    e.data.idCity = e.key.idCity;
 
+    this.cityService.update(e.data).subscribe();
+  }
+
+  public onRowRemoved(e) {
+    this.cityService.remove(e.key.idRegion).subscribe();
+  }
+
+  private loadCity() {
+    this.cityService.getAll().subscribe(infoCity => {
       this.cities = infoCity.data;
+    });
+  }
+
+  private loadCityType() {
+    this.cityTypeService.getAll().subscribe(infoType => {
+      this.citiesType = infoType.data;
+    });
+  }
+
+  private loadCounty() {
+    this.countyService.getAll().subscribe(infoCounty => {
+      this.counties = infoCounty.data;
     });
   }
 }

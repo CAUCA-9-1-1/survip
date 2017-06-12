@@ -17,10 +17,21 @@ export class CityService {
     });
   }
 
+  public create(city: City) {
+    return this.http.post(
+      'city',
+      JSON.stringify(city)
+    ).map((response: Response) => response.json());
+  }
+
   public update(city: City) {
     return this.http.put(
       'city',
       JSON.stringify(city),
     ).map((response: Response) => response.json());
+  }
+
+  public remove(idCity: string) {
+    return this.http.delete('city/' + idCity).map((response: Response) => response.json());
   }
 }
