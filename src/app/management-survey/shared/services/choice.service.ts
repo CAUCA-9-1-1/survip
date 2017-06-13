@@ -10,7 +10,7 @@ export class ChoiceService {
   constructor(private http: HttpService) { }
 
   public getAll(id_question: string) {
-    return this.http.get('surveychoice/' + id_question).map((response: Response) => {
+    return this.http.get('surveychoice/' + id_question + '/true').map((response: Response) => {
       const result = response.json();
 
       return result;
@@ -31,7 +31,7 @@ export class ChoiceService {
     ).map((response: Response) => response.json());
   }
 
-  public remove(idChoice: string) {
-    return this.http.delete('surveychoice/' + idChoice).map((response: Response) => response.json());
+  public remove(idSurveyChoice: string) {
+    return this.http.delete('surveychoice/' + idSurveyChoice).map((response: Response) => response.json());
   }
 }
