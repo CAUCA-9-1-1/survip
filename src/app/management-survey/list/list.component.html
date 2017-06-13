@@ -37,7 +37,7 @@
     </dxo-editing>
 
     <div *dxTemplate="let data of 'editmode'">
-        <a class="dx-link" (click)="onModified(data.data.idSurvey)">{{'modify' | translate}}</a>
+        <a class="dx-link" (click)="onModified(data.data.idSurvey)">{{'modifyQuestion' | translate}}</a>
     </div>
     <div *dxTemplate="let rowname of 'editname'">
         <app-multilang [value]="rowname.row.data.name" (onValueChanged)="rowname.setValue($event.value);"></app-multilang>

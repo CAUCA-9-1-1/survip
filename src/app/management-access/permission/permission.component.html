@@ -8,7 +8,8 @@
                 itemsExpr="children"
                 keyExpr="idPermissionObject"
                 selectionMode="single"
-                (onItemClick)="onRowSelected($event)">
+                [selectByClick]="true"
+                (onItemSelectionChanged)="onRowSelected($event)">
             </dx-tree-view>
         </div>
     </div>

@@ -16,6 +16,7 @@ export class MultilangComponent implements OnInit {
     });
 
     this._value['idLanguageContent'] = (val && val['idLanguageContent'] ? val['idLanguageContent'] : '');
+    this.selectedTabValue = this._value[this.selectedTab];
   }
   private _value: object = {
     'idLanguageContent': ''
