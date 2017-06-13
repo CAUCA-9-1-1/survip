@@ -17,10 +17,21 @@ export class ChoiceService {
     });
   }
 
+  public create(choice: Choice) {
+    return this.http.post(
+      'surveychoice',
+      JSON.stringify(choice)
+    ).map((response: Response) => response.json());
+  }
+
   public update(choice: Choice) {
     return this.http.put(
       'surveychoice',
       JSON.stringify(choice)
     ).map((response: Response) => response.json());
+  }
+
+  public remove(idChoice: string) {
+    return this.http.delete('surveychoice/' + idChoice).map((response: Response) => response.json());
   }
 }
