@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { TestModule } from '../../test.module';
+import { TestModule } from '../../../test.module';
 import { RiskLevelService } from './risk-level.service';
 
 describe('RiskLevelService', () => {

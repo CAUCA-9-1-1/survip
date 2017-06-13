@@ -14,22 +14,63 @@
   <div fxFlex="65%">
     <div *ngIf="selectedQuestion">
       <dx-form [formData]="selectedQuestion" (onFieldDataChanged)="onFormUpdated($event)">
-        <dxi-item label="{{'title' | translate}}" dataField="title.fr"></dxi-item>
-        <dxi-item label="{{'description' | translate}}" dataField="description.fr"></dxi-item>
+        <dxi-item [label]="{text: 'title' | translate}" dataField="title">
+          <app-multilang [value]="selectedQuestion.title" (onValueChanged)="selectedQuestion.title = $event.value;onFormUpdated($event);"></app-multilang>
+        </dxi-item>
+        <dxi-item [label]="{text: 'description' | translate}" dataField="description">
+          <app-multilang [value]="selectedQuestion.description" (onValueChanged)="selectedQuestion.description = $event.value;onFormUpdated($event);"></app-multilang>
+        </dxi-item>
         <dxi-item
-                label="{{'questionType' | translate}}"
+                [label]="{text: 'questionType' | translate}"
                 dataField="questionType"
                 editorType="dxSelectBox"
-                [editorOptions]="questionType"></dxi-item>
-        <dxi-item label="{{'nextQuestion' | translate}}" dataField="idSurveyQuestionNext"></dxi-item>
+                [editorOptions]="{dataSource: [
+                    {value: 'choice', text: 'choiceAnswer' | translate},
+                    {value: 'text', text: 'textAnswer' | translate},
+                    {value: 'date', text: 'dateAnswer' | translate}
+                  ], displayExpr: 'text', valueExpr: 'value'}">
+        </dxi-item>
+        <dxi-item
+                [label]="{text: 'nextQuestion' | translate}"
+                dataField="idSurveyQuestionNext"
+                editorType="dxSelectBox"
+                [editorOptions]="{dataSource: nextQuestions, displayExpr: 'description.fr', valueExpr: 'idSurveyQuestion'}">
+        </dxi-item>
       </dx-form>
       <label>{{'options' | translate}}</label>
       <dx-data-grid
               [dataSource]="choices"
-              [columns]="columns"
-              [editing]="editing"
               [hoverStateEnabled]="true"
-              (onRowUpdated)="onRowUpdated($event)">
+              (onInitNewRow)="onInitNewChoice($event)"
+              (onRowInserted)="onChoiceInserted($event)"
+              (onRowUpdated)="onChoiceUpdated($event)"
+              (onRowRemoved)="onChoiceRemoved($event)">
+        <dxi-column
+                dataField="sequence"
+                caption="{{'sequence' | translate}}"
+                width="15%"
+                sortOrder="asc"
+                sortIndex="0">
+        </dxi-column>
+        <dxi-column
+                dataField="name"
+                caption="{{'name' | translate}}"
+                [calculateCellValue]="onCalculateCellValue"
+                editCellTemplate="editname">
+        </dxi-column>
+        <dxi-column
+                dataField="idSurveyQuestionNext"
+                caption="{{'surveyQuestionNext' | translate}}">
+          <dxo-lookup [dataSource]="nextQuestions" displayExpr="description.fr" valueExpr="idSurveyQuestion">
+          </dxo-lookup>
+        </dxi-column>
+        <dxi-column dataField="isActive" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+
+        <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        </dxo-editing>
+        <div *dxTemplate="let rowname of 'editname'">
+          <app-multilang [value]="rowname.row.data.name" (onValueChanged)="rowname.setValue($event.value);"></app-multilang>
+        </div>
       </dx-data-grid>
     </div>
   </div>

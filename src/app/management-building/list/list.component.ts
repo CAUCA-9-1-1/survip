@@ -3,6 +3,12 @@ import {Component, OnInit} from '@angular/core';
 import {DataGrid} from '../../core/devextreme/datagrid';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
+import {Lane} from '../../management-address/shared/models/lane.model';
+import {LaneService} from '../../management-address/shared/services/lane.service';
+import {UtilisationCode} from '../shared/models/utilisation-code.model';
+import {UtilisationCodeService} from '../shared/services/utilisation-code.service';
+import {RiskLevel} from '../shared/models/risk-level.model';
+import {RiskLevelService} from '../shared/services/risk-level.service';
 
 @Component({
   selector: 'app-management-building-list',
@@ -10,64 +16,77 @@ import {Building} from '../shared/models/building.model';
   styleUrls: ['./list.component.styl'],
   providers: [
     BuildingService,
+    LaneService,
+    UtilisationCodeService,
+    RiskLevelService,
   ]
 })
 export class ListComponent extends DataGrid implements OnInit {
   buildings: Building[] = [];
-  editing: object = {};
-  filter: object = {};
+  lanes: Lane[] = [];
+  utilisationCodes: UtilisationCode[] = [];
+  riskLevels: RiskLevel[] = [];
 
-  constructor(private buildingService: BuildingService) {
+  constructor(
+    private buildingService: BuildingService,
+    private laneService: LaneService,
+    private utilisationCode: UtilisationCodeService,
+    private riskLevelService: RiskLevelService
+  ) {
     super();
-
-    this.editing = {
-      mode: 'form',
-      allowUpdating: true,
-      allowAdding: true,
-      allowDeleting: true,
-      form: {
-        colCount: 1,
-        items: [{
-          dataField: 'name',
-          isRequired: true
-        }, {
-          dataField: 'idLane'
-        }, {
-          dataField: 'isActive',
-          editorType: 'dxCheckBox'
-        }]
-      }
-    };
-    this.filter = {
-      visible: true
-    };
   }
 
   ngOnInit() {
     this.loadBuiling();
+    this.loadLane();
+    this.loadUtilisationCode();
+    this.loadRiskLevel();
   }
 
-  public onRowUpdated(e) {
-    for (const i in e.data) {
-      if (e.data[i]) {
-        e.key[i] = e.data[i];
-      }
-    }
+  public onInitNewRow(e) {
+    e.data.isActive = true;
+  }
 
-    this.buildingService.update(e.key).subscribe(info => {
-      if (!info.success) {
-        console.error(info.error);
+  public onRowInserted(e) {
+    this.buildingService.create(e.data).subscribe(info => {
+      if (info.success) {
+        this.loadBuiling();
       }
     });
   }
 
+  public onRowUpdated(e) {
+    e.data.idBuilding = e.key.idBuilding;
+
+    this.buildingService.update(e.data).subscribe();
+  }
+
+  public onRowRemoved(e) {
+    this.buildingService.remove(e.key.idBuilding).subscribe();
+  }
+
   private loadBuiling() {
     this.buildingService.getAll().subscribe(infoBuilding => {
-      if (!infoBuilding.success) {
-        console.error(infoBuilding.error);
-      }
-
       this.buildings = infoBuilding.data;
+    });
+  }
+
+  private loadLane() {
+    this.laneService.getAll().subscribe(infoLane => {
+      this.lanes = infoLane.data;
+    });
+  }
+
+  private loadUtilisationCode() {
+    this.utilisationCode.getAll().subscribe(infoCode => {
+      this.utilisationCodes = infoCode.data;
+    });
+  }
+
+  private loadRiskLevel() {
+    this.riskLevelService.getAll().subscribe(infoLevel => {
+      console.log(infoLevel);
+      this.riskLevels = infoLevel.data;
     });
   }
 }

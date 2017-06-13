@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 
-import {HttpService} from '../../core/http/http.service';
+import {HttpService} from '../../../core/http/http.service';
 
 @Injectable()
 export class RiskLevelService {
@@ -12,7 +12,7 @@ export class RiskLevelService {
     return this.http.get('risklevel').map((response: Response) => {
       const result = response.json();
 
-      return result.data;
+      return result;
     });
   }
 
@@ -20,7 +20,7 @@ export class RiskLevelService {
     return this.http.get('risklevel/' + idRiskLevel).map((response: Response) => {
       const result = response.json();
 
-      return result.data;
+      return result;
     });
   }
 }

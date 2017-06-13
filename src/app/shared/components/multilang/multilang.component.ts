@@ -21,7 +21,7 @@ export class MultilangComponent implements OnInit {
     'idLanguageContent': ''
   };
 
-  public tabs: object[] = [];
+  public languages: string[] = [];
   public selectedTab: string;
   public selectedTabValue: string;
 
@@ -34,17 +34,14 @@ export class MultilangComponent implements OnInit {
 
     this.translate.translate.get(environment.languages).subscribe((labels) => {
       environment.languages.forEach((lang) => {
-        this.tabs.push({
-          id: lang,
-          text: labels[lang]
-        });
+        this.languages.push(labels[lang]);
       });
     });
   }
 
   ngOnInit() {
     this.selectedTab = environment.languages[0];
-    this.selectedTabValue = this._value[environment.languages[0]];
+    this.selectedTabValue = this._value[this.selectedTab];
   }
 
   public onTabValueChanged(e) {
@@ -57,8 +54,8 @@ export class MultilangComponent implements OnInit {
     });
   }
 
-  public onSelectionChanged(e) {
-    this.selectedTab = e.itemData.id;
-    this.selectedTabValue = this._value[e.itemData.id];
+  public onTabChanged(e) {
+    this.selectedTab = environment.languages[e.component.option('selectedIndex')];
+    this.selectedTabValue = this._value[this.selectedTab];
   }
 }
