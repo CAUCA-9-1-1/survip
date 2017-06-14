@@ -80,12 +80,14 @@ export class ListComponent implements OnInit {
     }
   }
 
-  public onRowUpdated() {
+  public onRowUpdated(e) {
+    e.data.idInspection = e.key.idInspection;
 
+    this.inspectionService.update(e.data).subscribe();
   }
 
-  public onRowRemoved() {
-
+  public onRowRemoved(e) {
+    this.inspectionService.assign(e.key.idInspection).subscribe();
   }
 
   public onBuildingListOpened(e) {

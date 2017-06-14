@@ -23,4 +23,15 @@ export class InspectionService {
       JSON.stringify(inspection)
     ).map((response: Response) => response.json());
   }
+
+  public update(inspection: Inspection) {
+    return this.http.put(
+      'inspection',
+      JSON.stringify(inspection)
+    ).map((response: Response) => response.json());
+  }
+
+  public remove(idInspection: string) {
+    return this.http.delete('inspection/' + idInspection).map((response: Response) => response.json());
+  }
 }
