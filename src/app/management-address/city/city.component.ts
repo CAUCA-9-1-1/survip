@@ -60,20 +60,14 @@ export class CityComponent extends DataGrid implements OnInit {
   }
 
   private loadCity() {
-    this.cityService.getAll().subscribe(infoCity => {
-      this.cities = infoCity.data;
-    });
+    this.cityService.getAll().subscribe(data => this.cities = data);
   }
 
   private loadCityType() {
-    this.cityTypeService.getAll().subscribe(infoType => {
-      this.citiesType = infoType.data;
-    });
+    this.cityTypeService.getAll().subscribe(data => this.citiesType = data);
   }
 
   private loadCounty() {
-    this.countyService.getAll().subscribe(infoCounty => {
-      this.counties = infoCounty.data;
-    });
+    this.countyService.getAll().subscribe(data => this.counties = data);
   }
 }

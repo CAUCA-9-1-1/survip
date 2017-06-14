@@ -41,8 +41,6 @@ export class ListComponent extends DataGrid implements OnInit {
   }
 
   private loadSurvey() {
-    this.surveyService.getAll().subscribe(infoSurvey => {
-      this.surveys = infoSurvey.data;
-    });
+    this.surveyService.getAll().subscribe(data => this.surveys = data);
   }
 }

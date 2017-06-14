@@ -150,15 +150,15 @@ export class QuestionComponent extends DataGrid implements OnInit {
   }
 
   private loadChoice() {
-    this.choiceService.getAll(this.questions[this.selectedIndex].idSurveyQuestion).subscribe(infoChoice => {
-      this.choices = infoChoice.data;
+    this.choiceService.getAll(this.questions[this.selectedIndex].idSurveyQuestion).subscribe(data => {
+      this.choices = data;
       this.switchQuestion = false;
     });
   }
 
   private loadQuestion() {
-    this.questionService.getAll(this.survey).subscribe(infoQuestion => {
-      this.questions = infoQuestion.data;
+    this.questionService.getAll(this.survey).subscribe(data => {
+      this.questions = data;
 
       this.questions.forEach((question, index) => {
         if (this.selectedIndex > -1 && question.idSurveyQuestion === this.questions[this.selectedIndex].idSurveyQuestion) {

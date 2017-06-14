@@ -66,26 +66,18 @@ export class ListComponent extends DataGrid implements OnInit {
   }
 
   private loadBuiling() {
-    this.buildingService.getAll().subscribe(infoBuilding => {
-      this.buildings = infoBuilding.data;
-    });
+    this.buildingService.getAll().subscribe(data => this.buildings = data);
   }
 
   private loadLane() {
-    this.laneService.getAll().subscribe(infoLane => {
-      this.lanes = infoLane.data;
-    });
+    this.laneService.getAll().subscribe(data => this.lanes = data);
   }
 
   private loadUtilisationCode() {
-    this.utilisationCode.getAll().subscribe(infoCode => {
-      this.utilisationCodes = infoCode.data;
-    });
+    this.utilisationCode.getAll().subscribe(data => this.utilisationCodes = data);
   }
 
   private loadRiskLevel() {
-    this.riskLevelService.getAll().subscribe(infoLevel => {
-      this.riskLevels = infoLevel.data;
-    });
+    this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
   }
 }

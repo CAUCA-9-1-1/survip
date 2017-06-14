@@ -60,20 +60,14 @@ export class CountyComponent extends DataGrid implements OnInit {
   }
 
   private loadCounty() {
-    this.countyService.getAll().subscribe(infoCounty => {
-      this.counties = infoCounty.data;
-    });
+    this.countyService.getAll().subscribe(data => this.counties = data);
   }
 
   private loadState() {
-    this.stateService.getAll().subscribe(infoState => {
-      this.states = infoState.data;
-    });
+    this.stateService.getAll().subscribe(data => this.states = data);
   }
 
   private loadRegion() {
-    this.regionService.getAll().subscribe(infoRegion => {
-      this.regions = infoRegion.data;
-    });
+    this.regionService.getAll().subscribe(data => this.regions = data);
   }
 }

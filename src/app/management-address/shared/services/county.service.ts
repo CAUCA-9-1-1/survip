@@ -13,7 +13,7 @@ export class CountyService {
     return this.http.get('county').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

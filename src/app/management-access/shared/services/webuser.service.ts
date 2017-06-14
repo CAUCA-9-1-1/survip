@@ -13,7 +13,7 @@ export class WebuserService {
     return this.http.get('webuser').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

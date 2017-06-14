@@ -12,7 +12,7 @@ export class ApisActionService {
     return this.http.get('apisaction').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 }

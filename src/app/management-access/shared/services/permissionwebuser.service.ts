@@ -13,7 +13,7 @@ export class PermissionWebuserService {
     return this.http.get('permissionwebuser/' + idPermissionObject).map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

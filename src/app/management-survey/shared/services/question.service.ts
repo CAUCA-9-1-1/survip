@@ -13,7 +13,7 @@ export class QuestionService {
     return this.http.get('surveyquestion/' + id_survey + '/true').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

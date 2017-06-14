@@ -13,7 +13,7 @@ export class ChoiceService {
     return this.http.get('surveychoice/' + id_question + '/true').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

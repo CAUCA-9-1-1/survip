@@ -73,14 +73,10 @@ export class FireSafetyDepartmentComponent extends DataGrid implements OnInit {
   }
 
   private loadDeparment() {
-    this.fireSafetyDepartmentService.getAll().subscribe(infoDept => {
-      this.departments = infoDept.data;
-    });
+    this.fireSafetyDepartmentService.getAll().subscribe(data => this.departments = data);
   }
 
   private loadCounty() {
-    this.countyService.getAll().subscribe(infoCounty => {
-      this.counties = infoCounty.data;
-    });
+    this.countyService.getAll().subscribe(data => this.counties = data);
   }
 }

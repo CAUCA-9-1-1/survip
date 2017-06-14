@@ -13,7 +13,7 @@ export class LaneService {
     return this.http.get('lane').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

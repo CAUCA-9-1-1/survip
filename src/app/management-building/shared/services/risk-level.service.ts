@@ -12,7 +12,7 @@ export class RiskLevelService {
     return this.http.get('risklevel').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 
@@ -20,7 +20,7 @@ export class RiskLevelService {
     return this.http.get('risklevel/' + idRiskLevel).map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 }
