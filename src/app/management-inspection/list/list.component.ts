@@ -51,20 +51,14 @@ export class ListComponent implements OnInit {
   }
 
   private loadRiskLevel() {
-    this.riskLevelService.getAll().subscribe(infoLevel => {
-      this.riskLevels = infoLevel.data;
-    });
+    this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
   }
 
   private loadWebuser() {
-    this.webuserService.getAll().subscribe(infoUser => {
-      this.users = infoUser.data;
-    });
+    this.webuserService.getAll().subscribe(data => this.users = data);
   }
 
   private loadInspection() {
-    this.inspectionService.getAll().subscribe(infoInspection => {
-      this.inspections = infoInspection.data;
-    });
+    this.inspectionService.getAll().subscribe(data => this.inspections = data);
   }
 }

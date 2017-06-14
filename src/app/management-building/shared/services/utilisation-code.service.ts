@@ -12,7 +12,7 @@ export class UtilisationCodeService {
     return this.http.get('utilisationcode').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 }

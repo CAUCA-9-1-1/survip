@@ -137,20 +137,14 @@ export class WebuserComponent implements OnInit {
   }
 
   private loadUsers() {
-    this.webuserService.getAll().subscribe(infoWebuser => {
-      this.users = infoWebuser.data;
-    });
+    this.webuserService.getAll().subscribe(data => this.users = data);
   }
 
   private loadDepartments() {
-    this.departmentService.getAll().subscribe(infoDept => {
-      this.departments = infoDept.data;
-    });
+    this.departmentService.getAll().subscribe(data => this.departments = data);
   }
 
   private loadUserDepartment(idWebuser: string) {
-    this.webuserDeptService.getByUser(idWebuser).subscribe(deptUser => {
-      this.userDepartments = deptUser.data;
-    });
+    this.webuserDeptService.getByUser(idWebuser).subscribe(data => this.userDepartments = data);
   }
 }

@@ -13,7 +13,7 @@ export class InspectionService {
     return this.http.get('inspection').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

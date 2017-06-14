@@ -51,14 +51,10 @@ export class RegionComponent extends DataGrid implements OnInit {
   }
 
   private loadRegion() {
-    this.regionService.getAll().subscribe(infoRegion => {
-      this.regions = infoRegion.data;
-    });
+    this.regionService.getAll().subscribe(data => this.regions = data);
   }
 
   private loadState() {
-    this.stateService.getAll().subscribe(infoState => {
-      this.states = infoState.data;
-    });
+    this.stateService.getAll().subscribe(data => this.states = data);
   }
 }

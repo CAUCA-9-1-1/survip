@@ -51,14 +51,10 @@ export class LaneComponent extends DataGrid implements OnInit {
   }
 
   private loadLane() {
-    this.laneService.getAll().subscribe(infoLane => {
-      this.lanes = infoLane.data;
-    });
+    this.laneService.getAll().subscribe(data => this.lanes = data);
   }
 
   private loadCity() {
-    this.cityService.getAll().subscribe(infoCity => {
-      this.cities = infoCity.data;
-    });
+    this.cityService.getAll().subscribe(data => this.cities = data);
   }
 }

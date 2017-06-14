@@ -51,14 +51,10 @@ export class StateComponent extends DataGrid implements OnInit {
   }
 
   private loadState() {
-    this.stateService.getAll().subscribe(infoState => {
-      this.states = infoState.data;
-    });
+    this.stateService.getAll().subscribe(data => this.states = data);
   }
 
   private loadCountry() {
-    this.countryService.getAll().subscribe(infoCountry => {
-      this.countries = infoCountry.data;
-    });
+    this.countryService.getAll().subscribe(data => this.countries = data);
   }
 }

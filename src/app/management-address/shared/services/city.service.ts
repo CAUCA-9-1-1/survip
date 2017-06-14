@@ -13,7 +13,7 @@ export class CityService {
     return this.http.get('city').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

@@ -13,7 +13,7 @@ export class CountryService {
     return this.http.get('country').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

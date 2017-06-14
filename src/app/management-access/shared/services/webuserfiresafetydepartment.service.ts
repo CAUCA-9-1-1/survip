@@ -13,7 +13,7 @@ export class WebuserFireSafetyDepartmentService {
     return this.http.get('webuserfiresafetydepartment/' + idWebuser).map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

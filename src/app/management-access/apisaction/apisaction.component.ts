@@ -28,14 +28,10 @@ export class ApisactionComponent implements OnInit {
   }
 
   private loadAction() {
-    this.actionService.getAll().subscribe(infoAction => {
-      this.actions = infoAction.data;
-    });
+    this.actionService.getAll().subscribe(data => this.actions = data);
   }
 
   private loadWebuser() {
-    this.webuserService.getAll().subscribe(infoUser => {
-      this.users = infoUser.data;
-    });
+    this.webuserService.getAll().subscribe(data => this.users = data);
   }
 }

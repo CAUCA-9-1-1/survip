@@ -12,7 +12,7 @@ export class StatisticService {
     return this.http.get('webuserstatistic/' + stat).map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 }

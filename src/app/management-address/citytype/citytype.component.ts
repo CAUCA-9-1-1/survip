@@ -44,8 +44,6 @@ export class CityTypeComponent extends DataGrid implements OnInit {
   }
 
   private loadCityType() {
-    this.cityTypeService.getAll().subscribe(infoCityType => {
-      this.cityType = infoCityType.data;
-    });
+    this.cityTypeService.getAll().subscribe(data => this.cityType = data);
   }
 }

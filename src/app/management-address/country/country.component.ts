@@ -45,8 +45,6 @@ export class CountryComponent extends DataGrid implements OnInit {
   }
 
   private loadCountry() {
-    this.countryService.getAll().subscribe(infoCountry => {
-      this.countries = infoCountry.data;
-    });
+    this.countryService.getAll().subscribe(data => this.countries = data);
   }
 }

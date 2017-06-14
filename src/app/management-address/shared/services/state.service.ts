@@ -13,7 +13,7 @@ export class StateService {
     return this.http.get('state').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

@@ -13,7 +13,7 @@ export class BuildingService {
     return this.http.get('building').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

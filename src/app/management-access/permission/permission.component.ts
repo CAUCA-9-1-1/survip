@@ -73,30 +73,18 @@ export class PermissionComponent implements OnInit {
     this.loadObject();
   }
 
-  /* ngOnChanges() {
-    console.log('change');
-  }*/
-
   public onRowUpdated(e) {
-    for (const i in e.data) {
-      if (e.data[i]) {
-        e.key[i] = e.data[i];
-      }
-    }
+    e.data.idPermission = e.key.idPermission;
 
-    this.featureService.update(e.key).subscribe();
+    this.featureService.update(e.data).subscribe();
   }
 
   public onRowSelected(e) {
-    this.featureService.get(e.itemData.idPermissionObject).subscribe(infoFeature => {
-      this.features = infoFeature.data;
-    });
+    this.featureService.get(e.itemData.idPermissionObject).subscribe(data => this.features = data);
   }
 
   private loadObject() {
-    this.objectService.getAll().subscribe(infoObject => {
-      this.objects = infoObject.data;
-    });
+    this.objectService.getAll().subscribe(data => this.objects = data);
   }
 
   private onCalculateDisplayValue(column, data) {

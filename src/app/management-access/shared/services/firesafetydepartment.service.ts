@@ -13,7 +13,7 @@ export class FireSafetyDepartmentService {
     return this.http.get('firesafetydepartment').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

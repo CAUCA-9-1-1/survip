@@ -13,7 +13,7 @@ export class RegionService {
     return this.http.get('region').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 

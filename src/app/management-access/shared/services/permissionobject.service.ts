@@ -13,7 +13,7 @@ export class PermissionObjectService {
     return this.http.get('permissionobject').map((response: Response) => {
       const result = response.json();
 
-      return result;
+      return result.data;
     });
   }
 
