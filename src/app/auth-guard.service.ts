@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate {
   private storage: any;
 
   constructor(private router: Router, private windowRef: WindowRefService) {
-    this.storage = this.windowRef.nativeWindow.localStorage;
+    this.storage = this.windowRef.nativeObject('localStorage');
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {

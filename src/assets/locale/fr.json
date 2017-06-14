@@ -113,5 +113,10 @@
   "lane": "Voie",
   "publicLaneCode": "Code de voie public",
   "genericCode": "Code générique",
-  "code3Letter": "Code à 3 lettres"
+  "code3Letter": "Code à 3 lettres",
+  "inspectionManagement": "Gestion des inspection",
+  "inspections": "Inspections",
+  "inspector": "Inspecteur",
+  "createdOn": "Date de création",
+  "isCompleted": "Est complété"
 }

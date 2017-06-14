@@ -7,6 +7,7 @@ import {ManagementAddressComponent} from './management-address/management-addres
 import {ManagementAccessComponent} from './management-access/management-access.component';
 import {ManagementBuildingComponent} from './management-building/management-building.component';
 import {ManagementSurveyComponent} from './management-survey/management-survey.component';
+import {ManagementInspectionComponent} from './management-inspection/management-inspection.component';
 
 const appRoutes: Routes = [{
   path: '',
@@ -16,6 +17,9 @@ const appRoutes: Routes = [{
   path: 'management',
   canActivate: [AuthGuard],
   children: [{
+    path: 'inspection',
+    component: ManagementInspectionComponent
+  }, {
     path: 'survey',
     component: ManagementSurveyComponent
   }, {

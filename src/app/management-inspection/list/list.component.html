@@ -1,0 +1,31 @@
+<dx-data-grid
+        [(dataSource)]="inspections"
+        [hoverStateEnabled]="true"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+  <dxi-column dataField="idWebuser" caption="{{'inspector' | translate}}">
+    <dxo-lookup [dataSource]="users" displayExpr="username" valueExpr="idWebuser">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="idRiskLevel" caption="{{'riskLevel' | translate}}" [allowEditing]="false">
+    <dxo-lookup [dataSource]="riskLevels" displayExpr="name.fr" valueExpr="idRiskLevel">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="address" caption="{{'address' | translate}}" [allowEditing]="false">
+  </dxi-column>
+  <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+  <dxi-column
+          dataField="isCompleted"
+          dataType="boolean"
+          caption="{{'isCompleted' | translate}}"
+          width="10%"
+          [filterValue]="false"
+          [allowEditing]="false">
+  </dxi-column>
+
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+  </dxo-editing>
+</dx-data-grid>
