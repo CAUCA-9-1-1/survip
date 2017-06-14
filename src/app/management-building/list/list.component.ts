@@ -85,7 +85,6 @@ export class ListComponent extends DataGrid implements OnInit {
 
   private loadRiskLevel() {
     this.riskLevelService.getAll().subscribe(infoLevel => {
-      console.log(infoLevel);
       this.riskLevels = infoLevel.data;
     });
   }

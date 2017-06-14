@@ -107,5 +107,10 @@
   "lane": "Lane",
   "publicLaneCode": "Public lane code",
   "genericCode": "Generic code",
-  "code3Letter": "Code 3 letters"
+  "code3Letter": "Code 3 letters",
+  "inspectionManagement": "Management for inspection",
+  "inspections": "Inspections",
+  "inspector": "Inspector",
+  "createdOn": "Created on",
+  "isCompleted": "Is completed"
 }
