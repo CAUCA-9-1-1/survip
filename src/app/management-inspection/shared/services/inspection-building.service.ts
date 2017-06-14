@@ -2,25 +2,25 @@ import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 
 import {HttpService} from '../../../core/http/http.service';
-import {Inspection} from '../models/inspection.model';
+import {InspectionBuilding} from '../models/inspection-building.model';
 
 @Injectable()
-export class InspectionService {
+export class InspectionBuildingService {
 
   constructor(private http: HttpService) { }
 
   public getAll() {
-    return this.http.get('inspection').map((response: Response) => {
+    return this.http.get('inspectionbuilding').map((response: Response) => {
       const result = response.json();
 
       return result.data;
     });
   }
 
-  public assign(inspection: Inspection) {
-    return this.http.post(
-      'inspection',
-      JSON.stringify(inspection)
+  public update(building: InspectionBuilding) {
+    return this.http.put(
+      'inspectionbuilding',
+      JSON.stringify(building)
     ).map((response: Response) => response.json());
   }
 }

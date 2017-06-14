@@ -112,5 +112,11 @@
   "inspections": "Inspections",
   "inspector": "Inspector",
   "createdOn": "Created on",
-  "isCompleted": "Is completed"
+  "isCompleted": "Is completed",
+  "yearWithoutInspection": "Year without inspection",
+  "1year": "1 year",
+  "2year": "2 years",
+  "5year": "5 years",
+  "addInspection": "Add inspection",
+  "selectBuildingFirst": "You need to select a building first"
 }
