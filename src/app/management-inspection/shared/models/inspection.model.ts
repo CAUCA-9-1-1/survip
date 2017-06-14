@@ -2,7 +2,8 @@ export class Inspection {
   idInspection: string;
   idWebuser: object;
   idBuilding: string;
-  createdOn: Date;
+  idRiskLevel: string;
+  address: string;
   isActive: boolean;
   isCompleted: boolean;
 }

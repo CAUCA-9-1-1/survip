@@ -1,8 +1,39 @@
+<div fxLayout="row">
+  <div fxFlex="80%">
+    <dx-form [formData]="newInspection" (onFieldDataChanged)="onFormUpdated($event)" colCount="2">
+      <dxi-item
+              [label]="{text: 'building' | translate}"
+              dataField="idBuilding"
+              editorType="dxSelectBox"
+              [editorOptions]="{itemTemplate: 'showname', dataSource: filterBuildings, displayExpr: 'matricule', valueExpr: 'idBuilding'}">
+        <div *dxTemplate="let row of 'showname'">
+          <div *ngIf="row.name.fr">
+            <b>{{'name' | translate}}:</b> {{row.name.fr}}
+          </div>
+          <b>{{'address' | translate}}:</b> {{row.address}}<br />
+          <b>{{'matricule' | translate}}:</b> {{row.matricule}}
+        </div>
+      </dxi-item>
+      <dxi-item
+              [label]="{text: 'yearWithoutInspection' | translate}"
+              dataField="year"
+              editorType="dxSelectBox"
+              [editorOptions]="{
+                      dataSource: [
+                        {year: '1', text: '1year' | translate},
+                        {year: '2', text: '2year' | translate},
+                        {year: '5', text: '5year' | translate}
+                      ], displayExpr: 'text', valueExpr: 'year'}">
+      </dxi-item>
+    </dx-form>
+  </div>
+  <div fxFlex="20%">
+    <dx-button icon="add" (onClick)="onAddInspection($event)"></dx-button>
+  </div>
+</div>
 <dx-data-grid
         [(dataSource)]="inspections"
         [hoverStateEnabled]="true"
-        (onInitNewRow)="onInitNewRow($event)"
-        (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
   <dxi-column dataField="idWebuser" caption="{{'inspector' | translate}}">
@@ -26,6 +57,6 @@
   </dxi-column>
 
   <dxo-filter-row [visible]="true"></dxo-filter-row>
-  <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+  <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true">
   </dxo-editing>
 </dx-data-grid>

@@ -1,0 +1,21 @@
+<h1 md-dialog-title>{{'addInspection' | translate}}</h1>
+<div md-dialog-content>
+  <dx-form [formData]="inspection">
+    <dxi-item
+            [label]="{text: 'survey' | translate}"
+            dataField="idSurvey"
+            editorType="dxSelectBox"
+            [editorOptions]="{dataSource: surveys, displayExpr: 'name.fr', valueExpr: 'idSurvey'}">
+    </dxi-item>
+    <dxi-item
+            [label]="{text: 'webuser' | translate}"
+            dataField="idWebuser"
+            editorType="dxSelectBox"
+            [editorOptions]="{dataSource: users, displayExpr: 'username', valueExpr: 'idWebuser'}">
+    </dxi-item>
+  </dx-form>
+</div>
+<div md-dialog-actions>
+  <button md-raised-button (click)="onOK()">{{'ok' | translate}}</button>
+  <button md-raised-button (click)="onCancel()">{{'cancel' | translate}}</button>
+</div>
