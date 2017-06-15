@@ -118,5 +118,6 @@
   "2year": "2 years",
   "5year": "5 years",
   "addInspection": "Add inspection",
-  "selectBuildingFirst": "You need to select a building first"
+  "selectBuildingFirst": "You need to select a building first",
+  "inspectionByDate": "Inspection by day"
 }
