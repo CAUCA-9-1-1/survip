@@ -12,14 +12,17 @@ export class PinchZoomDirective {
   private lastPan = [0, 0];
 
   constructor(
-    private windowRef: WindowRefService,
-    private dialog: DialogsService,
-    private el: ElementRef,
-    private renderer: Renderer2,
+    private windowRef?: WindowRefService,
+    private dialog?: DialogsService,
+    private el?: ElementRef,
+    private renderer?: Renderer2,
   ) {
     if (this.renderer) {
       this.renderer.setStyle(this.el.nativeElement, 'cursor', 'pointer');
-      this.renderer.listen(this.el.nativeElement, 'click', this.fullZoom.bind(this));
+
+      if (this.fullZoom) {
+        this.renderer.listen(this.el.nativeElement, 'click', this.fullZoom.bind(this));
+      }
     }
   }
 
@@ -35,21 +38,21 @@ export class PinchZoomDirective {
     const hammerTag = new Hammer(this.windowRef.nativeDocument.querySelectorAll('app-fullscreen-dialog img')[0]);
 
     hammerTag.get('pinch').set({ enable: true });
-    hammerTag.on('pan', (e) => {
-      e.target.style.marginLeft = (this.lastPan[0] + e.deltaX) + 'px';
-      e.target.style.marginTop = (this.lastPan[1] + e.deltaY) + 'px';
+    hammerTag.on('pan', (event) => {
+      event.target.style.marginLeft = (this.lastPan[0] + e.deltaX) + 'px';
+      event.target.style.marginTop = (this.lastPan[1] + e.deltaY) + 'px';
     });
-    hammerTag.on('panend', (e) => {
+    hammerTag.on('panend', (event) => {
       this.lastPan = [
-        (this.lastPan[0] + e.deltaX),
-        (this.lastPan[1] + e.deltaY)
+        (this.lastPan[0] + event.deltaX),
+        (this.lastPan[1] + event.deltaY)
       ];
     });
-    hammerTag.on('pinch', (e) => {
-      e.target.style.transform = 'scale(' + (this.lastScale * e.scale) + ',' + (this.lastScale * e.scale) + ')';
+    hammerTag.on('pinch', (event) => {
+      event.target.style.transform = 'scale(' + (this.lastScale * event.scale) + ',' + (this.lastScale * event.scale) + ')';
     });
-    hammerTag.on('pinchend', (e) => {
-      this.lastScale *= e.scale;
+    hammerTag.on('pinchend', (event) => {
+      this.lastScale *= event.scale;
     });
   }
 }
