@@ -1,6 +1,12 @@
 <app-toolbar title="{{'inspectionManagement' | translate}}"></app-toolbar>
 <div class="content-under-toolbar">
-  <h1>{{'inspections' | translate}}</h1>
-  <app-management-inspection-list></app-management-inspection-list>
+  <md-tab-group (selectChange)="onSelectionChanged($event)">
+    <md-tab label="{{'inspections' | translate}}">
+      <app-management-inspection-list></app-management-inspection-list>
+    </md-tab>
+    <md-tab label="{{'statistics' | translate}}">
+      <app-management-inspection-statistics></app-management-inspection-statistics>
+    </md-tab>
+  </md-tab-group>
 </div>
 

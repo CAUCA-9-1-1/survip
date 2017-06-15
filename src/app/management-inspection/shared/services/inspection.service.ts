@@ -31,6 +31,18 @@ export class InspectionService {
     ).map((response: Response) => response.json());
   }
 
+  public complete(idInspection: string) {
+    const inspection = {
+      idInspection: idInspection,
+      isCompleted: true
+    };
+
+    return this.http.put(
+      'inspection',
+      JSON.stringify(inspection)
+    ).map((response: Response) => response.json());
+  }
+
   public remove(idInspection: string) {
     return this.http.delete('inspection/' + idInspection).map((response: Response) => response.json());
   }

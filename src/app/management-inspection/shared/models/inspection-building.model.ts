@@ -1,7 +1,8 @@
 export class InspectionBuilding {
   idBuidling: string;
   lastInspection: Date;
-  address: object;
+  name: object;
+  address: string;
   matricule: string;
   isActive: boolean;
 }
