@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import {TestModule} from '../../../test.module';
 import { MultilangComponent } from './multilang.component';
 
 describe('MultilangComponent', () => {
@@ -8,7 +9,8 @@ describe('MultilangComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MultilangComponent ]
+      imports: [TestModule],
+      declarations: [ /*MultilangComponent*/ ]
     })
     .compileComponents();
   }));

@@ -1,17 +1,22 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {MdDialog} from '@angular/material';
+import {MdDialogRef} from '@angular/material';
 
 import {TestModule} from '../../../test.module';
 import {WaitDialogComponent} from './wait-dialog.component';
 
+class MdDialogRefMock {
+}
+
 describe('WaitDialogComponent', () => {
   let component: WaitDialogComponent;
-  // let fixture: ComponentFixture<WaitDialogComponent>;
-  let dialog: MdDialog;
+  let fixture: ComponentFixture<WaitDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TestModule],
+      providers: [
+        { provide: MdDialogRef, useClass: MdDialogRefMock }
+      ],
       declarations: [
         // WaitDialogComponent
       ]
@@ -20,12 +25,9 @@ describe('WaitDialogComponent', () => {
   }));
 
   beforeEach(() => {
-    dialog = TestBed.get(MdDialog);
-    const dialogRef = dialog.open(WaitDialogComponent);
-    component = dialogRef.componentInstance;
-    // fixture = TestBed.createComponent(WaitDialogComponent);
-    // component = fixture.componentInstance;
-    // fixture.detectChanges();
+    fixture = TestBed.createComponent(WaitDialogComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {

@@ -1,6 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {MdDialogRef} from '@angular/material';
 
-import { CreateComponent } from './create.component';
+import {TestModule} from '../../test.module';
+import {CreateComponent} from './create.component';
+
+class MdDialogRefMock {
+}
 
 describe('CreateComponent', () => {
   let component: CreateComponent;
@@ -8,7 +13,11 @@ describe('CreateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateComponent ]
+      imports: [ TestModule ],
+      declarations: [ CreateComponent ],
+      providers: [
+        { provide: MdDialogRef, useClass: MdDialogRefMock }
+      ]
     })
     .compileComponents();
   }));

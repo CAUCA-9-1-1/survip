@@ -1,6 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
-import {DxChartModule, DxDataGridModule, DxFormModule, DxTreeViewModule} from 'devextreme-angular';
+import {
+  DxButtonModule,
+  DxChartModule,
+  DxDataGridModule,
+  DxFormModule, DxTabPanelModule,
+  DxTreeViewModule
+} from 'devextreme-angular';
 
 import {SharedModule} from './shared/shared.module';
 
@@ -8,17 +14,21 @@ import {SharedModule} from './shared/shared.module';
   imports: [
     SharedModule,
     RouterTestingModule,
+    DxButtonModule,
     DxChartModule,
     DxDataGridModule,
     DxFormModule,
+    DxTabPanelModule,
     DxTreeViewModule,
   ],
   exports: [
     SharedModule,
     RouterTestingModule,
+    DxButtonModule,
     DxChartModule,
     DxDataGridModule,
     DxFormModule,
+    DxTabPanelModule,
     DxTreeViewModule,
   ],
   providers: [
