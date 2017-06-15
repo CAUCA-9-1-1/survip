@@ -1,17 +1,22 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {MdDialog} from '@angular/material';
+import {MdDialogRef} from '@angular/material';
 
 import {TestModule} from '../../../test.module';
 import {FullscreenDialogComponent} from './fullscreen-dialog.component';
 
+class MdDialogRefMock {
+}
+
 describe('FullscreenDialogComponent', () => {
   let component: FullscreenDialogComponent;
-  // let fixture: ComponentFixture<FullscreenDialogComponent>;
-  let dialog: MdDialog;
+  let fixture: ComponentFixture<FullscreenDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TestModule],
+      providers: [
+        { provide: MdDialogRef, useClass: MdDialogRefMock }
+      ],
       declarations: [
         // FullscreenDialogComponent
       ]
@@ -20,12 +25,9 @@ describe('FullscreenDialogComponent', () => {
   }));
 
   beforeEach(() => {
-    dialog = TestBed.get(MdDialog);
-    const dialogRef = dialog.open(FullscreenDialogComponent);
-    component = dialogRef.componentInstance;
-    // fixture = TestBed.createComponent(FullscreenDialogComponent);
-    // component = fixture.componentInstance;
-    // fixture.detectChanges();
+    fixture = TestBed.createComponent(FullscreenDialogComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {

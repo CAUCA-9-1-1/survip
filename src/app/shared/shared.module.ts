@@ -48,7 +48,7 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
     LoaderComponent,
     ToolbarComponent,
     MultilangComponent,
-    /*MenuComponent,
+    MenuComponent,
     MenuItemComponent,
     TakePictureComponent,
     ToolbarBackComponent,
@@ -57,13 +57,13 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
     YesNoDialogComponent,
     WaitDialogComponent,
     FilterByPipe,
-    PinchZoomDirective,*/
+    PinchZoomDirective,
   ],
   entryComponents: [
-    /*WebcamComponent,
+    WebcamComponent,
     FullscreenDialogComponent,
     YesNoDialogComponent,
-    WaitDialogComponent,*/
+    WaitDialogComponent,
   ],
   exports: [
     CommonModule,
@@ -77,14 +77,14 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
     MultilangComponent,
     /*
     ReactiveFormsModule,
-    FormsModule,
+    FormsModule,*/
 
     MenuComponent,
     PageNotFoundComponent,
 
     ToolbarBackComponent,
     TakePictureComponent,
-    PinchZoomDirective,*/
+    PinchZoomDirective,
   ],
   imports: [
     CommonModule,

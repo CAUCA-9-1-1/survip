@@ -1,6 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ManagementInspectionComponent } from './management-inspection.component';
+import {TestModule} from '../test.module';
+import {ManagementInspectionComponent} from './management-inspection.component';
+import {ListComponent} from './list/list.component';
+import {CreateComponent} from './create/create.component';
+import {StatisticsComponent} from './statistics/statistics.component';
 
 describe('ManagementInspectionComponent', () => {
   let component: ManagementInspectionComponent;
@@ -8,7 +12,13 @@ describe('ManagementInspectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManagementInspectionComponent ]
+      imports: [TestModule],
+      declarations: [
+        ManagementInspectionComponent,
+        ListComponent,
+        CreateComponent,
+        StatisticsComponent,
+      ]
     })
     .compileComponents();
   }));
