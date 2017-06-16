@@ -98,7 +98,7 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
   providers: [
     provideConfigOptions({
       default: environment.igo,
-      path: './config/config.json'
+      path: './assets/config.json'
     }),
     LoaderService,
     WindowRefService,
