@@ -4,4 +4,9 @@ export const environment = {
   apiUrl: 'http://casrvsprevention1.ad.cauca.ca/api/',
   languages: ['fr', 'en'],
   locale: 'fr',
+  igo: {
+    language: {
+      prefix: './assets/locale/'
+    }
+  },
 };

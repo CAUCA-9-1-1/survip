@@ -9,4 +9,9 @@ export const environment = {
   apiUrl: 'http://localhost:8080/',
   languages: ['fr', 'en'],
   locale: 'fr',
+  igo: {
+    language: {
+      prefix: './assets/locale/'
+    }
+  },
 };
