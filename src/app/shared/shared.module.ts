@@ -2,16 +2,15 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {Http, RequestOptions, XHRBackend} from '@angular/http';
+import {RequestOptions, XHRBackend} from '@angular/http';
 import {MaterialModule} from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {DxTabPanelModule, DxTextBoxModule} from 'devextreme-angular';
+import {environment} from '../../environments/environment';
 
 import {
   IgoModule,
-  LanguageLoader,
-  LanguageService,
-  provideLanguageLoader,
+  provideConfigOptions,
 } from 'igo2';
 
 import {} from '../core/extends-prototype';
@@ -35,9 +34,6 @@ import {LoaderService} from './services/loader.service';
 import {AuthorizeRequestOptions} from '../core/http/authorize-request-options';
 import {MultilangComponent} from './components/multilang/multilang.component';
 
-export function translateLoader(http: Http) {
-  return new LanguageLoader(http, './assets/locale/', '.json');
-}
 export function httpServiceFactory(backend: XHRBackend, options: AuthorizeRequestOptions, loaderService: LoaderService) {
   return new HttpService(backend, options, loaderService);
 }
@@ -100,8 +96,10 @@ export function httpServiceFactory(backend: XHRBackend, options: AuthorizeReques
     */
   ],
   providers: [
-    provideLanguageLoader(translateLoader),
-    LanguageService,
+    provideConfigOptions({
+      default: environment.igo,
+      path: './config/config.json'
+    }),
     LoaderService,
     WindowRefService,
     DialogsService,
