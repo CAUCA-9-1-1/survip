@@ -2,7 +2,7 @@ import {Directive, ElementRef, Renderer2} from '@angular/core';
 import * as Hammer from 'hammerjs';
 
 import {DialogsService} from '../services/dialogs.service';
-import {WindowRefService} from '../services/window-ref.service';
+import {WindowRefService} from 'cause-lib';
 
 @Directive({
   selector: '[appPinchZoom]'

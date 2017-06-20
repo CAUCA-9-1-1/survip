@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Color} from '../../core/color';
-import {Password} from '../../core/password';
+import {Color} from 'cause-lib';
+import {Password} from 'cause-lib';
 import {Webuser} from '../shared/models/webuser.model';
 import {WebuserService} from '../shared/services/webuser.service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';

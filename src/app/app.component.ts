@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {locale, loadMessages} from 'devextreme/localization';
 
+import {ConfigService} from 'cause-lib';
 import {LanguageService} from 'igo2';
 
 @Component({
@@ -12,17 +11,11 @@ import {LanguageService} from 'igo2';
 export class AppComponent implements OnInit {
 
   constructor(
-    private language: LanguageService,
-    private http: Http,
+    private config: ConfigService,
+    private translate: LanguageService
   ) {
-    this.http.get(
-      '/assets/locale/devextreme/fr.json',
-    ).map((response: Response) => {
-      loadMessages(response.json())
-      locale('fr');
-    }).subscribe();
-
-    language.translate.use('fr');
+    this.config.useLang('fr');
+    this.translate.setLanguage('fr');
   }
 
   ngOnInit() {

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {MdDialogRef, MdDialog} from '@angular/material';
 import {Observable} from 'rxjs/Rx';
 
-import {WindowRefService} from './window-ref.service';
+import {WindowRefService} from 'cause-lib';
 import {YesNoDialogComponent} from '../components/yes-no-dialog/yes-no-dialog.component';
 import {FullscreenDialogComponent} from '../components/fullscreen-dialog/fullscreen-dialog.component';
 import {WaitDialogComponent} from '../components/wait-dialog/wait-dialog.component';

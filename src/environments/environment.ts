@@ -6,12 +6,15 @@
 export const environment = {
   envName: 'local',
   production: false,
-  apiUrl: 'http://localhost:8080/',
   languages: ['fr', 'en'],
   locale: 'fr',
   igo: {
     language: {
       prefix: './assets/locale/'
     }
+  },
+  cause: {
+    apiUrl: 'http://localhost:8080/',
+    languages: ['fr', 'en']
   },
 };

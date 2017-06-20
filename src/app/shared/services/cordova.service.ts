@@ -1,6 +1,6 @@
 import {Injectable, Input} from '@angular/core';
 
-import {WindowRefService} from './window-ref.service';
+import {WindowRefService} from 'cause-lib';
 
 @Injectable()
 export class CordovaService {

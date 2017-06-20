@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 
-import {HttpService} from '../../../core/http/http.service';
+import {HttpService} from 'cause-lib';
 import {City} from '../models/city.model';
 
 @Injectable()

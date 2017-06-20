@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {DataGrid} from '../../core/devextreme/datagrid';
+import {DevextremeDatagrid} from 'cause-lib';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 import {Lane} from '../../management-address/shared/models/lane.model';
@@ -21,7 +21,7 @@ import {RiskLevelService} from '../shared/services/risk-level.service';
     RiskLevelService,
   ]
 })
-export class ListComponent extends DataGrid implements OnInit {
+export class ListComponent extends DevextremeDatagrid implements OnInit {
   buildings: Building[] = [];
   lanes: Lane[] = [];
   utilisationCodes: UtilisationCode[] = [];
