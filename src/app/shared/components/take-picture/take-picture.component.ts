@@ -6,7 +6,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {MdDialog} from '@angular/material';
 
 import {WebcamComponent} from '../../../shared/components/webcam/webcam.component';
-import {WindowRefService} from '../../../shared/services/window-ref.service';
+import {WindowRefService} from 'cause-lib';
 import {CordovaService} from '../../services/cordova.service';
 import {DialogsService} from '../../services/dialogs.service';
 

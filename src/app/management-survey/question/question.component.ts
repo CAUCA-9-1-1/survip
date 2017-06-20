@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {LanguageService} from 'igo2';
 import {confirm} from 'devextreme/ui/dialog';
 
-import {DataGrid} from '../../core/devextreme/datagrid';
+import {DevextremeDatagrid} from 'cause-lib';
 import {Question} from '../shared/models/question.model';
 import {QuestionService} from '../shared/services/question.service';
 import {ChoiceService} from '../shared/services/choice.service';
@@ -17,7 +17,7 @@ import {Choice} from '../shared/models/choice.model';
     ChoiceService
   ]
 })
-export class QuestionComponent extends DataGrid implements OnInit {
+export class QuestionComponent extends DevextremeDatagrid implements OnInit {
   @Input() survey = '';
 
   questions: Question[] = [];

@@ -1,12 +1,15 @@
 export const environment = {
   envName: 'prod',
   production: true,
-  apiUrl: 'http://casrvsprevention1.ad.cauca.ca/api/',
   languages: ['fr', 'en'],
   locale: 'fr',
   igo: {
     language: {
       prefix: './assets/locale/'
     }
+  },
+  cause: {
+    apiUrl: 'http://casrvsprevention1/api/',
+    languages: ['fr', 'en']
   },
 };

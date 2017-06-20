@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 
-import {WindowRefService} from './shared/services/window-ref.service';
+import {WindowRefService} from 'cause-lib';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

@@ -28,6 +28,6 @@
     </dxo-editing>
 
     <div *dxTemplate="let rowname of 'editname'">
-        <app-multilang [value]="rowname.row.data.name" (onValueChanged)="rowname.setValue($event.value);"></app-multilang>
+        <cause-multilang [value]="rowname.row.data.name" (onValueChanged)="rowname.setValue($event.value);"></cause-multilang>
     </div>
 </dx-data-grid>

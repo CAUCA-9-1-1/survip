@@ -3,7 +3,7 @@ import {environment} from 'environments/environment';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {LanguageService} from 'igo2';
 
-import {DataGrid} from '../../core/devextreme/datagrid';
+import {DevextremeDatagrid} from 'cause-lib';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
 import {County} from '../../management-address/shared/models/county.model';
@@ -18,7 +18,7 @@ import {CountyService} from '../../management-address/shared/services/county.ser
     CountyService,
   ]
 })
-export class FireSafetyDepartmentComponent extends DataGrid implements OnInit {
+export class FireSafetyDepartmentComponent extends DevextremeDatagrid implements OnInit {
   @ViewChild(DxDataGridComponent) deptGrid: DxDataGridComponent;
 
   departments: FireSafetyDepartment[] = [];

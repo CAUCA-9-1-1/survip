@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {DataGrid} from '../../core/devextreme/datagrid';
+import {DevextremeDatagrid} from 'cause-lib';
 import {State} from '../shared/models/state.model';
 import {StateService} from '../shared/services/state.service';
 import {Country} from '../shared/models/country.model';
@@ -15,7 +15,7 @@ import {CountryService} from '../shared/services/country.service';
     CountryService,
   ]
 })
-export class StateComponent extends DataGrid implements OnInit {
+export class StateComponent extends DevextremeDatagrid implements OnInit {
   states: State[] = [];
   countries: Country[] = [];
 

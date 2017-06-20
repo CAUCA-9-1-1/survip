@@ -1,7 +1,7 @@
 import {TestBed, inject} from '@angular/core/testing';
 
 import {CordovaService} from './cordova.service';
-import {WindowRefService} from './window-ref.service';
+import {WindowRefService} from 'cause-lib';
 
 describe('CordovaService', () => {
   beforeEach(() => {
