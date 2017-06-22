@@ -25,12 +25,8 @@ import {TakePictureComponent} from './components/take-picture/take-picture.compo
 import {ToolbarComponent} from './components/toolbar/toolbar.component';
 import {ToolbarBackComponent} from './components/toolbar-back/toolbar-back.component';
 import {WebcamComponent} from './components/webcam/webcam.component';
-import {DialogsService} from './services/dialogs.service';
-import {YesNoDialogComponent} from './components/yes-no-dialog/yes-no-dialog.component';
 import {FilterByPipe} from './pipes/filter.pipe';
 import {PinchZoomDirective} from './directives/pinch-zoom.directive';
-import {FullscreenDialogComponent} from './components/fullscreen-dialog/fullscreen-dialog.component';
-import {WaitDialogComponent} from './components/wait-dialog/wait-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,17 +37,11 @@ import {WaitDialogComponent} from './components/wait-dialog/wait-dialog.componen
     TakePictureComponent,
     ToolbarBackComponent,
     WebcamComponent,
-    FullscreenDialogComponent,
-    YesNoDialogComponent,
-    WaitDialogComponent,
     FilterByPipe,
     PinchZoomDirective,
   ],
   entryComponents: [
     WebcamComponent,
-    FullscreenDialogComponent,
-    YesNoDialogComponent,
-    WaitDialogComponent,
   ],
   exports: [
     CommonModule,
@@ -96,7 +86,6 @@ import {WaitDialogComponent} from './components/wait-dialog/wait-dialog.componen
       default: environment.cause,
       // path: './assets/config-cause.json'
     }),
-    DialogsService,
   ]
 })
 export class SharedModule { }

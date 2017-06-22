@@ -26,7 +26,7 @@
         "../node_modules/igo2/src/style/igo.styl",
         "../node_modules/devextreme/dist/css/dx.common.css",
         "../node_modules/devextreme/dist/css/dx.light.css",
-        "theme.scss",
+        "../node_modules/cause-lib/src/style/theme.scss",
         "styles.styl"
       ],
       "scripts": [

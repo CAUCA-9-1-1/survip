@@ -6,9 +6,11 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {MdDialog} from '@angular/material';
 
 import {WebcamComponent} from '../../../shared/components/webcam/webcam.component';
-import {WindowRefService} from 'cause-lib';
+import {
+  DialogsService,
+  WindowRefService
+} from 'cause-lib';
 import {CordovaService} from '../../services/cordova.service';
-import {DialogsService} from '../../services/dialogs.service';
 
 @Component({
   selector: 'app-take-picture',
