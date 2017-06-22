@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {locale} from 'devextreme/localization';
 
-import {ConfigService} from 'cause-lib';
 import {LanguageService} from 'igo2';
+import 'cause-lib/dist/lib/core/extends/devextreme-fr';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,10 @@ import {LanguageService} from 'igo2';
 export class AppComponent implements OnInit {
 
   constructor(
-    private config: ConfigService,
-    private translate: LanguageService
+    private language: LanguageService,
   ) {
-    this.config.useLang('fr');
-    this.translate.setLanguage('fr');
+    locale('fr');
+    language.setLanguage('fr');
   }
 
   ngOnInit() {
