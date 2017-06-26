@@ -7,6 +7,7 @@ import {SharedModule} from './shared/shared.module';
 import {ManagementAddressModule} from './management-address/management-address.module';
 import {ManagementAccessModule} from './management-access/management-access.module';
 import {ManagementBuildingModule} from './management-building/management-building.module';
+import {ManagementInterventionPlanModule} from './management-intervention-plan/management-intervention-plan.module';
 import {ManagementInspectionModule} from './management-inspection/management-inspection.module';
 import {ManagementSurveyModule} from './management-survey/management-survey.module';
 
@@ -19,6 +20,7 @@ import {ManagementSurveyModule} from './management-survey/management-survey.modu
     ManagementAddressModule,
     ManagementAccessModule,
     ManagementBuildingModule,
+    ManagementInterventionPlanModule,
     ManagementInspectionModule,
     ManagementSurveyModule,
     AppRoutingModule

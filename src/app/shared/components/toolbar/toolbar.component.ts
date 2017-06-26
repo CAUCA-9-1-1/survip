@@ -13,6 +13,10 @@ export class ToolbarComponent implements OnInit {
     path: '/management/inspection/',
     popMenu: false
   }, {
+    name: 'interventionPlanManagement',
+    path: '/management/interventionplan/',
+    popMenu: false
+  }, {
     name: 'surveyManagement',
     path: '/management/survey/',
     popMenu: false

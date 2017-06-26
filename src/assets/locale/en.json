@@ -123,5 +123,7 @@
   "addInspection": "Add inspection",
   "selectBuildingFirst": "You need to select a building first",
   "inspectionByDate": "Inspection by day",
-  "interventionPlanManagement": "Management for intervention plan"
+  "interventionPlanManagement": "Management for intervention plan",
+  "interventionPlans": "Intervention plans",
+  "alarmPanel": "Alarm panel"
 }
