@@ -10,7 +10,7 @@ export class AlarmPanelService {
   constructor(private http: HttpService) { }
 
   public getAll() {
-    return this.http.get('alarmpanel').map((response: Response) => {
+    return this.http.get('alarmpaneltype').map((response: Response) => {
       const result = response.json();
 
       return result.data;
@@ -18,7 +18,7 @@ export class AlarmPanelService {
   }
 
   public get(idAlarmPanel: string) {
-    return this.http.get('alarmpanel/' + idAlarmPanel).map((response: Response) => {
+    return this.http.get('alarmpaneltype/' + idAlarmPanel).map((response: Response) => {
       const result = response.json();
 
       return result.data;
@@ -27,19 +27,19 @@ export class AlarmPanelService {
 
   public create(panel: AlarmPanel) {
     return this.http.post(
-      'alarmpanel',
+      'alarmpaneltype',
       JSON.stringify(panel)
     ).map((response: Response) => response.json());
   }
 
   public update(panel: AlarmPanel) {
     return this.http.put(
-      'alarmpanel',
+      'alarmpaneltype',
       JSON.stringify(panel),
     ).map((response: Response) => response.json());
   }
 
   public remove(idAlarmPanel: string) {
-    return this.http.delete('alarmpanel/' + idAlarmPanel).map((response: Response) => response.json());
+    return this.http.delete('alarmpaneltype/' + idAlarmPanel).map((response: Response) => response.json());
   }
 }
