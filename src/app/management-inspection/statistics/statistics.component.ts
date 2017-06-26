@@ -6,7 +6,7 @@ import {DxChartComponent} from 'devextreme-angular';
 import {StatisticService} from '../shared/services/statistic.service';
 
 @Component({
-  selector: 'app-management-inspection-statistics',
+  selector: 'app-managementinspection-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.styl'],
   providers: [StatisticService]

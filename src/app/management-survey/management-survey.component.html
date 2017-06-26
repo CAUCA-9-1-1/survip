@@ -2,11 +2,11 @@
 <div class="content-under-toolbar">
     <div *ngIf="!selectedSurvey">
         <h1>{{'survey' | translate}}</h1>
-        <app-management-survey-list></app-management-survey-list>
+        <app-managementsurvey-list></app-managementsurvey-list>
     </div>
     <div *ngIf="selectedSurvey">
         <h1>{{'survey' | translate}}</h1>
-        <app-management-survey-question [survey]="selectedSurvey"></app-management-survey-question>
+        <app-managementsurvey-question [survey]="selectedSurvey"></app-managementsurvey-question>
     </div>
 </div>
 

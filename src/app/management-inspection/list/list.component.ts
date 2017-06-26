@@ -14,7 +14,7 @@ import {RiskLevelService} from '../../management-building/shared/services/risk-l
 import {CreateComponent} from '../create/create.component';
 
 @Component({
-  selector: 'app-management-inspection-list',
+  selector: 'app-managementinspection-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.styl'],
   providers: [

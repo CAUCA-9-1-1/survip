@@ -5,7 +5,7 @@ import {ConstructionType} from '../shared/models/construction-type.model';
 import {ConstructionTypeService} from '../shared/services/construction-type.service';
 
 @Component({
-  selector: 'app-management-intervention-plan-constructiontype',
+  selector: 'app-managementinterventionplan-constructiontype',
   templateUrl: './construction-type.component.html',
   styleUrls: ['./construction-type.component.styl'],
   providers: [

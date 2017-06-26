@@ -1,17 +1,17 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { TestModule } from '../../../test.module';
-import { AlarmPanelService } from './alarm-panel.service';
+import { AlarmPanelTypeService } from './alarm-panel-type.service';
 
-describe('AlarmPanelService', () => {
+describe('AlarmPanelTypeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ TestModule ],
-      providers: [AlarmPanelService]
+      providers: [AlarmPanelTypeService]
     });
   });
 
-  it('should ...', inject([AlarmPanelService], (service: AlarmPanelService) => {
+  it('should ...', inject([AlarmPanelTypeService], (service: AlarmPanelTypeService) => {
     expect(service).toBeTruthy();
   }));
 });

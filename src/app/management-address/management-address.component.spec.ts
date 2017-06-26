@@ -8,7 +8,7 @@ import {StateComponent} from './state/state.component';
 import {RegionComponent} from './region/region.component';
 import {LaneComponent} from './lane/lane.component';
 import {CountyComponent} from './county/county.component';
-import {CityTypeComponent} from './citytype/citytype.component';
+import {CityTypeComponent} from './city-type/city-type.component';
 import {CityComponent} from './city/city.component';
 
 describe('ManagementAddressComponent', () => {
