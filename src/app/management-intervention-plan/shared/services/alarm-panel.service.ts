@@ -25,17 +25,17 @@ export class AlarmPanelService {
     });
   }
 
-  public create(panel: AlarmPanel) {
+  public create(type: AlarmPanel) {
     return this.http.post(
       'alarmpaneltype',
-      JSON.stringify(panel)
+      JSON.stringify(type)
     ).map((response: Response) => response.json());
   }
 
-  public update(panel: AlarmPanel) {
+  public update(type: AlarmPanel) {
     return this.http.put(
       'alarmpaneltype',
-      JSON.stringify(panel),
+      JSON.stringify(type),
     ).map((response: Response) => response.json());
   }
 

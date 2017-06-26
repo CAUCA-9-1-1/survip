@@ -125,5 +125,6 @@
   "inspectionByDate": "Inspection by day",
   "interventionPlanManagement": "Management for intervention plan",
   "interventionPlans": "Intervention plans",
-  "alarmPanel": "Alarm panel"
+  "alarmPanel": "Alarm panel",
+  "constructionType": "Construction type"
 }
