@@ -131,5 +131,6 @@
   "inspectionByDate": "Inspection par jour",
   "interventionPlanManagement": "Gestion pour les plans d'intervention",
   "interventionPlans": "Plans d'intervention",
-  "alarmPanel": "Panneau d'alarme"
+  "alarmPanel": "Panneau d'alarme",
+  "constructionType": "Type de construction"
 }

@@ -4,6 +4,7 @@ import { DxButtonModule, DxChartModule, DxDataGridModule, DxFormModule } from 'd
 import { ManagementInterventionPlanComponent } from './management-intervention-plan.component';
 import { SharedModule } from '../shared/shared.module';
 import { AlarmPanelComponent } from './alarmpanel/alarmpanel.component';
+import {ConstructionTypeComponent} from './constructiontype/construction-type.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { AlarmPanelComponent } from './alarmpanel/alarmpanel.component';
   declarations: [
     ManagementInterventionPlanComponent,
     AlarmPanelComponent,
+    ConstructionTypeComponent,
   ]
 })
 export class ManagementInterventionPlanModule { }
