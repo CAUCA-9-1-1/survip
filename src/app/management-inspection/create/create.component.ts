@@ -7,7 +7,7 @@ import {Survey} from '../../management-survey/shared/models/survey.model';
 import {SurveyService} from '../../management-survey/shared/services/survey.service';
 
 @Component({
-  selector: 'app-management-inspection-create',
+  selector: 'app-managementinspection-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.styl'],
   providers: [

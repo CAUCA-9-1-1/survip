@@ -5,7 +5,7 @@ import {Country} from '../shared/models/country.model';
 import {CountryService} from '../shared/services/country.service';
 
 @Component({
-  selector: 'app-management-address-country',
+  selector: 'app-managementaddress-country',
   templateUrl: './country.component.html',
   styleUrls: ['./country.component.styl'],
   providers: [CountryService]

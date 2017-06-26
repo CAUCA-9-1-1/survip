@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 
 import {HttpService} from 'cause-lib';
-import {AlarmPanel} from '../models/alarm-panel.model';
+import {AlarmPanelType} from '../models/alarm-panel-type.model';
 
 @Injectable()
-export class AlarmPanelService {
+export class AlarmPanelTypeService {
 
   constructor(private http: HttpService) { }
 
@@ -17,29 +17,29 @@ export class AlarmPanelService {
     });
   }
 
-  public get(idAlarmPanel: string) {
-    return this.http.get('alarmpaneltype/' + idAlarmPanel).map((response: Response) => {
+  public get(idAlarmPanelType: string) {
+    return this.http.get('alarmpaneltype/' + idAlarmPanelType).map((response: Response) => {
       const result = response.json();
 
       return result.data;
     });
   }
 
-  public create(type: AlarmPanel) {
+  public create(type: AlarmPanelType) {
     return this.http.post(
       'alarmpaneltype',
       JSON.stringify(type)
     ).map((response: Response) => response.json());
   }
 
-  public update(type: AlarmPanel) {
+  public update(type: AlarmPanelType) {
     return this.http.put(
       'alarmpaneltype',
       JSON.stringify(type),
     ).map((response: Response) => response.json());
   }
 
-  public remove(idAlarmPanel: string) {
-    return this.http.delete('alarmpaneltype/' + idAlarmPanel).map((response: Response) => response.json());
+  public remove(idAlarmPanelType: string) {
+    return this.http.delete('alarmpaneltype/' + idAlarmPanelType).map((response: Response) => response.json());
   }
 }

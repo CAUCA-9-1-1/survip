@@ -5,9 +5,9 @@ import {CityType} from '../shared/models/citytype.model';
 import {CityTypeService} from '../shared/services/citytype.service';
 
 @Component({
-  selector: 'app-management-address-citytype',
-  templateUrl: './citytype.component.html',
-  styleUrls: ['./citytype.component.styl'],
+  selector: 'app-managementaddress-citytype',
+  templateUrl: './city-type.component.html',
+  styleUrls: ['./city-type.component.styl'],
   providers: [CityTypeService]
 })
 export class CityTypeComponent extends DevextremeDatagrid implements OnInit {

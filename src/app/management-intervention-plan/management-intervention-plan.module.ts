@@ -3,8 +3,8 @@ import { DxButtonModule, DxChartModule, DxDataGridModule, DxFormModule } from 'd
 
 import { ManagementInterventionPlanComponent } from './management-intervention-plan.component';
 import { SharedModule } from '../shared/shared.module';
-import { AlarmPanelComponent } from './alarmpanel/alarmpanel.component';
-import {ConstructionTypeComponent} from './constructiontype/construction-type.component';
+import { AlarmPanelTypeComponent } from './alarm-panel-type/alarm-panel-type.component';
+import { ConstructionTypeComponent } from './construction-type/construction-type.component';
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import {ConstructionTypeComponent} from './constructiontype/construction-type.co
   ],
   declarations: [
     ManagementInterventionPlanComponent,
-    AlarmPanelComponent,
+    AlarmPanelTypeComponent,
     ConstructionTypeComponent,
   ]
 })

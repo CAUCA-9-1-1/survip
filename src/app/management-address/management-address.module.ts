@@ -4,7 +4,7 @@ import {DxDataGridModule} from 'devextreme-angular';
 import {SharedModule} from '../shared/shared.module';
 import {ManagementAddressComponent} from './management-address.component';
 import {CityComponent} from './city/city.component';
-import {CityTypeComponent} from './citytype/citytype.component';
+import {CityTypeComponent} from './city-type/city-type.component';
 import {CountryComponent} from './country/country.component';
 import {CountyComponent} from './county/county.component';
 import {LaneComponent} from './lane/lane.component';

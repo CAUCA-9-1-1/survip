@@ -9,7 +9,7 @@ import {ChoiceService} from '../shared/services/choice.service';
 import {Choice} from '../shared/models/choice.model';
 
 @Component({
-  selector: 'app-management-survey-question',
+  selector: 'app-managementsurvey-question',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.styl'],
   providers: [

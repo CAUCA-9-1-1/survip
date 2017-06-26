@@ -1,22 +1,22 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TestModule} from '../../test.module';
-import {UtilisationCodeComponent} from './utilisationcode.component';
+import {RiskLevelComponent} from './risk-level.component';
 
-describe('UtilisationCodeComponent', () => {
-  let component: UtilisationCodeComponent;
-  let fixture: ComponentFixture<UtilisationCodeComponent>;
+describe('RiskLevelComponent', () => {
+  let component: RiskLevelComponent;
+  let fixture: ComponentFixture<RiskLevelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ TestModule ],
-      declarations: [ UtilisationCodeComponent ]
+      declarations: [ RiskLevelComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UtilisationCodeComponent);
+    fixture = TestBed.createComponent(RiskLevelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

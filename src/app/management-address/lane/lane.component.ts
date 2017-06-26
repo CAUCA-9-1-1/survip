@@ -7,7 +7,7 @@ import {City} from '../shared/models/city.model';
 import {CityService} from '../shared/services/city.service';
 
 @Component({
-  selector: 'app-management-address-lane',
+  selector: 'app-managementaddress-lane',
   templateUrl: './lane.component.html',
   styleUrls: ['./lane.component.styl'],
   providers: [

@@ -6,7 +6,7 @@ import {Survey} from '../shared/models/survey.model';
 import {SurveyService} from '../shared/services/survey.service';
 
 @Component({
-  selector: 'app-management-survey-list',
+  selector: 'app-managementsurvey-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.styl'],
   providers: [SurveyService]

@@ -1,22 +1,22 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TestModule} from '../../test.module';
-import {CityTypeComponent} from './citytype.component';
+import {AlarmPanelTypeComponent} from './alarm-panel-type.component';
 
-describe('CityTypeComponent', () => {
-  let component: CityTypeComponent;
-  let fixture: ComponentFixture<CityTypeComponent>;
+describe('AlarmPanelTypeComponent', () => {
+  let component: AlarmPanelTypeComponent;
+  let fixture: ComponentFixture<AlarmPanelTypeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule ],
-      declarations: [ CityTypeComponent ]
+      imports: [ TestModule ],
+      declarations: [ AlarmPanelTypeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CityTypeComponent);
+    fixture = TestBed.createComponent(AlarmPanelTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

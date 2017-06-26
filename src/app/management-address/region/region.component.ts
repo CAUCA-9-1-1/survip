@@ -7,7 +7,7 @@ import {State} from '../shared/models/state.model';
 import {StateService} from '../shared/services/state.service';
 
 @Component({
-  selector: 'app-management-address-region',
+  selector: 'app-managementaddress-region',
   templateUrl: './region.component.html',
   styleUrls: ['./region.component.styl'],
   providers: [

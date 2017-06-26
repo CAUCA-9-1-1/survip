@@ -11,7 +11,7 @@ import {RiskLevel} from '../shared/models/risk-level.model';
 import {RiskLevelService} from '../shared/services/risk-level.service';
 
 @Component({
-  selector: 'app-management-building-list',
+  selector: 'app-managementbuilding-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.styl'],
   providers: [

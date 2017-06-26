@@ -5,9 +5,9 @@ import {RiskLevel} from '../shared/models/risk-level.model';
 import {RiskLevelService} from '../shared/services/risk-level.service';
 
 @Component({
-  selector: 'app-management-building-risklevel',
-  templateUrl: './risklevel.component.html',
-  styleUrls: ['./risklevel.component.styl'],
+  selector: 'app-managementbuilding-risklevel',
+  templateUrl: './risk-level.component.html',
+  styleUrls: ['./risk-level.component.styl'],
   providers: [
     RiskLevelService,
   ]

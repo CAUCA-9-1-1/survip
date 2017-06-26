@@ -5,9 +5,9 @@ import {UtilisationCode} from '../shared/models/utilisation-code.model';
 import {UtilisationCodeService} from '../shared/services/utilisation-code.service';
 
 @Component({
-  selector: 'app-management-building-utilisationcode',
-  templateUrl: './utilisationcode.component.html',
-  styleUrls: ['./utilisationcode.component.styl'],
+  selector: 'app-managementbuilding-utilisationcode',
+  templateUrl: './utilisation-code.component.html',
+  styleUrls: ['./utilisation-code.component.styl'],
   providers: [
     UtilisationCodeService,
   ]
