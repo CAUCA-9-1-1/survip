@@ -1,5 +1,5 @@
 <dx-data-grid
-        [dataSource]="alarmPanels"
+        [dataSource]="personRequiringAssistanceTypes"
         [hoverStateEnabled]="true"
         (onInitNewRow)="onInitNewRow($event)"
         (onRowInserted)="onRowInserted($event)"
@@ -17,7 +17,7 @@
 
   <dxo-filter-row [visible]="true"></dxo-filter-row>
   <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-    <dxo-popup title="{{'alarmPanelType' | translate}}" [showTitle]="true"></dxo-popup>
+    <dxo-popup title="{{'constructionType' | translate}}" [showTitle]="true"></dxo-popup>
 
     <dxo-form colCount="1">
       <dxi-item dataField="name" [isRequired]="true"></dxi-item>

@@ -5,6 +5,7 @@ import { ManagementInterventionPlanComponent } from './management-intervention-p
 import { SharedModule } from '../shared/shared.module';
 import { AlarmPanelTypeComponent } from './alarm-panel-type/alarm-panel-type.component';
 import { ConstructionTypeComponent } from './construction-type/construction-type.component';
+import {PersonRequiringAssistanceTypeComponent} from './person-requiring-assistance-type/person-requiring-assistance-type.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ConstructionTypeComponent } from './construction-type/construction-type
     ManagementInterventionPlanComponent,
     AlarmPanelTypeComponent,
     ConstructionTypeComponent,
+    PersonRequiringAssistanceTypeComponent,
   ]
 })
 export class ManagementInterventionPlanModule { }
