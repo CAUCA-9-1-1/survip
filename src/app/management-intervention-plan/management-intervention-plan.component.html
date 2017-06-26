@@ -1,0 +1,8 @@
+<app-toolbar title="{{'interventionPlanManagement' | translate}}"></app-toolbar>
+<div class="content-under-toolbar">
+  <md-tab-group (selectChange)="onSelectionChanged($event)">
+    <md-tab label="{{'alarmPanel' | translate}}">
+      <app-management-intervention-plan-alarmpanel></app-management-intervention-plan-alarmpanel>
+    </md-tab>
+  </md-tab-group>
+</div>
