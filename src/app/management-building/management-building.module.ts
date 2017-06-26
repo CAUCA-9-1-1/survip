@@ -4,6 +4,8 @@ import {DxDataGridModule} from 'devextreme-angular';
 import {SharedModule} from '../shared/shared.module';
 import {ManagementBuildingComponent} from './management-building.component';
 import {ListComponent} from './list/list.component';
+import {RiskLevelComponent} from './risklevel/risklevel.component';
+import {UtilisationCodeComponent} from './utilisationcode/utilisationcode.component';
 
 @NgModule({
   imports: [
@@ -11,11 +13,15 @@ import {ListComponent} from './list/list.component';
     DxDataGridModule
   ],
   exports: [
-    ListComponent
+    ListComponent,
+    RiskLevelComponent,
+    UtilisationCodeComponent,
   ],
   declarations: [
     ManagementBuildingComponent,
-    ListComponent
+    ListComponent,
+    RiskLevelComponent,
+    UtilisationCodeComponent,
   ]
 })
 export class ManagementBuildingModule { }
