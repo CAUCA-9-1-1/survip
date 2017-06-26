@@ -65,6 +65,9 @@
   "postalCode": "Postal code",
   "utilisationCode": "Utilisation code",
   "riskLevel": "Risk level",
+  "color": "Coulor",
+  "cubf": "CUBF",
+  "scian": "SCIAN",
   "matricule": "Matricule",
   "accessManagement": "Management for access",
   "webuser": "User",
@@ -119,5 +122,6 @@
   "5year": "5 years",
   "addInspection": "Add inspection",
   "selectBuildingFirst": "You need to select a building first",
-  "inspectionByDate": "Inspection by day"
+  "inspectionByDate": "Inspection by day",
+  "interventionPlanManagement": "Management for intervention plan"
 }

@@ -6,7 +6,6 @@
 export const environment = {
   envName: 'local',
   production: false,
-  languages: ['fr', 'en'],
   locale: 'fr',
   igo: {
     language: {
