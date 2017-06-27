@@ -87,7 +87,7 @@ export class ListComponent extends DevextremeDatagrid implements OnInit {
   }
 
   private loadUnitOfMeasure() {
-    this.unitOfMeasureService.getAll().subscribe(data => this.unitOfMeasures = data);
+    this.unitOfMeasureService.getAll('volume').subscribe(data => this.unitOfMeasures = data);
   }
 
   private loadLane() {

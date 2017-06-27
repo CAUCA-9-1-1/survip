@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConnectionComponent } from './connection.component';
+import { UnitOfMeasureComponent } from './unit-of-measure.component';
 
-describe('ConnectionComponent', () => {
-  let component: ConnectionComponent;
-  let fixture: ComponentFixture<ConnectionComponent>;
+describe('UnitOfMeasureComponent', () => {
+  let component: UnitOfMeasureComponent;
+  let fixture: ComponentFixture<UnitOfMeasureComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConnectionComponent ]
+      declarations: [ UnitOfMeasureComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConnectionComponent);
+    fixture = TestBed.createComponent(UnitOfMeasureComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

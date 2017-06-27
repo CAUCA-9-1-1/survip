@@ -29,7 +29,7 @@
           dataField="idOperatorTypeRate"
           caption="{{'operator' | translate}}"
           [visible]="false">
-    <dxo-lookup [dataSource]="operatorTypes" displayExpr="symbol" valueExpr="idOperatorTypeRate">
+    <dxo-lookup [dataSource]="operatorTypes" displayExpr="symbol" valueExpr="idOperatorType">
     </dxo-lookup>
   </dxi-column>
   <dxi-column dataField="rateFrom" caption="{{'from' | translate}}" [visible]="false"></dxi-column>
@@ -38,14 +38,14 @@
           dataField="idUnitOfMeasureRate"
           caption="{{'unitOfMeasure' | translate}}"
           [visible]="false">
-    <dxo-lookup [dataSource]="unitOfMeasures" displayExpr="name.fr" valueExpr="idUnitOfMeasureRate">
+    <dxo-lookup [dataSource]="unitOfMeasures" displayExpr="name.fr" valueExpr="idUnitOfMeasure">
     </dxo-lookup>
   </dxi-column>
   <dxi-column
           dataField="idOperatorTypePressure"
           caption="{{'operator' | translate}}"
           [visible]="false">
-    <dxo-lookup [dataSource]="operatorTypes" displayExpr="symbol" valueExpr="idOperatorTypePressure">
+    <dxo-lookup [dataSource]="operatorTypes" displayExpr="symbol" valueExpr="idOperatorType">
     </dxo-lookup>
   </dxi-column>
   <dxi-column dataField="pressureFrom" caption="{{'from' | translate}}" [visible]="false"></dxi-column>
@@ -54,7 +54,7 @@
           dataField="idUnitOfMeasurePressure"
           caption="{{'unitOfMeasure' | translate}}"
           [visible]="false">
-    <dxo-lookup [dataSource]="unitOfMeasures" displayExpr="name.fr" valueExpr="idUnitOfMeasurePressure">
+    <dxo-lookup [dataSource]="unitOfMeasures" displayExpr="name.fr" valueExpr="idUnitOfMeasure">
     </dxo-lookup>
   </dxi-column>
   <dxi-column dataField="color" caption="{{'color' | translate}}" [visible]="false"></dxi-column>
@@ -68,9 +68,9 @@
 
     <dxo-form colCount="2">
       <dxi-item dataField="idFireHydrantType" [isRequired]="true"></dxi-item>
-      <dxi-item dataField="fireHydrantNumber"></dxi-item>
+      <dxi-item dataField="fireHydrantNumber" [isRequired]="true"></dxi-item>
       <dxi-item dataField="idLane" [isRequired]="true"></dxi-item>
-      <dxi-item dataField="idIntersection" [isRequired]="true"></dxi-item>
+      <dxi-item dataField="idIntersection"></dxi-item>
       <dxi-item dataField="altitude"></dxi-item>
       <dxi-item dataField="altitude"></dxi-item>
       <dxi-item itemType="group" caption="{{'rate' | translate}}">
