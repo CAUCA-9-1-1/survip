@@ -146,5 +146,9 @@
   "fireHydrantNumber": "Fire hydrant number",
   "comments": "Comments",
   "physicalPosition": "Physical position",
-  "fireHydrantType": "Fire hydrant type"
+  "fireHydrantType": "Fire hydrant type",
+  "connectionType": "Connection type",
+  "symbol": "Symbol",
+  "abbreviation": "Abbreviation",
+  "type": "Type"
 }

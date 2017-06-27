@@ -1,5 +1,5 @@
 <dx-data-grid
-        [dataSource]="connectionTypes"
+        [dataSource]="unitOfMeasures"
         [hoverStateEnabled]="true"
         (onInitNewRow)="onInitNewRow($event)"
         (onRowInserted)="onRowInserted($event)"
@@ -13,14 +13,18 @@
           sortOrder="asc"
           sortIndex="0">
   </dxi-column>
+  <dxi-column dataField="abbreviation" caption="{{'abbreviation' | translate}}"></dxi-column>
+  <dxi-column dataField="type" caption="{{'type' | translate}}"></dxi-column>
   <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
   <dxo-filter-row [visible]="true"></dxo-filter-row>
   <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-    <dxo-popup title="{{'fireHydrantType' | translate}}" [showTitle]="true"></dxo-popup>
+    <dxo-popup title="{{'unitOfMeasure' | translate}}" [showTitle]="true"></dxo-popup>
 
     <dxo-form colCount="1">
       <dxi-item dataField="name"></dxi-item>
+      <dxi-item dataField="abbreviation"></dxi-item>
+      <dxi-item dataField="type"></dxi-item>
       <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
     </dxo-form>
   </dxo-editing>

@@ -152,5 +152,9 @@
   "fireHydrantNumber": "Numéro de la borne",
   "comments": "Commentaires",
   "physicalPosition": "Position physique",
-  "fireHydrantType": "Type de borne"
+  "fireHydrantType": "Type de borne",
+  "connectionType": "Type de connexion",
+  "symbol": "Symbole",
+  "abbreviation": "Abréviation",
+  "type": "Type"
 }

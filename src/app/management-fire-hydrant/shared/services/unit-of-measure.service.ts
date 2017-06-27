@@ -9,16 +9,8 @@ export class UnitOfMeasureService {
 
   constructor(private http: HttpService) { }
 
-  public getAll() {
-    return this.http.get('unitofmeasure').map((response: Response) => {
-      const result = response.json();
-
-      return result.data;
-    });
-  }
-
-  public get(idUnitOfMeasure: string) {
-    return this.http.get('unitofmeasure/' + idUnitOfMeasure).map((response: Response) => {
+  public getAll(type?: string) {
+    return this.http.get('unitofmeasure' + (type ? '/' + type : '')).map((response: Response) => {
       const result = response.json();
 
       return result.data;
