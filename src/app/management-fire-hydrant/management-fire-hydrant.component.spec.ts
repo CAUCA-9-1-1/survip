@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../test.module';
 import { ManagementFireHydrantComponent } from './management-fire-hydrant.component';
+import {ListComponent} from './list/list.component';
+import {TypeComponent} from './type/type.component';
+import {ConnectionTypeComponent} from './connection-type/connection-type.component';
 
 describe('ManagementFireHydrantComponent', () => {
   let component: ManagementFireHydrantComponent;
@@ -8,7 +12,13 @@ describe('ManagementFireHydrantComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManagementFireHydrantComponent ]
+      imports: [ TestModule ],
+      declarations: [
+        ManagementFireHydrantComponent,
+        ListComponent,
+        TypeComponent,
+        ConnectionTypeComponent,
+      ]
     })
     .compileComponents();
   }));
