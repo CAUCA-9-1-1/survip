@@ -133,5 +133,10 @@
   "interventionPlans": "Plans d'intervention",
   "alarmPanelType": "Type de panneau d'alarme",
   "constructionType": "Type de construction",
-  "personRequiringAssistanceType": "Type de personne nécessitant une assistance"
+  "personRequiringAssistanceType": "Type de personne nécessitant une assistance",
+  "hazardousMaterial": "Matière dangereuse",
+  "number": "Numéro",
+  "guideNumber": "Numéro du guide",
+  "reactionToWater": "Réaction à l'eau",
+  "toxicInhalationHazard": "Toxique danger d'inhalation"
 }
