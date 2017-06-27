@@ -138,5 +138,19 @@
   "number": "Numéro",
   "guideNumber": "Numéro du guide",
   "reactionToWater": "Réaction à l'eau",
-  "toxicInhalationHazard": "Toxique danger d'inhalation"
+  "toxicInhalationHazard": "Toxique danger d'inhalation",
+  "fireHydrantManagement": "Gestion des bornes",
+  "fireHydrant": "Borne",
+  "intersection": "Intersection",
+  "altitude": "Altitude",
+  "operator": "Opérateur",
+  "from": "De",
+  "to": "À",
+  "unitOfMeasure": "Unité de mesure",
+  "pressure": "Pression",
+  "rate": "Débit",
+  "fireHydrantNumber": "Numéro de la borne",
+  "comments": "Commentaires",
+  "physicalPosition": "Position physique",
+  "fireHydrantType": "Type de borne"
 }
