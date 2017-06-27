@@ -127,5 +127,10 @@
   "interventionPlans": "Intervention plans",
   "alarmPanelType": "Alarm panel type",
   "constructionType": "Construction type",
-  "personRequiringAssistanceType": "Person requiring assistance type"
+  "personRequiringAssistanceType": "Person requiring assistance type",
+  "hazardousMaterial": "Hazardous material",
+  "number": "Number",
+  "guideNumber": "Guide number",
+  "reactionToWater": "Reaction to water",
+  "toxicInhalationHazard": "Toxic inhalation hazard"
 }

@@ -5,7 +5,7 @@ import {PersonRequiringAssistanceType} from '../shared/models/person-requiring-a
 import {PersonRequiringAssistanceTypeService} from '../shared/services/person-requiring-assistance-type.service';
 
 @Component({
-  selector: 'app-managementinterventionplan-personrequiringassistancetype',
+  selector: 'app-managementbuilding-personrequiringassistancetype',
   templateUrl: './person-requiring-assistance-type.component.html',
   styleUrls: ['./person-requiring-assistance-type.component.styl'],
   providers: [

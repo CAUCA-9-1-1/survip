@@ -36,8 +36,8 @@ export class FireSafetyDepartmentComponent extends DevextremeDatagrid implements
   public ngOnInit() {
     this.loadDeparment();
     this.loadCounty();
-    this.translate.translate.get(environment.languages).subscribe((labels) => {
-      environment.languages.forEach((lang) => {
+    this.translate.translate.get(environment.cause.languages).subscribe((labels) => {
+      environment.cause.languages.forEach((lang) => {
         this.languages.push({
           code: lang,
           name: labels[lang],
