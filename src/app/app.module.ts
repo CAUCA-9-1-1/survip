@@ -10,6 +10,7 @@ import {ManagementBuildingModule} from './management-building/management-buildin
 import {ManagementInterventionPlanModule} from './management-intervention-plan/management-intervention-plan.module';
 import {ManagementInspectionModule} from './management-inspection/management-inspection.module';
 import {ManagementSurveyModule} from './management-survey/management-survey.module';
+import {ManagementFireHydrantModule} from './management-fire-hydrant/management-fire-hydrant.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {ManagementSurveyModule} from './management-survey/management-survey.modu
     ManagementAddressModule,
     ManagementAccessModule,
     ManagementBuildingModule,
+    ManagementFireHydrantModule,
     ManagementInterventionPlanModule,
     ManagementInspectionModule,
     ManagementSurveyModule,

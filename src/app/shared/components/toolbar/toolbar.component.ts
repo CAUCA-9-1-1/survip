@@ -29,6 +29,10 @@ export class ToolbarComponent implements OnInit {
     path: '/management/address/',
     popMenu: false
   }, {
+    name: 'fireHydrantManagement',
+    path: '/management/firehydrant/',
+    popMenu: false
+  }, {
     name: 'accessManagement',
     path: '/management/access/',
     popMenu: false

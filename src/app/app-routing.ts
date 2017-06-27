@@ -9,6 +9,7 @@ import {ManagementBuildingComponent} from './management-building/management-buil
 import {ManagementSurveyComponent} from './management-survey/management-survey.component';
 import {ManagementInspectionComponent} from './management-inspection/management-inspection.component';
 import {ManagementInterventionPlanComponent} from './management-intervention-plan/management-intervention-plan.component';
+import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
 
 const appRoutes: Routes = [{
   path: '',
@@ -32,6 +33,9 @@ const appRoutes: Routes = [{
   }, {
     path: 'address',
     component: ManagementAddressComponent
+  }, {
+    path: 'firehydrant',
+    component: ManagementFireHydrantComponent
   }, {
     path: 'access',
     component: ManagementAccessComponent

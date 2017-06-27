@@ -132,5 +132,19 @@
   "number": "Number",
   "guideNumber": "Guide number",
   "reactionToWater": "Reaction to water",
-  "toxicInhalationHazard": "Toxic inhalation hazard"
+  "toxicInhalationHazard": "Toxic inhalation hazard",
+  "fireHydrantManagement": "Management for fire hydrant",
+  "fireHydrant": "Fire hydrant",
+  "intersection": "Intersection",
+  "altitude": "Altitude",
+  "operator": "Operator",
+  "from": "From",
+  "to": "To",
+  "unitOfMeasure": "Unit of measure",
+  "pressure": "Pressure",
+  "rate": "Rate",
+  "fireHydrantNumber": "Fire hydrant number",
+  "comments": "Comments",
+  "physicalPosition": "Physical position",
+  "fireHydrantType": "Fire hydrant type"
 }
