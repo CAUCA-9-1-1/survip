@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../test.module';
 import { ManagementInterventionPlanComponent } from './management-intervention-plan.component';
+import { AlarmPanelTypeComponent } from './alarm-panel-type/alarm-panel-type.component';
+import { ConstructionTypeComponent } from './construction-type/construction-type.component';
 
 describe('ManagementInterventionPlanComponent', () => {
   let component: ManagementInterventionPlanComponent;
@@ -8,7 +11,12 @@ describe('ManagementInterventionPlanComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManagementInterventionPlanComponent ]
+      imports: [ TestModule ],
+      declarations: [
+        ManagementInterventionPlanComponent,
+        AlarmPanelTypeComponent,
+        ConstructionTypeComponent,
+      ]
     })
     .compileComponents();
   }));
