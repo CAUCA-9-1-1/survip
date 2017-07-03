@@ -9,7 +9,7 @@ describe('ListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TestModule ],
+      imports: [ TestModule ],
       declarations: [ ListComponent ]
     })
     .compileComponents();

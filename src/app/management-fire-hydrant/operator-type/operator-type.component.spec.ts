@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../../test.module';
 import { OperatorTypeComponent } from './operator-type.component';
 
 describe('UnitOfMeasureComponent', () => {
@@ -8,6 +9,7 @@ describe('UnitOfMeasureComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ TestModule ],
       declarations: [ OperatorTypeComponent ]
     })
     .compileComponents();

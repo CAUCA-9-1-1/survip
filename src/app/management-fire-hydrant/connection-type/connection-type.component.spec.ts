@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../../test.module';
 import { ConnectionTypeComponent } from './connection-type.component';
 
 describe('ConnectionTypeComponent', () => {
@@ -8,6 +9,7 @@ describe('ConnectionTypeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ TestModule ],
       declarations: [ ConnectionTypeComponent ]
     })
     .compileComponents();

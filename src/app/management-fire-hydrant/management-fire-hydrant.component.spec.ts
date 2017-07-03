@@ -2,9 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestModule } from '../test.module';
 import { ManagementFireHydrantComponent } from './management-fire-hydrant.component';
-import {ListComponent} from './list/list.component';
-import {TypeComponent} from './type/type.component';
-import {ConnectionTypeComponent} from './connection-type/connection-type.component';
+import { ListComponent } from './list/list.component';
+import { TypeComponent } from './type/type.component';
+import { ConnectionTypeComponent } from './connection-type/connection-type.component';
+import { OperatorTypeComponent } from './operator-type/operator-type.component';
+import { UnitOfMeasureComponent } from './unit-of-measure/unit-of-measure.component';
 
 describe('ManagementFireHydrantComponent', () => {
   let component: ManagementFireHydrantComponent;
@@ -18,6 +20,8 @@ describe('ManagementFireHydrantComponent', () => {
         ListComponent,
         TypeComponent,
         ConnectionTypeComponent,
+        OperatorTypeComponent,
+        UnitOfMeasureComponent,
       ]
     })
     .compileComponents();
