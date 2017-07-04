@@ -17,16 +17,12 @@ import {
   provideConfig,
 } from 'cause-lib';
 
-import {} from '../core/extends-prototype';
 import {MenuComponent} from './components/menu/menu.component';
 import {MenuItemComponent} from './components/menu-item/menu-item.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
-import {TakePictureComponent} from './components/take-picture/take-picture.component';
 import {ToolbarComponent} from './components/toolbar/toolbar.component';
 import {ToolbarBackComponent} from './components/toolbar-back/toolbar-back.component';
-import {WebcamComponent} from './components/webcam/webcam.component';
 import {FilterByPipe} from './pipes/filter.pipe';
-import {PinchZoomDirective} from './directives/pinch-zoom.directive';
 
 @NgModule({
   declarations: [
@@ -34,14 +30,8 @@ import {PinchZoomDirective} from './directives/pinch-zoom.directive';
     ToolbarComponent,
     MenuComponent,
     MenuItemComponent,
-    TakePictureComponent,
     ToolbarBackComponent,
-    WebcamComponent,
     FilterByPipe,
-    PinchZoomDirective,
-  ],
-  entryComponents: [
-    WebcamComponent,
   ],
   exports: [
     CommonModule,
@@ -58,10 +48,7 @@ import {PinchZoomDirective} from './directives/pinch-zoom.directive';
 
     MenuComponent,
     PageNotFoundComponent,
-
     ToolbarBackComponent,
-    TakePictureComponent,
-    PinchZoomDirective,
   ],
   imports: [
     CommonModule,
