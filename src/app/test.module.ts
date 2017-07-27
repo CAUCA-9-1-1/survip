@@ -31,7 +31,6 @@ import {SharedModule} from './shared/shared.module';
     DxTabPanelModule,
     DxTreeViewModule,
   ],
-  providers: [
-  ]
+  providers: []
 })
 export class TestModule { }
