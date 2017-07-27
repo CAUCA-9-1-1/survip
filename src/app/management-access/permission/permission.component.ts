@@ -1,31 +1,32 @@
 import {Component, OnInit} from '@angular/core';
 import {LanguageService} from 'igo2';
 
-import {PermissionWebuser} from '../shared/models/permissionwebuser.model';
-import {PermissionWebuserService} from '../shared/services/permissionwebuser.service';
+import {PermissionSystemFeature} from '../shared/models/permissionsystemfeature.model';
 import {PermissionObjectService} from '../shared/services/permissionobject.service';
 import {PermissionObject} from '../shared/models/permissionobject.model';
+import {PermissionService} from '../shared/services/permission.service';
 
 @Component({
   selector: 'app-management-access-permission',
   templateUrl: './permission.component.html',
   styleUrls: ['./permission.component.styl'],
   providers: [
-    PermissionWebuserService,
-    PermissionObjectService
+    PermissionService,
+    PermissionObjectService,
   ]
 })
 export class PermissionComponent implements OnInit {
-  features: PermissionWebuser[] = [];
+  features: PermissionSystemFeature[] = [];
   objects: PermissionObject[] = [];
   editing: object = {};
   filter: object = {};
   labels: object = {};
   defaultLookup: object = {};
-  webuserLookup: object = {};
+  accessLookup: object = {};
+  lastPermissionObject: object = {};
 
   constructor(
-    private featureService: PermissionWebuserService,
+    private permissionService: PermissionService,
     private objectService: PermissionObjectService,
     private translate: LanguageService
   ) {
@@ -37,7 +38,7 @@ export class PermissionComponent implements OnInit {
       displayExpr: 'text',
       valueExpr: 'value'
     };
-    this.webuserLookup = {
+    this.accessLookup = {
       dataSource: [
         {'value': null, 'text': 'seeParent'},
         {'value': true, 'text': 'yes'},
@@ -57,15 +58,15 @@ export class PermissionComponent implements OnInit {
       visible: true
     };
 
-    const labels = ['yes', 'no', 'seeParent', 'description', 'defaultValue', 'webuserValue'];
+    const labels = ['yes', 'no', 'seeParent', 'description', 'defaultValue', 'accessValue'];
     this.translate.translate.get(labels).subscribe((result: object) => {
       this.labels = result;
       this.defaultLookup['dataSource'][0]['text'] = result['yes'];
       this.defaultLookup['dataSource'][1]['text'] = result['no'];
 
-      this.webuserLookup['dataSource'][0]['text'] = result['seeParent'];
-      this.webuserLookup['dataSource'][1]['text'] = result['yes'];
-      this.webuserLookup['dataSource'][2]['text'] = result['no'];
+      this.accessLookup['dataSource'][0]['text'] = result['seeParent'];
+      this.accessLookup['dataSource'][1]['text'] = result['yes'];
+      this.accessLookup['dataSource'][2]['text'] = result['no'];
     });
   }
 
@@ -74,13 +75,21 @@ export class PermissionComponent implements OnInit {
   }
 
   public onRowUpdated(e) {
-    e.data.idPermission = e.key.idPermission;
+    if (e.key.idPermission) {
+      e.data.idPermission = e.key.idPermission;
 
-    this.featureService.update(e.data).subscribe();
+      this.permissionService.update(e.data).subscribe();
+    } else {
+      e.data.idPermissionObject = this.lastPermissionObject['idPermissionObject'];
+      e.data.idPermissionSystemFeature = e.key.idPermissionSystemFeature;
+
+      this.permissionService.create(e.data).subscribe();
+    }
   }
 
   public onRowSelected(e) {
-    this.featureService.get(e.itemData.idPermissionObject).subscribe(data => this.features = data);
+    this.lastPermissionObject = e.itemData;
+    this.permissionService.get(e.itemData.idPermissionObject).subscribe(data => this.features = data);
   }
 
   private loadObject() {

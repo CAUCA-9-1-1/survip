@@ -1,17 +1,17 @@
 import {TestBed, inject} from '@angular/core/testing';
 
 import {TestModule} from '../../../test.module';
-import {PermissionWebuserService} from './permissionwebuser.service';
+import {PermissionService} from './permission.service';
 
-describe('PermissionWebuserService', () => {
+describe('PermissionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ TestModule ],
-      providers: [ PermissionWebuserService]
+      providers: [ PermissionService ]
     });
   });
 
-  it('should ...', inject([PermissionWebuserService], (service: PermissionWebuserService) => {
+  it('should ...', inject([PermissionService], (service: PermissionService) => {
     expect(service).toBeTruthy();
   }));
 });
