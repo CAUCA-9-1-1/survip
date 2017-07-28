@@ -25,7 +25,7 @@
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
-    <dxi-column alignment="center" caption="{{lang | translate}}" cellTemplate="editmode"></dxi-column>
+    <dxi-column alignment="center" caption="{{'modify' | translate}}" cellTemplate="editmode"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
@@ -37,7 +37,7 @@
     </dxo-editing>
 
     <div *dxTemplate="let data of 'editmode'">
-        <a class="dx-link" (click)="onModified(data.data.idSurvey)">{{'modifyQuestion' | translate}}</a>
+        <a class="dx-link" (click)="onLanguageModify(data.data.idSurvey)">{{'modifyQuestion' | translate}}</a>
     </div>
     <div *dxTemplate="let rowname of 'editname'">
         <cause-multilang [value]="rowname.row.data.name" (onValueChanged)="rowname.setValue($event.value);"></cause-multilang>

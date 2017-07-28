@@ -7,6 +7,12 @@ import {ListComponent} from './list/list.component';
 import {QuestionComponent} from './question/question.component';
 
 @NgModule({
+  declarations: [
+    ManagementSurveyComponent,
+    ListComponent,
+    QuestionComponent,
+  ],
+  exports: [],
   imports: [
     SharedModule,
     DxButtonModule,
@@ -14,14 +20,6 @@ import {QuestionComponent} from './question/question.component';
     DxFormModule,
     DxTreeViewModule,
   ],
-  exports: [
-    ListComponent,
-    QuestionComponent
-  ],
-  declarations: [
-    ManagementSurveyComponent,
-    ListComponent,
-    QuestionComponent,
-  ]
+  providers: [],
 })
 export class ManagementSurveyModule { }

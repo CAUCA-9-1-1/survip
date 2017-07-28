@@ -10,11 +10,6 @@ import {PersonRequiringAssistanceTypeComponent} from './person-requiring-assista
 import {HazardousMaterialComponent} from './hazardous-material/hazardous-material.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    DxDataGridModule
-  ],
-  exports: [],
   declarations: [
     ManagementBuildingComponent,
     ListComponent,
@@ -22,6 +17,12 @@ import {HazardousMaterialComponent} from './hazardous-material/hazardous-materia
     UtilisationCodeComponent,
     PersonRequiringAssistanceTypeComponent,
     HazardousMaterialComponent,
-  ]
+  ],
+  exports: [],
+  imports: [
+    SharedModule,
+    DxDataGridModule
+  ],
+  providers: [],
 })
 export class ManagementBuildingModule { }

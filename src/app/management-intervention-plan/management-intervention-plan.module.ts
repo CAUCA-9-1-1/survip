@@ -7,6 +7,12 @@ import { AlarmPanelTypeComponent } from './alarm-panel-type/alarm-panel-type.com
 import { ConstructionTypeComponent } from './construction-type/construction-type.component';
 
 @NgModule({
+  declarations: [
+    ManagementInterventionPlanComponent,
+    AlarmPanelTypeComponent,
+    ConstructionTypeComponent,
+  ],
+  exports: [],
   imports: [
     SharedModule,
     DxButtonModule,
@@ -14,10 +20,6 @@ import { ConstructionTypeComponent } from './construction-type/construction-type
     DxDataGridModule,
     DxFormModule,
   ],
-  declarations: [
-    ManagementInterventionPlanComponent,
-    AlarmPanelTypeComponent,
-    ConstructionTypeComponent,
-  ]
+  providers: [],
 })
 export class ManagementInterventionPlanModule { }

@@ -10,10 +10,6 @@ import { OperatorTypeComponent } from './operator-type/operator-type.component';
 import { UnitOfMeasureComponent } from './unit-of-measure/unit-of-measure.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    DxDataGridModule
-  ],
   declarations: [
     ManagementFireHydrantComponent,
     ListComponent,
@@ -21,6 +17,10 @@ import { UnitOfMeasureComponent } from './unit-of-measure/unit-of-measure.compon
     UnitOfMeasureComponent,
     ConnectionTypeComponent,
     TypeComponent
-  ]
+  ],
+  imports: [
+    SharedModule,
+    DxDataGridModule
+  ],
 })
 export class ManagementFireHydrantModule { }

@@ -10,20 +10,6 @@ import {StatisticsComponent} from './statistics/statistics.component';
 import {WebuserComponent} from './webuser/webuser.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    DxDataGridModule,
-    DxChartModule,
-    DxFormModule,
-    DxTreeViewModule,
-  ],
-  exports: [
-    ApisactionComponent,
-    FireSafetyDepartmentComponent,
-    PermissionComponent,
-    StatisticsComponent,
-    WebuserComponent,
-  ],
   declarations: [
     ManagementAccessComponent,
     ApisactionComponent,
@@ -31,6 +17,14 @@ import {WebuserComponent} from './webuser/webuser.component';
     PermissionComponent,
     StatisticsComponent,
     WebuserComponent,
+  ],
+  exports: [],
+  imports: [
+    SharedModule,
+    DxDataGridModule,
+    DxChartModule,
+    DxFormModule,
+    DxTreeViewModule,
   ],
   providers: []
 })

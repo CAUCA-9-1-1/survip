@@ -3,27 +3,28 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {AuthGuard} from './auth-guard.service';
 import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
-import {ManagementAddressComponent} from './management-address/management-address.component';
 import {ManagementAccessComponent} from './management-access/management-access.component';
+import {ManagementAddressComponent} from './management-address/management-address.component';
 import {ManagementBuildingComponent} from './management-building/management-building.component';
-import {ManagementSurveyComponent} from './management-survey/management-survey.component';
+import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
 import {ManagementInspectionComponent} from './management-inspection/management-inspection.component';
 import {ManagementInterventionPlanComponent} from './management-intervention-plan/management-intervention-plan.component';
-import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
+import {ManagementSurveyComponent} from './management-survey/management-survey.component';
+
 
 const appRoutes: Routes = [{
   path: '',
-  redirectTo: '/management/survey',
+  redirectTo: '/management/inspection',
   pathMatch: 'full'
 }, {
   path: 'management',
   canActivate: [AuthGuard],
   children: [{
-    path: 'interventionplan',
-    component: ManagementInterventionPlanComponent
-  }, {
     path: 'inspection',
     component: ManagementInspectionComponent
+  }, {
+    path: 'interventionplan',
+    component: ManagementInterventionPlanComponent
   }, {
     path: 'survey',
     component: ManagementSurveyComponent
@@ -38,11 +39,11 @@ const appRoutes: Routes = [{
     component: ManagementFireHydrantComponent
   }, {
     path: 'access',
-    component: ManagementAccessComponent
+    component: ManagementAccessComponent,
   }]
 }, {
   path: '**',
-  component: PageNotFoundComponent
+  component: PageNotFoundComponent,
 }];
 
 @NgModule({

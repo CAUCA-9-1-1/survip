@@ -8,13 +8,6 @@ import {CreateComponent} from './create/create.component';
 import {StatisticsComponent} from './statistics/statistics.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    DxButtonModule,
-    DxChartModule,
-    DxDataGridModule,
-    DxFormModule,
-  ],
   declarations: [
     ManagementInspectionComponent,
     ListComponent,
@@ -23,6 +16,13 @@ import {StatisticsComponent} from './statistics/statistics.component';
   ],
   entryComponents: [
     CreateComponent,
-  ]
+  ],
+  imports: [
+    SharedModule,
+    DxButtonModule,
+    DxChartModule,
+    DxDataGridModule,
+    DxFormModule,
+  ],
 })
 export class ManagementInspectionModule { }

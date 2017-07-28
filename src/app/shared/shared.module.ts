@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+//import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from '@angular/material';
-import {BrowserModule} from '@angular/platform-browser';
-import {DxTabPanelModule, DxTextBoxModule} from 'devextreme-angular';
+//import {DxTabPanelModule, DxTextBoxModule} from 'devextreme-angular';
 import {environment} from '../../environments/environment';
 
 import {
@@ -17,52 +18,49 @@ import {
   provideConfig,
 } from 'cause-lib';
 
-import {MenuComponent} from './components/menu/menu.component';
-import {MenuItemComponent} from './components/menu-item/menu-item.component';
+//import {MenuComponent} from './components/menu/menu.component';
+//import {MenuItemComponent} from './components/menu-item/menu-item.component';*/
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {ToolbarComponent} from './components/toolbar/toolbar.component';
-import {ToolbarBackComponent} from './components/toolbar-back/toolbar-back.component';
-import {FilterByPipe} from './pipes/filter.pipe';
+//import {ToolbarBackComponent} from './components/toolbar-back/toolbar-back.component';
+//import {FilterByPipe} from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
     PageNotFoundComponent,
     ToolbarComponent,
-    MenuComponent,
+    /*MenuComponent,
     MenuItemComponent,
     ToolbarBackComponent,
-    FilterByPipe,
+    FilterByPipe,*/
   ],
   exports: [
-    CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    CommonModule,
     MaterialModule,
+    //FormsModule,
     FlexLayoutModule,
+    //ReactiveFormsModule,
     IgoModule,
     CauseModule,
 
     ToolbarComponent,
-    /*
-    ReactiveFormsModule,
-    FormsModule,*/
-
-    MenuComponent,
-    PageNotFoundComponent,
-    ToolbarBackComponent,
+    //MenuComponent,
+    //ToolbarBackComponent,
   ],
   imports: [
-    CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    CommonModule,
     MaterialModule,
+    //FormsModule,
     FlexLayoutModule,
-    DxTabPanelModule,
-    DxTextBoxModule,
+    //ReactiveFormsModule,
+    //DxTabPanelModule,
+    //DxTextBoxModule,
     IgoModule.forRoot(),
     CauseModule.forRoot(),
-    /*
-    ReactiveFormsModule,
-    FormsModule,
-    */
   ],
   providers: [
     provideConfigOptions({

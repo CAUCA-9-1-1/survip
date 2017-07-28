@@ -26,13 +26,25 @@ export class ListComponent extends DevextremeDatagrid implements OnInit {
     this.loadSurvey();
   }
 
+  public onInitNewRow(e) {
+
+  }
+
+  public onRowInserted(e) {
+
+  }
+
   public onRowUpdated(e) {
     e.data.idSurvey = e.key.idSurvey;
 
     this.surveyService.update(e.key).subscribe();
   }
 
-  private onModified(idSurvey) {
+  public onRowRemoved(e) {
+
+  }
+
+  public onLanguageModify(idSurvey) {
     this.router.navigate(['management/survey'], {
       queryParams: {
         id_survey: idSurvey
