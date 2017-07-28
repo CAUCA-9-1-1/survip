@@ -12,19 +12,6 @@ import {RegionComponent} from './region/region.component';
 import {StateComponent} from './state/state.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    DxDataGridModule
-  ],
-  exports: [
-    CityComponent,
-    CityTypeComponent,
-    CountryComponent,
-    CountyComponent,
-    LaneComponent,
-    RegionComponent,
-    StateComponent,
-  ],
   declarations: [
     ManagementAddressComponent,
     CityComponent,
@@ -34,6 +21,11 @@ import {StateComponent} from './state/state.component';
     LaneComponent,
     RegionComponent,
     StateComponent,
+  ],
+  exports: [],
+  imports: [
+    SharedModule,
+    DxDataGridModule
   ],
   providers: []
 })

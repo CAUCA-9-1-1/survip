@@ -31,6 +31,7 @@ export class ListComponent extends DevextremeDatagrid implements OnInit {
   fireHydrants: FireHydrant[] = [];
   fireHydrantTypes: FireHydrantType[] = [];
   lanes: Lane[] = [];
+  intersections: Lane[] = [];
   operatorTypes: OperatorType[] = [];
   unitOfMeasures: UnitOfMeasure[] = [];
 
