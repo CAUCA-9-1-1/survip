@@ -10,12 +10,16 @@ import {ManagementFireHydrantComponent} from './management-fire-hydrant/manageme
 import {ManagementInspectionComponent} from './management-inspection/management-inspection.component';
 import {ManagementInterventionPlanComponent} from './management-intervention-plan/management-intervention-plan.component';
 import {ManagementSurveyComponent} from './management-survey/management-survey.component';
+import {LoginComponent} from './user-access/login/login.component';
 
 
 const appRoutes: Routes = [{
   path: '',
   redirectTo: '/management/inspection',
-  pathMatch: 'full'
+  pathMatch: 'full',
+}, {
+  path: 'login',
+  component: LoginComponent,
 }, {
   path: 'management',
   canActivate: [AuthGuard],

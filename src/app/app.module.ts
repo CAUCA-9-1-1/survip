@@ -11,6 +11,7 @@ import {ManagementFireHydrantModule} from './management-fire-hydrant/management-
 import {ManagementInterventionPlanModule} from './management-intervention-plan/management-intervention-plan.module';
 import {ManagementInspectionModule} from './management-inspection/management-inspection.module';
 import {ManagementSurveyModule} from './management-survey/management-survey.module';
+import {UserAccessModule} from './user-access/user-access.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {ManagementSurveyModule} from './management-survey/management-survey.modu
     ManagementInterventionPlanModule,
     ManagementInspectionModule,
     ManagementSurveyModule,
+    UserAccessModule,
     AppRoutingModule,
   ],
   providers: [
