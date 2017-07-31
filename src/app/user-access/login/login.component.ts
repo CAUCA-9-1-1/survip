@@ -12,7 +12,8 @@ import {AuthenticationService} from '../shared/services/authentification.service
   ]
 })
 export class LoginComponent implements OnInit {
-  model: any = {};
+  username: string;
+  password: string;
   returnUrl: string;
 
   constructor(
@@ -29,7 +30,11 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.auth.login(this.model.username, this.model.password).subscribe(token => {
+    if (!this.username || !this.password) {
+      return false;
+    }
+
+    this.auth.login(this.username, this.password).subscribe(token => {
       if (token.accessToken) {
         this.router.navigate([this.returnUrl]);
       } else {
