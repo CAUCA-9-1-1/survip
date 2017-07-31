@@ -156,5 +156,8 @@
   "connectionType": "Type de connexion",
   "symbol": "Symbole",
   "abbreviation": "Abréviation",
-  "type": "Type"
+  "type": "Type",
+  "thisFieldIsRequired": "Ce champs est obligatoire",
+  "connection": "Connexion",
+  "enter": "Entrer"
 }

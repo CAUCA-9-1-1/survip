@@ -150,5 +150,8 @@
   "connectionType": "Connection type",
   "symbol": "Symbol",
   "abbreviation": "Abbreviation",
-  "type": "Type"
+  "type": "Type",
+  "thisFieldIsRequired": "This field is required",
+  "connection": "Connection",
+  "enter": "Enter"
 }
