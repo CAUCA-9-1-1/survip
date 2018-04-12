@@ -1,37 +1,36 @@
-import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import {HttpService} from 'cause-lib';
-import {State} from '../models/state.model';
+import { RequestService } from '../../../shared/services/request.service';
+import { State } from '../models/state.model';
+
 
 @Injectable()
-export class StateService {
+export class StateService extends RequestService {
 
-  constructor(private http: HttpService) { }
 
-  public getAll() {
-    return this.http.get('state').map((response: Response) => {
-      const result = response.json();
+    constructor(private http: HttpClient) {
+        super();
+    }
 
-      return result.data;
-    });
-  }
+    public getAll() {
+        return this.http.get<State[]>(this.apiUrl + 'State', {
+            headers: this.headers
+        });
+    }
 
-  public create(state: State) {
-    return this.http.post(
-      'state',
-      JSON.stringify(state)
-    ).map((response: Response) => response.json());
-  }
+    public save(state: State) {
+        return this.http.post(
+            this.apiUrl + 'state',
+            JSON.stringify(state), {
+                headers: this.headers
+            }
+        );
+    }
 
-  public update(state: State) {
-    return this.http.put(
-      'state',
-      JSON.stringify(state)
-    ).map((response: Response) => response.json());
-  }
-
-  public remove(idState: string) {
-    return this.http.delete('state/' + idState).map((response: Response) => response.json());
-  }
+    public remove(idState: string) {
+        return this.http.delete(this.apiUrl + 'state/' + idState, {
+            headers: this.headers
+        });
+    }
 }

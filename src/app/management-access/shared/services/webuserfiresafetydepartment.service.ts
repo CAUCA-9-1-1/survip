@@ -1,37 +1,37 @@
 import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 
-import {HttpService} from 'cause-lib';
 import {WebuserFireSafetyDepartment} from '../models/webuserfiresafetydepartment.model';
+
 
 @Injectable()
 export class WebuserFireSafetyDepartmentService {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpClient) { }
 
   public getByUser(idWebuser: string) {
-    return this.http.get('webuserfiresafetydepartment/' + idWebuser).map((response: Response) => {
+    /*return this.http.get('webuserfiresafetydepartment/' + idWebuser).map((response: Response) => {
       const result = response.json();
 
       return result.data;
-    });
+    });*/
   }
 
   public create(userDept: WebuserFireSafetyDepartment) {
-    return this.http.post(
+    /*return this.http.post(
       'webuserfiresafetydepartment',
       JSON.stringify(userDept)
-    ).map((response: Response) => response.json());
+    ).map((response: Response) => response.json());*/
   }
 
   public update(userDept: WebuserFireSafetyDepartment) {
-    return this.http.put(
+    /*return this.http.put(
       'webuserfiresafetydepartment',
       JSON.stringify(userDept)
-    ).map((response: Response) => response.json());
+    ).map((response: Response) => response.json());*/
   }
 
   public remove(idWebuser: string) {
-    return this.http.delete('webuserfiresafetydepartment/' + idWebuser).map((response: Response) => response.json());
+    // return this.http.delete('webuserfiresafetydepartment/' + idWebuser).map((response: Response) => response.json());
   }
 }

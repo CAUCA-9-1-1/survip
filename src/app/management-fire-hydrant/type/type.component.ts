@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  DevextremeDatagrid
-} from 'cause-lib';
 
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.service';
@@ -12,12 +9,10 @@ import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.servi
   styleUrls: ['./type.component.styl'],
   providers: [FireHydrantTypeService]
 })
-export class TypeComponent extends DevextremeDatagrid implements OnInit {
+export class TypeComponent implements OnInit {
   fireHydrantTypes: FireHydrantType[] = [];
 
-  constructor(private fireHydrantTypeService: FireHydrantTypeService) {
-    super();
-  }
+  constructor(private fireHydrantTypeService: FireHydrantTypeService) { }
 
   ngOnInit() {
     this.loadFireHydrantType();
@@ -28,24 +23,24 @@ export class TypeComponent extends DevextremeDatagrid implements OnInit {
   }
 
   public onRowInserted(e) {
-    this.fireHydrantTypeService.create(e.data).subscribe(info => {
+    /*this.fireHydrantTypeService.create(e.data).subscribe(info => {
       if (info.success) {
         this.loadFireHydrantType();
       }
-    });
+    });*/
   }
 
   public onRowUpdated(e) {
     e.data.idFireHydrantType = e.key.idFireHydrantType;
 
-    this.fireHydrantTypeService.update(e.data).subscribe();
+    // this.fireHydrantTypeService.update(e.data).subscribe();
   }
 
   public onRowRemoved(e) {
-    this.fireHydrantTypeService.remove(e.key.idFireHydrantType).subscribe();
+    // this.fireHydrantTypeService.remove(e.key.idFireHydrantType).subscribe();
   }
 
   private loadFireHydrantType() {
-    this.fireHydrantTypeService.getAll().subscribe(data => this.fireHydrantTypes = data);
+    // this.fireHydrantTypeService.getAll().subscribe(data => this.fireHydrantTypes = data);
   }
 }

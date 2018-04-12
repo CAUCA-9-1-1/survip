@@ -1,49 +1,47 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {DevextremeDatagrid} from 'cause-lib';
-import {Country} from '../shared/models/country.model';
-import {CountryService} from '../shared/services/country.service';
+import { Country } from '../shared/models/country.model';
+import { CountryService } from '../shared/services/country.service';
+
 
 @Component({
   selector: 'app-managementaddress-country',
   templateUrl: './country.component.html',
-  styleUrls: ['./country.component.styl'],
+  styleUrls: ['./country.component.scss'],
   providers: [CountryService]
 })
-export class CountryComponent extends DevextremeDatagrid implements OnInit {
-  countries: Country[] = [];
+export class CountryComponent {
+    countries: Country[] = [];
 
-  constructor(private countryService: CountryService) {
-    super();
-  }
-
-  public ngOnInit() {
-    this.loadCountry();
-  }
-
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
-
-  public onRowInserted(e) {
-    this.countryService.create(e.data).subscribe(info => {
-      if (info.success) {
+    constructor(private countryService: CountryService) {
         this.loadCountry();
-      }
-    });
-  }
+    }
 
-  public onRowUpdated(e) {
-    e.data.idCountry = e.key.idCountry;
+    public getCountryName(data) {
+        const country = Country.fromJSON(data);
 
-    this.countryService.update(e.data).subscribe();
-  }
+        return country.getLocalization('fr');
+    }
 
-  public onRowRemoved(e) {
-    this.countryService.remove(e.key.idCountry).subscribe();
-  }
+    public onInitNewRow(e) {
+        e.data.isActive = true;
+    }
 
-  private loadCountry() {
-    this.countryService.getAll().subscribe(data => this.countries = data);
-  }
+    public onRowInserted(e) {
+        this.countryService.save(e.data).subscribe(info => {
+            this.loadCountry();
+        });
+    }
+
+    public onRowUpdated(e) {
+        this.countryService.save(e.key).subscribe();
+    }
+
+    public onRowRemoved(e) {
+        this.countryService.remove(e.key.idCountry).subscribe();
+    }
+
+    private loadCountry() {
+        this.countryService.getAll().subscribe(data => this.countries = data);
+    }
 }

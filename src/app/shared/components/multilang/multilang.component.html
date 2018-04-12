@@ -1,0 +1,10 @@
+<dx-tab-panel
+        [items]="labels"
+        [selectedIndex]="0"
+        (onSelectionChanged)="onTabChanged($event)">
+  <ng-container *ngFor="let lang of labels; let i = index">
+    <dxi-item [title]="lang">
+      <dx-text-box (onKeyUp)="onTabValueChanged($event)" [value]="getLanguageValue()" [placeholder]="lang"></dx-text-box>
+    </dxi-item>
+  </ng-container>
+</dx-tab-panel>

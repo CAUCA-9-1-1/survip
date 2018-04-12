@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LanguageService} from 'igo2';
+import {TranslateService} from '@ngx-translate/core';
 import {confirm} from 'devextreme/ui/dialog';
 
-import {DevextremeDatagrid} from 'cause-lib';
 import {Question} from '../shared/models/question.model';
 import {QuestionService} from '../shared/services/question.service';
 import {ChoiceService} from '../shared/services/choice.service';
@@ -17,7 +16,7 @@ import {Choice} from '../shared/models/choice.model';
     ChoiceService
   ]
 })
-export class QuestionComponent extends DevextremeDatagrid implements OnInit {
+export class QuestionComponent implements OnInit {
   @Input() survey = '';
 
   questions: Question[] = [];
@@ -33,14 +32,12 @@ export class QuestionComponent extends DevextremeDatagrid implements OnInit {
   constructor(
     private questionService: QuestionService,
     private choiceService: ChoiceService,
-    private translate: LanguageService
-  ) {
-    super();
-  }
+    private translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.loadQuestion();
-    this.translate.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion']).subscribe(labels => {
+    this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion']).subscribe(labels => {
       this.messages = labels;
     });
   }
@@ -57,8 +54,8 @@ export class QuestionComponent extends DevextremeDatagrid implements OnInit {
     };
 
     this.questionService.create(question).subscribe(info => {
-      if (info.success) {
-        question.idSurveyQuestion = info.idSurveyQuestion;
+      if (info['success']) {
+        question.idSurveyQuestion = info['idSurveyQuestion'];
 
         this.selectedIndex = 0;
         this.loadQuestion();
@@ -109,11 +106,11 @@ export class QuestionComponent extends DevextremeDatagrid implements OnInit {
 
   public onRemoveQuestion() {
     if (this.selectedIndex > -1) {
-      confirm(this.messages['removeQuestion'], this.messages['question']).done((result) => {
+      /*confirm(this.messages['removeQuestion'], this.messages['question']).done((result) => {
         if (result) {
           this.questionService.remove(this.questions[this.selectedIndex].idSurveyQuestion).subscribe();
         }
-      });
+      });*/
     }
   }
 
@@ -123,7 +120,7 @@ export class QuestionComponent extends DevextremeDatagrid implements OnInit {
 
   public onChoiceInserted(e) {
     this.choiceService.create(e.data).subscribe(info => {
-      if (info.success) {
+      if (info['success']) {
         this.loadChoice();
       }
     });

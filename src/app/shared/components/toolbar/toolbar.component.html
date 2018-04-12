@@ -1,6 +1,6 @@
-<md-toolbar>
+<mat-toolbar>
   <ng-template ngFor let-item [ngForOf]="items">
-    <button *ngIf="item.popMenu === false" (click)="goto(item.path)" md-button>{{item.name | translate}}</button>
-    <button *ngIf="item.popMenu === true" [mdMenuTriggerFor]="appMenu"  md-button>{{item.name | translate}}</button>
+    <button *ngIf="item.popMenu === false" (click)="goto(item.path)" mat-button>{{item.name | translate}}</button>
+    <button *ngIf="item.popMenu === true" mat-button>{{item.name | translate}}</button>
   </ng-template>
-</md-toolbar>
+</mat-toolbar>

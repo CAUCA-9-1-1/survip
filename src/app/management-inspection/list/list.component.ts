@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
 import {alert} from 'devextreme/ui/dialog';
-import {LanguageService} from 'igo2';
 
 import {Inspection} from '../shared/models/inspection.model';
 import {InspectionService} from '../shared/services/inspection.service';
@@ -41,12 +41,12 @@ export class ListComponent implements OnInit {
     private webuserService: WebuserService,
     private riskLevelService: RiskLevelService,
     private inspectionBuildingService: InspectionBuildingService,
-    private dialog: MdDialog,
-    private translate: LanguageService
+    private dialog: MatDialog,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
-    this.translate.translate.get(['addInspection', 'selectBuildingFirst']).subscribe(labels => {
+    this.translate.get(['addInspection', 'selectBuildingFirst']).subscribe(labels => {
       this.messages = labels;
     });
 
@@ -70,9 +70,9 @@ export class ListComponent implements OnInit {
         if (result) {
           result.idBuilding = this.newInspection['idBuilding'];
 
-          this.inspectionService.assign(result).subscribe(data => {
+          /*this.inspectionService.assign(result).subscribe(data => {
             this.loadInspection();
-          });
+          });*/
         }
       });
     } else {
@@ -83,11 +83,11 @@ export class ListComponent implements OnInit {
   public onRowUpdated(e) {
     e.data.idInspection = e.key.idInspection;
 
-    this.inspectionService.update(e.data).subscribe();
+    // this.inspectionService.update(e.data).subscribe();
   }
 
   public onRowRemoved(e) {
-    this.inspectionService.assign(e.key.idInspection).subscribe();
+    // this.inspectionService.assign(e.key.idInspection).subscribe();
   }
 
   public onBuildingListOpened(e) {
@@ -108,21 +108,21 @@ export class ListComponent implements OnInit {
   }
 
   private loadRiskLevel() {
-    this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
+    // this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
   }
 
   private loadWebuser() {
-    this.webuserService.getAll().subscribe(data => this.users = data);
+    // this.webuserService.getAll().subscribe(data => this.users = data);
   }
 
   private loadInspection() {
-    this.inspectionService.getAll().subscribe(data => this.inspections = data);
+    // this.inspectionService.getAll().subscribe(data => this.inspections = data);
   }
 
   private loadBuidling() {
-    this.inspectionBuildingService.getAll().subscribe(data => {
+    /*this.inspectionBuildingService.getAll().subscribe(data => {
       this.buildings = data;
       this.filterBuilding();
-    });
+    });*/
   }
 }

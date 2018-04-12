@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {DevextremeDatagrid} from 'cause-lib';
 import {ConstructionType} from '../shared/models/construction-type.model';
 import {ConstructionTypeService} from '../shared/services/construction-type.service';
 
@@ -12,14 +11,12 @@ import {ConstructionTypeService} from '../shared/services/construction-type.serv
     ConstructionTypeService,
   ]
 })
-export class ConstructionTypeComponent extends DevextremeDatagrid implements OnInit {
+export class ConstructionTypeComponent implements OnInit {
   constructionTypes: ConstructionType[] = [];
 
   constructor(
     private constructionTypeService: ConstructionTypeService
-  ) {
-    super();
-  }
+  ) { }
 
   ngOnInit() {
     this.loadConstructionType();
@@ -30,24 +27,24 @@ export class ConstructionTypeComponent extends DevextremeDatagrid implements OnI
   }
 
   public onRowInserted(e) {
-    this.constructionTypeService.create(e.data).subscribe(info => {
+    /*this.constructionTypeService.create(e.data).subscribe(info => {
       if (info.success) {
         this.loadConstructionType();
       }
-    });
+    });*/
   }
 
   public onRowUpdated(e) {
     e.data.idConstructionType = e.key.idConstructionType;
 
-    this.constructionTypeService.update(e.data).subscribe();
+    // this.constructionTypeService.update(e.data).subscribe();
   }
 
   public onRowRemoved(e) {
-    this.constructionTypeService.remove(e.key.idConstructionType).subscribe();
+    // this.constructionTypeService.remove(e.key.idConstructionType).subscribe();
   }
 
   private loadConstructionType() {
-    this.constructionTypeService.getAll().subscribe(data => this.constructionTypes = data);
+    // this.constructionTypeService.getAll().subscribe(data => this.constructionTypes = data);
   }
 }

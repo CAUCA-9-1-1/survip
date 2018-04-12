@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  DevextremeDatagrid
-} from 'cause-lib';
 
 import {OperatorType} from '../shared/models/operator-type.model';
 import {OperatorTypeService} from '../shared/services/operator-type.service';
@@ -12,12 +9,10 @@ import {OperatorTypeService} from '../shared/services/operator-type.service';
   styleUrls: ['./operator-type.component.styl'],
   providers: [OperatorTypeService]
 })
-export class OperatorTypeComponent extends DevextremeDatagrid implements OnInit {
+export class OperatorTypeComponent implements OnInit {
   operatorTypes: OperatorType[] = [];
 
-  constructor(private operatorTypeService: OperatorTypeService) {
-    super();
-  }
+  constructor(private operatorTypeService: OperatorTypeService) { }
 
   ngOnInit() {
     this.loadOperatorType();
@@ -28,24 +23,24 @@ export class OperatorTypeComponent extends DevextremeDatagrid implements OnInit 
   }
 
   public onRowInserted(e) {
-    this.operatorTypeService.create(e.data).subscribe(info => {
+    /*this.operatorTypeService.create(e.data).subscribe(info => {
       if (info.success) {
         this.loadOperatorType();
       }
-    });
+    });*/
   }
 
   public onRowUpdated(e) {
     e.data.idOperatorType = e.key.idOperatorType;
 
-    this.operatorTypeService.update(e.data).subscribe();
+    // this.operatorTypeService.update(e.data).subscribe();
   }
 
   public onRowRemoved(e) {
-    this.operatorTypeService.remove(e.key.idOperatorType).subscribe();
+    // this.operatorTypeService.remove(e.key.idOperatorType).subscribe();
   }
 
   private loadOperatorType() {
-    this.operatorTypeService.getAll().subscribe(data => this.operatorTypes = data);
+    // this.operatorTypeService.getAll().subscribe(data => this.operatorTypes = data);
   }
 }

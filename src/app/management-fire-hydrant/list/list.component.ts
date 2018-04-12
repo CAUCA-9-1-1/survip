@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import {
-  DevextremeDatagrid
-} from 'cause-lib';
-
 import {FireHydrant} from '../shared/models/fire-hydrant.model';
 import {FireHydrantService} from '../shared/services/fire-hydrant.service';
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
@@ -27,7 +23,7 @@ import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
     LaneService,
   ]
 })
-export class ListComponent extends DevextremeDatagrid implements OnInit {
+export class ListComponent implements OnInit {
   fireHydrants: FireHydrant[] = [];
   fireHydrantTypes: FireHydrantType[] = [];
   lanes: Lane[] = [];
@@ -41,9 +37,7 @@ export class ListComponent extends DevextremeDatagrid implements OnInit {
     private operatorTypeService: OperatorTypeService,
     private unitOfMeasureService: UnitOfMeasureService,
     private laneService: LaneService,
-  ) {
-    super();
-  }
+  ) { }
 
   ngOnInit() {
     this.loadFireHydrant();
@@ -58,40 +52,40 @@ export class ListComponent extends DevextremeDatagrid implements OnInit {
   }
 
   public onRowInserted(e) {
-    this.fireHydrantService.create(e.data).subscribe(info => {
+    /*this.fireHydrantService.create(e.data).subscribe(info => {
       if (info.success) {
         this.loadFireHydrant();
       }
-    });
+    });*/
   }
 
   public onRowUpdated(e) {
     e.data.idFireHydrant = e.key.idFireHydrant;
 
-    this.fireHydrantService.update(e.data).subscribe();
+    // this.fireHydrantService.update(e.data).subscribe();
   }
 
   public onRowRemoved(e) {
-    this.fireHydrantService.remove(e.key.idFireHydrant).subscribe();
+    // this.fireHydrantService.remove(e.key.idFireHydrant).subscribe();
   }
 
   private loadFireHydrant() {
-    this.fireHydrantService.getAll().subscribe(data => this.fireHydrants = data);
+    // this.fireHydrantService.getAll().subscribe(data => this.fireHydrants = data);
   }
 
   private loadFireHydrantType() {
-    this.fireHydrantTypeService.getAll().subscribe(data => this.fireHydrantTypes = data);
+    // this.fireHydrantTypeService.getAll().subscribe(data => this.fireHydrantTypes = data);
   }
 
   private loadOperatorType() {
-    this.operatorTypeService.getAll().subscribe(data => this.operatorTypes = data);
+    // this.operatorTypeService.getAll().subscribe(data => this.operatorTypes = data);
   }
 
   private loadUnitOfMeasure() {
-    this.unitOfMeasureService.getAll('volume').subscribe(data => this.unitOfMeasures = data);
+    // this.unitOfMeasureService.getAll('volume').subscribe(data => this.unitOfMeasures = data);
   }
 
   private loadLane() {
-    this.laneService.getAll().subscribe(data => this.lanes = data);
+    // this.laneService.getAll().subscribe(data => this.lanes = data);
   }
 }

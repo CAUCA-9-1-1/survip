@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 
 import {Webuser} from '../../management-access/shared/models/webuser.model';
 import {WebuserService} from '../../management-access/shared/services/webuser.service';
@@ -24,7 +24,7 @@ export class CreateComponent implements OnInit {
   };
 
   constructor(
-    private dialogRef: MdDialogRef<CreateComponent>,
+    private dialogRef: MatDialogRef<CreateComponent>,
     private webuserService: WebuserService,
     private surveyService: SurveyService
   ) { }
@@ -43,10 +43,10 @@ export class CreateComponent implements OnInit {
   }
 
   private loadWebuser() {
-    this.webuserService.getAll().subscribe(data => this.users = data);
+    // this.webuserService.getAll().subscribe(data => this.users = data);
   }
 
   private loadSurvey() {
-    this.surveyService.getAll().subscribe(data => this.surveys = data);
+    // this.surveyService.getAll().subscribe(data => this.surveys = data);
   }
 }

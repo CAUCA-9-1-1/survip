@@ -1,76 +1,82 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CommonModule} from '@angular/common';
-//import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {MaterialModule} from '@angular/material';
-//import {DxTabPanelModule, DxTextBoxModule} from 'devextreme-angular';
-import {environment} from '../../environments/environment';
-
-import {
-  IgoModule,
-  provideConfigOptions,
-} from 'igo2';
-
-import {
-  CauseModule,
-  provideConfig,
-} from 'cause-lib';
-
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatToolbarModule } from '@angular/material';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { DxTabPanelModule, DxTextBoxModule } from 'devextreme-angular';
+import { environment } from '../../environments/environment';
 //import {MenuComponent} from './components/menu/menu.component';
 //import {MenuItemComponent} from './components/menu-item/menu-item.component';*/
-import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
-import {ToolbarComponent} from './components/toolbar/toolbar.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import {MultilangComponent} from './components/multilang/multilang.component';
 //import {ToolbarBackComponent} from './components/toolbar-back/toolbar-back.component';
 //import {FilterByPipe} from './pipes/filter.pipe';
 
-@NgModule({
-  declarations: [
-    PageNotFoundComponent,
-    ToolbarComponent,
-    /*MenuComponent,
-    MenuItemComponent,
-    ToolbarBackComponent,
-    FilterByPipe,*/
-  ],
-  exports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    MaterialModule,
-    //FormsModule,
-    FlexLayoutModule,
-    //ReactiveFormsModule,
-    IgoModule,
-    CauseModule,
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}
 
-    ToolbarComponent,
-    //MenuComponent,
-    //ToolbarBackComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    MaterialModule,
-    //FormsModule,
-    FlexLayoutModule,
-    //ReactiveFormsModule,
-    //DxTabPanelModule,
-    //DxTextBoxModule,
-    IgoModule.forRoot(),
-    CauseModule.forRoot(),
-  ],
-  providers: [
-    provideConfigOptions({
-      default: environment.igo,
-      // path: './assets/config-igo.json'
-    }),
-    provideConfig({
-      default: environment.cause,
-      // path: './assets/config-cause.json'
-    }),
-  ]
+@NgModule({
+    declarations: [
+        MultilangComponent,
+        PageNotFoundComponent,
+        ToolbarComponent,
+        /*MenuComponent,
+        MenuItemComponent,
+        ToolbarBackComponent,
+        FilterByPipe,*/
+    ],
+    exports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        FormsModule,
+        FlexLayoutModule,
+        HttpClientModule,
+        //ReactiveFormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTabsModule,
+        MatToolbarModule,
+        TranslateModule,
+
+        MultilangComponent,
+        ToolbarComponent,
+        //MenuComponent,
+        //ToolbarBackComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        FormsModule,
+        FlexLayoutModule,
+        HttpClientModule,
+        //ReactiveFormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTabsModule,
+        MatToolbarModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        DxTabPanelModule,
+        DxTextBoxModule,
+    ],
+    providers: [
+        HttpClientModule,
+    ]
 })
 export class SharedModule { }

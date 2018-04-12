@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Color} from 'cause-lib';
-import {Password} from 'cause-lib';
 import {Webuser} from '../shared/models/webuser.model';
 import {WebuserService} from '../shared/services/webuser.service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
@@ -59,7 +57,7 @@ export class WebuserComponent implements OnInit {
   }
 
   public onEditorPreparing(e) {
-    if (e.dataField === 'password' || e.dataField === 'passwordConfirm') {
+    /*if (e.dataField === 'password' || e.dataField === 'passwordConfirm') {
       e.editorOptions.mode = 'password';
       e.editorOptions.onKeyUp = (ev) => {
         const password = new Password();
@@ -74,7 +72,7 @@ export class WebuserComponent implements OnInit {
           });
         }
       };
-    }
+    }*/
   }
 
   public onEditingStart(e) {
@@ -87,21 +85,21 @@ export class WebuserComponent implements OnInit {
   }
 
   public onRowInserted(e) {
-    this.webuserService.create(e.data).subscribe(info => {
+    /*this.webuserService.create(e.data).subscribe(info => {
       if (info.success) {
         this.loadUsers();
       }
-    });
+    });*/
   }
 
   public onRowUpdated(e) {
     e.data.idWebuser = e.key.idWebuser;
 
-    this.webuserService.update(e.data).subscribe();
+    // this.webuserService.update(e.data).subscribe();
   }
 
   public onRowRemoved(e) {
-    this.webuserService.remove(e.key.idWebuser).subscribe();
+    // this.webuserService.remove(e.key.idWebuser).subscribe();
   }
 
   public onNewUserDepartment(e) {
@@ -115,11 +113,11 @@ export class WebuserComponent implements OnInit {
     e.data.idWebuserFireSafetyDepartment = e.key.idWebuserFireSafetyDepartment;
     e.data.idWebuser = this.selectedIdWebuser;
 
-    this.webuserDeptService.create(e.data).subscribe(info => {
+    /*this.webuserDeptService.create(e.data).subscribe(info => {
       if (info.success) {
         this.loadUserDepartment(this.selectedIdWebuser);
       }
-    });
+    });*/
   }
 
   public onUserDepartmentUpdated(e) {
@@ -129,22 +127,22 @@ export class WebuserComponent implements OnInit {
       }
     }
 
-    this.webuserDeptService.update(e.key).subscribe();
+    // this.webuserDeptService.update(e.key).subscribe();
   }
 
   public onUserDepartmentRemoved(e) {
-    this.webuserDeptService.remove(e.key.selectedIdWebuser).subscribe();
+    // this.webuserDeptService.remove(e.key.selectedIdWebuser).subscribe();
   }
 
   private loadUsers() {
-    this.webuserService.getAll().subscribe(data => this.users = data);
+    // this.webuserService.getAll().subscribe(data => this.users = data);
   }
 
   private loadDepartments() {
-    this.departmentService.getAll().subscribe(data => this.departments = data);
+    // this.departmentService.getAll().subscribe(data => this.departments = data);
   }
 
   private loadUserDepartment(idWebuser: string) {
-    this.webuserDeptService.getByUser(idWebuser).subscribe(data => this.userDepartments = data);
+    // this.webuserDeptService.getByUser(idWebuser).subscribe(data => this.userDepartments = data);
   }
 }

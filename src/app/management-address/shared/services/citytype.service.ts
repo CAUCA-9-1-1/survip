@@ -1,37 +1,37 @@
 import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
-import {HttpService} from 'cause-lib';
 import {CityType} from '../models/citytype.model';
 
 @Injectable()
 export class CityTypeService {
 
-  constructor(private http: HttpService) { }
+    constructor(private http: HttpClient) { }
 
-  public getAll() {
-    return this.http.get('citytype').map((response: Response) => {
-      const result = response.json();
+    public getAll() {
+        return this.http.get('citytype').pipe(
+            map((result) => {
+                return result['data'];
+            })
+        );
+    }
 
-      return result.data;
-    });
-  }
+    public create(cityType: CityType) {
+        return this.http.post(
+            'citytype',
+            JSON.stringify(cityType)
+        );
+    }
 
-  public create(cityType: CityType) {
-    return this.http.post(
-      'citytype',
-      JSON.stringify(cityType)
-    ).map((response: Response) => response.json());
-  }
+    public update(cityType: CityType) {
+        return this.http.put(
+            'citytype',
+            JSON.stringify(cityType),
+        );
+    }
 
-  public update(cityType: CityType) {
-    return this.http.put(
-      'citytype',
-      JSON.stringify(cityType),
-    ).map((response: Response) => response.json());
-  }
-
-  public remove(idCityType: string) {
-    return this.http.delete('citytype/' + idCityType).map((response: Response) => response.json());
-  }
+    public remove(idCityType: string) {
+        return this.http.delete('citytype/' + idCityType);
+    }
 }

@@ -1,45 +1,45 @@
 import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 
-import {HttpService} from 'cause-lib';
 import {OperatorType} from '../models/operator-type.model';
+
 
 @Injectable()
 export class OperatorTypeService {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpClient) { }
 
   public getAll() {
-    return this.http.get('operatortype').map((response: Response) => {
+    /*return this.http.get('operatortype').map((response: Response) => {
       const result = response.json();
 
       return result.data;
-    });
+    });*/
   }
 
   public get(idOperatorType: string) {
-    return this.http.get('operatortype/' + idOperatorType).map((response: Response) => {
+    /*return this.http.get('operatortype/' + idOperatorType).map((response: Response) => {
       const result = response.json();
 
       return result.data;
-    });
+    });*/
   }
 
   public create(type: OperatorType) {
-    return this.http.post(
+    /*return this.http.post(
       'operatortype',
       JSON.stringify(type)
-    ).map((response: Response) => response.json());
+    ).map((response: Response) => response.json());*/
   }
 
   public update(type: OperatorType) {
-    return this.http.put(
+    /*return this.http.put(
       'operatortype',
       JSON.stringify(type),
-    ).map((response: Response) => response.json());
+    ).map((response: Response) => response.json());*/
   }
 
   public remove(idOperatorType: string) {
-    return this.http.delete('operatortype/' + idOperatorType).map((response: Response) => response.json());
+    // return this.http.delete('operatortype/' + idOperatorType).map((response: Response) => response.json());
   }
 }

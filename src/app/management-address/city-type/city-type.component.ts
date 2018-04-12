@@ -1,21 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 
-import {DevextremeDatagrid} from 'cause-lib';
 import {CityType} from '../shared/models/citytype.model';
 import {CityTypeService} from '../shared/services/citytype.service';
 
 @Component({
   selector: 'app-managementaddress-citytype',
   templateUrl: './city-type.component.html',
-  styleUrls: ['./city-type.component.styl'],
+  styleUrls: ['./city-type.component.scss'],
   providers: [CityTypeService]
 })
-export class CityTypeComponent extends DevextremeDatagrid implements OnInit {
+export class CityTypeComponent implements OnInit {
   cityType: CityType[] = [];
 
-  constructor(private cityTypeService: CityTypeService) {
-    super();
-  }
+  constructor(private cityTypeService: CityTypeService) { }
 
   public ngOnInit() {
     this.loadCityType();
@@ -27,7 +24,7 @@ export class CityTypeComponent extends DevextremeDatagrid implements OnInit {
 
   public onRowInserted(e) {
     this.cityTypeService.create(e.data).subscribe(info => {
-      if (info.success) {
+      if (info['success']) {
         this.loadCityType();
       }
     });

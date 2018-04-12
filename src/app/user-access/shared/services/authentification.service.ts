@@ -1,37 +1,33 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-
-import {
-  HttpService,
-  WindowRefService
-} from 'cause-lib';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable()
 export class AuthenticationService {
-  private storage: any;
+    private storage: any;
 
-  constructor(
-    private http: HttpService,
-    private router: Router,
-    private windowRef: WindowRefService
-  ) {
-    this.storage = this.windowRef.nativeObject('localStorage');
-  }
+    constructor(private http: HttpClient) { }
 
-  public login(username: string, password: string) {
-    return this.http.login(username, password).map(infoToken => {
-      if (infoToken['data'].accessToken) {
-        this.storage.setItem('currentToken', infoToken['data'].accessToken);
+    public login(username: string, password: string) {
+        return this.http.post(environment.apiUrl + 'Authentification/Logon?user=' + username + '&password=' + password, {
+            username: username,
+            password: password,
+        }).pipe(
+            map(response => this.onResponse(response))
+        );
+    }
 
-        return infoToken['data'];
-      }
+    public logout() {
+        localStorage.removeItem('currentToken');
+    }
 
-      return {};
-    });
-  }
+    private onResponse(result) {
+        if (result.data.accessToken) {
+            localStorage.setItem('currentToken', result.data.accessToken);
+        }
 
-  public logout() {
-    this.http.logout();
-  }
+        return result.data;
+    }
 }

@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 
-import {HttpService} from 'cause-lib';
 import {AlarmPanelType} from '../models/alarm-panel-type.model';
 
 @Injectable()
 export class AlarmPanelTypeService {
-
+/*
   constructor(private http: HttpService) { }
 
   public getAll() {
@@ -41,5 +40,5 @@ export class AlarmPanelTypeService {
 
   public remove(idAlarmPanelType: string) {
     return this.http.delete('alarmpaneltype/' + idAlarmPanelType).map((response: Response) => response.json());
-  }
+  }*/
 }

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {DevextremeDatagrid} from 'cause-lib';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 import {Lane} from '../../management-address/shared/models/lane.model';
@@ -21,7 +20,7 @@ import {RiskLevelService} from '../shared/services/risk-level.service';
     RiskLevelService,
   ]
 })
-export class ListComponent extends DevextremeDatagrid implements OnInit {
+export class ListComponent  implements OnInit {
   buildings: Building[] = [];
   lanes: Lane[] = [];
   utilisationCodes: UtilisationCode[] = [];
@@ -32,9 +31,7 @@ export class ListComponent extends DevextremeDatagrid implements OnInit {
     private laneService: LaneService,
     private utilisationCode: UtilisationCodeService,
     private riskLevelService: RiskLevelService
-  ) {
-    super();
-  }
+  ) { }
 
   ngOnInit() {
     this.loadBuiling();
@@ -48,36 +45,36 @@ export class ListComponent extends DevextremeDatagrid implements OnInit {
   }
 
   public onRowInserted(e) {
-    this.buildingService.create(e.data).subscribe(info => {
+    /*this.buildingService.create(e.data).subscribe(info => {
       if (info.success) {
         this.loadBuiling();
       }
-    });
+    });*/
   }
 
   public onRowUpdated(e) {
     e.data.idBuilding = e.key.idBuilding;
 
-    this.buildingService.update(e.data).subscribe();
+    // this.buildingService.update(e.data).subscribe();
   }
 
   public onRowRemoved(e) {
-    this.buildingService.remove(e.key.idBuilding).subscribe();
+    // this.buildingService.remove(e.key.idBuilding).subscribe();
   }
 
   private loadBuiling() {
-    this.buildingService.getAll().subscribe(data => this.buildings = data);
+    // this.buildingService.getAll().subscribe(data => this.buildings = data);
   }
 
   private loadLane() {
-    this.laneService.getAll().subscribe(data => this.lanes = data);
+    // this.laneService.getAll().subscribe(data => this.lanes = data);
   }
 
   private loadUtilisationCode() {
-    this.utilisationCode.getAll().subscribe(data => this.utilisationCodes = data);
+    // this.utilisationCode.getAll().subscribe(data => this.utilisationCodes = data);
   }
 
   private loadRiskLevel() {
-    this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
+    // this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
   }
 }

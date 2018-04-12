@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {DevextremeDatagrid} from 'cause-lib';
 import {City} from '../shared/models/city.model';
 import {CityService} from '../shared/services/city.service';
 import {CityType} from '../shared/models/citytype.model';
@@ -11,14 +10,14 @@ import {CountyService} from '../shared/services/county.service';
 @Component({
   selector: 'app-managementaddress-city',
   templateUrl: './city.component.html',
-  styleUrls: ['./city.component.styl'],
+  styleUrls: ['./city.component.scss'],
   providers: [
     CityService,
     CityTypeService,
     CountyService,
   ]
 })
-export class CityComponent extends DevextremeDatagrid implements OnInit {
+export class CityComponent implements OnInit {
   cities: City[] = [];
   citiesType: CityType[] = [];
   counties: County[] = [];
@@ -27,9 +26,7 @@ export class CityComponent extends DevextremeDatagrid implements OnInit {
     private cityService: CityService,
     private cityTypeService: CityTypeService,
     private countyService: CountyService
-  ) {
-    super();
-  }
+  ) { }
 
   public ngOnInit() {
     this.loadCity();
@@ -43,7 +40,7 @@ export class CityComponent extends DevextremeDatagrid implements OnInit {
 
   public onRowInserted(e) {
     this.cityService.create(e.data).subscribe(info => {
-      if (info.success) {
+      if (info['success']) {
         this.loadCity();
       }
     });

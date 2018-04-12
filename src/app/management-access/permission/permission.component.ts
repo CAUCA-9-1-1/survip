@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LanguageService} from 'igo2';
+import {TranslateService} from '@ngx-translate/core';
 
 import {PermissionSystemFeature} from '../shared/models/permissionsystemfeature.model';
 import {PermissionObjectService} from '../shared/services/permissionobject.service';
@@ -28,7 +28,7 @@ export class PermissionComponent implements OnInit {
   constructor(
     private permissionService: PermissionService,
     private objectService: PermissionObjectService,
-    private translate: LanguageService
+    private translate: TranslateService
   ) {
     this.defaultLookup = {
       dataSource: [
@@ -59,7 +59,7 @@ export class PermissionComponent implements OnInit {
     };
 
     const labels = ['yes', 'no', 'seeParent', 'description', 'defaultValue', 'accessValue'];
-    this.translate.translate.get(labels).subscribe((result: object) => {
+    this.translate.get(labels).subscribe((result: object) => {
       this.labels = result;
       this.defaultLookup['dataSource'][0]['text'] = result['yes'];
       this.defaultLookup['dataSource'][1]['text'] = result['no'];
@@ -78,22 +78,22 @@ export class PermissionComponent implements OnInit {
     if (e.key.idPermission) {
       e.data.idPermission = e.key.idPermission;
 
-      this.permissionService.update(e.data).subscribe();
+      // this.permissionService.update(e.data).subscribe();
     } else {
       e.data.idPermissionObject = this.lastPermissionObject['idPermissionObject'];
       e.data.idPermissionSystemFeature = e.key.idPermissionSystemFeature;
 
-      this.permissionService.create(e.data).subscribe();
+      // this.permissionService.create(e.data).subscribe();
     }
   }
 
   public onRowSelected(e) {
     this.lastPermissionObject = e.itemData;
-    this.permissionService.get(e.itemData.idPermissionObject).subscribe(data => this.features = data);
+    // this.permissionService.get(e.itemData.idPermissionObject).subscribe(data => this.features = data);
   }
 
   private loadObject() {
-    this.objectService.getAll().subscribe(data => this.objects = data);
+    // this.objectService.getAll().subscribe(data => this.objects = data);
   }
 
   private onCalculateDisplayValue(column, data) {

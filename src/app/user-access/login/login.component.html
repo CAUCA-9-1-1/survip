@@ -1,14 +1,12 @@
 <div>
   <h2>{{'connection' | translate}}</h2>
-  <form novalidate (ngSubmit)="login()">
-    <md-input-container>
-      <input name="username" type="text" mdInput placeholder="{{'username' | translate}}" [(ngModel)]="username" required />
-      <md-error>{{'thisFieldIsRequired' | translate}}</md-error>
-    </md-input-container>
-    <md-input-container>
-      <input name="password" type="password" mdInput placeholder="{{'password' | translate}}" [(ngModel)]="password" required />
-      <md-error>{{'thisFieldIsRequired' | translate}}</md-error>
-    </md-input-container>
-    <button color="primary" md-raised-button>{{'enter' | translate}}</button>
+  <form novalidate (submit)="login()">
+    <mat-form-field>
+      <input matInput name="username" type="text" placeholder="{{'username' | translate}}" [(ngModel)]="username" required />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput name="password" type="password" placeholder="{{'password' | translate}}" [(ngModel)]="password" required />
+    </mat-form-field>
+    <button color="primary" mat-raised-button>{{'enter' | translate}}</button>
   </form>
 </div>

@@ -21,7 +21,7 @@ export class StatisticsComponent implements OnInit {
   constructor(private statisticService: StatisticService) {
     const start = new Date();
     const today = new Date();
-    const datePipe = new DatePipe(environment.locale);
+    const datePipe = new DatePipe('fr' /*environment.locale*/);
 
     start.setMonth(start.getMonth() - 1);
 
@@ -56,10 +56,10 @@ export class StatisticsComponent implements OnInit {
   }
 
   private loadConnectionByDate() {
-    this.statisticService.get('connectionByDate/' + this.period['start'] + '/' + this.period['end']).subscribe(data => this.connectionByDate = data);
+    // this.statisticService.get('connectionByDate/' + this.period['start'] + '/' + this.period['end']).subscribe(data => this.connectionByDate = data);
   }
 
   private loadRequestByTable() {
-    this.statisticService.get('requestByTable/' + this.period['start'] + '/' + this.period['end']).subscribe(data => this.requestByTable = data);
+    // this.statisticService.get('requestByTable/' + this.period['start'] + '/' + this.period['end']).subscribe(data => this.requestByTable = data);
   }
 }

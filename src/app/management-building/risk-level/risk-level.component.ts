@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {DevextremeDatagrid} from 'cause-lib';
 import {RiskLevel} from '../shared/models/risk-level.model';
 import {RiskLevelService} from '../shared/services/risk-level.service';
 
@@ -12,14 +11,12 @@ import {RiskLevelService} from '../shared/services/risk-level.service';
     RiskLevelService,
   ]
 })
-export class RiskLevelComponent extends DevextremeDatagrid implements OnInit {
+export class RiskLevelComponent implements OnInit {
   riskLevels: RiskLevel[] = [];
 
   constructor(
     private riskLevelService: RiskLevelService
-  ) {
-    super();
-  }
+  ) { }
 
   ngOnInit() {
     this.loadRiskLevel();
@@ -30,24 +27,24 @@ export class RiskLevelComponent extends DevextremeDatagrid implements OnInit {
   }
 
   public onRowInserted(e) {
-    this.riskLevelService.create(e.data).subscribe(info => {
+    /*this.riskLevelService.create(e.data).subscribe(info => {
       if (info.success) {
         this.loadRiskLevel();
       }
-    });
+    });*/
   }
 
   public onRowUpdated(e) {
     e.data.idRiskLevel = e.key.idRiskLevel;
 
-    this.riskLevelService.update(e.data).subscribe();
+    // this.riskLevelService.update(e.data).subscribe();
   }
 
   public onRowRemoved(e) {
-    this.riskLevelService.remove(e.key.idRiskLevel).subscribe();
+    // this.riskLevelService.remove(e.key.idRiskLevel).subscribe();
   }
 
   private loadRiskLevel() {
-    this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
+    // this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
   }
 }

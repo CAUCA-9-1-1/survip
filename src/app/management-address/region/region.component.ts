@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {DevextremeDatagrid} from 'cause-lib';
 import {Region} from '../shared/models/region.model';
 import {RegionService} from '../shared/services/region.service';
 import {State} from '../shared/models/state.model';
@@ -9,19 +8,17 @@ import {StateService} from '../shared/services/state.service';
 @Component({
   selector: 'app-managementaddress-region',
   templateUrl: './region.component.html',
-  styleUrls: ['./region.component.styl'],
+  styleUrls: ['./region.component.scss'],
   providers: [
     RegionService,
     StateService,
   ]
 })
-export class RegionComponent extends DevextremeDatagrid implements OnInit {
+export class RegionComponent implements OnInit {
   regions: Region[] = [];
   states: State[] = [];
 
-  constructor(private regionService: RegionService, private stateService: StateService) {
-    super();
-  }
+  constructor(private regionService: RegionService, private stateService: StateService) { }
 
   public ngOnInit() {
     this.loadRegion();
@@ -34,7 +31,7 @@ export class RegionComponent extends DevextremeDatagrid implements OnInit {
 
   public onRowInserted(e) {
     this.regionService.create(e.data).subscribe(info => {
-      if (info.success) {
+      if (info['success']) {
         this.loadRegion();
       }
     });

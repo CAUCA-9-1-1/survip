@@ -1,37 +1,36 @@
 import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
-import {HttpService} from 'cause-lib';
-import {Country} from '../models/country.model';
+import { RequestService } from '../../../shared/services/request.service';
+import { Country } from '../models/country.model';
+
 
 @Injectable()
-export class CountryService {
+export class CountryService extends RequestService {
 
-  constructor(private http: HttpService) { }
+    constructor(private http: HttpClient) {
+        super();
+    }
 
-  public getAll() {
-    return this.http.get('country').map((response: Response) => {
-      const result = response.json();
+    getAll() {
+        return this.http.get<Country[]>(this.apiUrl + 'Country', {
+            headers: this.headers
+        });
+    }
 
-      return result.data;
-    });
-  }
+    save(country: Country) {
+        return this.http.post(
+            this.apiUrl + 'Country',
+            JSON.stringify(country),
+            {
+                headers: this.headers
+            }
+        );
+    }
 
-  public create(country: Country) {
-    return this.http.post(
-      'country',
-      JSON.stringify(country)
-    ).map((response: Response) => response.json());
-  }
-
-  public update(country: Country) {
-    return this.http.put(
-      'country',
-      JSON.stringify(country),
-    ).map((response: Response) => response.json());
-  }
-
-  public remove(idCountry: string) {
-    return this.http.delete('country/' + idCountry).map((response: Response) => response.json());
-  }
+    remove(idCountry: string) {
+        return this.http.delete(this.apiUrl + 'Country/' + idCountry, {
+            headers: this.headers
+        });
+    }
 }

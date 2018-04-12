@@ -4,16 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  envName: 'local',
   production: false,
-  locale: 'fr',
-  igo: {
-    language: {
-      prefix: './assets/locale/'
-    }
-  },
-  cause: {
-    apiUrl: 'http://localhost:8080/',
-    languages: ['fr', 'en']
-  },
+    apiUrl: 'http://192.168.122.245:63933/api/'
 };

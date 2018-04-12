@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {DevextremeDatagrid} from 'cause-lib';
 import {Lane} from '../shared/models/lane.model';
 import {LaneService} from '../shared/services/lane.service';
 import {City} from '../shared/models/city.model';
@@ -9,19 +8,17 @@ import {CityService} from '../shared/services/city.service';
 @Component({
   selector: 'app-managementaddress-lane',
   templateUrl: './lane.component.html',
-  styleUrls: ['./lane.component.styl'],
+  styleUrls: ['./lane.component.scss'],
   providers: [
     LaneService,
     CityService,
   ]
 })
-export class LaneComponent extends DevextremeDatagrid implements OnInit {
+export class LaneComponent implements OnInit {
   lanes: Lane[] = [];
   cities: City[] = [];
 
-  constructor(private laneService: LaneService, private cityService: CityService) {
-    super();
-  }
+  constructor(private laneService: LaneService, private cityService: CityService) { }
 
   public ngOnInit() {
     this.loadLane();
@@ -34,7 +31,7 @@ export class LaneComponent extends DevextremeDatagrid implements OnInit {
 
   public onRowInserted(e) {
     this.laneService.create(e.data).subscribe(info => {
-      if (info.success) {
+      if (info['success']) {
         this.loadLane();
       }
     });

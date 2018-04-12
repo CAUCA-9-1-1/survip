@@ -1,37 +1,37 @@
 import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
-import {HttpService} from 'cause-lib';
 import {County} from '../models/county.model';
 
 @Injectable()
 export class CountyService {
 
-  constructor(private http: HttpService) { }
+    constructor(private http: HttpClient) { }
 
-  public getAll() {
-    return this.http.get('county').map((response: Response) => {
-      const result = response.json();
+    public getAll() {
+        return this.http.get('county').pipe(
+            map((result) => {
+                return result['data'];
+            })
+        );
+    }
 
-      return result.data;
-    });
-  }
+    public create(county: County) {
+        return this.http.post(
+            'county',
+            JSON.stringify(county)
+        );
+    }
 
-  public create(county: County) {
-    return this.http.post(
-      'county',
-      JSON.stringify(county)
-    ).map((response: Response) => response.json());
-  }
+    public update(county: County) {
+        return this.http.put(
+            'county',
+            JSON.stringify(county),
+        );
+    }
 
-  public update(county: County) {
-    return this.http.put(
-      'county',
-      JSON.stringify(county),
-    ).map((response: Response) => response.json());
-  }
-
-  public remove(idCounty: string) {
-    return this.http.delete('county/' + idCounty).map((response: Response) => response.json());
-  }
+    public remove(idCounty: string) {
+        return this.http.delete('county/' + idCounty);
+    }
 }

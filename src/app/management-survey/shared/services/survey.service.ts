@@ -1,26 +1,26 @@
-import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
-import {HttpService, WindowRefService} from 'cause-lib';
-import {Survey} from '../models/survey.model';
+import { Survey } from '../models/survey.model';
 
 @Injectable()
 export class SurveyService {
 
-  constructor(private http: HttpService, private windowRef: WindowRefService) { }
+  constructor(private http: HttpClient) { }
 
   public getAll() {
-    return this.http.get('survey').map((response: Response) => {
-      const result = response.json();
-
-      return result.data;
-    });
+    return this.http.get('survey').pipe(
+      map((result) => {
+        return result['data'];
+      })
+    );
   }
 
   public update(survey: Survey) {
     return this.http.put(
       'survey',
       JSON.stringify(survey)
-    ).map((response: Response) => response.json());
+    );
   }
 }

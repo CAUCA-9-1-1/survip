@@ -1,37 +1,37 @@
 import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 
-import {HttpService} from 'cause-lib';
 import {UnitOfMeasure} from '../models/unit-of-measure.model';
+
 
 @Injectable()
 export class UnitOfMeasureService {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpClient) { }
 
   public getAll(type?: string) {
-    return this.http.get('unitofmeasure' + (type ? '/' + type : '')).map((response: Response) => {
+    /*return this.http.get('unitofmeasure' + (type ? '/' + type : '')).map((response: Response) => {
       const result = response.json();
 
       return result.data;
-    });
+    });*/
   }
 
   public create(unit: UnitOfMeasure) {
-    return this.http.post(
+    /*return this.http.post(
       'unitofmeasure',
       JSON.stringify(unit)
-    ).map((response: Response) => response.json());
+    ).map((response: Response) => response.json());*/
   }
 
   public update(unit: UnitOfMeasure) {
-    return this.http.put(
+    /*return this.http.put(
       'unitofmeasure',
       JSON.stringify(unit),
-    ).map((response: Response) => response.json());
+    ).map((response: Response) => response.json());*/
   }
 
   public remove(idUnitOfMeasure: string) {
-    return this.http.delete('unitofmeasure/' + idUnitOfMeasure).map((response: Response) => response.json());
+    // return this.http.delete('unitofmeasure/' + idUnitOfMeasure).map((response: Response) => response.json());
   }
 }
