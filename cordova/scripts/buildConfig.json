@@ -1,8 +1,0 @@
-{
-  "android": {
-    "release": {
-      "keystore": "app-release-key.keystore",
-      "alias": "cauca"
-    }
-  }
-}
