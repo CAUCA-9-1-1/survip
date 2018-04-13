@@ -1,0 +1,82 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+/** Generated at http://mcg.mbitson.com **/
+$cause-red: (
+        50 : #f6e4e3,
+        100 : #e8bcb9,
+        200 : #d9908b,
+        300 : #ca635d,
+        400 : #be413a,
+        500 : #b32017,
+        600 : #ac1c14,
+        700 : #a31811,
+        800 : #9a130d,
+        900 : #8b0b07,
+        A100 : #ffbab8,
+        A200 : #ff8785,
+        A400 : #ff5552,
+        A700 : #ff3c39,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #000000,
+                400 : #ffffff,
+                500 : #ffffff,
+                600 : #ffffff,
+                700 : #ffffff,
+                800 : #ffffff,
+                900 : #ffffff,
+                A100 : #000000,
+                A200 : #000000,
+                A400 : #000000,
+                A700 : #ffffff,
+        )
+);
+
+$cause-gold: (
+        50 : #f9f6ef,
+        100 : #efe9d6,
+        200 : #e5dbbb,
+        300 : #dbcca0,
+        400 : #d3c18b,
+        500 : #cbb677,
+        600 : #c6af6f,
+        700 : #bea664,
+        800 : #b89e5a,
+        900 : #ac8e47,
+        A100 : #ffffff,
+        A200 : #fff1d1,
+        A400 : #ffe29e,
+        A700 : #ffda85,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #000000,
+                400 : #000000,
+                500 : #000000,
+                600 : #000000,
+                700 : #000000,
+                800 : #000000,
+                900 : #000000,
+                A100 : #000000,
+                A200 : #000000,
+                A400 : #000000,
+                A700 : #000000,
+        )
+);
+
+/** Define the theme. **/
+$cause-primary: mat-palette($cause-red);
+$cause-accent:  mat-palette($cause-red);
+$cause-theme:   mat-light-theme($cause-primary, $cause-accent);
+
+@include angular-material-theme($cause-theme);
+
+/**
+  Include the theme styles for only specified components.
+  @include mat-button-theme($app-theme);
+**/
