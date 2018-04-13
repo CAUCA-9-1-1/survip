@@ -8,9 +8,11 @@ import { ManagementAddressModule } from './management-address/management-address
 
 
 @NgModule({
-    bootstrap: [AppComponent],
+    bootstrap: [
+        AppComponent,
+    ],
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     imports: [
         SharedModule,
