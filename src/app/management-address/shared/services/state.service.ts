@@ -8,7 +8,6 @@ import { State } from '../models/state.model';
 @Injectable()
 export class StateService extends RequestService {
 
-
     constructor(private http: HttpClient) {
         super();
     }
