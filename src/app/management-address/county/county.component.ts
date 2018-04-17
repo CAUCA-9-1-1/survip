@@ -7,64 +7,79 @@ import {StateService} from '../shared/services/state.service';
 import {Region} from '../shared/models/region.model';
 import {RegionService} from '../shared/services/region.service';
 
+
 @Component({
-  selector: 'app-managementaddress-county',
-  templateUrl: './county.component.html',
-  styleUrls: ['./county.component.scss'],
-  providers: [
-    CountyService,
-    StateService,
-    RegionService,
-  ]
-})
+    selector: 'app-managementaddress-county',
+    templateUrl: './county.component.html',
+    styleUrls: ['./county.component.scss'],
+    providers: [
+        CountyService,
+        StateService,
+        RegionService,
+    ]
+    })
 export class CountyComponent implements OnInit {
-  counties: County[] = [];
-  states: State[] = [];
-  regions: Region[] = [];
+    counties: County[] = [];
+    states: State[] = [];
+    regions: Region[] = [];
 
-  constructor(
-    private countyService: CountyService,
-    private stateService: StateService,
-    private regionService: RegionService
-  ) { }
+    constructor(
+        private countyService: CountyService,
+        private stateService: StateService,
+        private regionService: RegionService
+    ) { }
 
-  public ngOnInit() {
-    this.loadCounty();
-    this.loadState();
-    this.loadRegion();
-  }
-
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
-
-  public onRowInserted(e) {
-    this.countyService.create(e.data).subscribe(info => {
-      if (info['success']) {
+    ngOnInit() {
         this.loadCounty();
-      }
-    });
-  }
+        this.loadState();
+        this.loadRegion();
+    }
 
-  public onRowUpdated(e) {
-    e.data.idCounty = e.key.idCounty;
+    getCountyName(data) {
+        const county = County.fromJSON(data);
 
-    this.countyService.update(e.data).subscribe();
-  }
+        return county.getLocalization('fr');
+    }
 
-  public onRowRemoved(e) {
-    this.countyService.remove(e.key.idCounty).subscribe();
-  }
+    getRegionName(data) {
+        const region = Region.fromJSON(data);
 
-  private loadCounty() {
-    this.countyService.getAll().subscribe(data => this.counties = data);
-  }
+        return region.getLocalization('fr');
+    }
 
-  private loadState() {
-    this.stateService.getAll().subscribe(data => this.states = data);
-  }
+    getStateName(data) {
+        const state = State.fromJSON(data);
 
-  private loadRegion() {
-    this.regionService.getAll().subscribe(data => this.regions = data);
-  }
+        return state.getLocalization('fr');
+    }
+
+    onInitNewRow(e) {
+        e.data.isActive = true;
+    }
+
+    onRowInserted(e) {
+        this.countyService.save(e.data).subscribe(info => {
+            this.loadCounty();
+        });
+    }
+
+    onRowUpdated(e) {
+        this.countyService.save(e.data).subscribe();
+    }
+
+    onRowRemoved(e) {
+        this.countyService.remove(e.key.id).subscribe();
+    }
+
+    private loadCounty() {
+        this.countyService.getAll().subscribe(data => this.counties = data);
+    }
+
+    private loadState() {
+        this.stateService.getAll().subscribe(data => this.states = data);
+    }
+
+    private loadRegion() {
+        this.regionService.getAll().subscribe(data => this.regions = data);
+    }
 }
