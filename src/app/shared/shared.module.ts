@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatTabsModule, MatToolbarModule } from '@angular/material';
 import { DxTabPanelModule, DxTextBoxModule } from 'devextreme-angular';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -46,6 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
+        MatSnackBarModule,
         MatTabsModule,
         MatToolbarModule,
         MultilangComponent,
@@ -66,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
+        MatSnackBarModule,
         MatTabsModule,
         MatToolbarModule,
         DxTabPanelModule,

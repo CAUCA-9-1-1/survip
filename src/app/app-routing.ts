@@ -25,25 +25,25 @@ const appRoutes: Routes = [{
     canActivate: [AuthGuardService],
     children: [{
         path: 'inspection',
-        component: LoginComponent//ManagementInspectionComponent
+        component: ManagementAddressComponent//ManagementInspectionComponent
     }, {
         path: 'interventionplan',
-        component: LoginComponent//ManagementInterventionPlanComponent
+        component: ManagementAddressComponent//ManagementInterventionPlanComponent
     }, {
         path: 'survey',
-        component: LoginComponent//ManagementSurveyComponent
+        component: ManagementAddressComponent//ManagementSurveyComponent
     }, {
         path: 'building',
-        component: LoginComponent//ManagementBuildingComponent
+        component: ManagementAddressComponent//ManagementBuildingComponent
     }, {
         path: 'address',
         component: ManagementAddressComponent
     }, {
         path: 'firehydrant',
-        component: LoginComponent//ManagementFireHydrantComponent
+        component: ManagementAddressComponent//ManagementFireHydrantComponent
     }, {
         path: 'access',
-        component: LoginComponent//ManagementAccessComponent,
+        component: ManagementAddressComponent//ManagementAccessComponent,
     }]
 }, {
     path: '**',

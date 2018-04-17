@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from '../shared/services/authentification.service';
+import { MatSnackBar } from '@angular/material';
+
 
 @Component({
     selector: 'app-login',
@@ -20,15 +22,15 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private auth: AuthenticationService,
-        // private alertService: AlertService
+        private notification: MatSnackBar
     ) { }
 
-    public ngOnInit() {
+    ngOnInit() {
         this.auth.logout();
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    public login(e) {
+    login(e) {
         if (!this.username || !this.password) {
             return false;
         }
@@ -37,10 +39,18 @@ export class LoginComponent implements OnInit {
             if (token.accessToken) {
                 this.router.navigate([this.returnUrl]);
             } else {
-                alert('bad login');
+                this.notify('bad login');
             }
+        }, error => {
+            this.notify('bad login');
         });
 
         return false;
+    }
+
+    private notify(message: string) {
+        this.notification.open( message, '', {
+            duration: 5000,
+        });
     }
 }
