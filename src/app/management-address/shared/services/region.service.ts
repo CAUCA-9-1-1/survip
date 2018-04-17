@@ -1,5 +1,6 @@
-import {Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import 'rxjs/add/operator/catch';
 
 import {Region} from '../models/region.model';
 import {RequestService} from '../../../shared/services/request.service';
@@ -8,14 +9,14 @@ import {State} from '../models/state.model';
 @Injectable()
 export class RegionService extends RequestService {
 
-    constructor(private http: HttpClient) {
-        super();
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
     }
 
     public getAll() {
         return this.http.get<Region[]>(this.apiUrl + 'Region', {
             headers: this.headers
-        });
+        }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
     public save(state: State) {
@@ -24,12 +25,12 @@ export class RegionService extends RequestService {
             JSON.stringify(state), {
                 headers: this.headers
             }
-        );
+        ).catch((error: HttpErrorResponse) => this.error(error));
     }
 
     public remove(idState: string) {
         return this.http.delete(this.apiUrl + 'Region/' + idState, {
             headers: this.headers
-        });
+        }).catch((error: HttpErrorResponse) => this.error(error));
     }
 }
