@@ -1,37 +1,35 @@
 import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 
 import {Region} from '../models/region.model';
+import {RequestService} from '../../../shared/services/request.service';
+import {State} from '../models/state.model';
 
 @Injectable()
-export class RegionService {
+export class RegionService extends RequestService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        super();
+    }
 
     public getAll() {
-        return this.http.get('region').pipe(
-            map((result) => {
-                return result['data'];
-            })
-        );
+        return this.http.get<Region[]>(this.apiUrl + 'Region', {
+            headers: this.headers
+        });
     }
 
-    public create(region: Region) {
+    public save(state: State) {
         return this.http.post(
-            'region',
-            JSON.stringify(region)
+            this.apiUrl + 'Region',
+            JSON.stringify(state), {
+                headers: this.headers
+            }
         );
     }
 
-    public update(region: Region) {
-        return this.http.put(
-            'region',
-            JSON.stringify(region)
-        );
-    }
-
-    public remove(idRegion: string) {
-        return this.http.delete('region/' + idRegion);
+    public remove(idState: string) {
+        return this.http.delete(this.apiUrl + 'Region/' + idState, {
+            headers: this.headers
+        });
     }
 }
