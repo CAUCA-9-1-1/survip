@@ -1,37 +1,36 @@
-import {Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import 'rxjs/add/operator/catch';
 
 import {City} from '../models/city.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 @Injectable()
-export class CityService {
+export class CityService extends RequestService {
 
-    constructor(private http: HttpClient) { }
-
-    public getAll() {
-        return this.http.get('city').pipe(
-            map((result) => {
-                return result['data'];
-            })
-        );
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
     }
 
-    public create(city: City) {
+    getAll() {
+        return this.http.get<City[]>(this.apiUrl + 'City', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    save(city: City) {
         return this.http.post(
-            'city',
-            JSON.stringify(city)
-        );
-    }
-
-    public update(city: City) {
-        return this.http.put(
-            'city',
+            this.apiUrl + 'City',
             JSON.stringify(city),
-        );
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    public remove(idCity: string) {
-        return this.http.delete('city/' + idCity);
+    remove(idCity: string) {
+        return this.http.delete(this.apiUrl + 'City/' + idCity, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
     }
 }

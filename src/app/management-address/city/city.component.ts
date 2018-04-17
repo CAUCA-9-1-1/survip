@@ -8,63 +8,80 @@ import {County} from '../shared/models/county.model';
 import {CountyService} from '../shared/services/county.service';
 
 @Component({
-  selector: 'app-managementaddress-city',
-  templateUrl: './city.component.html',
-  styleUrls: ['./city.component.scss'],
-  providers: [
-    CityService,
-    CityTypeService,
-    CountyService,
-  ]
+    selector: 'app-managementaddress-city',
+    templateUrl: './city.component.html',
+    styleUrls: ['./city.component.scss'],
+    providers: [
+        CityService,
+        CityTypeService,
+        CountyService,
+    ]
 })
 export class CityComponent implements OnInit {
-  cities: City[] = [];
-  citiesType: CityType[] = [];
-  counties: County[] = [];
+    cities: City[] = [];
+    citiesType: CityType[] = [];
+    counties: County[] = [];
 
-  constructor(
-    private cityService: CityService,
-    private cityTypeService: CityTypeService,
-    private countyService: CountyService
-  ) { }
+    constructor(
+        private cityService: CityService,
+        private cityTypeService: CityTypeService,
+        private countyService: CountyService
+    ) { }
 
-  public ngOnInit() {
-    this.loadCity();
-    this.loadCityType();
-    this.loadCounty();
-  }
-
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
-
-  public onRowInserted(e) {
-    this.cityService.create(e.data).subscribe(info => {
-      if (info['success']) {
+    ngOnInit() {
         this.loadCity();
-      }
-    });
-  }
+        this.loadCityType();
+        this.loadCounty();
+    }
 
-  public onRowUpdated(e) {
-    e.data.idCity = e.key.idCity;
+    getCityName(data) {
+        const city = City.fromJSON(data);
 
-    this.cityService.update(e.data).subscribe();
-  }
+        return city.getLocalization('fr');
+    }
 
-  public onRowRemoved(e) {
-    this.cityService.remove(e.key.idCity).subscribe();
-  }
+    getCityTypeName(data) {
+        const cityType = CityType.fromJSON(data);
 
-  private loadCity() {
-    this.cityService.getAll().subscribe(data => this.cities = data);
-  }
+        return cityType.getLocalization('fr');
+    }
 
-  private loadCityType() {
-    this.cityTypeService.getAll().subscribe(data => this.citiesType = data);
-  }
+    getCountyName(data) {
+        const county = County.fromJSON(data);
 
-  private loadCounty() {
-    this.countyService.getAll().subscribe(data => this.counties = data);
-  }
+        return county.getLocalization('fr');
+    }
+
+    onInitNewRow(e) {
+        e.data.emailAddress = '';
+        e.data.isActive = true;
+    }
+
+    onRowInserted(e) {
+        this.cityService.save(e.data).subscribe(info => {
+            this.loadCity();
+        }, error => {
+            this.loadCity();
+        });
+    }
+
+    onRowUpdated(e) {
+        this.cityService.save(e.key).subscribe();
+    }
+
+    onRowRemoved(e) {
+        this.cityService.remove(e.key.id).subscribe();
+    }
+
+    private loadCity() {
+        this.cityService.getAll().subscribe(data => this.cities = data);
+    }
+
+    private loadCityType() {
+        this.cityTypeService.getAll().subscribe(data => this.citiesType = data);
+    }
+
+    private loadCounty() {
+        this.countyService.getAll().subscribe(data => this.counties = data);
+    }
 }

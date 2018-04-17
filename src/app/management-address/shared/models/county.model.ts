@@ -6,6 +6,7 @@ export class County extends WithLocalization {
     idRegion: string;
     idState: string;
     isActive: boolean;
+    createdOn: Date;
 
     static fromJSON(data: object): County {
         const county = new County();
