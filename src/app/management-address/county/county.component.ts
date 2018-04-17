@@ -64,7 +64,7 @@ export class CountyComponent implements OnInit {
     }
 
     onRowUpdated(e) {
-        this.countyService.save(e.data).subscribe();
+        this.countyService.save(e.key).subscribe();
     }
 
     onRowRemoved(e) {
