@@ -6,9 +6,9 @@
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
-            dataField="name"
+            dataField="localizations"
             caption="{{'name' | translate}}"
-            [calculateCellValue]="onCalculateCellValue"
+            [calculateCellValue]="getCityName"
             editCellTemplate="editname"
             sortOrder="asc"
             sortIndex="1">
@@ -16,7 +16,7 @@
     <dxi-column
             dataField="idCityType"
             caption="{{'cityType' | translate}}">
-        <dxo-lookup [dataSource]="citiesType" displayExpr="name.fr" valueExpr="idCityType">
+        <dxo-lookup [dataSource]="citiesType" [displayExpr]="getCityTypeName" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column
@@ -24,11 +24,11 @@
             caption="{{'county' | translate}}"
             sortOrder="asc"
             sortIndex="0">
-        <dxo-lookup [dataSource]="counties" displayExpr="name.fr" valueExpr="idCounty">
+        <dxo-lookup [dataSource]="counties" [displayExpr]="getCountyName" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="code" caption="{{'code' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="code3Letter" caption="{{'code3Letter' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="code3Letters" caption="{{'code3Letters' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="emailAddress" caption="{{'email' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
@@ -37,18 +37,17 @@
         <dxo-popup title="{{'city' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="1">
-            <dxi-item dataField="name" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idCityType" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idCounty" [isRequired]="true"></dxi-item>
             <dxi-item dataField="code" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="code3Letter" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="code3Letters" [isRequired]="true"></dxi-item>
             <dxi-item dataField="emailAddress"></dxi-item>
             <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
 
     <div *dxTemplate="let rowname of 'editname'">
-        À refaire
-        <!-- <cause-multilang [value]="rowname.row.data.name" (onValueChanged)="rowname.setValue($event.value);"></cause-multilang> -->
+        <app-multilang [value]="rowname.row.data.localizations" (onValueChanged)="rowname.setValue($event.value);"></app-multilang>
     </div>
 </dx-data-grid>
