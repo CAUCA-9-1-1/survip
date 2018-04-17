@@ -1,12 +1,12 @@
 <div>
-  <h2>{{'connection' | translate}}</h2>
-  <form novalidate (submit)="login()">
-    <mat-form-field>
-      <input matInput name="username" type="text" placeholder="{{'username' | translate}}" [(ngModel)]="username" required />
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput name="password" type="password" placeholder="{{'password' | translate}}" [(ngModel)]="password" required />
-    </mat-form-field>
-    <button color="primary" mat-raised-button>{{'enter' | translate}}</button>
-  </form>
+    <h2>{{'connection' | translate}}</h2>
+    <form novalidate (submit)="login()">
+        <mat-form-field>
+            <input matInput name="username" type="text" placeholder="{{'username' | translate}}" [(ngModel)]="username" required />
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput name="password" type="password" placeholder="{{'password' | translate}}" [(ngModel)]="password" required />
+        </mat-form-field>
+        <button color="primary" mat-raised-button>{{'enter' | translate}}</button>
+    </form>
 </div>
