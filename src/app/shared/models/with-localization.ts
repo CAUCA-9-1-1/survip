@@ -1,4 +1,7 @@
-export class WithLocalization {
+import { BaseModel } from './base.model';
+
+
+export class WithLocalization extends BaseModel {
     localizations: any[];
 
     getLocalization(languageCode: string) {
