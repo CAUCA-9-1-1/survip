@@ -36,7 +36,7 @@
     <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-popup title="{{'lane' | translate}}" [showTitle]="true"></dxo-popup>
 
-        <dxo-form colCount="1" validationGroup="laneGroup">
+        <dxo-form colCount="1">
             <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idCity" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idPublicCode" [isRequired]="true"></dxi-item>
@@ -45,7 +45,7 @@
         </dxo-form>
     </dxo-editing>
 
-    <div *dxTemplate="let rowname of 'editname'">
-        <app-multilang [isRequired]="true" [dataField]="rowname" (valueChanged)="rowname.setValue($event.value);"></app-multilang>
+    <div *dxTemplate="let field of 'editname'">
+        <app-multilang [isRequired]="true" [dataField]="field" (valueChanged)="field.setValue($event.value);"></app-multilang>
     </div>
 </dx-data-grid>
