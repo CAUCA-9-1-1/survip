@@ -32,7 +32,7 @@ export class RequestService {
                 }
                 break;
             case 404:
-                alert('Not found : ' + this.apiUrl + 'Country');
+                alert('Not found : ' + error.url);
                 break;
         }
 

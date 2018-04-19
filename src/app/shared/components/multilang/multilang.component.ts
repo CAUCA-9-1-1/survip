@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {DxFormComponent} from 'devextreme-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 
@@ -8,12 +9,14 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./multilang.component.scss']
 })
 export class MultilangComponent implements OnInit {
-    @Output() onValueChanged = new EventEmitter();
-    @Input() value: any[];
+    @Output() valueChanged = new EventEmitter();
+    @Input() value: any;
+    @Input() dataField: any;
+    @Input() isRequired: boolean;
 
-    public labels: string[] = [];
-    public languages: string[] = [];
-    public selectedTab: string;
+    labels: string[] = [];
+    languages: string[] = [];
+    selectedTab: string;
 
     constructor(private translate: TranslateService) {
         this.languages = ['fr', 'en'];
@@ -30,6 +33,10 @@ export class MultilangComponent implements OnInit {
 
     ngOnInit() {
         this.selectedTab = this.languages[0];
+
+        if (this.dataField) {
+            this.value = this.dataField.row.data.localizations;
+        }
     }
 
     getLanguageValue() {
@@ -48,12 +55,17 @@ export class MultilangComponent implements OnInit {
 
     setLanguageValue(value: string) {
         let find = false;
+        let isValid = true;
 
         if (this.value) {
             this.value.forEach((item, index) => {
                 if (item.languageCode === this.selectedTab) {
                     this.value[index].name = value;
                     find = true;
+
+                    if (!value) {
+                        isValid = false;
+                    }
                 }
             });
         }
@@ -68,17 +80,29 @@ export class MultilangComponent implements OnInit {
                 languageCode: this.selectedTab,
                 isActive: true,
             });
+
+            if (!value) {
+                isValid = false;
+            }
         }
+
+        return isValid;
     }
 
     onTabValueChanged(e) {
         const oldValue = Object.assign({}, this.value);
 
-        this.setLanguageValue(e.element.querySelector('input').value);
-        this.onValueChanged.emit({
-            value: this.value,
-            oldValue: oldValue
-        });
+        if (this.setLanguageValue(e.element.querySelector('input').value)) {
+            this.valueChanged.emit({
+                value: this.value,
+                oldValue: oldValue
+            });
+        } else {
+            this.valueChanged.emit({
+                value: null,
+                oldValue: oldValue
+            });
+        }
     }
 
     onTabChanged(e) {

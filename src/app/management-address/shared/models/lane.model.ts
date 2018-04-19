@@ -4,8 +4,8 @@ import {WithLocalization} from '../../../shared/models/with-localization';
 export class Lane extends WithLocalization {
     id: string;
     idCity: string;
-    genericCode: string;
-    publicLaneCode: string;
+    idLaneGenericCode: string;
+    idPublicCode: string;
     isActive: boolean;
     createdOn: Date;
 

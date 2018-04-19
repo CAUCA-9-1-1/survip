@@ -6,7 +6,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatTabsModule, MatToolbarModule } from '@angular/material';
-import { DxTabPanelModule, DxTextBoxModule } from 'devextreme-angular';
+import { DxTabPanelModule, DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -72,6 +72,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatToolbarModule,
         DxTabPanelModule,
         DxTextBoxModule,
+        DxValidatorModule,
 
         TranslateModule.forRoot({
             loader: {

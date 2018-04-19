@@ -1,37 +1,35 @@
-import {Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {Lane} from '../models/lane.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 @Injectable()
-export class LaneService {
+export class LaneService extends RequestService {
 
-    constructor(private http: HttpClient) { }
-
-    public getAll() {
-        return this.http.get('lane').pipe(
-            map((result) => {
-                return result['data'];
-            })
-        );
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
     }
 
-    public create(lane: Lane) {
+    getAll() {
+        return this.http.get<Lane[]>(this.apiUrl + 'Lane', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    save(lane: Lane) {
         return this.http.post(
-            'lane',
-            JSON.stringify(lane)
-        );
-    }
-
-    public update(lane: Lane) {
-        return this.http.put(
-            'lane',
+            this.apiUrl + 'Lane',
             JSON.stringify(lane),
-        );
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    public remove(idLane: string) {
-        return this.http.delete('lane/' + idLane);
+    remove(idLane: string) {
+        return this.http.delete(this.apiUrl + 'Lane/' + idLane, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
     }
 }
