@@ -1,14 +1,15 @@
-<!--<dx-data-grid
+<dx-data-grid
         [dataSource]="departments"
         [hoverStateEnabled]="true"
         (onInitNewRow)="onInitNewRow($event)"
+        (onRowValidating)="onRowValidating($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
-            dataField="name"
+            dataField="localizations"
             caption="{{'name' | translate}}"
-            [calculateCellValue]="onCalculateCellValue"
+            [calculateCellValue]="getDepartmentName"
             editCellTemplate="editname"
             sortOrder="asc"
             sortIndex="0">
@@ -18,7 +19,7 @@
             caption="{{'county' | translate}}"
             sortOrder="asc"
             sortIndex="1">
-        <dxo-lookup [dataSource]="counties" displayExpr="name.fr" valueExpr="idCounty">
+        <dxo-lookup [dataSource]="counties" [displayExpr]="getCountyName" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="language" caption="{{'language' | translate}}" [visible]="false">
@@ -32,14 +33,14 @@
         <dxo-popup title="{{'fireSafetyDepartment' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="1">
-            <dxi-item dataField="name" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idCounty" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="language"></dxi-item>
+            <dxi-item dataField="language" [isRequired]="true"></dxi-item>
             <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
 
-    <div *dxTemplate="let rowname of 'editname'">
-        <cause-multilang [value]="rowname.row.data.name" (onValueChanged)="rowname.setValue($event.value);"></cause-multilang>
+    <div *dxTemplate="let field of 'editname'">
+        <app-multilang [isRequired]="true" [dataField]="field" (valueChanged)="field.setValue($event.value);"></app-multilang>
     </div>
-</dx-data-grid>-->
+</dx-data-grid>

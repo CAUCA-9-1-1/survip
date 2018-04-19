@@ -1,37 +1,36 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import {Webuser} from '../models/webuser.model';
+import { Webuser } from '../models/webuser.model';
+import { RequestService } from '../../../shared/services/request.service';
 
 
 @Injectable()
-export class WebuserService {
+export class WebuserService extends RequestService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
+    }
 
-  public getAll() {
-    /*return this.http.get('webuser').map((response: Response) => {
-      const result = response.json();
+    getAll() {
+        return this.http.get<Webuser[]>(this.apiUrl + 'Webuser', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-      return result.data;
-    });*/
-  }
+    save(webuser: Webuser) {
+        return this.http.post(
+            this.apiUrl + 'Webuser',
+            JSON.stringify(webuser),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-  public create(user: Webuser) {
-    /*return this.http.post(
-      'webuser',
-      JSON.stringify(user)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public update(user: Webuser) {
-    /*return this.http.put(
-      'webuser',
-      JSON.stringify(user)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public remove(idWebuser: string) {
-    // return this.http.delete('webuser/' + idWebuser).map((response: Response) => response.json());
-  }
+    remove(idWebuser: string) {
+        return this.http.delete(this.apiUrl + 'Webuser/' + idWebuser, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }

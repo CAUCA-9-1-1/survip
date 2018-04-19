@@ -8,14 +8,16 @@
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
-            dataField="attributes.firstName"
+            dataField="attributes"
             caption="{{'firstName' | translate}}"
+            [calculateCellValue]="getFirstname"
             sortOrder="asc"
             sortIndex="0">
     </dxi-column>
     <dxi-column
-            dataField="attributes.lastName"
+            dataField="attributes"
             caption="{{'lastName' | translate}}"
+            [calculateCellValue]="getLastname"
             sortOrder="asc"
             sortIndex="1"
     ></dxi-column>
@@ -24,9 +26,9 @@
     <dxi-column [visible]="false" dataField="username" caption="{{'username' | translate}}"></dxi-column>
     <dxi-column [visible]="false" dataField="password" caption="{{'password' | translate}}"></dxi-column>
     <dxi-column [visible]="false" dataField="passwordConfirm" caption="{{'passwordConfirm' | translate}}"></dxi-column>
-    <dxi-column [visible]="false" dataField="attributes.resetPassword" dataType="boolean" caption="{{'passwordReset' | translate}}"></dxi-column>
-    <dxi-column [visible]="false" dataField="attributes.email" caption="{{'email' | translate}}"></dxi-column>
-    <dxi-column [visible]="false" dataField="attributes.telephone" caption="{{'telephone' | translate}}"></dxi-column>
+    <dxi-column [visible]="false" dataField="resetPassword" dataType="boolean" caption="{{'passwordReset' | translate}}"></dxi-column>
+    <dxi-column [visible]="false" dataField="email" caption="{{'email' | translate}}"></dxi-column>
+    <dxi-column [visible]="false" dataField="telephone" caption="{{'telephone' | translate}}"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
@@ -40,7 +42,7 @@
             <dxi-item dataField="confirmPassword" [editorOptions]="{mode: 'password'}">
                 <dxi-validation-rule type="compare" [comparisonTarget]="onPasswordCompare"></dxi-validation-rule>
             </dxi-item>
-            <dxi-item dataField="attributes.resetPassword" editorType="dxCheckBox"></dxi-item>
+            <dxi-item dataField="resetPassword" editorType="dxCheckBox"></dxi-item>
             <dxi-item itemType="empty"></dxi-item>
             <dxi-item colSpan="2">
                 <dx-data-grid
@@ -61,12 +63,12 @@
                 </dx-data-grid>
             </dxi-item>
             <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
-                <dxi-item dataField="attributes.firstName" [isRequired]="true"></dxi-item>
-                <dxi-item dataField="attributes.lastName" [isRequired]="true"></dxi-item>
-                <dxi-item dataField="attributes.email" [editorOptions]="{mode: 'email'}">
+                <dxi-item dataField="firstName" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="lastName" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="email" [editorOptions]="{mode: 'email'}">
                     <dxi-validation-rule type="email"></dxi-validation-rule>
                 </dxi-item>
-                <dxi-item dataField="attributes.telephone" [editorOptions]="{mode: 'tel', mask: '000-000-0000'}">
+                <dxi-item dataField="telephone" [editorOptions]="{mode: 'tel', mask: '000-000-0000'}">
                     <dxi-validation-rule type="pattern" pattern="^[0-9]{10}$"></dxi-validation-rule>
                 </dxi-item>
             </dxi-item>
