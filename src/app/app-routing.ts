@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
-//import {ManagementAccessComponent} from './management-access/management-access.component';
-import {ManagementAddressComponent} from './management-address/management-address.component';
+import { ManagementAccessComponent } from './management-access/management-access.component';
+import { ManagementAddressComponent } from './management-address/management-address.component';
 //import {ManagementBuildingComponent} from './management-building/management-building.component';
 //import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
 //import {ManagementInspectionComponent} from './management-inspection/management-inspection.component';
@@ -15,7 +15,7 @@ import { LoginComponent } from './user-access/login/login.component';
 
 const appRoutes: Routes = [{
     path: '',
-    redirectTo: '/management/address',
+    redirectTo: '/management/access',
     pathMatch: 'full',
 }, {
     path: 'login',
@@ -43,7 +43,7 @@ const appRoutes: Routes = [{
         component: ManagementAddressComponent//ManagementFireHydrantComponent
     }, {
         path: 'access',
-        component: ManagementAddressComponent//ManagementAccessComponent,
+        component: ManagementAccessComponent,
     }]
 }, {
     path: '**',

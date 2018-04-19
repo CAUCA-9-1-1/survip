@@ -8,7 +8,7 @@ import {StatisticService} from '../shared/services/statistic.service';
 @Component({
   selector: 'app-management-access-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.styl'],
+  styleUrls: ['./statistics.component.scss'],
   providers: [StatisticService]
 })
 export class StatisticsComponent implements OnInit {
@@ -21,7 +21,7 @@ export class StatisticsComponent implements OnInit {
   constructor(private statisticService: StatisticService) {
     const start = new Date();
     const today = new Date();
-    const datePipe = new DatePipe('fr' /*environment.locale*/);
+    const datePipe = new DatePipe(environment.locale.use);
 
     start.setMonth(start.getMonth() - 1);
 

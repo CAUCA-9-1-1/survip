@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing';
 import { SharedModule } from './shared/shared.module';
 import { UserAccessModule } from './user-access/user-access.module';
 import { ManagementAddressModule } from './management-address/management-address.module';
+import { ManagementAccessModule } from './management-access/management-access.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ManagementAddressModule } from './management-address/management-address
     imports: [
         SharedModule,
         ManagementAddressModule,
+        ManagementAccessModule,
         UserAccessModule,
         AppRoutingModule,
     ],

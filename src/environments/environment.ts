@@ -7,7 +7,7 @@ export const environment = {
     production: false,
     locale: {
         available: ['fr', 'en'],
-        default: 'fr',
+        use: 'fr',
     },
     apiUrl: 'http://192.168.122.245:63933/api/'
 };

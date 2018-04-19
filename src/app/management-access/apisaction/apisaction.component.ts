@@ -7,7 +7,7 @@ import {WebuserService} from '../shared/services/webuser.service';
 @Component({
   selector: 'app-management-access-apisaction',
   templateUrl: './apisaction.component.html',
-  styleUrls: ['./apisaction.component.styl'],
+  styleUrls: ['./apisaction.component.scss'],
   providers: [
     ApisActionService,
     WebuserService,
