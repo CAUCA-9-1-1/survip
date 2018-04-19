@@ -28,7 +28,6 @@ export class CountryComponent {
     }
 
     onRowValidating(e) {
-        console.log(e);
         if (!e.newData.localizations) {
             e.isValid = false;
         }
