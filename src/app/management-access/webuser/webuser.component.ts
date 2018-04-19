@@ -7,142 +7,175 @@ import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartme
 import {WebuserFireSafetyDepartment} from '../shared/models/webuserfiresafetydepartment.model';
 import {WebuserFireSafetyDepartmentService} from '../shared/services/webuserfiresafetydepartment.service';
 
+
 @Component({
-  selector: 'app-management-access-webuser',
-  templateUrl: './webuser.component.html',
-  styleUrls: ['./webuser.component.scss'],
-  providers: [
-    FireSafetyDepartmentService,
-    WebuserService,
-    WebuserFireSafetyDepartmentService,
-  ]
+    selector: 'app-management-access-webuser',
+    templateUrl: './webuser.component.html',
+    styleUrls: ['./webuser.component.scss'],
+    providers: [
+        FireSafetyDepartmentService,
+        WebuserService,
+        WebuserFireSafetyDepartmentService,
+    ]
 })
 export class WebuserComponent implements OnInit {
-  private selectedPassword: string;
-  private selectedIdWebuser: string;
+    private selectedPassword: string;
+    private selectedIdWebuser: string;
 
-  users: Webuser[] = [];
-  departments: FireSafetyDepartment[] = [];
-  userDepartments: WebuserFireSafetyDepartment[] = [];
+    users: Webuser[] = [];
+    departments: FireSafetyDepartment[] = [];
+    userDepartments: WebuserFireSafetyDepartment[] = [];
 
-  constructor(
-    private departmentService: FireSafetyDepartmentService,
-    private webuserService: WebuserService,
-    private webuserDeptService: WebuserFireSafetyDepartmentService
-  ) { }
+    constructor(
+        private departmentService: FireSafetyDepartmentService,
+        private webuserService: WebuserService,
+        private webuserDeptService: WebuserFireSafetyDepartmentService
+    ) { }
 
-  public ngOnInit() {
-    this.loadUsers();
-    this.loadDepartments();
-  }
-
-  public onPasswordChanged = (e) => {
-    if (e.value && e.value.length < 8) {
-      return false;
-    }
-
-    this.selectedPassword = e.value;
-    return true;
-  }
-
-  public onPasswordCompare = () => {
-    return (this.selectedPassword ? this.selectedPassword : null);
-  }
-
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-    e.data.attributes = {
-      resetPassword: true
-    };
-  }
-
-  public onEditorPreparing(e) {
-    /*if (e.dataField === 'password' || e.dataField === 'passwordConfirm') {
-      e.editorOptions.mode = 'password';
-      e.editorOptions.onKeyUp = (ev) => {
-        const password = new Password();
-        const color = new Color();
-        const input = ev.component.element().find('input').get(0);
-        const hue = password.quality(input.value) * 1.2 / 360;
-        const rgb = color.hslToRgb(hue, 1, 0.5);
-
-        if (input.value) {
-          ev.component.element().find('input').css({
-            'background-color': ['rgb(', rgb[0], ',', rgb[1], ',', rgb[2], ')'].join('')
-          });
-        }
-      };
-    }*/
-  }
-
-  public onEditingStart(e) {
-    e.data.password = '';
-
-    this.loadUserDepartment(e.data.idWebuser);
-
-    this.selectedIdWebuser = e.data.idWebuser;
-    this.selectedPassword = '';
-  }
-
-  public onRowInserted(e) {
-    /*this.webuserService.create(e.data).subscribe(info => {
-      if (info.success) {
+    ngOnInit() {
         this.loadUsers();
-      }
-    });*/
-  }
-
-  public onRowUpdated(e) {
-    e.data.idWebuser = e.key.idWebuser;
-
-    // this.webuserService.update(e.data).subscribe();
-  }
-
-  public onRowRemoved(e) {
-    // this.webuserService.remove(e.key.idWebuser).subscribe();
-  }
-
-  public onNewUserDepartment(e) {
-    e.data.isActive = true;
-    e.data.attributes = {
-      resetPassword: true
-    };
-  }
-
-  public onUserDepartmentInserted(e) {
-    e.data.idWebuserFireSafetyDepartment = e.key.idWebuserFireSafetyDepartment;
-    e.data.idWebuser = this.selectedIdWebuser;
-
-    /*this.webuserDeptService.create(e.data).subscribe(info => {
-      if (info.success) {
-        this.loadUserDepartment(this.selectedIdWebuser);
-      }
-    });*/
-  }
-
-  public onUserDepartmentUpdated(e) {
-    for (const i in e.data) {
-      if (e.data[i]) {
-        e.key[i] = e.data[i];
-      }
+        this.loadDepartments();
     }
 
-    // this.webuserDeptService.update(e.key).subscribe();
-  }
+    getFirstname(e) {
+        let name = '';
 
-  public onUserDepartmentRemoved(e) {
-    // this.webuserDeptService.remove(e.key.selectedIdWebuser).subscribe();
-  }
+        e.attributes.forEach(attribute => {
+            if (attribute.attributeName === 'firstname') {
+                name = attribute.attributeValue;
+            }
+        });
 
-  private loadUsers() {
-    // this.webuserService.getAll().subscribe(data => this.users = data);
-  }
+        return name;
+    }
 
-  private loadDepartments() {
-    // this.departmentService.getAll().subscribe(data => this.departments = data);
-  }
+    getLastname(e) {
+        let name = '';
+        e.attributes.forEach(attribute => {
+            if (attribute.attributeName === 'lastname') {
+                name = attribute.attributeValue;
+            }
+        });
 
-  private loadUserDepartment(idWebuser: string) {
-    // this.webuserDeptService.getByUser(idWebuser).subscribe(data => this.userDepartments = data);
-  }
+        return name;
+    }
+
+    getAttribute(field, e) {
+        let name = '';
+
+        e.attributes.forEach(attribute => {
+            if (attribute.attributeName === field) {
+                name = attribute.attributeValue;
+            }
+        });
+
+        return name;
+    }
+
+    onPasswordChanged = (e) => {
+        if (e.value && e.value.length < 8) {
+          return false;
+        }
+
+        this.selectedPassword = e.value;
+        return true;
+    }
+
+    onPasswordCompare = () => {
+        return (this.selectedPassword ? this.selectedPassword : null);
+    }
+
+    onInitNewRow(e) {
+        e.data.isActive = true;
+        e.data.attributes = {
+            resetPassword: true
+        };
+    }
+
+    onEditorPreparing(e) {
+        if (e.dataField === 'password' || e.dataField === 'passwordConfirm') {
+            e.editorOptions.mode = 'password';
+            e.editorOptions.onKeyUp = (ev) => {
+                /*const password = new Password();
+                const color = new Color();
+                const input = ev.component.element().find('input').get(0);
+                const hue = password.quality(input.value) * 1.2 / 360;
+                const rgb = color.hslToRgb(hue, 1, 0.5);
+
+                if (input.value) {
+                    ev.component.element().find('input').css({
+                        'background-color': ['rgb(', rgb[0], ',', rgb[1], ',', rgb[2], ')'].join('')
+                    });
+                }*/
+            };
+        }
+    }
+
+    onEditingStart(e) {
+        e.data.password = '';
+        e.data.resetPassword = false;
+
+        this.loadUserDepartment(e.data.id);
+
+        this.selectedIdWebuser = e.data.id;
+        this.selectedPassword = '';
+    }
+
+    onRowInserted(e) {
+        this.webuserService.save(e.data).subscribe(info => {
+            this.loadUsers();
+        });
+    }
+
+    onRowUpdated(e) {
+        this.webuserService.save(e.key).subscribe();
+    }
+
+    onRowRemoved(e) {
+        this.webuserService.remove(e.key.id).subscribe();
+    }
+
+    public onNewUserDepartment(e) {
+        e.data.isActive = true;
+        e.data.attributes = {
+            resetPassword: true
+        };
+    }
+
+    public onUserDepartmentInserted(e) {
+        e.data.idWebuserFireSafetyDepartment = e.key.idWebuserFireSafetyDepartment;
+        e.data.idWebuser = this.selectedIdWebuser;
+
+        /*this.webuserDeptService.create(e.data).subscribe(info => {
+          if (info.success) {
+            this.loadUserDepartment(this.selectedIdWebuser);
+          }
+        });*/
+    }
+
+    public onUserDepartmentUpdated(e) {
+        for (const i in e.data) {
+          if (e.data[i]) {
+            e.key[i] = e.data[i];
+          }
+        }
+
+        // this.webuserDeptService.update(e.key).subscribe();
+    }
+
+    public onUserDepartmentRemoved(e) {
+        // this.webuserDeptService.remove(e.key.selectedIdWebuser).subscribe();
+    }
+
+    private loadUsers() {
+        this.webuserService.getAll().subscribe(data => this.users = data);
+    }
+
+    private loadDepartments() {
+        this.departmentService.getAll().subscribe(data => this.departments = data);
+    }
+
+    private loadUserDepartment(idWebuser: string) {
+        // this.webuserDeptService.getByUser(idWebuser).subscribe(data => this.userDepartments = data);
+    }
 }

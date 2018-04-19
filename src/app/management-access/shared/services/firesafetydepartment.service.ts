@@ -1,37 +1,36 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {FireSafetyDepartment} from '../models/firesafetydepartment.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 
 @Injectable()
-export class FireSafetyDepartmentService {
+export class FireSafetyDepartmentService extends RequestService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
+    }
 
-  public getAll() {
-    /*return this.http.get('firesafetydepartment').map((response: Response) => {
-      const result = response.json();
+    getAll() {
+        return this.http.get<FireSafetyDepartment[]>(this.apiUrl + 'FireSafetyDepartment', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-      return result.data;
-    });*/
-  }
+    save(department: FireSafetyDepartment) {
+        return this.http.post(
+            this.apiUrl + 'FireSafetyDepartment',
+            JSON.stringify(department),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-  public create(dept: FireSafetyDepartment) {
-    /*return this.http.post(
-      'firesafetydepartment',
-      JSON.stringify(dept)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public update(dept: FireSafetyDepartment) {
-    /*return this.http.put(
-      'firesafetydepartment',
-      JSON.stringify(dept)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public remove(idFireSafetyDepartment: string) {
-    // return this.http.delete('firesafetydepartment/' + idFireSafetyDepartment).map((response: Response) => response.json());
-  }
+    remove(idDepartment: string) {
+        return this.http.delete(this.apiUrl + 'FireSafetyDepartment/' + idDepartment, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }
