@@ -26,33 +26,39 @@ export class RegionComponent implements OnInit {
         this.loadState();
     }
 
-    public getRegionName(data) {
+    getRegionName(data) {
         const region = Region.fromJSON(data);
 
         return region.getLocalization('fr');
     }
 
-    public getStateName(data) {
+    getStateName(data) {
         const state = State.fromJSON(data);
 
         return state.getLocalization('fr');
     }
 
-    public onInitNewRow(e) {
+    onInitNewRow(e) {
         e.data.isActive = true;
     }
 
-    public onRowInserted(e) {
+    onRowValidating(e) {
+        if (!e.newData.localizations) {
+            e.isValid = false;
+        }
+    }
+
+    onRowInserted(e) {
         this.regionService.save(e.data).subscribe(info => {
             this.loadRegion();
         });
     }
 
-    public onRowUpdated(e) {
+    onRowUpdated(e) {
         this.regionService.save(e.key).subscribe();
     }
 
-    public onRowRemoved(e) {
+    onRowRemoved(e) {
         this.regionService.remove(e.key.id).subscribe();
     }
 
