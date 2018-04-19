@@ -48,7 +48,7 @@ export class CityComponent implements OnInit {
 
     getCountyName(data) {
         const county = County.fromJSON(data);
-
+console.log(data);
         return county.getLocalization('fr');
     }
 
