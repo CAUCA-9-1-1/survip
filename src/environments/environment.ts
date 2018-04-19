@@ -4,6 +4,10 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
+    production: false,
+    locale: {
+        available: ['fr', 'en'],
+        default: 'fr',
+    },
     apiUrl: 'http://192.168.122.245:63933/api/'
 };
