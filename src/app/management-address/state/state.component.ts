@@ -24,38 +24,44 @@ export class StateComponent implements OnInit {
         private countryService: CountryService
     ) { }
 
-    public ngOnInit() {
+    ngOnInit() {
         this.loadState();
         this.loadCountry();
     }
 
-    public getStateName(data) {
+    getStateName(data) {
         const state = State.fromJSON(data);
 
         return state.getLocalization('fr');
     }
 
-    public getCountryName(data) {
+    getCountryName(data) {
         const country = Country.fromJSON(data);
 
         return country.getLocalization('fr');
     }
 
-    public onInitNewRow(e) {
+    onInitNewRow(e) {
         e.data.isActive = true;
     }
 
-    public onRowInserted(e) {
+    onRowValidating(e) {
+        if (!e.newData.localizations) {
+            e.isValid = false;
+        }
+    }
+
+    onRowInserted(e) {
         this.stateService.save(e.data).subscribe(info => {
             this.loadState();
         });
     }
 
-    public onRowUpdated(e) {
+    onRowUpdated(e) {
         this.stateService.save(e.key).subscribe();
     }
 
-    public onRowRemoved(e) {
+    onRowRemoved(e) {
         this.stateService.remove(e.key.idState).subscribe();
     }
 
