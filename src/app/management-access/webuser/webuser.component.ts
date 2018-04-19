@@ -10,7 +10,7 @@ import {WebuserFireSafetyDepartmentService} from '../shared/services/webuserfire
 @Component({
   selector: 'app-management-access-webuser',
   templateUrl: './webuser.component.html',
-  styleUrls: ['./webuser.component.styl'],
+  styleUrls: ['./webuser.component.scss'],
   providers: [
     FireSafetyDepartmentService,
     WebuserService,

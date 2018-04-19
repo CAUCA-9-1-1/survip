@@ -9,7 +9,7 @@ import {PermissionService} from '../shared/services/permission.service';
 @Component({
   selector: 'app-management-access-permission',
   templateUrl: './permission.component.html',
-  styleUrls: ['./permission.component.styl'],
+  styleUrls: ['./permission.component.scss'],
   providers: [
     PermissionService,
     PermissionObjectService,

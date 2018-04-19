@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 import { TranslateService } from '@ngx-translate/core';
 import 'devextreme-intl';
 import * as frMessages from 'devextreme/localization/messages/fr.json';
@@ -14,23 +16,27 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
     title = 'app';
-    useLanguage = 'fr';
 
     constructor(private ngxLanguage: TranslateService) {
-        this.useLanguage = localStorage.getItem('locale') || environment.locale.default;
+        environment.locale.use = localStorage.getItem('locale') || environment.locale.use;
 
+        this.setAngular();
         this.setNgxTranslator();
         this.setDevExtreme();
     }
 
+    private setAngular() {
+        registerLocaleData(localeFr, 'fr');
+    }
+
     private setDevExtreme() {
         loadMessages(frMessages);
-        locale(this.useLanguage);
+        locale(environment.locale.use);
     }
 
     private setNgxTranslator() {
         this.ngxLanguage.addLangs(environment.locale.available);
-        this.ngxLanguage.setDefaultLang(this.useLanguage);
-        this.ngxLanguage.use(this.useLanguage);
+        this.ngxLanguage.setDefaultLang(environment.locale.use);
+        this.ngxLanguage.use(environment.locale.use);
     }
 }

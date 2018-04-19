@@ -1,20 +1,20 @@
 <app-toolbar title="{{'accessManagement' | translate}}"></app-toolbar>
 <div class="content-under-toolbar">
-    <md-tab-group (selectChange)="onSelectionChanged($event)">
-        <md-tab label="{{'permission' | translate}}">
+    <mat-tab-group (selectChange)="onSelectionChanged($event)">
+        <mat-tab label="{{'permission' | translate}}">
             <app-management-access-permission></app-management-access-permission>
-        </md-tab>
-        <md-tab label="{{'webuser' | translate}}">
+        </mat-tab>
+        <mat-tab label="{{'webuser' | translate}}">
             <app-management-access-webuser></app-management-access-webuser>
-        </md-tab>
-        <md-tab label="{{'fireSafetyDepartment' | translate}}">
+        </mat-tab>
+        <mat-tab label="{{'fireSafetyDepartment' | translate}}">
             <app-management-access-firesafetydepartment></app-management-access-firesafetydepartment>
-        </md-tab>
-        <md-tab label="{{'apisAction' | translate}}">
+        </mat-tab>
+        <mat-tab label="{{'apisAction' | translate}}">
             <app-management-access-apisaction></app-management-access-apisaction>
-        </md-tab>
-        <md-tab label="{{'statistics' | translate}}">
+        </mat-tab>
+        <mat-tab label="{{'statistics' | translate}}">
             <app-management-access-statistics></app-management-access-statistics>
-        </md-tab>
-    </md-tab-group>
+        </mat-tab>
+    </mat-tab-group>
 </div>
