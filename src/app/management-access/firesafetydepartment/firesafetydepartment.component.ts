@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../environments/environment';
 
@@ -70,7 +70,7 @@ export class FireSafetyDepartmentComponent implements OnInit {
         this.fireSafetyDepartmentService.remove(e.key.id).subscribe();
     }
 
-    loadDeparment() {
+    private loadDeparment() {
         this.fireSafetyDepartmentService.getAll().subscribe(data => this.departments = data);
     }
 

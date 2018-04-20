@@ -1,39 +1,37 @@
-export class Building {
-  idBuilding: string;
-  name: object;
-  isActive: boolean;
-  address: string;
-  matricule: string;
-  civicNumber: string;
-  civicLetter: string;
-  civicSupp: string;
-  civicLetterSupp: string;
-  appartmentNumber: string;
-  floor: string;
-  numberOfFloors: number;
-  numberOfAppartment: number;
-  numberOfBuilding: number;
-  vacantLand: boolean;
-  yearOfConstruction: number;
-  buildingValue: number;
-  idLane: string;
-  postalCode: string;
-  idUtilisationCode: string;
-  idSector: string;
-  idMutualAidSector: string;
-  idJawsExtricationSector: string;
-  idSledSector: string;
-  suite: number;
-  idRiskLevel: string;
-  source: string;
-  is_parent: boolean;
-  utilisationDescription: string;
-  showInResources: string;
-  idResourceCategory: string;
-  idAssociationBuilding: string;
-  idAssociationType: string;
-  idUnitType: string;
-  geojson: object;
-  coordinatesSource: string;
-  details: string;
+import {WithLocalization} from '../../../shared/models/with-localization';
+
+
+export class Building extends WithLocalization {
+    appartmentNumber: string;
+    buildingValue: number;
+    childType: number;
+    civicLetter: string;
+    civicLetterSupp: string;
+    civicNumber: string;
+    civicSupp: string;
+    coordinates: string;
+    coordinatesSource: string;
+    details: string;
+    floor: string;
+    idLane: string;
+    idParentBuilding: string;
+    idRiskLevel: string;
+    idUtilisationCode: string;
+    isParent: boolean;
+    matricule: string;
+    numberOfAppartment: number;
+    numberOfBuilding: number;
+    numberOfFloors: number;
+    postalCode: string;
+    showInResources: string;
+    source: string;
+    utilisationDescription: string;
+    vacantLand: boolean;
+    yearOfConstruction: number;
+
+    static fromJSON(data: object): Building {
+        const building = new Building();
+
+        return Object.assign(building, data);
+    }
 }

@@ -158,6 +158,8 @@
   "abbreviation": "Abréviation",
   "type": "Type",
   "thisFieldIsRequired": "Ce champs est obligatoire",
+  "firestation": "Caserne",
+  "fax": "Fax",
   "connection": "Connexion",
   "enter": "Entrer"
 }
