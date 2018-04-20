@@ -152,6 +152,8 @@
   "abbreviation": "Abbreviation",
   "type": "Type",
   "thisFieldIsRequired": "This field is required",
+  "firestation": "Firestation",
+  "fax": "Fax",
   "connection": "Connection",
   "enter": "Enter"
 }

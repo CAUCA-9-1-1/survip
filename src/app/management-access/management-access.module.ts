@@ -8,6 +8,7 @@ import {FireSafetyDepartmentComponent} from './firesafetydepartment/firesafetyde
 import {PermissionComponent} from './permission/permission.component';
 import {StatisticsComponent} from './statistics/statistics.component';
 import {WebuserComponent} from './webuser/webuser.component';
+import { FirestationComponent } from './firestation/firestation.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {WebuserComponent} from './webuser/webuser.component';
     PermissionComponent,
     StatisticsComponent,
     WebuserComponent,
+    FirestationComponent,
   ],
   exports: [],
   imports: [

@@ -2,34 +2,34 @@ import {Injectable, Injector} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {RequestService} from '../../../shared/services/request.service';
-import {Building} from '../models/building.model';
+import {Firestation} from '../models/firestation.model';
 
 
 @Injectable()
-export class BuildingService extends RequestService {
+export class FirestationService extends RequestService {
 
     constructor(private http: HttpClient, injector: Injector) {
         super(injector);
     }
 
     getAll() {
-        return this.http.get<Building[]>(this.apiUrl + 'Building', {
+        return this.http.get<Firestation[]>(this.apiUrl + 'Firestation', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    save(building: Building) {
+    save(station: Firestation) {
         return this.http.post(
-            this.apiUrl + 'Building',
-            JSON.stringify(building),
+            this.apiUrl + 'Firestation',
+            JSON.stringify(station),
             {
                 headers: this.headers
             }
         ).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    remove(idBuilding: string) {
-        return this.http.delete(this.apiUrl + 'Building/' + idBuilding, {
+    remove(idStation: string) {
+        return this.http.delete(this.apiUrl + 'Firestation/' + idStation, {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
