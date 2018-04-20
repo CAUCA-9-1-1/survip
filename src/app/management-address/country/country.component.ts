@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 import { Country } from '../shared/models/country.model';
 import { CountryService } from '../shared/services/country.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 
 
 @Component({
@@ -10,44 +12,23 @@ import { CountryService } from '../shared/services/country.service';
   styleUrls: ['./country.component.scss'],
   providers: [CountryService]
 })
-export class CountryComponent {
-    countries: Country[] = [];
+export class CountryComponent extends GridWithCrudService implements OnInit {
 
-    constructor(private countryService: CountryService) {
-        this.loadCountry();
+    constructor(countryService: CountryService) {
+        super(countryService);
+    }
+
+    ngOnInit() {
+        this.loadSource();
     }
 
     getCountryName(data) {
         const country = Country.fromJSON(data);
 
-        return country.getLocalization('fr');
+        return country.getLocalization(environment.locale.use);
     }
 
     onInitNewRow(e) {
         e.data.isActive = true;
-    }
-
-    onRowValidating(e) {
-        if (!e.newData.localizations) {
-            e.isValid = false;
-        }
-    }
-
-    onRowInserted(e) {
-        this.countryService.save(e.data).subscribe(info => {
-            this.loadCountry();
-        });
-    }
-
-    onRowUpdated(e) {
-        this.countryService.save(e.key).subscribe();
-    }
-
-    onRowRemoved(e) {
-        this.countryService.remove(e.key.id).subscribe();
-    }
-
-    private loadCountry() {
-        this.countryService.getAll().subscribe(data => this.countries = data);
     }
 }

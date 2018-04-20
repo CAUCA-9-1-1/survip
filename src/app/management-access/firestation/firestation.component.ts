@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 import {FirestationService} from '../shared/services/firestation.service';
 import {Firestation} from '../shared/models/firestation.model';
@@ -6,6 +7,7 @@ import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartme
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {BuildingService} from '../../management-building/shared/services/building.service';
 import {Building} from '../../management-building/shared/models/building.model';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 
 
 @Component({
@@ -18,19 +20,20 @@ import {Building} from '../../management-building/shared/models/building.model';
         BuildingService,
     ]
 })
-export class FirestationComponent implements OnInit {
-    firestations: Firestation[] = [];
+export class FirestationComponent extends GridWithCrudService implements OnInit {
     departments: FireSafetyDepartment[] = [];
     buildings: Building[] = [];
 
     constructor(
-        private firestationService: FirestationService,
+        firestationService: FirestationService,
         private fireSafetyDepartmentService: FireSafetyDepartmentService,
         private buildingService: BuildingService,
-    ) { }
+    ) {
+        super(firestationService);
+    }
 
     ngOnInit() {
-        this.loadStation();
+        this.loadSource();
         this.loadDepartment();
         this.loadBuilding();
     }
@@ -38,35 +41,17 @@ export class FirestationComponent implements OnInit {
     getDepartmentName(data) {
         const department = FireSafetyDepartment.fromJSON(data);
 
-        return department.getLocalization('fr');
+        return department.getLocalization(environment.locale.use);
     }
 
     getBuildingName(data) {
         const building = Building.fromJSON(data);
 
-        return building.getLocalization('fr');
+        return building.getLocalization(environment.locale.use);
     }
 
     onInitNewRow(e) {
         e.data.isActive = true;
-    }
-
-    onRowInserted(e) {
-        this.firestationService.save(e.data).subscribe(info => {
-            this.loadStation();
-        });
-    }
-
-    onRowUpdated(e) {
-        this.firestationService.save(e.key).subscribe();
-    }
-
-    onRowRemoved(e) {
-        this.firestationService.remove(e.key.id).subscribe();
-    }
-
-    private loadStation() {
-        this.firestationService.getAll().subscribe(data => this.firestations = data);
     }
 
     private loadDepartment() {
