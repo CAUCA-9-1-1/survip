@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 import { State } from '../shared/models/state.model';
 import { StateService } from '../shared/services/state.service';
 import { Country } from '../shared/models/country.model';
 import { CountryService } from '../shared/services/country.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 
 
 @Component({
@@ -15,58 +17,35 @@ import { CountryService } from '../shared/services/country.service';
         CountryService,
     ]
 })
-export class StateComponent implements OnInit {
-    states: State[] = [];
+export class StateComponent extends GridWithCrudService implements OnInit {
     countries: Country[] = [];
 
     constructor(
-        private stateService: StateService,
+        stateService: StateService,
         private countryService: CountryService
-    ) { }
+    ) {
+        super(stateService);
+    }
 
     ngOnInit() {
-        this.loadState();
+        this.loadSource();
         this.loadCountry();
     }
 
     getStateName(data) {
         const state = State.fromJSON(data);
 
-        return state.getLocalization('fr');
+        return state.getLocalization(environment.locale.use);
     }
 
     getCountryName(data) {
         const country = Country.fromJSON(data);
 
-        return country.getLocalization('fr');
+        return country.getLocalization(environment.locale.use);
     }
 
     onInitNewRow(e) {
         e.data.isActive = true;
-    }
-
-    onRowValidating(e) {
-        if (!e.newData.localizations) {
-            e.isValid = false;
-        }
-    }
-
-    onRowInserted(e) {
-        this.stateService.save(e.data).subscribe(info => {
-            this.loadState();
-        });
-    }
-
-    onRowUpdated(e) {
-        this.stateService.save(e.key).subscribe();
-    }
-
-    onRowRemoved(e) {
-        this.stateService.remove(e.key.idState).subscribe();
-    }
-
-    private loadState() {
-        this.stateService.getAll().subscribe(data => this.states = data);
     }
 
     private loadCountry() {

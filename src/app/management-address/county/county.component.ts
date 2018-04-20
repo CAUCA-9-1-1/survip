@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 import {County} from '../shared/models/county.model';
 import {CountyService} from '../shared/services/county.service';
@@ -6,6 +7,7 @@ import {State} from '../shared/models/state.model';
 import {StateService} from '../shared/services/state.service';
 import {Region} from '../shared/models/region.model';
 import {RegionService} from '../shared/services/region.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 
 
 @Component({
@@ -18,19 +20,20 @@ import {RegionService} from '../shared/services/region.service';
         RegionService,
     ]
     })
-export class CountyComponent implements OnInit {
-    counties: County[] = [];
+export class CountyComponent extends GridWithCrudService implements OnInit {
     states: State[] = [];
     regions: Region[] = [];
 
     constructor(
-        private countyService: CountyService,
+        countyService: CountyService,
         private stateService: StateService,
         private regionService: RegionService
-    ) { }
+    ) {
+        super(countyService);
+    }
 
     ngOnInit() {
-        this.loadCounty();
+        this.loadSource();
         this.loadState();
         this.loadRegion();
     }
@@ -38,47 +41,23 @@ export class CountyComponent implements OnInit {
     getCountyName(data) {
         const county = County.fromJSON(data);
 
-        return county.getLocalization('fr');
+        return county.getLocalization(environment.locale.use);
     }
 
     getRegionName(data) {
         const region = Region.fromJSON(data);
 
-        return region.getLocalization('fr');
+        return region.getLocalization(environment.locale.use);
     }
 
     getStateName(data) {
         const state = State.fromJSON(data);
 
-        return state.getLocalization('fr');
+        return state.getLocalization(environment.locale.use);
     }
 
     onInitNewRow(e) {
         e.data.isActive = true;
-    }
-
-    onRowValidating(e) {
-        if (!e.newData.localizations) {
-            e.isValid = false;
-        }
-    }
-
-    onRowInserted(e) {
-        this.countyService.save(e.data).subscribe(info => {
-            this.loadCounty();
-        });
-    }
-
-    onRowUpdated(e) {
-        this.countyService.save(e.key).subscribe();
-    }
-
-    onRowRemoved(e) {
-        this.countyService.remove(e.key.id).subscribe();
-    }
-
-    private loadCounty() {
-        this.countyService.getAll().subscribe(data => this.counties = data);
     }
 
     private loadState() {

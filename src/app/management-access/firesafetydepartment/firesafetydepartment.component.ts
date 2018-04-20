@@ -6,6 +6,7 @@ import { FireSafetyDepartment } from '../shared/models/firesafetydepartment.mode
 import { FireSafetyDepartmentService } from '../shared/services/firesafetydepartment.service';
 import { County } from '../../management-address/shared/models/county.model';
 import { CountyService } from '../../management-address/shared/services/county.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 
 
 @Component({
@@ -17,19 +18,20 @@ import { CountyService } from '../../management-address/shared/services/county.s
         CountyService,
     ]
 })
-export class FireSafetyDepartmentComponent implements OnInit {
-    departments: FireSafetyDepartment[] = [];
+export class FireSafetyDepartmentComponent extends GridWithCrudService implements OnInit {
     counties: County[] = [];
     languages = [];
 
     constructor(
-        private fireSafetyDepartmentService: FireSafetyDepartmentService,
+        fireSafetyDepartmentService: FireSafetyDepartmentService,
         private countyService: CountyService,
         private translateService: TranslateService
-    ) { }
+    ) {
+        super(fireSafetyDepartmentService);
+    }
 
     ngOnInit() {
-        this.loadDeparment();
+        this.loadSource();
         this.loadCounty();
         this.loadTranslation();
     }
@@ -37,41 +39,17 @@ export class FireSafetyDepartmentComponent implements OnInit {
     getDepartmentName(data) {
         const department = FireSafetyDepartment.fromJSON(data);
 
-        return department.getLocalization('fr');
+        return department.getLocalization(environment.locale.use);
     }
 
     getCountyName(data) {
         const county = County.fromJSON(data);
 
-        return county.getLocalization('fr');
+        return county.getLocalization(environment.locale.use);
     }
 
     onInitNewRow(e) {
         e.data.isActive = true;
-    }
-
-    onRowValidating(e) {
-        if (!e.newData.localizations) {
-            e.isValid = false;
-        }
-    }
-
-    onRowInserted(e) {
-        this.fireSafetyDepartmentService.save(e.data).subscribe(info => {
-            this.loadDeparment();
-        });
-    }
-
-    onRowUpdated(e) {
-        this.fireSafetyDepartmentService.save(e.key).subscribe();
-    }
-
-    onRowRemoved(e) {
-        this.fireSafetyDepartmentService.remove(e.key.id).subscribe();
-    }
-
-    private loadDeparment() {
-        this.fireSafetyDepartmentService.getAll().subscribe(data => this.departments = data);
     }
 
     private loadCounty() {

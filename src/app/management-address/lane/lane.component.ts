@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 import {Lane} from '../shared/models/lane.model';
 import {LaneService} from '../shared/services/lane.service';
@@ -8,6 +9,8 @@ import {LaneGenericCode} from '../shared/models/lane-generic-code.model';
 import {LanePublicCode} from '../shared/models/lane-public-code.model';
 import {LaneGenericCodeService} from '../shared/services/lane-generic-code.service';
 import {LanePublicCodeService} from '../shared/services/lane-public-code.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+
 
 @Component({
     selector: 'app-managementaddress-lane',
@@ -20,24 +23,22 @@ import {LanePublicCodeService} from '../shared/services/lane-public-code.service
         LanePublicCodeService,
     ]
 })
-export class LaneComponent implements OnInit {
-    lanes: Lane[] = [];
+export class LaneComponent extends GridWithCrudService implements OnInit {
     cities: City[] = [];
     publicCodes: LanePublicCode[] = [];
     genericCodes: LaneGenericCode[] = [];
-    validationForName = [{
-        type: 'required'
-    }];
 
     constructor(
-        private laneService: LaneService,
+        laneService: LaneService,
         private cityService: CityService,
         private publicCode: LanePublicCodeService,
         private genericCode: LaneGenericCodeService
-    ) { }
+    ) {
+        super(laneService);
+    }
 
     ngOnInit() {
-        this.loadLane();
+        this.loadSource();
         this.loadCity();
         this.loadPublicCode();
         this.loadGenericCode();
@@ -46,41 +47,17 @@ export class LaneComponent implements OnInit {
     getLaneName(data) {
         const lane = Lane.fromJSON(data);
 
-        return lane.getLocalization('fr');
+        return lane.getLocalization(environment.locale.use);
     }
 
     getCityName(data) {
         const city = City.fromJSON(data);
 
-        return city.getLocalization('fr');
+        return city.getLocalization(environment.locale.use);
     }
 
     onInitNewRow(e) {
         e.data.isActive = true;
-    }
-
-    onRowValidating(e) {
-        if (!e.newData.localizations) {
-            e.isValid = false;
-        }
-    }
-
-    onRowInserted(e) {
-        this.laneService.save(e.data).subscribe(info => {
-            this.loadLane();
-        });
-    }
-
-    onRowUpdated(e) {
-        this.laneService.save(e.key).subscribe();
-    }
-
-    onRowRemoved(e) {
-        this.laneService.remove(e.key.id).subscribe();
-    }
-
-    private loadLane() {
-        this.laneService.getAll().subscribe(data => this.lanes = data);
     }
 
     private loadCity() {

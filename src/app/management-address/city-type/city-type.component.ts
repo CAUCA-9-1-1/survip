@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 import {CityType} from '../shared/models/citytype.model';
 import {CityTypeService} from '../shared/services/citytype.service';
-import {County} from '../shared/models/county.model';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+
 
 @Component({
     selector: 'app-managementaddress-citytype',
@@ -10,46 +12,23 @@ import {County} from '../shared/models/county.model';
     styleUrls: ['./city-type.component.scss'],
     providers: [CityTypeService]
 })
-export class CityTypeComponent implements OnInit {
-    cityType: CityType[] = [];
+export class CityTypeComponent extends GridWithCrudService implements OnInit {
 
-    constructor(private cityTypeService: CityTypeService) { }
+    constructor(cityTypeService: CityTypeService) {
+        super(cityTypeService);
+    }
 
     ngOnInit() {
-        this.loadCityType();
+        this.loadSource();
     }
 
     getCityTypeName(data) {
         const cityType = CityType.fromJSON(data);
 
-        return cityType.getLocalization('fr');
+        return cityType.getLocalization(environment.locale.use);
     }
 
     onInitNewRow(e) {
         e.data.isActive = true;
-    }
-
-    onRowValidating(e) {
-        if (!e.newData.localizations) {
-            e.isValid = false;
-        }
-    }
-
-    onRowInserted(e) {
-        this.cityTypeService.save(e.data).subscribe(info => {
-            this.loadCityType();
-        });
-    }
-
-    onRowUpdated(e) {
-        this.cityTypeService.save(e.key).subscribe();
-    }
-
-    onRowRemoved(e) {
-        this.cityTypeService.remove(e.key.id).subscribe();
-    }
-
-    private loadCityType() {
-        this.cityTypeService.getAll().subscribe(data => this.cityType = data);
     }
 }

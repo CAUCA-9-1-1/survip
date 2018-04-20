@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 import {Region} from '../shared/models/region.model';
 import {RegionService} from '../shared/services/region.service';
 import {State} from '../shared/models/state.model';
 import {StateService} from '../shared/services/state.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 
 
 @Component({
@@ -15,55 +17,32 @@ import {StateService} from '../shared/services/state.service';
         StateService,
     ]
 })
-export class RegionComponent implements OnInit {
-    regions: Region[] = [];
+export class RegionComponent extends GridWithCrudService implements OnInit {
     states: State[] = [];
 
-    constructor(private regionService: RegionService, private stateService: StateService) { }
+    constructor(regionService: RegionService, private stateService: StateService) {
+        super(regionService);
+    }
 
     public ngOnInit() {
-        this.loadRegion();
+        this.loadSource();
         this.loadState();
     }
 
     getRegionName(data) {
         const region = Region.fromJSON(data);
 
-        return region.getLocalization('fr');
+        return region.getLocalization(environment.locale.use);
     }
 
     getStateName(data) {
         const state = State.fromJSON(data);
 
-        return state.getLocalization('fr');
+        return state.getLocalization(environment.locale.use);
     }
 
     onInitNewRow(e) {
         e.data.isActive = true;
-    }
-
-    onRowValidating(e) {
-        if (!e.newData.localizations) {
-            e.isValid = false;
-        }
-    }
-
-    onRowInserted(e) {
-        this.regionService.save(e.data).subscribe(info => {
-            this.loadRegion();
-        });
-    }
-
-    onRowUpdated(e) {
-        this.regionService.save(e.key).subscribe();
-    }
-
-    onRowRemoved(e) {
-        this.regionService.remove(e.key.id).subscribe();
-    }
-
-    private loadRegion() {
-        this.regionService.getAll().subscribe(data => this.regions = data);
     }
 
     private loadState() {
