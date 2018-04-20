@@ -17,28 +17,34 @@ export class CountryComponent {
         this.loadCountry();
     }
 
-    public getCountryName(data) {
+    getCountryName(data) {
         const country = Country.fromJSON(data);
 
         return country.getLocalization('fr');
     }
 
-    public onInitNewRow(e) {
+    onInitNewRow(e) {
         e.data.isActive = true;
     }
 
-    public onRowInserted(e) {
+    onRowValidating(e) {
+        if (!e.newData.localizations) {
+            e.isValid = false;
+        }
+    }
+
+    onRowInserted(e) {
         this.countryService.save(e.data).subscribe(info => {
             this.loadCountry();
         });
     }
 
-    public onRowUpdated(e) {
+    onRowUpdated(e) {
         this.countryService.save(e.key).subscribe();
     }
 
-    public onRowRemoved(e) {
-        this.countryService.remove(e.key.idCountry).subscribe();
+    onRowRemoved(e) {
+        this.countryService.remove(e.key.id).subscribe();
     }
 
     private loadCountry() {

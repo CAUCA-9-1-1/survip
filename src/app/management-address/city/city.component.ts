@@ -57,6 +57,12 @@ export class CityComponent implements OnInit {
         e.data.isActive = true;
     }
 
+    onRowValidating(e) {
+        if (!e.newData.localizations) {
+            e.isValid = false;
+        }
+    }
+
     onRowInserted(e) {
         this.cityService.save(e.data).subscribe(info => {
             this.loadCity();

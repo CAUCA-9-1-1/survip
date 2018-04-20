@@ -1,5 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {DxFormComponent} from 'devextreme-angular';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 
@@ -91,18 +90,12 @@ export class MultilangComponent implements OnInit {
 
     onTabValueChanged(e) {
         const oldValue = Object.assign({}, this.value);
+        const isValid = this.setLanguageValue(e.element.querySelector('input').value);
 
-        if (this.setLanguageValue(e.element.querySelector('input').value)) {
-            this.valueChanged.emit({
-                value: this.value,
-                oldValue: oldValue
-            });
-        } else {
-            this.valueChanged.emit({
-                value: null,
-                oldValue: oldValue
-            });
-        }
+        this.valueChanged.emit({
+            value: isValid ? this.value : '',
+            oldValue: oldValue
+        });
     }
 
     onTabChanged(e) {

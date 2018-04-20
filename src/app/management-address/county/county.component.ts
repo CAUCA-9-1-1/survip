@@ -57,6 +57,12 @@ export class CountyComponent implements OnInit {
         e.data.isActive = true;
     }
 
+    onRowValidating(e) {
+        if (!e.newData.localizations) {
+            e.isValid = false;
+        }
+    }
+
     onRowInserted(e) {
         this.countyService.save(e.data).subscribe(info => {
             this.loadCounty();
