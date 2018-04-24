@@ -1,5 +1,5 @@
 <dx-data-grid
-        [dataSource]="users"
+        [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         (onEditingStart)="onEditingStart($event)"
         (onEditorPreparing)="onEditorPreparing($event)"
@@ -8,14 +8,14 @@
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
-            dataField="attributes"
+            dataField="firstname"
             caption="{{'firstName' | translate}}"
             [calculateCellValue]="getFirstname"
             sortOrder="asc"
             sortIndex="0">
     </dxi-column>
     <dxi-column
-            dataField="attributes"
+            dataField="lastname"
             caption="{{'lastName' | translate}}"
             [calculateCellValue]="getLastname"
             sortOrder="asc"
@@ -46,15 +46,14 @@
             <dxi-item itemType="empty"></dxi-item>
             <dxi-item colSpan="2">
                 <dx-data-grid
-                        [dataSource]="userDepartments"
+                        [dataSource]="webuserFireSafetyDepartments"
                         [hoverStateEnabled]="true"
                         (onInitNewRow)="onNewUserDepartment($event)"
-                        (onRowUpdated)="onUserDepartmentUpdated($event)"
                         (onRowInserted)="onUserDepartmentInserted($event)"
                         (onRowUpdated)="onUserDepartmentUpdated($event)"
                         (onRowRemoved)="onUserDepartmentRemoved($event)">
                     <dxi-column dataField="idFireSafetyDepartment" caption="{{'fireSafetyDepartment' | translate}}">
-                        <dxo-lookup [dataSource]="departments" displayExpr="name.fr" valueExpr="idFireSafetyDepartment">
+                        <dxo-lookup [dataSource]="departments" [displayExpr]="getDepartmentName" valueExpr="id">
                         </dxo-lookup>
                     </dxi-column>
                     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
@@ -63,8 +62,8 @@
                 </dx-data-grid>
             </dxi-item>
             <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
-                <dxi-item dataField="firstName" [isRequired]="true"></dxi-item>
-                <dxi-item dataField="lastName" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="firstname" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="lastname" [isRequired]="true"></dxi-item>
                 <dxi-item dataField="email" [editorOptions]="{mode: 'email'}">
                     <dxi-validation-rule type="email"></dxi-validation-rule>
                 </dxi-item>
