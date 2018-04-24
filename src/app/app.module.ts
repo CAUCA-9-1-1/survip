@@ -6,6 +6,7 @@ import { SharedModule } from './shared/shared.module';
 import { UserAccessModule } from './user-access/user-access.module';
 import { ManagementAddressModule } from './management-address/management-address.module';
 import { ManagementAccessModule } from './management-access/management-access.module';
+import { ManagementFireHydrantModule } from './management-fire-hydrant/management-fire-hydrant.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ManagementAccessModule } from './management-access/management-access.mo
         SharedModule,
         ManagementAddressModule,
         ManagementAccessModule,
+        ManagementFireHydrantModule,
         UserAccessModule,
         AppRoutingModule,
     ],

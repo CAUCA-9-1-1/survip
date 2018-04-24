@@ -25,7 +25,7 @@
     </dxo-form>
   </dxo-editing>
 
-  <div *dxTemplate="let rowname of 'editname'">
-    <cause-multilang [value]="rowname.row.data.name" (onValueChanged)="rowname.setValue($event.value);"></cause-multilang>
+  <div *dxTemplate="let field of 'editname'">
+    <app-multilang [isRequired]="true" [dataField]="field" (valueChanged)="field.setValue($event.value);"></app-multilang>
   </div>
 </dx-data-grid>

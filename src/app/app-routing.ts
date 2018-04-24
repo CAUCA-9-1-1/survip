@@ -6,7 +6,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { ManagementAccessComponent } from './management-access/management-access.component';
 import { ManagementAddressComponent } from './management-address/management-address.component';
 //import {ManagementBuildingComponent} from './management-building/management-building.component';
-//import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
+import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
 //import {ManagementInspectionComponent} from './management-inspection/management-inspection.component';
 //import {ManagementInterventionPlanComponent} from './management-intervention-plan/management-intervention-plan.component';
 //import {ManagementSurveyComponent} from './management-survey/management-survey.component';
@@ -40,7 +40,7 @@ const appRoutes: Routes = [{
         component: ManagementAddressComponent
     }, {
         path: 'firehydrant',
-        component: ManagementAddressComponent//ManagementFireHydrantComponent
+        component: ManagementFireHydrantComponent
     }, {
         path: 'access',
         component: ManagementAccessComponent,
