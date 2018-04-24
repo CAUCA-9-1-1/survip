@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxColorBoxModule, DxDataGridModule } from 'devextreme-angular';
 
 import { SharedModule } from '../shared/shared.module';
 import { ManagementFireHydrantComponent } from './management-fire-hydrant.component';
@@ -10,17 +10,18 @@ import { OperatorTypeComponent } from './operator-type/operator-type.component';
 import { UnitOfMeasureComponent } from './unit-of-measure/unit-of-measure.component';
 
 @NgModule({
-  declarations: [
-    ManagementFireHydrantComponent,
-    ListComponent,
-    OperatorTypeComponent,
-    UnitOfMeasureComponent,
-    ConnectionTypeComponent,
-    TypeComponent
-  ],
-  imports: [
-    SharedModule,
-    DxDataGridModule
-  ],
+    declarations: [
+        ManagementFireHydrantComponent,
+        ListComponent,
+        OperatorTypeComponent,
+        UnitOfMeasureComponent,
+        ConnectionTypeComponent,
+        TypeComponent
+    ],
+    imports: [
+        SharedModule,
+        DxDataGridModule,
+        DxColorBoxModule,
+    ],
 })
 export class ManagementFireHydrantModule { }

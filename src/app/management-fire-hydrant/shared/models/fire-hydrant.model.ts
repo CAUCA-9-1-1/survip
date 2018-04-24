@@ -7,7 +7,7 @@ export class FireHydrant {
     idFireHydrantType: string;
     geojson: object;
     altitude: number;
-    fireHydrantNumber: string;
+    number: string;
     idOperationTypeRate: string;
     rateFrom: string;
     rateTo: string;

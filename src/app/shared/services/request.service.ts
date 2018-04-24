@@ -1,9 +1,9 @@
-import {Injector} from '@angular/core';
-import {Router} from '@angular/router';
+import { Injector } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { environment } from '../../../environments/environment';
-import {HttpErrorResponse} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 
 export class RequestService {
@@ -17,6 +17,7 @@ export class RequestService {
         this.headers = {
             'Authorization': 'Bearer ' + localStorage.getItem('currentToken'),
             'Content-Type': 'application/json; charset=UTF-8',
+            'languageCode': environment.locale.use,
         };
 
         this.apiUrl = environment.apiUrl;

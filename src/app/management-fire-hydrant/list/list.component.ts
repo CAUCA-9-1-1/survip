@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
-import {FireHydrant} from '../shared/models/fire-hydrant.model';
 import {FireHydrantService} from '../shared/services/fire-hydrant.service';
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.service';
@@ -10,82 +10,115 @@ import {OperatorType} from '../shared/models/operator-type.model';
 import {OperatorTypeService} from '../shared/services/operator-type.service';
 import {UnitOfMeasure} from '../shared/models/unit-of-measure.model';
 import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {CityService} from '../../management-address/shared/services/city.service';
+import {City} from '../../management-address/shared/models/city.model';
+import {DxDataGridComponent} from 'devextreme-angular';
+
 
 @Component({
-  selector: 'app-managementfirehydrant-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.styl'],
-  providers: [
-    FireHydrantService,
-    FireHydrantTypeService,
-    OperatorTypeService,
-    UnitOfMeasureService,
-    LaneService,
-  ]
+    selector: 'app-managementfirehydrant-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.styl'],
+    providers: [
+        FireHydrantService,
+        FireHydrantTypeService,
+        OperatorTypeService,
+        UnitOfMeasureService,
+        CityService,
+        LaneService,
+    ]
 })
-export class ListComponent implements OnInit {
-  fireHydrants: FireHydrant[] = [];
-  fireHydrantTypes: FireHydrantType[] = [];
-  lanes: Lane[] = [];
-  intersections: Lane[] = [];
-  operatorTypes: OperatorType[] = [];
-  unitOfMeasures: UnitOfMeasure[] = [];
+export class ListComponent extends GridWithCrudService implements OnInit, AfterViewInit {
+    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-  constructor(
-    private fireHydrantService: FireHydrantService,
-    private fireHydrantTypeService: FireHydrantTypeService,
-    private operatorTypeService: OperatorTypeService,
-    private unitOfMeasureService: UnitOfMeasureService,
-    private laneService: LaneService,
-  ) { }
+    fireHydrantTypes: FireHydrantType[] = [];
+    cities: City[] = [];
+    lanes: any[] = [];
+    intersections: Lane[] = [];
+    operatorTypes: OperatorType[] = [];
+    unitOfMeasures: UnitOfMeasure[] = [];
 
-  ngOnInit() {
-    this.loadFireHydrant();
-    this.loadFireHydrantType();
-    this.loadOperatorType();
-    this.loadUnitOfMeasure();
-    this.loadLane();
-  }
+    constructor(
+        fireHydrantService: FireHydrantService,
+        private fireHydrantTypeService: FireHydrantTypeService,
+        private operatorTypeService: OperatorTypeService,
+        private unitOfMeasureService: UnitOfMeasureService,
+        private cityService: CityService,
+        private laneService: LaneService,
+    ) {
+        super(fireHydrantService);
+    }
 
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
+    ngOnInit() {
+        this.loadSource();
+        this.loadFireHydrantType();
+        this.loadOperatorType();
+        this.loadUnitOfMeasure();
+        this.loadCity();
+    }
 
-  public onRowInserted(e) {
-    /*this.fireHydrantService.create(e.data).subscribe(info => {
-      if (info.success) {
-        this.loadFireHydrant();
-      }
-    });*/
-  }
+    ngAfterViewInit() {
+        this.dataGrid.instance.option('onEditorPreparing', (e) => {
+                if (e.dataField === 'idCity') {
+                    e.editorOptions.type = 'dxSelectBox';
+                    e.editorOptions.onValueChanged = (ev) => {
+                        this.loadLane(ev.value);
+                    };
+                } else if (e.dataField === 'idLane') {
+                    e.editorOptions.type = 'dxSelectBox';
+                    e.editorOptions.onOpened = (ev) => {
+                        ev.component.option('dataSource', this.lanes);
+                    };
+                }
+            }
+        );
+    }
 
-  public onRowUpdated(e) {
-    e.data.idFireHydrant = e.key.idFireHydrant;
+    getFireHydrantTypeName(data) {
+        const type = FireHydrantType.fromJSON(data);
 
-    // this.fireHydrantService.update(e.data).subscribe();
-  }
+        return type.getLocalization(environment.locale.use);
+    }
 
-  public onRowRemoved(e) {
-    // this.fireHydrantService.remove(e.key.idFireHydrant).subscribe();
-  }
+    getCityName(data) {
+        const city = City.fromJSON(data);
 
-  private loadFireHydrant() {
-    // this.fireHydrantService.getAll().subscribe(data => this.fireHydrants = data);
-  }
+        return city.getLocalization(environment.locale.use);
+    }
 
-  private loadFireHydrantType() {
-    // this.fireHydrantTypeService.getAll().subscribe(data => this.fireHydrantTypes = data);
-  }
+    getIntersectionName(data) {
+        return '';
+    }
 
-  private loadOperatorType() {
-    // this.operatorTypeService.getAll().subscribe(data => this.operatorTypes = data);
-  }
+    getUnitOfMeasureName(data) {
+        const unit = UnitOfMeasure.fromJSON(data);
 
-  private loadUnitOfMeasure() {
-    // this.unitOfMeasureService.getAll('volume').subscribe(data => this.unitOfMeasures = data);
-  }
+        return unit.getLocalization(environment.locale.use);
+    }
 
-  private loadLane() {
-    // this.laneService.getAll().subscribe(data => this.lanes = data);
-  }
+    onInitNewRow(e) {
+        e.data.color = 'rgba(255, 0, 0, 1)';
+        e.data.isActive = true;
+    }
+
+    private loadFireHydrantType() {
+        this.fireHydrantTypeService.getAll().subscribe(data => this.fireHydrantTypes = data);
+    }
+
+    private loadOperatorType() {
+        this.operatorTypeService.getAll().subscribe(data => this.operatorTypes = data);
+    }
+
+    private loadUnitOfMeasure() {
+        this.unitOfMeasureService.getAll().subscribe(data => this.unitOfMeasures = data);
+    }
+
+    private loadCity() {
+        this.cityService.getAll().subscribe(data => this.cities = data);
+    }
+
+    private loadLane(idCity: string) {
+        this.laneService.getAllOfCity(idCity).subscribe(data => this.lanes = data);
+    }
 }

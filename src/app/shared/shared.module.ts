@@ -9,15 +9,9 @@ import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule,
 import { DxTabPanelModule, DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-import { environment } from '../../environments/environment';
-//import {MenuComponent} from './components/menu/menu.component';
-//import {MenuItemComponent} from './components/menu-item/menu-item.component';*/
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MultilangComponent } from './components/multilang/multilang.component';
-//import {ToolbarBackComponent} from './components/toolbar-back/toolbar-back.component';
-//import {FilterByPipe} from './pipes/filter.pipe';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -30,10 +24,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         MultilangComponent,
         PageNotFoundComponent,
         ToolbarComponent,
-        /*MenuComponent,
-        MenuItemComponent,
-        ToolbarBackComponent,
-        FilterByPipe,*/
     ],
     exports: [
         BrowserModule,
@@ -42,7 +32,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         FormsModule,
         FlexLayoutModule,
         HttpClientModule,
-        //ReactiveFormsModule,
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
@@ -51,9 +40,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatToolbarModule,
         MultilangComponent,
         ToolbarComponent,
-        //MenuComponent,
-        //ToolbarBackComponent,
-
         TranslateModule,
     ],
     imports: [
@@ -63,7 +49,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         FormsModule,
         FlexLayoutModule,
         HttpClientModule,
-        //ReactiveFormsModule,
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
