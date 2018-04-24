@@ -1,94 +1,104 @@
 <dx-data-grid
-        [dataSource]="fireHydrants"
+        [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         (onInitNewRow)="onInitNewRow($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
-  <dxi-column
-          dataField="idFireHydrantType"
-          caption="{{'fireHydrantType' | translate}}">
-    <dxo-lookup [dataSource]="fireHydrantTypes" displayExpr="name.fr" valueExpr="idFireHydrantType">
-    </dxo-lookup>
-  </dxi-column>
-  <dxi-column
-          dataField="idLane"
-          caption="{{'lane' | translate}}">
-    <dxo-lookup [dataSource]="lanes" displayExpr="name.fr" valueExpr="idLane">
-    </dxo-lookup>
-  </dxi-column>
-  <dxi-column
-          dataField="idIntersection"
-          caption="{{'intersection' | translate}}">
-    <dxo-lookup [dataSource]="intersections" displayExpr="name.fr" valueExpr="idIntersection">
-    </dxo-lookup>
-  </dxi-column>
-  <dxi-column dataField="altitude" caption="{{'altitude' | translate}}" [visible]="false"></dxi-column>
-  <dxi-column dataField="fireHydrantNumber" caption="{{'fireHydrantNumber' | translate}}" [visible]="false"></dxi-column>
-  <dxi-column
-          dataField="idOperatorTypeRate"
-          caption="{{'operator' | translate}}"
-          [visible]="false">
-    <dxo-lookup [dataSource]="operatorTypes" displayExpr="symbol" valueExpr="idOperatorType">
-    </dxo-lookup>
-  </dxi-column>
-  <dxi-column dataField="rateFrom" caption="{{'from' | translate}}" [visible]="false"></dxi-column>
-  <dxi-column dataField="rateTo" caption="{{'to' | translate}}" [visible]="false"></dxi-column>
-  <dxi-column
-          dataField="idUnitOfMeasureRate"
-          caption="{{'unitOfMeasure' | translate}}"
-          [visible]="false">
-    <dxo-lookup [dataSource]="unitOfMeasures" displayExpr="name.fr" valueExpr="idUnitOfMeasure">
-    </dxo-lookup>
-  </dxi-column>
-  <dxi-column
-          dataField="idOperatorTypePressure"
-          caption="{{'operator' | translate}}"
-          [visible]="false">
-    <dxo-lookup [dataSource]="operatorTypes" displayExpr="symbol" valueExpr="idOperatorType">
-    </dxo-lookup>
-  </dxi-column>
-  <dxi-column dataField="pressureFrom" caption="{{'from' | translate}}" [visible]="false"></dxi-column>
-  <dxi-column dataField="pressureTo" caption="{{'to' | translate}}" [visible]="false"></dxi-column>
-  <dxi-column
-          dataField="idUnitOfMeasurePressure"
-          caption="{{'unitOfMeasure' | translate}}"
-          [visible]="false">
-    <dxo-lookup [dataSource]="unitOfMeasures" displayExpr="name.fr" valueExpr="idUnitOfMeasure">
-    </dxo-lookup>
-  </dxi-column>
-  <dxi-column dataField="color" caption="{{'color' | translate}}" [visible]="false"></dxi-column>
-  <dxi-column dataField="comments" caption="{{'comments' | translate}}" [visible]="false"></dxi-column>
-  <dxi-column dataField="physicalPosition" caption="{{'physicalPosition' | translate}}" [visible]="false"></dxi-column>
-  <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+    <dxi-column
+            dataField="idFireHydrantType"
+            caption="{{'fireHydrantType' | translate}}">
+        <dxo-lookup [dataSource]="fireHydrantTypes" [displayExpr]="getFireHydrantTypeName" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="number" caption="{{'fireHydrantNumber' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column
+            dataField="idCity"
+            caption="{{'city' | translate}}">
+        <dxo-lookup [dataSource]="cities" [displayExpr]="getCityName" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+            dataField="idLane"
+            caption="{{'lane' | translate}}">
+        <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+            dataField="idIntersection"
+            caption="{{'intersection' | translate}}">
+        <dxo-lookup [dataSource]="intersections" [displayExpr]="getIntersectionName" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="altitude" caption="{{'altitude' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column
+            dataField="idOperatorTypeRate"
+            caption="{{'operator' | translate}}"
+            [visible]="false">
+        <dxo-lookup [dataSource]="operatorTypes" displayExpr="symbol" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="rateFrom" caption="{{'from' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="rateTo" caption="{{'to' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column
+            dataField="idUnitOfMeasureRate"
+            caption="{{'unitOfMeasure' | translate}}"
+            [visible]="false">
+        <dxo-lookup [dataSource]="unitOfMeasures" [displayExpr]="getUnitOfMeasureName" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+            dataField="idOperatorTypePressure"
+            caption="{{'operator' | translate}}"
+            [visible]="false">
+        <dxo-lookup [dataSource]="operatorTypes" displayExpr="symbol" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="pressureFrom" caption="{{'from' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="pressureTo" caption="{{'to' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column
+            dataField="idUnitOfMeasurePressure"
+            caption="{{'unitOfMeasure' | translate}}"
+            [visible]="false">
+        <dxo-lookup [dataSource]="unitOfMeasures" [displayExpr]="getUnitOfMeasureName" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="color" caption="{{'color' | translate}}" [visible]="false" editCellTemplate="editcolor"></dxi-column>
+    <dxi-column dataField="comments" caption="{{'comments' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="physicalPosition" caption="{{'physicalPosition' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
-  <dxo-filter-row [visible]="true"></dxo-filter-row>
-  <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-    <dxo-popup title="{{'fireHydrant' | translate}}" [showTitle]="true"></dxo-popup>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'fireHydrant' | translate}}" [showTitle]="true"></dxo-popup>
 
-    <dxo-form colCount="2">
-      <dxi-item dataField="idFireHydrantType" [isRequired]="true"></dxi-item>
-      <dxi-item dataField="fireHydrantNumber" [isRequired]="true"></dxi-item>
-      <dxi-item dataField="idLane" [isRequired]="true"></dxi-item>
-      <dxi-item dataField="idIntersection"></dxi-item>
-      <dxi-item dataField="altitude"></dxi-item>
-      <dxi-item dataField="altitude"></dxi-item>
-      <dxi-item itemType="group" caption="{{'rate' | translate}}">
-        <dxi-item dataField="idOperatorTypeRate"></dxi-item>
-        <dxi-item dataField="rateFrom"></dxi-item>
-        <dxi-item dataField="rateTo"></dxi-item>
-        <dxi-item dataField="idUnitOfMeasureRate"></dxi-item>
-      </dxi-item>
-      <dxi-item itemType="group" caption="{{'pressure' | translate}}">
-        <dxi-item dataField="idOperatorTypePressure"></dxi-item>
-        <dxi-item dataField="pressureFrom"></dxi-item>
-        <dxi-item dataField="pressureTo"></dxi-item>
-        <dxi-item dataField="idUnitOfMeasurePressure"></dxi-item>
-      </dxi-item>
-      <dxi-item dataField="color"></dxi-item>
-      <dxi-item dataField="comments"></dxi-item>
-      <dxi-item dataField="physicalPosition"></dxi-item>
-      <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
-    </dxo-form>
-  </dxo-editing>
+        <dxo-form colCount="2">
+            <dxi-item dataField="idFireHydrantType" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="number" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="idCity" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="idLane" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="idIntersection"></dxi-item>
+            <dxi-item dataField="altitude"></dxi-item>
+            <dxi-item itemType="group" caption="{{'rate' | translate}}">
+                <dxi-item dataField="idOperatorTypeRate" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="rateFrom" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="rateTo" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="idUnitOfMeasureRate" [isRequired]="true"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'pressure' | translate}}">
+                <dxi-item dataField="idOperatorTypePressure" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="pressureFrom" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="pressureTo" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="idUnitOfMeasurePressure" [isRequired]="true"></dxi-item>
+            </dxi-item>
+            <dxi-item dataField="color" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="comments"></dxi-item>
+            <dxi-item dataField="physicalPosition"></dxi-item>
+            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+        </dxo-form>
+    </dxo-editing>
+
+    <div *dxTemplate="let field of 'editcolor'">
+        <dx-color-box [value]="field.data.color" [editAlphaChannel]="true" (onValueChanged)="field.setValue($event.value);"></dx-color-box>
+    </div>
 </dx-data-grid>

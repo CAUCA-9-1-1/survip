@@ -4,6 +4,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Lane} from '../models/lane.model';
 import {RequestService} from '../../../shared/services/request.service';
 
+
 @Injectable()
 export class LaneService extends RequestService {
 
@@ -13,6 +14,12 @@ export class LaneService extends RequestService {
 
     getAll() {
         return this.http.get<Lane[]>(this.apiUrl + 'Lane', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    getAllOfCity(idCity: string) {
+        return this.http.get<Lane[]>(this.apiUrl + 'Lane/City/' + idCity, {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
