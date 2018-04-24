@@ -1,45 +1,36 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {FireHydrant} from '../models/fire-hydrant.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 
 @Injectable()
-export class FireHydrantService {
+export class FireHydrantService extends RequestService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
+    }
 
-  public getAll() {
-    /*return this.http.get('firehydrant').map((response: Response) => {
-      const result = response.json();
+    getAll() {
+        return this.http.get<FireHydrant[]>(this.apiUrl + 'FireHydrant', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-      return result.data;
-    });*/
-  }
+    save(fireHydrant: FireHydrant) {
+        return this.http.post(
+            this.apiUrl + 'FireHydrant',
+            JSON.stringify(fireHydrant),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-  public get(idFireHydrant: string) {
-    /*return this.http.get('firehydrant/' + idFireHydrant).map((response: Response) => {
-      const result = response.json();
-
-      return result.data;
-    });*/
-  }
-
-  public create(fireHydrant: FireHydrant) {
-    /*return this.http.post(
-      'firehydrant',
-      JSON.stringify(fireHydrant)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public update(fireHydrant: FireHydrant) {
-    /*return this.http.put(
-      'firehydrant',
-      JSON.stringify(fireHydrant),
-    ).map((response: Response) => response.json());*/
-  }
-
-  public remove(idFireHydrant: string) {
-    // return this.http.delete('firehydrant/' + idFireHydrant).map((response: Response) => response.json());
-  }
+    remove(idFireHydrant: string) {
+        return this.http.delete(this.apiUrl + 'FireHydrant/' + idFireHydrant, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }

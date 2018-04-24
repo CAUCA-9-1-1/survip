@@ -1,46 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 
-import {OperatorType} from '../shared/models/operator-type.model';
 import {OperatorTypeService} from '../shared/services/operator-type.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+
 
 @Component({
-  selector: 'app-managementfirehydrant-operatortype',
-  templateUrl: './operator-type.component.html',
-  styleUrls: ['./operator-type.component.styl'],
-  providers: [OperatorTypeService]
+    selector: 'app-managementfirehydrant-operatortype',
+    templateUrl: './operator-type.component.html',
+    styleUrls: ['./operator-type.component.styl'],
+    providers: [OperatorTypeService]
 })
-export class OperatorTypeComponent implements OnInit {
-  operatorTypes: OperatorType[] = [];
+export class OperatorTypeComponent extends GridWithCrudService implements OnInit {
 
-  constructor(private operatorTypeService: OperatorTypeService) { }
+    constructor(operatorTypeService: OperatorTypeService) {
+        super(operatorTypeService);
+    }
 
-  ngOnInit() {
-    this.loadOperatorType();
-  }
+    ngOnInit() {
+        this.loadSource();
+    }
 
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
-
-  public onRowInserted(e) {
-    /*this.operatorTypeService.create(e.data).subscribe(info => {
-      if (info.success) {
-        this.loadOperatorType();
-      }
-    });*/
-  }
-
-  public onRowUpdated(e) {
-    e.data.idOperatorType = e.key.idOperatorType;
-
-    // this.operatorTypeService.update(e.data).subscribe();
-  }
-
-  public onRowRemoved(e) {
-    // this.operatorTypeService.remove(e.key.idOperatorType).subscribe();
-  }
-
-  private loadOperatorType() {
-    // this.operatorTypeService.getAll().subscribe(data => this.operatorTypes = data);
-  }
+    onInitNewRow(e) {
+        e.data.isActive = true;
+    }
 }
