@@ -1,45 +1,36 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {FireHydrantType} from '../models/fire-hydrant-type.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 
 @Injectable()
-export class FireHydrantTypeService {
+export class FireHydrantTypeService extends RequestService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
+    }
 
-  public getAll() {
-    /*return this.http.get('firehydranttype').map((response: Response) => {
-      const result = response.json();
+    getAll() {
+        return this.http.get<FireHydrantType[]>(this.apiUrl + 'FireHydrantType', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-      return result.data;
-    });*/
-  }
+    save(type: FireHydrantType) {
+        return this.http.post(
+            this.apiUrl + 'FireHydrantType',
+            JSON.stringify(type),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-  public get(idFireHydrantType: string) {
-    /*return this.http.get('firehydranttype/' + idFireHydrantType).map((response: Response) => {
-      const result = response.json();
-
-      return result.data;
-    });*/
-  }
-
-  public create(type: FireHydrantType) {
-    /*return this.http.post(
-      'firehydranttype',
-      JSON.stringify(type)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public update(type: FireHydrantType) {
-    /*return this.http.put(
-      'firehydranttype',
-      JSON.stringify(type),
-    ).map((response: Response) => response.json());*/
-  }
-
-  public remove(idFireHydrantType: string) {
-    // return this.http.delete('firehydranttype/' + idFireHydrantType).map((response: Response) => response.json());
-  }
+    remove(idType: string) {
+        return this.http.delete(this.apiUrl + 'FireHydrantType/' + idType, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }

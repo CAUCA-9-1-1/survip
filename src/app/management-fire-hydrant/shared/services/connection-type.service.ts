@@ -1,45 +1,36 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {ConnectionType} from '../models/connection-type.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 
 @Injectable()
-export class ConnectionTypeService {
+export class ConnectionTypeService extends RequestService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
+    }
 
-  public getAll() {
-    /*return this.http.get('firehydrantconnectiontype').map((response: Response) => {
-      const result = response.json();
+    getAll() {
+        return this.http.get<ConnectionType[]>(this.apiUrl + 'ConnectionType', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-      return result.data;
-    });*/
-  }
+    save(type: ConnectionType) {
+        return this.http.post(
+            this.apiUrl + 'ConnectionType',
+            JSON.stringify(type),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-  public get(idConnectionType: string) {
-    /*return this.http.get('firehydrantconnectiontype/' + idConnectionType).map((response: Response) => {
-      const result = response.json();
-
-      return result.data;
-    });*/
-  }
-
-  public create(type: ConnectionType) {
-    /*return this.http.post(
-      'firehydrantconnectiontype',
-      JSON.stringify(type)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public update(type: ConnectionType) {
-    /*return this.http.put(
-      'firehydrantconnectiontype',
-      JSON.stringify(type),
-    ).map((response: Response) => response.json());*/
-  }
-
-  public remove(idConnectionType: string) {
-    // return this.http.delete('firehydrantconnectiontype/' + idConnectionType).map((response: Response) => response.json());
-  }
+    remove(idType: string) {
+        return this.http.delete(this.apiUrl + 'ConnectionType/' + idType, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }
