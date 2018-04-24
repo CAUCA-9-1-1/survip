@@ -3,7 +3,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { TestModule } from '../../../test.module';
 import { FireHydrantService } from './fire-hydrant.service';
 
-describe('ConnectionTypeService', () => {
+describe('FireHydrantConnectionTypeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ TestModule ],

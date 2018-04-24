@@ -1,46 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+
 
 @Component({
-  selector: 'app-managementfirehydrant-type',
-  templateUrl: './type.component.html',
-  styleUrls: ['./type.component.styl'],
-  providers: [FireHydrantTypeService]
+    selector: 'app-managementfirehydrant-type',
+    templateUrl: './type.component.html',
+    styleUrls: ['./type.component.styl'],
+    providers: [FireHydrantTypeService]
 })
-export class TypeComponent implements OnInit {
-  fireHydrantTypes: FireHydrantType[] = [];
+export class TypeComponent extends GridWithCrudService implements OnInit {
 
-  constructor(private fireHydrantTypeService: FireHydrantTypeService) { }
+    constructor(fireHydrantTypeService: FireHydrantTypeService) {
+        super(fireHydrantTypeService);
+    }
 
-  ngOnInit() {
-    this.loadFireHydrantType();
-  }
+    ngOnInit() {
+        this.loadSource();
+    }
 
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
+    getTypeName(data) {
+        const type = FireHydrantType.fromJSON(data);
 
-  public onRowInserted(e) {
-    /*this.fireHydrantTypeService.create(e.data).subscribe(info => {
-      if (info.success) {
-        this.loadFireHydrantType();
-      }
-    });*/
-  }
+        return type.getLocalization(environment.locale.use);
+    }
 
-  public onRowUpdated(e) {
-    e.data.idFireHydrantType = e.key.idFireHydrantType;
-
-    // this.fireHydrantTypeService.update(e.data).subscribe();
-  }
-
-  public onRowRemoved(e) {
-    // this.fireHydrantTypeService.remove(e.key.idFireHydrantType).subscribe();
-  }
-
-  private loadFireHydrantType() {
-    // this.fireHydrantTypeService.getAll().subscribe(data => this.fireHydrantTypes = data);
-  }
+    onInitNewRow(e) {
+        e.data.isActive = true;
+    }
 }
