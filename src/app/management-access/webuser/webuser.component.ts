@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Webuser} from '../shared/models/webuser.model';
 import {WebuserService} from '../shared/services/webuser.service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
-import {WebuserFireSafetyDepartment} from '../shared/models/webuserfiresafetydepartment.model';
-import {WebuserFireSafetyDepartmentService} from '../shared/services/webuserfiresafetydepartment.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {environment} from '../../../environments/environment';
 
 
 @Component({
@@ -15,47 +14,51 @@ import {WebuserFireSafetyDepartmentService} from '../shared/services/webuserfire
     providers: [
         FireSafetyDepartmentService,
         WebuserService,
-        WebuserFireSafetyDepartmentService,
     ]
 })
-export class WebuserComponent implements OnInit {
+export class WebuserComponent extends GridWithCrudService implements OnInit {
     private selectedPassword: string;
     private selectedIdWebuser: string;
 
-    users: Webuser[] = [];
     departments: FireSafetyDepartment[] = [];
-    userDepartments: WebuserFireSafetyDepartment[] = [];
+    webuserFireSafetyDepartments = [];
 
     constructor(
+        webuserService: WebuserService,
         private departmentService: FireSafetyDepartmentService,
-        private webuserService: WebuserService,
-        private webuserDeptService: WebuserFireSafetyDepartmentService
-    ) { }
+    ) {
+        super(webuserService);
+    }
 
     ngOnInit() {
-        this.loadUsers();
+        this.loadSource();
         this.loadDepartments();
     }
 
     getFirstname(e) {
         let name = '';
 
-        e.attributes.forEach(attribute => {
-            if (attribute.attributeName === 'firstname') {
-                name = attribute.attributeValue;
-            }
-        });
+        if (e.attributes) {
+            e.attributes.forEach(attribute => {
+                if (attribute.attributeName === 'firstname') {
+                    name = attribute.attributeValue;
+                }
+            });
+        }
 
         return name;
     }
 
     getLastname(e) {
         let name = '';
-        e.attributes.forEach(attribute => {
-            if (attribute.attributeName === 'lastname') {
-                name = attribute.attributeValue;
-            }
-        });
+
+        if (e.attributes) {
+            e.attributes.forEach(attribute => {
+                if (attribute.attributeName === 'lastname') {
+                    name = attribute.attributeValue;
+                }
+            });
+        }
 
         return name;
     }
@@ -63,16 +66,24 @@ export class WebuserComponent implements OnInit {
     getAttribute(field, e) {
         let name = '';
 
-        e.attributes.forEach(attribute => {
-            if (attribute.attributeName === field) {
-                name = attribute.attributeValue;
-            }
-        });
+        if (e.attributes) {
+            e.attributes.forEach(attribute => {
+                if (attribute.attributeName === field) {
+                    name = attribute.attributeValue;
+                }
+            });
+        }
 
         return name;
     }
 
-    onPasswordChanged = (e) => {
+    getDepartmentName(data) {
+        const departments = FireSafetyDepartment.fromJSON(data);
+
+        return departments.getLocalization(environment.locale.use);
+    }
+
+    onPasswordChanged(e) {
         if (e.value && e.value.length < 8) {
           return false;
         }
@@ -81,15 +92,8 @@ export class WebuserComponent implements OnInit {
         return true;
     }
 
-    onPasswordCompare = () => {
+    onPasswordCompare() {
         return (this.selectedPassword ? this.selectedPassword : null);
-    }
-
-    onInitNewRow(e) {
-        e.data.isActive = true;
-        e.data.attributes = {
-            resetPassword: true
-        };
     }
 
     onEditorPreparing(e) {
@@ -111,71 +115,45 @@ export class WebuserComponent implements OnInit {
         }
     }
 
+    onInitNewRow(e) {
+        e.data.isActive = true;
+        e.data.resetPassword = true;
+    }
+
     onEditingStart(e) {
         e.data.password = '';
-        e.data.resetPassword = false;
+        e.data.resetPassword = this.getAttribute('resetPassword', e.data);
 
-        this.loadUserDepartment(e.data.id);
+        console.log('edit SSI', e);
 
+        this.webuserFireSafetyDepartments = e.data.fireSafetyDepartments;
         this.selectedIdWebuser = e.data.id;
         this.selectedPassword = '';
     }
 
-    onRowInserted(e) {
-        this.webuserService.save(e.data).subscribe(info => {
-            this.loadUsers();
-        });
-    }
-
-    onRowUpdated(e) {
-        this.webuserService.save(e.key).subscribe();
-    }
-
-    onRowRemoved(e) {
-        this.webuserService.remove(e.key.id).subscribe();
-    }
-
-    public onNewUserDepartment(e) {
-        e.data.isActive = true;
-        e.data.attributes = {
-            resetPassword: true
-        };
-    }
-
-    public onUserDepartmentInserted(e) {
-        e.data.idWebuserFireSafetyDepartment = e.key.idWebuserFireSafetyDepartment;
+    onNewUserDepartment(e) {
         e.data.idWebuser = this.selectedIdWebuser;
-
-        /*this.webuserDeptService.create(e.data).subscribe(info => {
-          if (info.success) {
-            this.loadUserDepartment(this.selectedIdWebuser);
-          }
-        });*/
+        e.data.isActive = true;
     }
 
-    public onUserDepartmentUpdated(e) {
+    onUserDepartmentInserted(e) {
+        console.log('SSI insert', e);
+    }
+
+    onUserDepartmentUpdated(e) {
         for (const i in e.data) {
           if (e.data[i]) {
             e.key[i] = e.data[i];
           }
         }
 
-        // this.webuserDeptService.update(e.key).subscribe();
     }
 
-    public onUserDepartmentRemoved(e) {
+    onUserDepartmentRemoved(e) {
         // this.webuserDeptService.remove(e.key.selectedIdWebuser).subscribe();
-    }
-
-    private loadUsers() {
-        this.webuserService.getAll().subscribe(data => this.users = data);
     }
 
     private loadDepartments() {
         this.departmentService.getAll().subscribe(data => this.departments = data);
-    }
-
-    private loadUserDepartment(idWebuser: string) {
-        // this.webuserDeptService.getByUser(idWebuser).subscribe(data => this.userDepartments = data);
     }
 }

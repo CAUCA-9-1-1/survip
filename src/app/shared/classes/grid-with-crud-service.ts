@@ -19,6 +19,7 @@ export class GridWithCrudService {
     }
 
     onRowUpdated(e) {
+        console.log('webuser update', e);
         this.sourceService.save(e.key).subscribe();
     }
 
