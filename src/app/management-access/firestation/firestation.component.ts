@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {DxDataGridComponent} from 'devextreme-angular';
 import {environment} from '../../../environments/environment';
 
 import {FirestationService} from '../shared/services/firestation.service';
-import {Firestation} from '../shared/models/firestation.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {BuildingService} from '../../management-building/shared/services/building.service';
@@ -20,7 +20,9 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
         BuildingService,
     ]
 })
-export class FirestationComponent extends GridWithCrudService implements OnInit {
+export class FirestationComponent extends GridWithCrudService implements OnInit, AfterViewInit {
+    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+
     departments: FireSafetyDepartment[] = [];
     buildings: Building[] = [];
 
@@ -34,8 +36,19 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
 
     ngOnInit() {
         this.loadSource();
-        this.loadDepartment();
         this.loadBuilding();
+    }
+
+    ngAfterViewInit() {
+        this.dataGrid.instance.option('onEditorPreparing', (e) => {
+                if (e.dataField === 'idFireSafetyDepartment') {
+                    e.editorOptions.type = 'dxSelectBox';
+                    e.editorOptions.onOpened = (ev) => {
+                        this.loadDepartment(ev);
+                    };
+                }
+            }
+        );
     }
 
     getDepartmentName(data) {
@@ -54,8 +67,14 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
         e.data.isActive = true;
     }
 
-    private loadDepartment() {
-        this.fireSafetyDepartmentService.getAll().subscribe(data => this.departments = data);
+    private loadDepartment(ev?) {
+        this.fireSafetyDepartmentService.getAll().subscribe(data => {
+            this.departments = data;
+
+            if (ev) {
+                ev.component.option('dataSource', this.departments);
+            }
+        });
     }
 
     private loadBuilding() {
