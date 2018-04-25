@@ -19,7 +19,7 @@ import {DxDataGridComponent} from 'devextreme-angular';
 @Component({
     selector: 'app-managementfirehydrant-list',
     templateUrl: './list.component.html',
-    styleUrls: ['./list.component.styl'],
+    styleUrls: ['./list.component.scss'],
     providers: [
         FireHydrantService,
         FireHydrantTypeService,

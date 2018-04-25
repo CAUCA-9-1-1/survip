@@ -9,7 +9,7 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 @Component({
     selector: 'app-managementfirehydrant-connectiontype',
     templateUrl: './connection-type.component.html',
-    styleUrls: ['./connection-type.component.styl'],
+    styleUrls: ['./connection-type.component.scss'],
     providers: [FireHydrantConnectionTypeService]
 })
 export class ConnectionTypeComponent extends GridWithCrudService implements OnInit {

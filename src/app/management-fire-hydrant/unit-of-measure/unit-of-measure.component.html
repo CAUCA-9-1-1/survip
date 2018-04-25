@@ -15,7 +15,7 @@
           sortIndex="0">
     </dxi-column>
     <dxi-column dataField="abbreviation" caption="{{'abbreviation' | translate}}"></dxi-column>
-    <dxi-column dataField="measureType" caption="{{'type' | translate}}"></dxi-column>
+    <dxi-column dataField="measureType" caption="{{'type' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
