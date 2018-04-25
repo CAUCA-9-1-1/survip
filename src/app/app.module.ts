@@ -6,6 +6,7 @@ import { SharedModule } from './shared/shared.module';
 import { UserAccessModule } from './user-access/user-access.module';
 import { ManagementAddressModule } from './management-address/management-address.module';
 import { ManagementAccessModule } from './management-access/management-access.module';
+import { DashboardInspectionModule } from './dashboard-inspection/dashboard-inspection.module';
 import { ManagementFireHydrantModule } from './management-fire-hydrant/management-fire-hydrant.module';
 
 
@@ -18,6 +19,7 @@ import { ManagementFireHydrantModule } from './management-fire-hydrant/managemen
     ],
     imports: [
         SharedModule,
+        DashboardInspectionModule,
         ManagementAddressModule,
         ManagementAccessModule,
         ManagementFireHydrantModule,

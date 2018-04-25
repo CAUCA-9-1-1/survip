@@ -1,0 +1,46 @@
+<app-toolbar title="{{'dashboardInspection' | translate}}"></app-toolbar>
+<div class="content-under-toolbar">
+    <mat-button-toggle-group #group="matButtonToggleGroup" color="primary">
+        <mat-button-toggle value="mode1" [checked]="selectedMode == 'mode1'">
+            {{'mode1' | translate}}
+        </mat-button-toggle>
+        <mat-button-toggle value="mode2" [checked]="selectedMode == 'mode2'">
+            {{'mode2' | translate}}
+        </mat-button-toggle>
+        <mat-button-toggle value="mode3" [checked]="selectedMode == 'mode3'">
+            {{'mode3' | translate}}
+        </mat-button-toggle>
+        <mat-button-toggle value="mode4" [checked]="selectedMode == 'mode4'">
+            {{'mode4' | translate}}
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <dx-data-grid
+            [dataSource]="dataSource"
+            [hoverStateEnabled]="true">
+        <dxi-column dataField="idBuilding" caption="{{'building' | translate}}">
+            <dxo-lookup [dataSource]="buildings" [displayExpr]="getBuildingName" valueExpr="id">
+            </dxo-lookup>
+        </dxi-column>
+        <dxi-column dataField="idSurvey" caption="{{'survey' | translate}}">
+            <dxo-lookup [dataSource]="surveys" [displayExpr]="getSurveyName" valueExpr="id">
+            </dxo-lookup>
+        </dxi-column>
+        <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="15%" [visible]="false"></dxi-column>
+
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-search-panel
+                [visible]="true"
+                [width]="searchWidth"
+                placeholder="{{'search' | translate}}"></dxo-search-panel>
+        <dxo-editing mode="popup" [allowAdding]="true">
+            <dxo-popup title="{{'inspection' | translate}}" [showTitle]="true"></dxo-popup>
+
+            <dxo-form colCount="2">
+                <dxi-item dataField="idBuilding" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="idSurvey" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+            </dxo-form>
+        </dxo-editing>
+    </dx-data-grid>
+</div>

@@ -71,7 +71,7 @@ $cause-gold: (
 
 /** Define the theme. **/
 $cause-primary: mat-palette($cause-red);
-$cause-accent:  mat-palette($cause-red);
+$cause-accent:  mat-palette($cause-gold);
 $cause-theme:   mat-light-theme($cause-primary, $cause-accent);
 
 @include angular-material-theme($cause-theme);
@@ -80,3 +80,21 @@ $cause-theme:   mat-light-theme($cause-primary, $cause-accent);
   Include the theme styles for only specified components.
   @include mat-button-theme($app-theme);
 **/
+@mixin mix-app-theme($app-theme) {
+  $primary: map-get($app-theme, primary);
+  $accent: map-get($app-theme, accent);
+
+  .mat-button-toggle {
+    padding: 4px;
+    background-color: mat-color($cause-accent);
+    color: mat-color($cause-accent, default-contrast);
+  }
+
+  .mat-button-toggle-checked {
+    background-color: mat-color($cause-primary);
+    color: mat-color($cause-primary, default-contrast);
+  }
+}
+
+// Include the mixin
+@include mix-app-theme($cause-theme);
