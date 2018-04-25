@@ -3,7 +3,7 @@ import {WithLocalization} from '../../../shared/models/with-localization';
 
 export class UnitOfMeasure extends WithLocalization {
     abbreviation: string;
-    measureType: string;
+    measureType: number;
 
     static fromJSON(data: object): UnitOfMeasure {
         const unit = new UnitOfMeasure();

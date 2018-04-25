@@ -9,7 +9,7 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 @Component({
     selector: 'app-managementfirehydrant-type',
     templateUrl: './type.component.html',
-    styleUrls: ['./type.component.styl'],
+    styleUrls: ['./type.component.scss'],
     providers: [FireHydrantTypeService]
 })
 export class TypeComponent extends GridWithCrudService implements OnInit {
