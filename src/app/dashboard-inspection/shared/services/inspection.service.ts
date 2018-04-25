@@ -21,7 +21,7 @@ export class InspectionService extends RequestService {
     }
 
     getBuildingToDo() {
-        return this.http.get<Building[]>(this.apiUrl + 'BuildingWithoutInspection', {
+        return this.http.get<Building[]>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
