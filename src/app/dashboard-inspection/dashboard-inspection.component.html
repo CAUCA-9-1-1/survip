@@ -1,6 +1,6 @@
 <app-toolbar title="{{'dashboardInspection' | translate}}"></app-toolbar>
 <div class="content-under-toolbar">
-    <mat-button-toggle-group #group="matButtonToggleGroup" color="primary">
+    <mat-button-toggle-group #group="matButtonToggleGroup" color="primary" (valueChange)="changeMode($event)">
         <mat-button-toggle value="mode1" [checked]="selectedMode == 'mode1'">
             {{'mode1' | translate}}
         </mat-button-toggle>

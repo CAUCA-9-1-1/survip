@@ -25,7 +25,7 @@ export class Building extends WithLocalization {
     numberOfBuilding: number;
     numberOfFloor: number;
     postalCode: string;
-    showInResources: string;
+    showInResources: boolean;
     source: string;
     suite: string;
     utilisationDescription: string;

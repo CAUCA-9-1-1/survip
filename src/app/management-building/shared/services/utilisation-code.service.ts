@@ -1,38 +1,37 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import 'rxjs/add/operator/catch';
 
 import {UtilisationCode} from '../models/utilisation-code.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 
 @Injectable()
-export class UtilisationCodeService {
+export class UtilisationCodeService extends RequestService {
 
-  constructor(private http: HttpClient
-  ) { }
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
+    }
 
-  public getAll() {
-    /*return this.http.get('utilisationcode').map((response: Response) => {
-      const result = response.json();
+    getAll() {
+        return this.http.get<UtilisationCode[]>(this.apiUrl + 'UtilisationCode', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-      return result.data;
-    });*/
-  }
+    save(code: UtilisationCode) {
+        return this.http.post(
+            this.apiUrl + 'UtilisationCode',
+            JSON.stringify(code),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-  public create(code: UtilisationCode) {
-    /*return this.http.post(
-      'utilisationcode',
-      JSON.stringify(code)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public update(code: UtilisationCode) {
-    /*return this.http.put(
-      'utilisationcode',
-      JSON.stringify(code),
-    ).map((response: Response) => response.json());*/
-  }
-
-  public remove(idUtilisationCode: string) {
-    // return this.http.delete('utilisationcode/' + idUtilisationCode).map((response: Response) => response.json());
-  }
+    remove(idCode: string) {
+        return this.http.delete(this.apiUrl + 'UtilisationCode/' + idCode, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }
