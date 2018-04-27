@@ -34,7 +34,8 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
 
     fireHydrantTypes: FireHydrantType[] = [];
     cities: City[] = [];
-    lanes: any[] = [];
+    lanes: Lane[] = [];
+    lanesOfCity: Lane[] = [];
     intersections: Lane[] = [];
     operatorTypes: OperatorType[] = [];
     unitOfMeasures: UnitOfMeasure[] = [];
@@ -56,23 +57,28 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
         this.loadOperatorType();
         this.loadUnitOfMeasure();
         this.loadCity();
+        this.loadLane();
     }
 
     ngAfterViewInit() {
-        this.dataGrid.instance.option('onEditorPreparing', (e) => {
+        this.dataGrid.instance.option({
+            onEditingStart: (e) => {
+                this.loadLaneByCity(e.data.idCity);
+            },
+            onEditorPreparing: (e) => {
                 if (e.dataField === 'idCity') {
                     e.editorOptions.type = 'dxSelectBox';
                     e.editorOptions.onValueChanged = (ev) => {
-                        this.loadLane(ev.value);
+                        this.loadLaneByCity(ev.value);
                     };
                 } else if (e.dataField === 'idLane') {
                     e.editorOptions.type = 'dxSelectBox';
                     e.editorOptions.onOpened = (ev) => {
-                        ev.component.option('dataSource', this.lanes);
+                        ev.component.option('dataSource', this.lanesOfCity);
                     };
                 }
             }
-        );
+        });
     }
 
     getFireHydrantTypeName(data) {
@@ -85,6 +91,16 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
         const city = City.fromJSON(data);
 
         return city.getLocalization(environment.locale.use);
+    }
+
+    getLaneName(data) {
+        if (data.localizations) {
+            const lane = Lane.fromJSON(data);
+
+            return lane.getLocalization(environment.locale.use);
+        } else {
+            return data.name;
+        }
     }
 
     getIntersectionName(data) {
@@ -118,7 +134,11 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
         this.cityService.getAll().subscribe(data => this.cities = data);
     }
 
-    private loadLane(idCity: string) {
-        this.laneService.getAllOfCity(idCity).subscribe(data => this.lanes = data);
+    private loadLane() {
+        this.laneService.getAll().subscribe(data => this.lanes = data);
+    }
+
+    private loadLaneByCity(idCity: string) {
+        this.laneService.getAllOfCity(idCity).subscribe(data => this.lanesOfCity = data);
     }
 }
