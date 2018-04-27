@@ -8,7 +8,6 @@ import { ManagementAccessComponent } from './management-access/management-access
 import { ManagementAddressComponent } from './management-address/management-address.component';
 //import {ManagementBuildingComponent} from './management-building/management-building.component';
 import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
-//import {ManagementInspectionComponent} from './management-inspection/management-inspection.component';
 //import {ManagementInterventionPlanComponent} from './management-intervention-plan/management-intervention-plan.component';
 //import {ManagementSurveyComponent} from './management-survey/management-survey.component';
 import { LoginComponent } from './user-access/login/login.component';
