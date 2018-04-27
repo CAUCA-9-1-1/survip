@@ -1,26 +1,30 @@
-<app-toolbar title="{{'addressManagement' | translate}}"></app-toolbar>
-<div class="content-under-toolbar">
-    <mat-tab-group>
-        <mat-tab label="{{'lane' | translate}}">
-            <app-managementaddress-lane></app-managementaddress-lane>
-        </mat-tab>
-        <mat-tab label="{{'city' | translate}}">
-            <app-managementaddress-city></app-managementaddress-city>
-        </mat-tab>
-        <mat-tab label="{{'cityType' | translate}}">
-            <app-managementaddress-citytype></app-managementaddress-citytype>
-        </mat-tab>
-        <mat-tab label="{{'county' | translate}}">
-            <app-managementaddress-county></app-managementaddress-county>
-        </mat-tab>
-        <mat-tab label="{{'region' | translate}}">
-            <app-managementaddress-region></app-managementaddress-region>
-        </mat-tab>
-        <mat-tab label="{{'state' | translate}}">
-            <app-managementaddress-state></app-managementaddress-state>
-        </mat-tab>
-        <mat-tab label="{{'country' | translate}}">
-            <app-managementaddress-country></app-managementaddress-country>
-        </mat-tab>
-    </mat-tab-group>
+<div fxLayout="row">
+    <div fxFlex="350px">
+        <app-main-menu></app-main-menu>
+    </div>
+    <div fxFlex="" class="content">
+        <mat-tab-group>
+            <mat-tab label="{{'lane' | translate}}">
+                <app-managementaddress-lane></app-managementaddress-lane>
+            </mat-tab>
+            <mat-tab label="{{'city' | translate}}">
+                <app-managementaddress-city></app-managementaddress-city>
+            </mat-tab>
+            <mat-tab label="{{'cityType' | translate}}">
+                <app-managementaddress-citytype></app-managementaddress-citytype>
+            </mat-tab>
+            <mat-tab label="{{'county' | translate}}">
+                <app-managementaddress-county></app-managementaddress-county>
+            </mat-tab>
+            <mat-tab label="{{'region' | translate}}">
+                <app-managementaddress-region></app-managementaddress-region>
+            </mat-tab>
+            <mat-tab label="{{'state' | translate}}">
+                <app-managementaddress-state></app-managementaddress-state>
+            </mat-tab>
+            <mat-tab label="{{'country' | translate}}">
+                <app-managementaddress-country></app-managementaddress-country>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
 </div>

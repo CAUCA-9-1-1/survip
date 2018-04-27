@@ -3,7 +3,7 @@
 @include mat-core();
 
 /** Generated at http://mcg.mbitson.com **/
-$cause-red: (
+$theme-color-red: (
         50 : #f6e4e3,
         100 : #e8bcb9,
         200 : #d9908b,
@@ -36,7 +36,7 @@ $cause-red: (
         )
 );
 
-$cause-gold: (
+$theme-color-gold: (
         50 : #f9f6ef,
         100 : #efe9d6,
         200 : #e5dbbb,
@@ -70,11 +70,11 @@ $cause-gold: (
 );
 
 /** Define the theme. **/
-$cause-primary: mat-palette($cause-red);
-$cause-accent:  mat-palette($cause-gold);
-$cause-theme:   mat-light-theme($cause-primary, $cause-accent);
+$theme-primary: mat-palette($theme-color-red);
+$theme-accent:  mat-palette($theme-color-gold);
+$theme:   mat-light-theme($theme-primary, $theme-accent);
 
-@include angular-material-theme($cause-theme);
+@include angular-material-theme($theme);
 
 /**
   Include the theme styles for only specified components.
@@ -85,16 +85,17 @@ $cause-theme:   mat-light-theme($cause-primary, $cause-accent);
   $accent: map-get($app-theme, accent);
 
   .mat-button-toggle {
-    padding: 4px;
-    background-color: mat-color($cause-accent);
-    color: mat-color($cause-accent, default-contrast);
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: mat-color($theme-accent);
+    color: mat-color($theme-accent, default-contrast);
   }
 
   .mat-button-toggle-checked {
-    background-color: mat-color($cause-primary);
-    color: mat-color($cause-primary, default-contrast);
+    background-color: mat-color($theme-primary);
+    color: mat-color($theme-primary, default-contrast);
   }
 }
 
 // Include the mixin
-@include mix-app-theme($cause-theme);
+@include mix-app-theme($theme);

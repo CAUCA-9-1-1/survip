@@ -5,7 +5,7 @@ import {StatisticsComponent} from './statistics/statistics.component';
 @Component({
   selector: 'app-management-access',
   templateUrl: './management-access.component.html',
-  styleUrls: ['./management-access.component.styl']
+  styleUrls: ['./management-access.component.scss']
 })
 export class ManagementAccessComponent implements OnInit {
   @ViewChild(StatisticsComponent) stats: StatisticsComponent;

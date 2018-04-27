@@ -1,19 +1,23 @@
-<app-toolbar title="{{'dashboardInspection' | translate}}"></app-toolbar>
-<div class="content-under-toolbar">
-    <mat-button-toggle-group #group="matButtonToggleGroup" color="primary" (valueChange)="changeMode($event)">
-        <mat-button-toggle value="mode1" [checked]="selectedMode == 'mode1'">
-            {{'mode1' | translate}}
-        </mat-button-toggle>
-        <mat-button-toggle value="mode2" [checked]="selectedMode == 'mode2'">
-            {{'mode2' | translate}}
-        </mat-button-toggle>
-        <mat-button-toggle value="mode3" [checked]="selectedMode == 'mode3'">
-            {{'mode3' | translate}}
-        </mat-button-toggle>
-        <mat-button-toggle value="mode4" [checked]="selectedMode == 'mode4'">
-            {{'mode4' | translate}}
-        </mat-button-toggle>
-    </mat-button-toggle-group>
+<div fxLayout="row">
+    <div fxFlex="350px">
+        <app-main-menu></app-main-menu>
+    </div>
+    <div fxFlex="" class="content">
+        <mat-button-toggle-group #group="matButtonToggleGroup" color="primary" (valueChange)="changeMode($event)">
+            <mat-button-toggle value="mode1" [checked]="selectedMode == 'mode1'">
+                {{'mode1' | translate}}
+            </mat-button-toggle>
+            <mat-button-toggle value="mode2" [checked]="selectedMode == 'mode2'">
+                {{'mode2' | translate}}
+            </mat-button-toggle>
+            <mat-button-toggle value="mode3" [checked]="selectedMode == 'mode3'">
+                {{'mode3' | translate}}
+            </mat-button-toggle>
+            <mat-button-toggle value="mode4" [checked]="selectedMode == 'mode4'">
+                {{'mode4' | translate}}
+            </mat-button-toggle>
+        </mat-button-toggle-group>
 
-    <dx-data-grid [dataSource]="dataSource" [hoverStateEnabled]="true"></dx-data-grid>
+        <dx-data-grid [dataSource]="dataSource" [hoverStateEnabled]="true"></dx-data-grid>
+    </div>
 </div>

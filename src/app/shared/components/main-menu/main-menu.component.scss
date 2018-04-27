@@ -1,0 +1,19 @@
+@import '../../../../theme';
+
+$accent: map-get($theme, accent);
+
+:host {
+  height: 100%;
+  display: block;
+  border-right: 1px solid rgba(0,0,0,.2);
+  margin-right: 10px;
+}
+
+h4 > div {
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+h4:hover {
+  background-color: mat-color($accent);
+}

@@ -1,0 +1,7 @@
+<mat-list>
+    <mat-list-item *ngFor="let menu of items">
+        <h4 mat-line (click)="goto(menu.path)">
+            <div>{{menu.name | translate}}</div>
+        </h4>
+    </mat-list-item>
+</mat-list>
