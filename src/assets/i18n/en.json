@@ -168,6 +168,7 @@
   "utilisationDescription": "Utilisation description",
   "details": "Details",
   "webuserAssignedTo": "User assigned to",
+  "createBatch": "Create batch",
   "connection": "Connection",
   "enter": "Enter"
 }

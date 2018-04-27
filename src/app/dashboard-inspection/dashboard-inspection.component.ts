@@ -57,9 +57,9 @@ export class DashboardInspectionComponent implements OnInit, AfterViewInit {
 
         this.translateService.get([
             'riskLevel', 'address', 'transversal', 'city', 'postalCode', 'batch', 'status', 'note', 'anomaly',
-            'lastInspection', 'lastReport', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue',
-            'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationDescription',
-            'vacantLand', 'yearOfConstruction', 'details', 'webuserAssignedTo', 'utilisationCode'
+            'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details',
+            'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode',
+            'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch'
         ]).subscribe(labels => {
             this.labels = labels;
             this.labelIsLoaded = true;
@@ -88,6 +88,16 @@ export class DashboardInspectionComponent implements OnInit, AfterViewInit {
         }
     }
 
+    private createBatch(e) {
+        const buildings = [];
+
+        this.dataGrid.instance.getSelectedRowsData().forEach(rows => {
+            buildings.push(rows.idBuilding);
+        });
+
+        console.log(buildings);
+    }
+
     private setDatagrid() {
         const columns = this.getColumns();
 
@@ -114,14 +124,33 @@ export class DashboardInspectionComponent implements OnInit, AfterViewInit {
                 }
 
                 localStorage.setItem('column-visible-' + this.selectedMode, JSON.stringify(visible));
-            }
+            },
+            selection: {
+                mode: 'multiple'
+            },
+            onToolbarPreparing: (e) => this.customizeToolbar(e)
+        });
+    }
+
+    private customizeToolbar(e) {
+        const toolbarItems = e.toolbarOptions.items;
+
+        toolbarItems.unshift({
+            widget: 'dxButton',
+            options: {
+                text: this.labels['createBatch'],
+                icon: 'group',
+                disabled: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? true : false),
+                onClick: (e) => this.createBatch(e)
+            },
+            location: 'after',
         });
     }
 
     private getDefaultColumnVisible() {
         const visible = [
-            true, true, false, false, false, false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false, false, false, false, false
+            true, true, false, false, false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false, false, false, false
         ];
 
         switch (this.selectedMode) {
@@ -141,8 +170,6 @@ export class DashboardInspectionComponent implements OnInit, AfterViewInit {
                 visible[8] = true;
                 visible[9] = true;
                 visible[10] = true;
-                visible[11] = true;
-                visible[12] = true;
                 break;
             case 'mode4':
                 visible[3] = true;
@@ -219,33 +246,28 @@ export class DashboardInspectionComponent implements OnInit, AfterViewInit {
             caption: this.labels['status'],
             visible: visible[7],
         }, {
-            dataField: 'visitNote',
+            dataField: 'hasVisitNote',
             caption: this.labels['note'],
             dataType: 'boolean',
             visible: visible[8],
         }, {
-            dataField: 'anomaly',
+            dataField: 'hasAnomaly',
             caption: this.labels['anomaly'],
             dataType: 'boolean',
             visible: visible[9],
         }, {
-            dataField: 'lastInspection',
+            dataField: 'lastInspectionOn',
             caption: this.labels['lastInspection'],
             dataType: 'date',
             visible: visible[10],
         }, {
-            dataField: 'lastReport',
-            caption: this.labels['lastReport'],
-            dataType: 'date',
-            visible: visible[11],
-        }, {
             dataField: 'contact',
             caption: this.labels['contact'],
-            visible: visible[13],
+            visible: visible[11],
         }, {
             dataField: 'owner',
             caption: this.labels['owner'],
-            visible: visible[14],
+            visible: visible[12],
         }, {
             dataField: 'idUtilisationCode',
             caption: this.labels['utilisationCode'],
@@ -258,48 +280,44 @@ export class DashboardInspectionComponent implements OnInit, AfterViewInit {
                     return code.getLocalization(environment.locale.use);
                 }
             },
-            visible: visible[15],
+            visible: visible[13],
         }, {
             dataField: 'idPicture',
             caption: this.labels['picture'],
-            visible: visible[16],
+            visible: visible[14],
         }, {
             dataField: 'buildingValue',
             caption: this.labels['buildingValue'],
-            visible: visible[17],
+            visible: visible[15],
         }, {
             dataField: 'matricule',
             caption: this.labels['matricule'],
-            visible: visible[18],
+            visible: visible[16],
         }, {
             dataField: 'numberOfAppartment',
             caption: this.labels['numberOfAppartment'],
-            visible: visible[19],
+            visible: visible[17],
         }, {
             dataField: 'numberOfBuilding',
             caption: this.labels['numberOfBuilding'],
-            visible: visible[20],
+            visible: visible[18],
         }, {
             dataField: 'numberOfFloor',
             caption: this.labels['numberOfFloor'],
-            visible: visible[21],
-        }, {
-            dataField: 'utilisationDescription',
-            caption: this.labels['utilisationDescription'],
-            visible: visible[22],
+            visible: visible[19],
         }, {
             dataField: 'vacantLand',
             caption: this.labels['vacantLand'],
             dataType: 'boolean',
-            visible: visible[23],
+            visible: visible[20],
         }, {
             dataField: 'yearOfConstruction',
             caption: this.labels['yearOfConstruction'],
-            visible: visible[24],
+            visible: visible[21],
         }, {
             dataField: 'details',
             caption: this.labels['details'],
-            visible: visible[25],
+            visible: visible[22],
         }];
     }
 
