@@ -10,7 +10,7 @@
     <dxi-column
             dataField="name"
             caption="{{'name' | translate}}"
-            [calculateCellValue]="onCalculateCellValue"
+            [calculateCellValue]="getBuildingName"
             editCellTemplate="editname"
             sortOrder="asc"
             sortIndex="0">

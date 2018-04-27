@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
+import {environment} from '../../../environments/environment';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 import {Lane} from '../../management-address/shared/models/lane.model';
@@ -8,73 +9,69 @@ import {UtilisationCode} from '../shared/models/utilisation-code.model';
 import {UtilisationCodeService} from '../shared/services/utilisation-code.service';
 import {RiskLevel} from '../shared/models/risk-level.model';
 import {RiskLevelService} from '../shared/services/risk-level.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+
 
 @Component({
-  selector: 'app-managementbuilding-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.styl'],
-  providers: [
-    BuildingService,
-    LaneService,
-    UtilisationCodeService,
-    RiskLevelService,
-  ]
+    selector: 'app-managementbuilding-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.styl'],
+    providers: [
+        BuildingService,
+        LaneService,
+        UtilisationCodeService,
+        RiskLevelService,
+    ]
 })
-export class ListComponent  implements OnInit {
-  buildings: Building[] = [];
-  lanes: Lane[] = [];
-  utilisationCodes: UtilisationCode[] = [];
-  riskLevels: RiskLevel[] = [];
+export class ListComponent extends GridWithCrudService implements OnInit {
+    buildings: Building[] = [];
+    lanes: Lane[] = [];
+    utilisationCodes: UtilisationCode[] = [];
+    riskLevels: RiskLevel[] = [];
 
-  constructor(
-    private buildingService: BuildingService,
-    private laneService: LaneService,
-    private utilisationCode: UtilisationCodeService,
-    private riskLevelService: RiskLevelService
-  ) { }
+    constructor(
+        buildingService: BuildingService,
+        private laneService: LaneService,
+        private utilisationCode: UtilisationCodeService,
+        private riskLevelService: RiskLevelService
+    ) {
+        super(buildingService);
+    }
 
-  ngOnInit() {
-    this.loadBuiling();
-    this.loadLane();
-    this.loadUtilisationCode();
-    this.loadRiskLevel();
-  }
+    ngOnInit() {
+        this.loadSource();
+        this.loadLane();
+        this.loadUtilisationCode();
+        this.loadRiskLevel();
+    }
 
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
+    getBuildingName(data) {
+        const building = Building.fromJSON(data);
 
-  public onRowInserted(e) {
-    /*this.buildingService.create(e.data).subscribe(info => {
-      if (info.success) {
-        this.loadBuiling();
-      }
-    });*/
-  }
+        return building.getLocalization(environment.locale.use);
+    }
 
-  public onRowUpdated(e) {
-    e.data.idBuilding = e.key.idBuilding;
+    getLaneName(data) {
+        const lane = Lane.fromJSON(data);
 
-    // this.buildingService.update(e.data).subscribe();
-  }
+        return lane.getLocalization(environment.locale.use);
+    }
 
-  public onRowRemoved(e) {
-    // this.buildingService.remove(e.key.idBuilding).subscribe();
-  }
+    public onInitNewRow(e) {
+        e.data.vacantLand = false;
+        e.data.isParent = true;
+        e.data.isActive = true;
+    }
 
-  private loadBuiling() {
-    // this.buildingService.getAll().subscribe(data => this.buildings = data);
-  }
+    private loadLane() {
+        this.laneService.getAll().subscribe(data => this.lanes = data);
+    }
 
-  private loadLane() {
-    // this.laneService.getAll().subscribe(data => this.lanes = data);
-  }
+    private loadUtilisationCode() {
+        this.utilisationCode.getAll().subscribe(data => this.utilisationCodes = data);
+    }
 
-  private loadUtilisationCode() {
-    // this.utilisationCode.getAll().subscribe(data => this.utilisationCodes = data);
-  }
-
-  private loadRiskLevel() {
-    // this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
-  }
+    private loadRiskLevel() {
+        this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
+    }
 }
