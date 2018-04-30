@@ -1,45 +1,37 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import 'rxjs/add/operator/catch';
 
 import {RiskLevel} from '../models/risk-level.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 
 @Injectable()
-export class RiskLevelService {
+export class RiskLevelService extends RequestService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
+    }
 
-  public getAll() {
-    /*return this.http.get('risklevel').map((response: Response) => {
-      const result = response.json();
+    getAll() {
+        return this.http.get<RiskLevel[]>(this.apiUrl + 'RiskLevel', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-      return result.data;
-    });*/
-  }
+    save(level: RiskLevel) {
+        return this.http.post(
+            this.apiUrl + 'RiskLevel',
+            JSON.stringify(level),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-  public get(idRiskLevel: string) {
-    /*return this.http.get('risklevel/' + idRiskLevel).map((response: Response) => {
-      const result = response.json();
-
-      return result.data;
-    });*/
-  }
-
-  public create(level: RiskLevel) {
-    /*return this.http.post(
-      'risklevel',
-      JSON.stringify(level)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public update(level: RiskLevel) {
-    /*return this.http.put(
-      'risklevel',
-      JSON.stringify(level),
-    ).map((response: Response) => response.json());*/
-  }
-
-  public remove(idRiskLevel: string) {
-    // return this.http.delete('risklevel/' + idRiskLevel).map((response: Response) => response.json());
-  }
+    remove(idLevel: string) {
+        return this.http.delete(this.apiUrl + 'RiskLevel/' + idLevel, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }

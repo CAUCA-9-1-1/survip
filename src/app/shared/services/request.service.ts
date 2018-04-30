@@ -25,6 +25,7 @@ export class RequestService {
 
     error(error: HttpErrorResponse) {
         switch (error.status) {
+            case 0:
             case 401:
                 if (this.router) {
                     localStorage.removeItem('currentToken');
