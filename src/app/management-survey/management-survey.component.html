@@ -1,12 +1,16 @@
-<app-toolbar title="{{'surveyManagement' | translate}}"></app-toolbar>
-<div class="content-under-toolbar">
-    <div *ngIf="!selectedSurvey">
-        <h1>{{'survey' | translate}}</h1>
-        <app-managementsurvey-list></app-managementsurvey-list>
+<div fxLayout="row">
+    <div fxFlex="350px">
+        <app-main-menu></app-main-menu>
     </div>
-    <div *ngIf="selectedSurvey">
-        <h1>{{'survey' | translate}}</h1>
-        <app-managementsurvey-question [survey]="selectedSurvey"></app-managementsurvey-question>
+    <div fxFlex="" class="content">
+        <div *ngIf="!selectedSurvey">
+            <h1>{{'survey' | translate}}</h1>
+            <app-managementsurvey-list></app-managementsurvey-list>
+        </div>
+        <div *ngIf="selectedSurvey">
+            <h1>{{'survey' | translate}}</h1>
+            <app-managementsurvey-question [survey]="selectedSurvey"></app-managementsurvey-question>
+        </div>
     </div>
 </div>
 

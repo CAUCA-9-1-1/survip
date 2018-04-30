@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 export class MainMenuComponent implements OnInit {
     items = [{
         name: 'inspectionManagement',
-        path: '/management/inspection/',
+        path: '/inspection/dashboard/',
     }, {
         name: 'interventionPlanManagement',
         path: '/management/interventionplan/',
