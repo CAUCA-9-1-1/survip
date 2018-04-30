@@ -3,12 +3,12 @@ import { DxDataGridModule } from 'devextreme-angular';
 import { MatButtonToggleModule } from '@angular/material';
 
 import { SharedModule } from '../shared/shared.module';
-import { DashboardInspectionComponent } from './dashboard-inspection.component';
+import { InspectionDashboardComponent } from './inspection-dashboard.component';
 
 
 @NgModule({
     declarations: [
-        DashboardInspectionComponent
+        InspectionDashboardComponent
     ],
     imports: [
         SharedModule,
@@ -16,4 +16,4 @@ import { DashboardInspectionComponent } from './dashboard-inspection.component';
         DxDataGridModule,
     ],
 })
-export class DashboardInspectionModule { }
+export class InspectionDashboardModule { }

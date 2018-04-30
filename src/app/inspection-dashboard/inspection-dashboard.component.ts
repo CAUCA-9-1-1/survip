@@ -17,8 +17,8 @@ import {environment} from '../../environments/environment';
 
 @Component({
     selector: 'app-dashboard-inspection',
-    templateUrl: './dashboard-inspection.component.html',
-    styleUrls: ['./dashboard-inspection.component.scss'],
+    templateUrl: './inspection-dashboard.component.html',
+    styleUrls: ['./inspection-dashboard.component.scss'],
     providers: [
         InspectionService,
         LaneService,
@@ -27,7 +27,7 @@ import {environment} from '../../environments/environment';
         UtilisationCodeService,
     ]
 })
-export class DashboardInspectionComponent implements OnInit, AfterViewInit {
+export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
     dataSource: InspectionForList[];

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
-import { DashboardInspectionComponent } from './dashboard-inspection/dashboard-inspection.component';
+import { InspectionDashboardComponent } from './inspection-dashboard/inspection-dashboard.component';
 import { ManagementAccessComponent } from './management-access/management-access.component';
 import { ManagementAddressComponent } from './management-address/management-address.component';
 //import {ManagementBuildingComponent} from './management-building/management-building.component';
@@ -25,7 +25,7 @@ const appRoutes: Routes = [{
     canActivate: [AuthGuardService],
     children: [{
         path: 'inspection',
-        component: DashboardInspectionComponent
+        component: InspectionDashboardComponent
     }, {
         path: 'interventionplan',
         component: ManagementAddressComponent//ManagementInterventionPlanComponent
