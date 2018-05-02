@@ -1,47 +1,49 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-
-import { Question } from '../models/question.model';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {RequestService} from '../../../shared/services/request.service';
+import {Question} from '../models/question.model';
+import {Survey} from '../models/survey.model';
 
 @Injectable()
-export class QuestionService {
+export class QuestionService extends RequestService {
 
-    constructor(private http: HttpClient) { }
-
-    public getAll(id_survey: string) {
-        return this.http.get('surveyquestion/' + id_survey + '/true').pipe(
-            map(result => {
-                return result['data'];
-            })
-        );
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
     }
 
-    public create(question: Question) {
+    getAll(id_survey: string) {
+        return this.http.get<Survey[]>(this.apiUrl + 'SurveyQuestion/Survey/' + id_survey, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    save(surveyQuestion: Question) {
         return this.http.post(
-            'surveyquestion',
-            JSON.stringify(question)
-        );
+            this.apiUrl + 'SurveyQuestion',
+            JSON.stringify(surveyQuestion),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    public update(question: Question) {
-        return this.http.put(
-            'surveyquestion',
-            JSON.stringify(question)
-        );
+    remove(id: string) {
+        return this.http.delete(this.apiUrl + 'SurveyQuestion/' + id, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    public remove(idSurveyQuestion: string) {
-        return this.http.delete('surveyquestion/' + idSurveyQuestion);
-    }
-
-    public move(idSurveyQuestion, step) {
-        return this.http.put(
-            'surveyquestion',
+    move(id, step) {
+        return this.http.post(
+            this.apiUrl + 'SurveyQuestion',
             JSON.stringify({
-                idSurveyQuestion: idSurveyQuestion,
-                step: step,
-            })
-        );
+                idSurveyQuestion: id,
+                step: step
+            }),
+            {headers: this.headers}
+        ).catch((error: HttpErrorResponse) => this.error(error));
     }
 }
+
+
