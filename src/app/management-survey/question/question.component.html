@@ -10,8 +10,9 @@
         <div class="content">
             <dx-tree-view
                     [dataSource]="questions"
-                    displayExpr="description.fr"
-                    keyExpr="idSurveyQuestion"
+                    displayExpr="localizations"
+                    [itemTemplate]="getQuestionTitle"
+                    keyExpr="id"
                     selectionMode="single"
                     [selectByClick]="true"
                     (onItemSelectionChanged)="onRowSelected($event)">
@@ -21,20 +22,20 @@
     <div fxFlex="65%">
         <div *ngIf="selectedIndex > -1">
             <dx-form [formData]="questions[selectedIndex]" (onFieldDataChanged)="onFormUpdated('form',$event)">
-                <dxi-item [label]="{text: 'title' | translate}" dataField="title">
-                    <app-multilang [value]="questions[selectedIndex].title" (valueChanged)="onFormUpdated('title',$event);"></app-multilang>
+                <dxi-item [label]="{text: 'title' | translate}" dataField="localizations" >
+                    <app-multilang [value]="questions[selectedIndex].localizations" fieldName="title" (valueChanged)="onFormUpdated('title',$event);"></app-multilang>
                 </dxi-item>
-                <dxi-item [label]="{text: 'description' | translate}" dataField="description">
-                    <app-multilang [value]="questions[selectedIndex].description" (valueChanged)="onFormUpdated('description',$event);"></app-multilang>
+                <dxi-item [label]="{text: 'description' | translate}" dataField="localizations">
+                    <app-multilang [value]="questions[selectedIndex].localizations" (valueChanged)="onFormUpdated('description',$event);"></app-multilang>
                 </dxi-item>
                 <dxi-item
                         [label]="{text: 'questionType' | translate}"
                         dataField="questionType"
                         editorType="dxSelectBox"
                         [editorOptions]="{dataSource: [
-                            {value: 'choice', text: 'choiceAnswer' | translate},
-                            {value: 'text', text: 'textAnswer' | translate},
-                            {value: 'date', text: 'dateAnswer' | translate}
+                            {value: 1, text: 'choiceAnswer' | translate},
+                            {value: 2, text: 'textAnswer' | translate},
+                            {value: 3, text: 'dateAnswer' | translate}
                             ], displayExpr: 'text', valueExpr: 'value'}">
                 </dxi-item>
                 <dxi-item
@@ -49,9 +50,9 @@
                     [dataSource]="choices"
                     [hoverStateEnabled]="true"
                     (onInitNewRow)="onInitNewChoice($event)"
-                    (onRowInserted)="onChoiceInserted($event)"
-                    (onRowUpdated)="onChoiceUpdated($event)"
-                    (onRowRemoved)="onChoiceRemoved($event)">
+                    (onRowInserted)="onRowInserted($event)"
+                    (onRowUpdated)="onRowUpdated($event)"
+                    (onRowRemoved)="onRowRemoved($event)">
                 <dxi-column
                     dataField="sequence"
                     caption="{{'sequence' | translate}}"
@@ -60,9 +61,9 @@
                     sortIndex="0">
                 </dxi-column>
                 <dxi-column
-                    dataField="name"
+                    dataField="localizations"
                     caption="{{'name' | translate}}"
-                    [calculateCellValue]="onCalculateCellValue"
+                    [calculateCellValue]="getChoiceName"
                     editCellTemplate="editname">
                 </dxi-column>
                 <dxi-column

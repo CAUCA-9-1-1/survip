@@ -17,4 +17,17 @@ export class WithLocalization extends BaseModel {
 
         return name;
     }
+    getLocalizationTitle(languageCode: string) {
+        let title = '';
+
+        if (this.localizations) {
+            this.localizations.forEach(item => {
+                if (item.languageCode === languageCode) {
+                    title = item.title;
+                }
+            });
+        }
+
+        return title;
+    }
 }

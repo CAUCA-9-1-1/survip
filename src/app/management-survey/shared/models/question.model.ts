@@ -1,10 +1,15 @@
-export class Question {
-  idSurveyQuestion: string;
+import {WithLocalization} from '../../../shared/models/with-localization';
+
+
+export class Question extends WithLocalization {
   idSurvey: string;
-  title: object;
-  description: object;
   idSurveyQuestionNext: string;
   sequence: number;
-  questionType: string;
-  isActive: boolean;
+  questionType: number;
+
+    static fromJSON(data: object): Question {
+        const question = new Question();
+
+        return Object.assign(question, data);
+    }
 }

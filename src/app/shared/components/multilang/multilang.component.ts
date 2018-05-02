@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class MultilangComponent implements OnInit {
     @Output() valueChanged = new EventEmitter();
     @Input() value: any;
+    @Input() fieldName = 'name';
     @Input() dataField: any;
     @Input() isRequired: boolean;
 
@@ -44,7 +45,7 @@ export class MultilangComponent implements OnInit {
         if (this.value) {
             this.value.forEach(item => {
                 if (item.languageCode === this.selectedTab) {
-                    languageValue = item.name;
+                    languageValue = item[this.fieldName];
                 }
             });
         }
@@ -59,7 +60,7 @@ export class MultilangComponent implements OnInit {
         if (this.value) {
             this.value.forEach((item, index) => {
                 if (item.languageCode === this.selectedTab) {
-                    this.value[index].name = value;
+                    this.value[index][this.fieldName] = value;
                     find = true;
 
                     if (!value) {
@@ -74,11 +75,12 @@ export class MultilangComponent implements OnInit {
                 this.value = [];
             }
 
-            this.value.push({
-                name: value,
+            const item = {
                 languageCode: this.selectedTab,
                 isActive: true,
-            });
+            };
+            item[this.fieldName] = value;
+            this.value.push(item);
 
             if (!value) {
                 isValid = false;

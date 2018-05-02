@@ -1,167 +1,185 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {confirm} from 'devextreme/ui/dialog';
-
 import {Question} from '../shared/models/question.model';
 import {QuestionService} from '../shared/services/question.service';
 import {ChoiceService} from '../shared/services/choice.service';
 import {Choice} from '../shared/models/choice.model';
+import {environment} from '../../../environments/environment';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {confirm} from 'devextreme/ui/dialog';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
-  selector: 'app-managementsurvey-question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.styl'],
-  providers: [
-    QuestionService,
-    ChoiceService
-  ]
+    selector: 'app-managementsurvey-question',
+    templateUrl: './question.component.html',
+    styleUrls: ['./question.component.styl'],
+    providers: [
+        QuestionService,
+        ChoiceService
+    ]
 })
-export class QuestionComponent implements OnInit {
-  @Input() survey = '';
+export class QuestionComponent extends GridWithCrudService implements OnInit {
+    @Input() survey = '';
 
-  questions: Question[] = [];
-  nextQuestions: Question[] = [];
-  choices: Choice[] = [];
-  selectedIndex: number = -1;
-  columns: object[] = [];
-  editing: object = {};
-  switchQuestion = false;
-  timer = null;
-  messages: object = {};
+    questions: Question[] = [];
+    nextQuestions: Question[] = [];
+    choices: Choice[] = [];
+    selectedIndex = -1;
+    columns: object[] = [];
+    editing: object = {};
+    switchQuestion = false;
+    timer = null;
+    messages: object = {};
 
-  constructor(
-    private questionService: QuestionService,
-    private choiceService: ChoiceService,
-    private translate: TranslateService
-  ) { }
+    constructor(
+        private questionService: QuestionService,
+        choiceService: ChoiceService,
+        private translate: TranslateService,
+        private notification: MatSnackBar,
+    ) {
+        super(choiceService);
+    }
 
-  ngOnInit() {
-    this.loadQuestion();
-    this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion']).subscribe(labels => {
-      this.messages = labels;
-    });
-  }
-
-  public onAddQuestion() {
-    this.switchQuestion = true;
-    const question = new Question();
-    question.idSurvey = this.survey;
-    question.title = {
-      'fr': this.messages['newTitle']
-    };
-    question.description = {
-      'fr': this.messages['newQuestion']
-    };
-
-    this.questionService.create(question).subscribe(info => {
-      if (info['success']) {
-        question.idSurveyQuestion = info['idSurveyQuestion'];
-
-        this.selectedIndex = 0;
+    ngOnInit() {
         this.loadQuestion();
+        this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion']).subscribe(labels => {
+            this.messages = labels;
+        });
+    }
+
+    getQuestionDescription(data, index, element) {
+        console.log(data);
+        if (data.localizations.length > 0) {
+            const surveyQuestion = Question.fromJSON(data.localizations);
+            element.innerHTML = surveyQuestion.getLocalization(environment.locale.use);
+        } else {
+            element.innerHTML = 'Pas de description';
+        }
+    }
+
+    getQuestionTitle(data, index, element) {
+        console.log('get title :' + data.localizations);
+        if (data.localizations.length > 0) {
+            const surveyQuestion = Question.fromJSON(data.localizations);
+            element.innerHTML = surveyQuestion.getLocalizationTitle(environment.locale.use);
+        } else {
+            element.innerHTML = 'Pas de titre';
+        }
+
+    }
+
+    getChoiceName(data, index, element) {
+        if (data.localizations.length > 0) {
+            const surveyQuestion = Question.fromJSON(data.localizations);
+            element.innerHTML = surveyQuestion.getLocalizationTitle(environment.locale.use);
+        } else {
+            element.innerHTML = 'Pas de titre';
+        }
+    }
+
+    onAddQuestion() {
+        this.switchQuestion = true;
+        const question = new Question();
+        question.idSurvey = this.survey;
+        question.questionType = 1;
+
+        this.questionService.save(question).subscribe(info => {
+                question.id = info['idSurveyQuestion'];
+
+                this.selectedIndex = 0;
+                this.loadQuestion();
+                this.setNextQuestion();
+                this.loadSource(this.questions[this.selectedIndex].id);
+            },
+            error => {
+                this.notification.open( 'Erreur lors de l"ajout de question.', '', {
+                    duration: 3000,
+                });
+            });
+    }
+
+    onMoveUp() {
+        if (this.selectedIndex > -1) {
+            this.questionService.move(this.questions[this.selectedIndex].id, -1).subscribe(() => {
+                this.loadQuestion();
+            });
+        }
+    }
+
+    onMoveDown() {
+        if (this.selectedIndex > -1) {
+            this.questionService.move(this.questions[this.selectedIndex].id, 1).subscribe(() => {
+                this.loadQuestion();
+            });
+        }
+    }
+
+    onRowSelected(e) {
+        this.switchQuestion = true;
+        this.selectedIndex = e.itemIndex;
+
+        console.log('item selected : ' + this.questions[this.selectedIndex].id);
         this.setNextQuestion();
-        this.loadChoice();
-      }
-    });
-  }
-
-  public onMoveUp() {
-    if (this.selectedIndex > -1) {
-      this.questionService.move(this.questions[this.selectedIndex].idSurveyQuestion, -1).subscribe(() => {
-        this.loadQuestion();
-      });
+        this.loadSource(this.questions[this.selectedIndex].id);
     }
-  }
 
-  public onMoveDown() {
-    if (this.selectedIndex > -1) {
-      this.questionService.move(this.questions[this.selectedIndex].idSurveyQuestion, 1).subscribe(() => {
-        this.loadQuestion();
-      });
+    onFormUpdated(item, e) {
+        console.log('form updated :' , e);
+            if (this.timer) {
+                clearTimeout(this.timer);
+            }
+            if (item !== 'form') {
+                this.questions[this.selectedIndex][item] = e.value;
+            }
+
+            this.timer = setTimeout(() => {
+                this.questionService.save(this.questions[this.selectedIndex]).subscribe();
+            }, 1000);
     }
-  }
 
-  public onRowSelected(e) {
-    this.switchQuestion = true;
-    this.selectedIndex = e.itemIndex;
-
-    this.setNextQuestion();
-    this.loadChoice();
-  }
-
-  public onFormUpdated(item, e) {
-    if (!this.switchQuestion) {
-      if (this.timer) {
-        clearTimeout(this.timer);
-      }
-      if (item !== 'form') {
-        this.questions[this.selectedIndex][item] = e.value;
-      }
-
-      this.timer = setTimeout(() => {
-        this.questionService.update(this.questions[this.selectedIndex]).subscribe();
-      }, 1000);
-    }
-  }
-
-  public onRemoveQuestion() {
-    if (this.selectedIndex > -1) {
-      /*confirm(this.messages['removeQuestion'], this.messages['question']).done((result) => {
-        if (result) {
-          this.questionService.remove(this.questions[this.selectedIndex].idSurveyQuestion).subscribe();
+    onRemoveQuestion() {
+        if (this.selectedIndex > -1) {
+            confirm(this.messages['removeQuestion'], this.messages['question']).then((result) => {
+              if (result) {
+                this.questionService.remove(this.questions[this.selectedIndex].id).subscribe();
+              }
+            });
         }
-      });*/
     }
-  }
 
-  public onInitNewChoice(e) {
-    e.data.isActive = true;
-  }
 
-  public onChoiceInserted(e) {
-    this.choiceService.create(e.data).subscribe(info => {
-      if (info['success']) {
-        this.loadChoice();
-      }
-    });
-  }
+    onInitNewChoice(e) {
+        e.data.isActive = true;
+    }
 
-  public onChoiceUpdated(e) {
-    e.data.idSurveyChoice = e.key.idSurveyChoice;
+    setNextQuestion() {
+        this.nextQuestions = [];
 
-    this.choiceService.update(e.data).subscribe();
-  }
+        this.questions.forEach((question) => {
+            if (question.id !== this.questions[this.selectedIndex].id) {
+                this.nextQuestions.push(question);
+            }
+        });
+    }
 
-  public onChoiceRemoved(e) {
-    this.choiceService.remove(e.key.idSurveyChoice).subscribe();
-  }
+    loadQuestion() {
+        this.questionService.getAll(this.survey).subscribe(data => {
+            this.questions = data;
 
-  private setNextQuestion() {
-    this.nextQuestions = [];
+            this.FilteredActiveQuestion();
+            this.questions.forEach((question, index) => {
+                if (this.selectedIndex > -1 && question.id === this.questions[this.selectedIndex].id) {
+                    this.questions[index]['selected'] = true;
+                }
+            });
+        });
+    }
 
-    this.questions.forEach((question) => {
-      if (question.idSurveyQuestion !== this.questions[this.selectedIndex].idSurveyQuestion) {
-        this.nextQuestions.push(question);
-      }
-    });
-  }
-
-  private loadChoice() {
-    this.choiceService.getAll(this.questions[this.selectedIndex].idSurveyQuestion).subscribe(data => {
-      this.choices = data;
-      this.switchQuestion = false;
-    });
-  }
-
-  private loadQuestion() {
-    this.questionService.getAll(this.survey).subscribe(data => {
-      this.questions = data;
-
-      this.questions.forEach((question, index) => {
-        if (this.selectedIndex > -1 && question.idSurveyQuestion === this.questions[this.selectedIndex].idSurveyQuestion) {
-          this.questions[index]['selected'] = true;
-        }
-      });
-    });
-  }
+    FilteredActiveQuestion() {
+        console.log('Before filter : ' + JSON.stringify(this.questions));
+        this.questions = this.questions.filter((item) => {
+            return (item.isActive);
+        });
+        console.log('after filter : ' + JSON.stringify(this.questions));
+    }
 }
