@@ -29,7 +29,11 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     inspectors: WebuserForWeb[] = [];
     inspectorsList: WebuserForWeb[] = [];
     buildings: Building[] = [];
-    buildingInspected: Building[] = [];
+    buildingsInspected: Building[] = [];
+    buildingsNotInspected: Building[] = [];
+    popupBuildingVisible = false;
+    popupBuildingSelected = [];
+    popupButtons: any[];
 
     constructor(
         translateService: TranslateService,
@@ -39,8 +43,26 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     ) {
         super(batchService);
 
-        translateService.get(['all']).subscribe(data => {
+        translateService.get(['all', 'addBuildingsToInspection', 'add', 'cancel']).subscribe(data => {
             this.labels = data;
+
+            this.popupButtons = [{
+                location: 'after',
+                widget: 'dxButton',
+                options: {
+                    text: this.labels['add'],
+                    onClick: () => this.onAddBuilding()
+                }
+            }, {
+                location: 'after',
+                widget: 'dxButton',
+                options: {
+                    text: this.labels['cancel'],
+                    onClick: () => {
+                        this.popupBuildingVisible = false;
+                    }
+                }
+            }];
         });
     }
 
@@ -52,14 +74,19 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     onInitNewRow(e) {
         this.inspectors = [];
-        this.buildingInspected = [];
+        this.buildingsInspected = [];
+        this.buildingsNotInspected = Object.assign([], this.buildings);
 
+        e.data.idWebuserCreatedBy = localStorage.getItem('currentWebuser');
+        e.data.isReadyForInspection = false;
+        e.data.createOn = (new Date());
         e.data.isActive = true;
     }
 
     onEditingStart(e) {
         this.inspectors = [];
-        this.buildingInspected = [];
+        this.buildingsInspected = [];
+        this.buildingsNotInspected = [];
 
         e.data.users.forEach(inspector => {
             this.webusers.forEach(user => {
@@ -68,16 +95,24 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
                 }
             });
         });
-        e.data.inspections.forEach(inspection => {
-            this.buildings.forEach(building => {
+        this.buildings.forEach(building => {
+            let find = false;
+
+            e.data.inspections.forEach(inspection => {
                 if (building.id === inspection.idBuilding) {
                     building = Object.assign({
-                        assignedTo: inspection.idWebuserAssignedTo || 'all'
+                        assignedTo: inspection.idWebuserAssignedTo || 'all',
+                        sequence: inspection.sequence,
                     }, building);
 
-                    this.buildingInspected.push(building);
+                    find = true;
+                    this.buildingsInspected.push(building);
                 }
             });
+
+            if (!find) {
+                this.buildingsNotInspected.push(building);
+            }
         });
 
         this.inspectorsList = this.inspectors.concat([{
@@ -86,12 +121,36 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         }]);
     }
 
+    onToolbarPreparing(e) {
+        const toolbarItems = e.toolbarOptions.items;
+
+        toolbarItems.unshift({
+            widget: 'dxButton',
+            options: {
+                text: this.labels['addBuildingsToInspection'],
+                onClick: (ev) => {
+                    this.popupBuildingSelected = [];
+                    this.popupBuildingVisible = true;
+                }
+            },
+            location: 'after',
+        });
+    }
+
     setFormUserField(field) {
         this.formUserField = field;
+
+        if (!this.formUserField.value) {
+            this.formUserField.value = [];
+        }
     }
 
     setFormInspectionField(field) {
         this.formInspectionField = field;
+
+        if (!this.formInspectionField.value) {
+            this.formInspectionField.value = [];
+        }
     }
 
     addInspector(e, field) {
@@ -135,28 +194,97 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         }
     }
 
-    onBuildingsRemoved(item) {
-        let find = -1;
+    onBuildingsRemoved(e) {
+        this.moveBuildingsSource('buildings', 'buildingsNotInspected', e.key.id);
 
-        this.buildingInspected.forEach((inspector, index) => {
-            if (inspector.id === item.id) {
+        let find = -1;
+        this.formInspectionField.data.inspections.forEach((inspection, index) => {
+            if (inspection.idBuilding === e.key.id) {
                 find = index;
             }
         });
 
         if (find > -1) {
-            this.buildingInspected.splice(find, 1);
+            this.formInspectionField.data.inspections.splice(find, 1);
         }
+
+        this.formInspectionField.setValue(this.formInspectionField.data.inspections);
     }
 
-    onBuildingsUpdated(item) {
+    onBuildingsUpdated(e) {
         this.formInspectionField.data.inspections.forEach((inspection, index) => {
-            if (inspection.idBuilding === item.key.id) {
-                this.formInspectionField.data.inspections[index].idWebuserAssignedTo = (item.key.assignedTo === 'all' ? null : item.key.assignedTo);
+            if (inspection.idBuilding === e.key.id) {
+                this.formInspectionField.data.inspections[index].idWebuserAssignedTo = (
+                    e.key.assignedTo === 'all' ? null : e.key.assignedTo
+                );
+                this.formInspectionField.data.inspections[index].sequence = (
+                    e.key.sequence || 0
+                );
             }
         });
 
         this.formInspectionField.setValue(this.formInspectionField.data.inspections);
+    }
+
+    moveUp(field) {
+        if (field.rowIndex > 0) {
+            field.component.editCell(field.rowIndex - 1, 0);
+            field.component.cellValue(field.rowIndex - 1, 0, field.data.sequence);
+
+            field.component.editCell(field.rowIndex, 0);
+            field.component.cellValue(field.rowIndex, 0, (field.data.sequence - 1));
+
+            field.component.saveEditData();
+        }
+    }
+
+    moveDown(field) {
+        if (field.rowIndex < this.buildingsInspected.length - 1) {
+            field.component.editCell(field.rowIndex, 0);
+            field.component.cellValue(field.rowIndex, 0, field.data.sequence + 1);
+
+            field.component.editCell(field.rowIndex + 1, 0);
+            field.component.cellValue(field.rowIndex + 1, 0, field.data.sequence);
+            field.component.saveEditData();
+        }
+    }
+
+    private onAddBuilding() {
+        this.popupBuildingSelected.forEach(building => {
+            const inspection = {
+                idBatch: this.formUserField.data.id,
+                idBuilding: building.id,
+                idWebuserAssignedTo: null,
+                idWebuserCreatedBy: localStorage.getItem('currentWebuser'),
+            };
+
+            this.moveBuildingsSource('buildingsNotInspected', 'buildingsInspected', building.id);
+            this.formInspectionField.value.push(inspection);
+            this.popupBuildingVisible = false;
+        });
+
+        this.formInspectionField.setValue(this.formInspectionField.value);
+    }
+
+    private moveBuildingsSource(sourceFrom, sourceTo, idBuilding) {
+        let find = -1;
+
+        this[sourceFrom].forEach((building, index) => {
+            if (building.id === idBuilding) {
+                find = index;
+            }
+        });
+
+        if (find > -1) {
+            const newBuilding = Object.assign([], this[sourceFrom][find]);
+            newBuilding.assignedTo = 'all';
+
+            this[sourceTo].push(newBuilding);
+
+            if (sourceFrom !== 'buildings') {
+                this[sourceFrom].splice(find, 1);
+            }
+        }
     }
 
     private loadWebuser() {

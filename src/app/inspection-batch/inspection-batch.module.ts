@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DxButtonModule, DxDataGridModule, DxListModule, DxSelectBoxModule} from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxListModule, DxPopupModule, DxSelectBoxModule, DxToolbarModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {InspectionBatchComponent} from './inspection-batch.component';
@@ -15,6 +15,8 @@ import {InspectionBatchComponent} from './inspection-batch.component';
         DxDataGridModule,
         DxListModule,
         DxSelectBoxModule,
+        DxPopupModule,
+        DxToolbarModule,
     ],
 })
 export class InspectionBatchModule { }

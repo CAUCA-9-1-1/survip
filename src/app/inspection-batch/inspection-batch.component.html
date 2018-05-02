@@ -58,19 +58,19 @@
             </div>
             <div *dxTemplate="let field of 'editBuildings'">
                 <dx-data-grid
-                        [dataSource]="buildingInspected"
+                        [dataSource]="buildingsInspected"
                         [hoverStateEnabled]="true"
                         [rowAlternationEnabled]="true"
+                        (onToolbarPreparing)="onToolbarPreparing($event)"
                         (onInitialized)="setFormInspectionField(field)"
                         (onRowUpdated)="onBuildingsUpdated($event)"
                         (onRowRemoved)="onBuildingsRemoved($event)">
+                    <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="8%" caption=" "></dxi-column>
                     <dxi-column
                             dataField="civicNumber"
                             caption="{{'civicNumber' | translate}}"
                             [allowEditing]="false"
-                            width="14%"
-                            sortOrder="asc"
-                            sortIndex="0">
+                            width="14%">
                     </dxi-column>
                     <dxi-column dataField="lane" caption="{{'lane' | translate}}" [allowEditing]="false"></dxi-column>
                     <dxi-column dataField="city" caption="{{'city' | translate}}" [allowEditing]="false"></dxi-column>
@@ -82,8 +82,39 @@
 
                     <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true">
                     </dxo-editing>
+
+                    <div *dxTemplate="let field of 'showmove'">
+                        <dx-button icon="arrowup" (onClick)="moveUp(field)"></dx-button>
+                        <dx-button icon="arrowdown" (onClick)="moveDown(field)"></dx-button>
+                    </div>
                 </dx-data-grid>
             </div>
         </dx-data-grid>
     </div>
 </div>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        title="{{'addBuildingsToInspection' | translate}}"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupBuildingVisible">
+    <div *dxTemplate="let data of 'content'">
+        <dx-list
+                [dataSource]="buildingsNotInspected"
+                itemTemplate="listItem"
+                keyExpr="id"
+                height="90%"
+                [(selectedItems)]="popupBuildingSelected"
+                [searchEnabled]="true"
+                [searchExpr]="['civicNumber', 'lane', 'city', 'riskLevel']"
+                selectionMode="multiple">
+            <div *dxTemplate="let item of 'listItem'">
+                <div>{{item.civicNumber}}</div>
+                <div>{{item.lane}}</div>
+                <div>{{item.city}}</div>
+                <div>{{item.riskLevel}}</div>
+            </div>
+        </dx-list>
+        <dx-toolbar [items]="popupButtons"></dx-toolbar>
+    </div>
+</dx-popup>
