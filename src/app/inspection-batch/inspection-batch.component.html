@@ -37,15 +37,6 @@
                     <dxi-item itemType="empty"></dxi-item>
                     <dxi-item itemType="group" caption="{{'batchInspectors' | translate}}">
                         <dxi-item dataField="users" [label]="{visible: false}"></dxi-item>
-                        <dxi-item>
-                            <dx-list [dataSource]="inspectors" itemTemplate="listItem">
-                                <div *dxTemplate="let item of 'listItem'">
-                                    <dx-button icon="trash" (onClick)="removeInspector(item)">
-                                    </dx-button>
-                                    <span>{{item.name}}</span>
-                                </div>
-                            </dx-list>
-                        </dxi-item>
                     </dxi-item>
                     <dxi-item itemType="group" caption="{{'batchBuilding' | translate}}" [colSpan]="3">
                         <dxi-item dataField="inspections" [label]="{visible: false}"></dxi-item>
@@ -54,7 +45,14 @@
             </dxo-editing>
 
             <div *dxTemplate="let field of 'editInspectors'">
-                <dx-select-box [dataSource]="webusers" valueExpr="id" displayExpr="name" (onInitialized)="setFormUserField(field)" (onSelectionChanged)="addInspector($event)" placeholder="{{'addToInspectors' | translate}}"></dx-select-box>
+                <dx-select-box [dataSource]="inspectorsOff" valueExpr="id" displayExpr="name" (onInitialized)="setFormUserField(field)" (onSelectionChanged)="addInspector($event)" placeholder="{{'addToInspectors' | translate}}"></dx-select-box>
+                <dx-list [dataSource]="inspectorsOn" itemTemplate="listItem">
+                    <div *dxTemplate="let item of 'listItem'">
+                        <dx-button icon="trash" (onClick)="removeInspector(item)">
+                        </dx-button>
+                        <span>{{item.name}}</span>
+                    </div>
+                </dx-list>
             </div>
             <div *dxTemplate="let field of 'editBuildings'">
                 <dx-data-grid

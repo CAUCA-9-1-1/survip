@@ -26,7 +26,8 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     formUserField: any;
     formInspectionField: any;
     webusers: WebuserForWeb[];
-    inspectors: WebuserForWeb[] = [];
+    inspectorsOn: WebuserForWeb[] = [];
+    inspectorsOff: WebuserForWeb[] = [];
     inspectorsList: WebuserForWeb[] = [];
     buildings: Building[] = [];
     buildingsInspected: Building[] = [];
@@ -73,7 +74,8 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     onInitNewRow(e) {
-        this.inspectors = [];
+        this.inspectorsOn = [];
+        this.inspectorsOff = Object.assign([], this.webusers);
         this.buildingsInspected = [];
         this.buildingsNotInspected = Object.assign([], this.buildings);
 
@@ -84,16 +86,23 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     onEditingStart(e) {
-        this.inspectors = [];
+        this.inspectorsOn = [];
         this.buildingsInspected = [];
         this.buildingsNotInspected = [];
 
-        e.data.users.forEach(inspector => {
-            this.webusers.forEach(user => {
+        this.webusers.forEach(user => {
+            let find = false;
+
+            e.data.users.forEach(inspector => {
                 if (user.id === inspector.idWebuser) {
-                    this.inspectors.push(Object.assign({}, user));
+                    find = true;
+                    this.inspectorsOn.push(user);
                 }
             });
+
+            if (!find) {
+                this.inspectorsOff.push(user);
+            }
         });
         this.buildings.forEach(building => {
             let find = false;
@@ -115,7 +124,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
             }
         });
 
-        this.inspectorsList = this.inspectors.concat([{
+        this.inspectorsList = this.inspectorsOn.concat([{
             id: 'all',
             name: this.labels['all'],
         }]);
@@ -158,36 +167,28 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         const users = this.formUserField.value;
 
         if ('id' in inspector) {
-            this.inspectors.push(inspector);
-
             users.push({
                 idWebuser: inspector.id,
                 idBatch: this.formUserField.data.id,
             });
 
+            this.moveInspectorsSource('inspectorsOff', 'inspectorsOn', inspector.id);
             this.formUserField.setValue(users);
+
             e.component.option('value', '');
         }
     }
 
     removeInspector(item) {
-        let findInspector = -1;
+        this.moveInspectorsSource('inspectorsOn', 'inspectorsOff', item.id);
         let findWebuser = -1;
 
-        this.inspectors.forEach((inspector, index) => {
-            if (inspector.id === item.id) {
-                findInspector = index;
-            }
-        });
         this.formUserField.value.forEach((user, index) => {
             if (user.idWebuser === item.id) {
                 findWebuser = index;
             }
         });
 
-        if (findInspector > -1) {
-            this.inspectors.splice(findInspector, 1);
-        }
         if (findWebuser > -1) {
             this.formUserField.value.splice(findWebuser, 1);
             this.formUserField.setValue(this.formUserField.value);
@@ -264,6 +265,24 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         });
 
         this.formInspectionField.setValue(this.formInspectionField.value);
+    }
+
+    private moveInspectorsSource(sourceFrom, sourceTo, idWebuser) {
+        let find = -1;
+
+        this[sourceFrom].forEach((user, index) => {
+            if (user.id === idWebuser) {
+                find = index;
+            }
+        });
+
+        if (find > -1) {
+            this[sourceTo].push(this[sourceFrom][find]);
+
+            if (sourceFrom !== 'webusers') {
+                this[sourceFrom].splice(find, 1);
+            }
+        }
     }
 
     private moveBuildingsSource(sourceFrom, sourceTo, idBuilding) {
