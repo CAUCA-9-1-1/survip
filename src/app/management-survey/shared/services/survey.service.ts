@@ -1,26 +1,34 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-
-import { Survey } from '../models/survey.model';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Survey} from '../models/survey.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 @Injectable()
-export class SurveyService {
+export class SurveyService extends RequestService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
+    }
 
-  public getAll() {
-    return this.http.get('survey').pipe(
-      map((result) => {
-        return result['data'];
-      })
-    );
-  }
+    getAll() {
+        return this.http.get<Survey[]>(this.apiUrl + 'Survey', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-  public update(survey: Survey) {
-    return this.http.put(
-      'survey',
-      JSON.stringify(survey)
-    );
-  }
+    save(survey: Survey) {
+        return this.http.post(
+            this.apiUrl + 'Survey',
+            JSON.stringify(survey),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    remove(id: string) {
+        return this.http.delete(this.apiUrl + 'Survey/' + id, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }

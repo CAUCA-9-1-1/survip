@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 
 import {Survey} from '../shared/models/survey.model';
 import {SurveyService} from '../shared/services/survey.service';
+import {environment} from '../../../environments/environment';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 
 @Component({
   selector: 'app-managementsurvey-list',
@@ -10,46 +12,32 @@ import {SurveyService} from '../shared/services/survey.service';
   styleUrls: ['./list.component.styl'],
   providers: [SurveyService]
 })
-export class ListComponent  implements OnInit {
-  surveys: Survey[] = [];
-  surveyTypes: object[] = [];
+export class ListComponent  extends GridWithCrudService implements OnInit {
 
   constructor(
     private router: Router,
-    private surveyService: SurveyService
-  ) { }
+    surveyService: SurveyService
+  ) {
+      super(surveyService);
+  }
 
   ngOnInit() {
-    this.loadSurvey();
+      this.loadSource();
   }
 
+  getSurveyName(data)  {
+      const survey = Survey.fromJSON(data);
+      return survey.getLocalization(environment.locale.use);
+  }
   public onInitNewRow(e) {
-
+    e.data.isActive = true;
   }
 
-  public onRowInserted(e) {
-
-  }
-
-  public onRowUpdated(e) {
-    e.data.idSurvey = e.key.idSurvey;
-
-    this.surveyService.update(e.key).subscribe();
-  }
-
-  public onRowRemoved(e) {
-
-  }
-
-  public onLanguageModify(idSurvey) {
+  public onModifyQuestion(idSurvey) {
     this.router.navigate(['management/survey'], {
       queryParams: {
         id_survey: idSurvey
       }
     });
-  }
-
-  private loadSurvey() {
-    this.surveyService.getAll().subscribe(data => this.surveys = data);
   }
 }
