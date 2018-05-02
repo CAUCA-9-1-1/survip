@@ -1,14 +1,14 @@
 <dx-data-grid
-        [(dataSource)]="surveys"
+        [(dataSource)]="dataSource"
         [hoverStateEnabled]="true"
         (onInitNewRow)="onInitNewRow($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
-            dataField="name"
+            dataField="localizations"
             caption="{{'name' | translate}}"
-            [calculateCellValue]="onCalculateCellValue"
+            [calculateCellValue]="getSurveyName"
             editCellTemplate="editname"
             sortOrder="asc"
             sortIndex="0">
@@ -16,9 +16,9 @@
     <dxi-column dataField="surveyType" caption="{{'surveyType' | translate}}">
         <dxo-lookup
                 [dataSource]="[
-                    {value: 'residential', text: 'residential' | translate},
-                    {value: 'general', text: 'general' | translate},
-                    {value: 'agricultural', text: 'agricultural' | translate}
+                    {value: '1', text: 'residential' | translate},
+                    {value: '2', text: 'general' | translate},
+                    {value: '3', text: 'agricultural' | translate}
                 ]"
                 displayExpr="text"
                 valueExpr="value">
@@ -37,7 +37,7 @@
     </dxo-editing>
 
     <div *dxTemplate="let data of 'editmode'">
-        <a class="dx-link" (click)="onLanguageModify(data.data.idSurvey)">{{'modifyQuestion' | translate}}</a>
+        <a class="dx-link" (click)="onModifyQuestion(data.data.id)">{{'modifyQuestion' | translate}}</a>
     </div>
     <div *dxTemplate="let field of 'editname'">
         <app-multilang [isRequired]="true" [dataField]="field" (valueChanged)="field.setValue($event.value);"></app-multilang>

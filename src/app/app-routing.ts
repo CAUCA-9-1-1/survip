@@ -7,9 +7,9 @@ import {InspectionDashboardComponent} from './inspection-dashboard/inspection-da
 import {InspectionBatchComponent} from './inspection-batch/inspection-batch.component';
 import {ManagementAccessComponent} from './management-access/management-access.component';
 import {ManagementAddressComponent} from './management-address/management-address.component';
-//import {ManagementBuildingComponent} from './management-building/management-building.component';
+// import {ManagementBuildingComponent} from './management-building/management-building.component';
 import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
-//import {ManagementInterventionPlanComponent} from './management-intervention-plan/management-intervention-plan.component';
+// import {ManagementInterventionPlanComponent} from './management-intervention-plan/management-intervention-plan.component';
 import {ManagementSurveyComponent} from './management-survey/management-survey.component';
 import {LoginComponent} from './user-access/login/login.component';
 
@@ -36,13 +36,13 @@ const appRoutes: Routes = [{
     canActivate: [AuthGuardService],
     children: [{
         path: 'interventionplan',
-        component: ManagementAddressComponent//ManagementInterventionPlanComponent
+        component: ManagementAddressComponent// ManagementInterventionPlanComponent
     }, {
         path: 'survey',
         component: ManagementSurveyComponent
     }, {
         path: 'building',
-        component: ManagementAddressComponent//ManagementBuildingComponent
+        component: ManagementAddressComponent// ManagementBuildingComponent
     }, {
         path: 'address',
         component: ManagementAddressComponent
