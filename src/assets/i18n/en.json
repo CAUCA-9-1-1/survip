@@ -177,6 +177,8 @@
   "batchInspectors": "Batch inspectors",
   "batchBuilding": "Batch building",
   "addToInspectors": "Add to inspectors",
+  "assignedTo": "Assigned to",
+  "all": "All",
   "connection": "Connection",
   "enter": "Enter"
 }

@@ -183,6 +183,8 @@
   "batchInspectors": "Inspecteurs du lot",
   "batchBuilding": "Bâtiments du lot",
   "addToInspectors": "Ajouter aux inspecteurs",
+  "assignedTo": "Assigné à",
+  "all": "Tous",
   "connection": "Connexion",
   "enter": "Entrer"
 }

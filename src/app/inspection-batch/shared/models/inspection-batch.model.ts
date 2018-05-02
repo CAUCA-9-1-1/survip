@@ -6,6 +6,8 @@ export class InspectionBatch extends BaseModel {
     idWebuserCreatedBy: string;
     isReadyForInspection: boolean;
     shouldStartOn: Date;
+    inspections: any[];
+    users: any[];
 
     static fromJSON(data: object): InspectionBatch {
         const batch = new InspectionBatch();

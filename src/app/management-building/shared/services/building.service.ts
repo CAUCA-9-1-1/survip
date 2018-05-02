@@ -18,6 +18,12 @@ export class BuildingService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    getActive() {
+        return this.http.get<Building[]>(this.apiUrl + 'Building/Active', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     save(building: Building) {
         return this.http.post(
             this.apiUrl + 'Building',

@@ -18,4 +18,19 @@ export class InspectionBatchService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    save(batch: InspectionBatch) {
+        return this.http.post(
+            this.apiUrl + 'Batch',
+            JSON.stringify(batch),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    remove(idBatch: string) {
+        return this.http.delete(this.apiUrl + 'Batch/' + idBatch, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }
