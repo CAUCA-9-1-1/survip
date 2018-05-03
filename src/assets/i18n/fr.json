@@ -186,6 +186,7 @@
   "assignedTo": "Assigné à",
   "all": "Tous",
   "addBuildingsToInspection": "Ajouter un ou plusieurs batîments à inspecter",
+  "needInspectorForReadyInspection": "Pour rendre accessible l'inspection, vous devez avoir au minimum 1 inspecteur",
   "connection": "Connexion",
   "enter": "Entrer"
 }

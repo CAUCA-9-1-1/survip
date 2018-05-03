@@ -180,6 +180,7 @@
   "assignedTo": "Assigned to",
   "all": "All",
   "addBuildingsToInspection": "Add or many buildings to inspect",
+  "needInspectorForReadyInspection": "To make the inspection accessible, you must have at least 1 inspector",
   "connection": "Connection",
   "enter": "Enter"
 }

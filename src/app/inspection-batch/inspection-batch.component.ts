@@ -44,7 +44,9 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     ) {
         super(batchService);
 
-        translateService.get(['all', 'addBuildingsToInspection', 'add', 'cancel']).subscribe(data => {
+        translateService.get([
+            'all', 'addBuildingsToInspection', 'add', 'cancel'
+        ]).subscribe(data => {
             this.labels = data;
 
             this.popupButtons = [{
@@ -229,14 +231,14 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     moveUp(field) {
-
         if (field.rowIndex > 0) {
-            field.component.editCell(field.rowIndex - 1, 0);
-            field.component.cellValue(field.rowIndex - 1, 0, field.data.sequence);
-
             field.component.editCell(field.rowIndex, 0);
             field.component.cellValue(field.rowIndex, 0, (field.data.sequence - 1));
 
+            field.component.editCell(field.rowIndex - 1, 0);
+            field.component.cellValue(field.rowIndex - 1, 0, field.data.sequence);
+
+            field.component.closeEditCell();
             field.component.saveEditData();
         }
     }
@@ -249,8 +251,19 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
             field.component.editCell(field.rowIndex, 0);
             field.component.cellValue(field.rowIndex, 0, field.data.sequence + 1);
 
+            field.component.closeEditCell();
             field.component.saveEditData();
         }
+    }
+
+    validateInspector(options) {
+        if (options.value && options.validator._validationGroup.key.users.length === 0) {
+            if (!options.validator._validationGroup.data.users || options.validator._validationGroup.data.users.length === 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private onAddBuilding() {
