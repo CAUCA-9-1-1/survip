@@ -87,6 +87,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     onEditingStart(e) {
         this.inspectorsOn = [];
+        this.inspectorsOff = [];
         this.buildingsInspected = [];
         this.buildingsNotInspected = [];
 
@@ -228,6 +229,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     moveUp(field) {
+
         if (field.rowIndex > 0) {
             field.component.editCell(field.rowIndex - 1, 0);
             field.component.cellValue(field.rowIndex - 1, 0, field.data.sequence);
@@ -241,17 +243,21 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     moveDown(field) {
         if (field.rowIndex < this.buildingsInspected.length - 1) {
+            field.component.editCell(field.rowIndex + 1, 0);
+            field.component.cellValue(field.rowIndex + 1, 0, field.data.sequence);
+
             field.component.editCell(field.rowIndex, 0);
             field.component.cellValue(field.rowIndex, 0, field.data.sequence + 1);
 
-            field.component.editCell(field.rowIndex + 1, 0);
-            field.component.cellValue(field.rowIndex + 1, 0, field.data.sequence);
             field.component.saveEditData();
         }
     }
 
     private onAddBuilding() {
-        this.popupBuildingSelected.forEach(building => {
+        const buildingToInsert = Object.assign([], this.popupBuildingSelected);
+        this.popupBuildingSelected = [];
+
+        buildingToInsert.forEach(building => {
             const inspection = {
                 idBatch: this.formUserField.data.id,
                 idBuilding: building.id,
@@ -297,6 +303,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         if (find > -1) {
             const newBuilding = Object.assign([], this[sourceFrom][find]);
             newBuilding.assignedTo = 'all';
+            newBuilding.sequence = this[sourceTo].length;
 
             this[sourceTo].push(newBuilding);
 
