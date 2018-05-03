@@ -47,18 +47,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         });
     }
 
-    getQuestionDescription(data, index, element) {
-        console.log(data);
-        if (data.localizations.length > 0) {
-            const surveyQuestion = Question.fromJSON(data.localizations);
-            element.innerHTML = surveyQuestion.getLocalization(environment.locale.use);
-        } else {
-            element.innerHTML = 'Pas de description';
-        }
-    }
-
     getQuestionTitle(data, index, element) {
-        console.log('get title :' + data.localizations);
         if (data.localizations.length > 0) {
             const surveyQuestion = Question.fromJSON(data.localizations);
             element.innerHTML = surveyQuestion.getLocalizationTitle(environment.locale.use);
@@ -83,16 +72,16 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         question.idSurvey = this.survey;
         question.questionType = 1;
 
-        this.questionService.save(question).subscribe(info => {
-                question.id = info['idSurveyQuestion'];
-
+        this.questionService.save(question)
+            .subscribe(info => {
+                question.id = info['id'];
                 this.selectedIndex = 0;
                 this.loadQuestion();
                 this.setNextQuestion();
                 this.loadSource(this.questions[this.selectedIndex].id);
             },
             error => {
-                this.notification.open( 'Erreur lors de l"ajout de question.', '', {
+                this.notification.open('Erreur lors de l"ajout de question.', '', {
                     duration: 3000,
                 });
             });
@@ -118,35 +107,32 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         this.switchQuestion = true;
         this.selectedIndex = e.itemIndex;
 
-        console.log('item selected : ' + this.questions[this.selectedIndex].id);
         this.setNextQuestion();
         this.loadSource(this.questions[this.selectedIndex].id);
     }
 
     onFormUpdated(item, e) {
-        console.log('form updated :' , e);
-            if (this.timer) {
-                clearTimeout(this.timer);
-            }
-            if (item !== 'form') {
-                this.questions[this.selectedIndex][item] = e.value;
-            }
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+        if (item !== 'form') {
+            this.questions[this.selectedIndex][item] = e.value;
+        }
 
-            this.timer = setTimeout(() => {
-                this.questionService.save(this.questions[this.selectedIndex]).subscribe();
-            }, 1000);
+        this.timer = setTimeout(() => {
+            this.questionService.save(this.questions[this.selectedIndex]).subscribe();
+        }, 1000);
     }
 
     onRemoveQuestion() {
         if (this.selectedIndex > -1) {
             confirm(this.messages['removeQuestion'], this.messages['question']).then((result) => {
-              if (result) {
-                this.questionService.remove(this.questions[this.selectedIndex].id).subscribe();
-              }
+                if (result) {
+                    this.questionService.remove(this.questions[this.selectedIndex].id).subscribe();
+                }
             });
         }
     }
-
 
     onInitNewChoice(e) {
         e.data.isActive = true;
@@ -165,8 +151,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     loadQuestion() {
         this.questionService.getAll(this.survey).subscribe(data => {
             this.questions = data;
-
-            this.FilteredActiveQuestion();
+            this.filteredActiveQuestion();
             this.questions.forEach((question, index) => {
                 if (this.selectedIndex > -1 && question.id === this.questions[this.selectedIndex].id) {
                     this.questions[index]['selected'] = true;
@@ -175,11 +160,19 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         });
     }
 
-    FilteredActiveQuestion() {
-        console.log('Before filter : ' + JSON.stringify(this.questions));
+    filteredActiveQuestion() {
         this.questions = this.questions.filter((item) => {
             return (item.isActive);
         });
-        console.log('after filter : ' + JSON.stringify(this.questions));
+    }
+
+    onMultiLangValueChanged(item, e) {
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+        this.timer = setTimeout(() => {
+            this.onFormUpdated(item, e);
+        }, 1000);
+
     }
 }
