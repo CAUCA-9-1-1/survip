@@ -185,6 +185,7 @@
   "mode2": "Inspections to check",
   "mode3": "Inspections completed",
   "mode4": "Building",
+  "needMinimum1Building": "You need a building minimally",
   "connection": "Connection",
   "enter": "Enter",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"

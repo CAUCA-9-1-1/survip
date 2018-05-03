@@ -191,6 +191,7 @@
   "mode2": "Inspections à vérifier",
   "mode3": "Inspections complétés",
   "mode4": "Bâtiments",
+  "needMinimum1Building": "Vous avez besoin minimalement d'un bâtiment",
   "connection": "Connexion",
   "enter": "Entrer",
   "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?"
