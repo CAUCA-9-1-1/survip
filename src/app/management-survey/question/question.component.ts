@@ -48,9 +48,11 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     getQuestionTitle(data, index, element) {
+        console.log('localizations : ' + JSON.stringify(data.localizations));
         if (data.localizations.length > 0) {
             const surveyQuestion = Question.fromJSON(data.localizations);
             element.innerHTML = surveyQuestion.getLocalizationTitle(environment.locale.use);
+            console.log('titre à afficher : ' + element.innerHTML);
         } else {
             element.innerHTML = 'Pas de titre';
         }
@@ -71,20 +73,30 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         const question = new Question();
         question.idSurvey = this.survey;
         question.questionType = 1;
+        question.localizations = [];
+        environment.locale.available.forEach(language => {
+            const languageItem = {
+                languageCode: language.toLowerCase(),
+                isActive: true,
+                name: '',
+                title: ''
+            };
+            question.localizations.push(languageItem);
+        });
 
         this.questionService.save(question)
             .subscribe(info => {
-                question.id = info['id'];
-                this.selectedIndex = 0;
-                this.loadQuestion();
-                this.setNextQuestion();
-                this.loadSource(this.questions[this.selectedIndex].id);
-            },
-            error => {
-                this.notification.open('Erreur lors de l"ajout de question.', '', {
-                    duration: 3000,
+                    question.id = info['id'];
+                    this.selectedIndex = 0;
+                    this.loadQuestion();
+                    this.setNextQuestion();
+                    this.loadSource(question.id);
+                },
+                error => {
+                    this.notification.open('Erreur lors de l"ajout de question.', '', {
+                        duration: 3000,
+                    });
                 });
-            });
     }
 
     onMoveUp() {
@@ -171,8 +183,9 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             clearTimeout(this.timer);
         }
         this.timer = setTimeout(() => {
+            console.log('Question : ' + JSON.stringify(this.questions));
             this.onFormUpdated(item, e);
-        }, 1000);
+        }, 1500);
 
     }
 }

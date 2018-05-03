@@ -26,7 +26,7 @@
                     <app-multilang [value]="questions[selectedIndex].localizations" fieldName="title" (valueChanged)="onMultiLangValueChanged('title',$event);"></app-multilang>
                 </dxi-item>
                 <dxi-item [label]="{text: 'description' | translate}" dataField="localizations">
-                    <app-multilang [value]="questions[selectedIndex].localizations" (valueChanged)="onMultiLangValueChanged('description',$event);"></app-multilang>
+                    <app-multilang [value]="questions[selectedIndex].localizations" fieldName="name" (valueChanged)="onMultiLangValueChanged('description',$event);"></app-multilang>
                 </dxi-item>
                 <dxi-item
                         [label]="{text: 'questionType' | translate}"
