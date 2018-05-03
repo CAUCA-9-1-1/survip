@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import {environment} from '../../../../environments/environment';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class MultilangComponent implements OnInit {
     selectedTab: string;
 
     constructor(private translate: TranslateService) {
-        this.languages = ['fr', 'en'];
+        this.languages = environment.locale.available;
 
         // If we use the PIPE "translate" inside the "title" of "dxi-item" the view bug
         this.translate.get(this.languages).subscribe(labels => {
@@ -33,15 +34,38 @@ export class MultilangComponent implements OnInit {
 
     ngOnInit() {
         this.selectedTab = this.languages[0];
-
+        this.initializeLanguagesCollection();
         if (this.dataField) {
             this.value = this.dataField.row.data.localizations;
         }
     }
 
+    private initializeLanguagesCollection() {
+        this.languages.forEach(language => {
+            if (!this.getLanguageIndex(language.toLowerCase())) {
+                const languageItem = {
+                    languageCode: language.toLowerCase(),
+                    isActive: true,
+                    fieldName: '',
+                };
+                this.value.push(languageItem);
+            }
+        });
+    }
+
+    private getLanguageIndex(languageCode: string) {
+        let retValue = false;
+        for (const SavedLanguage of this.value) {
+            if (SavedLanguage.languageCode === languageCode) {
+                retValue = true;
+                break;
+            }
+        }
+        return retValue;
+    }
+
     getLanguageValue() {
         let languageValue = '';
-
         if (this.value) {
             this.value.forEach(item => {
                 if (item.languageCode === this.selectedTab) {
