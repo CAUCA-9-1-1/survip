@@ -88,7 +88,17 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         this.inspectorsOn = [];
         this.inspectorsOff = Object.assign([], this.webusers);
         this.buildingsInspected = [];
-        this.buildingsNotInspected = Object.assign([], this.buildingsWithoutInspection);
+        this.buildingsNotInspected = [];
+
+        this.buildings.forEach(building => {
+            this.buildingsWithoutInspection.forEach(inspection => {
+                if (building.id === inspection['idBuilding']) {
+                    building = Object.assign({}, building);
+
+                    this.buildingsNotInspected.push(building);
+                }
+            });
+        });
 
         e.data.idWebuserCreatedBy = localStorage.getItem('currentWebuser');
         e.data.isReadyForInspection = false;
@@ -289,16 +299,24 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     validateReady(e) {
-        if (e.value && (
-            this.formReadyField.key.users.length === 0 || this.formReadyField.key.inspections.length === 0
-        )) {
-            this.notification.open(this.labels['needInspectorAndBuildingForReadyInspection'], '', {
-                duration: 5000,
-                panelClass: ['error-toasts']
-            });
+        if (e.value) {
+            let valid = true;
 
-            e.value = false;
-            e.component.option('value', false);
+            if (!this.formReadyField.key.users || !this.formReadyField.key.inspections) {
+                valid = false;
+            } else if (this.formReadyField.key.users.length === 0 || this.formReadyField.key.inspections.length === 0) {
+                valid = false;
+            }
+
+            if (!valid) {
+                this.notification.open(this.labels['needInspectorAndBuildingForReadyInspection'], '', {
+                    duration: 5000,
+                    panelClass: ['error-toasts']
+                });
+
+                e.value = false;
+                e.component.option('value', false);
+            }
         }
 
         this.formReadyField.setValue(e.value);
