@@ -8,10 +8,14 @@ import {Router} from '@angular/router';
     styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent implements OnInit {
-    items = [{
-        name: 'inspectionManagement',
+    inspection = [{
+        name: 'inspectionDashboard',
         path: '/inspection/dashboard/',
     }, {
+        name: 'inspectionBatch',
+        path: '/inspection/batch/',
+    }];
+    management = [{
         name: 'interventionPlanManagement',
         path: '/management/interventionplan/',
     }, {

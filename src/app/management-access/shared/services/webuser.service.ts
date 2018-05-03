@@ -19,6 +19,12 @@ export class WebuserService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    getActive() {
+        return this.http.get<Webuser[]>(this.apiUrl + 'Webuser/Active', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     save(webuser: Webuser) {
         return this.http.post(
             this.apiUrl + 'Webuser',

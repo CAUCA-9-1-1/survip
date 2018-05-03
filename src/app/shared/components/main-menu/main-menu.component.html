@@ -1,5 +1,12 @@
 <mat-list>
-    <mat-list-item *ngFor="let menu of items">
+    <h3>{{'inspection' | translate}}</h3>
+    <mat-list-item *ngFor="let menu of inspection">
+        <h4 mat-line (click)="goto(menu.path)">
+            <div>{{menu.name | translate}}</div>
+        </h4>
+    </mat-list-item>
+    <h3>{{'management' | translate}}</h3>
+    <mat-list-item *ngFor="let menu of management">
         <h4 mat-line (click)="goto(menu.path)">
             <div>{{menu.name | translate}}</div>
         </h4>

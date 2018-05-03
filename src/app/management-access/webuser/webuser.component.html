@@ -1,6 +1,7 @@
 <dx-data-grid
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
         (onEditingStart)="onEditingStart($event)"
         (onEditorPreparing)="onEditorPreparing($event)"
         (onInitNewRow)="onInitNewRow($event)"
@@ -48,6 +49,7 @@
                 <dx-data-grid
                         [dataSource]="webuserFireSafetyDepartments"
                         [hoverStateEnabled]="true"
+                        [rowAlternationEnabled]="true"
                         (onInitNewRow)="onNewUserDepartment($event)"
                         (onRowInserted)="onUserDepartmentInserted($event)"
                         (onRowUpdated)="onUserDepartmentUpdated($event)"

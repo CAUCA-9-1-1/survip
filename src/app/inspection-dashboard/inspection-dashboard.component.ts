@@ -13,6 +13,7 @@ import {InspectionForList} from './shared/models/inspection-for-list.model';
 import {City} from '../management-address/shared/models/city.model';
 import {CityService} from '../management-address/shared/services/city.service';
 import {environment} from '../../environments/environment';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -47,6 +48,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         private riskLevelService: RiskLevelService,
         private utilisationCodeService: UtilisationCodeService,
         private translateService: TranslateService,
+        private notification: MatSnackBar,
     ) { }
 
     ngOnInit() {

@@ -6,7 +6,6 @@ import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
-    private storage: any;
 
     constructor(private http: HttpClient) { }
 
@@ -21,13 +20,15 @@ export class AuthenticationService {
 
     public logout() {
         localStorage.removeItem('currentToken');
+        localStorage.removeItem('currentWebuser');
     }
 
-    private onResponse(result) {
-        if (result.data.accessToken) {
-            localStorage.setItem('currentToken', result.data.accessToken);
+    private onResponse(response) {
+        if (response.data.accessToken) {
+            localStorage.setItem('currentToken', response.data.accessToken);
+            localStorage.setItem('currentWebuser', response.data.idWebuser);
         }
 
-        return result.data;
+        return response.data;
     }
 }

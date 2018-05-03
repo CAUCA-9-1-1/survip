@@ -13,6 +13,12 @@ export class InspectionService extends RequestService {
         super(injector);
     }
 
+    getAll() {
+        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     getToDo() {
         return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ToDoInspection', {
             headers: this.headers

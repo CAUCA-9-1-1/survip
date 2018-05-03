@@ -9,6 +9,11 @@ $accent: map-get($theme, accent);
   margin-right: 10px;
 }
 
+h3 {
+  padding: 0.5em;
+  text-transform: uppercase;
+}
+
 h4 > div {
   padding: 0.5em;
   cursor: pointer;
