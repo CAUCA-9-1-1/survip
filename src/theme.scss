@@ -83,17 +83,30 @@ $theme:   mat-light-theme($theme-primary, $theme-accent);
 @mixin mix-app-theme($app-theme) {
   $primary: map-get($app-theme, primary);
   $accent: map-get($app-theme, accent);
+  $warn: map-get($app-theme, warn);
+  $accent-text: map-get($app-theme, accent);
+  $warn-text: map-get($app-theme, warn);
 
   .mat-button-toggle {
     padding: 0.5em;
     border-radius: 5px;
-    background-color: mat-color($theme-accent);
     color: mat-color($theme-accent, default-contrast);
+    background-color: mat-color($theme-accent);
   }
 
   .mat-button-toggle-checked {
-    background-color: mat-color($theme-primary);
     color: mat-color($theme-primary, default-contrast);
+    background-color: mat-color($theme-primary);
+  }
+
+  .success-toasts {
+    color: mat-color($accent-text, default-contrast);
+    background-color: mat-color($accent);
+  }
+
+  .error-toasts {
+    color: mat-color($warn-text, default-contrast);
+    background-color: mat-color($warn);
   }
 }
 

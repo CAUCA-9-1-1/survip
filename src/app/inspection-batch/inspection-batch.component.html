@@ -19,7 +19,7 @@
                 sortIndex="0">
             </dxi-column>
             <dxi-column dataField="civicNumber" caption="{{'civicNumber' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="isReadyForInspection" dataType="boolean" caption="{{'isReadyForInspection' | translate}}" width="10%"></dxi-column>
+            <dxi-column dataField="isReadyForInspection" editCellTemplate="editReady" cellTemplate="showReady" caption="{{'isReadyForInspection' | translate}}" width="10%"></dxi-column>
             <dxi-column dataField="shouldStartOn" dataType="date" caption="{{'shouldStartOn' | translate}}"></dxi-column>
             <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
             <dxi-column dataField="users" editCellTemplate="editInspectors" [visible]="false"></dxi-column>
@@ -32,9 +32,7 @@
                 <dxo-form colCount="4">
                     <dxi-item dataField="description" [isRequired]="true" [colSpan]="4"></dxi-item>
                     <dxi-item dataField="shouldStartOn"></dxi-item>
-                    <dxi-item dataField="isReadyForInspection">
-                        <dxi-validation-rule type="custom" [validationCallback]="validateInspector" message="{{'needInspectorForReadyInspection' | translate}}"></dxi-validation-rule>
-                    </dxi-item>
+                    <dxi-item dataField="isReadyForInspection"></dxi-item>
                     <dxi-item dataField="isActive"></dxi-item>
                     <dxi-item itemType="empty"></dxi-item>
                     <dxi-item itemType="group" caption="{{'batchInspectors' | translate}}">
@@ -46,6 +44,12 @@
                 </dxo-form>
             </dxo-editing>
 
+            <div *dxTemplate="let field of 'showReady'">
+                <dx-check-box class="dx-datagrid-checkbox-size" [readOnly]="true" [value]="field.value"></dx-check-box>
+            </div>
+            <div *dxTemplate="let field of 'editReady'">
+                <dx-check-box (onInitialized)="setFormReadyField(field)" (onValueChanged)="validateReady($event)" [value]="field.value"></dx-check-box>
+            </div>
             <div *dxTemplate="let field of 'editInspectors'">
                 <dx-select-box [dataSource]="inspectorsOff" valueExpr="id" displayExpr="name" (onInitialized)="setFormUserField(field)" (onSelectionChanged)="addInspector($event)" placeholder="{{'addToInspectors' | translate}}"></dx-select-box>
                 <dx-list [dataSource]="inspectorsOn" itemTemplate="listItem">

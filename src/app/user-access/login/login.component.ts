@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private auth: AuthenticationService,
-        private notification: MatSnackBar
+        private notification: MatSnackBar,
     ) { }
 
     ngOnInit() {
@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
     private notify(message: string) {
         this.notification.open( message, '', {
             duration: 5000,
+            panelClass: ['error-toasts']
         });
     }
 }

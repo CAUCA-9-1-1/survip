@@ -180,7 +180,7 @@
   "assignedTo": "Assigned to",
   "all": "All",
   "addBuildingsToInspection": "Add or many buildings to inspect",
-  "needInspectorForReadyInspection": "To make the inspection accessible, you must have at least 1 inspector",
+  "needInspectorAndBuildingForReadyInspection": "To make the inspection accessible, you must have at least 1 inspector and 1 building",
   "mode1": "Inspections in progress / pending",
   "mode2": "Inspections to check",
   "mode3": "Inspections completed",

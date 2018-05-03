@@ -1,12 +1,15 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {DxDataGridComponent} from 'devextreme-angular';
+
 import {GridWithCrudService} from '../shared/classes/grid-with-crud-service';
 import {InspectionBatchService} from './shared/services/inspection-batch.service';
 import {WebuserService} from '../management-access/shared/services/webuser.service';
 import {Building} from '../management-building/shared/models/building.model';
-import {BuildingService} from '../management-building/shared/services/building.service';
 import {TranslateService} from '@ngx-translate/core';
 import {WebuserForWeb} from '../management-access/shared/models/webuser-for-web.model';
-import {DxDataGridComponent} from 'devextreme-angular';
+import {InspectionService} from '../inspection-dashboard/shared/services/inspection.service';
+import {BuildingService} from '../management-building/shared/services/building.service';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -17,6 +20,7 @@ import {DxDataGridComponent} from 'devextreme-angular';
         InspectionBatchService,
         WebuserService,
         BuildingService,
+        InspectionService,
     ],
 })
 export class InspectionBatchComponent extends GridWithCrudService implements OnInit {
@@ -24,6 +28,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     labels = [];
     formUserField: any;
+    formReadyField: any;
     formInspectionField: any;
     webusers: WebuserForWeb[];
     inspectorsOn: WebuserForWeb[] = [];
@@ -32,6 +37,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     buildings: Building[] = [];
     buildingsInspected: Building[] = [];
     buildingsNotInspected: Building[] = [];
+    buildingsWithoutInspection: Building[] = [];
     popupBuildingVisible = false;
     popupBuildingSelected = [];
     popupButtons: any[];
@@ -41,11 +47,13 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         batchService: InspectionBatchService,
         private webuserService: WebuserService,
         private buildingService: BuildingService,
+        private inspectionService: InspectionService,
+        private notification: MatSnackBar,
     ) {
         super(batchService);
 
         translateService.get([
-            'all', 'addBuildingsToInspection', 'add', 'cancel'
+            'all', 'addBuildingsToInspection', 'add', 'cancel', 'needInspectorAndBuildingForReadyInspection'
         ]).subscribe(data => {
             this.labels = data;
 
@@ -73,18 +81,24 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         this.loadSource();
         this.loadWebuser();
         this.loadBuilding();
+        this.loadInspection();
     }
 
     onInitNewRow(e) {
         this.inspectorsOn = [];
         this.inspectorsOff = Object.assign([], this.webusers);
         this.buildingsInspected = [];
-        this.buildingsNotInspected = Object.assign([], this.buildings);
+        this.buildingsNotInspected = Object.assign([], this.buildingsWithoutInspection);
 
         e.data.idWebuserCreatedBy = localStorage.getItem('currentWebuser');
         e.data.isReadyForInspection = false;
         e.data.createOn = (new Date());
         e.data.isActive = true;
+
+        this.inspectorsList = this.inspectorsOn.concat([{
+            id: 'all',
+            name: this.labels['all'],
+        }]);
     }
 
     onEditingStart(e) {
@@ -92,6 +106,11 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         this.inspectorsOff = [];
         this.buildingsInspected = [];
         this.buildingsNotInspected = [];
+        const idBuildingsWithoutInspection = [];
+
+        this.buildingsWithoutInspection.forEach(building => {
+            idBuildingsWithoutInspection.push(building['idBuilding']);
+        });
 
         this.webusers.forEach(user => {
             let find = false;
@@ -123,7 +142,9 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
             });
 
             if (!find) {
-                this.buildingsNotInspected.push(building);
+                if (idBuildingsWithoutInspection.includes(building.id)) {
+                    this.buildingsNotInspected.push(Object.assign({}, building));
+                }
             }
         });
 
@@ -147,6 +168,10 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
             },
             location: 'after',
         });
+    }
+
+    setFormReadyField(field) {
+        this.formReadyField = field;
     }
 
     setFormUserField(field) {
@@ -183,6 +208,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     removeInspector(item) {
+
         this.moveInspectorsSource('inspectorsOn', 'inspectorsOff', item.id);
         let findWebuser = -1;
 
@@ -195,6 +221,10 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         if (findWebuser > -1) {
             this.formUserField.value.splice(findWebuser, 1);
             this.formUserField.setValue(this.formUserField.value);
+
+            if (this.formUserField.data.users.length === 0) {
+                this.formReadyField.setValue(false);
+            }
         }
     }
 
@@ -213,6 +243,10 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         }
 
         this.formInspectionField.setValue(this.formInspectionField.data.inspections);
+
+        if (this.formInspectionField.data.inspections.length === 0) {
+            this.formReadyField.setValue(false);
+        }
     }
 
     onBuildingsUpdated(e) {
@@ -254,14 +288,20 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         }
     }
 
-    validateInspector(options) {
-        if (options.value && options.validator._validationGroup.key.users.length === 0) {
-            if (!options.validator._validationGroup.data.users || options.validator._validationGroup.data.users.length === 0) {
-                return false;
-            }
+    validateReady(e) {
+        if (e.value && (
+            this.formReadyField.key.users.length === 0 || this.formReadyField.key.inspections.length === 0
+        )) {
+            this.notification.open(this.labels['needInspectorAndBuildingForReadyInspection'], '', {
+                duration: 5000,
+                panelClass: ['error-toasts']
+            });
+
+            e.value = false;
+            e.component.option('value', false);
         }
 
-        return true;
+        this.formReadyField.setValue(e.value);
     }
 
     private onAddBuilding() {
@@ -296,10 +336,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
         if (find > -1) {
             this[sourceTo].push(this[sourceFrom][find]);
-
-            if (sourceFrom !== 'webusers') {
-                this[sourceFrom].splice(find, 1);
-            }
+            this[sourceFrom].splice(find, 1);
         }
     }
 
@@ -331,5 +368,9 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     private loadBuilding() {
         this.buildingService.getActive().subscribe(data => this.buildings = data);
+    }
+
+    private loadInspection() {
+        this.inspectionService.getBuildingToDo().subscribe(data => this.buildingsWithoutInspection = data);
     }
 }

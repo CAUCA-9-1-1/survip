@@ -186,7 +186,7 @@
   "assignedTo": "Assigné à",
   "all": "Tous",
   "addBuildingsToInspection": "Ajouter un ou plusieurs batîments à inspecter",
-  "needInspectorForReadyInspection": "Pour rendre accessible l'inspection, vous devez avoir au minimum 1 inspecteur",
+  "needInspectorAndBuildingForReadyInspection": "Pour rendre accessible l'inspection, vous devez avoir au minimum 1 inspecteur et 1 bâtiment",
   "mode1": "Inspections en cours/en attente",
   "mode2": "Inspections à vérifier",
   "mode3": "Inspections complétés",
