@@ -34,20 +34,23 @@ export class MultilangComponent implements OnInit {
 
     ngOnInit() {
         this.selectedTab = this.languages[0];
-        this.initializeLanguagesCollection();
         if (this.dataField) {
             this.value = this.dataField.row.data.localizations;
         }
+        this.initializeLanguagesCollection();
     }
 
     private initializeLanguagesCollection() {
+        if (!this.value) {
+            this.value = [];
+        }
         this.languages.forEach(language => {
             if (!this.getLanguageIndex(language.toLowerCase())) {
                 const languageItem = {
                     languageCode: language.toLowerCase(),
                     isActive: true,
-                    fieldName: '',
                 };
+                languageItem[this.fieldName] = '';
                 this.value.push(languageItem);
             }
         });
@@ -55,10 +58,12 @@ export class MultilangComponent implements OnInit {
 
     private getLanguageIndex(languageCode: string) {
         let retValue = false;
-        for (const SavedLanguage of this.value) {
-            if (SavedLanguage.languageCode === languageCode) {
-                retValue = true;
-                break;
+        if (this.value) {
+            for (const SavedLanguage of this.value) {
+                if (SavedLanguage.languageCode === languageCode) {
+                    retValue = true;
+                    break;
+                }
             }
         }
         return retValue;
@@ -92,23 +97,6 @@ export class MultilangComponent implements OnInit {
                     }
                 }
             });
-        }
-
-        if (!find) {
-            if (!this.value) {
-                this.value = [];
-            }
-
-            const item = {
-                languageCode: this.selectedTab,
-                isActive: true,
-            };
-            item[this.fieldName] = value;
-            this.value.push(item);
-
-            if (!value) {
-                isValid = false;
-            }
         }
 
         return isValid;
