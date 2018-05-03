@@ -187,6 +187,10 @@
   "all": "Tous",
   "addBuildingsToInspection": "Ajouter un ou plusieurs batîments à inspecter",
   "needInspectorForReadyInspection": "Pour rendre accessible l'inspection, vous devez avoir au minimum 1 inspecteur",
+  "mode1": "Inspections en cours/en attente",
+  "mode2": "Inspections à vérifier",
+  "mode3": "Inspections complétés",
+  "mode4": "Bâtiments",
   "connection": "Connexion",
   "enter": "Entrer"
 }
