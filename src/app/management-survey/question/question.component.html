@@ -11,7 +11,7 @@
             <dx-tree-view
                     [dataSource]="questions"
                     displayExpr="localizations"
-                    [itemTemplate]="getQuestionTitle"
+                    [itemTemplate]="getLocalizationsTitle"
                     keyExpr="id"
                     selectionMode="single"
                     [selectByClick]="true"
@@ -63,7 +63,7 @@
                 <dxi-column
                     dataField="localizations"
                     caption="{{'name' | translate}}"
-                    [calculateCellValue]="getChoiceName"
+                    [calculateCellValue]="getLocalizationsTitle"
                     editCellTemplate="editname">
                 </dxi-column>
                 <dxi-column

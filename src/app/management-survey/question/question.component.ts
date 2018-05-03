@@ -47,42 +47,20 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         });
     }
 
-    getQuestionTitle(data, index, element) {
-        console.log('localizations : ' + JSON.stringify(data.localizations));
+    getLocalizationsTitle(data, index, element) {
         if (data.localizations.length > 0) {
             const surveyQuestion = Question.fromJSON(data.localizations);
-            element.innerHTML = surveyQuestion.getLocalizationTitle(environment.locale.use);
-            console.log('titre à afficher : ' + element.innerHTML);
-        } else {
-            element.innerHTML = 'Pas de titre';
-        }
-
-    }
-
-    getChoiceName(data, index, element) {
-        if (data.localizations.length > 0) {
-            const surveyQuestion = Question.fromJSON(data.localizations);
+            surveyQuestion.localizations = data.localizations;
             element.innerHTML = surveyQuestion.getLocalizationTitle(environment.locale.use);
         } else {
             element.innerHTML = 'Pas de titre';
         }
+
     }
 
     onAddQuestion() {
         this.switchQuestion = true;
-        const question = new Question();
-        question.idSurvey = this.survey;
-        question.questionType = 1;
-        question.localizations = [];
-        environment.locale.available.forEach(language => {
-            const languageItem = {
-                languageCode: language.toLowerCase(),
-                isActive: true,
-                name: '',
-                title: ''
-            };
-            question.localizations.push(languageItem);
-        });
+        const question = this.createNewQuestion();
 
         this.questionService.save(question)
             .subscribe(info => {
@@ -97,6 +75,23 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
                         duration: 3000,
                     });
                 });
+    }
+
+    private createNewQuestion() {
+        const question = new Question();
+        question.idSurvey = this.survey;
+        question.questionType = 1;
+        question.localizations = [];
+        environment.locale.available.forEach(language => {
+            const languageItem = {
+                languageCode: language.toLowerCase(),
+                isActive: true,
+                name: '',
+                title: ''
+            };
+            question.localizations.push(languageItem);
+        });
+        return question;
     }
 
     onMoveUp() {
