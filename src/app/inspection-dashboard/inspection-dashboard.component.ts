@@ -14,6 +14,8 @@ import {City} from '../management-address/shared/models/city.model';
 import {CityService} from '../management-address/shared/services/city.service';
 import {environment} from '../../environments/environment';
 import {MatSnackBar} from '@angular/material';
+import {InspectionBatchService} from '../inspection-batch/shared/services/inspection-batch.service';
+import {InspectionBatch} from '../inspection-batch/shared/models/inspection-batch.model';
 
 
 @Component({
@@ -26,6 +28,7 @@ import {MatSnackBar} from '@angular/material';
         CityService,
         RiskLevelService,
         UtilisationCodeService,
+        InspectionBatchService,
     ]
 })
 export class InspectionDashboardComponent implements OnInit, AfterViewInit {
@@ -49,6 +52,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         private utilisationCodeService: UtilisationCodeService,
         private translateService: TranslateService,
         private notification: MatSnackBar,
+        private batchService: InspectionBatchService,
     ) { }
 
     ngOnInit() {
@@ -61,7 +65,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'riskLevel', 'address', 'transversal', 'city', 'postalCode', 'batch', 'status', 'note', 'anomaly',
             'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details',
             'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode',
-            'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch'
+            'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building'
         ]).subscribe(labels => {
             this.labels = labels;
             this.labelIsLoaded = true;
@@ -97,7 +101,22 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             buildings.push(rows.idBuilding);
         });
 
-        console.log(buildings);
+        if (buildings.length === 0) {
+            return this.notification.open( this.labels['needMinimum1Building'], '', {
+                duration: 5000,
+            });
+        }
+
+        const batch = InspectionBatch.fromJSON({
+            description: 'À venir',
+            idWebuserCreatedBy: localStorage.getItem('currentWebuser'),
+            isActive: true,
+            isReadyForInspection: false,
+        });
+
+        this.batchService.save(batch).subscribe((data) => {
+            alert(data);
+        });
     }
 
     private setDatagrid() {
@@ -143,7 +162,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 text: this.labels['createBatch'],
                 icon: 'group',
                 disabled: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? true : false),
-                onClick: (e) => this.createBatch(e)
+                onClick: (ev) => this.createBatch(ev)
             },
             location: 'after',
         });
