@@ -25,7 +25,6 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     nextQuestions: Question[] = [];
     choices: Choice[] = [];
     selectedIndex = -1;
-    columns: object[] = [];
     editing: object = {};
     switchQuestion = false;
     timer = null;
@@ -50,12 +49,18 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     getLocalizationsTitle(data, index, element) {
         if (data.localizations.length > 0) {
             const surveyQuestion = Question.fromJSON(data.localizations);
-            surveyQuestion.localizations = data.localizations;
+            if (!surveyQuestion.localizations) {
+                surveyQuestion.localizations = data.localizations;
+            }
             element.innerHTML = surveyQuestion.getLocalizationTitle(environment.locale.use);
         } else {
             element.innerHTML = 'Pas de titre';
         }
+    }
 
+    getChoiceTitle(data)  {
+        const choice = Choice.fromJSON(data);
+        return choice.getLocalizationTitle(environment.locale.use);
     }
 
     onAddQuestion() {
@@ -143,6 +148,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
     onInitNewChoice(e) {
         e.data.isActive = true;
+        e.data.idSurveyQuestion = this.questions[this.selectedIndex].id;
     }
 
     setNextQuestion() {
@@ -178,7 +184,6 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             clearTimeout(this.timer);
         }
         this.timer = setTimeout(() => {
-            console.log('Question : ' + JSON.stringify(this.questions));
             this.onFormUpdated(item, e);
         }, 1500);
 
