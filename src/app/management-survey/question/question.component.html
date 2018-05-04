@@ -11,76 +11,85 @@
             <dx-tree-view
                     [dataSource]="questions"
                     displayExpr="localizations"
-                    [itemTemplate]="getLocalizationsTitle"
+                    [itemTemplate]="getQuestionTreeviewTitle"
                     keyExpr="id"
                     selectionMode="single"
                     [selectByClick]="true"
-                    (onItemSelectionChanged)="onRowSelected($event)">
+                    (onItemSelectionChanged)="onQuestionSelected($event)">
             </dx-tree-view>
         </div>
     </div>
     <div fxFlex="65%">
         <div *ngIf="selectedIndex > -1">
             <dx-form [formData]="questions[selectedIndex]" (onFieldDataChanged)="onFormUpdated('form',$event)">
-                <dxi-item [label]="{text: 'title' | translate}" dataField="localizations" >
-                    <app-multilang [value]="questions[selectedIndex].localizations" fieldName="title" (valueChanged)="onMultiLangValueChanged('title',$event);"></app-multilang>
+                <dxi-item [label]="{text: 'title' | translate}" dataField="localizations" class="multilang">
+                    <app-multilang [value]="questions[selectedIndex].localizations" fieldName="title"
+                                   (valueChanged)="onMultiLangValueChanged('title',$event);"></app-multilang>
                 </dxi-item>
-                <dxi-item [label]="{text: 'description' | translate}" dataField="localizations">
-                    <app-multilang [value]="questions[selectedIndex].localizations" fieldName="name" (valueChanged)="onMultiLangValueChanged('description',$event);"></app-multilang>
+                <dxi-item [label]="{text: 'description' | translate}" dataField="localizations" class="multilang">
+                    <app-multilang [value]="questions[selectedIndex].localizations" fieldName="name"
+                                   (valueChanged)="onMultiLangValueChanged('description',$event);"></app-multilang>
                 </dxi-item>
                 <dxi-item
                         [label]="{text: 'questionType' | translate}"
                         dataField="questionType"
                         editorType="dxSelectBox"
+
                         [editorOptions]="{dataSource: [
                             {value: 1, text: 'choiceAnswer' | translate},
                             {value: 2, text: 'textAnswer' | translate},
                             {value: 3, text: 'dateAnswer' | translate}
-                            ], displayExpr: 'text', valueExpr: 'value'}">
+                            ], displayExpr: 'text', valueExpr: 'value', onValueChanged:QuestionTypeChanged}">
                 </dxi-item>
                 <dxi-item
                         [label]="{text: 'nextQuestion' | translate}"
                         dataField="idSurveyQuestionNext"
                         editorType="dxSelectBox"
-                        [editorOptions]="{dataSource: nextQuestions, displayExpr: 'description.fr', valueExpr: 'idSurveyQuestion'}">
+                        [editorOptions]="{dataSource: nextQuestions, displayExpr:getLocalizedTitle , valueExpr: 'id'}">
                 </dxi-item>
             </dx-form>
-            <label>{{'options' | translate}}</label>
-            <dx-data-grid
-                    [dataSource]="choices"
-                    [hoverStateEnabled]="true"
-                    (onInitNewRow)="onInitNewChoice($event)"
-                    (onRowInserted)="onRowInserted($event)"
-                    (onRowUpdated)="onRowUpdated($event)"
-                    (onRowRemoved)="onRowRemoved($event)">
-                <dxi-column
-                    dataField="sequence"
-                    caption="{{'sequence' | translate}}"
-                    width="15%"
-                    sortOrder="asc"
-                    sortIndex="0">
-                </dxi-column>
-                <dxi-column
-                    dataField="localizations"
-                    caption="{{'name' | translate}}"
-                    [calculateCellValue]="getChoiceTitle"
-                    editCellTemplate="editname">
-                </dxi-column>
-                <dxi-column
-                        dataField="idSurveyQuestionNext"
-                        caption="{{'surveyQuestionNext' | translate}}">
-                    <dxo-lookup [dataSource]="nextQuestions" displayExpr="description.fr" valueExpr="idSurveyQuestion">
-                    </dxo-lookup>
-                </dxi-column>
-                <dxi-column dataField="isActive" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+            <br>
+            <div>
+                <label>{{'options' | translate}}</label>
+                <dx-data-grid
+                        [dataSource]="dataSource"
+                        [hoverStateEnabled]="true"
+                        (onInitNewRow)="onInitNewChoice($event)"
+                        (onRowInserted)="addNewQuestionChoice($event)"
+                        (onRowUpdated)="onRowUpdated($event)"
+                        (onRowRemoved)="onRowRemoved($event)"
+                        [visible]="optionsChoiceVisible">
+                    <dxi-column
+                            dataField="sequence"
+                            caption="{{'sequence' | translate}}"
+                            width="15%"
+                            sortOrder="asc"
+                            sortIndex="0">
+                    </dxi-column>
+                    <dxi-column
+                            dataField="localizations"
+                            caption="{{'name' | translate}}"
+                            [calculateCellValue]="getLocalizedTitle"
+                            editCellTemplate="editname">
+                    </dxi-column>
+                    <dxi-column
+                            dataField="idSurveyQuestionNext"
+                            caption="{{'surveyQuestionNext' | translate}}"
+                            sortOrder="asc"
+                            sortIndex="0">
+                        <dxo-lookup [dataSource]="nextQuestions" [displayExpr]="getLocalizedTitle" valueExpr="id">
+                        </dxo-lookup>
+                    </dxi-column>
+                    <dxi-column dataField="isActive" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+                    <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+                    </dxo-editing>
 
-                <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-                </dxo-editing>
-
-                <div *dxTemplate="let field of 'editname'">
-                    <app-multilang [isRequired]="true" [dataField]="field" (valueChanged)="field.setValue($event.value);"></app-multilang>
-                </div>
-            </dx-data-grid>
+                    <div *dxTemplate="let field of 'editname'">
+                        <app-multilang [isRequired]="true" [dataField]="field"
+                                       (valueChanged)="field.setValue($event.value);"></app-multilang>
+                    </div>
+                </dx-data-grid>
+            </div>
         </div>
     </div>
 </div>
