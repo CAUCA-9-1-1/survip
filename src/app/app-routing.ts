@@ -30,6 +30,9 @@ const appRoutes: Routes = [{
     }, {
         path: 'batch',
         component: InspectionBatchComponent
+    }, {
+        path: 'batch/:idBatch',
+        component: InspectionBatchComponent
     }]
 }, {
     path: 'management',
