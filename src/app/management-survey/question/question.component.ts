@@ -3,7 +3,6 @@ import {TranslateService} from '@ngx-translate/core';
 import {Question} from '../shared/models/question.model';
 import {QuestionService} from '../shared/services/question.service';
 import {ChoiceService} from '../shared/services/choice.service';
-import {Choice} from '../shared/models/choice.model';
 import {environment} from '../../../environments/environment';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {confirm} from 'devextreme/ui/dialog';
@@ -23,16 +22,16 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
     questions: Question[] = [];
     nextQuestions: Question[] = [];
-    choices: Choice[] = [];
     selectedIndex = -1;
     editing: object = {};
-    switchQuestion = false;
     timer = null;
     messages: object = {};
+    isLoading = false;
+    optionsChoiceVisible = true;
 
     constructor(
         private questionService: QuestionService,
-        choiceService: ChoiceService,
+        private choiceService: ChoiceService,
         private translate: TranslateService,
         private notification: MatSnackBar,
     ) {
@@ -46,25 +45,20 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         });
     }
 
-    getLocalizationsTitle(data, index, element) {
-        if (data.localizations.length > 0) {
-            const surveyQuestion = Question.fromJSON(data.localizations);
-            if (!surveyQuestion.localizations) {
-                surveyQuestion.localizations = data.localizations;
-            }
-            element.innerHTML = surveyQuestion.getLocalizationTitle(environment.locale.use);
-        } else {
+    getQuestionTreeviewTitle(data, index, element) {
+        const question = Question.fromJSON(data);
+        element.innerHTML = question.getLocalization(environment.locale.use);
+        if (element.innerHTML === '') {
             element.innerHTML = 'Pas de titre';
         }
     }
 
-    getChoiceTitle(data)  {
-        const choice = Choice.fromJSON(data);
-        return choice.getLocalizationTitle(environment.locale.use);
+    getLocalizedTitle(data) {
+        const question = Question.fromJSON(data);
+        return question.getLocalization(environment.locale.use);
     }
 
     onAddQuestion() {
-        this.switchQuestion = true;
         const question = this.createNewQuestion();
 
         this.questionService.save(question)
@@ -82,7 +76,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
                 });
     }
 
-    private createNewQuestion() {
+    createNewQuestion() {
         const question = new Question();
         question.idSurvey = this.survey;
         question.questionType = 1;
@@ -100,40 +94,65 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     onMoveUp() {
-        if (this.selectedIndex > -1) {
-            this.questionService.move(this.questions[this.selectedIndex].id, -1).subscribe(() => {
+        if (this.selectedIndex + 1 > -1) {
+            /*this.questionService.move(this.questions[this.selectedIndex].id, -1).subscribe(() => {
                 this.loadQuestion();
-            });
+            });*/
+            console.log('Questions Before ranking up : ' + JSON.stringify(this.questions));
+
+            this.questions[(this.selectedIndex - 1)].sequence = this.selectedIndex;
+            this.questions[this.selectedIndex].sequence = this.selectedIndex - 1;
+
+            console.log('Questions after ranking up : ' + JSON.stringify(this.questions));
+        }
+    }
+    QuestionTypeChanged(data) {
+        if (data.value === 1) {
+            this.optionsChoiceVisible = false;
+        } else {
+            this.optionsChoiceVisible = true;
         }
     }
 
     onMoveDown() {
-        if (this.selectedIndex > -1) {
-            this.questionService.move(this.questions[this.selectedIndex].id, 1).subscribe(() => {
+        if ((this.selectedIndex > -1) && (this.selectedIndex + 1 < this.questions.length)) {
+            console.log('Questions Before ranking down : ' + JSON.stringify(this.questions));
+
+            this.questions[(this.selectedIndex + 1)].sequence = this.selectedIndex;
+            this.questions[this.selectedIndex].sequence = this.selectedIndex - 1;
+
+            console.log('Questions after ranking down : ' + JSON.stringify(this.questions));
+           /* this.questionService.move(this.questions[this.selectedIndex].id, 1).subscribe(() => {
                 this.loadQuestion();
-            });
+            });*/
         }
     }
 
-    onRowSelected(e) {
-        this.switchQuestion = true;
-        this.selectedIndex = e.itemIndex;
+    onQuestionSelected(e) {
+        if (this.selectedIndex !== e.itemIndex) {
+            this.isLoading = true;
+            this.selectedIndex = e.itemIndex;
 
-        this.setNextQuestion();
-        this.loadSource(this.questions[this.selectedIndex].id);
+            this.setNextQuestion();
+            this.loadSource(this.questions[this.selectedIndex].id);
+
+            this.isLoading = false;
+        }
     }
 
     onFormUpdated(item, e) {
-        if (this.timer) {
-            clearTimeout(this.timer);
-        }
-        if (item !== 'form') {
-            this.questions[this.selectedIndex][item] = e.value;
-        }
+        if (!this.isLoading) {
+            if (this.timer) {
+                clearTimeout(this.timer);
+            }
+            if (item !== 'form') {
+                this.questions[this.selectedIndex][item] = e.value;
+            }
 
-        this.timer = setTimeout(() => {
-            this.questionService.save(this.questions[this.selectedIndex]).subscribe();
-        }, 1000);
+            this.timer = setTimeout(() => {
+                this.questionService.save(this.questions[this.selectedIndex]).subscribe();
+            }, 1000);
+        }
     }
 
     onRemoveQuestion() {
@@ -151,12 +170,20 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         e.data.idSurveyQuestion = this.questions[this.selectedIndex].id;
     }
 
+    addNewQuestionChoice(e) {
+        this.choiceService.save(e.data).subscribe(info => {
+            this.loadSource(this.questions[this.selectedIndex].id);
+        }, error => {
+            this.loadSource(this.questions[this.selectedIndex].id);
+        });
+    }
+
     setNextQuestion() {
         this.nextQuestions = [];
 
-        this.questions.forEach((question) => {
-            if (question.id !== this.questions[this.selectedIndex].id) {
-                this.nextQuestions.push(question);
+        this.questions.forEach((next_question) => {
+            if (next_question.id !== this.questions[this.selectedIndex].id) {
+                this.nextQuestions.push(next_question);
             }
         });
     }

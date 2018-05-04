@@ -26,7 +26,7 @@ export class GridWithCrudService {
         this.sourceService.remove(e.key.id).subscribe();
     }
 
-    protected loadSource(id?: string) {
+    loadSource(id?: string) {
         this.sourceService.getAll(id).subscribe(data => this.dataSource = data);
     }
 
