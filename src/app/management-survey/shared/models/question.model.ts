@@ -9,7 +9,6 @@ export class Question extends WithLocalization {
 
     static fromJSON(data: object): Question {
         const question = new Question();
-
         return Object.assign(question, data);
     }
 }

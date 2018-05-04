@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-
 import {Survey} from '../shared/models/survey.model';
 import {SurveyService} from '../shared/services/survey.service';
 import {environment} from '../../../environments/environment';

@@ -1,6 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {map} from 'rxjs/operators';
 import {RequestService} from '../../../shared/services/request.service';
 import {Question} from '../models/question.model';
 import {Survey} from '../models/survey.model';
