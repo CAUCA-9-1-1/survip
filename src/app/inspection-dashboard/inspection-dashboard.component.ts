@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 
@@ -13,9 +14,10 @@ import {InspectionForList} from './shared/models/inspection-for-list.model';
 import {City} from '../management-address/shared/models/city.model';
 import {CityService} from '../management-address/shared/services/city.service';
 import {environment} from '../../environments/environment';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {InspectionBatchService} from '../inspection-batch/shared/services/inspection-batch.service';
 import {InspectionBatch} from '../inspection-batch/shared/models/inspection-batch.model';
+import {AskBatchDescriptionComponent} from './ask-batch-description/ask-batch-description.component';
 
 
 @Component({
@@ -53,6 +55,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         private translateService: TranslateService,
         private notification: MatSnackBar,
         private batchService: InspectionBatchService,
+        private router: Router,
+        private dialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -107,15 +111,25 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             });
         }
 
-        const batch = InspectionBatch.fromJSON({
-            description: 'À venir',
-            idWebuserCreatedBy: localStorage.getItem('currentWebuser'),
-            isActive: true,
-            isReadyForInspection: false,
+        this.askBatchDescription(buildings);
+    }
+
+    private askBatchDescription(buildings: string[]): void {
+        const dialogRef = this.dialog.open(AskBatchDescriptionComponent, {
+            width: '300px'
         });
 
-        this.batchService.save(batch).subscribe((data) => {
-            alert(data);
+        dialogRef.afterClosed().subscribe(result => {
+            const batch = InspectionBatch.fromJSON({
+                description: result.description,
+                idWebuserCreatedBy: localStorage.getItem('currentWebuser'),
+                isActive: true,
+                isReadyForInspection: false,
+            });
+
+            this.batchService.save(batch).subscribe((data) => {
+                this.router.navigate(['inspection/batch', 'test']);
+            });
         });
     }
 

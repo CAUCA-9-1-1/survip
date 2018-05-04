@@ -9,7 +9,7 @@ $accent: map-get($theme, accent);
   margin-right: 10px;
 }
 
-h3 {
+:host h3 {
   padding: 0.5em;
   text-transform: uppercase;
 }
