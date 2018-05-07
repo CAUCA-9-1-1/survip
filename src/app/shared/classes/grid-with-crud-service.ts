@@ -1,3 +1,4 @@
+import {environment} from '../../../environments/environment';
 
 export class GridWithCrudService {
     dataSource = [];
@@ -5,8 +6,18 @@ export class GridWithCrudService {
     constructor(private sourceService: any) { }
 
     onRowValidating(e) {
-        if (!e.newData.localizations) {
+        const localizations = e.newData.localizations || e.key.localizations;
+
+        if (!localizations) {
             e.isValid = false;
+        } else {
+            environment.locale.available.forEach(language => {
+                localizations.forEach(localization => {
+                    if (localization.languageCode === language && !localization.name) {
+                        e.isValid = false;
+                    }
+                });
+            });
         }
     }
 
@@ -19,11 +30,11 @@ export class GridWithCrudService {
     }
 
     onRowUpdated(e) {
-        this.sourceService.save(e.key).subscribe();
+        this.sourceService.save(e.key).subscribe(() => this.loadSource());
     }
 
     onRowRemoved(e) {
-        this.sourceService.remove(e.key.id).subscribe();
+        this.sourceService.remove(e.key.id).subscribe(() => this.loadSource());
     }
 
     protected loadSource(opts?: any) {
