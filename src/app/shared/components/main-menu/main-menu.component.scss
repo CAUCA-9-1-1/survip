@@ -22,3 +22,7 @@ h4 > div {
 h4:hover {
   background-color: mat-color($accent);
 }
+
+h4.selected {
+  background-color: mat-color($accent);
+}
