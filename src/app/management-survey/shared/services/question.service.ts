@@ -33,13 +33,9 @@ export class QuestionService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    move(id, step) {
+    move(id: string, sequence: number) {
         return this.http.post(
-            this.apiUrl + 'SurveyQuestion',
-            JSON.stringify({
-                idSurveyQuestion: id,
-                step: step
-            }),
+            this.apiUrl + 'SurveyQuestion/' + id + '/Sequence/' + sequence, '[]' ,
             {headers: this.headers}
         ).catch((error: HttpErrorResponse) => this.error(error));
     }
