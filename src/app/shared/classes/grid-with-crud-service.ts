@@ -12,11 +12,17 @@ export class GridWithCrudService {
             e.isValid = false;
         } else {
             environment.locale.available.forEach(language => {
+                let isValid = false;
+
                 localizations.forEach(localization => {
-                    if (localization.languageCode === language && !localization.name) {
-                        e.isValid = false;
+                    if (localization.languageCode === language && localization.name) {
+                        isValid = true;
                     }
                 });
+
+                if (!isValid) {
+                    e.isValid = false;
+                }
             });
         }
     }
