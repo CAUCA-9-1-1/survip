@@ -125,10 +125,19 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 idWebuserCreatedBy: localStorage.getItem('currentWebuser'),
                 isActive: true,
                 isReadyForInspection: false,
+                inspections: [],
+            });
+
+            buildings.forEach(building => {
+                batch.inspections.push({
+                    idBuilding: building,
+                    idWebuserCreatedBy: localStorage.getItem('currentWebuser'),
+                    isActive: true,
+                });
             });
 
             this.batchService.save(batch).subscribe((data) => {
-                this.router.navigate(['inspection/batch', 'test']);
+                this.router.navigate(['inspection/batch', data.id]);
             });
         });
     }
