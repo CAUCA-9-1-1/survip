@@ -50,7 +50,6 @@
   "choiceAnswer": "Réponse à choix multiple",
   "textAnswer": "Réponse à développement",
   "dateAnswer": "Réponse avec une date",
-  "yesNoAnswer" : "Réponse OUI NON",
   "sequence": "Séquence",
   "surveyQuestionNext": "Question suivante",
   "buildingManagement": "Gestion des bâtiments",

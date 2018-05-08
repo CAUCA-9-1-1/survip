@@ -44,7 +44,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
     ngOnInit() {
         this.loadQuestion();
-        this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion', 'choiceAnswer', 'textAnswer', 'dateAnswer', 'yesNoAnswer', 'removeQuestionChoices'])
+        this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion', 'choiceAnswer', 'textAnswer', 'dateAnswer', 'removeQuestionChoices'])
             .subscribe(labels => {
                 this.messages = labels;
                 this.questionTypeOptions.dataSource = [
