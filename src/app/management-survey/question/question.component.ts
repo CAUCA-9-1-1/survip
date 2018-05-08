@@ -28,6 +28,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     messages: object = {};
     isLoading = false;
     optionsChoiceVisible = true;
+    questionTypeOptions = {dataSource: [], displayExpr: 'text', valueExpr: 'value', onValueChanged: this.QuestionTypeChanged.bind(this)};
+    questionTypeChoiceCanceled = false;
 
     constructor(
         private questionService: QuestionService,
@@ -40,9 +42,15 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
     ngOnInit() {
         this.loadQuestion();
-        this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion']).subscribe(labels => {
-            this.messages = labels;
-        });
+        this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion', 'choiceAnswer', 'textAnswer', 'dateAnswer', 'yesNoAnswer', 'removeQuestionChoices'])
+            .subscribe(labels => {
+                this.messages = labels;
+                this.questionTypeOptions.dataSource = [
+                    {value: 1, text: labels['choiceAnswer']},
+                    {value: 2, text: labels['textAnswer']},
+                    {value: 3, text: labels['dateAnswer']},
+                    {value: 4, text: labels['yesNoAnswer']}];
+            });
     }
 
     getQuestionTreeviewTitle(data, index, element) {
@@ -80,6 +88,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         const question = new Question();
         question.idSurvey = this.survey;
         question.questionType = 1;
+        this.displayOptionDetails(question.questionType);
+        question.sequence = this.getLastQuestionSequence();
         question.localizations = [];
         environment.locale.available.forEach(language => {
             const languageItem = {
@@ -94,72 +104,116 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     onMoveUp() {
-        if (this.selectedIndex + 1 > -1) {
-            /*this.questionService.move(this.questions[this.selectedIndex].id, -1).subscribe(() => {
-                this.loadQuestion();
-            });*/
-            console.log('Questions Before ranking up : ' + JSON.stringify(this.questions));
+        if (this.selectedIndex - 1 > -1) {
+            const sequence1 = this.questions[this.selectedIndex].sequence;
+            const sequence2 = this.questions[this.selectedIndex - 1].sequence;
 
-            this.questions[(this.selectedIndex - 1)].sequence = this.selectedIndex;
-            this.questions[this.selectedIndex].sequence = this.selectedIndex - 1;
+            this.questions[this.selectedIndex].sequence = sequence2;
+            this.questions[this.selectedIndex - 1].sequence = sequence1;
 
-            console.log('Questions after ranking up : ' + JSON.stringify(this.questions));
-        }
-    }
-    QuestionTypeChanged(data) {
-        if (data.value === 1) {
-            this.optionsChoiceVisible = false;
-        } else {
-            this.optionsChoiceVisible = true;
+            this.questions.sort(function(a, b) {return (a.sequence > b.sequence) ? 1 : ((b.sequence > a.sequence) ? -1 : 0); } );
+
+            this.selectedIndex -- ;
+
+            this.moveQuestion();
         }
     }
 
     onMoveDown() {
         if ((this.selectedIndex > -1) && (this.selectedIndex + 1 < this.questions.length)) {
-            console.log('Questions Before ranking down : ' + JSON.stringify(this.questions));
 
-            this.questions[(this.selectedIndex + 1)].sequence = this.selectedIndex;
-            this.questions[this.selectedIndex].sequence = this.selectedIndex - 1;
+            const sequence1 = this.questions[this.selectedIndex].sequence;
+            const sequence2 = this.questions[this.selectedIndex + 1].sequence;
 
-            console.log('Questions after ranking down : ' + JSON.stringify(this.questions));
-           /* this.questionService.move(this.questions[this.selectedIndex].id, 1).subscribe(() => {
-                this.loadQuestion();
-            });*/
+            this.questions[this.selectedIndex].sequence = sequence2;
+            this.questions[(this.selectedIndex + 1)].sequence = sequence1;
+
+            this.questions.sort(function(a, b) {return (a.sequence > b.sequence) ? 1 : ((b.sequence > a.sequence) ? -1 : 0); } );
+
+            this.selectedIndex ++ ;
+
+            this.moveQuestion();
         }
     }
 
+    QuestionTypeChanged(data) {
+        if (this.questionTypeChoiceCanceled) {
+            this.questionTypeChoiceCanceled = false;
+            return;
+        }
+
+        let questionType = data.value;
+        if ((data.previousValue === 1) && (!this.isLoading) && (this.dataSource.length > 0)) {
+            confirm(this.messages['removeQuestionChoices'], this.messages['question']).then((result) => {
+                if (!result) {
+                    this.questionTypeChoiceCanceled = true;
+                    data.component.option('value', data.previousValue);
+                    questionType = data.previousValue;
+                } else {
+                    this.choiceService.deleteQuestionsChoices(this.questions[this.selectedIndex].id)
+                        .subscribe(deleteResult => {
+                            if (deleteResult) {
+                                console.log('Les choix de réponses pour cette question ont été supprimés');
+                            } else {
+                                console.log('Erreur lors de la suppression des choix de la question');
+                            }
+                        });
+                }
+            });
+        }
+        this.displayOptionDetails(questionType);
+        this.isLoading = false;
+    }
+
     onQuestionSelected(e) {
+        this.isLoading = true;
         if (this.selectedIndex !== e.itemIndex) {
-            this.isLoading = true;
+
             this.selectedIndex = e.itemIndex;
 
             this.setNextQuestion();
-            this.loadSource(this.questions[this.selectedIndex].id);
 
-            this.isLoading = false;
+            this.displayOptionDetails(this.questions[this.selectedIndex].questionType);
+
+            if (this.optionsChoiceVisible) {
+                this.loadSource(this.questions[this.selectedIndex].id);
+            }
         }
     }
 
     onFormUpdated(item, e) {
-        if (!this.isLoading) {
-            if (this.timer) {
-                clearTimeout(this.timer);
-            }
-            if (item !== 'form') {
-                this.questions[this.selectedIndex][item] = e.value;
-            }
-
-            this.timer = setTimeout(() => {
-                this.questionService.save(this.questions[this.selectedIndex]).subscribe();
-            }, 1000);
+        if (item !== 'form') {
+            this.questions[this.selectedIndex][item] = e.value;
         }
+        this.saveQuestion();
+    }
+
+    saveQuestion() {
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+        this.timer = setTimeout(() => {
+            this.questionService.save(this.questions[this.selectedIndex]).subscribe();
+        }, 1000);
+    }
+
+    moveQuestion() {
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+        this.timer = setTimeout(() => {
+            this.questionService.move(this.questions[this.selectedIndex].id, this.questions[this.selectedIndex].sequence).subscribe();
+        }, 1000);
     }
 
     onRemoveQuestion() {
         if (this.selectedIndex > -1) {
             confirm(this.messages['removeQuestion'], this.messages['question']).then((result) => {
                 if (result) {
-                    this.questionService.remove(this.questions[this.selectedIndex].id).subscribe();
+                    this.questionService.remove(this.questions[this.selectedIndex].id)
+                        .subscribe(removeResult => {
+                            this.loadQuestion();
+                        });
                 }
             });
         }
@@ -214,5 +268,17 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             this.onFormUpdated(item, e);
         }, 1500);
 
+    }
+
+    displayOptionDetails(questionType) {
+        if (questionType === 1) {
+            this.optionsChoiceVisible = true;
+        } else {
+            this.optionsChoiceVisible = false;
+        }
+    }
+
+    getLastQuestionSequence() {
+        return this.questions.length + 1;
     }
 }
