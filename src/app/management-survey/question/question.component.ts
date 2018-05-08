@@ -51,7 +51,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
                     {value: 1, text: labels['choiceAnswer']},
                     {value: 2, text: labels['textAnswer']},
                     {value: 3, text: labels['dateAnswer']},
-                    {value: 4, text: labels['yesNoAnswer']}];
+                ];
             });
     }
 
