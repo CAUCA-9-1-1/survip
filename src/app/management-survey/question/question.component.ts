@@ -74,7 +74,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         this.questionService.save(question)
             .subscribe(info => {
                     question.id = info['id'];
-                    this.selectedIndex = 0;
+                    this.selectedIndex = this.questions.length;
                     this.loadQuestion();
                     this.setNextQuestion();
                     this.loadSource(question.id);
@@ -283,6 +283,6 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     getLastQuestionSequence() {
-        return this.questions.length + 1;
+        return this.questions[this.questions.length - 1].sequence + 1;
     }
 }
