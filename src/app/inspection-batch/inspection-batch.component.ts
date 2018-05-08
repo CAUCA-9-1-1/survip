@@ -10,6 +10,7 @@ import {WebuserForWeb} from '../management-access/shared/models/webuser-for-web.
 import {InspectionService} from '../inspection-dashboard/shared/services/inspection.service';
 import {BuildingService} from '../management-building/shared/services/building.service';
 import {MatSnackBar} from '@angular/material';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -49,6 +50,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         private buildingService: BuildingService,
         private inspectionService: InspectionService,
         private notification: MatSnackBar,
+        private activeRoute: ActivatedRoute,
     ) {
         super(batchService);
 
@@ -78,7 +80,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     ngOnInit() {
-        this.loadSource();
+        this.loadSource(() => this.autoEditBatch());
         this.loadWebuser();
         this.loadBuilding();
         this.loadInspection();
@@ -378,6 +380,23 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
                 this[sourceFrom].splice(find, 1);
             }
         }
+    }
+
+    private autoEditBatch() {
+        this.activeRoute.params.subscribe(param => {
+            const keys = this.dataSource.filter(row => {
+                if (row.id === param.idBatch) {
+                    return true;
+                }
+            });
+
+            if (keys.length) {
+                setTimeout(() => {
+                    const rowIndex = this.dataGrid.instance.getRowIndexByKey(keys[0]);
+                    this.dataGrid.instance.editRow(rowIndex);
+                }, 200);
+            }
+        });
     }
 
     private loadWebuser() {
