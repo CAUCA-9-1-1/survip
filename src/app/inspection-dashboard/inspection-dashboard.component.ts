@@ -68,7 +68,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         this.translateService.get([
             'riskLevel', 'address', 'transversal', 'city', 'postalCode', 'batch', 'status', 'note', 'anomaly',
             'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details',
-            'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode',
+            'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see',
             'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building'
         ]).subscribe(labels => {
             this.labels = labels;
@@ -95,6 +95,12 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             this.selectedMode = mode;
             this.setDatagrid();
             this.loadData();
+        }
+    }
+
+    showBatch(field) {
+        if (field.data && field.data.items.length) {
+            this.router.navigate(['/inspection/batch', field.data.items[0].idBatch]);
         }
     }
 
@@ -282,9 +288,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             caption: this.labels['batch'],
             visible: visible[6],
             groupIndex: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? 0 : null),
-            groupCellTemplate: (container, data) => {
-                container.innerHTML = this.labels['batch'] + ' : ' + data.value;
-            }
+            groupCellTemplate: 'groupBatch',
         }, {
             dataField: 'visitStatus',
             caption: this.labels['status'],

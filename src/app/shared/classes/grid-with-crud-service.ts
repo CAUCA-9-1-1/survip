@@ -26,7 +26,7 @@ export class GridWithCrudService {
         this.sourceService.remove(e.key.id).subscribe();
     }
 
-    protected loadSource(opts?: () => void | string) {
+    protected loadSource(opts?: any) {
         if (typeof(opts) === 'function') {
             this.loadWithCallback(opts);
         } else if (typeof(opts) === 'string') {
