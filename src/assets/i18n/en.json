@@ -44,7 +44,6 @@
   "choiceAnswer": "Answer with multiple choice",
   "textAnswer": "Answer with text",
   "dateAnswer": "Answer with date",
-  "yesNoAnswer" : "Answer YES NO",
   "sequence": "Sequence",
   "surveyQuestionNext": "Next question",
   "buildingManagement": "Management for building",
