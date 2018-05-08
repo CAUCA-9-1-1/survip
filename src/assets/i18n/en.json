@@ -44,6 +44,7 @@
   "choiceAnswer": "Answer with multiple choice",
   "textAnswer": "Answer with text",
   "dateAnswer": "Answer with date",
+  "yesNoAnswer" : "Answer YES NO",
   "sequence": "Sequence",
   "surveyQuestionNext": "Next question",
   "buildingManagement": "Management for building",
@@ -180,11 +181,12 @@
   "assignedTo": "Assigned to",
   "all": "All",
   "addBuildingsToInspection": "Add or many buildings to inspect",
-  "needInspectorAndBuildingForReadyInspection": "To make the inspection accessible, you must have at least 1 inspector and 1 building",
+  "needInspectorAndBuildingForReadyInspection": "To make the inspection accessible, you must have at least an inspector and a building",
   "mode1": "Inspections in progress / pending",
   "mode2": "Inspections to check",
   "mode3": "Inspections completed",
   "mode4": "Building",
   "connection": "Connection",
-  "enter": "Enter"
+  "enter": "Enter",
+  "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }
