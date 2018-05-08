@@ -22,6 +22,7 @@
     <div fxFlex="65%">
         <div *ngIf="selectedIndex > -1">
             <dx-form [formData]="questions[selectedIndex]" (onFieldDataChanged)="onFormUpdated('form',$event)">
+                <dxi-item></dxi-item>
                 <dxi-item [label]="{text: 'title' | translate}" dataField="localizations" class="multilang">
                     <app-multilang [value]="questions[selectedIndex].localizations" fieldName="title"
                                    (valueChanged)="onMultiLangValueChanged('title',$event);"></app-multilang>
@@ -34,12 +35,7 @@
                         [label]="{text: 'questionType' | translate}"
                         dataField="questionType"
                         editorType="dxSelectBox"
-
-                        [editorOptions]="{dataSource: [
-                            {value: 1, text: 'choiceAnswer' | translate},
-                            {value: 2, text: 'textAnswer' | translate},
-                            {value: 3, text: 'dateAnswer' | translate}
-                            ], displayExpr: 'text', valueExpr: 'value', onValueChanged:QuestionTypeChanged}">
+                        [editorOptions]="questionTypeOptions">
                 </dxi-item>
                 <dxi-item
                         [label]="{text: 'nextQuestion' | translate}"
@@ -49,7 +45,7 @@
                 </dxi-item>
             </dx-form>
             <br>
-            <div>
+            <div [fxShow]="optionsChoiceVisible">
                 <label>{{'options' | translate}}</label>
                 <dx-data-grid
                         [dataSource]="dataSource"
@@ -57,8 +53,7 @@
                         (onInitNewRow)="onInitNewChoice($event)"
                         (onRowInserted)="addNewQuestionChoice($event)"
                         (onRowUpdated)="onRowUpdated($event)"
-                        (onRowRemoved)="onRowRemoved($event)"
-                        [visible]="optionsChoiceVisible">
+                        (onRowRemoved)="onRowRemoved($event)">
                     <dxi-column
                             dataField="sequence"
                             caption="{{'sequence' | translate}}"

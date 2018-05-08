@@ -49,7 +49,8 @@
   "options": "Options",
   "choiceAnswer": "Réponse à choix multiple",
   "textAnswer": "Réponse à développement",
-  "dateAnswer": "Réponse avec un date",
+  "dateAnswer": "Réponse avec une date",
+  "yesNoAnswer" : "Réponse OUI NON",
   "sequence": "Séquence",
   "surveyQuestionNext": "Question suivante",
   "buildingManagement": "Gestion des bâtiments",
@@ -186,11 +187,12 @@
   "assignedTo": "Assigné à",
   "all": "Tous",
   "addBuildingsToInspection": "Ajouter un ou plusieurs batîments à inspecter",
-  "needInspectorAndBuildingForReadyInspection": "Pour rendre accessible l'inspection, vous devez avoir au minimum 1 inspecteur et 1 bâtiment",
+  "needInspectorAndBuildingForReadyInspection": "Pour rendre accessible l'inspection, vous devez avoir au minimum un inspecteur et un bâtiment",
   "mode1": "Inspections en cours/en attente",
   "mode2": "Inspections à vérifier",
   "mode3": "Inspections complétés",
   "mode4": "Bâtiments",
   "connection": "Connexion",
-  "enter": "Entrer"
+  "enter": "Entrer",
+  "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?"
 }

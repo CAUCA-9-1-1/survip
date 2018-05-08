@@ -31,4 +31,10 @@ export class ChoiceService extends RequestService  {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
+
+    deleteQuestionsChoices(idSurveyQuestion: string) {
+        return this.http.delete(this.apiUrl + 'SurveyQuestionChoice/SurveyQuestion/' + idSurveyQuestion, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }
