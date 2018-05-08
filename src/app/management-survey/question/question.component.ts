@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Question} from '../shared/models/question.model';
 import {QuestionService} from '../shared/services/question.service';
@@ -7,6 +7,7 @@ import {environment} from '../../../environments/environment';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {confirm} from 'devextreme/ui/dialog';
 import {MatSnackBar} from '@angular/material';
+import {DxTreeViewComponent} from 'devextreme-angular';
 
 @Component({
     selector: 'app-managementsurvey-question',
@@ -19,6 +20,7 @@ import {MatSnackBar} from '@angular/material';
 })
 export class QuestionComponent extends GridWithCrudService implements OnInit {
     @Input() survey = '';
+    @ViewChild(DxTreeViewComponent) treeViewQuestion: DxTreeViewComponent;
 
     questions: Question[] = [];
     nextQuestions: Question[] = [];
@@ -212,6 +214,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
                 if (result) {
                     this.questionService.remove(this.questions[this.selectedIndex].id)
                         .subscribe(removeResult => {
+                            this.selectedIndex = 0;
                             this.loadQuestion();
                         });
                 }
@@ -268,6 +271,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             this.onFormUpdated(item, e);
         }, 1500);
 
+        this.treeViewQuestion.instance.option('dataSource', this.questions);
     }
 
     displayOptionDetails(questionType) {
