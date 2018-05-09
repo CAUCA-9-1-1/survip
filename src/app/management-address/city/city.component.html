@@ -2,6 +2,7 @@
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
+        (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onRowValidating)="onRowValidating($event)"
         (onRowInserted)="onRowInserted($event)"
@@ -50,6 +51,6 @@
     </dxo-editing>
 
     <div *dxTemplate="let field of 'editname'">
-        <app-multilang [isRequired]="true" [dataField]="field" (valueChanged)="field.setValue($event.value);"></app-multilang>
+        <app-multilang [isRequired]="true" [value]="field.row.data.localizations" (valueChanged)="field.setValue($event.value);"></app-multilang>
     </div>
 </dx-data-grid>

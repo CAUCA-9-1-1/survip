@@ -1,9 +1,23 @@
 import {environment} from '../../../environments/environment';
 
+
 export class GridWithCrudService {
     dataSource = [];
+    popup: any;
 
     constructor(private sourceService: any) { }
+
+    onInitialized(e) {
+        const options = e.component.option('editing');
+
+        if (options.popup) {
+            options.popup.onHiding = (ev) => {
+                this.loadSource();
+            };
+
+            e.component.option('editing', options);
+        }
+    }
 
     onRowValidating(e) {
         const localizations = e.newData.localizations || e.key.localizations;

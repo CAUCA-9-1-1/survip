@@ -37,14 +37,15 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
     dataSource: InspectionForList[];
-    lanes: Lane[];
-    cities: City[];
-    riskLevels: RiskLevel[];
-    utilisationCodes: UtilisationCode[];
-    labels = [];
+    lanes: Lane[] = [];
+    cities: City[] = [];
+    riskLevels: RiskLevel[] = [];
+    utilisationCodes: UtilisationCode[] = [];
+    labels = {};
     selectedMode = 'mode4';
     labelIsLoaded = false;
     angularIsLoaded = false;
+    everythingIsLoaded = false;
 
     constructor(
         private inspectionService: InspectionService,
@@ -60,9 +61,9 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit() {
+        this.loadRiskLevel();
         this.loadCities();
         this.loadLanes();
-        this.loadRiskLevel();
         this.loadUtilisationCode();
 
         this.translateService.get([
@@ -72,36 +73,41 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building'
         ]).subscribe(labels => {
             this.labels = labels;
-            this.labelIsLoaded = true;
-
-            if (this.angularIsLoaded) {
-                this.setDatagrid();
-                this.loadData();
-            }
+            this.checkLoadedElement();
         });
     }
 
     ngAfterViewInit() {
         this.angularIsLoaded = true;
-
-        if (this.labelIsLoaded) {
-            this.setDatagrid();
-            this.loadData();
-        }
+        this.checkLoadedElement();
     }
 
     changeMode(mode) {
-        if (this.angularIsLoaded) {
-            this.selectedMode = mode;
-            this.setDatagrid();
-            this.loadData();
-        }
+        this.selectedMode = mode;
+        this.setDatagrid();
+        this.loadData();
     }
 
     showBatch(field) {
         if (field.data && field.data.items.length) {
             this.router.navigate(['/inspection/batch', field.data.items[0].idBatch]);
         }
+    }
+
+    private checkLoadedElement(): boolean {
+        if (
+            this.angularIsLoaded && this.labels !== {} &&
+            this.riskLevels.length && this.lanes.length &&
+            this.cities.length && this.utilisationCodes.length
+        ) {
+            this.setDatagrid();
+            this.loadData();
+            this.everythingIsLoaded = true;
+
+            return true;
+        }
+
+        return false;
     }
 
     private createBatch(e) {
@@ -390,18 +396,30 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     }
 
     private loadLanes() {
-        this.laneService.getAll().subscribe(data => this.lanes = data);
+        this.laneService.getAll().subscribe(data => {
+            this.lanes = data;
+            this.checkLoadedElement();
+        });
     }
 
     private loadCities() {
-        this.cityService.getAll().subscribe(data => this.cities = data);
+        this.cityService.getAll().subscribe(data => {
+            this.cities = data;
+            this.checkLoadedElement();
+        });
     }
 
     private loadRiskLevel() {
-        this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
+        this.riskLevelService.getAll().subscribe(data => {
+            this.riskLevels = data;
+            this.checkLoadedElement();
+        });
     }
 
     private loadUtilisationCode() {
-        this.utilisationCodeService.getAll().subscribe(data => this.utilisationCodes = data);
+        this.utilisationCodeService.getAll().subscribe(data => {
+            this.utilisationCodes = data;
+            this.checkLoadedElement();
+        });
     }
 }
