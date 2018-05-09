@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -7,6 +7,8 @@ import {Router} from '@angular/router';
     styleUrls: ['./section-list.component.scss']
 })
 export class SectionListComponent implements OnInit {
+    @Output() selectionChange = new EventEmitter();
+
     selected = '';
     sections = [{
         name: 'buildingDetails',
@@ -17,7 +19,7 @@ export class SectionListComponent implements OnInit {
     }, {
         name: 'pnaps',
     }, {
-        name: 'hazardousMaterial',
+        name: 'hazardousMaterials',
     }, {
         name: 'alarmPanels',
     }, {
@@ -28,17 +30,15 @@ export class SectionListComponent implements OnInit {
         name: 'anomalies',
     }];
 
-    constructor(
-        private router: Router,
-    ) {
-        this.selected = '';
+    constructor() {
+        this.selected = 'buildingDetails';
     }
 
     ngOnInit() { }
 
-    goto(path) {
-        this.selected = path;
-        this.router.navigate([path]);
+    goto(name) {
+        this.selected = name;
+        this.selectionChange.emit(name);
     }
 
     isSelected(path) {
