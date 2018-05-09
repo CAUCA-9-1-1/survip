@@ -18,11 +18,9 @@ import { DxTabPanelModule, DxTextBoxModule, DxValidatorModule } from 'devextreme
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { environment } from '../../environments/environment';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MultilangComponent } from './components/multilang/multilang.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
-//import {FilterByPipe} from './pipes/filter.pipe';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -35,7 +33,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         MultilangComponent,
         PageNotFoundComponent,
         MainMenuComponent,
-        /*FilterByPipe,*/
     ],
     exports: [
         BrowserModule,
