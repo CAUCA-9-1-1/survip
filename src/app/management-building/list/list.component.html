@@ -2,6 +2,7 @@
         [dataSource]="buildings"
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
+        (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"

@@ -4,16 +4,16 @@
     </div>
     <div fxFlex="" class="content">
         <mat-button-toggle-group #group="matButtonToggleGroup" color="primary" (valueChange)="changeMode($event)">
-            <mat-button-toggle value="mode1" [checked]="selectedMode == 'mode1'">
+            <mat-button-toggle value="mode1" [checked]="selectedMode == 'mode1'" [disabled]="!everythingIsLoaded">
                 {{'mode1' | translate}}
             </mat-button-toggle>
-            <mat-button-toggle value="mode2" [checked]="selectedMode == 'mode2'">
+            <mat-button-toggle value="mode2" [checked]="selectedMode == 'mode2'" [disabled]="!everythingIsLoaded">
                 {{'mode2' | translate}}
             </mat-button-toggle>
-            <mat-button-toggle value="mode3" [checked]="selectedMode == 'mode3'">
+            <mat-button-toggle value="mode3" [checked]="selectedMode == 'mode3'" [disabled]="!everythingIsLoaded">
                 {{'mode3' | translate}}
             </mat-button-toggle>
-            <mat-button-toggle value="mode4" [checked]="selectedMode == 'mode4'">
+            <mat-button-toggle value="mode4" [checked]="selectedMode == 'mode4'" [disabled]="!everythingIsLoaded">
                 {{'mode4' | translate}}
             </mat-button-toggle>
         </mat-button-toggle-group>

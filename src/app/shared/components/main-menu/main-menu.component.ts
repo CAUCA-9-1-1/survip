@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -8,39 +8,48 @@ import {Router} from '@angular/router';
     styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent implements OnInit {
+    selected = '';
     inspection = [{
         name: 'inspectionDashboard',
-        path: '/inspection/dashboard/',
+        path: '/inspection/dashboard',
     }, {
         name: 'inspectionBatch',
-        path: '/inspection/batch/',
+        path: '/inspection/batch',
     }];
     management = [{
         name: 'interventionPlanManagement',
-        path: '/management/interventionplan/',
+        path: '/management/interventionplan',
     }, {
         name: 'surveyManagement',
-        path: '/management/survey/',
+        path: '/management/survey',
     }, {
         name: 'buildingManagement',
-        path: '/management/building/',
+        path: '/management/building',
     }, {
         name: 'addressManagement',
-        path: '/management/address/',
+        path: '/management/address',
     }, {
         name: 'fireHydrantManagement',
-        path: '/management/firehydrant/',
+        path: '/management/firehydrant',
     }, {
         name: 'accessManagement',
-        path: '/management/access/',
+        path: '/management/access',
     }];
 
-    constructor(private router: Router) { }
-
-    ngOnInit() {
+    constructor(
+        private router: Router,
+    ) {
+        this.selected = this.router.url;
     }
 
+    ngOnInit() { }
+
     goto(path) {
+        this.selected = path;
         this.router.navigate([path]);
+    }
+
+    isSelected(path) {
+        return (this.selected.indexOf(path) > -1 ? 'selected' : '');
     }
 }
