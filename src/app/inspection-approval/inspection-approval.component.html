@@ -1,20 +1,46 @@
-<div fxLayout="row">
+<div class="fullHeight" fxLayout="row">
     <div fxFlex="350px">
         <app-main-menu></app-main-menu>
     </div>
-    <div fxFlex="" class="content">
+    <div fxFlex="0" class="content">
         <div fxLayout="column">
             <div fxFlex="">
                 <div fxLayout="row">
                     <div fxFlex="300px">
-                        <app-section-list></app-section-list>
+                        <app-section-list (selectionChange)="sectionChange($event)"></app-section-list>
                     </div>
                     <div fxFlex="">
-                        OK
+                        <div [fxShow]="selected == 'buildingDetails'">
+                            <app-building-details></app-building-details>
+                        </div>
+                        <div [fxShow]="selected == 'survey'">
+                            <app-survey></app-survey>
+                        </div>
+                        <div [fxShow]="selected == 'contacts'">
+                            <app-contacts></app-contacts>
+                        </div>
+                        <div [fxShow]="selected == 'pnaps'">
+                            <app-pnaps></app-pnaps>
+                        </div>
+                        <div [fxShow]="selected == 'hazardousMaterials'">
+                            <app-hazardous-materials></app-hazardous-materials>
+                        </div>
+                        <div [fxShow]="selected == 'alarmPanels'">
+                            <app-alarm-panels></app-alarm-panels>
+                        </div>
+                        <div [fxShow]="selected == 'waterSprinkler'">
+                            <app-water-sprinkler></app-water-sprinkler>
+                        </div>
+                        <div [fxShow]="selected == 'particularRisks'">
+                            <app-particular-risks></app-particular-risks>
+                        </div>
+                        <div [fxShow]="selected == 'anomalies'">
+                            <app-anomalies></app-anomalies>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div fxFlex="30px" class="tools">
+            <div fxFlex="15%" class="tools">
                 <button mat-raised-button>
                     <mat-icon>check_circle_outline</mat-icon>
                     {{'approve' | translate}}

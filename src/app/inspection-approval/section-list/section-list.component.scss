@@ -1,0 +1,16 @@
+@import '../../../theme';
+
+$accent: map-get($theme, accent);
+
+h4 > div {
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+h4:hover {
+  background-color: mat-color($accent);
+}
+
+h4.selected {
+  background-color: mat-color($accent);
+}
