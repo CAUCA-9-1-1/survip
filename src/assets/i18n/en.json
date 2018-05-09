@@ -167,6 +167,8 @@
   "contact": "Contact",
   "owner": "Owner",
   "picture": "Picture",
+  "approve": "Approve",
+  "reject": "Reject",
   "utilisationDescription": "Utilisation description",
   "details": "Details",
   "webuserAssignedTo": "User assigned to",

@@ -1,0 +1,33 @@
+<div fxLayout="row">
+    <div fxFlex="350px">
+        <app-main-menu></app-main-menu>
+    </div>
+    <div fxFlex="" class="content">
+        <div fxLayout="column">
+            <div fxFlex="">
+                <div fxLayout="row">
+                    <div fxFlex="300px">
+                        <app-section-list></app-section-list>
+                    </div>
+                    <div fxFlex="">
+                        OK
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="30px" class="tools">
+                <button mat-raised-button>
+                    <mat-icon>check_circle_outline</mat-icon>
+                    {{'approve' | translate}}
+                </button>
+                <button mat-raised-button color="warn">
+                    <mat-icon>warning</mat-icon>
+                    {{'reject' | translate}}
+                </button>
+                <button mat-raised-button>
+                    <mat-icon>clear</mat-icon>
+                    {{'cancel' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
