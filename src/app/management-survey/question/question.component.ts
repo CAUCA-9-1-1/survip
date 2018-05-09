@@ -69,14 +69,15 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     onAddQuestion() {
+        this.isLoading = true ;
         const question = this.createNewQuestion();
 
         this.questionService.save(question)
             .subscribe(info => {
                     question.id = info['id'];
-                    this.selectedIndex = this.questions.length;
+                    this.selectedIndex = this.questions.length - 1;
                     this.loadQuestion();
-                    this.setNextQuestion();
+                    this.dataSource = [];
                     this.loadSource(question.id);
                 },
                 error => {
@@ -89,7 +90,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     createNewQuestion() {
         const question = new Question();
         question.idSurvey = this.survey;
-        question.questionType = 1;
+        question.questionType = 2;
         this.displayOptionDetails(question.questionType);
         question.sequence = this.getLastQuestionSequence();
         question.localizations = [];
@@ -102,6 +103,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             };
             question.localizations.push(languageItem);
         });
+
+        this.questions.push(question);
         return question;
     }
 
@@ -177,9 +180,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
             this.displayOptionDetails(this.questions[this.selectedIndex].questionType);
 
-            if (this.optionsChoiceVisible) {
-                this.loadSource(this.questions[this.selectedIndex].id);
-            }
+            this.loadSource(this.questions[this.selectedIndex].id);
         }
     }
 
