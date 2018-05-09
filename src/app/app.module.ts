@@ -10,6 +10,7 @@ import {InspectionDashboardModule} from './inspection-dashboard/inspection-dashb
 import {ManagementFireHydrantModule} from './management-fire-hydrant/management-fire-hydrant.module';
 import {ManagementSurveyModule} from './management-survey/management-survey.module';
 import {InspectionBatchModule} from './inspection-batch/inspection-batch.module';
+import {InspectionApprovalModule} from './inspection-approval/inspection-approval.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {InspectionBatchModule} from './inspection-batch/inspection-batch.module'
     ],
     imports: [
         SharedModule,
+        InspectionApprovalModule,
         InspectionBatchModule,
         InspectionDashboardModule,
         ManagementAddressModule,

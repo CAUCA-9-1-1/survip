@@ -19,8 +19,11 @@
         </mat-button-toggle-group>
 
         <dx-data-grid [dataSource]="dataSource" [hoverStateEnabled]="true" [rowAlternationEnabled]="true">
+            <div *dxTemplate="let field of 'approveInspection'">
+                <button mat-button [fxShow]="selectedMode == 'mode2'" color="primary" (click)="showInspection(field)">{{'approve' | translate}}</button>
+            </div>
             <div *dxTemplate="let field of 'groupBatch'">
-                <button mat-button color="primary" (click)="showBatch(field)">{{'see' | translate}}</button>
+                <button mat-button [fxShow]="selectedMode == 'mode1'" color="primary" (click)="showBatch(field)">{{'see' | translate}}</button>
                 {{'batch' | translate}} : {{field.value}}
             </div>
         </dx-data-grid>

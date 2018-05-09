@@ -9,9 +9,9 @@ import {ManagementAccessComponent} from './management-access/management-access.c
 import {ManagementAddressComponent} from './management-address/management-address.component';
 // import {ManagementBuildingComponent} from './management-building/management-building.component';
 import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
-// import {ManagementInterventionPlanComponent} from './management-intervention-plan/management-intervention-plan.component';
 import {ManagementSurveyComponent} from './management-survey/management-survey.component';
 import {LoginComponent} from './user-access/login/login.component';
+import {InspectionApprovalComponent} from './inspection-approval/inspection-approval.component';
 
 
 const appRoutes: Routes = [{
@@ -28,6 +28,9 @@ const appRoutes: Routes = [{
         path: 'dashboard',
         component: InspectionDashboardComponent
     }, {
+        path: 'dashboard/:idInspection',
+        component: InspectionApprovalComponent
+    }, {
         path: 'batch',
         component: InspectionBatchComponent
     }, {
@@ -38,9 +41,6 @@ const appRoutes: Routes = [{
     path: 'management',
     canActivate: [AuthGuardService],
     children: [{
-        path: 'interventionplan',
-        component: ManagementAddressComponent// ManagementInterventionPlanComponent
-    }, {
         path: 'survey',
         component: ManagementSurveyComponent
     }, {

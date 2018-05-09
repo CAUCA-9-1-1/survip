@@ -1,0 +1,8 @@
+<mat-list>
+    <h3>{{'inspection' | translate}}</h3>
+    <mat-list-item *ngFor="let menu of sections">
+        <h4 mat-line (click)="goto(menu.name)" [class]="isSelected(menu.name)">
+            <div>{{menu.name | translate}}</div>
+        </h4>
+    </mat-list-item>
+</mat-list>
