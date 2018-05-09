@@ -35,10 +35,6 @@ export class MultilangComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.dataField) {
-            this.value = this.dataField.row.data.localizations;
-        }
-
         this.selectedTab = this.languages[0];
         this.initializeLanguagesCollection();
     }
