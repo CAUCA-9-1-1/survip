@@ -18,3 +18,13 @@ body {
 .cdk-overlay-container {
   z-index: 10000;
 }
+
+.fullHeight {
+  height: 100%;
+  display: block;
+}
+
+.fullHeight > div {
+  height: calc(100% - 4em);
+  overflow: auto;
+}

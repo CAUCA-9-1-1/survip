@@ -1,0 +1,24 @@
+:host > div {
+    display: block;
+    height: 100%;
+}
+
+div.title {
+    padding: 7px;
+    font-size: 1.3em;
+    font-weight: bolder;
+    line-height: 36px;
+}
+
+div.title dx-button {
+    float: right;
+    margin: 0 2px;
+}
+
+div.content {
+    height: 100%;
+}
+
+.multilang {
+    padding : 2px;
+}

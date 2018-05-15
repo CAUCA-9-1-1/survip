@@ -4,7 +4,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 @Component({
   selector: 'app-management-survey',
   templateUrl: './management-survey.component.html',
-  styleUrls: ['./management-survey.component.styl']
+  styleUrls: ['./management-survey.component.scss']
 })
 export class ManagementSurveyComponent implements OnInit {
   public selectedSurvey = null;
