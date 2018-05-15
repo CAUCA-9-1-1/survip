@@ -41,15 +41,15 @@
                 </div>
             </div>
             <div fxFlex="15%" class="tools">
-                <button mat-raised-button>
+                <button mat-raised-button color="accent" (click)="approve()">
                     <mat-icon>check_circle_outline</mat-icon>
                     {{'approve' | translate}}
                 </button>
-                <button mat-raised-button color="warn">
+                <button mat-raised-button color="primary" (click)="refuse()">
                     <mat-icon>warning</mat-icon>
-                    {{'reject' | translate}}
+                    {{'refuse' | translate}}
                 </button>
-                <button mat-raised-button>
+                <button mat-raised-button color="warn" (click)="cancel()">
                     <mat-icon>clear</mat-icon>
                     {{'cancel' | translate}}
                 </button>

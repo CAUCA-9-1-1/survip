@@ -70,6 +70,7 @@ $theme-color-gold: (
 );
 
 /** Define the theme. **/
+$theme-success: mat-palette($mat-light-green);
 $theme-primary: mat-palette($theme-color-red);
 $theme-accent:  mat-palette($theme-color-gold);
 $theme:   mat-light-theme($theme-primary, $theme-accent);
