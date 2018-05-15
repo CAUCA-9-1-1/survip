@@ -12,7 +12,7 @@ import {DxTreeViewComponent} from 'devextreme-angular';
 @Component({
     selector: 'app-managementsurvey-question',
     templateUrl: './question.component.html',
-    styleUrls: ['./question.component.styl'],
+    styleUrls: ['./question.component.scss'],
     providers: [
         QuestionService,
         ChoiceService

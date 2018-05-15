@@ -8,7 +8,7 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 @Component({
   selector: 'app-managementsurvey-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.styl'],
+  styleUrls: ['./list.component.scss'],
   providers: [SurveyService]
 })
 export class ListComponent  extends GridWithCrudService implements OnInit {
