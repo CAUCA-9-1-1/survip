@@ -2,7 +2,9 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {DxDataGridComponent} from 'devextreme-angular';
+import {MatDialog, MatSnackBar} from '@angular/material';
 
+import {environment} from '../../environments/environment';
 import {InspectionService} from './shared/services/inspection.service';
 import {LaneService} from '../management-address/shared/services/lane.service';
 import {Lane} from '../management-address/shared/models/lane.model';
@@ -13,11 +15,11 @@ import {UtilisationCodeService} from '../management-building/shared/services/uti
 import {InspectionForList} from './shared/models/inspection-for-list.model';
 import {City} from '../management-address/shared/models/city.model';
 import {CityService} from '../management-address/shared/services/city.service';
-import {environment} from '../../environments/environment';
-import {MatDialog, MatSnackBar} from '@angular/material';
 import {InspectionBatchService} from '../inspection-batch/shared/services/inspection-batch.service';
 import {InspectionBatch} from '../inspection-batch/shared/models/inspection-batch.model';
 import {AskBatchDescriptionComponent} from './ask-batch-description/ask-batch-description.component';
+import {WebuserForWeb} from '../management-access/shared/models/webuser-for-web.model';
+import {WebuserService} from '../management-access/shared/services/webuser.service';
 
 
 @Component({
@@ -31,24 +33,26 @@ import {AskBatchDescriptionComponent} from './ask-batch-description/ask-batch-de
         RiskLevelService,
         UtilisationCodeService,
         InspectionBatchService,
+        WebuserService,
     ]
 })
 export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
     dataSource: InspectionForList[];
+    webusers: WebuserForWeb[] = [];
     lanes: Lane[] = [];
     cities: City[] = [];
     riskLevels: RiskLevel[] = [];
     utilisationCodes: UtilisationCode[] = [];
     labels = {};
     selectedMode = 'mode4';
-    labelIsLoaded = false;
     angularIsLoaded = false;
     everythingIsLoaded = false;
 
     constructor(
         private inspectionService: InspectionService,
+        private webuserService: WebuserService,
         private laneService: LaneService,
         private cityService: CityService,
         private riskLevelService: RiskLevelService,
@@ -64,6 +68,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         this.loadRiskLevel();
         this.loadCities();
         this.loadLanes();
+        this.loadWebusers();
         this.loadUtilisationCode();
 
         this.translateService.get([
@@ -104,7 +109,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         if (
             this.angularIsLoaded && this.labels !== {} &&
             this.riskLevels.length && this.lanes.length &&
-            this.cities.length && this.utilisationCodes.length
+            this.cities.length && this.utilisationCodes.length &&
+            this.webusers.length
         ) {
             this.setDatagrid();
             this.loadData();
@@ -299,6 +305,11 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'idWebuserAssignedTo',
             caption: this.labels['webuserAssignedTo'],
+            lookup: {
+                dataSource: this.webusers,
+                displayExpr: 'name',
+                valueExpr: 'id',
+            },
             visible: visible[6],
         }, {
             dataField: 'batchDescription',
@@ -392,7 +403,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 this.inspectionService.getToDo().subscribe(data => this.dataSource = data);
                 break;
             case 'mode2':
-                this.inspectionService.getApproved().subscribe(data => this.dataSource = data);
+                this.inspectionService.getForApproval().subscribe(data => this.dataSource = data);
                 break;
             case 'mode3':
                 this.inspectionService.getBuildingHistory().subscribe(data => this.dataSource = data);
@@ -404,6 +415,13 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 this.dataSource = [];
                 break;
         }
+    }
+
+    private loadWebusers() {
+        this.webuserService.getActive().subscribe(data => {
+            this.webusers = data;
+            this.checkLoadedElement();
+        });
     }
 
     private loadLanes() {

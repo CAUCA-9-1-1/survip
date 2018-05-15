@@ -25,8 +25,8 @@ export class InspectionService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    getApproved() {
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ApprovedInspection', {
+    getForApproval() {
+        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ForApprovalInspection', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
@@ -39,6 +39,24 @@ export class InspectionService extends RequestService {
 
     getBuildingToDo() {
         return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    approve(id: string) {
+        return this.http.post<Boolean>(this.apiUrl + 'Inspection/' + id + '/approve', {}, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    refuse(id: string) {
+        return this.http.post<Boolean>(this.apiUrl + 'Inspection/' + id + '/refuse', {}, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    cancel(id: string) {
+        return this.http.post<Boolean>(this.apiUrl + 'Inspection/' + id + '/cancel', {}, {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
