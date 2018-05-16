@@ -201,5 +201,13 @@
   "connection": "Connection",
   "enter": "Enter",
   "close": "Close",
+  "garage": "Garage",
+  "height": "Height",
+  "construction": "Construction",
+  "fireResistance": "Fire resistance",
+  "siding": "Siding",
+  "estimatedWaterFlow": "Estimated water flow",
+  "roof": "Roof",
+  "material": "Material",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }

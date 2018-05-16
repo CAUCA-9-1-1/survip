@@ -34,4 +34,28 @@ export class UnitOfMeasureService extends RequestService {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
+
+    getCapacity() {
+        return this.http.get(this.apiUrl + 'UnitOfMeasure/capacity', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    getDimension() {
+        return this.http.get(this.apiUrl + 'UnitOfMeasure/dimension', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    getPressure() {
+        return this.http.get(this.apiUrl + 'UnitOfMeasure/pressure', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    getRate() {
+        return this.http.get(this.apiUrl + 'UnitOfMeasure/rate', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }

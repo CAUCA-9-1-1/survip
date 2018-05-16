@@ -6,7 +6,12 @@ import {Component, Input, OnInit} from '@angular/core';
     styleUrls: ['./particular-risks.component.scss']
 })
 export class ParticularRisksComponent implements OnInit {
-    @Input() idBuilding: string;
+    @Input()
+    set building(id: string) {
+        this.idBuilding = id;
+    }
+
+    private idBuilding: string;
 
     constructor() { }
 

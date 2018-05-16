@@ -6,7 +6,12 @@ import {Component, Input, OnInit} from '@angular/core';
     styleUrls: ['./pnaps.component.scss']
 })
 export class PnapsComponent implements OnInit {
-    @Input() idBuilding: string;
+    @Input()
+    set building(id: string) {
+        this.idBuilding = id;
+    }
+
+    private idBuilding: string;
 
     constructor() { }
 

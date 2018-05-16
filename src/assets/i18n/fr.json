@@ -206,5 +206,13 @@
   "connection": "Connexion",
   "enter": "Entrer",
   "close": "Fermer",
+  "garage": "Garage",
+  "height": "Hauteur",
+  "construction": "Construction",
+  "fireResistance": "Résistance au feu",
+  "siding": "Revêtement",
+  "estimatedWaterFlow": "Débit d'eau estimé",
+  "roof": "Toit",
+  "material": "Matériel",
   "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?"
 }
