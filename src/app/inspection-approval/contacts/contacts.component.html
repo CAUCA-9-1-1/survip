@@ -1,7 +1,3 @@
-<mat-list>
-    <mat-list-item *ngFor="let contact of contacts">
-        <h4 mat-line>
-            <div>{{contact.name}}</div>
-        </h4>
-    </mat-list-item>
-</mat-list>
+<div fxLayout="row"  *ngFor="let contact of contacts">
+    <div>{{contact.name}}</div>
+</div>
