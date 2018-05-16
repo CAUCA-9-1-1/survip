@@ -12,7 +12,7 @@ import {InspectionService} from '../inspection-dashboard/shared/services/inspect
     ]
 })
 export class InspectionApprovalComponent implements OnInit {
-    selected = 'buildingDetails';
+    selected = 'generalBuildingInfo';
     isClosed = false;
 
     private inspectionId: string;

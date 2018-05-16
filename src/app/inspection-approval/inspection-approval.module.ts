@@ -8,10 +8,14 @@ import { SurveyComponent } from './survey/survey.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { PnapsComponent } from './pnaps/pnaps.component';
 import { HazardousMaterialsComponent } from './hazardous-materials/hazardous-materials.component';
-import { AlarmPanelsComponent } from './alarm-panels/alarm-panels.component';
-import { WaterSprinklerComponent } from './water-sprinkler/water-sprinkler.component';
+import { FireProtectionComponent } from './fire-protection/fire-protection.component';
+import { WaterSupplyComponent } from './water-supply/water-supply.component';
 import { ParticularRisksComponent } from './particular-risks/particular-risks.component';
 import { AnomaliesComponent } from './anomalies/anomalies.component';
+import { GeneralBuildingInfoComponent } from './general-building-info/general-building-info.component';
+import { ImplantationPlanComponent } from './implantation-plan/implantation-plan.component';
+import { CourseComponent } from './course/course.component';
+import { BuildingListComponent } from './building-list/building-list.component';
 
 
 @NgModule({
@@ -23,10 +27,14 @@ import { AnomaliesComponent } from './anomalies/anomalies.component';
         ContactsComponent,
         PnapsComponent,
         HazardousMaterialsComponent,
-        AlarmPanelsComponent,
-        WaterSprinklerComponent,
+        FireProtectionComponent,
+        WaterSupplyComponent,
         ParticularRisksComponent,
-        AnomaliesComponent
+        AnomaliesComponent,
+        GeneralBuildingInfoComponent,
+        ImplantationPlanComponent,
+        CourseComponent,
+        BuildingListComponent
     ],
     imports: [
         SharedModule

@@ -43,6 +43,12 @@ export class InspectionService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    getBuildingGeneralInfo(id: string) {
+        return this.http.get<DashboardInspection[]>(this.apiUrl + 'inspection/' + id + '/detail', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     approve(id: string) {
         return this.http.post<Boolean>(this.apiUrl + 'Inspection/' + id + '/approve', {}, {
             headers: this.headers

@@ -5,3 +5,12 @@
 .tools {
   text-align: center;
 }
+
+.details ::ng-deep div[fxLayout="row"] {
+  line-height: 3em;
+  border-bottom: solid 1px #cccccc;
+}
+
+.details ::ng-deep div[fxLayout="row"] > div[fxFlex="30%"] {
+  font-weight: bolder;
+}

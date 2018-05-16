@@ -5,37 +5,28 @@
     <div fxFlex="0" class="content">
         <div fxLayout="column">
             <div fxFlex="">
-                <div fxLayout="row">
+                <div fxLayout="row" class="details">
                     <div fxFlex="300px">
                         <app-section-list (selectionChange)="sectionChange($event)"></app-section-list>
                     </div>
                     <div fxFlex="">
-                        <div [fxShow]="selected == 'buildingDetails'">
-                            <app-building-details></app-building-details>
+                        <div [fxShow]="selected == 'generalBuildingInfo'">
+                            <app-general-building-info [inspectionId]="inspectionId"></app-general-building-info>
+                        </div>
+                        <div [fxShow]="selected == 'implantationPlan'">
+                            <app-implantation-plan></app-implantation-plan>
+                        </div>
+                        <div [fxShow]="selected == 'course'">
+                            <app-course></app-course>
+                        </div>
+                        <div [fxShow]="selected == 'waterSupply'">
+                            <app-water-supply></app-water-supply>
                         </div>
                         <div [fxShow]="selected == 'survey'">
                             <app-survey></app-survey>
                         </div>
-                        <div [fxShow]="selected == 'contacts'">
-                            <app-contacts></app-contacts>
-                        </div>
-                        <div [fxShow]="selected == 'pnaps'">
-                            <app-pnaps></app-pnaps>
-                        </div>
-                        <div [fxShow]="selected == 'hazardousMaterials'">
-                            <app-hazardous-materials></app-hazardous-materials>
-                        </div>
-                        <div [fxShow]="selected == 'alarmPanels'">
-                            <app-alarm-panels></app-alarm-panels>
-                        </div>
-                        <div [fxShow]="selected == 'waterSprinkler'">
-                            <app-water-sprinkler></app-water-sprinkler>
-                        </div>
-                        <div [fxShow]="selected == 'particularRisks'">
-                            <app-particular-risks></app-particular-risks>
-                        </div>
-                        <div [fxShow]="selected == 'anomalies'">
-                            <app-anomalies></app-anomalies>
+                        <div [fxShow]="selected == 'buildingDetails' || selected == 'contacts' || selected == 'pnaps' || selected == 'hazardousMaterials' || selected == 'fireProtection' || selected == 'particularRisks' || selected == 'anomalies'">
+                            <app-building-list [selected]="selected"></app-building-list>
                         </div>
                     </div>
                 </div>
