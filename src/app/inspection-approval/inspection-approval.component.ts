@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {InspectionService} from '../inspection-dashboard/shared/services/inspection.service';
-import {ActivatedRoute} from '@angular/router';
+
 
 @Component({
     selector: 'app-inspection-approval',
@@ -12,11 +13,13 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class InspectionApprovalComponent implements OnInit {
     selected = 'buildingDetails';
+    isClosed = false;
 
     private inspectionId: string;
 
     constructor(
         private activeRoute: ActivatedRoute,
+        private router: Router,
         private inspectionService: InspectionService
     ) {
         this.activeRoute.params.subscribe(param => {
@@ -32,14 +35,18 @@ export class InspectionApprovalComponent implements OnInit {
     }
 
     approve() {
-        this.inspectionService.approve(this.inspectionId).subscribe();
+        this.inspectionService.approve(this.inspectionId).subscribe(() => this.isClosed = true);
     }
 
     refuse() {
-        this.inspectionService.refuse(this.inspectionId).subscribe();
+        this.inspectionService.refuse(this.inspectionId).subscribe(() => this.isClosed = true);
     }
 
     cancel() {
-        this.inspectionService.cancel(this.inspectionId).subscribe();
+        this.inspectionService.cancel(this.inspectionId).subscribe(() => this.isClosed = true);
+    }
+
+    close() {
+        this.router.navigate(['inspection/dashboard']);
     }
 }
