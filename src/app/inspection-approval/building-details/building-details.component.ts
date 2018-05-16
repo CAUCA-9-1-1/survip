@@ -21,9 +21,11 @@ export class BuildingDetailsComponent implements OnInit {
     }
 
     private idBuilding: string;
+    private garageTypes = ['no', 'yes', 'detached'];
 
     detail: any = {};
     buildingType: string;
+    garageType: string;
     unitHeight: string;
     unitEstimatedWaterFlow: string;
     constructionType: string;
@@ -43,6 +45,8 @@ export class BuildingDetailsComponent implements OnInit {
     loadData() {
         this.inspectionService.getBuildingDetail(this.idBuilding).subscribe(data => {
             this.detail = data;
+
+            this.garageType = this.garageTypes[data.garageType];
 
             this.constructionService.getBuildingTypes().subscribe(types => {
                 types.forEach( type => {

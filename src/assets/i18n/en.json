@@ -209,5 +209,6 @@
   "estimatedWaterFlow": "Estimated water flow",
   "roof": "Roof",
   "material": "Material",
+  "detached": "Detached",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }
