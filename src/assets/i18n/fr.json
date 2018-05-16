@@ -197,10 +197,11 @@
   "needInspectorAndBuildingForReadyInspection": "Pour rendre accessible l'inspection, vous devez avoir au minimum un inspecteur et un bâtiment",
   "mode1": "Inspections en cours/en attente",
   "mode2": "Inspections à vérifier",
-  "mode3": "Inspections complétés",
+  "mode3": "Inspections complétées",
   "mode4": "Bâtiments",
   "needMinimum1Building": "Vous avez besoin minimalement d'un bâtiment",
   "connection": "Connexion",
   "enter": "Entrer",
+  "close": "Fermer",
   "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?"
 }

@@ -197,5 +197,6 @@
   "needMinimum1Building": "You need a building minimally",
   "connection": "Connection",
   "enter": "Enter",
+  "close": "Close",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }
