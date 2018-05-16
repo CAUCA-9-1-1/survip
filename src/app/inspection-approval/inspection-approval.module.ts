@@ -12,7 +12,7 @@ import { FireProtectionComponent } from './fire-protection/fire-protection.compo
 import { WaterSupplyComponent } from './water-supply/water-supply.component';
 import { ParticularRisksComponent } from './particular-risks/particular-risks.component';
 import { AnomaliesComponent } from './anomalies/anomalies.component';
-import { GeneralBuildingInfoComponent } from './general-building-info/general-building-info.component';
+import { GeneralInfoComponent } from './general-info/general-info.component';
 import { ImplantationPlanComponent } from './implantation-plan/implantation-plan.component';
 import { CourseComponent } from './course/course.component';
 import { BuildingListComponent } from './building-list/building-list.component';
@@ -31,7 +31,7 @@ import { BuildingListComponent } from './building-list/building-list.component';
         WaterSupplyComponent,
         ParticularRisksComponent,
         AnomaliesComponent,
-        GeneralBuildingInfoComponent,
+        GeneralInfoComponent,
         ImplantationPlanComponent,
         CourseComponent,
         BuildingListComponent

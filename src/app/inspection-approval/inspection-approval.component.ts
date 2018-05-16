@@ -12,11 +12,10 @@ import {InspectionService} from '../inspection-dashboard/shared/services/inspect
     ]
 })
 export class InspectionApprovalComponent implements OnInit {
-    selected = 'generalBuildingInfo';
+    selected = 'generalInfo';
     isClosed = false;
     title = '';
-
-    private inspectionId: string;
+    inspectionId: string;
 
     constructor(
         private activeRoute: ActivatedRoute,
@@ -26,7 +25,7 @@ export class InspectionApprovalComponent implements OnInit {
         this.activeRoute.params.subscribe(param => {
             this.inspectionId = param.idInspection;
 
-            this.inspectionService.getBuildingGeneralInfo(param.idInspection).subscribe(data => this.title = data.mainBuildingAddress);
+            this.inspectionService.getGeneralInfo(param.idInspection).subscribe(data => this.title = data.mainBuildingAddress);
         });
     }
 

@@ -11,8 +11,8 @@
                         <app-section-list (selectionChange)="sectionChange($event)"></app-section-list>
                     </div>
                     <div fxFlex="">
-                        <div [fxShow]="selected == 'generalBuildingInfo'">
-                            <app-general-building-info [inspectionId]="inspectionId"></app-general-building-info>
+                        <div [fxShow]="selected == 'generalInfo'">
+                            <app-general-info [inspectionId]="inspectionId"></app-general-info>
                         </div>
                         <div [fxShow]="selected == 'implantationPlan'">
                             <app-implantation-plan></app-implantation-plan>
@@ -27,7 +27,7 @@
                             <app-survey></app-survey>
                         </div>
                         <div [fxShow]="selected == 'buildingDetails' || selected == 'contacts' || selected == 'pnaps' || selected == 'hazardousMaterials' || selected == 'fireProtection' || selected == 'particularRisks' || selected == 'anomalies'">
-                            <app-building-list [selected]="selected"></app-building-list>
+                            <app-building-list [selected]="selected" [inspectionId]="inspectionId"></app-building-list>
                         </div>
                     </div>
                 </div>

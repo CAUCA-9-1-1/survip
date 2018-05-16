@@ -11,7 +11,7 @@ export class SectionListComponent implements OnInit {
 
     selected = '';
     sectionsInspection = [{
-        name: 'generalBuildingInfo',
+        name: 'generalInfo',
     }, {
         name: 'implantationPlan',
     }, {
@@ -38,7 +38,7 @@ export class SectionListComponent implements OnInit {
     }];
 
     constructor() {
-        this.selected = 'generalBuildingInfo';
+        this.selected = 'generalInfo';
     }
 
     ngOnInit() { }

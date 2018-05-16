@@ -9,9 +9,9 @@ import {UtilisationCode} from '../../management-building/shared/models/utilisati
 
 
 @Component({
-    selector: 'app-general-building-info',
-    templateUrl: './general-building-info.component.html',
-    styleUrls: ['./general-building-info.component.scss'],
+    selector: 'app-general-info',
+    templateUrl: './general-info.component.html',
+    styleUrls: ['./general-info.component.scss'],
     providers: [
         InspectionService,
         LaneService,
@@ -19,7 +19,7 @@ import {UtilisationCode} from '../../management-building/shared/models/utilisati
         UtilisationCodeService,
     ]
 })
-export class GeneralBuildingInfoComponent implements OnInit {
+export class GeneralInfoComponent implements OnInit {
     @Input() inspectionId: string;
 
     generalInfo: any = {};
@@ -36,7 +36,7 @@ export class GeneralBuildingInfoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.inspectionService.getBuildingGeneralInfo(this.inspectionId).subscribe(data => {
+        this.inspectionService.getGeneralInfo(this.inspectionId).subscribe(data => {
             this.generalInfo = data;
 
             this.laneService.getAllOfCity(data.idCity).subscribe(lanes => {

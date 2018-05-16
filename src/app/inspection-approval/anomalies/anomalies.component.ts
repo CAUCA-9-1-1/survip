@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-anomalies',
-  templateUrl: './anomalies.component.html',
-  styleUrls: ['./anomalies.component.scss']
+    selector: 'app-anomalies',
+    templateUrl: './anomalies.component.html',
+    styleUrls: ['./anomalies.component.scss']
 })
 export class AnomaliesComponent implements OnInit {
+    @Input() idBuilding: string;
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }
