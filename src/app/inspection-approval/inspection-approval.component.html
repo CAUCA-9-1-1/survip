@@ -24,7 +24,7 @@
                             <app-water-supply [inspectionId]="inspectionId"></app-water-supply>
                         </div>
                         <div [fxShow]="selected == 'survey'">
-                            <app-survey></app-survey>
+                            <app-survey [inspectionId]="inspectionId"></app-survey>
                         </div>
                         <div [fxShow]="selected == 'buildingDetails' || selected == 'contacts' || selected == 'pnaps' || selected == 'hazardousMaterials' || selected == 'fireProtection' || selected == 'particularRisks' || selected == 'anomalies'">
                             <app-building-list [selected]="selected" [inspectionId]="inspectionId"></app-building-list>

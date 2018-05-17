@@ -24,3 +24,7 @@
 .details ::ng-deep div[fxLayout="row"] ul {
   line-height: 1.5em;
 }
+
+.details ::ng-deep mat-card {
+  margin-bottom: 1em;
+}

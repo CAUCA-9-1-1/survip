@@ -1,3 +1,9 @@
-<p>
-  survey works!
-</p>
+<mat-card *ngFor="let category of summary">
+    <mat-card-title>{{category.title}}</mat-card-title>
+    <mat-card-content>
+        <div fxLayout="row" *ngFor="let question of category.answerSummary">
+            <div fxFlex="60%">{{question.questionDescription}}</div>
+            <div>{{question.answer}}</div>
+        </div>
+    </mat-card-content>
+</mat-card>
