@@ -1,0 +1,25 @@
+<mat-tab-group [(selectedIndex)]="selectedIndex" (selectedIndexChange)="selectBuilding($event)">
+    <mat-tab *ngFor="let building of buildings" [label]="building.name">
+        <div [fxShow]="selected == 'buildingDetails'">
+            <app-building-details [building]="selectedIdBuilding"></app-building-details>
+        </div>
+        <div [fxShow]="selected == 'contacts'">
+            <app-contacts [building]="selectedIdBuilding"></app-contacts>
+        </div>
+        <div [fxShow]="selected == 'pnaps'">
+            <app-pnaps [building]="selectedIdBuilding"></app-pnaps>
+        </div>
+        <div [fxShow]="selected == 'hazardousMaterials'">
+            <app-hazardous-materials [building]="selectedIdBuilding"></app-hazardous-materials>
+        </div>
+        <div [fxShow]="selected == 'fireProtection'">
+            <app-fire-protection [building]="selectedIdBuilding"></app-fire-protection>
+        </div>
+        <div [fxShow]="selected == 'particularRisks'">
+            <app-particular-risks [building]="selectedIdBuilding"></app-particular-risks>
+        </div>
+        <div [fxShow]="selected == 'anomalies'">
+            <app-anomalies [building]="selectedIdBuilding"></app-anomalies>
+        </div>
+    </mat-tab>
+</mat-tab-group>

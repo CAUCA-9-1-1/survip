@@ -10,10 +10,19 @@ export class SectionListComponent implements OnInit {
     @Output() selectionChange = new EventEmitter();
 
     selected = '';
-    sections = [{
-        name: 'buildingDetails',
+    sectionsInspection = [{
+        name: 'generalInfo',
+    }, {
+        name: 'implantationPlan',
+    }, {
+        name: 'course',
+    }, {
+        name: 'waterSupply',
     }, {
         name: 'survey',
+    }];
+    sectionsBuilding = [{
+        name: 'buildingDetails',
     }, {
         name: 'contacts',
     }, {
@@ -21,9 +30,7 @@ export class SectionListComponent implements OnInit {
     }, {
         name: 'hazardousMaterials',
     }, {
-        name: 'alarmPanels',
-    }, {
-        name: 'waterSprinkler',
+        name: 'fireProtection',
     }, {
         name: 'particularRisks',
     }, {
@@ -31,7 +38,7 @@ export class SectionListComponent implements OnInit {
     }];
 
     constructor() {
-        this.selected = 'buildingDetails';
+        this.selected = 'generalInfo';
     }
 
     ngOnInit() { }

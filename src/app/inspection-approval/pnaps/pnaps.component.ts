@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-pnaps',
-  templateUrl: './pnaps.component.html',
-  styleUrls: ['./pnaps.component.scss']
+    selector: 'app-pnaps',
+    templateUrl: './pnaps.component.html',
+    styleUrls: ['./pnaps.component.scss']
 })
 export class PnapsComponent implements OnInit {
+    @Input()
+    set building(id: string) {
+        this.idBuilding = id;
+    }
 
-  constructor() { }
+    private idBuilding: string;
 
-  ngOnInit() {
-  }
+    constructor() { }
+
+    ngOnInit() {
+    }
 
 }

@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-particular-risks',
-  templateUrl: './particular-risks.component.html',
-  styleUrls: ['./particular-risks.component.scss']
+    selector: 'app-particular-risks',
+    templateUrl: './particular-risks.component.html',
+    styleUrls: ['./particular-risks.component.scss']
 })
 export class ParticularRisksComponent implements OnInit {
+    @Input()
+    set building(id: string) {
+        this.idBuilding = id;
+    }
 
-  constructor() { }
+    private idBuilding: string;
 
-  ngOnInit() {
-  }
+    constructor() { }
+
+    ngOnInit() {
+    }
 
 }

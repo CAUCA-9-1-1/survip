@@ -1,3 +1,51 @@
-<p>
-  building-details works!
-</p>
+<mat-card>
+    <mat-card-title>{{'building' | translate}}</mat-card-title>
+    <mat-card-content>
+        <div fxLayout="row">
+            <div fxFlex="30%">{{'type' | translate}}</div>
+            <div>{{buildingType}}</div>
+        </div>
+        <div fxLayout="row">
+            <div fxFlex="30%">{{'garage' | translate}}</div>
+            <div>{{garageType | translate}}</div>
+        </div>
+        <div fxLayout="row">
+            <div fxFlex="30%">{{'height' | translate}}</div>
+            <div>{{detail.height}} {{unitHeight}}</div>
+        </div>
+        <div fxLayout="row">
+            <div fxFlex="30%">{{'estimatedWaterFlow' | translate}}</div>
+            <div>{{detail.estimatedWaterFlow}} {{unitEstimatedWaterFlow}}</div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-title>{{'construction' | translate}}</mat-card-title>
+    <mat-card-content>
+        <div fxLayout="row">
+            <div fxFlex="30%">{{'type' | translate}}</div>
+            <div>{{constructionType}}</div>
+        </div>
+        <div fxLayout="row">
+            <div fxFlex="30%">{{'fireResistance' | translate}}</div>
+            <div>{{fireResistance}}</div>
+        </div>
+        <div fxLayout="row">
+            <div fxFlex="30%">{{'siding' | translate}}</div>
+            <div>{{sidingType}}</div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-title>{{'roof' | translate}}</mat-card-title>
+    <mat-card-content>
+        <div fxLayout="row">
+            <div fxFlex="30%">{{'type' | translate}}</div>
+            <div>{{roofType}}</div>
+        </div>
+        <div fxLayout="row">
+            <div fxFlex="30%">{{'material' | translate}}</div>
+            <div>{{roofMaterialType}}</div>
+        </div>
+    </mat-card-content>
+</mat-card>
