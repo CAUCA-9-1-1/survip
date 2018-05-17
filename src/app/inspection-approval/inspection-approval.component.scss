@@ -20,3 +20,7 @@
 .details ::ng-deep div[fxLayout="row"] > div[fxFlex="30%"] {
   font-weight: bolder;
 }
+
+.details ::ng-deep div[fxLayout="row"] ul {
+  line-height: 1.5em;
+}
