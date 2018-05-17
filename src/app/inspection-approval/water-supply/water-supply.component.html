@@ -1,3 +1,5 @@
-<p>
-  water-sprinkler works!
-</p>
+<h3>{{'fireHydrants' | translate}}</h3>
+<div fxLayout="row" *ngFor="let fireHydrant of fireHydrants">
+    <div fxFlex="30%">{{fireHydrant.number}}</div>
+    <div>{{fireHydrant.address}}</div>
+</div>
