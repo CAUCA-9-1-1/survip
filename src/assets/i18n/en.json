@@ -214,5 +214,6 @@
   "alarmPanels": "Alarm panels",
   "fireHydrants": "Fire hydrants",
   "courses": "Courses",
+  "logout": "Logout",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }

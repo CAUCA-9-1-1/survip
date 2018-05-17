@@ -219,5 +219,6 @@
   "alarmPanels": "Panneaux d'alarme",
   "fireHydrants": "Bornes",
   "courses": "Parcours",
+  "logout": "Déconnecter",
   "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?"
 }
