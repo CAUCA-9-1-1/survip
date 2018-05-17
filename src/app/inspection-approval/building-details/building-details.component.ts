@@ -17,6 +17,16 @@ export class BuildingDetailsComponent implements OnInit {
     @Input()
     set building(id: string) {
         this.idBuilding = id;
+        this.detail = {};
+        this.buildingType = '';
+        this.garageType = '';
+        this.unitHeight = '';
+        this.unitEstimatedWaterFlow = '';
+        this.constructionType = '';
+        this.fireResistance = '';
+        this.sidingType = '';
+        this.roofType = '';
+        this.roofMaterialType = '';
         this.loadData();
     }
 
