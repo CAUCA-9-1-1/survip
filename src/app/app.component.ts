@@ -1,28 +1,42 @@
 import { Component } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
+import {Router} from '@angular/router';
+import {registerLocaleData} from '@angular/common';
+import {TranslateService} from '@ngx-translate/core';
 import localeFr from '@angular/common/locales/fr';
-import { TranslateService } from '@ngx-translate/core';
 import 'devextreme-intl';
 import * as frMessages from 'devextreme/localization/messages/fr.json';
-import { locale, loadMessages } from 'devextreme/localization';
+import {locale, loadMessages} from 'devextreme/localization';
 
-import { environment } from '../environments/environment';
+import {environment} from '../environments/environment';
+import {AuthenticationService} from './user-access/shared/services/authentification.service';
 
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    providers: [
+        AuthenticationService,
+    ]
 })
 export class AppComponent {
     title = 'app';
 
-    constructor(private ngxLanguage: TranslateService) {
+    constructor(
+        private ngxLanguage: TranslateService,
+        private auth: AuthenticationService,
+        private router: Router,
+    ) {
         environment.locale.use = localStorage.getItem('locale') || environment.locale.use;
 
         this.setAngular();
         this.setNgxTranslator();
         this.setDevExtreme();
+    }
+
+    logout() {
+        this.auth.logout();
+        this.router.navigate(['/']);
     }
 
     private setAngular() {
