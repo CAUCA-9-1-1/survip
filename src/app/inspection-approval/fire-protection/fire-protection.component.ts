@@ -13,13 +13,15 @@ export class FireProtectionComponent implements OnInit {
     @Input()
     set building(id: string) {
         this.idBuilding = id;
+        this.sprinklers = [];
+        this.alarmPanels = [];
         this.loadData();
     }
 
     private idBuilding: string;
 
     sprinklers: any = [];
-    panels: any = [];
+    alarmPanels: any = [];
 
     constructor(
         private inspectionService: InspectionService,
@@ -33,7 +35,7 @@ export class FireProtectionComponent implements OnInit {
             this.sprinklers = data;
         });
         this.inspectionService.getBuildingAlarmPanel(this.idBuilding).subscribe(data => {
-            this.panels = data;
+            this.alarmPanels = data;
         });
     }
 }
