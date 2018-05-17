@@ -49,6 +49,18 @@ export class InspectionService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    getCourse(id: string) {
+        return this.http.get(this.apiUrl + 'inspection/' + id + '/course', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    getCourseLane(id: string) {
+        return this.http.get(this.apiUrl + 'inspection/course/' + id, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     getFireHydrant(id: string) {
         return this.http.get(this.apiUrl + 'inspection/' + id + '/firehydrant', {
             headers: this.headers

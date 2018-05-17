@@ -1,3 +1,9 @@
-<p>
-  course works!
-</p>
+<h3>{{'courses' | translate}}</h3>
+<div fxLayout="row" *ngFor="let course of courses">
+    <div fxFlex="30%">{{course.description}}</div>
+    <ul>
+        <li *ngFor="let lane of course.lanes">
+            {{lane.description}}
+        </li>
+    </ul>
+</div>

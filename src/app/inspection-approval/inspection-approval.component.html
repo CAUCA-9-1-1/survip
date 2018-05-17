@@ -18,7 +18,7 @@
                             <app-implantation-plan></app-implantation-plan>
                         </div>
                         <div [fxShow]="selected == 'course'">
-                            <app-course></app-course>
+                            <app-course [inspectionId]="inspectionId"></app-course>
                         </div>
                         <div [fxShow]="selected == 'waterSupply'">
                             <app-water-supply [inspectionId]="inspectionId"></app-water-supply>
