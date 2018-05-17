@@ -13,12 +13,13 @@ export class ContactsComponent implements OnInit {
     @Input()
     set building(id: string) {
         this.idBuilding = id;
+        this.contacts = [];
         this.loadData();
     }
 
     private idBuilding: string;
 
-    contacts: any = {};
+    contacts: any = [];
 
     constructor(
         private inspectionService: InspectionService,

@@ -13,12 +13,13 @@ export class PnapsComponent implements OnInit {
     @Input()
     set building(id: string) {
         this.idBuilding = id;
+        this.pnaps = [];
         this.loadData();
     }
 
     private idBuilding: string;
 
-    pnaps: any = {};
+    pnaps: any = [];
 
     constructor(
         private inspectionService: InspectionService,
