@@ -18,7 +18,7 @@ export class PnapsComponent implements OnInit {
 
     private idBuilding: string;
 
-    pnaps: any = {};
+    pnaps: any = [];
 
     constructor(
         private inspectionService: InspectionService,
