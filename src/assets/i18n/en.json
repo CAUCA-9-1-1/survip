@@ -210,5 +210,7 @@
   "roof": "Roof",
   "material": "Material",
   "detached": "Detached",
+  "sprinklers": "Sprinklers",
+  "alarmPanels": "Alarm panels",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }
