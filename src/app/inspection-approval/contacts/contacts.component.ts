@@ -18,7 +18,7 @@ export class ContactsComponent implements OnInit {
 
     private idBuilding: string;
 
-    contacts: any = {};
+    contacts: any = [];
 
     constructor(
         private inspectionService: InspectionService,

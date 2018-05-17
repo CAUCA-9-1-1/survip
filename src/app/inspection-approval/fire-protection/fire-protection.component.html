@@ -1,3 +1,10 @@
-<p>
-  alarm-panels works!
-</p>
+<h3>{{'alarmPanel' | translate}}</h3>
+<div fxLayout="row"  *ngFor="let panel of panels">
+    <div fxFlex="50%">{{panel.locationDescription}}</div>
+    <div>{{panel.typeDescription}}</div>
+</div>
+<h3>{{'sprinkler' | translate}}</h3>
+<div fxLayout="row"  *ngFor="let sprinkler of sprinklers">
+    <div fxFlex="50%">{{sprinkler.locationDescription}}</div>
+    <div>{{sprinkler.typeDescription}}</div>
+</div>
