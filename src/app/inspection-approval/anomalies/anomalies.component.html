@@ -1,3 +1,6 @@
-<p>
-  anomalies works!
-</p>
+<div *ngFor="let theme of anomalies">
+    <h3>{{theme.theme}}</h3>
+    <div fxLayout="row" *ngFor="let anomaly of theme.anomalies">
+        <div>{{anomaly.notes}}</div>
+    </div>
+</div>
