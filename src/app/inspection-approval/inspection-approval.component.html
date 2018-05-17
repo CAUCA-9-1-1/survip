@@ -21,7 +21,7 @@
                             <app-course></app-course>
                         </div>
                         <div [fxShow]="selected == 'waterSupply'">
-                            <app-water-supply></app-water-supply>
+                            <app-water-supply [inspectionId]="inspectionId"></app-water-supply>
                         </div>
                         <div [fxShow]="selected == 'survey'">
                             <app-survey></app-survey>

@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {InspectionService} from '../../inspection-dashboard/shared/services/inspection.service';
 
 @Component({
-  selector: 'app-water-supply',
-  templateUrl: './water-supply.component.html',
-  styleUrls: ['./water-supply.component.scss']
+    selector: 'app-water-supply',
+    templateUrl: './water-supply.component.html',
+    styleUrls: ['./water-supply.component.scss'],
+    providers: [
+        InspectionService,
+    ]
 })
 export class WaterSupplyComponent implements OnInit {
+    @Input() inspectionId: string;
 
-  constructor() { }
+    fireHydrants: any = [];
 
-  ngOnInit() {
-  }
+    constructor(
+        private inspectionService: InspectionService,
+    ) { }
 
+    ngOnInit() {
+        this.inspectionService.getFireHydrant(this.inspectionId).subscribe(data => {
+            this.fireHydrants = data;
+        });
+    }
 }
