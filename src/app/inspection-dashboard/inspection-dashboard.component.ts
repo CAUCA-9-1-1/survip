@@ -46,7 +46,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     riskLevels: RiskLevel[] = [];
     utilisationCodes: UtilisationCode[] = [];
     labels = {};
-    selectedMode = 'mode4';
+    selectedMode = 'mode1';
     angularIsLoaded = false;
     everythingIsLoaded = false;
 
@@ -76,7 +76,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details',
             'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see',
             'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building',
-            'approve'
+            'approve', 'todo', 'started', 'absent', 'waitingApprobation', 'approved', 'refused', 'canceled'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -321,6 +321,32 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             dataField: 'visitStatus',
             caption: this.labels['status'],
             visible: visible[8],
+            lookup: {
+                displayExpr: 'name',
+                valueExpr: 'id',
+                dataSource: [{
+                    id: 0,
+                    name: this.labels['todo']
+                }, {
+                    id: 1,
+                    name: this.labels['started']
+                }, {
+                    id: 2,
+                    name: this.labels['absent']
+                }, {
+                    id: 3,
+                    name: this.labels['waitingApprobation']
+                }, {
+                    id: 4,
+                    name: this.labels['approved']
+                }, {
+                    id: 5,
+                    name: this.labels['refused']
+                }, {
+                    id: 6,
+                    name: this.labels['canceld']
+                }]
+            }
         }, {
             dataField: 'hasVisitNote',
             caption: this.labels['note'],
