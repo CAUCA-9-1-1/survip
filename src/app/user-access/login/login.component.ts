@@ -3,19 +3,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from '../shared/services/authentification.service';
 import { MatSnackBar } from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    providers: [
-        AuthenticationService,
-    ]
 })
 export class LoginComponent implements OnInit {
     username = '';
     password = '';
+    labels = {};
     returnUrl: string;
 
     constructor(
@@ -23,11 +22,18 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private auth: AuthenticationService,
         private notification: MatSnackBar,
+        private translateService: TranslateService,
     ) { }
 
     ngOnInit() {
         this.auth.logout();
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+        this.translateService.get([
+            'badLogin', 'errorDuringLoggin'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     login(e) {
@@ -39,10 +45,10 @@ export class LoginComponent implements OnInit {
             if (token.accessToken) {
                 this.router.navigate([this.returnUrl]);
             } else {
-                this.notify('bad login');
+                this.notify(this.labels['badLogin']);
             }
         }, error => {
-            this.notify('bad login');
+            this.notify(this.labels['errorDuringLoggin']);
         });
 
         return false;

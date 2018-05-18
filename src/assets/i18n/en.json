@@ -215,5 +215,7 @@
   "fireHydrants": "Fire hydrants",
   "courses": "Courses",
   "logout": "Logout",
+  "badLogin": "Bad username or password",
+  "errorDuringLoggin": "An error occur during connection",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }
