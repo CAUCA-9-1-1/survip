@@ -21,6 +21,7 @@ import {AuthenticationService} from './user-access/shared/services/authentificat
 })
 export class AppComponent {
     title = 'app';
+    isLogged = (localStorage.getItem('currentToken') ? true : false);
 
     constructor(
         private ngxLanguage: TranslateService,
@@ -29,6 +30,11 @@ export class AppComponent {
     ) {
         environment.locale.use = localStorage.getItem('locale') || environment.locale.use;
 
+        this.auth.status().subscribe(logged => {
+            console.log(logged);
+            this.isLogged = logged;
+        });
+
         this.setAngular();
         this.setNgxTranslator();
         this.setDevExtreme();
@@ -36,7 +42,7 @@ export class AppComponent {
 
     logout() {
         this.auth.logout();
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
     }
 
     private setAngular() {

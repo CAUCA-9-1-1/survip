@@ -220,5 +220,7 @@
   "fireHydrants": "Bornes",
   "courses": "Parcours",
   "logout": "Déconnecter",
+  "badLogin": "Mauvais nom d'utilisateur ou mot de passe",
+  "errorDuringLoggin": "Une erreur est survenue durant la connexion",
   "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?"
 }

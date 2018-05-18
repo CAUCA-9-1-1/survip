@@ -2,7 +2,7 @@
     <mat-toolbar-row>
         <span>SURVI-Prévention</span>
         <span class="fill-space"></span>
-        <span>
+        <span [fxShow]="isLogged">
             <button mat-raised-button color="accent" (click)="logout()">{{'logout' | translate}}</button>
         </span>
     </mat-toolbar-row>
