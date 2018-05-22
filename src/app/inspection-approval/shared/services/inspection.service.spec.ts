@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { InspectionService } from './inspection.service';
 
-describe('InspectionService', () => {
+describe('DashboardService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [InspectionService]

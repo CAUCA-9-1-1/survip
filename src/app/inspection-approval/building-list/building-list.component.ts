@@ -1,10 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {InspectionService} from '../../inspection-dashboard/shared/services/inspection.service';
+
+import {InspectionService} from '../shared/services/inspection.service';
+
 
 @Component({
     selector: 'app-building-list',
     templateUrl: './building-list.component.html',
-    styleUrls: ['./building-list.component.scss']
+    styleUrls: ['./building-list.component.scss'],
+    providers: [
+        InspectionService,
+    ]
 })
 export class BuildingListComponent implements OnInit {
     @Input() selected: string;

@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {InspectionService} from '../../inspection-dashboard/shared/services/inspection.service';
+
+import {InspectionService} from '../shared/services/inspection.service';
+
 
 @Component({
     selector: 'app-water-supply',
