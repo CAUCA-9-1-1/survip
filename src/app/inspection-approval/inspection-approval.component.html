@@ -5,12 +5,12 @@
     <div fxFlex="0" class="content">
         <div fxLayout="column">
             <div fxFlex="5%" class="title">{{title}}</div>
-            <div fxFlex="">
+            <div fxFlex="90%">
                 <div fxLayout="row" class="details">
-                    <div fxFlex="300px">
+                    <div fxFlex="20%">
                         <app-section-list (selectionChange)="sectionChange($event)"></app-section-list>
                     </div>
-                    <div fxFlex="">
+                    <div fxFlex="80%">
                         <div [fxShow]="selected == 'generalInfo'">
                             <app-general-info [inspectionId]="inspectionId"></app-general-info>
                         </div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div fxFlex="15%" class="tools">
+            <div fxFlex="5%" class="tools">
                 <button mat-raised-button color="accent" (click)="approve()" [fxShow]="!isClosed">
                     <mat-icon>check_circle_outline</mat-icon>
                     {{'approve' | translate}}
