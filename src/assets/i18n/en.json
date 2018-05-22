@@ -1,4 +1,16 @@
 {
+  "risks": {
+    "floor": "Floor",
+    "wall": "Wall",
+    "foundation": "Foundation",
+    "roof": "Roof",
+    "weakened": "Weakened",
+    "opening": "Opening",
+    "dimension": "Dimension",
+    "sector": "Sector",
+    "comments": "Comments",
+    "localization": "Localization"
+  },
   "cancel": "Cancel",
   "create": "Create",
   "modify": "Modify",

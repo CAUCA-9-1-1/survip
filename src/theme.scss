@@ -100,6 +100,12 @@ $theme:   mat-light-theme($theme-primary, $theme-accent);
     background-color: mat-color($theme-primary);
   }
 
+  .mat-expanded .mat-expansion-panel-header.mat-expanded,
+  .mat-expanded .mat-expansion-panel-header.mat-expanded:focus,
+  .mat-expanded .mat-expansion-panel-header.mat-expanded:hover {
+    background-color: mat-color($theme-accent);
+  }
+
   .success-toasts {
     color: mat-color($accent-text, default-contrast);
     background-color: mat-color($accent);

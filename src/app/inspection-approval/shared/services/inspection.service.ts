@@ -73,30 +73,6 @@ export class InspectionService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    getBuildingParticularRisksFloor(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/particularrisk/floor', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
-    }
-
-    getBuildingParticularRisksFoundation(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/particularrisk/foundation', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
-    }
-
-    getBuildingParticularRisksRoof(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/particularrisk/roof', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
-    }
-
-    getBuildingParticularRisksWall(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/particularrisk/wall', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
-    }
-
     getBuildingPNAPS(id: string) {
         return this.http.get(this.apiUrl + 'inspection/building/' + id + '/pnaps', {
             headers: this.headers
