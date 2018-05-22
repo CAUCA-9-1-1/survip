@@ -20,6 +20,7 @@ import {InspectionBatch} from '../inspection-batch/shared/models/inspection-batc
 import {AskBatchDescriptionComponent} from './ask-batch-description/ask-batch-description.component';
 import {WebuserForWeb} from '../management-access/shared/models/webuser-for-web.model';
 import {WebuserService} from '../management-access/shared/services/webuser.service';
+import {PictureService} from '../shared/services/picture.service';
 
 
 @Component({
@@ -33,6 +34,7 @@ import {WebuserService} from '../management-access/shared/services/webuser.servi
         RiskLevelService,
         UtilisationCodeService,
         InspectionBatchService,
+        PictureService,
         WebuserService,
     ]
 })
@@ -46,7 +48,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     riskLevels: RiskLevel[] = [];
     utilisationCodes: UtilisationCode[] = [];
     labels = {};
-    selectedMode = 'mode4';
+    selectedMode = 'mode1';
     angularIsLoaded = false;
     everythingIsLoaded = false;
 
@@ -60,6 +62,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         private translateService: TranslateService,
         private notification: MatSnackBar,
         private batchService: InspectionBatchService,
+        private pictureService: PictureService,
         private router: Router,
         private dialog: MatDialog
     ) { }
@@ -76,7 +79,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details',
             'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see',
             'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building',
-            'approve'
+            'approve', 'todo', 'started', 'absent', 'waitingApprobation', 'approved', 'refused', 'canceled'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -321,29 +324,50 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             dataField: 'visitStatus',
             caption: this.labels['status'],
             visible: visible[8],
-        }, {
-            dataField: 'hasVisitNote',
-            caption: this.labels['note'],
-            dataType: 'boolean',
-            visible: visible[9],
+            lookup: {
+                displayExpr: 'name',
+                valueExpr: 'id',
+                dataSource: [{
+                    id: 0,
+                    name: this.labels['todo']
+                }, {
+                    id: 1,
+                    name: this.labels['started']
+                }, {
+                    id: 2,
+                    name: this.labels['absent']
+                }, {
+                    id: 3,
+                    name: this.labels['waitingApprobation']
+                }, {
+                    id: 4,
+                    name: this.labels['approved']
+                }, {
+                    id: 5,
+                    name: this.labels['refused']
+                }, {
+                    id: 6,
+                    name: this.labels['canceled']
+                }]
+            }
         }, {
             dataField: 'hasAnomaly',
             caption: this.labels['anomaly'],
             dataType: 'boolean',
-            visible: visible[10],
+            visible: visible[9],
         }, {
             dataField: 'lastInspectionOn',
             caption: this.labels['lastInspection'],
             dataType: 'date',
-            visible: visible[11],
+            visible: visible[10],
         }, {
             dataField: 'contact',
             caption: this.labels['contact'],
-            visible: visible[12],
+            visible: visible[11],
         }, {
             dataField: 'owner',
             caption: this.labels['owner'],
-            visible: visible[13],
+            visible: visible[12],
         }, {
             dataField: 'idUtilisationCode',
             caption: this.labels['utilisationCode'],
@@ -353,48 +377,57 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 displayExpr: (data) => {
                     const code = UtilisationCode.fromJSON(data);
 
-                    return code.getLocalization(environment.locale.use);
+                    return code.getLocalization(environment.locale.use, 'description');
                 }
             },
-            visible: visible[14],
+            visible: visible[13],
         }, {
             dataField: 'idPicture',
             caption: this.labels['picture'],
-            visible: visible[15],
+            visible: visible[14],
+            cellTemplate: (container, options) => this.showPicture(container, options),
         }, {
             dataField: 'buildingValue',
             caption: this.labels['buildingValue'],
-            visible: visible[16],
+            visible: visible[15],
         }, {
             dataField: 'matricule',
             caption: this.labels['matricule'],
-            visible: visible[17],
+            visible: visible[16],
         }, {
             dataField: 'numberOfAppartment',
             caption: this.labels['numberOfAppartment'],
-            visible: visible[18],
+            visible: visible[17],
         }, {
             dataField: 'numberOfBuilding',
             caption: this.labels['numberOfBuilding'],
-            visible: visible[19],
+            visible: visible[18],
         }, {
             dataField: 'numberOfFloor',
             caption: this.labels['numberOfFloor'],
-            visible: visible[20],
+            visible: visible[19],
         }, {
             dataField: 'vacantLand',
             caption: this.labels['vacantLand'],
             dataType: 'boolean',
-            visible: visible[21],
+            visible: visible[20],
         }, {
             dataField: 'yearOfConstruction',
             caption: this.labels['yearOfConstruction'],
-            visible: visible[22],
+            visible: visible[21],
         }, {
             dataField: 'details',
             caption: this.labels['details'],
-            visible: visible[23],
+            visible: visible[22],
         }];
+    }
+
+    private showPicture(container, options) {
+        if (options.data.idPicture) {
+            this.pictureService.get(options.data.idPicture).subscribe((data) => {
+                container.innerHTML = '<img height="100" src="data:image/jpeg;base64,' + data.picture + '" />';
+            });
+        }
     }
 
     private loadData() {
