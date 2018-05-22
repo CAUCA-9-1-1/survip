@@ -347,7 +347,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                     name: this.labels['refused']
                 }, {
                     id: 6,
-                    name: this.labels['canceld']
+                    name: this.labels['canceled']
                 }]
             }
         }, {
