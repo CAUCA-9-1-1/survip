@@ -1,10 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {InspectionService} from '../../inspection-dashboard/shared/services/inspection.service';
+
+import {InspectionService} from '../shared/services/inspection.service';
+
 
 @Component({
     selector: 'app-course',
     templateUrl: './course.component.html',
-    styleUrls: ['./course.component.scss']
+    styleUrls: ['./course.component.scss'],
+    providers: [
+        InspectionService,
+    ]
 })
 export class CourseComponent implements OnInit {
     @Input() inspectionId: string;

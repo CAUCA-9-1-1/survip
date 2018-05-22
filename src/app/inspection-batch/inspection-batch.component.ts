@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
+import {MatSnackBar} from '@angular/material';
+import {ActivatedRoute} from '@angular/router';
 
 import {GridWithCrudService} from '../shared/classes/grid-with-crud-service';
 import {InspectionBatchService} from './shared/services/inspection-batch.service';
@@ -7,10 +9,8 @@ import {WebuserService} from '../management-access/shared/services/webuser.servi
 import {Building} from '../management-building/shared/models/building.model';
 import {TranslateService} from '@ngx-translate/core';
 import {WebuserForWeb} from '../management-access/shared/models/webuser-for-web.model';
-import {InspectionService} from '../inspection-dashboard/shared/services/inspection.service';
 import {BuildingService} from '../management-building/shared/services/building.service';
-import {MatSnackBar} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
+import {InspectionService} from '../inspection-approval/shared/services/inspection.service';
 
 
 @Component({

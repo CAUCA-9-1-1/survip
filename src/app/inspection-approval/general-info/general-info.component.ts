@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {environment} from '../../../environments/environment';
-import {InspectionService} from '../../inspection-dashboard/shared/services/inspection.service';
 import {LaneService} from '../../management-address/shared/services/lane.service';
 import {RiskLevelService} from '../../management-building/shared/services/risk-level.service';
 import {UtilisationCodeService} from '../../management-building/shared/services/utilisation-code.service';
 import {UtilisationCode} from '../../management-building/shared/models/utilisation-code.model';
+import {InspectionService} from '../shared/services/inspection.service';
 
 
 @Component({

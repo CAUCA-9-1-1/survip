@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 
 import {RequestService} from '../../../shared/services/request.service';
-import {DashboardInspection} from '../models/dashboard-inspection.model';
+import {Inspection} from '../models/inspection.model';
 
 
 @Injectable()
@@ -14,31 +14,13 @@ export class InspectionService extends RequestService {
     }
 
     getAll() {
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
-    }
-
-    getToDo() {
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ToDoInspection', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
-    }
-
-    getForApproval() {
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ForApprovalInspection', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
-    }
-
-    getBuildingHistory() {
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithHistory', {
+        return this.http.get<Inspection[]>(this.apiUrl + 'Inspection', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
     getBuildingToDo() {
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
+        return this.http.get<Inspection[]>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
@@ -87,6 +69,30 @@ export class InspectionService extends RequestService {
 
     getBuildingContact(id: string) {
         return this.http.get(this.apiUrl + 'inspection/building/' + id + '/contact', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    getBuildingParticularRisksFloor(id: string) {
+        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/particularrisk/floor', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    getBuildingParticularRisksFoundation(id: string) {
+        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/particularrisk/foundation', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    getBuildingParticularRisksRoof(id: string) {
+        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/particularrisk/roof', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    getBuildingParticularRisksWall(id: string) {
+        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/particularrisk/wall', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }

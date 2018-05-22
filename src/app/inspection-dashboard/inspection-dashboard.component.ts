@@ -5,7 +5,7 @@ import {DxDataGridComponent} from 'devextreme-angular';
 import {MatDialog, MatSnackBar} from '@angular/material';
 
 import {environment} from '../../environments/environment';
-import {InspectionService} from './shared/services/inspection.service';
+import {DashboardService} from './shared/services/dashboard.service';
 import {LaneService} from '../management-address/shared/services/lane.service';
 import {Lane} from '../management-address/shared/models/lane.model';
 import {RiskLevelService} from '../management-building/shared/services/risk-level.service';
@@ -28,7 +28,7 @@ import {PictureService} from '../shared/services/picture.service';
     templateUrl: './inspection-dashboard.component.html',
     styleUrls: ['./inspection-dashboard.component.scss'],
     providers: [
-        InspectionService,
+        DashboardService,
         LaneService,
         CityService,
         RiskLevelService,
@@ -53,7 +53,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     everythingIsLoaded = false;
 
     constructor(
-        private inspectionService: InspectionService,
+        private inspectionService: DashboardService,
         private webuserService: WebuserService,
         private laneService: LaneService,
         private cityService: CityService,
