@@ -20,6 +20,7 @@ export class SurveyComponent implements OnInit {
 
     ngOnInit() {
         this.inspectionService.getSurveySummary(this.inspectionId).subscribe(data => {
+            console.log(data);
             this.summary = data;
         });
     }
