@@ -31,7 +31,6 @@ export class AppComponent {
         environment.locale.use = localStorage.getItem('locale') || environment.locale.use;
 
         this.auth.status().subscribe(logged => {
-            console.log(logged);
             this.isLogged = logged;
         });
 
