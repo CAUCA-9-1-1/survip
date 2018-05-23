@@ -4,22 +4,22 @@
             <app-building-details [building]="selectedIdBuilding"></app-building-details>
         </div>
         <div [fxShow]="selected == 'contacts'">
-            <app-contacts [building]="selectedIdBuilding"></app-contacts>
+            <app-building-contacts [building]="selectedIdBuilding"></app-building-contacts>
         </div>
         <div [fxShow]="selected == 'pnaps'">
-            <app-pnaps [building]="selectedIdBuilding"></app-pnaps>
+            <app-building-pnaps [building]="selectedIdBuilding"></app-building-pnaps>
         </div>
         <div [fxShow]="selected == 'hazardousMaterials'">
-            <app-hazardous-materials [building]="selectedIdBuilding"></app-hazardous-materials>
+            <app-building-hazardous-materials [building]="selectedIdBuilding"></app-building-hazardous-materials>
         </div>
         <div [fxShow]="selected == 'fireProtection'">
-            <app-fire-protection [building]="selectedIdBuilding"></app-fire-protection>
+            <app-building-fire-protection [building]="selectedIdBuilding"></app-building-fire-protection>
         </div>
         <div [fxShow]="selected == 'particularRisks'">
-            <app-particular-risks [building]="selectedIdBuilding"></app-particular-risks>
+            <app-building-particular-risks [building]="selectedIdBuilding"></app-building-particular-risks>
         </div>
         <div [fxShow]="selected == 'anomalies'">
-            <app-anomalies [building]="selectedIdBuilding"></app-anomalies>
+            <app-building-anomalies [building]="selectedIdBuilding"></app-building-anomalies>
         </div>
     </mat-tab>
 </mat-tab-group>
