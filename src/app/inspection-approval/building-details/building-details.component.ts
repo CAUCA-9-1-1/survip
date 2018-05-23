@@ -55,6 +55,10 @@ export class BuildingDetailsComponent implements OnInit {
     ngOnInit() { }
 
     loadData() {
+        if (!this.idBuilding) {
+            return null;
+        }
+
         this.inspectionService.getBuildingDetail(this.idBuilding).subscribe(data => {
             this.detail = data;
 
