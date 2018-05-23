@@ -1,15 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {InspectionService} from '../../inspection-dashboard/shared/services/inspection.service';
 
 @Component({
-  selector: 'app-survey',
-  templateUrl: './survey.component.html',
-  styleUrls: ['./survey.component.scss']
+    selector: 'app-survey',
+    templateUrl: './survey.component.html',
+    styleUrls: ['./survey.component.scss'],
+    providers: [
+        InspectionService,
+    ]
 })
 export class SurveyComponent implements OnInit {
+    @Input() inspectionId: string;
 
-  constructor() { }
+    summary: any = [];
 
-  ngOnInit() {
-  }
+    constructor(
+        private inspectionService: InspectionService,
+    ) { }
+
+    ngOnInit() {
+        this.inspectionService.getSurveySummary(this.inspectionId).subscribe(data => {
+            console.log(data);
+            this.summary = data;
+        });
+    }
 
 }

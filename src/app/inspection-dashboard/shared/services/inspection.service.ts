@@ -67,6 +67,12 @@ export class InspectionService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    getSurveySummary(id: string) {
+        return this.http.get(this.apiUrl + 'InspectionQuestion/Inspection/' + id + '/Summary', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     getBuildings(id: string) {
         return this.http.get(this.apiUrl + 'inspection/' + id + '/building', {
             headers: this.headers

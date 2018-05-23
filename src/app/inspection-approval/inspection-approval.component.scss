@@ -9,7 +9,12 @@
 }
 
 .tools {
+  padding-top: 10px;
   text-align: center;
+}
+
+.details {
+  height: 100%;
 }
 
 .details ::ng-deep div[fxLayout="row"] {
@@ -23,4 +28,18 @@
 
 .details ::ng-deep div[fxLayout="row"] ul {
   line-height: 1.5em;
+}
+
+.details div[fxFlex="80%"] > div {
+  height: 100%;
+}
+
+.details div[fxFlex="80%"] > div > * {
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+
+.details ::ng-deep mat-card {
+  margin-bottom: 1em;
 }

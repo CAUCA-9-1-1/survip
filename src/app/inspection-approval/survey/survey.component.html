@@ -1,3 +1,20 @@
-<p>
-  survey works!
-</p>
+<mat-card *ngFor="let category of summary">
+    <mat-card-title>{{category.title}}</mat-card-title>
+    <mat-card-content>
+        <div *ngFor="let recursive of category.answerSummary; let index = index;">
+            <div *ngIf="recursive.isRecursive && recursive.recursiveAnswer.length">
+                <h4>{{recursive.questionTitle}} #{{index + 1}}</h4>
+                <div fxLayout="row" *ngFor="let question of recursive.recursiveAnswer">
+                    <div fxFlex="60%">{{question.questionDescription}}</div>
+                    <div>{{question.answer}}</div>
+                </div>
+            </div>
+            <div *ngIf="!recursive.isRecursive">
+                <div fxLayout="row">
+                    <div fxFlex="60%">{{recursive.questionDescription}}</div>
+                    <div>{{recursive.answer}}</div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
