@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {MatCardModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {SlideshowModule} from 'ng-simple-slideshow';
 
 import {InspectionApprovalComponent} from './inspection-approval.component';
 import {SharedModule} from '../shared/shared.module';
@@ -43,7 +42,6 @@ import {BuildingListComponent} from './building-list/building-list.component';
         SharedModule,
         MatCardModule,
         MatExpansionModule,
-        SlideshowModule,
     ],
 })
 export class InspectionApprovalModule { }

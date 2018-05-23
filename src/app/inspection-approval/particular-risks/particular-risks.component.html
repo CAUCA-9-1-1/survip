@@ -2,38 +2,37 @@
 <mat-accordion>
     <mat-expansion-panel *ngFor="let group of particularRisks">
         <mat-expansion-panel-header>
-            <h4>{{group.description}}</h4>
+            <h4>{{group?.description}}</h4>
         </mat-expansion-panel-header>
 
-        <div fxLayout="row">
-            <div fxFlex="25%">{{'risks.weakened' | translate}}</div>
-            <div fxFlex="25%">{{group.risks.isWeakened ? 'yes' : 'no' | translate}}</div>
-            <div fxFlex="25%">{{'risks.opening' | translate}}</div>
-            <div fxFlex="25%">{{group.risks.hasOpening ? 'yes' : 'no' | translate}}</div>
-        </div>
-        <div fxLayout="row">
-            <div fxFlex="25%">{{'risks.dimension' | translate}}</div>
-            <div fxFlex="75%">{{group.risks.dimension}}</div>
-        </div>
-        <h4>{{'risks.localization' | translate}}</h4>
-        <div fxLayout="row">
-            <div fxFlex="25%">{{'risks.wall' | translate}}</div>
-            <div fxFlex="25%">{{group.risks.wall}}</div>
-            <div fxFlex="25%">{{'risks.sector' | translate}}</div>
-            <div fxFlex="25%">{{group.risks.sector}}</div>
-        </div>
-        <div fxLayout="row">
-            <div fxFlex="25%">{{'risks.comments' | translate}}</div>
-            <div fxFlex="75%">{{group.risks.comments}}</div>
-        </div>
-        <div fxLayout="row">
-            <slideshow height="200"
-                       [autoPlay]="true"
-                       [showArrows]="true"
-                       imageUrls="{{group.pictures}}"
-                       lazyLoad="{{group.pictures?.length > 1}}"
-                       [autoPlayWaitForLazyLoad]="true">
-            </slideshow>
+        <div *ngIf="group?.risks">
+            <div fxLayout="row">
+                <div fxFlex="25%">{{'risks.weakened' | translate}}</div>
+                <div fxFlex="25%">{{group.risks.isWeakened ? 'yes' : 'no' | translate}}</div>
+                <div fxFlex="25%">{{'risks.opening' | translate}}</div>
+                <div fxFlex="25%">{{group.risks.hasOpening ? 'yes' : 'no' | translate}}</div>
+            </div>
+            <div fxLayout="row">
+                <div fxFlex="25%">{{'risks.dimension' | translate}}</div>
+                <div fxFlex="75%">{{group.risks.dimension}}</div>
+            </div>
+            <h4>{{'risks.localization' | translate}}</h4>
+            <div fxLayout="row">
+                <div fxFlex="25%">{{'risks.wall' | translate}}</div>
+                <div fxFlex="25%">{{group.risks.wall}}</div>
+                <div fxFlex="25%">{{'risks.sector' | translate}}</div>
+                <div fxFlex="25%">{{group.risks.sector}}</div>
+            </div>
+            <div fxLayout="row">
+                <div fxFlex="25%">{{'risks.comments' | translate}}</div>
+                <div fxFlex="75%">{{group.risks.comments}}</div>
+            </div>
+            <div fxLayout="row">
+                <app-slideshow height="200"
+                           [autoPlay]="true"
+                           [images]="group?.pictures">
+                </app-slideshow>
+            </div>
         </div>
     </mat-expansion-panel>
 </mat-accordion>
