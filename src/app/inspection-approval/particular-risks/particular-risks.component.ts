@@ -51,7 +51,9 @@ export class ParticularRisksComponent implements OnInit {
             };
 
             this.particularRisksService.getPictures(data.id).subscribe( pictures => {
-                console.log(pictures);
+                pictures.forEach((image, index) => {
+                    this.particularRisks[0].pictures.push('data:image/jpeg;base64,' + image['pictureData']);
+                });
             });
         });
         this.particularRisksService.getFloor(this.idBuilding).subscribe(data => {
@@ -62,7 +64,9 @@ export class ParticularRisksComponent implements OnInit {
             };
 
             this.particularRisksService.getPictures(data.id).subscribe( pictures => {
-                console.log(pictures);
+                pictures.forEach((image, index) => {
+                    this.particularRisks[1].pictures.push('data:image/jpeg;base64,' + image['pictureData']);
+                });
             });
         });
         this.particularRisksService.getWall(this.idBuilding).subscribe(data => {
@@ -73,7 +77,9 @@ export class ParticularRisksComponent implements OnInit {
             };
 
             this.particularRisksService.getPictures(data.id).subscribe( pictures => {
-                console.log(pictures);
+                pictures.forEach((image, index) => {
+                    this.particularRisks[2].pictures.push('data:image/jpeg;base64,' + image['pictureData']);
+                });
             });
         });
         this.particularRisksService.getRoof(this.idBuilding).subscribe(data => {
@@ -84,7 +90,9 @@ export class ParticularRisksComponent implements OnInit {
             };
 
             this.particularRisksService.getPictures(data.id).subscribe( pictures => {
-                console.log(pictures);
+                pictures.forEach((image, index) => {
+                    this.particularRisks[3].pictures.push('data:image/jpeg;base64,' + image['pictureData']);
+                });
             });
         });
     }

@@ -21,6 +21,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MultilangComponent } from './components/multilang/multilang.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { SlideshowComponent } from './components/slideshow/slideshow.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -33,6 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MultilangComponent,
         PageNotFoundComponent,
         MainMenuComponent,
+        SlideshowComponent,
     ],
     exports: [
         BrowserModule,
@@ -53,6 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
         TranslateModule,
         MainMenuComponent,
+        SlideshowComponent,
     ],
     imports: [
         BrowserModule,
