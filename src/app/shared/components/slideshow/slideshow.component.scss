@@ -5,6 +5,7 @@
 .slideshow {
   margin: 0px auto;
   position: relative;
+  overflow: hidden;
 }
 
 .slideshow > div {
@@ -16,7 +17,7 @@
 img {
   max-height: 100%;
   max-width: 100%;
-  margin: 0px auto;
+  margin: 0 auto;
   display: block;
 }
 

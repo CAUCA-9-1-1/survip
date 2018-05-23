@@ -1,5 +1,5 @@
 <div #container class="slideshow">
-    <div *ngFor="let url of images;">
+    <div *ngFor="let url of images; let index = index;" [@slideLeftRight]="getState(index)">
         <img src="{{url}}" />
     </div>
 </div>
