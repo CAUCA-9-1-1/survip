@@ -2,6 +2,7 @@
   "risks": {
     "floor": "Floor",
     "wall": "Wall",
+    "walls": "Walls",
     "foundation": "Foundation",
     "roof": "Roof",
     "weakened": "Weakened",

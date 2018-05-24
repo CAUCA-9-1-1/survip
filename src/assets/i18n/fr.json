@@ -1,7 +1,8 @@
 {
   "risks": {
     "floor": "Plancher",
-    "wall": "Murs",
+    "wall": "Mur",
+    "walls": "Murs",
     "foundation": "Fondation",
     "roof": "Toit",
     "weakened": "Affaiblie",
