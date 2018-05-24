@@ -9,7 +9,7 @@ import {InspectionService} from '../shared/services/inspection.service';
     styleUrls: ['./inspection-water-supply.component.scss'],
     providers: [
         InspectionService,
-    ]
+    ],
 })
 export class InspectionWaterSupplyComponent implements OnInit {
     @Input() inspectionId: string;
