@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {InspectionService} from '../inspection-dashboard/shared/services/inspection.service';
+
+import {InspectionService} from './shared/services/inspection.service';
 
 
 @Component({

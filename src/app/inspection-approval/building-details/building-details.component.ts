@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {InspectionService} from '../../inspection-dashboard/shared/services/inspection.service';
+
 import {ConstructionService} from '../../management-building/shared/services/construction.service';
 import {UnitOfMeasureService} from '../../management-fire-hydrant/shared/services/unit-of-measure.service';
+import {InspectionService} from '../shared/services/inspection.service';
+
 
 @Component({
     selector: 'app-building-details',
@@ -53,6 +55,10 @@ export class BuildingDetailsComponent implements OnInit {
     ngOnInit() { }
 
     loadData() {
+        if (!this.idBuilding) {
+            return null;
+        }
+
         this.inspectionService.getBuildingDetail(this.idBuilding).subscribe(data => {
             this.detail = data;
 

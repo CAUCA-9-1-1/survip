@@ -1,0 +1,33 @@
+<h3>{{'particularRisks' | translate}}</h3>
+<mat-accordion>
+    <mat-expansion-panel  [expanded]="false" *ngFor="let label of description; let index = index;">
+        <mat-expansion-panel-header>
+            <h4>{{label}}</h4>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row">
+            <div fxFlex="25%" class="title">{{'risks.weakened' | translate}}</div>
+            <div fxFlex="25%">{{risks[index].isWeakened ? 'yes' : 'no' | translate}}</div>
+            <div fxFlex="25%" class="title">{{'risks.opening' | translate}}</div>
+            <div fxFlex="25%">{{risks[index].hasOpening ? 'yes' : 'no' | translate}}</div>
+        </div>
+        <div fxLayout="row" [fxShow]="index === 0">
+            <div fxFlex="25%" class="title">{{'risks.dimension' | translate}}</div>
+            <div fxFlex="75%">{{risks[index].dimension}}</div>
+        </div>
+        <h4 class="section">{{'risks.localization' | translate}}</h4>
+        <div fxLayout="row">
+            <div fxFlex="25%" class="title">{{'risks.wall' | translate}}</div>
+            <div fxFlex="25%">{{risks[index].wall}}</div>
+            <div fxFlex="25%" class="title">{{'risks.sector' | translate}}</div>
+            <div fxFlex="25%">{{risks[index].sector}}</div>
+        </div>
+        <h4 class="section">{{'risks.comments' | translate}}</h4>
+        <div fxLayout="row">
+            <div>{{risks[index].comments}}</div>
+        </div>
+        <div fxLayout="row" [fxShow]="pictures[index].length">
+            <app-slideshow height="200" [images]="pictures[index]"></app-slideshow>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

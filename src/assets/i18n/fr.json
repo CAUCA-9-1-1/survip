@@ -1,4 +1,17 @@
 {
+  "risks": {
+    "floor": "Plancher",
+    "wall": "Mur",
+    "walls": "Murs",
+    "foundation": "Fondation",
+    "roof": "Toit",
+    "weakened": "Affaiblie",
+    "opening": "Ouverture",
+    "dimension": "Dimension",
+    "sector": "Section",
+    "comments": "Commentaires",
+    "localization": "Localisation"
+  },
   "cancel": "Annuler",
   "create": "Créer",
   "left": "Gauche",
