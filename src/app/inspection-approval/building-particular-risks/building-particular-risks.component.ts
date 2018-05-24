@@ -34,12 +34,12 @@ export class BuildingParticularRisksComponent implements OnInit {
         private translateService: TranslateService,
     ) {
         this.translateService.get([
-            'risks.floor', 'risks.foundation', 'risks.wall', 'risks.roof'
+            'risks.foundation', 'risks.floor', 'risks.walls', 'risks.roof'
         ]).subscribe(data => {
             this.description = [
                 data['risks.foundation'],
                 data['risks.floor'],
-                data['risks.wall'],
+                data['risks.walls'],
                 data['risks.roof'],
             ];
         });
