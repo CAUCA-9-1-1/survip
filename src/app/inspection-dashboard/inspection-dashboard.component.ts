@@ -79,7 +79,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details',
             'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see',
             'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building',
-            'approve', 'todo', 'started', 'absent', 'waitingApprobation', 'approved', 'refused', 'canceled'
+            'approve', 'todo', 'started', 'absent', 'waitingApprobation', 'approved', 'refused', 'cancelled'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -344,7 +344,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                     name: this.labels['refused']
                 }, {
                     id: 5,
-                    name: this.labels['canceled']
+                    name: this.labels['cancelled']
                 }]
             }
         }, {

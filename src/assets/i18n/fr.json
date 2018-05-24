@@ -238,7 +238,7 @@
   "waitingApprobation": "En attente d'approbation",
   "approved": "Approuver",
   "refused": "Refuser",
-  "canceled": "Annuler",
+  "cancelled": "Annuler",
   "logout": "Déconnecter",
   "badLogin": "Mauvais nom d'utilisateur ou mot de passe",
   "errorDuringLoggin": "Une erreur est survenue durant la connexion",
