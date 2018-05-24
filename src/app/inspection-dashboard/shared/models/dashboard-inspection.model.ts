@@ -10,7 +10,7 @@ export class DashboardInspection {
     idLaneTransversal: string;
     idCity: string;
     postalCode: string;
-    visitStatus: string;
+    inspectionStatus: string;
     visitNote: boolean;
     anomaly: boolean;
     lastInspection: Date;

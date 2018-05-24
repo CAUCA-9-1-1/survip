@@ -321,7 +321,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             groupIndex: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? 0 : null),
             groupCellTemplate: 'groupBatch',
         }, {
-            dataField: 'visitStatus',
+            dataField: 'inspectionStatus',
             caption: this.labels['status'],
             visible: visible[8],
             lookup: {
@@ -335,18 +335,15 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                     name: this.labels['started']
                 }, {
                     id: 2,
-                    name: this.labels['absent']
-                }, {
-                    id: 3,
                     name: this.labels['waitingApprobation']
                 }, {
-                    id: 4,
+                    id: 3,
                     name: this.labels['approved']
                 }, {
-                    id: 5,
+                    id: 4,
                     name: this.labels['refused']
                 }, {
-                    id: 6,
+                    id: 5,
                     name: this.labels['canceled']
                 }]
             }
