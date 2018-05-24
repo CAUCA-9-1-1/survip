@@ -9,5 +9,5 @@ export const environment = {
         available: ['fr', 'en'],
         use: 'fr',
     },
-    apiUrl: 'http://cadevsprevention1.ad.cauca.ca:5555/api/',
+    apiUrl: 'http://localhost:5555/api/',
 };
