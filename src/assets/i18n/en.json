@@ -233,7 +233,7 @@
   "waitingApprobation": "Waiting approbation",
   "approved": "Approved",
   "refused": "Refused",
-  "canceled": "Canceled",
+  "cancelled": "Cancelled",
   "logout": "Logout",
   "badLogin": "Bad username or password",
   "errorDuringLoggin": "An error occur during connection",
