@@ -12,6 +12,7 @@ import {ManagementFireHydrantComponent} from './management-fire-hydrant/manageme
 import {ManagementSurveyComponent} from './management-survey/management-survey.component';
 import {LoginComponent} from './user-access/login/login.component';
 import {InspectionApprovalComponent} from './inspection-approval/inspection-approval.component';
+import {InspectionManagementComponent} from './inspection-management/inspection-management.component';
 
 
 const appRoutes: Routes = [{
@@ -36,6 +37,9 @@ const appRoutes: Routes = [{
     }, {
         path: 'batch/:idBatch',
         component: InspectionBatchComponent
+    }, {
+        path: 'management',
+        component: InspectionManagementComponent
     }]
 }, {
     path: 'management',
