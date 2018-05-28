@@ -4,6 +4,7 @@ $accent: map-get($theme, accent);
 
 :host {
   height: 100%;
+  min-width: 300px;
   display: block;
   border-right: 1px solid rgba(0,0,0,.2);
   margin-right: 10px;

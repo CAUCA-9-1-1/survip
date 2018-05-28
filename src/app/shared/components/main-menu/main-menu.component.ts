@@ -20,9 +20,6 @@ export class MainMenuComponent implements OnInit {
         path: '/inspection/management',
     }];
     management = [{
-        name: 'interventionPlanManagement',
-        path: '/management/interventionplan',
-    }, {
         name: 'surveyManagement',
         path: '/management/survey',
     }, {
