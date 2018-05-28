@@ -1,10 +1,22 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span>SURVI-Prévention</span>
+        <span [fxShow]="isLogged">
+            <button mat-raised-button color="accent" (click)="showMenu()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </span>
+        <span class="title">SURVI-Prévention</span>
         <span class="fill-space"></span>
         <span [fxShow]="isLogged">
             <button mat-raised-button color="accent" (click)="logout()">{{'logout' | translate}}</button>
         </span>
     </mat-toolbar-row>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<div class="fullHeight">
+    <div #menuContainer class="menuContainer">
+        <app-main-menu></app-main-menu>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

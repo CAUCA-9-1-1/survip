@@ -1,103 +1,96 @@
-<div class="fullHeight" fxLayout="row">
-    <div fxFlex="350px">
-        <app-main-menu></app-main-menu>
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onInitialized)="onInitialized($event)"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onEditingStart)="onEditingStart($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="description"
+            caption="{{'description' | translate}}"
+            sortOrder="asc"
+            sortIndex="0">
+    </dxi-column>
+    <dxi-column dataField="civicNumber" caption="{{'civicNumber' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="isReadyForInspection" editCellTemplate="editReady" cellTemplate="showReady" caption="{{'isReadyForInspection' | translate}}" width="10%"></dxi-column>
+    <dxi-column dataField="shouldStartOn" dataType="date" caption="{{'shouldStartOn' | translate}}"></dxi-column>
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+    <dxi-column dataField="users" editCellTemplate="editInspectors" [visible]="false"></dxi-column>
+    <dxi-column dataField="inspections" editCellTemplate="editBuildings" [visible]="false"></dxi-column>
+
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'batch' | translate}}" [showTitle]="true"></dxo-popup>
+
+        <dxo-form colCount="4">
+            <dxi-item dataField="description" [isRequired]="true" [colSpan]="4"></dxi-item>
+            <dxi-item dataField="shouldStartOn"></dxi-item>
+            <dxi-item dataField="isReadyForInspection"></dxi-item>
+            <dxi-item dataField="isActive"></dxi-item>
+            <dxi-item itemType="empty"></dxi-item>
+            <dxi-item itemType="group" caption="{{'batchInspectors' | translate}}">
+                <dxi-item dataField="users" [label]="{visible: false}"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'batchBuilding' | translate}}" [colSpan]="3">
+                <dxi-item dataField="inspections" [label]="{visible: false}"></dxi-item>
+            </dxi-item>
+        </dxo-form>
+    </dxo-editing>
+
+    <div *dxTemplate="let field of 'showReady'">
+        <dx-check-box class="dx-datagrid-checkbox-size" [readOnly]="true" [value]="field.value"></dx-check-box>
     </div>
-    <div fxFlex="" class="content">
+    <div *dxTemplate="let field of 'editReady'">
+        <dx-check-box (onInitialized)="setFormReadyField(field)" (onValueChanged)="validateReady($event)" [value]="field.value"></dx-check-box>
+    </div>
+    <div *dxTemplate="let field of 'editInspectors'">
+        <dx-select-box [dataSource]="inspectorsOff" valueExpr="id" displayExpr="name" (onInitialized)="setFormUserField(field)" (onSelectionChanged)="addInspector($event)" placeholder="{{'addToInspectors' | translate}}"></dx-select-box>
+        <dx-list [dataSource]="inspectorsOn" itemTemplate="listItem">
+            <div *dxTemplate="let item of 'listItem'">
+                <dx-button icon="trash" (onClick)="removeInspector(item)">
+                </dx-button>
+                <span>{{item.name}}</span>
+            </div>
+        </dx-list>
+    </div>
+    <div *dxTemplate="let field of 'editBuildings'">
         <dx-data-grid
-                [dataSource]="dataSource"
+                [dataSource]="buildingsInspected"
                 [hoverStateEnabled]="true"
                 [rowAlternationEnabled]="true"
                 (onInitialized)="onInitialized($event)"
-                (onInitNewRow)="onInitNewRow($event)"
-                (onEditingStart)="onEditingStart($event)"
-                (onRowInserted)="onRowInserted($event)"
-                (onRowUpdated)="onRowUpdated($event)"
-                (onRowRemoved)="onRowRemoved($event)">
+                (onToolbarPreparing)="onToolbarPreparing($event)"
+                (onInitialized)="setFormInspectionField(field)"
+                (onRowUpdated)="onBuildingsUpdated($event)"
+                (onRowRemoved)="onBuildingsRemoved($event)">
+            <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="8%" caption=" "></dxi-column>
             <dxi-column
-                dataField="description"
-                caption="{{'description' | translate}}"
-                sortOrder="asc"
-                sortIndex="0">
+                    dataField="civicNumber"
+                    caption="{{'civicNumber' | translate}}"
+                    [allowEditing]="false"
+                    width="14%">
             </dxi-column>
-            <dxi-column dataField="civicNumber" caption="{{'civicNumber' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="isReadyForInspection" editCellTemplate="editReady" cellTemplate="showReady" caption="{{'isReadyForInspection' | translate}}" width="10%"></dxi-column>
-            <dxi-column dataField="shouldStartOn" dataType="date" caption="{{'shouldStartOn' | translate}}"></dxi-column>
-            <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
-            <dxi-column dataField="users" editCellTemplate="editInspectors" [visible]="false"></dxi-column>
-            <dxi-column dataField="inspections" editCellTemplate="editBuildings" [visible]="false"></dxi-column>
+            <dxi-column dataField="lane" caption="{{'lane' | translate}}" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="city" caption="{{'city' | translate}}" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="riskLevel" caption="{{'riskLevel' | translate}}" [allowEditing]="false" width="14%"></dxi-column>
+            <dxi-column dataField="assignedTo" caption="{{'assignedTo' | translate}}">
+                <dxo-lookup [dataSource]="inspectorsList" displayExpr="name" valueExpr="id">
+                </dxo-lookup>
+            </dxi-column>
 
-            <dxo-filter-row [visible]="true"></dxo-filter-row>
-            <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-                <dxo-popup title="{{'batch' | translate}}" [showTitle]="true"></dxo-popup>
-
-                <dxo-form colCount="4">
-                    <dxi-item dataField="description" [isRequired]="true" [colSpan]="4"></dxi-item>
-                    <dxi-item dataField="shouldStartOn"></dxi-item>
-                    <dxi-item dataField="isReadyForInspection"></dxi-item>
-                    <dxi-item dataField="isActive"></dxi-item>
-                    <dxi-item itemType="empty"></dxi-item>
-                    <dxi-item itemType="group" caption="{{'batchInspectors' | translate}}">
-                        <dxi-item dataField="users" [label]="{visible: false}"></dxi-item>
-                    </dxi-item>
-                    <dxi-item itemType="group" caption="{{'batchBuilding' | translate}}" [colSpan]="3">
-                        <dxi-item dataField="inspections" [label]="{visible: false}"></dxi-item>
-                    </dxi-item>
-                </dxo-form>
+            <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true">
             </dxo-editing>
 
-            <div *dxTemplate="let field of 'showReady'">
-                <dx-check-box class="dx-datagrid-checkbox-size" [readOnly]="true" [value]="field.value"></dx-check-box>
-            </div>
-            <div *dxTemplate="let field of 'editReady'">
-                <dx-check-box (onInitialized)="setFormReadyField(field)" (onValueChanged)="validateReady($event)" [value]="field.value"></dx-check-box>
-            </div>
-            <div *dxTemplate="let field of 'editInspectors'">
-                <dx-select-box [dataSource]="inspectorsOff" valueExpr="id" displayExpr="name" (onInitialized)="setFormUserField(field)" (onSelectionChanged)="addInspector($event)" placeholder="{{'addToInspectors' | translate}}"></dx-select-box>
-                <dx-list [dataSource]="inspectorsOn" itemTemplate="listItem">
-                    <div *dxTemplate="let item of 'listItem'">
-                        <dx-button icon="trash" (onClick)="removeInspector(item)">
-                        </dx-button>
-                        <span>{{item.name}}</span>
-                    </div>
-                </dx-list>
-            </div>
-            <div *dxTemplate="let field of 'editBuildings'">
-                <dx-data-grid
-                        [dataSource]="buildingsInspected"
-                        [hoverStateEnabled]="true"
-                        [rowAlternationEnabled]="true"
-                        (onInitialized)="onInitialized($event)"
-                        (onToolbarPreparing)="onToolbarPreparing($event)"
-                        (onInitialized)="setFormInspectionField(field)"
-                        (onRowUpdated)="onBuildingsUpdated($event)"
-                        (onRowRemoved)="onBuildingsRemoved($event)">
-                    <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="8%" caption=" "></dxi-column>
-                    <dxi-column
-                            dataField="civicNumber"
-                            caption="{{'civicNumber' | translate}}"
-                            [allowEditing]="false"
-                            width="14%">
-                    </dxi-column>
-                    <dxi-column dataField="lane" caption="{{'lane' | translate}}" [allowEditing]="false"></dxi-column>
-                    <dxi-column dataField="city" caption="{{'city' | translate}}" [allowEditing]="false"></dxi-column>
-                    <dxi-column dataField="riskLevel" caption="{{'riskLevel' | translate}}" [allowEditing]="false" width="14%"></dxi-column>
-                    <dxi-column dataField="assignedTo" caption="{{'assignedTo' | translate}}">
-                        <dxo-lookup [dataSource]="inspectorsList" displayExpr="name" valueExpr="id">
-                        </dxo-lookup>
-                    </dxi-column>
-
-                    <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true">
-                    </dxo-editing>
-
-                    <div *dxTemplate="let field of 'showmove'">
-                        <dx-button icon="arrowup" (onClick)="moveUp(field)"></dx-button>
-                        <dx-button icon="arrowdown" (onClick)="moveDown(field)"></dx-button>
-                    </div>
-                </dx-data-grid>
+            <div *dxTemplate="let field of 'showmove'">
+                <dx-button icon="arrowup" (onClick)="moveUp(field)"></dx-button>
+                <dx-button icon="arrowdown" (onClick)="moveDown(field)"></dx-button>
             </div>
         </dx-data-grid>
     </div>
-</div>
+</dx-data-grid>
 <dx-popup
         class="popup"
         [showTitle]="true"

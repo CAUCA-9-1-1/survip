@@ -1,55 +1,47 @@
-<div class="fullHeight" fxLayout="row">
-    <div fxFlex="350px">
-        <app-main-menu></app-main-menu>
-    </div>
-    <div fxFlex="0" class="content">
-        <div fxLayout="column">
-            <div fxFlex="5%" class="title">{{title}}</div>
-            <div fxFlex="90%">
-                <div fxLayout="row" class="details">
-                    <div fxFlex="20%">
-                        <app-section-list (selectionChange)="sectionChange($event)"></app-section-list>
-                    </div>
-                    <div fxFlex="80%">
-                        <div [fxShow]="selected == 'generalInfo'">
-                            <app-inspection-general-info [inspectionId]="inspectionId"></app-inspection-general-info>
-                        </div>
-                        <div [fxShow]="selected == 'implantationPlan'">
-                            <app-inspection-implantation-plan [implantationPlan]="idImplantationPlan"></app-inspection-implantation-plan>
-                        </div>
-                        <div [fxShow]="selected == 'course'">
-                            <app-inspection-course [inspectionId]="inspectionId"></app-inspection-course>
-                        </div>
-                        <div [fxShow]="selected == 'waterSupply'">
-                            <app-inspection-water-supply [inspectionId]="inspectionId"></app-inspection-water-supply>
-                        </div>
-                        <div [fxShow]="selected == 'survey'">
-                            <app-inspection-survey [inspectionId]="inspectionId"></app-inspection-survey>
-                        </div>
-                        <div [fxShow]="selected == 'buildingDetails' || selected == 'contacts' || selected == 'pnaps' || selected == 'hazardousMaterials' || selected == 'fireProtection' || selected == 'particularRisks' || selected == 'anomalies'">
-                            <app-building-list [selected]="selected" [inspectionId]="inspectionId"></app-building-list>
-                        </div>
-                    </div>
-                </div>
+<div fxLayout="column">
+<div fxFlex="5%" class="title">{{title}}</div>
+<div fxFlex="90%">
+    <div fxLayout="row" class="details">
+        <div fxFlex="20%">
+            <app-section-list (selectionChange)="sectionChange($event)"></app-section-list>
+        </div>
+        <div fxFlex="80%">
+            <div [fxShow]="selected == 'generalInfo'">
+                <app-inspection-general-info [inspectionId]="inspectionId"></app-inspection-general-info>
             </div>
-            <div fxFlex="5%" class="tools">
-                <button mat-raised-button color="accent" (click)="approve()" [fxShow]="!isClosed">
-                    <mat-icon>check_circle_outline</mat-icon>
-                    {{'approve' | translate}}
-                </button>
-                <button mat-raised-button color="primary" (click)="refuse()" [fxShow]="!isClosed">
-                    <mat-icon>warning</mat-icon>
-                    {{'refuse' | translate}}
-                </button>
-                <button mat-raised-button color="warn" (click)="cancel()" [fxShow]="!isClosed">
-                    <mat-icon>clear</mat-icon>
-                    {{'cancel' | translate}}
-                </button>
-                <button mat-raised-button (click)="close()" [fxShow]="isClosed">
-                    <mat-icon>close</mat-icon>
-                    {{'close' | translate}}
-                </button>
+            <div [fxShow]="selected == 'implantationPlan'">
+                <app-inspection-implantation-plan [implantationPlan]="idImplantationPlan"></app-inspection-implantation-plan>
+            </div>
+            <div [fxShow]="selected == 'course'">
+                <app-inspection-course [inspectionId]="inspectionId"></app-inspection-course>
+            </div>
+            <div [fxShow]="selected == 'waterSupply'">
+                <app-inspection-water-supply [inspectionId]="inspectionId"></app-inspection-water-supply>
+            </div>
+            <div [fxShow]="selected == 'survey'">
+                <app-inspection-survey [inspectionId]="inspectionId"></app-inspection-survey>
+            </div>
+            <div [fxShow]="selected == 'buildingDetails' || selected == 'contacts' || selected == 'pnaps' || selected == 'hazardousMaterials' || selected == 'fireProtection' || selected == 'particularRisks' || selected == 'anomalies'">
+                <app-building-list [selected]="selected" [inspectionId]="inspectionId"></app-building-list>
             </div>
         </div>
     </div>
+</div>
+<div fxFlex="5%" class="tools">
+    <button mat-raised-button color="accent" (click)="approve()" [fxShow]="!isClosed">
+        <mat-icon>check_circle_outline</mat-icon>
+        {{'approve' | translate}}
+    </button>
+    <button mat-raised-button color="primary" (click)="refuse()" [fxShow]="!isClosed">
+        <mat-icon>warning</mat-icon>
+        {{'refuse' | translate}}
+    </button>
+    <button mat-raised-button color="warn" (click)="cancel()" [fxShow]="!isClosed">
+        <mat-icon>clear</mat-icon>
+        {{'cancel' | translate}}
+    </button>
+    <button mat-raised-button (click)="close()" [fxShow]="isClosed">
+        <mat-icon>close</mat-icon>
+        {{'close' | translate}}
+    </button>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {registerLocaleData} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
@@ -20,6 +20,8 @@ import {AuthenticationService} from './user-access/shared/services/authentificat
     ]
 })
 export class AppComponent {
+    @ViewChild('menuContainer') menuContainer: ElementRef;
+
     title = 'app';
     isLogged = (localStorage.getItem('currentToken') ? true : false);
 
@@ -41,7 +43,16 @@ export class AppComponent {
 
     logout() {
         this.auth.logout();
+        this.menuContainer.nativeElement.style.width = '0';
         this.router.navigate(['/login']);
+    }
+
+    showMenu() {
+        if (!this.menuContainer.nativeElement.offsetWidth) {
+            this.menuContainer.nativeElement.style.width = '20%';
+        } else {
+            this.menuContainer.nativeElement.style.width = '0';
+        }
     }
 
     private setAngular() {
