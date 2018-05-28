@@ -79,7 +79,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details',
             'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see',
             'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building',
-            'approve', 'todo', 'started', 'absent', 'waitingApprobation', 'approved', 'refused', 'cancelled'
+            'approve', 'todo', 'started', 'absent', 'waitingApprobation', 'approved', 'refused', 'cancelled',
+            'collapseAll', 'expandAll'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -213,13 +214,35 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         toolbarItems.unshift({
             widget: 'dxButton',
             options: {
+                text: this.labels['collapseAll'],
+                icon: 'spinright',
+                disabled: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? false : true),
+                onClick: (ev) => this.openCloseGroup(ev,0)},
+            location: 'after',
+        });
+
+        toolbarItems.unshift({
+            widget: 'dxButton',
+            options: {
                 text: this.labels['createBatch'],
                 icon: 'group',
-                disabled: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? true : false),
+                disabled: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? false : false),
                 onClick: (ev) => this.createBatch(ev)
             },
             location: 'after',
         });
+    }
+
+    private openCloseGroup(e, groupIndex) {
+        if (e.component.option('icon') === 'spinright') {
+            e.component.option('icon', 'spindown');
+            e.component.option('text', this.labels['expandAll']);
+            this.dataGrid.instance.collapseAll(groupIndex);
+        } else {
+            e.component.option('icon', 'spinright');
+            e.component.option('text', this.labels['collapseAll']);
+            this.dataGrid.instance.expandAll(groupIndex);
+        }
     }
 
     private getDefaultColumnVisible() {
