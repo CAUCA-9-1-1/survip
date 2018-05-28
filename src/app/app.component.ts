@@ -43,6 +43,7 @@ export class AppComponent {
 
     logout() {
         this.auth.logout();
+        this.menuContainer.nativeElement.style.width = '0';
         this.router.navigate(['/login']);
     }
 

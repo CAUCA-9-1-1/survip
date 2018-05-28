@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -9,31 +9,34 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class MainMenuComponent implements OnInit {
     selected = '';
-    inspection = [{
+    menus = [{
         name: 'inspectionDashboard',
         path: '/inspection/dashboard',
     }, {
-        name: 'inspectionBatch',
-        path: '/inspection/batch',
-    }, {
-        name: 'inspectionManagement',
-        path: '/inspection/management',
-    }];
-    management = [{
-        name: 'surveyManagement',
-        path: '/management/survey',
-    }, {
-        name: 'buildingManagement',
-        path: '/management/building',
-    }, {
-        name: 'addressManagement',
-        path: '/management/address',
-    }, {
-        name: 'fireHydrantManagement',
-        path: '/management/firehydrant',
-    }, {
-        name: 'accessManagement',
-        path: '/management/access',
+        name: 'management',
+        path: '',
+        items: [{
+            name: 'surveyManagement',
+            path: '/management/survey',
+        }, {
+            name: 'buildingManagement',
+            path: '/management/building',
+        }, {
+            name: 'addressManagement',
+            path: '/management/address',
+        }, {
+            name: 'fireHydrantManagement',
+            path: '/management/firehydrant',
+        }, {
+            name: 'accessManagement',
+            path: '/management/access',
+        }, {
+            name: 'inspectionBatchManagement',
+            path: '/inspection/batch',
+        }, {
+            name: 'inspectionManagement',
+            path: '/inspection/management',
+        }]
     }];
 
     constructor(
