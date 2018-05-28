@@ -11,6 +11,7 @@ import {ManagementFireHydrantModule} from './management-fire-hydrant/management-
 import {ManagementSurveyModule} from './management-survey/management-survey.module';
 import {InspectionBatchModule} from './inspection-batch/inspection-batch.module';
 import {InspectionApprovalModule} from './inspection-approval/inspection-approval.module';
+import {InspectionManagementModule} from './inspection-management/inspection-management.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {InspectionApprovalModule} from './inspection-approval/inspection-approva
         InspectionApprovalModule,
         InspectionBatchModule,
         InspectionDashboardModule,
+        InspectionManagementModule,
         ManagementAddressModule,
         ManagementAccessModule,
         ManagementFireHydrantModule,

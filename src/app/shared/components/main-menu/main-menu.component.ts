@@ -15,6 +15,9 @@ export class MainMenuComponent implements OnInit {
     }, {
         name: 'inspectionBatch',
         path: '/inspection/batch',
+    }, {
+        name: 'inspectionManagement',
+        path: '/inspection/management',
     }];
     management = [{
         name: 'interventionPlanManagement',
