@@ -1,14 +1,20 @@
 <mat-list>
-    <h3>{{'inspection' | translate}}</h3>
-    <mat-list-item *ngFor="let menu of inspection">
-        <h4 mat-line (click)="goto(menu.path)" [class]="isSelected(menu.path)">
-            <div>{{menu.name | translate}}</div>
-        </h4>
-    </mat-list-item>
-    <h3>{{'management' | translate}}</h3>
-    <mat-list-item *ngFor="let menu of management">
-        <h4 mat-line (click)="goto(menu.path)" [class]="isSelected(menu.path)">
-            <div>{{menu.name | translate}}</div>
-        </h4>
-    </mat-list-item>
+    <ng-container *ngFor="let menu of menus">
+        <div *ngIf="menu.path; else withItems">
+            <mat-list-item>
+                <h4 mat-line (click)="goto(menu.path)" [class]="isSelected(menu.path)">
+                    <div>{{menu.name | translate}}</div>
+                </h4>
+            </mat-list-item>
+        </div>
+
+        <ng-template #withItems>
+            <h3>{{menu.name | translate}}</h3>
+            <mat-list-item *ngFor="let submenu of menu.items">
+                <h4 mat-line (click)="goto(submenu.path)" [class]="isSelected(submenu.path)">
+                    <div>{{submenu.name | translate}}</div>
+                </h4>
+            </mat-list-item>
+        </ng-template>
+    </ng-container>
 </mat-list>
