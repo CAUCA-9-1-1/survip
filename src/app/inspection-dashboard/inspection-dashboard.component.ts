@@ -317,13 +317,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[5],
             width: width[5] || null,
         }, {
-            dataField: 'idWebuserAssignedTo',
+            dataField: 'webuserAssignedTo',
             caption: this.labels['webuserAssignedTo'],
-            lookup: {
-                dataSource: this.webusers,
-                displayExpr: 'name',
-                valueExpr: 'id',
-            },
             visible: visible[6],
             width: width[6] || null,
         }, {
