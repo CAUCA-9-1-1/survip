@@ -248,6 +248,8 @@
   "approved": "Approuvée",
   "refused": "Refusée",
   "cancelled": "Annulée",
+  "expandAll": "Ouvrir tout",
+  "collapseAll": "Fermer tout",
   "logout": "Déconnecter",
   "badLogin": "Mauvais nom d'utilisateur ou mot de passe",
   "errorDuringLoggin": "Une erreur est survenue durant la connexion",
