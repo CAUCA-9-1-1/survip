@@ -173,6 +173,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         const columns = this.getColumns();
 
         this.dataGrid.instance.option({
+            allowColumnResizing: true,
             filterRow: {
                 visible: true,
             },
@@ -189,12 +190,15 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             },
             onColumnsChanging: (e) => {
                 const visible = [];
+                const width = [];
 
                 for (let i = 0, j = e.component.columnCount(); i < j; i++) {
                     visible.push(e.component.columnOption(i, 'visible'));
+                    width.push(e.component.columnOption(i, 'width'));
                 }
 
                 localStorage.setItem('column-visible-' + this.selectedMode, JSON.stringify(visible));
+                localStorage.setItem('column-width-' + this.selectedMode, JSON.stringify(width));
             },
             selection: {
                 mode: 'multiple'
@@ -255,10 +259,12 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     private getColumns(): any[] {
         const visible = JSON.parse(localStorage.getItem('column-visible-' + this.selectedMode)) || this.getDefaultColumnVisible();
+        const width = JSON.parse(localStorage.getItem('column-width-' + this.selectedMode)) || [];
 
         return [{
             caption: this.labels['approve'],
             visible: visible[0],
+            width: width[0] || null,
             cellTemplate: 'approveInspection',
         }, {
             dataField: 'idRiskLevel',
@@ -271,10 +277,12 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 }
             },
             visible: visible[1],
+            width: width[1] || null,
         }, {
             dataField: 'address',
             caption: this.labels['address'],
             visible: visible[2],
+            width: width[2] || null,
         }, {
             dataField: 'idLaneTransversal',
             caption: this.labels['transversal'],
@@ -288,10 +296,12 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 }
             },
             visible: visible[3],
+            width: width[3] || null,
         }, {
             dataField: 'idCity',
             caption: this.labels['city'],
             visible: visible[4],
+            width: width[4] || null,
             lookup: {
                 dataSource: this.cities,
                 valueExpr: 'id',
@@ -305,6 +315,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             dataField: 'postalCode',
             caption: this.labels['postalCode'],
             visible: visible[5],
+            width: width[5] || null,
         }, {
             dataField: 'idWebuserAssignedTo',
             caption: this.labels['webuserAssignedTo'],
@@ -314,16 +325,19 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 valueExpr: 'id',
             },
             visible: visible[6],
+            width: width[6] || null,
         }, {
             dataField: 'batchDescription',
             caption: this.labels['batch'],
             visible: visible[7],
+            width: width[7] || null,
             groupIndex: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? 0 : null),
             groupCellTemplate: 'groupBatch',
         }, {
             dataField: 'inspectionStatus',
             caption: this.labels['status'],
             visible: visible[8],
+            width: width[8] || null,
             lookup: {
                 displayExpr: 'name',
                 valueExpr: 'id',
@@ -352,19 +366,23 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             caption: this.labels['anomaly'],
             dataType: 'boolean',
             visible: visible[9],
+            width: width[9] || null,
         }, {
             dataField: 'lastInspectionOn',
             caption: this.labels['lastInspection'],
             dataType: 'date',
             visible: visible[10],
+            width: width[10] || null,
         }, {
             dataField: 'contact',
             caption: this.labels['contact'],
             visible: visible[11],
+            width: width[11] || null,
         }, {
             dataField: 'owner',
             caption: this.labels['owner'],
             visible: visible[12],
+            width: width[12] || null,
         }, {
             dataField: 'idUtilisationCode',
             caption: this.labels['utilisationCode'],
@@ -378,44 +396,54 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 }
             },
             visible: visible[13],
+            width: width[13] || null,
         }, {
             dataField: 'idPicture',
             caption: this.labels['picture'],
             visible: visible[14],
+            width: width[14] || null,
             cellTemplate: (container, options) => this.showPicture(container, options),
         }, {
             dataField: 'buildingValue',
             caption: this.labels['buildingValue'],
             visible: visible[15],
+            width: width[15] || null,
         }, {
             dataField: 'matricule',
             caption: this.labels['matricule'],
             visible: visible[16],
+            width: width[16] || null,
         }, {
             dataField: 'numberOfAppartment',
             caption: this.labels['numberOfAppartment'],
             visible: visible[17],
+            width: width[17] || null,
         }, {
             dataField: 'numberOfBuilding',
             caption: this.labels['numberOfBuilding'],
             visible: visible[18],
+            width: width[18] || null,
         }, {
             dataField: 'numberOfFloor',
             caption: this.labels['numberOfFloor'],
             visible: visible[19],
+            width: width[19] || null,
         }, {
             dataField: 'vacantLand',
             caption: this.labels['vacantLand'],
             dataType: 'boolean',
             visible: visible[20],
+            width: width[20] || null,
         }, {
             dataField: 'yearOfConstruction',
             caption: this.labels['yearOfConstruction'],
             visible: visible[21],
+            width: width[21] || null,
         }, {
             dataField: 'details',
             caption: this.labels['details'],
             visible: visible[22],
+            width: width[22] || null,
         }];
     }
 
