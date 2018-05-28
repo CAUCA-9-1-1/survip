@@ -1,14 +1,6 @@
-<div class="fullHeight" fxLayout="row">
-    <div fxFlex="350px">
-        <app-main-menu></app-main-menu>
-    </div>
-    <div fxFlex="" class="content">
-        <div *ngIf="!selectedSurvey">
-            <app-managementsurvey-list></app-managementsurvey-list>
-        </div>
-        <div *ngIf="selectedSurvey">
-            <app-managementsurvey-question [survey]="selectedSurvey"></app-managementsurvey-question>
-        </div>
-    </div>
+<div *ngIf="!selectedSurvey">
+    <app-managementsurvey-list></app-managementsurvey-list>
 </div>
-
+<div *ngIf="selectedSurvey">
+    <app-managementsurvey-question [survey]="selectedSurvey"></app-managementsurvey-question>
+</div>
