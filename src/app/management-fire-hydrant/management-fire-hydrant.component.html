@@ -1,24 +1,17 @@
-<div class="fullHeight" fxLayout="row">
-    <div fxFlex="350px">
-        <app-main-menu></app-main-menu>
-    </div>
-    <div fxFlex="" class="content">
-        <mat-tab-group>
-            <mat-tab label="{{'fireHydrant' | translate}}">
-                <app-managementfirehydrant-list></app-managementfirehydrant-list>
-            </mat-tab>
-            <mat-tab label="{{'fireHydrantType' | translate}}">
-                <app-managementfirehydrant-type></app-managementfirehydrant-type>
-            </mat-tab>
-            <mat-tab label="{{'connectionType' | translate}}">
-                <app-managementfirehydrant-connectiontype></app-managementfirehydrant-connectiontype>
-            </mat-tab>
-            <mat-tab label="{{'operator' | translate}}">
-                <app-managementfirehydrant-operatortype></app-managementfirehydrant-operatortype>
-            </mat-tab>
-            <mat-tab label="{{'unitOfMeasure' | translate}}">
-                <app-managementfirehydrant-unitofmeasure></app-managementfirehydrant-unitofmeasure>
-            </mat-tab>
-        </mat-tab-group>
-    </div>
-</div>
+<mat-tab-group>
+    <mat-tab label="{{'fireHydrant' | translate}}">
+        <app-managementfirehydrant-list></app-managementfirehydrant-list>
+    </mat-tab>
+    <mat-tab label="{{'fireHydrantType' | translate}}">
+        <app-managementfirehydrant-type></app-managementfirehydrant-type>
+    </mat-tab>
+    <mat-tab label="{{'connectionType' | translate}}">
+        <app-managementfirehydrant-connectiontype></app-managementfirehydrant-connectiontype>
+    </mat-tab>
+    <mat-tab label="{{'operator' | translate}}">
+        <app-managementfirehydrant-operatortype></app-managementfirehydrant-operatortype>
+    </mat-tab>
+    <mat-tab label="{{'unitOfMeasure' | translate}}">
+        <app-managementfirehydrant-unitofmeasure></app-managementfirehydrant-unitofmeasure>
+    </mat-tab>
+</mat-tab-group>

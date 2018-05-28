@@ -1,69 +1,62 @@
-<div class="fullHeight" fxLayout="row">
-    <div fxFlex="350px">
-        <app-main-menu></app-main-menu>
-    </div>
-    <div fxFlex="" class="content">
-        <dx-data-grid
-                [dataSource]="dataSource"
-                [hoverStateEnabled]="true"
-                [rowAlternationEnabled]="true"
-                (onInitNewRow)="onInitNewRow($event)"
-                (onRowInserted)="onRowInserted($event)"
-                (onRowUpdated)="onRowUpdated($event)"
-                (onRowRemoved)="onRowRemoved($event)">
-            <dxi-column
-                    dataField="idFireSafetyDepartment"
-                    caption="{{'fireSafetyDepartment' | translate}}">
-                <dxo-lookup [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName" valueExpr="id">
-                </dxo-lookup>
-            </dxi-column>
-            <dxi-column
-                    dataField="idRiskLevel"
-                    caption="{{'riskLevel' | translate}}">
-                <dxo-lookup [dataSource]="riskLevels" displayExpr="name" valueExpr="id">
-                </dxo-lookup>
-            </dxi-column>
-            <dxi-column
-                    dataField="idSurvey"
-                    caption="{{'survey' | translate}}">
-                <dxo-lookup [dataSource]="surveys" [displayExpr]="getSurveyName" valueExpr="id" [allowClearing]="true">
-                </dxo-lookup>
-            </dxi-column>
-            <dxi-column dataField="hasGeneralInformation" dataType="boolean" caption="{{'generalInformation' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="hasImplantationPlan" dataType="boolean" caption="{{'implantationPlan' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="hasCourse" dataType="boolean" caption="{{'course' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="hasWaterSupply" dataType="boolean" caption="{{'waterSupply' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="hasBuildingDetails" dataType="boolean" caption="{{'buildingDetails' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="hasBuildingContacts" dataType="boolean" caption="{{'buildingContacts' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="hasBuildingPNAPS" dataType="boolean" caption="{{'buildingPnaps' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="hasBuildingHazardousMaterials" dataType="boolean" caption="{{'buildingHazardousMaterials' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="hasBuildingFireProtection" dataType="boolean" caption="{{'buildingFireProtection' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="hasBuildingParticularRisks" dataType="boolean" caption="{{'buildingParticularRisks' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="hasBuildingAnomalies" dataType="boolean" caption="{{'buildingAnomalies' | translate}}" [visible]="false"></dxi-column>
-            <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="idFireSafetyDepartment"
+            caption="{{'fireSafetyDepartment' | translate}}">
+        <dxo-lookup [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+            dataField="idRiskLevel"
+            caption="{{'riskLevel' | translate}}">
+        <dxo-lookup [dataSource]="riskLevels" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+            dataField="idSurvey"
+            caption="{{'survey' | translate}}">
+        <dxo-lookup [dataSource]="surveys" [displayExpr]="getSurveyName" valueExpr="id" [allowClearing]="true">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="hasGeneralInformation" dataType="boolean" caption="{{'generalInformation' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasImplantationPlan" dataType="boolean" caption="{{'implantationPlan' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasCourse" dataType="boolean" caption="{{'course' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasWaterSupply" dataType="boolean" caption="{{'waterSupply' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasBuildingDetails" dataType="boolean" caption="{{'buildingDetails' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasBuildingContacts" dataType="boolean" caption="{{'buildingContacts' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasBuildingPNAPS" dataType="boolean" caption="{{'buildingPnaps' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasBuildingHazardousMaterials" dataType="boolean" caption="{{'buildingHazardousMaterials' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasBuildingFireProtection" dataType="boolean" caption="{{'buildingFireProtection' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasBuildingParticularRisks" dataType="boolean" caption="{{'buildingParticularRisks' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasBuildingAnomalies" dataType="boolean" caption="{{'buildingAnomalies' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
-            <dxo-filter-row [visible]="true"></dxo-filter-row>
-            <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-                <dxo-popup title="{{'inspectionManagement' | translate}}" [showTitle]="true"></dxo-popup>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'inspectionManagement' | translate}}" [showTitle]="true"></dxo-popup>
 
-                <dxo-form colCount="4">
-                    <dxi-item dataField="idFireSafetyDepartment" [colSpan]="4" [isRequired]="true"></dxi-item>
-                    <dxi-item dataField="idRiskLevel" [colSpan]="2" [isRequired]="true"></dxi-item>
-                    <dxi-item dataField="idSurvey" [colSpan]="2"></dxi-item>
-                    <dxi-item dataField="hasGeneralInformation"></dxi-item>
-                    <dxi-item dataField="hasImplantationPlan"></dxi-item>
-                    <dxi-item dataField="hasCourse"></dxi-item>
-                    <dxi-item dataField="hasWaterSupply"></dxi-item>
-                    <dxi-item dataField="hasBuildingDetails"></dxi-item>
-                    <dxi-item dataField="hasBuildingContacts"></dxi-item>
-                    <dxi-item dataField="hasBuildingPNAPS"></dxi-item>
-                    <dxi-item dataField="hasBuildingHazardousMaterials"></dxi-item>
-                    <dxi-item dataField="hasBuildingFireProtection"></dxi-item>
-                    <dxi-item dataField="hasBuildingParticularRisks"></dxi-item>
-                    <dxi-item dataField="hasBuildingAnomalies"></dxi-item>
-                    <dxi-item dataField="isActive"></dxi-item>
-                </dxo-form>
-            </dxo-editing>
-        </dx-data-grid>
-    </div>
-</div>
+        <dxo-form colCount="4">
+            <dxi-item dataField="idFireSafetyDepartment" [colSpan]="4" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="idRiskLevel" [colSpan]="2" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="idSurvey" [colSpan]="2"></dxi-item>
+            <dxi-item dataField="hasGeneralInformation"></dxi-item>
+            <dxi-item dataField="hasImplantationPlan"></dxi-item>
+            <dxi-item dataField="hasCourse"></dxi-item>
+            <dxi-item dataField="hasWaterSupply"></dxi-item>
+            <dxi-item dataField="hasBuildingDetails"></dxi-item>
+            <dxi-item dataField="hasBuildingContacts"></dxi-item>
+            <dxi-item dataField="hasBuildingPNAPS"></dxi-item>
+            <dxi-item dataField="hasBuildingHazardousMaterials"></dxi-item>
+            <dxi-item dataField="hasBuildingFireProtection"></dxi-item>
+            <dxi-item dataField="hasBuildingParticularRisks"></dxi-item>
+            <dxi-item dataField="hasBuildingAnomalies"></dxi-item>
+            <dxi-item dataField="isActive"></dxi-item>
+        </dxo-form>
+    </dxo-editing>
+</dx-data-grid>

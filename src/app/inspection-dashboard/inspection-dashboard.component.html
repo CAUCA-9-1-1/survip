@@ -1,31 +1,24 @@
-<div class="fullHeight" fxLayout="row">
-    <div fxFlex="350px">
-        <app-main-menu></app-main-menu>
-    </div>
-    <div fxFlex="" class="content">
-        <mat-button-toggle-group #group="matButtonToggleGroup" color="primary" (valueChange)="changeMode($event)">
-            <mat-button-toggle value="mode1" [checked]="selectedMode == 'mode1'" [disabled]="!everythingIsLoaded">
-                {{'mode1' | translate}}
-            </mat-button-toggle>
-            <mat-button-toggle value="mode2" [checked]="selectedMode == 'mode2'" [disabled]="!everythingIsLoaded">
-                {{'mode2' | translate}}
-            </mat-button-toggle>
-            <mat-button-toggle value="mode3" [checked]="selectedMode == 'mode3'" [disabled]="!everythingIsLoaded">
-                {{'mode3' | translate}}
-            </mat-button-toggle>
-            <mat-button-toggle value="mode4" [checked]="selectedMode == 'mode4'" [disabled]="!everythingIsLoaded">
-                {{'mode4' | translate}}
-            </mat-button-toggle>
-        </mat-button-toggle-group>
+<mat-button-toggle-group #group="matButtonToggleGroup" color="primary" (valueChange)="changeMode($event)">
+    <mat-button-toggle value="mode1" [checked]="selectedMode == 'mode1'" [disabled]="!everythingIsLoaded">
+        {{'mode1' | translate}}
+    </mat-button-toggle>
+    <mat-button-toggle value="mode2" [checked]="selectedMode == 'mode2'" [disabled]="!everythingIsLoaded">
+        {{'mode2' | translate}}
+    </mat-button-toggle>
+    <mat-button-toggle value="mode3" [checked]="selectedMode == 'mode3'" [disabled]="!everythingIsLoaded">
+        {{'mode3' | translate}}
+    </mat-button-toggle>
+    <mat-button-toggle value="mode4" [checked]="selectedMode == 'mode4'" [disabled]="!everythingIsLoaded">
+        {{'mode4' | translate}}
+    </mat-button-toggle>
+</mat-button-toggle-group>
 
-        <dx-data-grid [dataSource]="dataSource" [hoverStateEnabled]="true" [rowAlternationEnabled]="true">
-            <div *dxTemplate="let field of 'approveInspection'">
-                <button mat-button [fxShow]="selectedMode == 'mode2'" color="primary" (click)="showInspection(field)">{{'approve' | translate}}</button>
-            </div>
-            <div *dxTemplate="let field of 'groupBatch'">
-                <button mat-button [fxShow]="selectedMode == 'mode1'" color="primary" (click)="showBatch(field)">{{'see' | translate}}</button>
-                {{'batch' | translate}} : {{field.value}}
-            </div>
-        </dx-data-grid>
+<dx-data-grid [dataSource]="dataSource" [hoverStateEnabled]="true" [rowAlternationEnabled]="true">
+    <div *dxTemplate="let field of 'approveInspection'">
+        <button mat-button [fxShow]="selectedMode == 'mode2'" color="primary" (click)="showInspection(field)">{{'approve' | translate}}</button>
     </div>
-</div>
+    <div *dxTemplate="let field of 'groupBatch'">
+        <button mat-button [fxShow]="selectedMode == 'mode1'" color="primary" (click)="showBatch(field)">{{'see' | translate}}</button>
+        {{'batch' | translate}} : {{field.value}}
+    </div>
+</dx-data-grid>
