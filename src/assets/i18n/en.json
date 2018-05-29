@@ -245,6 +245,8 @@
   "cancelled": "Cancelled",
   "expandAll": "Expand all",
   "collapseAll": "Collapse all",
+  "delete": "Delete",
+  "wantToDeleteBatch": "Are you sure you want to delete this batch?",
   "logout": "Logout",
   "badLogin": "Bad username or password",
   "errorDuringLoggin": "An error occur during connection",

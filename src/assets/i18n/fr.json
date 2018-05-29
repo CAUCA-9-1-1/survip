@@ -250,6 +250,8 @@
   "cancelled": "Annulée",
   "expandAll": "Ouvrir tout",
   "collapseAll": "Fermer tout",
+  "delete": "Supprimer",
+  "wantToDeleteBatch": "Êtes-vous certain de vouloir supprimer ce lot?",
   "logout": "Déconnecter",
   "badLogin": "Mauvais nom d'utilisateur ou mot de passe",
   "errorDuringLoggin": "Une erreur est survenue durant la connexion",
