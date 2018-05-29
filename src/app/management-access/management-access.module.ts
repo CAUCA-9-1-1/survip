@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DxDataGridModule, DxChartModule, DxFormModule, DxTreeViewModule} from 'devextreme-angular';
+import {DxDataGridModule, DxFormModule, DxTreeViewModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {ManagementAccessComponent} from './management-access.component';
@@ -23,7 +23,6 @@ import {FirestationComponent} from './firestation/firestation.component';
     imports: [
         SharedModule,
         DxDataGridModule,
-        DxChartModule,
         DxFormModule,
         DxTreeViewModule,
     ],

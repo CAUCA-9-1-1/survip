@@ -1,3 +1,45 @@
-<p>
-  statistics works!
-</p>
+<h2>Résultats des visites de prévention</h2>
+<div fxLayout="row">
+    <div fxFlex="50%"></div>
+    <div fxFlex="50%"></div>
+</div>
+<div fxLayout="row">
+    <div fxFlex="48%">
+        <dx-pie-chart title="Impact des visites" [palette]="colors.visites" [dataSource]="visites">
+            <dxi-series argumentField="description" valueField="total">
+                <dxo-label [visible]="true">
+                    <dxo-connector [visible]="true" [width]="1"></dxo-connector>
+                </dxo-label>
+                <dxo-label
+                        [visible]="true"
+                        [customizeText]="customizePieLabel">
+                    <dxo-font [size]="16"></dxo-font>
+                    <dxo-connector
+                            [visible]="true"
+                            [width]="0.5">
+                    </dxo-connector>
+                </dxo-label>
+            </dxi-series>
+            <dxo-tooltip [enabled]="true" [customizeTooltip]="showPourcent"></dxo-tooltip>
+            <dxo-export [enabled]="true"></dxo-export>
+        </dx-pie-chart>
+    </div>
+    <div fxFlex="4%"></div>
+    <div fxFlex="48%">
+        <dx-chart
+                [palette]="colors.resultats"
+                [dataSource]="resultats"
+                [customizeLabel]="customizeBarLabel">
+            <dxo-title text="Résultat vs Objectif"></dxo-title>
+            <dxo-common-series-settings
+                    argumentField="description"
+                    type="bar"
+                    valueField="total"
+                    [ignoreEmptyPoints]="true">
+            </dxo-common-series-settings>
+            <dxo-series-template nameField="description"></dxo-series-template>
+            <dxo-tooltip [enabled]="true" [customizeTooltip]="showTooltip"></dxo-tooltip>
+            <dxo-export [enabled]="true"></dxo-export>
+        </dx-chart>
+    </div>
+</div>
