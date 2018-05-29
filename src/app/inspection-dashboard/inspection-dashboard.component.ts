@@ -80,7 +80,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details',
             'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see',
             'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building',
-            'approve', 'todo', 'started', 'absent', 'waitingApprobation', 'approved', 'refused', 'cancelled',
+            'approve', 'todo', 'started', 'absent', 'waitingApprobation', 'approved', 'refused', 'canceled',
             'collapseAll', 'expandAll', 'delete', 'wantToDeleteBatch'
         ]).subscribe(labels => {
             this.labels = labels;
@@ -235,7 +235,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             options: {
                 text: this.labels['createBatch'],
                 icon: 'group',
-                disabled: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? false : false),
+                disabled: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? true : false),
                 onClick: (ev) => this.createBatch(ev)
             },
             location: 'after',
@@ -385,7 +385,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                     name: this.labels['refused']
                 }, {
                     id: 5,
-                    name: this.labels['cancelled']
+                    name: this.labels['canceled']
                 }]
             }
         }, {

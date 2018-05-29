@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {MatSnackBar} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {GridWithCrudService} from '../shared/classes/grid-with-crud-service';
 import {InspectionBatchService} from './shared/services/inspection-batch.service';
@@ -50,6 +50,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         private buildingService: BuildingService,
         private inspectionService: InspectionService,
         private notification: MatSnackBar,
+        private router: Router,
         private activeRoute: ActivatedRoute,
     ) {
         super(batchService);
@@ -220,7 +221,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     removeInspector(item) {
-
         this.moveInspectorsSource('inspectorsOn', 'inspectorsOff', item.id);
         let findWebuser = -1;
 
@@ -394,6 +394,10 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
                 setTimeout(() => {
                     const rowIndex = this.dataGrid.instance.getRowIndexByKey(keys[0]);
                     this.dataGrid.instance.editRow(rowIndex);
+
+                    this.dataGrid.instance['getController']('editing')._editPopup.option('onHidden', () => {
+                        this.router.navigate(['/inspection/dashboard']);
+                    });
                 }, 200);
             }
         });

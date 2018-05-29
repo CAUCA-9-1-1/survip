@@ -31,7 +31,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     isLoading = false;
     optionsChoiceVisible = true;
     questionTypeOptions = {dataSource: [], displayExpr: 'text', valueExpr: 'value', onValueChanged: this.QuestionTypeChanged.bind(this)};
-    questionTypeChoiceCancelled = false;
+    questionTypeChoiceCanceled = false;
 
     constructor(
         private questionService: QuestionService,
@@ -142,8 +142,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     QuestionTypeChanged(data) {
-        if (this.questionTypeChoiceCancelled) {
-            this.questionTypeChoiceCancelled = false;
+        if (this.questionTypeChoiceCanceled) {
+            this.questionTypeChoiceCanceled = false;
             return;
         }
 
@@ -151,7 +151,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         if ((data.previousValue === 1) && (!this.isLoading) && (this.dataSource.length > 0)) {
             confirm(this.messages['removeQuestionChoices'], this.messages['question']).then((result) => {
                 if (!result) {
-                    this.questionTypeChoiceCancelled = true;
+                    this.questionTypeChoiceCanceled = true;
                     data.component.option('value', data.previousValue);
                     questionType = data.previousValue;
                 } else {
