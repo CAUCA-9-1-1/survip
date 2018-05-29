@@ -1,4 +1,4 @@
-<mat-tab-group (selectChange)="onSelectionChanged($event)">
+<mat-tab-group>
     <mat-tab label="{{'permission' | translate}}">
         <app-management-access-permission></app-management-access-permission>
     </mat-tab>
@@ -13,8 +13,5 @@
     </mat-tab>
     <mat-tab label="{{'apisAction' | translate}}">
         <app-management-access-apisaction></app-management-access-apisaction>
-    </mat-tab>
-    <mat-tab label="{{'statistics' | translate}}">
-        <app-management-access-statistics></app-management-access-statistics>
     </mat-tab>
 </mat-tab-group>

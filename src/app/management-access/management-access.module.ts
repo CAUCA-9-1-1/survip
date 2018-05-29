@@ -6,7 +6,6 @@ import {ManagementAccessComponent} from './management-access.component';
 import {ApisactionComponent} from './apisaction/apisaction.component';
 import {FireSafetyDepartmentComponent} from './firesafetydepartment/firesafetydepartment.component';
 import {PermissionComponent} from './permission/permission.component';
-import {StatisticsComponent} from './statistics/statistics.component';
 import {WebuserComponent} from './webuser/webuser.component';
 import {FirestationComponent} from './firestation/firestation.component';
 
@@ -17,7 +16,6 @@ import {FirestationComponent} from './firestation/firestation.component';
         ApisactionComponent,
         FireSafetyDepartmentComponent,
         PermissionComponent,
-        StatisticsComponent,
         WebuserComponent,
         FirestationComponent,
     ],
