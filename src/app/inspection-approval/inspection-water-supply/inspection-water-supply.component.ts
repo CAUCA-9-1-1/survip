@@ -12,16 +12,27 @@ import {InspectionService} from '../shared/services/inspection.service';
     ],
 })
 export class InspectionWaterSupplyComponent implements OnInit {
-    @Input() inspectionId: string;
+    @Input()
+    set inspection(id: string) {
+        this.idInspection = id;
+        this.loadData();
+    }
 
+    idInspection: string;
     fireHydrants: any = [];
 
     constructor(
         private inspectionService: InspectionService,
     ) { }
 
-    ngOnInit() {
-        this.inspectionService.getFireHydrant(this.inspectionId).subscribe(data => {
+    ngOnInit() { }
+
+    loadData() {
+        if (!this.idInspection) {
+            return null;
+        }
+
+        this.inspectionService.getFireHydrant(this.idInspection).subscribe(data => {
             this.fireHydrants = data;
         });
     }

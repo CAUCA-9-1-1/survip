@@ -12,16 +12,27 @@ import {InspectionService} from '../shared/services/inspection.service';
     ]
 })
 export class InspectionCourseComponent implements OnInit {
-    @Input() inspectionId: string;
+    @Input()
+    set inspection(id: string) {
+        this.idInspection = id;
+        this.loadData();
+    }
 
+    idInspection: string;
     courses: any = [];
 
     constructor(
         private inspectionService: InspectionService,
     ) { }
 
-    ngOnInit() {
-        this.inspectionService.getCourse(this.inspectionId).subscribe(data => {
+    ngOnInit() { }
+
+    loadData() {
+        if (!this.idInspection) {
+            return null;
+        }
+
+        this.inspectionService.getCourse(this.idInspection).subscribe(data => {
             this.courses = data.sort((a, b) => {
                 return a.description > b.description ? 1 : -1;
             });

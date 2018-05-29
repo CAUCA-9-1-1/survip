@@ -13,9 +13,14 @@ import {InspectionService} from '../shared/services/inspection.service';
 })
 export class BuildingListComponent implements OnInit {
     @Input() selected: string;
-    @Input() inspectionId: string;
+    @Input()
+    set inspection(id: string) {
+        this.idInspection = id;
+        this.loadData();
+    }
 
     buildings = [];
+    idInspection: string;
     selectedIndex = 0;
     selectedIdBuilding: string;
 
@@ -23,8 +28,14 @@ export class BuildingListComponent implements OnInit {
         private inspectionService: InspectionService,
     ) { }
 
-    ngOnInit() {
-        this.inspectionService.getBuildings(this.inspectionId).subscribe(data => {
+    ngOnInit() { }
+
+    loadData() {
+        if (!this.idInspection) {
+            return null;
+        }
+
+        this.inspectionService.getBuildings(this.idInspection).subscribe(data => {
             this.buildings = data;
             this.selectedIdBuilding = this.buildings[this.selectedIndex].id;
         });

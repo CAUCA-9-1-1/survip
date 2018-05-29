@@ -41,6 +41,18 @@ export class InspectionApprovalComponent implements OnInit {
         this.selected = section;
     }
 
+    isBuildingSection() {
+        return (
+            this.selected === 'buildingDetails' ||
+            this.selected === 'contacts' ||
+            this.selected === 'pnaps' ||
+            this.selected === 'hazardousMaterials' ||
+            this.selected === 'fireProtection' ||
+            this.selected === 'particularRisks' ||
+            this.selected === 'anomalies' ? true : false
+        );
+    }
+
     approve() {
         this.inspectionService.approve(this.inspectionId).subscribe(() => this.isClosed = true);
     }
