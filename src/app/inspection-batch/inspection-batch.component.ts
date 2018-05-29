@@ -330,7 +330,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
         buildingToInsert.forEach(building => {
             const inspection = {
-                sequence: this.formInspectionField.data.inspections.length,
+                sequence: (this.formInspectionField.data.inspections ? this.formInspectionField.data.inspections.length : 0),
                 idBatch: this.formInspectionField.data.id,
                 idBuilding: building.id,
                 idWebuserAssignedTo: null,
