@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {MatDialog, MatSnackBar} from '@angular/material';
+import {confirm} from 'devextreme/ui/dialog';
 
 import {environment} from '../../environments/environment';
 import {DashboardService} from './shared/services/dashboard.service';
@@ -80,7 +81,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see',
             'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building',
             'approve', 'todo', 'started', 'absent', 'waitingApprobation', 'approved', 'refused', 'cancelled',
-            'collapseAll', 'expandAll'
+            'collapseAll', 'expandAll', 'delete', 'wantToDeleteBatch'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -101,6 +102,14 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         if (field.data && field.data.items.length) {
             this.router.navigate(['/inspection/batch', field.data.items[0].idBatch]);
         }
+    }
+
+    removeBatch(field) {
+        confirm(this.labels['wantToDeleteBatch'], this.labels['delete']).then((result) => {
+            if (result) {
+                this.batchService.remove(field.data.items[0].idBatch).subscribe(() => this.loadData());
+            }
+        });
     }
 
     showInspection(field) {
