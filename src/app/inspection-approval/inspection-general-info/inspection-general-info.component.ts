@@ -36,6 +36,10 @@ export class InspectionGeneralInfoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        if (!this.inspectionId) {
+            return null;
+        }
+
         this.inspectionService.getGeneralInfo(this.inspectionId).subscribe(data => {
             this.generalInfo = data;
 

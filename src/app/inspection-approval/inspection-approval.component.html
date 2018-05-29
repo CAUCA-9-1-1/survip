@@ -7,22 +7,22 @@
         </div>
         <div fxFlex="80%">
             <div [fxShow]="selected == 'generalInfo'">
-                <app-inspection-general-info [inspectionId]="inspectionId"></app-inspection-general-info>
+                <app-inspection-general-info [inspectionId]="selected == 'generalInfo' ? inspectionId : ''"></app-inspection-general-info>
             </div>
             <div [fxShow]="selected == 'implantationPlan'">
                 <app-inspection-implantation-plan [implantationPlan]="idImplantationPlan"></app-inspection-implantation-plan>
             </div>
             <div [fxShow]="selected == 'course'">
-                <app-inspection-course [inspectionId]="inspectionId"></app-inspection-course>
+                <app-inspection-course [inspection]="selected == 'course' ? inspectionId : ''"></app-inspection-course>
             </div>
             <div [fxShow]="selected == 'waterSupply'">
-                <app-inspection-water-supply [inspectionId]="inspectionId"></app-inspection-water-supply>
+                <app-inspection-water-supply [inspection]="selected == 'waterSupply' ? inspectionId : ''"></app-inspection-water-supply>
             </div>
             <div [fxShow]="selected == 'survey'">
-                <app-inspection-survey [inspectionId]="inspectionId"></app-inspection-survey>
+                <app-inspection-survey [inspection]="selected == 'survey' ? inspectionId : ''"></app-inspection-survey>
             </div>
-            <div [fxShow]="selected == 'buildingDetails' || selected == 'contacts' || selected == 'pnaps' || selected == 'hazardousMaterials' || selected == 'fireProtection' || selected == 'particularRisks' || selected == 'anomalies'">
-                <app-building-list [selected]="selected" [inspectionId]="inspectionId"></app-building-list>
+            <div [fxShow]="isBuildingSection">
+                <app-building-list [selected]="selected" [inspection]="isBuildingSection() ? inspectionId : ''"></app-building-list>
             </div>
         </div>
     </div>
