@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {InspectionService} from '../shared/services/inspection.service';
+import {InspectionBuildingAnomalyService} from '../shared/services/inspection-building-anomaly.service';
 
 
 @Component({
@@ -8,7 +8,7 @@ import {InspectionService} from '../shared/services/inspection.service';
     templateUrl: './building-anomalies.component.html',
     styleUrls: ['./building-anomalies.component.scss'],
     providers: [
-        InspectionService,
+        InspectionBuildingAnomalyService,
     ]
 })
 export class BuildingAnomaliesComponent implements OnInit {
@@ -24,7 +24,7 @@ export class BuildingAnomaliesComponent implements OnInit {
     anomalies: any = [];
 
     constructor(
-        private inspectionService: InspectionService,
+        private anomalyService: InspectionBuildingAnomalyService,
     ) { }
 
     ngOnInit() {
@@ -35,8 +35,22 @@ export class BuildingAnomaliesComponent implements OnInit {
             return null;
         }
 
-        this.inspectionService.getBuildingAnomaly(this.idBuilding).subscribe(data => {
+        this.anomalyService.getBuildingAnomaly(this.idBuilding).subscribe(data => {
             this.anomalies = data;
+
+            data.forEach((theme, indexTheme) => {
+                theme.anomalies.forEach((anomaly, indexAnomaly) => {
+                    this.anomalyService.getPictures(anomaly.id).subscribe( pictures => {
+                        this.anomalies[indexTheme].anomalies[indexAnomaly].pictures = [];
+
+                        pictures.forEach(image => {
+                            this.anomalies[indexTheme]
+                                .anomalies[indexAnomaly]
+                                .pictures.push('data:image/jpeg;base64,' + image['pictureData']);
+                        });
+                    });
+                });
+            });
         });
     }
 }

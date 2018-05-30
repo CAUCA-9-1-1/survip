@@ -18,7 +18,8 @@ export class InspectionSurveyComponent implements OnInit {
         this.loadData();
     }
 
-    idInspection: string;
+    private idInspection: string;
+
     summary: any = [];
 
     constructor(
