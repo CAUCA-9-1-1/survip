@@ -13,6 +13,9 @@ export class MainMenuComponent implements OnInit {
         name: 'inspectionDashboard',
         path: '/inspection/dashboard',
     }, {
+        name: 'statistics',
+        path: '/statistics',
+    }, {
         name: 'management',
         path: '',
         items: [{

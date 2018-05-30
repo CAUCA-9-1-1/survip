@@ -7,12 +7,13 @@ import {InspectionDashboardComponent} from './inspection-dashboard/inspection-da
 import {InspectionBatchComponent} from './inspection-batch/inspection-batch.component';
 import {ManagementAccessComponent} from './management-access/management-access.component';
 import {ManagementAddressComponent} from './management-address/management-address.component';
-// import {ManagementBuildingComponent} from './management-building/management-building.component';
+import {ManagementBuildingComponent} from './management-building/management-building.component';
 import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
 import {ManagementSurveyComponent} from './management-survey/management-survey.component';
 import {LoginComponent} from './user-access/login/login.component';
 import {InspectionApprovalComponent} from './inspection-approval/inspection-approval.component';
 import {InspectionManagementComponent} from './inspection-management/inspection-management.component';
+import {StatisticsComponent} from './statistics/statistics.component';
 
 
 const appRoutes: Routes = [{
@@ -22,6 +23,10 @@ const appRoutes: Routes = [{
 }, {
     path: 'login',
     component: LoginComponent,
+}, {
+    path: 'statistics',
+    canActivate: [AuthGuardService],
+    component: StatisticsComponent
 }, {
     path: 'inspection',
     canActivate: [AuthGuardService],
@@ -49,7 +54,7 @@ const appRoutes: Routes = [{
         component: ManagementSurveyComponent
     }, {
         path: 'building',
-        component: ManagementAddressComponent// ManagementBuildingComponent
+        component: ManagementBuildingComponent
     }, {
         path: 'address',
         component: ManagementAddressComponent
