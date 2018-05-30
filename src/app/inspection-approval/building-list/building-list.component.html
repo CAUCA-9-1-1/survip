@@ -1,25 +1,25 @@
 <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedIndexChange)="selectBuilding($event)">
     <mat-tab *ngFor="let building of buildings" [label]="building.name">
         <div [fxShow]="selected == 'buildingDetails'">
-            <app-building-details [building]="selectedIdBuilding"></app-building-details>
+            <app-building-details [building]="selected == 'buildingDetails' ? selectedIdBuilding : ''"></app-building-details>
         </div>
         <div [fxShow]="selected == 'contacts'">
-            <app-building-contacts [building]="selectedIdBuilding"></app-building-contacts>
+            <app-building-contacts [building]="selected == 'contacts' ? selectedIdBuilding : ''"></app-building-contacts>
         </div>
         <div [fxShow]="selected == 'pnaps'">
-            <app-building-pnaps [building]="selectedIdBuilding"></app-building-pnaps>
+            <app-building-pnaps [building]="selected == 'pnaps' ? selectedIdBuilding : ''"></app-building-pnaps>
         </div>
         <div [fxShow]="selected == 'hazardousMaterials'">
-            <app-building-hazardous-materials [building]="selectedIdBuilding"></app-building-hazardous-materials>
+            <app-building-hazardous-materials [building]="selected == 'hazardousMaterials' ? selectedIdBuilding : ''"></app-building-hazardous-materials>
         </div>
         <div [fxShow]="selected == 'fireProtection'">
-            <app-building-fire-protection [building]="selectedIdBuilding"></app-building-fire-protection>
+            <app-building-fire-protection [building]="selected == 'fireProtection' ? selectedIdBuilding : ''"></app-building-fire-protection>
         </div>
         <div [fxShow]="selected == 'particularRisks'">
-            <app-building-particular-risks [building]="selectedIdBuilding"></app-building-particular-risks>
+            <app-building-particular-risks [building]="selected == 'particularRisks' ? selectedIdBuilding : ''"></app-building-particular-risks>
         </div>
         <div [fxShow]="selected == 'anomalies'">
-            <app-building-anomalies [building]="selectedIdBuilding"></app-building-anomalies>
+            <app-building-anomalies [building]="selected == 'anomalies' ? selectedIdBuilding : ''"></app-building-anomalies>
         </div>
     </mat-tab>
 </mat-tab-group>

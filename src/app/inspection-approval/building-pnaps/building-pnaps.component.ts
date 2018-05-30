@@ -20,7 +20,6 @@ export class BuildingPnapsComponent implements OnInit {
     }
 
     private idBuilding: string;
-
     pnaps: any = [];
 
     constructor(

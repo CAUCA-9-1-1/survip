@@ -18,7 +18,7 @@ export class InspectionWaterSupplyComponent implements OnInit {
         this.loadData();
     }
 
-    idInspection: string;
+    private idInspection: string;
     fireHydrants: any = [];
 
     constructor(

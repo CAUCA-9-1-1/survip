@@ -18,7 +18,7 @@ export class InspectionCourseComponent implements OnInit {
         this.loadData();
     }
 
-    idInspection: string;
+    private idInspection: string;
     courses: any = [];
 
     constructor(
