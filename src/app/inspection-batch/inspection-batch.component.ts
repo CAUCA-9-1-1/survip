@@ -43,6 +43,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     popupBuildingVisible = false;
     popupBuildingSelected = [];
     popupButtons: any[];
+    lastSelected: any = {};
     searchEditorOptions = {
         onValueChanged: (e) => this.onSearch(e)
     };
@@ -94,7 +95,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     onInitNewRow(e) {
         this.inspectorsOn = [];
         this.inspectorsOff = Object.assign([], this.webusers);
-        this.buildingsInspected = [];
+        this.setBuildingInspected({});
         this.setBuildingNotInspected();
 
         e.data.idWebuserCreatedBy = localStorage.getItem('currentWebuser');
@@ -111,13 +112,8 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     onEditingStart(e) {
         this.inspectorsOn = [];
         this.inspectorsOff = [];
-        this.buildingsInspected = [];
-        this.buildingsNotInspected = [];
-        const idBuildingsWithoutInspection = [];
-
-        this.buildingsWithoutInspection.forEach(building => {
-            idBuildingsWithoutInspection.push(building['idBuilding']);
-        });
+        this.setBuildingInspected(e.data);
+        this.setBuildingNotInspected();
 
         this.webusers.forEach(user => {
             let find = false;
@@ -131,27 +127,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
             if (!find) {
                 this.inspectorsOff.push(user);
-            }
-        });
-        this.buildings.forEach(building => {
-            let find = false;
-
-            e.data.inspections.forEach(inspection => {
-                if (building.id === inspection.idBuilding) {
-                    building = Object.assign({
-                        assignedTo: inspection.idWebuserAssignedTo || 'all',
-                        sequence: inspection.sequence,
-                    }, building);
-
-                    find = true;
-                    this.buildingsInspected.push(building);
-                }
-            });
-
-            if (!find) {
-                if (idBuildingsWithoutInspection.includes(building.id)) {
-                    this.buildingsNotInspected.push(Object.assign({}, building));
-                }
             }
         });
 
@@ -397,6 +372,30 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         });
     }
 
+    private setBuildingInspected(info?: any) {
+        if (!info) {
+            info = this.lastSelected;
+        } else {
+            this.lastSelected = info;
+        }
+
+        this.buildingsInspected = [];
+        this.buildings.forEach(building => {
+            if (info.inspections && info.inspections.length) {
+                info.inspections.forEach(inspection => {
+                    if (building.id === inspection.idBuilding) {
+                        building = Object.assign({
+                            assignedTo: inspection.idWebuserAssignedTo || 'all',
+                            sequence: inspection.sequence,
+                        }, building);
+
+                        this.buildingsInspected.push(building);
+                    }
+                });
+            }
+        });
+    }
+
     private setBuildingNotInspected() {
         this.buildingsNotInspected = [];
 
@@ -433,7 +432,11 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     private loadBuilding() {
-        this.buildingService.getActive().subscribe(data => this.buildings = data);
+        this.buildingService.getActive().subscribe(data => {
+            this.buildings = data;
+            this.setBuildingInspected();
+            this.setBuildingNotInspected();
+        });
     }
 
     private loadInspection() {
