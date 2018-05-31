@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {DxDataGridComponent} from 'devextreme-angular';
+import {Component, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
 
 import {FirestationService} from '../shared/services/firestation.service';
@@ -20,11 +19,10 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
         BuildingService,
     ]
 })
-export class FirestationComponent extends GridWithCrudService implements OnInit, AfterViewInit {
-    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
-
+export class FirestationComponent extends GridWithCrudService implements OnInit {
     departments: FireSafetyDepartment[] = [];
     buildings: Building[] = [];
+    buildingLookup: {};
 
     constructor(
         firestationService: FirestationService,
@@ -36,19 +34,8 @@ export class FirestationComponent extends GridWithCrudService implements OnInit,
 
     ngOnInit() {
         this.loadSource();
+        this.loadDepartment();
         this.loadBuilding();
-    }
-
-    ngAfterViewInit() {
-        this.dataGrid.instance.option('onEditorPreparing', (e) => {
-                if (e.dataField === 'idFireSafetyDepartment') {
-                    e.editorOptions.type = 'dxSelectBox';
-                    e.editorOptions.onOpened = (ev) => {
-                        this.loadDepartment(ev);
-                    };
-                }
-            }
-        );
     }
 
     getDepartmentName(data) {
@@ -58,26 +45,40 @@ export class FirestationComponent extends GridWithCrudService implements OnInit,
     }
 
     getBuildingName(data) {
-        const building = Building.fromJSON(data);
+        return data.name + ' (' + data.civicNumber + ' ' + data.lane + ', ' + data.city + ')';
+    }
 
-        return building.getLocalization(environment.locale.use);
+    onEditorPreparing(e: any): void {
+        if (e.dataField === 'idBuilding') {
+            e.editorName = 'dxLookup';
+            e.editorOptions.valueExpr = 'id';
+            e.editorOptions.displayExpr = (item) => {
+                if (item) {
+                    return item.civicNumber + ' ' + item.lane + ', ' + item.city;
+                }
+            };
+            e.editorOptions.dataSource = this.buildings;
+        }
+
     }
 
     onInitNewRow(e) {
         e.data.isActive = true;
+
+        this.loadDepartment();
     }
 
-    private loadDepartment(ev?) {
+    onEditingStart(e) {
+        this.loadDepartment();
+    }
+
+    private loadDepartment() {
         this.fireSafetyDepartmentService.getAll().subscribe(data => {
             this.departments = data;
-
-            if (ev) {
-                ev.component.option('dataSource', this.departments);
-            }
         });
     }
 
     private loadBuilding() {
-        this.buildingService.getAll().subscribe(data => this.buildings = data);
+        this.buildingService.getActive().subscribe(data => this.buildings = data);
     }
 }
