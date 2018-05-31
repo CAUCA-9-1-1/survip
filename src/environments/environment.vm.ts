@@ -9,5 +9,5 @@ export const environment = {
         available: ['fr', 'en'],
         use: 'fr',
     },
-    apiUrl: 'http://192.168.123.34:5555/api/',
+    apiUrl: '//192.168.123.34:5555/api/',
 };
