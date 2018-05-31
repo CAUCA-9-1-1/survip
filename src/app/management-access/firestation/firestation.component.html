@@ -3,7 +3,9 @@
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
         (onInitialized)="onInitialized($event)"
+        (onEditorPreparing)="onEditorPreparing($event)"
         (onInitNewRow)="onInitNewRow($event)"
+        (onEditingStart)="onEditingStart($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
@@ -12,7 +14,10 @@
         <dxo-lookup [dataSource]="departments" [displayExpr]="getDepartmentName" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="idBuilding" caption="{{'building' | translate}}">
+    <dxi-column
+            dataField="idBuilding"
+            caption="{{'building' | translate}}"
+            [allowFiltering]="false">
         <dxo-lookup [dataSource]="buildings" [displayExpr]="getBuildingName" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
@@ -23,16 +28,16 @@
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-    <dxo-popup title="{{'firestation' | translate}}" [showTitle]="true"></dxo-popup>
+        <dxo-popup title="{{'firestation' | translate}}" [showTitle]="true"></dxo-popup>
 
-    <dxo-form colCount="2">
-        <dxi-item dataField="name" [isRequired]="true" colSpan="2"></dxi-item>
-        <dxi-item dataField="idFireSafetyDepartment" [isRequired]="true"></dxi-item>
-        <dxi-item dataField="idBuilding"></dxi-item>
-        <dxi-item dataField="email"></dxi-item>
-        <dxi-item dataField="phoneNumber"></dxi-item>
-        <dxi-item dataField="faxNumber"></dxi-item>
-        <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
-    </dxo-form>
+        <dxo-form colCount="2">
+            <dxi-item dataField="name" [isRequired]="true" colSpan="2"></dxi-item>
+            <dxi-item dataField="idFireSafetyDepartment" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="idBuilding" editorType="dxLookup" [editorOptions]="buildingLookup"></dxi-item>
+            <dxi-item dataField="email"></dxi-item>
+            <dxi-item dataField="phoneNumber"></dxi-item>
+            <dxi-item dataField="faxNumber"></dxi-item>
+            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+        </dxo-form>
     </dxo-editing>
 </dx-data-grid>
