@@ -19,7 +19,17 @@ export class InspectionService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    getBuildingToDo() {
+    getBuildingToDo(search?: string) {
+        const loadOptions = {
+            take: 20,
+        };
+
+        if (search) {
+            loadOptions['filter'] = [[search]];
+        }
+
+        this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
+
         return this.http.get<Inspection[]>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));

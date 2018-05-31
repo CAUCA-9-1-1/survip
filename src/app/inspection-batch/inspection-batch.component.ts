@@ -28,6 +28,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
     labels = [];
+    timer: number;
     formUserField: any;
     formReadyField: any;
     formInspectionField: any;
@@ -42,6 +43,9 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     popupBuildingVisible = false;
     popupBuildingSelected = [];
     popupButtons: any[];
+    searchEditorOptions = {
+        onValueChanged: (e) => this.onSearch(e)
+    };
 
     constructor(
         translateService: TranslateService,
@@ -91,17 +95,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         this.inspectorsOn = [];
         this.inspectorsOff = Object.assign([], this.webusers);
         this.buildingsInspected = [];
-        this.buildingsNotInspected = [];
-
-        this.buildings.forEach(building => {
-            this.buildingsWithoutInspection.forEach(inspection => {
-                if (building.id === inspection['idBuilding']) {
-                    building = Object.assign({}, building);
-
-                    this.buildingsNotInspected.push(building);
-                }
-            });
-        });
+        this.setBuildingNotInspected();
 
         e.data.idWebuserCreatedBy = localStorage.getItem('currentWebuser');
         e.data.isReadyForInspection = false;
@@ -403,6 +397,37 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         });
     }
 
+    private setBuildingNotInspected() {
+        this.buildingsNotInspected = [];
+
+        this.buildings.forEach(building => {
+            this.buildingsWithoutInspection.forEach(inspection => {
+                if (building.id === inspection['idBuilding']) {
+                    building = Object.assign({}, building);
+
+                    this.buildingsNotInspected.push(building);
+                }
+            });
+        });
+    }
+
+    private onSearch(e) {
+        if (!e.value) {
+            return null;
+        }
+
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+
+        this.timer = setTimeout((function(search) {
+            this.inspectionService.getBuildingToDo(search).subscribe(data => {
+                this.buildingsWithoutInspection = data.data;
+                this.setBuildingNotInspected();
+            });
+        }).bind(this, e.value), 1000);
+    }
+
     private loadWebuser() {
         this.webuserService.getActive().subscribe(data => this.webusers = data);
     }
@@ -412,6 +437,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     private loadInspection() {
-        this.inspectionService.getBuildingToDo().subscribe(data => this.buildingsWithoutInspection = data);
+        this.inspectionService.getBuildingToDo().subscribe(data => this.buildingsWithoutInspection = data.data);
     }
 }

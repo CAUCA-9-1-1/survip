@@ -103,8 +103,10 @@
                 itemTemplate="listItem"
                 keyExpr="id"
                 height="90%"
+                pageLoadMode="scrollBottom"
                 [(selectedItems)]="popupBuildingSelected"
                 [searchEnabled]="true"
+                [searchEditorOptions]="searchEditorOptions"
                 [searchExpr]="['civicNumber', 'lane', 'city', 'riskLevel']"
                 selectionMode="multiple">
             <div *dxTemplate="let item of 'listItem'">
