@@ -4,6 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {confirm} from 'devextreme/ui/dialog';
+import CustomStore from 'devextreme/data/custom_store';
 
 import {environment} from '../../environments/environment';
 import {DashboardService} from './shared/services/dashboard.service';
@@ -42,7 +43,7 @@ import {PictureService} from '../shared/services/picture.service';
 export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-    dataSource: InspectionForList[];
+    dataSource: any = {};
     webusers: WebuserForWeb[] = [];
     lanes: Lane[] = [];
     cities: City[] = [];
@@ -54,7 +55,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     everythingIsLoaded = false;
 
     constructor(
-        private inspectionService: DashboardService,
+        private dashboardService: DashboardService,
         private webuserService: WebuserService,
         private laneService: LaneService,
         private cityService: CityService,
@@ -185,7 +186,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         this.dataGrid.instance.option({
             allowColumnResizing: true,
             filterRow: {
-                visible: true,
+                visible: false,
             },
             searchPanel: {
                 visible: true,
@@ -485,21 +486,33 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     private loadData() {
         switch (this.selectedMode) {
             case 'mode1':
-                this.inspectionService.getToDo().subscribe(data => this.dataSource = data);
+                this.createStore('getToDo');
                 break;
             case 'mode2':
-                this.inspectionService.getForApproval().subscribe(data => this.dataSource = data);
+                this.createStore('getForApproval');
                 break;
             case 'mode3':
-                this.inspectionService.getBuildingHistory().subscribe(data => this.dataSource = data);
+                this.createStore('getBuildingHistory');
                 break;
             case 'mode4':
-                this.inspectionService.getBuildingToDo().subscribe(data => this.dataSource = data);
+                this.createStore('getBuildingToDo');
                 break;
             default:
                 this.dataSource = [];
                 break;
         }
+    }
+
+    private createStore(getFunction: string) {
+        this.dataSource = {
+            store: new CustomStore({
+                load: (loadOptions: any) => {
+                    return this.dashboardService[getFunction](loadOptions).toPromise();
+                }
+            }),
+        };
+
+        this.dataSource.store.load();
     }
 
     private loadWebusers() {
