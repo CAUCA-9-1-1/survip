@@ -4,5 +4,5 @@ export const environment = {
         available: ['fr', 'en'],
         use: 'fr',
     },
-    apiUrl: 'http://catestsprevention1.ad.cauca.ca:5555/api/',
+    apiUrl: '//survipreventiontest.cauca.ca/api/',
 };

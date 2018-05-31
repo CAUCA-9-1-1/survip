@@ -9,5 +9,5 @@ export const environment = {
         available: ['fr', 'en'],
         use: 'fr',
     },
-    apiUrl: 'http://localhost:5555/api/',
+    apiUrl: '//localhost:5555/api/',
 };

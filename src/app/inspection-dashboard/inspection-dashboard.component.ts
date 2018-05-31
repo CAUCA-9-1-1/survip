@@ -14,7 +14,6 @@ import {RiskLevelService} from '../management-building/shared/services/risk-leve
 import {RiskLevel} from '../management-building/shared/models/risk-level.model';
 import {UtilisationCode} from '../management-building/shared/models/utilisation-code.model';
 import {UtilisationCodeService} from '../management-building/shared/services/utilisation-code.service';
-import {InspectionForList} from './shared/models/inspection-for-list.model';
 import {City} from '../management-address/shared/models/city.model';
 import {CityService} from '../management-address/shared/services/city.service';
 import {InspectionBatchService} from '../inspection-batch/shared/services/inspection-batch.service';
@@ -296,12 +295,14 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
         return [{
             caption: this.labels['approve'],
+            dataType: 'string',
             visible: visible[0],
             width: width[0] || null,
             cellTemplate: 'approveInspection',
         }, {
             dataField: 'idRiskLevel',
             caption: this.labels['riskLevel'],
+            dataType: 'string',
             lookup: {
                 dataSource: this.riskLevels,
                 valueExpr: 'id',
@@ -314,11 +315,13 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'address',
             caption: this.labels['address'],
+            dataType: 'string',
             visible: visible[2],
             width: width[2] || null,
         }, {
             dataField: 'idLaneTransversal',
             caption: this.labels['transversal'],
+            dataType: 'string',
             lookup: {
                 dataSource: this.lanes,
                 valueExpr: 'id',
@@ -333,6 +336,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'idCity',
             caption: this.labels['city'],
+            dataType: 'string',
             visible: visible[4],
             width: width[4] || null,
             lookup: {
@@ -347,16 +351,19 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'postalCode',
             caption: this.labels['postalCode'],
+            dataType: 'string',
             visible: visible[5],
             width: width[5] || null,
         }, {
             dataField: 'webuserAssignedTo',
             caption: this.labels['webuserAssignedTo'],
+            dataType: 'string',
             visible: visible[6],
             width: width[6] || null,
         }, {
             dataField: 'batchDescription',
             caption: this.labels['batch'],
+            dataType: 'string',
             visible: visible[7],
             width: width[7] || null,
             groupIndex: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? 0 : null),
@@ -364,6 +371,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'inspectionStatus',
             caption: this.labels['status'],
+            dataType: 'string',
             visible: visible[8],
             width: width[8] || null,
             lookup: {
@@ -404,16 +412,19 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'contact',
             caption: this.labels['contact'],
+            dataType: 'string',
             visible: visible[11],
             width: width[11] || null,
         }, {
             dataField: 'owner',
             caption: this.labels['owner'],
+            dataType: 'string',
             visible: visible[12],
             width: width[12] || null,
         }, {
             dataField: 'idUtilisationCode',
             caption: this.labels['utilisationCode'],
+            dataType: 'string',
             lookup: {
                 dataSource: this.utilisationCodes,
                 valueExpr: 'id',
@@ -428,32 +439,38 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'idPicture',
             caption: this.labels['picture'],
+            dataType: 'object',
             visible: visible[14],
             width: width[14] || null,
             cellTemplate: (container, options) => this.showPicture(container, options),
         }, {
             dataField: 'buildingValue',
             caption: this.labels['buildingValue'],
+            dataType: 'string',
             visible: visible[15],
             width: width[15] || null,
         }, {
             dataField: 'matricule',
             caption: this.labels['matricule'],
+            dataType: 'string',
             visible: visible[16],
             width: width[16] || null,
         }, {
             dataField: 'numberOfAppartment',
             caption: this.labels['numberOfAppartment'],
+            dataType: 'number',
             visible: visible[17],
             width: width[17] || null,
         }, {
             dataField: 'numberOfBuilding',
             caption: this.labels['numberOfBuilding'],
+            dataType: 'number',
             visible: visible[18],
             width: width[18] || null,
         }, {
             dataField: 'numberOfFloor',
             caption: this.labels['numberOfFloor'],
+            dataType: 'number',
             visible: visible[19],
             width: width[19] || null,
         }, {
@@ -465,11 +482,13 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'yearOfConstruction',
             caption: this.labels['yearOfConstruction'],
+            dataType: 'number',
             visible: visible[21],
             width: width[21] || null,
         }, {
             dataField: 'details',
             caption: this.labels['details'],
+            dataType: 'string',
             visible: visible[22],
             width: width[22] || null,
         }];
@@ -511,8 +530,6 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 }
             }),
         };
-
-        this.dataSource.store.load();
     }
 
     private loadWebusers() {
