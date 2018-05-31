@@ -13,7 +13,17 @@
     </mat-button-toggle>
 </mat-button-toggle-group>
 
-<dx-data-grid [dataSource]="dataSource" [hoverStateEnabled]="true" [rowAlternationEnabled]="true">
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true">
+    <dxo-remote-operations
+            [filtering]="true"
+            [sorting]="true"
+            [paging]="true">
+    </dxo-remote-operations>
+    <dxo-paging [pageSize]="20"></dxo-paging>
+
     <div *dxTemplate="let field of 'approveInspection'">
         <button mat-button [fxShow]="selectedMode == 'mode2'" color="primary" (click)="showInspection(field)">{{'approve' | translate}}</button>
     </div>

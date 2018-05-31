@@ -13,25 +13,33 @@ export class DashboardService extends RequestService {
         super(injector);
     }
 
-    getToDo() {
+    getToDo(loadOptions) {
+        this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
+
         return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ToDoInspection', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    getForApproval() {
+    getForApproval(loadOptions) {
+        this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
+
         return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ForApprovalInspection', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    getBuildingHistory() {
+    getBuildingHistory(loadOptions) {
+        this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
+
         return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithHistory', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    getBuildingToDo() {
+    getBuildingToDo(loadOptions) {
+        this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
+
         return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
