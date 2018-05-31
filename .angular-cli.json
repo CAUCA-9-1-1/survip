@@ -29,6 +29,7 @@
         "dev": "environments/environment.ts",
         "vm": "environments/environment.vm.ts",
         "local": "environments/environment.local.ts",
+        "test": "environments/environment.test.ts",
         "prod": "environments/environment.prod.ts"
       }
     }
