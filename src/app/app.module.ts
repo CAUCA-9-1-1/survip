@@ -14,6 +14,7 @@ import {InspectionBatchModule} from './inspection-batch/inspection-batch.module'
 import {InspectionApprovalModule} from './inspection-approval/inspection-approval.module';
 import {InspectionManagementModule} from './inspection-management/inspection-management.module';
 import {StatisticsModule} from './statistics/statistics.module';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 
 @NgModule({
@@ -38,6 +39,9 @@ import {StatisticsModule} from './statistics/statistics.module';
         StatisticsModule,
         AppRoutingModule,
     ],
-    providers: [],
+    providers: [{
+        provide: LocationStrategy,
+        useClass: HashLocationStrategy,
+    }],
 })
 export class AppModule { }
