@@ -69,6 +69,8 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
                 if (e.dataField === 'idCity') {
                     e.editorOptions.type = 'dxSelectBox';
                     e.editorOptions.onValueChanged = (ev) => {
+                        e.setValue(ev.value);
+
                         this.loadLaneByCity(ev.value);
                     };
                 } else if (e.dataField === 'idLane') {
