@@ -45,7 +45,7 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
     }
 
     getBuildingName(data) {
-        return data.name + ' (' + data.civicNumber + ' ' + data.lane + ', ' + data.city + ')';
+        return data.civicNumber + ' ' + data.lane + ', ' + data.city + (data.name ? ' (' + data.name + ')' : '');
     }
 
     onEditorPreparing(e: any): void {
