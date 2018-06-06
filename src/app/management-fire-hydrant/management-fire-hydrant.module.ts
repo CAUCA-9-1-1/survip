@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { DxColorBoxModule, DxDataGridModule } from 'devextreme-angular';
+import { DxTextBoxModule, DxDataGridModule } from 'devextreme-angular';
 
 import { SharedModule } from '../shared/shared.module';
 import { ManagementFireHydrantComponent } from './management-fire-hydrant.component';
@@ -21,7 +21,7 @@ import { UnitOfMeasureComponent } from './unit-of-measure/unit-of-measure.compon
     imports: [
         SharedModule,
         DxDataGridModule,
-        DxColorBoxModule,
+        DxTextBoxModule,
     ],
 })
 export class ManagementFireHydrantModule { }

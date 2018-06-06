@@ -1,0 +1,15 @@
+::ng-deep .fireHydrantField .textbox {
+  height: 0;
+  overflow: hidden;
+}
+
+::ng-deep .fireHydrantField .fireHydrant {
+  width: 90%;
+  margin: 7px;
+}
+
+::ng-deep .fireHydrant {
+  width: 100%;
+  height: 20px;
+  border: solid 1px #000;
+}
