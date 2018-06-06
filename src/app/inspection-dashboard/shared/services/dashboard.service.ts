@@ -38,7 +38,7 @@ export class DashboardService extends RequestService {
     getBuildingToDo(loadOptions) {
         this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
 
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
+        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithoutInspectionOData', {
             headers: this.headers
         });
     }
