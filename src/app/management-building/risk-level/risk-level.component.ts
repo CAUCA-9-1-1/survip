@@ -1,50 +1,38 @@
 import {Component, OnInit} from '@angular/core';
 
-import {RiskLevel} from '../shared/models/risk-level.model';
+import {environment} from '../../../environments/environment';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {RiskLevelService} from '../shared/services/risk-level.service';
+import {RiskLevel} from '../shared/models/risk-level.model';
+
 
 @Component({
-  selector: 'app-managementbuilding-risklevel',
-  templateUrl: './risk-level.component.html',
-  styleUrls: ['./risk-level.component.styl'],
-  providers: [
-    RiskLevelService,
-  ]
+    selector: 'app-managementbuilding-risklevel',
+    templateUrl: './risk-level.component.html',
+    styleUrls: ['./risk-level.component.styl'],
+    providers: [
+        RiskLevelService,
+    ]
 })
-export class RiskLevelComponent implements OnInit {
-  riskLevels: RiskLevel[] = [];
+export class RiskLevelComponent extends GridWithCrudService implements OnInit {
 
-  constructor(
-    private riskLevelService: RiskLevelService
-  ) { }
+    constructor(
+        riskLevelService: RiskLevelService
+    ) {
+        super(riskLevelService);
+    }
 
-  ngOnInit() {
-    this.loadRiskLevel();
-  }
+    ngOnInit() {
+        this.loadSource();
+    }
 
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
+    getRiskLevelName(data) {
+        const level = RiskLevel.fromJSON(data);
 
-  public onRowInserted(e) {
-    /*this.riskLevelService.create(e.data).subscribe(info => {
-      if (info.success) {
-        this.loadRiskLevel();
-      }
-    });*/
-  }
+        return level.getLocalization(environment.locale.use);
+    }
 
-  public onRowUpdated(e) {
-    e.data.idRiskLevel = e.key.idRiskLevel;
-
-    // this.riskLevelService.update(e.data).subscribe();
-  }
-
-  public onRowRemoved(e) {
-    // this.riskLevelService.remove(e.key.idRiskLevel).subscribe();
-  }
-
-  private loadRiskLevel() {
-    // this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
-  }
+    onInitNewRow(e) {
+        e.data.isActive = true;
+    }
 }

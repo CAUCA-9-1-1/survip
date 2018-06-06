@@ -72,6 +72,6 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     }
 
     private loadRiskLevel() {
-        this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
+        this.riskLevelService.localized().subscribe(data => this.riskLevels = data);
     }
 }

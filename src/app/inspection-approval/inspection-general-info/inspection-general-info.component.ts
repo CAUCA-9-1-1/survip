@@ -54,7 +54,7 @@ export class InspectionGeneralInfoComponent implements OnInit {
                 });
             });
 
-            this.riskService.getAll().subscribe(risks => {
+            this.riskService.localized().subscribe(risks => {
                 risks.forEach( risk => {
                     if (risk.id === data.mainBuildingIdRiskLevel) {
                         this.riskLevel = risk.name;

@@ -1,31 +1,35 @@
 <dx-data-grid
-        [dataSource]="utilisationCodes"
+        [dataSource]="dataSource"
         [hoverStateEnabled]="true"
+        (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
+        (onRowValidating)="onRowValidating($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column dataField="cubf" caption="{{'cubf' | translate}}"></dxi-column>
     <dxi-column dataField="scian" caption="{{'scian' | translate}}"></dxi-column>
     <dxi-column
-            dataField="name"
+            dataField="localizations"
             caption="{{'name' | translate}}"
-            [calculateCellValue]="onCalculateCellValue"
-            editCellTemplate="editname"
-            sortOrder="asc"
-            sortIndex="0">
+            [calculateCellValue]="getCodeName"
+            editCellTemplate="editname">
     </dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-        <dxo-popup title="{{'riskLevel' | translate}}" [showTitle]="true"></dxo-popup>
+        <dxo-popup title="{{'utilisationCode' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="1">
             <dxi-item dataField="cubf" [isRequired]="true"></dxi-item>
             <dxi-item dataField="scian"></dxi-item>
-            <dxi-item dataField="name"></dxi-item>
+            <dxi-item dataField="localizations"></dxi-item>
             <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
+
+    <div *dxTemplate="let field of 'editname'">
+        <app-multilang [isRequired]="true" [value]="field.row.data.localizations" (valueChanged)="field.setValue($event.value);"></app-multilang>
+    </div>
 </dx-data-grid>

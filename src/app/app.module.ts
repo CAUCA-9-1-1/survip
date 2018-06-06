@@ -12,7 +12,6 @@ import {ManagementSurveyModule} from './management-survey/management-survey.modu
 import {InspectionDashboardModule} from './inspection-dashboard/inspection-dashboard.module';
 import {InspectionBatchModule} from './inspection-batch/inspection-batch.module';
 import {InspectionApprovalModule} from './inspection-approval/inspection-approval.module';
-import {ManagementBuildingModule} from './management-building/management-building.module';
 import {InspectionManagementModule} from './inspection-management/inspection-management.module';
 import {StatisticsModule} from './statistics/statistics.module';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';

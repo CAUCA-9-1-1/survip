@@ -75,7 +75,7 @@ export class InspectionManagementComponent extends GridWithCrudService implement
     }
 
     private loadRiskLevel() {
-        this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
+        this.riskLevelService.localized().subscribe(data => this.riskLevels = data);
     }
 
     private loadSurvey() {

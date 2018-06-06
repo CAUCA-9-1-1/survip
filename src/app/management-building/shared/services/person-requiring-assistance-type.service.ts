@@ -1,45 +1,36 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {PersonRequiringAssistanceType} from '../models/person-requiring-assistance-type.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 
 @Injectable()
-export class PersonRequiringAssistanceTypeService {
+export class PersonRequiringAssistanceTypeService extends RequestService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
+    }
 
-  public getAll() {
-    /*return this.http.get('personrequiringassistancetype').map((response: Response) => {
-      const result = response.json();
+    getAll() {
+        return this.http.get<PersonRequiringAssistanceType[]>(this.apiUrl + 'PersonRequiringAssistanceType', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-      return result.data;
-    });*/
-  }
+    save(type: PersonRequiringAssistanceType) {
+        return this.http.post(
+            this.apiUrl + 'PersonRequiringAssistanceType',
+            JSON.stringify(type),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-  public get(idPersonRequiringAssistanceType: string) {
-    /*return this.http.get('personrequiringassistancetype/' + idPersonRequiringAssistanceType).map((response: Response) => {
-      const result = response.json();
-
-      return result.data;
-    });*/
-  }
-
-  public create(type: PersonRequiringAssistanceType) {
-    /*return this.http.post(
-      'personrequiringassistancetype',
-      JSON.stringify(type)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public update(type: PersonRequiringAssistanceType) {
-    /*return this.http.put(
-      'personrequiringassistancetype',
-      JSON.stringify(type),
-    ).map((response: Response) => response.json());*/
-  }
-
-  public remove(idPersonRequiringAssistanceType: string) {
-    // return this.http.delete('personrequiringassistancetype/' + idPersonRequiringAssistanceType).map((response: Response) => response.json());
-  }
+    remove(idPersonRequiringAssistanceType: string) {
+        return this.http.delete(this.apiUrl + 'PersonRequiringAssistanceType/' + idPersonRequiringAssistanceType, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }

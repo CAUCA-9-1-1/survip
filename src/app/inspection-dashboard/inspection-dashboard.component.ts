@@ -556,7 +556,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     }
 
     private loadRiskLevel() {
-        this.riskLevelService.getAll().subscribe(data => {
+        this.riskLevelService.localized().subscribe(data => {
             this.riskLevels = data;
             this.checkLoadedElement();
         });

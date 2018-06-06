@@ -19,6 +19,12 @@ export class RiskLevelService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    localized() {
+        return this.http.get<RiskLevel[]>(this.apiUrl + 'RiskLevel/localized', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     save(level: RiskLevel) {
         return this.http.post(
             this.apiUrl + 'RiskLevel',
