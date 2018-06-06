@@ -4,7 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {confirm} from 'devextreme/ui/dialog';
-import CustomStore from 'devextreme/data/custom_store';
+import ODataStore from 'devextreme/data/odata/store';
 
 import config from '../../assets/config/config.json';
 import {DashboardService} from './shared/services/dashboard.service';
@@ -22,6 +22,7 @@ import {AskBatchDescriptionComponent} from './ask-batch-description/ask-batch-de
 import {WebuserForWeb} from '../management-access/shared/models/webuser-for-web.model';
 import {WebuserService} from '../management-access/shared/services/webuser.service';
 import {PictureService} from '../shared/services/picture.service';
+import {ODataService} from '../shared/services/o-data.service';
 
 
 @Component({
@@ -522,10 +523,10 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     private createStore(getFunction: string) {
         this.dataSource = {
-            store: new CustomStore({
-                load: (loadOptions: any) => {
-                    return this.dashboardService[getFunction](loadOptions).toPromise();
-                }
+            store: new ODataService({
+                url: 'Inspection/BuildingWithoutInspectionOData',
+                key: 'idBuilding',
+                keyType: 'string',
             }),
         };
     }
