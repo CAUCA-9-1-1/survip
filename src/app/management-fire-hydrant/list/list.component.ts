@@ -36,7 +36,6 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     cities: City[] = [];
     lanes: Lane[] = [];
     lanesOfCity: Lane[] = [];
-    intersections: Lane[] = [];
     operatorTypes: OperatorType[] = [];
     unitOfMeasures: UnitOfMeasure[] = [];
     colors = [{
@@ -98,7 +97,7 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
 
                         this.loadLaneByCity(ev.value);
                     };
-                } else if (e.dataField === 'idLane') {
+                } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
                     e.editorOptions.type = 'dxSelectBox';
                     e.editorOptions.onOpened = (ev) => {
                         ev.component.option('dataSource', this.lanesOfCity);
