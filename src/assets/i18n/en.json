@@ -250,5 +250,8 @@
   "logout": "Logout",
   "badLogin": "Bad username or password",
   "errorDuringLoggin": "An error occur during connection",
+  "childBuildings": "Child buildings",
+  "save": "Save",
+  "youNeedToSaveYourNewItem": "You need to save your new item before continue",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }

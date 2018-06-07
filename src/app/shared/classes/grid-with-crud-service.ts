@@ -5,6 +5,8 @@ export class GridWithCrudService {
     dataSource = [];
     popup: any;
 
+    private loadSpecificOpts: any;
+
     constructor(private sourceService: any) { }
 
     onInitialized(e) {
@@ -43,21 +45,23 @@ export class GridWithCrudService {
 
     onRowInserted(e) {
         this.sourceService.save(e.data).subscribe(info => {
-            this.loadSource();
+            this.loadSource(this.loadSpecificOpts);
         }, error => {
-            this.loadSource();
+            this.loadSource(this.loadSpecificOpts);
         });
     }
 
     onRowUpdated(e) {
-        this.sourceService.save(e.key).subscribe(() => this.loadSource());
+        this.sourceService.save(e.key).subscribe(() => this.loadSource(this.loadSpecificOpts));
     }
 
     onRowRemoved(e) {
-        this.sourceService.remove(e.key.id).subscribe(() => this.loadSource());
+        this.sourceService.remove(e.key.id).subscribe(() => this.loadSource(this.loadSpecificOpts));
     }
 
     protected loadSource(opts?: any) {
+        this.loadSpecificOpts = opts;
+
         if (typeof(opts) === 'function') {
             this.loadWithCallback(opts);
         } else if (typeof(opts) === 'string') {

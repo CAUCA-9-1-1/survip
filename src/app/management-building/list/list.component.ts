@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {alert} from 'devextreme/ui/dialog';
 
 import {environment} from '../../../environments/environment';
 import {BuildingService} from '../shared/services/building.service';
@@ -10,6 +11,7 @@ import {UtilisationCodeService} from '../shared/services/utilisation-code.servic
 import {RiskLevel} from '../shared/models/risk-level.model';
 import {RiskLevelService} from '../shared/services/risk-level.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -25,11 +27,18 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 })
 export class ListComponent extends GridWithCrudService implements OnInit {
     @Input() isParent: boolean;
-    @Input() idParentBuilding: string;
+    @Input()
+    set parentBuilding(building: Building) {
+        this.parent = building;
+        this.loadSource(this.parent.id);
+    }
 
+    labels: any = {};
     lanes: Lane[] = [];
     utilisationCodes: UtilisationCode[] = [];
     riskLevels: RiskLevel[] = [];
+    selectedBuidling: string;
+    parent: Building;
     popupVisible = {
         childBuildings: false,
         waterSupply: false,
@@ -39,15 +48,24 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         buildingService: BuildingService,
         private laneService: LaneService,
         private utilisationCode: UtilisationCodeService,
-        private riskLevelService: RiskLevelService
+        private riskLevelService: RiskLevelService,
+        private translateServive: TranslateService,
     ) {
         super(buildingService);
+
+        this.translateServive.get([
+            'save', 'youNeedToSaveYourNewItem'
+        ], data => {
+            this.labels = data;
+            console.log(data);
+        });
     }
 
     ngOnInit() {
-        console.log(this.idParentBuilding);
+        if (this.isParent) {
+            this.loadSource();
+        }
 
-        this.loadSource();
         this.loadLane();
         this.loadUtilisationCode();
         this.loadRiskLevel();
@@ -60,12 +78,29 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     }
 
     onInitNewRow(e) {
-        e.data.vacantLand = false;
-        e.data.isParent = true;
-        e.data.isActive = true;
+        const building = new Building();
+
+        e.data = Object.assign(this.parent || building, {
+            localizations: null,
+            buildingValue: building.buildingValue,
+            yearOfConstruction: building.yearOfConstruction,
+            isParent: this.isParent,
+        });
+
+        this.selectedBuidling = null;
+    }
+
+    onEditingStart(e) {
+        this.selectedBuidling = e.data;
     }
 
     showPopup(popupName: string) {
+        if (!this.selectedBuidling) {
+            alert(this.labels['youNeedToSaveYourNewItem'], this.labels['save']);
+
+            return null;
+        }
+
         this.popupVisible[popupName] = true;
     }
 

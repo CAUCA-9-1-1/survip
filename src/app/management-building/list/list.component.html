@@ -4,6 +4,7 @@
         [rowAlternationEnabled]="true"
         (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
+        (onEditingStart)="onEditingStart($event)"
         (onRowValidating)="onRowValidating($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
@@ -58,8 +59,8 @@
 
         <dxo-form colCount="2">
             <dxi-item dataField="localizations" colSpan="2"></dxi-item>
-            <dxi-item dataField="civicNumber" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
             <dxi-item dataField="idLane" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+            <dxi-item dataField="civicNumber" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
             <dxi-item dataField="civicLetter" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
             <dxi-item dataField="civicSupp" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
             <dxi-item dataField="civicLetterSupp" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
@@ -78,10 +79,24 @@
             <dxi-item dataField="vacantLand" editorType="dxCheckBox"></dxi-item>
             <dxi-item dataField="isParent" editorType="dxCheckBox" [editorOptions]="{'readOnly': true}"></dxi-item>
             <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+            <dxi-item template="listButton" colSpan="2"></dxi-item>
         </dxo-form>
     </dxo-editing>
 
+    <div *dxTemplate="let field of 'listButton'">
+        <dx-button text="{{'childBuildings' | translate}}" (onClick)="showPopup('childBuildings')" [disabled]="!isParent"></dx-button>
+    </div>
     <div *dxTemplate="let field of 'editname'">
         <app-multilang [isRequired]="true" [value]="field.row.data.localizations" (valueChanged)="field.setValue($event.value);"></app-multilang>
     </div>
 </dx-data-grid>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        title="{{'childBuildings' | translate}}"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupVisible.childBuildings">
+    <div *dxTemplate="let data of 'content'">
+        <app-managementbuilding-list [isParent]="false" [parentBuilding]="selectedBuidling"></app-managementbuilding-list>
+    </div>
+</dx-popup>
