@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DxDataGridModule} from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxPopupModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {ManagementBuildingComponent} from './management-building.component';
@@ -22,7 +22,9 @@ import {HazardousMaterialComponent} from './hazardous-material/hazardous-materia
     exports: [],
     imports: [
         SharedModule,
-        DxDataGridModule
+        DxButtonModule,
+        DxDataGridModule,
+        DxPopupModule,
     ],
     providers: [],
 })

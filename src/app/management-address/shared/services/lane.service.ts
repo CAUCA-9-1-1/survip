@@ -18,6 +18,12 @@ export class LaneService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    localized() {
+        return this.http.get<Lane[]>(this.apiUrl + 'Lane/localized', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     getAllOfCity(idCity: string) {
         return this.http.get<Lane[]>(this.apiUrl + 'Lane/City/' + idCity, {
             headers: this.headers

@@ -19,6 +19,12 @@ export class UtilisationCodeService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    localized() {
+        return this.http.get<UtilisationCode[]>(this.apiUrl + 'UtilisationCode/localized', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     save(code: UtilisationCode) {
         return this.http.post(
             this.apiUrl + 'UtilisationCode',

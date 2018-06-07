@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import {environment} from '../../../environments/environment';
 import {BuildingService} from '../shared/services/building.service';
@@ -24,10 +24,16 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
     ]
 })
 export class ListComponent extends GridWithCrudService implements OnInit {
-    buildings: Building[] = [];
+    @Input() isParent: boolean;
+    @Input() idParentBuilding: string;
+
     lanes: Lane[] = [];
     utilisationCodes: UtilisationCode[] = [];
     riskLevels: RiskLevel[] = [];
+    popupVisible = {
+        childBuildings: false,
+        waterSupply: false,
+    };
 
     constructor(
         buildingService: BuildingService,
@@ -39,6 +45,8 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.idParentBuilding);
+
         this.loadSource();
         this.loadLane();
         this.loadUtilisationCode();
@@ -51,24 +59,22 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         return building.getLocalization(environment.locale.use);
     }
 
-    getLaneName(data) {
-        const lane = Lane.fromJSON(data);
-
-        return lane.getLocalization(environment.locale.use);
-    }
-
-    public onInitNewRow(e) {
+    onInitNewRow(e) {
         e.data.vacantLand = false;
         e.data.isParent = true;
         e.data.isActive = true;
     }
 
+    showPopup(popupName: string) {
+        this.popupVisible[popupName] = true;
+    }
+
     private loadLane() {
-        this.laneService.getAll().subscribe(data => this.lanes = data);
+        this.laneService.localized().subscribe(data => this.lanes = data);
     }
 
     private loadUtilisationCode() {
-        this.utilisationCode.getAll().subscribe(data => this.utilisationCodes = data);
+        this.utilisationCode.localized().subscribe(data => this.utilisationCodes = data);
     }
 
     private loadRiskLevel() {

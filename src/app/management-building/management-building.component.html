@@ -1,6 +1,6 @@
 <mat-tab-group>
     <mat-tab label="{{'building' | translate}}">
-        <app-managementbuilding-list></app-managementbuilding-list>
+        <app-managementbuilding-list [isParent]="true"></app-managementbuilding-list>
     </mat-tab>
     <mat-tab label="{{'riskLevel' | translate}}">
         <app-managementbuilding-risklevel></app-managementbuilding-risklevel>
