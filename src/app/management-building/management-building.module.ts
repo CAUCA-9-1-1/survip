@@ -9,6 +9,7 @@ import {UtilisationCodeComponent} from './utilisation-code/utilisation-code.comp
 import {PersonRequiringAssistanceTypeComponent} from './person-requiring-assistance-type/person-requiring-assistance-type.component';
 import {HazardousMaterialComponent} from './hazardous-material/hazardous-material.component';
 import { ManageContactsComponent } from './manage-contacts/manage-contacts.component';
+import { ManagePnapsComponent } from './manage-pnaps/manage-pnaps.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ManageContactsComponent } from './manage-contacts/manage-contacts.compo
         PersonRequiringAssistanceTypeComponent,
         HazardousMaterialComponent,
         ManageContactsComponent,
+        ManagePnapsComponent,
     ],
     exports: [],
     imports: [
