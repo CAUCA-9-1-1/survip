@@ -4,7 +4,6 @@
         [rowAlternationEnabled]="true"
         (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
-        (onRowValidating)="onRowValidating($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
@@ -40,13 +39,13 @@
             <dxi-item dataField="lastName" [isRequired]="true"></dxi-item>
             <dxi-item dataField="isOwner" editorType="dxCheckBox"></dxi-item>
             <dxi-item dataField="callPriority"></dxi-item>
-            <dxi-item dataField="phoneNumber"></dxi-item>
+            <dxi-item dataField="phoneNumber" [editorOptions]="{'mask': '000-000-0000'}"></dxi-item>
             <dxi-item dataField="phoneNumberExtension"></dxi-item>
-            <dxi-item dataField="cellphoneNumber"></dxi-item>
+            <dxi-item dataField="cellphoneNumber" [editorOptions]="{'mask': '000-000-0000'}"></dxi-item>
             <dxi-item itemType="empty"></dxi-item>
-            <dxi-item dataField="pagerNumber"></dxi-item>
+            <dxi-item dataField="pagerNumber" [editorOptions]="{'mask': '000-000-0000'}"></dxi-item>
             <dxi-item dataField="pagerCode"></dxi-item>
-            <dxi-item dataField="otherNumber"></dxi-item>
+            <dxi-item dataField="otherNumber" [editorOptions]="{'mask': '000-000-0000'}"></dxi-item>
             <dxi-item dataField="otherNumberExtension"></dxi-item>
             <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>

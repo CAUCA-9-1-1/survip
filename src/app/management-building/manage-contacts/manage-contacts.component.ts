@@ -37,7 +37,7 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
         if (!this.idBuilding || !this.service) {
             return null;
         }
-console.log(this.service);
+
         this.sourceService = (this.service === 'building' ? this.buildingService : this.inspectionService);
         this.loadSource(this.idBuilding);
     }

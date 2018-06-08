@@ -96,6 +96,7 @@
         [showTitle]="true"
         title="{{'addBuildingsToInspection' | translate}}"
         [closeOnOutsideClick]="true"
+        [toolbarItems]="popupButtons"
         [(visible)]="popupBuildingVisible">
     <div *dxTemplate="let data of 'content'">
         <dx-list
@@ -116,6 +117,5 @@
                 <div>{{item.riskLevel}}</div>
             </div>
         </dx-list>
-        <dx-toolbar [items]="popupButtons"></dx-toolbar>
     </div>
 </dx-popup>

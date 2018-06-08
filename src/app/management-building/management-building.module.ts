@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DxButtonModule, DxDataGridModule, DxPopupModule} from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxPopupModule, DxToolbarModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {ManagementBuildingComponent} from './management-building.component';
@@ -27,6 +27,7 @@ import { ManageContactsComponent } from './manage-contacts/manage-contacts.compo
         DxButtonModule,
         DxDataGridModule,
         DxPopupModule,
+        DxToolbarModule,
     ],
     providers: [],
 })

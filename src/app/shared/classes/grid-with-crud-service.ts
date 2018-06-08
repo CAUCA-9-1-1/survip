@@ -16,7 +16,7 @@ export class GridWithCrudService {
 
         if (options.popup) {
             options.popup.onHiding = (ev) => {
-                this.loadSource();
+                this.loadSource(this.loadSpecificOpts);
             };
 
             e.component.option('editing', options);

@@ -43,6 +43,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         childBuildings: false,
         contacts: false,
     };
+    toolbarItems = [];
 
     constructor(
         buildingService: BuildingService,
@@ -54,10 +55,23 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         super(buildingService);
 
         this.translateServive.get([
-            'save', 'youNeedToSaveYourNewItem'
-        ], data => {
-            this.labels = data;
-            console.log(data);
+            'close', 'save', 'youNeedToSaveYourNewItem'
+        ]).subscribe(labels => {
+            this.labels = labels;
+
+            this.toolbarItems = [{
+                toolbar: 'bottom',
+                location: 'after',
+                widget: 'dxButton',
+                options: {
+                    icon: 'close',
+                    text: this.labels['close'],
+                    onClick: () => {
+                        this.popupVisible['childBuildings'] = false;
+                        this.popupVisible['contacts'] = false;
+                    }
+                }
+            }];
         });
     }
 
