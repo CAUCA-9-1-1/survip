@@ -7,7 +7,9 @@ export class GridWithCrudService {
 
     private loadSpecificOpts: any;
 
-    constructor(private sourceService: any) { }
+    constructor(
+        protected sourceService?: any,
+    ) { }
 
     onInitialized(e) {
         const options = e.component.option('editing');

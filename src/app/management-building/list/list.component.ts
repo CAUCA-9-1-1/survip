@@ -41,7 +41,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     parent: Building;
     popupVisible = {
         childBuildings: false,
-        waterSupply: false,
+        contacts: false,
     };
 
     constructor(

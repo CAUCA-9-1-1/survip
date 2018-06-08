@@ -8,6 +8,7 @@ import {RiskLevelComponent} from './risk-level/risk-level.component';
 import {UtilisationCodeComponent} from './utilisation-code/utilisation-code.component';
 import {PersonRequiringAssistanceTypeComponent} from './person-requiring-assistance-type/person-requiring-assistance-type.component';
 import {HazardousMaterialComponent} from './hazardous-material/hazardous-material.component';
+import { ManageContactsComponent } from './manage-contacts/manage-contacts.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {HazardousMaterialComponent} from './hazardous-material/hazardous-materia
         UtilisationCodeComponent,
         PersonRequiringAssistanceTypeComponent,
         HazardousMaterialComponent,
+        ManageContactsComponent,
     ],
     exports: [],
     imports: [
