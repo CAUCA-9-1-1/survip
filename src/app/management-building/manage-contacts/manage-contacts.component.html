@@ -20,7 +20,7 @@
             sortIndex="1">
     </dxi-column>
     <dxi-column dataField="isOwner" dataType="boolean" caption="{{'isOwner' | translate}}" width="10%"></dxi-column>
-    <dxi-column dataField="callPriority" caption="{{'priority' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="callPriority" dataType="number" caption="{{'priority' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="phoneNumber" caption="{{'phoneNumber' | translate}}"></dxi-column>
     <dxi-column dataField="phoneNumberExtension" caption="{{'extension' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="cellphoneNumber" caption="{{'cellphoneNumber' | translate}}" [visible]="false"></dxi-column>
@@ -39,15 +39,18 @@
             <dxi-item dataField="lastName" [isRequired]="true"></dxi-item>
             <dxi-item dataField="isOwner" editorType="dxCheckBox"></dxi-item>
             <dxi-item dataField="callPriority"></dxi-item>
-            <dxi-item dataField="phoneNumber" [editorOptions]="{'mask': '000-000-0000'}"></dxi-item>
-            <dxi-item dataField="phoneNumberExtension"></dxi-item>
-            <dxi-item dataField="cellphoneNumber" [editorOptions]="{'mask': '000-000-0000'}"></dxi-item>
-            <dxi-item itemType="empty"></dxi-item>
-            <dxi-item dataField="pagerNumber" [editorOptions]="{'mask': '000-000-0000'}"></dxi-item>
-            <dxi-item dataField="pagerCode"></dxi-item>
-            <dxi-item dataField="otherNumber" [editorOptions]="{'mask': '000-000-0000'}"></dxi-item>
-            <dxi-item dataField="otherNumberExtension"></dxi-item>
             <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+            <dxi-item itemType="empty"></dxi-item>
+            <dxi-item itemType="group" caption="{{'phoneNumber' | translate}}" colSpan="2" colCount="2">
+                <dxi-item dataField="phoneNumber" [editorOptions]="{'mask': '(000) 000-0000'}"></dxi-item>
+                <dxi-item dataField="phoneNumberExtension"></dxi-item>
+                <dxi-item dataField="cellphoneNumber" [editorOptions]="{'mask': '(000) 000-0000'}"></dxi-item>
+                <dxi-item itemType="empty"></dxi-item>
+                <dxi-item dataField="pagerNumber" [editorOptions]="{'mask': '(000) 000-0000'}"></dxi-item>
+                <dxi-item dataField="pagerCode"></dxi-item>
+                <dxi-item dataField="otherNumber" [editorOptions]="{'mask': '(000) 000-0000'}"></dxi-item>
+                <dxi-item dataField="otherNumberExtension"></dxi-item>
+            </dxi-item>
         </dxo-form>
     </dxo-editing>
 </dx-data-grid>

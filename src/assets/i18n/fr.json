@@ -258,5 +258,13 @@
   "childBuildings": "Bâtiments enfant",
   "save": "Sauvegarder",
   "youNeedToSaveYourNewItem": "Vous devez sauvegarder votre nouvel élément avant de continuer",
+  "phoneNumber": "Téléphone",
+  "extension": "Extension",
+  "cellphoneNumber": "Cellulaire",
+  "pagerNumber": "Pager",
+  "pagerCode": "Code pour le pager",
+  "otherNumber": "Autre téléphone",
+  "isOwner": "Propriétaire",
+  "priority": "Priorité",
   "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?"
 }
