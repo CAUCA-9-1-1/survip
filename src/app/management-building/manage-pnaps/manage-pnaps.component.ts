@@ -3,6 +3,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {BuildingPnapsService} from '../shared/services/building-pnaps.service';
 import {InspectionBuildingPnapsService} from '../../inspection-approval/shared/services/inspection-building-pnaps.service';
+import {PersonRequiringAssistanceTypeService} from '../shared/services/person-requiring-assistance-type.service';
+import {PersonRequiringAssistanceType} from '../shared/models/person-requiring-assistance-type.model';
 
 
 @Component({
@@ -12,6 +14,7 @@ import {InspectionBuildingPnapsService} from '../../inspection-approval/shared/s
     providers: [
         InspectionBuildingPnapsService,
         BuildingPnapsService,
+        PersonRequiringAssistanceTypeService,
     ]
 })
 export class ManagePnapsComponent extends GridWithCrudService implements OnInit {
@@ -23,15 +26,19 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
     }
 
     idBuilding: string;
+    pnapsType: PersonRequiringAssistanceType[];
 
     constructor(
         private inspectionService: InspectionBuildingPnapsService,
         private buildingService: BuildingPnapsService,
+        private pnapsTypeService: PersonRequiringAssistanceTypeService,
     ) {
         super();
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.loadType();
+    }
 
     loadData() {
         if (!this.idBuilding || !this.service) {
@@ -54,5 +61,9 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
         e.data.eveningIsApproximate = false;
         e.data.nightIsApproximate = false;
         e.data.isActive = true;
+    }
+
+    private loadType() {
+        this.pnapsTypeService.localized().subscribe(data => this.pnapsType = data);
     }
 }

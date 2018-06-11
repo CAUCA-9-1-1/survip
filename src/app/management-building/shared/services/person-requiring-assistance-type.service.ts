@@ -18,6 +18,12 @@ export class PersonRequiringAssistanceTypeService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    localized() {
+        return this.http.get<PersonRequiringAssistanceType[]>(this.apiUrl + 'PersonRequiringAssistanceType/localized', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     save(type: PersonRequiringAssistanceType) {
         return this.http.post(
             this.apiUrl + 'PersonRequiringAssistanceType',
