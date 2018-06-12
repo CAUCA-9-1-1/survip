@@ -29,7 +29,7 @@
     <dxi-column
             dataField="idIntersection"
             caption="{{'intersection' | translate}}">
-        <dxo-lookup [dataSource]="intersections" [displayExpr]="getIntersectionName" valueExpr="id">
+        <dxo-lookup [dataSource]="lanes" [displayExpr]="getLaneName" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="altitude" caption="{{'altitude' | translate}}" [visible]="false"></dxi-column>
@@ -65,7 +65,10 @@
         <dxo-lookup [dataSource]="unitOfMeasures" [displayExpr]="getUnitOfMeasureName" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="color" caption="{{'color' | translate}}" [visible]="false" editCellTemplate="editcolor"></dxi-column>
+    <dxi-column dataField="color" caption="{{'color' | translate}}" [visible]="false">
+        <dxo-lookup [dataSource]="colors" displayExpr="color" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
     <dxi-column dataField="comments" caption="{{'comments' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="physicalPosition" caption="{{'physicalPosition' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
@@ -99,8 +102,4 @@
             <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
-
-    <div *dxTemplate="let field of 'editcolor'">
-        <dx-color-box [value]="field.data.color" [editAlphaChannel]="true" (onValueChanged)="field.setValue($event.value);"></dx-color-box>
-    </div>
 </dx-data-grid>

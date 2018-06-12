@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {environment} from '../../../environments/environment';
+import {DxDataGridComponent} from 'devextreme-angular';
 
+import {environment} from '../../../environments/environment';
 import {FireHydrantService} from '../shared/services/fire-hydrant.service';
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.service';
@@ -13,7 +14,6 @@ import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {CityService} from '../../management-address/shared/services/city.service';
 import {City} from '../../management-address/shared/models/city.model';
-import {DxDataGridComponent} from 'devextreme-angular';
 
 
 @Component({
@@ -36,9 +36,33 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     cities: City[] = [];
     lanes: Lane[] = [];
     lanesOfCity: Lane[] = [];
-    intersections: Lane[] = [];
     operatorTypes: OperatorType[] = [];
     unitOfMeasures: UnitOfMeasure[] = [];
+    colors = [{
+        id: '#000000',
+        color: '#000000',
+    }, {
+        id: '#FFFFFF',
+        color: '#FFFFFF',
+    }, {
+        id: '#6495ED',
+        color: '#6495ED',
+    }, {
+        id: '#9ACD32',
+        color: '#9ACD32',
+    }, {
+        id: '#FFA500',
+        color: '#FFA500',
+    }, {
+        id: '#FF0000',
+        color: '#FF0000',
+    }, {
+        id: '#FFFF00',
+        color: '#FFFF00',
+    }, {
+        id: '#CB42F4',
+        color: '#CB42F4',
+    }];
 
     constructor(
         fireHydrantService: FireHydrantService,
@@ -73,10 +97,24 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
 
                         this.loadLaneByCity(ev.value);
                     };
-                } else if (e.dataField === 'idLane') {
+                } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
                     e.editorOptions.type = 'dxSelectBox';
                     e.editorOptions.onOpened = (ev) => {
                         ev.component.option('dataSource', this.lanesOfCity);
+                    };
+                } else if (e.dataField === 'color') {
+                    e.editorOptions.type = 'dxSelectBox';
+                    e.editorOptions.fieldTemplate = (data, container) => {
+                        container.innerHTML = '<div class="dx-texteditor-container">' +
+                                '<div class="fireHydrantField">' +
+                                    '<div class="textbox"><input class="dx-texteditor-input" value="' + data.color + '" readOnly="true" /></div>' +
+                                    '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>' +
+                                '</div>' +
+                                '<div class="dx-texteditor-buttons-container"></div>' +
+                            '</div>';
+                    };
+                    e.editorOptions.itemTemplate = (data, index, container) => {
+                        container.innerHTML = '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>';
                     };
                 }
             }
@@ -116,7 +154,7 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     }
 
     onInitNewRow(e) {
-        e.data.color = 'rgba(255, 0, 0, 1)';
+        e.data.color = 'red';
         e.data.isActive = true;
     }
 
