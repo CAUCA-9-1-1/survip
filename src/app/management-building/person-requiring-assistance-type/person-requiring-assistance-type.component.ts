@@ -9,7 +9,7 @@ import {environment} from '../../../environments/environment';
 @Component({
     selector: 'app-managementbuilding-personrequiringassistancetype',
     templateUrl: './person-requiring-assistance-type.component.html',
-    styleUrls: ['./person-requiring-assistance-type.component.styl'],
+    styleUrls: ['./person-requiring-assistance-type.component.scss'],
     providers: [
         PersonRequiringAssistanceTypeService,
     ]

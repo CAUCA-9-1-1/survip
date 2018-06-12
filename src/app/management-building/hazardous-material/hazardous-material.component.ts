@@ -8,7 +8,7 @@ import {environment} from '../../../environments/environment';
 @Component({
     selector: 'app-managementbuilding-hazardousmaterial',
     templateUrl: './hazardous-material.component.html',
-    styleUrls: ['./hazardous-material.component.styl'],
+    styleUrls: ['./hazardous-material.component.scss'],
     providers: [
         HazardousMaterialService,
     ]

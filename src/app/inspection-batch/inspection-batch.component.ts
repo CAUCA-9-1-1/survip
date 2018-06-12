@@ -66,6 +66,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
             this.labels = data;
 
             this.popupButtons = [{
+                toolbar: 'bottom',
                 location: 'after',
                 widget: 'dxButton',
                 options: {
@@ -73,6 +74,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
                     onClick: () => this.onAddBuilding()
                 }
             }, {
+                toolbar: 'bottom',
                 location: 'after',
                 widget: 'dxButton',
                 options: {
