@@ -17,6 +17,12 @@
             sortOrder="asc"
             sortIndex="0">
     </dxi-column>
+    <dxi-column
+            dataField="idPicture"
+            caption="{{'photo' | translate}}"
+            editCellTemplate="editphoto"
+            [visible]="false">
+    </dxi-column>
     <dxi-column dataField="civicNumber" caption="{{'civicNumber' | translate}}"></dxi-column>
     <dxi-column dataField="civicLetter" caption="{{'civicLetter' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="civicSupp" caption="{{'civicSupp' | translate}}" [visible]="false"></dxi-column>
@@ -58,27 +64,36 @@
         <dxo-popup title="{{'building' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="2">
-            <dxi-item dataField="localizations" colSpan="2"></dxi-item>
-            <dxi-item dataField="idLane" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="civicNumber" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="civicLetter" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="civicSupp" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="civicLetterSupp" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="suite" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="appartmentNumber" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="postalCode" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="floor" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="numberOfFloor" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="numberOfAppartment" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="numberOfBuilding" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
-            <dxi-item dataField="yearOfConstruction"></dxi-item>
-            <dxi-item dataField="buildingValue"></dxi-item>
-            <dxi-item dataField="idUtilisationCode"></dxi-item>
-            <dxi-item dataField="idRiskLevel"></dxi-item>
-            <dxi-item dataField="matricule"></dxi-item>
-            <dxi-item dataField="vacantLand" editorType="dxCheckBox"></dxi-item>
-            <dxi-item dataField="isParent" editorType="dxCheckBox" [editorOptions]="{'readOnly': true}"></dxi-item>
-            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+            <dxi-item itemType="group" colCount="3">
+                <dxi-item dataField="localizations" colSpan="3"></dxi-item>
+                <dxi-item dataField="matricule" colSpan="3"></dxi-item>
+                <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+                <dxi-item dataField="vacantLand" editorType="dxCheckBox"></dxi-item>
+                <dxi-item dataField="isParent" editorType="dxCheckBox" [editorOptions]="{'readOnly': true}"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group">
+                <dxi-item dataField="idPicture"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'address' | translate}}" colSpan="2" colCount="4">
+                <dxi-item dataField="idLane" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="civicNumber" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="civicLetter" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="civicSupp" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="civicLetterSupp" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="suite" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="appartmentNumber" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="postalCode" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="floor" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'details' | translate}}" colSpan="2" colCount="4">
+                <dxi-item dataField="numberOfFloor" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="numberOfAppartment" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="numberOfBuilding" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                <dxi-item dataField="yearOfConstruction"></dxi-item>
+                <dxi-item dataField="buildingValue"></dxi-item>
+                <dxi-item dataField="idUtilisationCode"></dxi-item>
+                <dxi-item dataField="idRiskLevel"></dxi-item>
+            </dxi-item>
             <dxi-item template="listButton" colSpan="2"></dxi-item>
         </dxo-form>
     </dxo-editing>
@@ -91,6 +106,10 @@
     </div>
     <div *dxTemplate="let field of 'editname'">
         <app-multilang [isRequired]="true" [value]="field.row.data.localizations" (valueChanged)="field.setValue($event.value);"></app-multilang>
+    </div>
+    <div *dxTemplate="let field of 'editphoto'">
+        <dx-file-uploader accept="image/*" labelText="{{'orDropFileHere' | translate}}"></dx-file-uploader>
+        PHOTO
     </div>
 </dx-data-grid>
 <dx-popup

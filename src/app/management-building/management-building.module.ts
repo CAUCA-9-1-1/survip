@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DxButtonModule, DxDataGridModule, DxPopupModule, DxToolbarModule} from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxFileUploaderModule, DxPopupModule, DxToolbarModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {ManagementBuildingComponent} from './management-building.component';
@@ -30,6 +30,7 @@ import { ManageHazardousMaterialComponent } from './manage-hazardous-material/ma
         SharedModule,
         DxButtonModule,
         DxDataGridModule,
+        DxFileUploaderModule,
         DxPopupModule,
         DxToolbarModule,
     ],
