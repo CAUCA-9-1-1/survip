@@ -5,7 +5,7 @@ export class BuildingPnaps extends BaseModel {
     idBuilding = '';
     idPersonRequiringAssistanceType = '';
     personName = '';
-    contactName: '';
+    contactName = '';
     contactPhoneNumber = '';
     floor = '';
     local = '';

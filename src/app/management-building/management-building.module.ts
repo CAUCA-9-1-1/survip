@@ -10,6 +10,7 @@ import {PersonRequiringAssistanceTypeComponent} from './person-requiring-assista
 import {HazardousMaterialComponent} from './hazardous-material/hazardous-material.component';
 import { ManageContactsComponent } from './manage-contacts/manage-contacts.component';
 import { ManagePnapsComponent } from './manage-pnaps/manage-pnaps.component';
+import { ManageHazardousMaterialComponent } from './manage-hazardous-material/manage-hazardous-material.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ManagePnapsComponent } from './manage-pnaps/manage-pnaps.component';
         HazardousMaterialComponent,
         ManageContactsComponent,
         ManagePnapsComponent,
+        ManageHazardousMaterialComponent,
     ],
     exports: [],
     imports: [
