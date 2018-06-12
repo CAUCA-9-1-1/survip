@@ -12,8 +12,14 @@ export class BuildingService extends RequestService {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<Building[]>(this.apiUrl + 'Building', {
+    getAll(id?: string) {
+        let url = this.apiUrl + 'Building';
+
+        if (id) {
+            url += '/child/' + id;
+        }
+
+        return this.http.get<Building[]>(url, {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
