@@ -32,6 +32,6 @@ export class HazardousMaterialComponent extends GridWithCrudService implements O
     }
 
     onInitNewRow(e) {
-        e.data.isActive = true;
+        e.data = Object.assign(new HazardousMaterial(), {});
     }
 }

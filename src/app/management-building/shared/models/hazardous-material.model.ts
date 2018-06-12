@@ -1,10 +1,10 @@
 import {WithLocalization} from '../../../shared/models/with-localization';
 
 export class HazardousMaterial extends WithLocalization {
-    number: string;
-    guideNumber: string;
-    reactToWater: boolean;
-    toxicInhalationHazard: boolean;
+    number = '';
+    guideNumber = '';
+    reactToWater = false;
+    toxicInhalationHazard = false;
 
     static fromJSON(data: object): HazardousMaterial {
         const material = new HazardousMaterial();

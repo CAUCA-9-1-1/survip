@@ -1,5 +1,5 @@
 export class BaseModel {
     id: string;
-    isActive: boolean;
+    isActive = true;
     createOn: Date;
 }
