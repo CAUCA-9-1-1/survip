@@ -109,11 +109,7 @@
     </div>
     <div *dxTemplate="let field of 'editphoto'">
         <app-image [idImage]="field.value"></app-image>
-        <dx-file-uploader
-                accept="image/*"
-                [uploadUrl]="uploadImageUrl"
-                labelText="{{'orDropFileHere' | translate}}">
-        </dx-file-uploader>
+        <app-upload accept="image/*" (onReadend)="uploadPicture"></app-upload>
     </div>
 </dx-data-grid>
 <dx-popup

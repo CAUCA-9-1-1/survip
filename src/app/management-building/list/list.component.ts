@@ -46,7 +46,6 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         hazardousMaterials: false,
     };
     toolbarItems = [];
-    uploadImageUrl = environment.apiUrl + 'Picture/';
 
     constructor(
         buildingService: BuildingService,
@@ -111,6 +110,10 @@ export class ListComponent extends GridWithCrudService implements OnInit {
 
     onEditingStart(e) {
         this.selectedBuidling = e.data;
+    }
+
+    uploadPicture(e) {
+        console.log(e);
     }
 
     showPopup(popupName: string) {
