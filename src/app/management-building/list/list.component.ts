@@ -17,7 +17,7 @@ import {TranslateService} from '@ngx-translate/core';
 @Component({
     selector: 'app-managementbuilding-list',
     templateUrl: './list.component.html',
-    styleUrls: ['./list.component.styl'],
+    styleUrls: ['./list.component.scss'],
     providers: [
         BuildingService,
         LaneService,

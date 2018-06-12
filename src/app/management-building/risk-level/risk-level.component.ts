@@ -9,7 +9,7 @@ import {RiskLevel} from '../shared/models/risk-level.model';
 @Component({
     selector: 'app-managementbuilding-risklevel',
     templateUrl: './risk-level.component.html',
-    styleUrls: ['./risk-level.component.styl'],
+    styleUrls: ['./risk-level.component.scss'],
     providers: [
         RiskLevelService,
     ]

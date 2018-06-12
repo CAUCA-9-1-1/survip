@@ -9,7 +9,7 @@ import {environment} from '../../../environments/environment';
 @Component({
     selector: 'app-managementbuilding-utilisationcode',
     templateUrl: './utilisation-code.component.html',
-    styleUrls: ['./utilisation-code.component.styl'],
+    styleUrls: ['./utilisation-code.component.scss'],
     providers: [
         UtilisationCodeService,
     ]
