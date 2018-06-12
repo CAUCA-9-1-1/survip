@@ -266,5 +266,13 @@
   "otherNumber": "Autre téléphone",
   "isOwner": "Propriétaire",
   "priority": "Priorité",
+  "pnapType": "Type de P.N.A.P.",
+  "personName": "Nom de la personne",
+  "local": "Local",
+  "day": "Jour",
+  "evening": "Soir",
+  "night": "Nuit",
+  "residentCount": "Nombre de résident",
+  "approximate": "Approximation",
   "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?"
 }

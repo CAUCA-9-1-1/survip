@@ -261,5 +261,13 @@
   "otherNumber": "Other phone number",
   "isOwner": "Owner",
   "priority": "Priority",
+  "pnapType": "P.N.A.P. type",
+  "personName": "Person name",
+  "local": "Local",
+  "day": "Day",
+  "evening": "Evening",
+  "night": "Night",
+  "residentCount": "Resident count",
+  "approximate": "Approximate",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }

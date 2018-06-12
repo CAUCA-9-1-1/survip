@@ -1,0 +1,67 @@
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onInitialized)="onInitialized($event)"
+        (onEditorPreparing)="onEditorPreparing($event)"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="idPersonRequiringAssistanceType"
+            caption="{{'pnapType' | translate}}"
+            sortOrder="asc"
+            sortIndex="0">
+        <dxo-lookup [dataSource]="pnapsType" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+            dataField="personName"
+            caption="{{'personName' | translate}}"
+            sortOrder="asc"
+            sortIndex="1">
+    </dxi-column>
+    <dxi-column dataField="floor" caption="{{'floor' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="local" caption="{{'local' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="contactName" caption="{{'name' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="contactPhoneNumber" caption="{{'phoneNumber' | translate}}"></dxi-column>
+    <dxi-column dataField="dayResidentCount" caption="{{'residentCount' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="dayIsApproximate" dataType="boolean" caption="{{'approximate' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="eveningResidentCount" caption="{{'residentCount' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="eveningIsApproximate" dataType="boolean" caption="{{'approximate' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="nightResidentCount" caption="{{'residentCount' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="nightIsApproximate" dataType="boolean" caption="{{'approximate' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="description" caption="{{'description' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'contact' | translate}}" [showTitle]="true"></dxo-popup>
+
+        <dxo-form colCount="2">
+            <dxi-item dataField="idPersonRequiringAssistanceType" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="personName" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="floor" editorType="dxCheckBox"></dxi-item>
+            <dxi-item dataField="local"></dxi-item>
+            <dxi-item dataField="description"></dxi-item>
+            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+            <dxi-item itemType="group" caption="{{'contact' | translate}}" colSpan="2" colCount="2">
+                <dxi-item dataField="contactName"></dxi-item>
+                <dxi-item dataField="contactPhoneNumber" [editorOptions]="{'mask': '(000) 000-0000'}"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'day' | translate}}" colSpan="2" colCount="2">
+                <dxi-item dataField="dayResidentCount"></dxi-item>
+                <dxi-item dataField="dayIsApproximate" editorType="dxCheckBox"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'evening' | translate}}" colSpan="2" colCount="2">
+                <dxi-item dataField="eveningResidentCount"></dxi-item>
+                <dxi-item dataField="eveningIsApproximate" editorType="dxCheckBox"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'night' | translate}}" colSpan="2" colCount="2">
+                <dxi-item dataField="nightResidentCount"></dxi-item>
+                <dxi-item dataField="nightIsApproximate" editorType="dxCheckBox"></dxi-item>
+            </dxi-item>
+        </dxo-form>
+    </dxo-editing>
+</dx-data-grid>
