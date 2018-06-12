@@ -87,6 +87,7 @@
         <dx-button text="{{'childBuildings' | translate}}" (onClick)="showPopup('childBuildings')" [disabled]="!isParent"></dx-button>
         <dx-button text="{{'contacts' | translate}}" (onClick)="showPopup('contacts')"></dx-button>
         <dx-button text="{{'pnaps' | translate}}" (onClick)="showPopup('pnaps')"></dx-button>
+        <dx-button text="{{'hazardousMaterial' | translate}}" (onClick)="showPopup('hazardousMaterial')"></dx-button>
     </div>
     <div *dxTemplate="let field of 'editname'">
         <app-multilang [isRequired]="true" [value]="field.row.data.localizations" (valueChanged)="field.setValue($event.value);"></app-multilang>
@@ -123,5 +124,16 @@
         [(visible)]="popupVisible.pnaps">
     <div *dxTemplate="let data of 'content'">
         <app-manage-pnaps [service]="'building'" [building]="selectedBuidling.id"></app-manage-pnaps>
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        title="{{'hazardousMaterial' | translate}}"
+        [closeOnOutsideClick]="true"
+        [toolbarItems]="toolbarItems"
+        [(visible)]="popupVisible.hazardousMaterial">
+    <div *dxTemplate="let data of 'content'">
+        <app-manage-hazardous-material [service]="'building'" [building]="selectedBuidling.id"></app-manage-hazardous-material>
     </div>
 </dx-popup>

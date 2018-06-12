@@ -43,6 +43,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         childBuildings: false,
         contacts: false,
         pnaps: false,
+        hazardousMaterial: false,
     };
     toolbarItems = [];
 
@@ -71,6 +72,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
                         this.popupVisible['childBuildings'] = false;
                         this.popupVisible['contacts'] = false;
                         this.popupVisible['pnaps'] = false;
+                        this.popupVisible['hazardousMaterial'] = false;
                     }
                 }
             }];
