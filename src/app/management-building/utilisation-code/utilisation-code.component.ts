@@ -3,7 +3,6 @@ import {Component, OnInit} from '@angular/core';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {UtilisationCode} from '../shared/models/utilisation-code.model';
 import {UtilisationCodeService} from '../shared/services/utilisation-code.service';
-import {RiskLevel} from '../shared/models/risk-level.model';
 import {environment} from '../../../environments/environment';
 
 
