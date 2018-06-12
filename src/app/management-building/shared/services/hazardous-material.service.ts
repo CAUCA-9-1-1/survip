@@ -1,46 +1,42 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {HazardousMaterial} from '../models/hazardous-material.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 
 @Injectable()
-export class HazardousMaterialService {
+export class HazardousMaterialService extends RequestService {
 
-  constructor(private http: HttpClient
-  ) { }
+    constructor(private http: HttpClient, injector: Injector) {
+        super(injector);
+    }
 
-  public getAll() {
-    /*return this.http.get('hazardousmaterial').map((response: Response) => {
-      const result = response.json();
+    getAll() {
+        return this.http.get<HazardousMaterial[]>(this.apiUrl + 'HazardousMaterial', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-      return result.data;
-    });*/
-  }
+    get(idHazardousMaterial: string) {
+        return this.http.get<HazardousMaterial[]>(this.apiUrl + 'HazardousMaterial/' + idHazardousMaterial, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-  public get(idHazardousMaterial: string) {
-    /*return this.http.get('hazardousmaterial/' + idHazardousMaterial).map((response: Response) => {
-      const result = response.json();
+    save(material: HazardousMaterial) {
+        return this.http.post(
+            this.apiUrl + 'HazardousMaterial',
+            JSON.stringify(material),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
+    }
 
-      return result.data;
-    });*/
-  }
-
-  public create(material: HazardousMaterial) {
-    /*return this.http.post(
-      'hazardousmaterial',
-      JSON.stringify(material)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public update(material: HazardousMaterial) {
-    /*return this.http.put(
-      'hazardousmaterial',
-      JSON.stringify(material),
-    ).map((response: Response) => response.json());*/
-  }
-
-  public remove(idHazardousMaterial: string) {
-    // return this.http.delete('hazardousmaterial/' + idHazardousMaterial).map((response: Response) => response.json());
-  }
+    remove(idHazardousMaterial: string) {
+        return this.http.delete(this.apiUrl + 'HazardousMaterial/' + idHazardousMaterial, {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
 }

@@ -2,49 +2,36 @@ import {Component, OnInit} from '@angular/core';
 
 import {HazardousMaterial} from '../shared/models/hazardous-material.model';
 import {HazardousMaterialService} from '../shared/services/hazardous-material.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {environment} from '../../../environments/environment';
 
 @Component({
-  selector: 'app-managementbuilding-hazardousmaterial',
-  templateUrl: './hazardous-material.component.html',
-  styleUrls: ['./hazardous-material.component.styl'],
-  providers: [
-    HazardousMaterialService,
-  ]
+    selector: 'app-managementbuilding-hazardousmaterial',
+    templateUrl: './hazardous-material.component.html',
+    styleUrls: ['./hazardous-material.component.styl'],
+    providers: [
+        HazardousMaterialService,
+    ]
 })
-export class HazardousMaterialComponent implements OnInit {
-  hazardousMaterials: HazardousMaterial[] = [];
+export class HazardousMaterialComponent extends GridWithCrudService implements OnInit {
 
-  constructor(
-    private hazardousMaterialService: HazardousMaterialService
-  ) { }
+    constructor(
+        hazardousMaterialService: HazardousMaterialService
+    ) {
+        super(hazardousMaterialService);
+    }
 
-  ngOnInit() {
-    this.loadHazardousMaterial();
-  }
+    ngOnInit() {
+        this.loadSource();
+    }
 
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
+    getMaterialName(data) {
+        const material = HazardousMaterial.fromJSON(data);
 
-  public onRowInserted(e) {
-    /*this.hazardousMaterialService.create(e.data).subscribe(info => {
-      if (info.success) {
-        this.loadHazardousMaterial();
-      }
-    });*/
-  }
+        return material.getLocalization(environment.locale.use);
+    }
 
-  public onRowUpdated(e) {
-    e.data.idHazardousMaterial = e.key.idHazardousMaterial;
-
-    // this.hazardousMaterialService.update(e.data).subscribe();
-  }
-
-  public onRowRemoved(e) {
-    // this.hazardousMaterialService.remove(e.key.idHazardousMaterial).subscribe();
-  }
-
-  private loadHazardousMaterial() {
-    // this.hazardousMaterialService.getAll().subscribe(data => this.hazardousMaterials = data);
-  }
+    onInitNewRow(e) {
+        e.data = Object.assign(new HazardousMaterial(), {});
+    }
 }

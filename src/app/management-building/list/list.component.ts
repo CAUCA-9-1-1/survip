@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
+import {environment} from '../../../environments/environment';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 import {Lane} from '../../management-address/shared/models/lane.model';
@@ -8,73 +9,75 @@ import {UtilisationCode} from '../shared/models/utilisation-code.model';
 import {UtilisationCodeService} from '../shared/services/utilisation-code.service';
 import {RiskLevel} from '../shared/models/risk-level.model';
 import {RiskLevelService} from '../shared/services/risk-level.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+
 
 @Component({
-  selector: 'app-managementbuilding-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.styl'],
-  providers: [
-    BuildingService,
-    LaneService,
-    UtilisationCodeService,
-    RiskLevelService,
-  ]
+    selector: 'app-managementbuilding-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.styl'],
+    providers: [
+        BuildingService,
+        LaneService,
+        UtilisationCodeService,
+        RiskLevelService,
+    ]
 })
-export class ListComponent  implements OnInit {
-  buildings: Building[] = [];
-  lanes: Lane[] = [];
-  utilisationCodes: UtilisationCode[] = [];
-  riskLevels: RiskLevel[] = [];
+export class ListComponent extends GridWithCrudService implements OnInit {
+    @Input() isParent: boolean;
+    @Input() idParentBuilding: string;
 
-  constructor(
-    private buildingService: BuildingService,
-    private laneService: LaneService,
-    private utilisationCode: UtilisationCodeService,
-    private riskLevelService: RiskLevelService
-  ) { }
+    lanes: Lane[] = [];
+    utilisationCodes: UtilisationCode[] = [];
+    riskLevels: RiskLevel[] = [];
+    popupVisible = {
+        childBuildings: false,
+        waterSupply: false,
+    };
 
-  ngOnInit() {
-    this.loadBuiling();
-    this.loadLane();
-    this.loadUtilisationCode();
-    this.loadRiskLevel();
-  }
+    constructor(
+        buildingService: BuildingService,
+        private laneService: LaneService,
+        private utilisationCode: UtilisationCodeService,
+        private riskLevelService: RiskLevelService
+    ) {
+        super(buildingService);
+    }
 
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
+    ngOnInit() {
+        console.log(this.idParentBuilding);
 
-  public onRowInserted(e) {
-    /*this.buildingService.create(e.data).subscribe(info => {
-      if (info.success) {
-        this.loadBuiling();
-      }
-    });*/
-  }
+        this.loadSource();
+        this.loadLane();
+        this.loadUtilisationCode();
+        this.loadRiskLevel();
+    }
 
-  public onRowUpdated(e) {
-    e.data.idBuilding = e.key.idBuilding;
+    getBuildingName(data) {
+        const building = Building.fromJSON(data);
 
-    // this.buildingService.update(e.data).subscribe();
-  }
+        return building.getLocalization(environment.locale.use);
+    }
 
-  public onRowRemoved(e) {
-    // this.buildingService.remove(e.key.idBuilding).subscribe();
-  }
+    onInitNewRow(e) {
+        e.data.vacantLand = false;
+        e.data.isParent = true;
+        e.data.isActive = true;
+    }
 
-  private loadBuiling() {
-    // this.buildingService.getAll().subscribe(data => this.buildings = data);
-  }
+    showPopup(popupName: string) {
+        this.popupVisible[popupName] = true;
+    }
 
-  private loadLane() {
-    // this.laneService.getAll().subscribe(data => this.lanes = data);
-  }
+    private loadLane() {
+        this.laneService.localized().subscribe(data => this.lanes = data);
+    }
 
-  private loadUtilisationCode() {
-    // this.utilisationCode.getAll().subscribe(data => this.utilisationCodes = data);
-  }
+    private loadUtilisationCode() {
+        this.utilisationCode.localized().subscribe(data => this.utilisationCodes = data);
+    }
 
-  private loadRiskLevel() {
-    // this.riskLevelService.getAll().subscribe(data => this.riskLevels = data);
-  }
+    private loadRiskLevel() {
+        this.riskLevelService.localized().subscribe(data => this.riskLevels = data);
+    }
 }

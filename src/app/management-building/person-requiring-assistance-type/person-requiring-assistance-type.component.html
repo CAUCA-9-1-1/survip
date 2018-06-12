@@ -1,14 +1,17 @@
 <dx-data-grid
-        [dataSource]="personRequiringAssistanceTypes"
+        [dataSource]="dataSource"
         [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
+        (onRowValidating)="onRowValidating($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
   <dxi-column
-          dataField="name"
+          dataField="localizations"
           caption="{{'name' | translate}}"
-          [calculateCellValue]="onCalculateCellValue"
+          [calculateCellValue]="getTypeName"
           editCellTemplate="editname"
           sortOrder="asc"
           sortIndex="0">
@@ -17,10 +20,10 @@
 
   <dxo-filter-row [visible]="true"></dxo-filter-row>
   <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-    <dxo-popup title="{{'constructionType' | translate}}" [showTitle]="true"></dxo-popup>
+    <dxo-popup title="{{'psapType' | translate}}" [showTitle]="true"></dxo-popup>
 
     <dxo-form colCount="1">
-      <dxi-item dataField="name" [isRequired]="true"></dxi-item>
+      <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
       <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
     </dxo-form>
   </dxo-editing>

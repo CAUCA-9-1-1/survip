@@ -1,50 +1,38 @@
 import {Component, OnInit} from '@angular/core';
 
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {PersonRequiringAssistanceType} from '../shared/models/person-requiring-assistance-type.model';
 import {PersonRequiringAssistanceTypeService} from '../shared/services/person-requiring-assistance-type.service';
+import {environment} from '../../../environments/environment';
+
 
 @Component({
-  selector: 'app-managementbuilding-personrequiringassistancetype',
-  templateUrl: './person-requiring-assistance-type.component.html',
-  styleUrls: ['./person-requiring-assistance-type.component.styl'],
-  providers: [
-    PersonRequiringAssistanceTypeService,
-  ]
+    selector: 'app-managementbuilding-personrequiringassistancetype',
+    templateUrl: './person-requiring-assistance-type.component.html',
+    styleUrls: ['./person-requiring-assistance-type.component.styl'],
+    providers: [
+        PersonRequiringAssistanceTypeService,
+    ]
 })
-export class PersonRequiringAssistanceTypeComponent implements OnInit {
-  personRequiringAssistanceTypes: PersonRequiringAssistanceType[] = [];
+export class PersonRequiringAssistanceTypeComponent extends GridWithCrudService implements OnInit {
 
-  constructor(
-    private personRequiringAssistanceTypeService: PersonRequiringAssistanceTypeService
-  ) { }
+    constructor(
+        personRequiringAssistanceTypeService: PersonRequiringAssistanceTypeService
+    ) {
+        super(personRequiringAssistanceTypeService);
+    }
 
-  ngOnInit() {
-    this.loadConstructionType();
-  }
+    ngOnInit() {
+        this.loadSource();
+    }
 
-  public onInitNewRow(e) {
-    e.data.isActive = true;
-  }
+    getTypeName(data) {
+        const type = PersonRequiringAssistanceType.fromJSON(data);
 
-  public onRowInserted(e) {
-    /*this.personRequiringAssistanceTypeService.create(e.data).subscribe(info => {
-      if (info.success) {
-        this.loadConstructionType();
-      }
-    });*/
-  }
+        return type.getLocalization(environment.locale.use);
+    }
 
-  public onRowUpdated(e) {
-    e.data.idPersonRequiringAssistanceType = e.key.idPersonRequiringAssistanceType;
-
-    // this.personRequiringAssistanceTypeService.update(e.data).subscribe();
-  }
-
-  public onRowRemoved(e) {
-    // this.personRequiringAssistanceTypeService.remove(e.key.idPersonRequiringAssistanceType).subscribe();
-  }
-
-  private loadConstructionType() {
-    // this.personRequiringAssistanceTypeService.getAll().subscribe(data => this.personRequiringAssistanceTypes = data);
-  }
+    onInitNewRow(e) {
+        e.data.isActive = true;
+    }
 }
