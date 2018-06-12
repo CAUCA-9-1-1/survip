@@ -46,6 +46,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         hazardousMaterials: false,
     };
     toolbarItems = [];
+    uploadImageUrl = environment.apiUrl + 'Picture/';
 
     constructor(
         buildingService: BuildingService,

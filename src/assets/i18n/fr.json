@@ -295,5 +295,6 @@
   "unknown": "Indéterminé",
   "underground": "Sous-terre",
   "aboveground": "Hors-terre",
+  "orDropFileHere": "ou déposer un fichier ici",
   "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?"
 }

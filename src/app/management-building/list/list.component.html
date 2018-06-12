@@ -108,8 +108,12 @@
         <app-multilang [isRequired]="true" [value]="field.row.data.localizations" (valueChanged)="field.setValue($event.value);"></app-multilang>
     </div>
     <div *dxTemplate="let field of 'editphoto'">
-        <dx-file-uploader accept="image/*" labelText="{{'orDropFileHere' | translate}}"></dx-file-uploader>
-        PHOTO
+        <app-image [idImage]="field.value"></app-image>
+        <dx-file-uploader
+                accept="image/*"
+                [uploadUrl]="uploadImageUrl"
+                labelText="{{'orDropFileHere' | translate}}">
+        </dx-file-uploader>
     </div>
 </dx-data-grid>
 <dx-popup
