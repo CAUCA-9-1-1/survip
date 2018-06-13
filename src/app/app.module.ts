@@ -15,6 +15,7 @@ import {InspectionApprovalModule} from './inspection-approval/inspection-approva
 import {InspectionManagementModule} from './inspection-management/inspection-management.module';
 import {StatisticsModule} from './statistics/statistics.module';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {ReportConfigurationModule} from './report-configuration/report-configuration.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
         UserAccessModule,
         StatisticsModule,
         AppRoutingModule,
+        ReportConfigurationModule,
     ],
     providers: [{
         provide: LocationStrategy,
