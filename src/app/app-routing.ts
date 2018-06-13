@@ -14,6 +14,7 @@ import {LoginComponent} from './user-access/login/login.component';
 import {InspectionApprovalComponent} from './inspection-approval/inspection-approval.component';
 import {InspectionManagementComponent} from './inspection-management/inspection-management.component';
 import {StatisticsComponent} from './statistics/statistics.component';
+import {ReportConfigurationComponent} from './report-configuration/report-configuration.component';
 
 
 const appRoutes: Routes = [{
@@ -65,6 +66,9 @@ const appRoutes: Routes = [{
         path: 'access',
         component: ManagementAccessComponent,
     }]
+}, {
+    path: 'report-configuration',
+    component: ReportConfigurationComponent
 }, {
     path: '**',
     component: PageNotFoundComponent,
