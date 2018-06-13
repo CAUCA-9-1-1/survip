@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {PictureService} from '../../services/picture.service';
 import {Picture} from '../../models/picture.model';
 
@@ -12,19 +12,23 @@ import {Picture} from '../../models/picture.model';
 })
 export class ImageComponent implements OnInit {
     @ViewChild('container') container: ElementRef;
+    @Output() valueChanged = new EventEmitter();
     @Input() height: string;
-    @Input() allowChange: boolean;
+    @Input() allowChange = false;
+    @Input() autoApiChange = false;
     @Input()
     set idImage(id) {
         this.src = '';
+        this.idPicture = id;
 
         if (id) {
             this.pictureService.get(id).subscribe(data => {
-                this.src = 'data:image/jpeg;base64,' + data['picture'];
+                this.src = data.dataUri;
             });
         }
     }
 
+    idPicture: string;
     src: string;
 
     constructor(
@@ -40,11 +44,25 @@ export class ImageComponent implements OnInit {
     uploadPicture(e) {
         const picture = new Picture();
 
-        picture.data = e.content;
+        picture.id = this.idPicture || undefined;
         picture.name = e.name;
+        picture.data = '';
+        picture.mimeType = '';
+        picture.dataUri = e.content;
 
-        this.pictureService.save(picture).subscribe(data => {
-            console.log(data);
-        });
+        this.src = e.content;
+
+        if (this.autoApiChange) {
+            this.pictureService.save(picture).subscribe(id => {
+                this.valueChanged.emit({
+                    value: id,
+                    oldValue: this.idPicture,
+                });
+
+                this.idPicture = id;
+            });
+        } else {
+            this.valueChanged.emit(picture);
+        }
     }
 }

@@ -1,4 +1,5 @@
 import {WithLocalization} from '../../../shared/models/with-localization';
+import {Picture} from '../../../shared/models/picture.model';
 
 
 export class Building extends WithLocalization {
@@ -24,6 +25,7 @@ export class Building extends WithLocalization {
     numberOfAppartment = 0;
     numberOfBuilding = 0;
     numberOfFloor = 0;
+    picture: Picture;
     postalCode = '';
     showInResources = false;
     source = '';
