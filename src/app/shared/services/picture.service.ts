@@ -1,6 +1,8 @@
 import {Injectable, Injector} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+
 import {RequestService} from './request.service';
+import {Picture} from '../models/picture.model';
 
 
 @Injectable()
@@ -11,8 +13,18 @@ export class PictureService extends RequestService {
     }
 
     get(idPicture: string) {
-        return this.http.get(this.apiUrl + 'Picture/' + idPicture, {
+        return this.http.get<Picture>(this.apiUrl + 'Picture/' + idPicture, {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    save(picture: Picture) {
+        return this.http.put(
+            this.apiUrl + 'Picture',
+            JSON.stringify(picture),
+            {
+                headers: this.headers
+            }
+        ).catch((error: HttpErrorResponse) => this.error(error));
     }
 }

@@ -108,8 +108,7 @@
         <app-multilang [isRequired]="true" [value]="field.row.data.localizations" (valueChanged)="field.setValue($event.value);"></app-multilang>
     </div>
     <div *dxTemplate="let field of 'editphoto'">
-        <app-image [idImage]="field.value"></app-image>
-        <app-upload accept="image/*" (onReadend)="uploadPicture"></app-upload>
+        <app-image [idImage]="field.value" height="200px" [allowChange]="true"></app-image>
     </div>
 </dx-data-grid>
 <dx-popup

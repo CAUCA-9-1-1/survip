@@ -14,7 +14,7 @@ import {
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
-import { DxTabPanelModule, DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
+import {DxButtonModule, DxTabPanelModule, DxTextBoxModule, DxValidatorModule} from 'devextreme-angular';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -78,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatSnackBarModule,
         MatTabsModule,
         MatToolbarModule,
+        DxButtonModule,
         DxTabPanelModule,
         DxTextBoxModule,
         DxValidatorModule,
