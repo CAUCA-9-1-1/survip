@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {environment} from '../../../environments/environment';
 
+import {environment} from '../../../environments/environment';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {Lane} from '../shared/models/lane.model';
 import {LaneService} from '../shared/services/lane.service';
 import {City} from '../shared/models/city.model';
@@ -9,7 +10,6 @@ import {LaneGenericCode} from '../shared/models/lane-generic-code.model';
 import {LanePublicCode} from '../shared/models/lane-public-code.model';
 import {LaneGenericCodeService} from '../shared/services/lane-generic-code.service';
 import {LanePublicCodeService} from '../shared/services/lane-public-code.service';
-import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 
 
 @Component({
@@ -35,6 +35,10 @@ export class LaneComponent extends GridWithCrudService implements OnInit {
         private genericCode: LaneGenericCodeService
     ) {
         super(laneService);
+    }
+
+    setModel(data: any) {
+        return Lane.fromJSON(data);
     }
 
     ngOnInit() {

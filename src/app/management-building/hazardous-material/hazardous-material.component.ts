@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 
+import {environment} from '../../../environments/environment';
 import {HazardousMaterial} from '../shared/models/hazardous-material.model';
 import {HazardousMaterialService} from '../shared/services/hazardous-material.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
-import {environment} from '../../../environments/environment';
+
 
 @Component({
     selector: 'app-managementbuilding-hazardousmaterial',
@@ -19,6 +20,10 @@ export class HazardousMaterialComponent extends GridWithCrudService implements O
         hazardousMaterialService: HazardousMaterialService
     ) {
         super(hazardousMaterialService);
+    }
+
+    setModel(data: any) {
+        return HazardousMaterial.fromJSON(data);
     }
 
     ngOnInit() {

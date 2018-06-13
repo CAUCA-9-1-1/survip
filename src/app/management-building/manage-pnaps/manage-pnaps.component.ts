@@ -36,6 +36,10 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
         super();
     }
 
+    setModel(data: any) {
+        return data;
+    }
+
     ngOnInit() {
         this.loadType();
     }

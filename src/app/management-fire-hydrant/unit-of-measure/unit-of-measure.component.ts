@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {environment} from '../../../environments/environment';
 
+import {environment} from '../../../environments/environment';
 import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {UnitOfMeasure} from '../shared/models/unit-of-measure.model';
@@ -16,6 +16,10 @@ export class UnitOfMeasureComponent extends GridWithCrudService implements OnIni
 
     constructor(unitOfMeasureService: UnitOfMeasureService) {
         super(unitOfMeasureService);
+    }
+
+    setModel(data: any) {
+        return UnitOfMeasure.fromJSON(data);
     }
 
     ngOnInit() {

@@ -31,6 +31,10 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
         super();
     }
 
+    setModel(data: any) {
+        return data;
+    }
+
     ngOnInit() { }
 
     loadData() {

@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 
+import {environment} from '../../../environments/environment';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {WebuserService} from '../shared/services/webuser.service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
-import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
-import {environment} from '../../../environments/environment';
+import {Webuser} from '../shared/models/webuser.model';
 
 
 @Component({
@@ -28,6 +29,10 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         private departmentService: FireSafetyDepartmentService,
     ) {
         super(webuserService);
+    }
+
+    setModel(data: any) {
+        return Webuser.fromJSON(data);
     }
 
     ngOnInit() {

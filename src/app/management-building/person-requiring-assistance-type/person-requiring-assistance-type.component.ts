@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 
+import {environment} from '../../../environments/environment';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {PersonRequiringAssistanceType} from '../shared/models/person-requiring-assistance-type.model';
 import {PersonRequiringAssistanceTypeService} from '../shared/services/person-requiring-assistance-type.service';
-import {environment} from '../../../environments/environment';
 
 
 @Component({
@@ -20,6 +20,10 @@ export class PersonRequiringAssistanceTypeComponent extends GridWithCrudService 
         personRequiringAssistanceTypeService: PersonRequiringAssistanceTypeService
     ) {
         super(personRequiringAssistanceTypeService);
+    }
+
+    setModel(data: any) {
+        return PersonRequiringAssistanceType.fromJSON(data);
     }
 
     ngOnInit() {

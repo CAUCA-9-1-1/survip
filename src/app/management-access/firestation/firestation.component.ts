@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {environment} from '../../../environments/environment';
 
+import {environment} from '../../../environments/environment';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {FirestationService} from '../shared/services/firestation.service';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {BuildingService} from '../../management-building/shared/services/building.service';
 import {Building} from '../../management-building/shared/models/building.model';
-import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {Firestation} from '../shared/models/firestation.model';
 
 
 @Component({
@@ -30,6 +31,10 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
         private buildingService: BuildingService,
     ) {
         super(firestationService);
+    }
+
+    setModel(data: any) {
+        return Firestation.fromJSON(data);
     }
 
     ngOnInit() {

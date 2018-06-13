@@ -19,4 +19,10 @@ export class FireHydrant {
     color: string;
     comments: string;
     physicalPosition: string;
+
+    static fromJSON(data: object): FireHydrant {
+        const hydrant = new FireHydrant();
+
+        return Object.assign(hydrant, data);
+    }
 }

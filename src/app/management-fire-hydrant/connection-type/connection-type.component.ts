@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {environment} from '../../../environments/environment';
+import {Component, OnInit} from '@angular/core';
 
+import {environment} from '../../../environments/environment';
 import {FireHydrantConnectionType} from '../shared/models/fire-hydrant-connection-type.model';
 import {FireHydrantConnectionTypeService} from '../shared/services/fire-hydrant-connection-type.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
@@ -16,6 +16,10 @@ export class ConnectionTypeComponent extends GridWithCrudService implements OnIn
 
     constructor(connectionTypeService: FireHydrantConnectionTypeService) {
         super(connectionTypeService);
+    }
+
+    setModel(data: any) {
+        return FireHydrantConnectionType.fromJSON(data);
     }
 
     ngOnInit() {

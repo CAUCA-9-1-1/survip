@@ -5,7 +5,7 @@ import {Picture} from '../../../shared/models/picture.model';
 export class Building extends WithLocalization {
     appartmentNumber = '';
     buildingValue = 0;
-    childType: number;
+    childType = 0;
     civicLetter = '';
     civicLetterSupp = '';
     civicNumber = '';
@@ -20,7 +20,6 @@ export class Building extends WithLocalization {
     idPicture: string;
     idRiskLevel: string;
     idUtilisationCode: string;
-    isParent: boolean;
     matricule = '';
     numberOfAppartment = 0;
     numberOfBuilding = 0;
@@ -29,7 +28,7 @@ export class Building extends WithLocalization {
     postalCode = '';
     showInResources = false;
     source = '';
-    suite = '';
+    suite = 0;
     utilisationDescription = '';
     vacantLand = false;
     yearOfConstruction = 2000;

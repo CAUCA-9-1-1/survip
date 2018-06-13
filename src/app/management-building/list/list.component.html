@@ -56,7 +56,6 @@
     </dxi-column>
     <dxi-column dataField="matricule" caption="{{'matricule' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="vacantLand" dataType="boolean" caption="{{'vacantLand' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="isParent" dataType="boolean" caption="{{'isParent' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
@@ -103,7 +102,7 @@
     </dxo-editing>
 
     <div *dxTemplate="let field of 'listButton'">
-        <dx-button text="{{'childBuildings' | translate}}" (onClick)="showPopup('childBuildings')" [disabled]="!isParent"></dx-button>
+        <dx-button text="{{'childBuildings' | translate}}" (onClick)="showPopup('childBuildings')" [disabled]="parent"></dx-button>
         <dx-button text="{{'contacts' | translate}}" (onClick)="showPopup('contacts')"></dx-button>
         <dx-button text="{{'pnap' | translate}}" (onClick)="showPopup('pnap')"></dx-button>
         <dx-button text="{{'hazardousMaterials' | translate}}" (onClick)="showPopup('hazardousMaterials')"></dx-button>
@@ -124,7 +123,7 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.childBuildings">
     <div *dxTemplate="let data of 'content'">
-        <app-managementbuilding-list [isParent]="false" [parentBuilding]="selectedBuidling"></app-managementbuilding-list>
+        <app-managementbuilding-list [parentBuilding]="selectedBuidling"></app-managementbuilding-list>
     </div>
 </dx-popup>
 <dx-popup

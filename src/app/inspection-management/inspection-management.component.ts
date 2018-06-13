@@ -9,6 +9,7 @@ import {RiskLevel} from '../management-building/shared/models/risk-level.model';
 import {RiskLevelService} from '../management-building/shared/services/risk-level.service';
 import {SurveyService} from '../management-survey/shared/services/survey.service';
 import {Survey} from '../management-survey/shared/models/survey.model';
+import {Inspection} from '../inspection-approval/shared/models/inspection.model';
 
 @Component({
     selector: 'app-inspection-management',
@@ -33,6 +34,10 @@ export class InspectionManagementComponent extends GridWithCrudService implement
         private surveyService: SurveyService,
     ) {
         super(inspectionManagementService);
+    }
+
+    setModel(data: any) {
+        return Inspection.fromJSON(data);
     }
 
     ngOnInit() {

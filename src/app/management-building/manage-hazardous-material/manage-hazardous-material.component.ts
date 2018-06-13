@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {
@@ -9,7 +10,7 @@ import {HazardousMaterial} from '../shared/models/hazardous-material.model';
 import {HazardousMaterialService} from '../shared/services/hazardous-material.service';
 import {UnitOfMeasureService} from '../../management-fire-hydrant/shared/services/unit-of-measure.service';
 import {UnitOfMeasure} from '../../management-fire-hydrant/shared/models/unit-of-measure.model';
-import {TranslateService} from '@ngx-translate/core';
+
 
 
 @Component({
@@ -59,6 +60,10 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
                 name: labels['aboveground'],
             }];
         });
+    }
+
+    setModel(data: any) {
+        return data;
     }
 
     ngOnInit() {
