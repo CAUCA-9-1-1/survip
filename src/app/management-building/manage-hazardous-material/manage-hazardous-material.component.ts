@@ -10,6 +10,7 @@ import {HazardousMaterial} from '../shared/models/hazardous-material.model';
 import {HazardousMaterialService} from '../shared/services/hazardous-material.service';
 import {UnitOfMeasureService} from '../../management-fire-hydrant/shared/services/unit-of-measure.service';
 import {UnitOfMeasure} from '../../management-fire-hydrant/shared/models/unit-of-measure.model';
+import {BuildingHazardousMaterial} from '../shared/models/building-hazardous-material.model';
 
 
 
@@ -63,7 +64,7 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
     }
 
     setModel(data: any) {
-        return data;
+        return BuildingHazardousMaterial.fromJSON(data);
     }
 
     ngOnInit() {
