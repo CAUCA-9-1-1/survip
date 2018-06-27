@@ -23,13 +23,13 @@
     <dxi-column
             dataField="idLane"
             caption="{{'lane' | translate}}">
-        <dxo-lookup [dataSource]="lanes" [displayExpr]="getLaneName" valueExpr="id">
+        <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column
             dataField="idIntersection"
             caption="{{'intersection' | translate}}">
-        <dxo-lookup [dataSource]="lanes" [displayExpr]="getLaneName" valueExpr="id">
+        <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="altitude" caption="{{'altitude' | translate}}" [visible]="false"></dxi-column>

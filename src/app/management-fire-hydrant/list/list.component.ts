@@ -138,16 +138,6 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
         return city.getLocalization(environment.locale.use);
     }
 
-    getLaneName(data) {
-        if (data.localizations) {
-            const lane = Lane.fromJSON(data);
-
-            return lane.getLocalization(environment.locale.use);
-        } else {
-            return data.name;
-        }
-    }
-
     getIntersectionName(data) {
         return '';
     }
@@ -180,7 +170,7 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     }
 
     private loadLane() {
-        this.laneService.getAll().subscribe(data => this.lanes = data);
+        this.laneService.localized().subscribe(data => this.lanes = data);
     }
 
     private loadLaneByCity(idCity: string) {
