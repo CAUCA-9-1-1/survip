@@ -1,9 +1,9 @@
-import {environment} from '../../../environments/environment';
+import validationEngine from 'devextreme/ui/validation_engine';
 
 
 export abstract class GridWithCrudService {
     dataSource = [];
-    popup: any;
+    validationGroup = 'custom-validation-group-' + (new Date()).getTime();
 
     private loadSpecificOpts: any;
 
@@ -15,6 +15,8 @@ export abstract class GridWithCrudService {
         const options = e.component.option('editing');
 
         if (options.popup) {
+            options.form.validationGroup = this.validationGroup;
+            options.form.showValidationSummary = true;
             options.popup.onHiding = (ev) => {
                 this.loadSource(this.loadSpecificOpts);
             };
@@ -24,24 +26,10 @@ export abstract class GridWithCrudService {
     }
 
     onRowValidating(e) {
-        const localizations = e.newData.localizations || e.key.localizations;
+        const validation = validationEngine.validateGroup(this.validationGroup);
 
-        if (!localizations) {
-            e.isValid = false;
-        } else {
-            environment.locale.available.forEach(language => {
-                let isValid = false;
-
-                localizations.forEach(localization => {
-                    if (localization.languageCode === language && localization.name) {
-                        isValid = true;
-                    }
-                });
-
-                if (!isValid) {
-                    e.isValid = false;
-                }
-            });
+        if (e.isValid) {
+            e.isValid = validation.isValid;
         }
     }
 

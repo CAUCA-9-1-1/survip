@@ -10,10 +10,12 @@ import {environment} from '../../../../environments/environment';
   templateUrl: './multilang.component.html',
   styleUrls: ['./multilang.component.scss']
 })
+
 export class MultilangComponent implements OnInit {
     @ViewChild(DxTabPanelComponent) tabs: DxTabPanelComponent;
     @Output() valueChanged = new EventEmitter();
-    @Input() value: any;
+    @Input() value: any = [];
+    @Input() validationGroup: string;
     @Input() fieldName = 'name';
     @Input() dataField: any;
     @Input() isRequired: boolean;
@@ -36,32 +38,34 @@ export class MultilangComponent implements OnInit {
 
     ngOnInit() {
         this.selectedTab = this.languages[0];
-        this.initializeLanguagesCollection();
+        this.initializeValueForAllLanguages();
     }
 
-    private initializeLanguagesCollection() {
+    private initializeValueForAllLanguages() {
         if (!this.value) {
             this.value = [];
         }
 
-        this.languages.forEach(language => {
-            if (!this.getLanguageIndex(language.toLowerCase())) {
-                const languageItem = {
-                    languageCode: language.toLowerCase(),
-                    isActive: true,
-                };
-                languageItem[this.fieldName] = '';
-                this.value.push(languageItem);
-            }
-        });
+        if (this.value.length !== this.languages.length) {
+            this.languages.forEach(language => {
+                if (!this.hasLanguageIndex(language.toLowerCase())) {
+                    const languageItem = {
+                        languageCode: language.toLowerCase(),
+                        isActive: true,
+                    };
+                    languageItem[this.fieldName] = '';
+                    this.value.push(languageItem);
+                }
+            });
+        }
     }
 
-    private getLanguageIndex(languageCode: string) {
+    private hasLanguageIndex(languageCode: string) {
         let retValue = false;
 
         if (this.value) {
-            for (const SavedLanguage of this.value) {
-                if (SavedLanguage.languageCode === languageCode) {
+            for (const languageItem of this.value) {
+                if (languageItem.languageCode === languageCode) {
                     retValue = true;
                     break;
                 }
@@ -69,6 +73,16 @@ export class MultilangComponent implements OnInit {
         }
 
         return retValue;
+    }
+
+    private setLanguageValue(value: string) {
+        if (this.value) {
+            this.value.forEach((item, index) => {
+                if (item.languageCode === this.selectedTab) {
+                    this.value[index][this.fieldName] = value;
+                }
+            });
+        }
     }
 
     getLanguageValue() {
@@ -85,45 +99,29 @@ export class MultilangComponent implements OnInit {
         return languageValue;
     }
 
-    setLanguageValue(value: string) {
-        let find = false;
-        let isValid = true;
-
-        if (this.value) {
-            this.value.forEach((item, index) => {
-                if (item.languageCode === this.selectedTab) {
-                    this.value[index][this.fieldName] = value;
-                    find = true;
-
-                    if (this.isRequired && !value) {
-                        isValid = false;
-                    }
-                }
-            });
-        }
-
-        return isValid;
-    }
-
     onTabValueChanged(e) {
         const oldValue = Object.assign({}, this.value);
-        const isValid = this.setLanguageValue(e.element.querySelector('input').value);
 
-        e.component.option('isValid', isValid);
-
+        this.setLanguageValue(e.element.querySelector('input').value);
         this.valueChanged.emit({
-            value: isValid ? this.value : '',
+            value: this.value,
             oldValue: oldValue
         });
-
-        this.displayStatusOnTabPanel(this.tabs.instance.element(), isValid);
     }
 
     onTabChanged(e) {
         this.selectedTab = this.languages[e.component.option('selectedIndex')];
     }
 
-    private displayStatusOnTabPanel(tabs, isValid) {
+    onValidation(e) {
+        const allValid = this.validateAllLanguages();
+
+        if (e.isValid) {
+            e.isValid = allValid;
+        }
+    }
+
+    private validateAllLanguages() {
         let allValid = true;
 
         this.value.forEach((item, index) => {
@@ -132,7 +130,15 @@ export class MultilangComponent implements OnInit {
             }
         });
 
-        tabs.querySelector('.dx-tabpanel-container').style.background = (allValid ? '' : 'rgba(217, 83, 79, 0.2)');
-        tabs.querySelector('.dx-tabpanel-tabs .dx-tab-selected').style.color = (isValid ? '' : 'rgba(217, 83, 79, 0.8)');
+        if (this.tabs) {
+            const panel = this.tabs.instance.element();
+            const tabs = <HTMLElement>panel.querySelector('.dx-tabpanel-tabs .dx-tabs');
+
+            if (tabs) {
+                tabs.style.background = (allValid ? '#f7f7f7' : 'rgba(217, 83, 79, 0.2)');
+            }
+        }
+
+        return allValid;
     }
 }
