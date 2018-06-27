@@ -37,7 +37,7 @@ export class BuildingListComponent implements OnInit {
 
         this.inspectionService.getBuildings(this.idInspection).subscribe(data => {
             data.sort((a, b) => {
-                return a.isParent ? 1 : -1;
+                return a.childType === 0 ? 1 : -1;
             });
 
             this.buildings = data;

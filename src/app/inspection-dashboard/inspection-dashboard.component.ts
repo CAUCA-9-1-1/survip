@@ -495,7 +495,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     private showPicture(container, options) {
         if (options.data.idPicture) {
             this.pictureService.get(options.data.idPicture).subscribe((data) => {
-                container.innerHTML = '<img height="100" src="data:image/jpeg;base64,' + data.picture + '" />';
+                container.innerHTML = '<img height="100" src="' + data.dataUri + '" />';
             });
         }
     }

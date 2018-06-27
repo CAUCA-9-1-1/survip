@@ -1,10 +1,13 @@
 import {Injectable, Injector} from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {Inspection} from '../models/inspection.model';
 import {InspectionGeneralInfo} from '../models/inspection-general-info.model';
+import {InspectionCourse} from '../models/inspection-course.model';
+import {InspectionCourses} from '../models/inspection-courses.model';
+import {Building} from '../../../management-building/shared/models/building.model';
+import {BuildingDetails} from '../models/building-details.model';
 
 
 @Injectable()
@@ -31,8 +34,10 @@ export class InspectionService extends RequestService {
 
         this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
 
-        return this.http.get<Inspection[]>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
-            headers: this.headers
+        return this.http.get<{
+            data: Inspection[];
+        }>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
+            headers: this.headers,
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
@@ -43,13 +48,13 @@ export class InspectionService extends RequestService {
     }
 
     getCourse(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/' + id + '/course', {
+        return this.http.get<InspectionCourses[]>(this.apiUrl + 'inspection/' + id + '/course', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
     getCourseLane(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/course/' + id, {
+        return this.http.get<InspectionCourse>(this.apiUrl + 'inspection/course/' + id, {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
@@ -67,13 +72,13 @@ export class InspectionService extends RequestService {
     }
 
     getBuildings(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/' + id + '/building', {
+        return this.http.get<Building[]>(this.apiUrl + 'inspection/' + id + '/building', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
     getBuildingDetail(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/detail', {
+        return this.http.get<BuildingDetails>(this.apiUrl + 'inspection/building/' + id + '/detail', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }

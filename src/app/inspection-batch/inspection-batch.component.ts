@@ -12,6 +12,7 @@ import {WebuserForWeb} from '../management-access/shared/models/webuser-for-web.
 import {BuildingService} from '../management-building/shared/services/building.service';
 import {InspectionService} from '../inspection-approval/shared/services/inspection.service';
 import {InspectionBatch} from './shared/models/inspection-batch.model';
+import {Inspection} from '../inspection-approval/shared/models/inspection.model';
 
 
 @Component({
@@ -40,7 +41,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     buildings: Building[] = [];
     buildingsInspected: Building[] = [];
     buildingsNotInspected: Building[] = [];
-    buildingsWithoutInspection: Building[] = [];
+    buildingsWithoutInspection: Inspection[] = [];
     popupBuildingVisible = false;
     popupBuildingSelected = [];
     popupButtons: any[];
