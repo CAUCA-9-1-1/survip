@@ -38,6 +38,11 @@
     </dxo-editing>
 
     <div *dxTemplate="let field of 'editname'">
-        <app-multilang [isRequired]="true" [value]="field.row.data.localizations" (valueChanged)="field.setValue($event.value);"></app-multilang>
+        <app-multilang
+                [validationGroup]="validationGroup"
+                [isRequired]="true"
+                [value]="field.row.data.localizations"
+                (valueChanged)="field.setValue($event.value);">
+        </app-multilang>
     </div>
 </dx-data-grid>
