@@ -3,6 +3,7 @@ import { BaseModel } from './base.model';
 
 export class WithLocalization extends BaseModel {
     localizations: any[];
+    name: string;
 
     getLocalization(languageCode: string, fieldName?: string) {
         let name = '';

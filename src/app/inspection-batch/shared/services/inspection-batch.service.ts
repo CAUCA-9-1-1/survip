@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {InspectionBatch} from '../models/inspection-batch.model';
+import {PostModel} from '../../../shared/models/post.model';
 
 
 @Injectable()
@@ -19,7 +20,7 @@ export class InspectionBatchService extends RequestService {
     }
 
     save(batch: InspectionBatch) {
-        return this.http.post(
+        return this.http.post<PostModel>(
             this.apiUrl + 'Batch',
             JSON.stringify(batch),
             {

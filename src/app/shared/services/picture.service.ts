@@ -5,6 +5,8 @@ import {RequestService} from './request.service';
 import {Picture} from '../models/picture.model';
 import 'rxjs/add/operator/catch';
 
+import {Picture} from '../models/picture.model';
+
 
 @Injectable()
 export class PictureService extends RequestService {
