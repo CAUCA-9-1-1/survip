@@ -178,6 +178,8 @@
   "unitOfMeasure": "Unit of measure",
   "pressure": "Pressure",
   "rate": "Rate",
+  "dimension": "Dimension",
+  "diameter": "Diameter",
   "fireHydrantNumber": "Fire hydrant number",
   "comments": "Comments",
   "physicalPosition": "Physical position",
