@@ -14,7 +14,7 @@
 </mat-toolbar>
 <div class="fullHeight">
     <div #menuContainer class="menuContainer">
-        <app-main-menu></app-main-menu>
+        <app-main-menu (click)="showMenu()"></app-main-menu>
     </div>
     <div class="content">
         <router-outlet></router-outlet>
