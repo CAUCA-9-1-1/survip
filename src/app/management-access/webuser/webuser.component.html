@@ -33,7 +33,7 @@
     <dxi-column [visible]="false" dataField="telephone" caption="{{'telephone' | translate}}"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
-    <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-popup title="{{'webuser' | translate}}" [showTitle]="true"></dxo-popup>
         <dxo-form colCount="2">
             <dxi-item dataField="username" [isRequired]="true"></dxi-item>
@@ -61,7 +61,7 @@
                     </dxi-column>
                     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
-                    <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true"></dxo-editing>
+                    <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true"></dxo-editing>
                 </dx-data-grid>
             </dxi-item>
             <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
