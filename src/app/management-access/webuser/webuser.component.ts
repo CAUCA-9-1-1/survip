@@ -5,7 +5,11 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {WebuserService} from '../shared/services/webuser.service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
-import {Webuser} from '../shared/models/webuser.model';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {environment} from '../../../environments/environment';
+import {Password} from '../../shared/classes/password';
+import {Color} from '../../shared/classes/color';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -21,15 +25,37 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     private selectedPassword: string;
     private selectedIdWebuser: string;
 
+    labels = {};
     departments: FireSafetyDepartment[] = [];
     departmentField: any;
     webuserFireSafetyDepartments = [];
+    passwordOptions = {
+        mode: 'password',
+        onKeyUp: (ev) => {
+            const password = new Password();
+            const color = new Color();
+            const input = ev.component.element().querySelector('input');
+            const hue = password.quality(input.value) * 1.2 / 360;
+            const rgb = color.hslToRgb(hue, 1, 0.5);
+
+            if (input.value) {
+                input.style.backgroundColor = ['rgb(', rgb[0], ',', rgb[1], ',', rgb[2], ')'].join('');
+            }
+        }
+    };
 
     constructor(
         webuserService: WebuserService,
+        translateService: TranslateService,
         private departmentService: FireSafetyDepartmentService,
     ) {
         super(webuserService);
+
+        translateService.get([
+            'passwordError'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -89,7 +115,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         return departments.getLocalization(environment.locale.use);
     }
 
-    onPasswordChanged(e) {
+    onPasswordChanged = (e) => {
         if (e.value && e.value.length < 8) {
           return false;
         }
@@ -98,26 +124,13 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         return true;
     }
 
-    onPasswordCompare() {
+    onPasswordCompare = (e) => {
         return (this.selectedPassword ? this.selectedPassword : null);
     }
 
     onEditorPreparing(e) {
-        if (e.dataField === 'password' || e.dataField === 'passwordConfirm') {
+        if (e.dataField === 'password') {
             e.editorOptions.mode = 'password';
-            e.editorOptions.onKeyUp = (ev) => {
-                /*const password = new Password();
-                const color = new Color();
-                const input = ev.component.element().find('input').get(0);
-                const hue = password.quality(input.value) * 1.2 / 360;
-                const rgb = color.hslToRgb(hue, 1, 0.5);
-
-                if (input.value) {
-                    ev.component.element().find('input').css({
-                        'background-color': ['rgb(', rgb[0], ',', rgb[1], ',', rgb[2], ')'].join('')
-                    });
-                }*/
-            };
         }
     }
 

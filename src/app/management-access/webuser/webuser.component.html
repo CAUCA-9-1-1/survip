@@ -38,15 +38,15 @@
         <dxo-popup title="{{'webuser' | translate}}" [showTitle]="true"></dxo-popup>
         <dxo-form colCount="2">
             <dxi-item dataField="username" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
-            <dxi-item dataField="password" [editorOptions]="{mode: 'password'}">
+            <dxi-item itemType="empty"></dxi-item>
+            <dxi-item dataField="password" [editorOptions]="passwordOptions">
                 <dxi-validation-rule type="custom" message="{{'passwordError' | translate}}" [validationCallback]="onPasswordChanged"></dxi-validation-rule>
             </dxi-item>
-            <dxi-item dataField="confirmPassword" [editorOptions]="{mode: 'password'}">
+            <dxi-item dataField="confirmPassword" [editorOptions]="passwordOptions">
                 <dxi-validation-rule type="compare" [comparisonTarget]="onPasswordCompare"></dxi-validation-rule>
             </dxi-item>
+            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
             <dxi-item dataField="resetPassword" editorType="dxCheckBox"></dxi-item>
-            <dxi-item itemType="empty"></dxi-item>
             <dxi-item dataField="fireSafetyDepartments" colSpan="2"></dxi-item>
             <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
                 <dxi-item dataField="firstname" [isRequired]="true"></dxi-item>
