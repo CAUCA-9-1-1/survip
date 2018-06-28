@@ -22,6 +22,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     private selectedIdWebuser: string;
 
     departments: FireSafetyDepartment[] = [];
+    departmentField: any;
     webuserFireSafetyDepartments = [];
 
     constructor(
@@ -45,7 +46,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
         if (e.attributes) {
             e.attributes.forEach(attribute => {
-                if (attribute.attributeName === 'firstname') {
+                if (attribute.attributeName === 'first_name') {
                     name = attribute.attributeValue;
                 }
             });
@@ -59,7 +60,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
         if (e.attributes) {
             e.attributes.forEach(attribute => {
-                if (attribute.attributeName === 'lastname') {
+                if (attribute.attributeName === 'last_name') {
                     name = attribute.attributeValue;
                 }
             });
@@ -129,11 +130,17 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         e.data.password = '';
         e.data.resetPassword = this.getAttribute('resetPassword', e.data);
 
-        console.log('edit SSI', e);
-
         this.webuserFireSafetyDepartments = e.data.fireSafetyDepartments;
         this.selectedIdWebuser = e.data.id;
         this.selectedPassword = '';
+    }
+
+    setDepartmentField(field) {
+        this.departmentField = field;
+
+        if (!this.departmentField.value) {
+            this.departmentField.value = {};
+        }
     }
 
     onNewUserDepartment(e) {
@@ -141,21 +148,8 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         e.data.isActive = true;
     }
 
-    onUserDepartmentInserted(e) {
-        console.log('SSI insert', e);
-    }
-
-    onUserDepartmentUpdated(e) {
-        for (const i in e.data) {
-          if (e.data[i]) {
-            e.key[i] = e.data[i];
-          }
-        }
-
-    }
-
-    onUserDepartmentRemoved(e) {
-        // this.webuserDeptService.remove(e.key.selectedIdWebuser).subscribe();
+    onUserDepartmentChanged(e) {
+        this.departmentField.setValue(this.departmentField.data.fireSafetyDepartments);
     }
 
     private loadDepartments() {

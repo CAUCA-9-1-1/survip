@@ -31,6 +31,7 @@
     <dxi-column [visible]="false" dataField="resetPassword" dataType="boolean" caption="{{'passwordReset' | translate}}"></dxi-column>
     <dxi-column [visible]="false" dataField="email" caption="{{'email' | translate}}"></dxi-column>
     <dxi-column [visible]="false" dataField="telephone" caption="{{'telephone' | translate}}"></dxi-column>
+    <dxi-column [visible]="false" dataField="fireSafetyDepartments" editCellTemplate="editDepartments" caption="{{'fireSafetyDepartment' | translate}}"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
@@ -46,24 +47,7 @@
             </dxi-item>
             <dxi-item dataField="resetPassword" editorType="dxCheckBox"></dxi-item>
             <dxi-item itemType="empty"></dxi-item>
-            <dxi-item colSpan="2">
-                <dx-data-grid
-                        [dataSource]="webuserFireSafetyDepartments"
-                        [hoverStateEnabled]="true"
-                        [rowAlternationEnabled]="true"
-                        (onInitNewRow)="onNewUserDepartment($event)"
-                        (onRowInserted)="onUserDepartmentInserted($event)"
-                        (onRowUpdated)="onUserDepartmentUpdated($event)"
-                        (onRowRemoved)="onUserDepartmentRemoved($event)">
-                    <dxi-column dataField="idFireSafetyDepartment" caption="{{'fireSafetyDepartment' | translate}}">
-                        <dxo-lookup [dataSource]="departments" [displayExpr]="getDepartmentName" valueExpr="id">
-                        </dxo-lookup>
-                    </dxi-column>
-                    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
-
-                    <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true"></dxo-editing>
-                </dx-data-grid>
-            </dxi-item>
+            <dxi-item dataField="fireSafetyDepartments" colSpan="2"></dxi-item>
             <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
                 <dxi-item dataField="firstname" [isRequired]="true"></dxi-item>
                 <dxi-item dataField="lastname" [isRequired]="true"></dxi-item>
@@ -76,4 +60,24 @@
             </dxi-item>
         </dxo-form>
     </dxo-editing>
+
+    <div *dxTemplate="let field of 'editDepartments'">
+        <dx-data-grid
+                [dataSource]="webuserFireSafetyDepartments"
+                [hoverStateEnabled]="true"
+                [rowAlternationEnabled]="true"
+                (onInitialized)="setDepartmentField(field)"
+                (onInitNewRow)="onNewUserDepartment($event)"
+                (onRowInserted)="onUserDepartmentChanged($event)"
+                (onRowUpdated)="onUserDepartmentChanged($event)"
+                (onRowRemoved)="onUserDepartmentChanged($event)">
+            <dxi-column dataField="idFireSafetyDepartment" caption="{{'fireSafetyDepartment' | translate}}">
+                <dxo-lookup [dataSource]="departments" [displayExpr]="getDepartmentName" valueExpr="id">
+                </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+
+            <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true"></dxo-editing>
+        </dx-data-grid>
+    </div>
 </dx-data-grid>
