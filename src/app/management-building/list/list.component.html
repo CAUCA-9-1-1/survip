@@ -19,7 +19,7 @@
     </dxi-column>
     <dxi-column
             dataField="picture"
-            caption="{{'photo' | translate}}"
+            caption="{{'picture' | translate}}"
             editCellTemplate="editphoto"
             [visible]="false">
     </dxi-column>
@@ -74,7 +74,7 @@
                         <dxi-item dataField="isParent" editorType="dxCheckBox" [editorOptions]="{'readOnly': true}"></dxi-item>
                     </dxi-item>
                     <dxi-item itemType="group">
-                        <dxi-item dataField="picture"></dxi-item>
+                        <dxi-item dataField="picture" [label]="{visible: false}"></dxi-item>
                     </dxi-item>
                 </dxi-tab>
                 <dxi-tab title="{{'address' | translate}}" colCount="2">
@@ -112,6 +112,7 @@
         <app-multilang [isRequired]="true" [value]="field.row.data.localizations" (valueChanged)="field.setValue($event.value);"></app-multilang>
     </div>
     <div *dxTemplate="let field of 'editphoto'">
+        <span class="dx-field-item-label-text">{{'picture' | translate}}:</span>
         <app-image [idImage]="field.row.data.idPicture" height="400px" [allowChange]="true" (valueChanged)="field.setValue($event)"></app-image>
     </div>
 </dx-data-grid>
