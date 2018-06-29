@@ -38,7 +38,8 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     lanes: Lane[] = [];
     lanesOfCity: Lane[] = [];
     operatorTypes: OperatorType[] = [];
-    unitOfMeasures: UnitOfMeasure[] = [];
+    rateUnits: UnitOfMeasure[] = [];
+    pressureUnits: UnitOfMeasure[] = [];
     colors = [{
         id: '#000000',
         color: '#000000',
@@ -162,7 +163,8 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     }
 
     private loadUnitOfMeasure() {
-        this.unitOfMeasureService.getAll().subscribe(data => this.unitOfMeasures = data);
+        this.unitOfMeasureService.getRate().subscribe(data => this.rateUnits = data);
+        this.unitOfMeasureService.getPressure().subscribe(data => this.pressureUnits = data);
     }
 
     private loadCity() {

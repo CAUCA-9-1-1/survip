@@ -46,7 +46,7 @@
             dataField="idUnitOfMeasureRate"
             caption="{{'unitOfMeasure' | translate}}"
             [visible]="false">
-        <dxo-lookup [dataSource]="unitOfMeasures" [displayExpr]="getUnitOfMeasureName" valueExpr="id">
+        <dxo-lookup [dataSource]="rateUnits" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column
@@ -62,7 +62,7 @@
             dataField="idUnitOfMeasurePressure"
             caption="{{'unitOfMeasure' | translate}}"
             [visible]="false">
-        <dxo-lookup [dataSource]="unitOfMeasures" [displayExpr]="getUnitOfMeasureName" valueExpr="id">
+        <dxo-lookup [dataSource]="pressureUnits" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="color" caption="{{'color' | translate}}" [visible]="false">

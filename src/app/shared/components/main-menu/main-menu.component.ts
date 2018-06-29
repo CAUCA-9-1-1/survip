@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 
 
@@ -8,6 +8,8 @@ import {Router} from '@angular/router';
     styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent implements OnInit {
+    @Output() click = new EventEmitter();
+
     selected = '';
     menus = [{
         name: 'inspectionDashboard',
@@ -53,6 +55,9 @@ export class MainMenuComponent implements OnInit {
     goto(path) {
         this.selected = path;
         this.router.navigate([path]);
+        this.click.emit({
+            path: path
+        });
     }
 
     isSelected(path) {

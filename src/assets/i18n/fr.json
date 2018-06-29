@@ -183,6 +183,8 @@
   "unitOfMeasure": "Unité de mesure",
   "pressure": "Pression",
   "rate": "Débit",
+  "dimension": "Dimension",
+  "diameter": "Diamètre",
   "fireHydrantNumber": "Numéro de la borne",
   "comments": "Commentaires",
   "physicalPosition": "Position physique",
