@@ -327,11 +327,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             lookup: {
                 dataSource: this.lanes,
                 valueExpr: 'id',
-                displayExpr: (data) => {
-                    const lane = Lane.fromJSON(data);
-
-                    return lane.getLocalization(environment.locale.use);
-                }
+                displayExpr: 'name',
             },
             visible: visible[3],
             width: width[3] || null,
@@ -542,7 +538,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     }
 
     private loadLanes() {
-        this.laneService.getAll().subscribe(data => {
+        this.laneService.localized().subscribe(data => {
             this.lanes = data;
             this.checkLoadedElement();
         });
