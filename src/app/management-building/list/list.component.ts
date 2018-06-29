@@ -28,7 +28,9 @@ import {TranslateService} from '@ngx-translate/core';
 export class ListComponent extends GridWithCrudService implements OnInit {
     @Input()
     set parentBuilding(building: Building) {
+        console.log('parent', building);
         this.parent = building;
+        this.isParent = (building ? false : true);
         this.loadSource(this.parent ? this.parent.id : undefined);
     }
 
@@ -38,6 +40,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     riskLevels: RiskLevel[] = [];
     selectedBuidling: string;
     parent: Building;
+    isParent = true;
     popupVisible = {
         childBuildings: false,
         contacts: false,
