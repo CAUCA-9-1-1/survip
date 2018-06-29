@@ -5,7 +5,11 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {WebuserService} from '../shared/services/webuser.service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
-import {Webuser} from '../shared/models/webuser.model';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {environment} from '../../../environments/environment';
+import {Password} from '../../shared/classes/password';
+import {Color} from '../../shared/classes/color';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -21,14 +25,37 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     private selectedPassword: string;
     private selectedIdWebuser: string;
 
+    labels = {};
     departments: FireSafetyDepartment[] = [];
+    departmentField: any;
     webuserFireSafetyDepartments = [];
+    passwordOptions = {
+        mode: 'password',
+        onKeyUp: (ev) => {
+            const password = new Password();
+            const color = new Color();
+            const input = ev.component.element().querySelector('input');
+            const hue = password.quality(input.value) * 1.2 / 360;
+            const rgb = color.hslToRgb(hue, 1, 0.5);
+
+            if (input.value) {
+                input.style.backgroundColor = ['rgb(', rgb[0], ',', rgb[1], ',', rgb[2], ')'].join('');
+            }
+        }
+    };
 
     constructor(
         webuserService: WebuserService,
+        translateService: TranslateService,
         private departmentService: FireSafetyDepartmentService,
     ) {
         super(webuserService);
+
+        translateService.get([
+            'passwordError'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -45,7 +72,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
         if (e.attributes) {
             e.attributes.forEach(attribute => {
-                if (attribute.attributeName === 'firstname') {
+                if (attribute.attributeName === 'first_name') {
                     name = attribute.attributeValue;
                 }
             });
@@ -59,7 +86,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
         if (e.attributes) {
             e.attributes.forEach(attribute => {
-                if (attribute.attributeName === 'lastname') {
+                if (attribute.attributeName === 'last_name') {
                     name = attribute.attributeValue;
                 }
             });
@@ -88,7 +115,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         return departments.getLocalization(environment.locale.use);
     }
 
-    onPasswordChanged(e) {
+    onPasswordChanged = (e) => {
         if (e.value && e.value.length < 8) {
           return false;
         }
@@ -97,26 +124,13 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         return true;
     }
 
-    onPasswordCompare() {
+    onPasswordCompare = (e) => {
         return (this.selectedPassword ? this.selectedPassword : null);
     }
 
     onEditorPreparing(e) {
-        if (e.dataField === 'password' || e.dataField === 'passwordConfirm') {
+        if (e.dataField === 'password') {
             e.editorOptions.mode = 'password';
-            e.editorOptions.onKeyUp = (ev) => {
-                /*const password = new Password();
-                const color = new Color();
-                const input = ev.component.element().find('input').get(0);
-                const hue = password.quality(input.value) * 1.2 / 360;
-                const rgb = color.hslToRgb(hue, 1, 0.5);
-
-                if (input.value) {
-                    ev.component.element().find('input').css({
-                        'background-color': ['rgb(', rgb[0], ',', rgb[1], ',', rgb[2], ')'].join('')
-                    });
-                }*/
-            };
         }
     }
 
@@ -129,11 +143,43 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         e.data.password = '';
         e.data.resetPassword = this.getAttribute('resetPassword', e.data);
 
-        console.log('edit SSI', e);
-
         this.webuserFireSafetyDepartments = e.data.fireSafetyDepartments;
         this.selectedIdWebuser = e.data.id;
         this.selectedPassword = '';
+    }
+
+    onRowUpdated(e) {
+        const fieldUser = ['id', 'createOn', 'isActive', 'password', 'username', 'fireSafetyDepartments'];
+
+        for (const attr in e.data) {
+            if (e.data[attr] && fieldUser.indexOf(attr) === -1) {
+                const selectAttr = e.key.attributes.filter(item => {
+                    if (item.attribute_name === attr) {
+                        return item;
+                    }
+                });
+
+                if (selectAttr.length) {
+                    console.log(selectAttr);
+                } else {
+                    e.key.attributes.push({
+                        attributeName: attr,
+                        attributeValue: e.data[attr],
+                        idWebuser: e.key.id,
+                    });
+                }
+            }
+        }
+console.log(e.key);
+        super.onRowUpdated(e);
+    }
+
+    setDepartmentField(field) {
+        this.departmentField = field;
+
+        if (!this.departmentField.value) {
+            this.departmentField.value = {};
+        }
     }
 
     onNewUserDepartment(e) {
@@ -141,21 +187,8 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         e.data.isActive = true;
     }
 
-    onUserDepartmentInserted(e) {
-        console.log('SSI insert', e);
-    }
-
-    onUserDepartmentUpdated(e) {
-        for (const i in e.data) {
-          if (e.data[i]) {
-            e.key[i] = e.data[i];
-          }
-        }
-
-    }
-
-    onUserDepartmentRemoved(e) {
-        // this.webuserDeptService.remove(e.key.selectedIdWebuser).subscribe();
+    onUserDepartmentChanged(e) {
+        this.departmentField.setValue(this.departmentField.data.fireSafetyDepartments);
     }
 
     private loadDepartments() {
