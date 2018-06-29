@@ -1,0 +1,6 @@
+<div #container>
+    <img [src]="src" />
+</div>
+<ng-container *ngIf="allowChange">
+    <app-upload accept="image/*" (readend)="uploadPicture($event)"></app-upload>
+</ng-container>

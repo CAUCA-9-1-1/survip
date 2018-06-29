@@ -290,5 +290,6 @@
   "unknown": "Unknown",
   "underground": "Underground",
   "aboveground": "Aboveground",
+  "orDropFileHere": "or drop file here",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }

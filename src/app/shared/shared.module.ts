@@ -14,7 +14,7 @@ import {
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
-import { DxTabPanelModule, DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
+import {DxButtonModule, DxTabPanelModule, DxTextBoxModule, DxValidatorModule} from 'devextreme-angular';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -22,6 +22,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { MultilangComponent } from './components/multilang/multilang.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { SlideshowComponent } from './components/slideshow/slideshow.component';
+import { ImageComponent } from './components/image/image.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -35,6 +37,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         PageNotFoundComponent,
         MainMenuComponent,
         SlideshowComponent,
+        ImageComponent,
+        UploadComponent,
     ],
     exports: [
         BrowserModule,
@@ -56,6 +60,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         TranslateModule,
         MainMenuComponent,
         SlideshowComponent,
+        ImageComponent,
+        UploadComponent,
     ],
     imports: [
         BrowserModule,
@@ -72,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatSnackBarModule,
         MatTabsModule,
         MatToolbarModule,
+        DxButtonModule,
         DxTabPanelModule,
         DxTextBoxModule,
         DxValidatorModule,

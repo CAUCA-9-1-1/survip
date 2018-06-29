@@ -12,6 +12,7 @@ import {RiskLevel} from '../shared/models/risk-level.model';
 import {RiskLevelService} from '../shared/services/risk-level.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {TranslateService} from '@ngx-translate/core';
+import {Picture} from '../../shared/models/picture.model';
 
 
 @Component({
