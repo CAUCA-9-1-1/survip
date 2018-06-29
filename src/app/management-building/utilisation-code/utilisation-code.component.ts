@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 
+import {environment} from '../../../environments/environment';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {UtilisationCode} from '../shared/models/utilisation-code.model';
 import {UtilisationCodeService} from '../shared/services/utilisation-code.service';
-import {environment} from '../../../environments/environment';
 
 
 @Component({
@@ -20,6 +20,10 @@ export class UtilisationCodeComponent extends GridWithCrudService implements OnI
         utilisationCodeService: UtilisationCodeService
     ) {
         super(utilisationCodeService);
+    }
+
+    setModel(data: any) {
+        return UtilisationCode.fromJSON(data);
     }
 
     ngOnInit() {

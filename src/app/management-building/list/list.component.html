@@ -56,7 +56,6 @@
     </dxi-column>
     <dxi-column dataField="matricule" caption="{{'matricule' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="vacantLand" dataType="boolean" caption="{{'vacantLand' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="isParent" dataType="boolean" caption="{{'isParent' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
@@ -66,12 +65,11 @@
         <dxo-form colCount="1">
             <dxi-item itemType="tabbed" [tabPanelOptions]="{ deferRendering: false }">
                 <dxi-tab title="{{'general' | translate}}" colCount="2">
-                    <dxi-item itemType="group" colCount="3">
-                        <dxi-item dataField="localizations" colSpan="3"></dxi-item>
-                        <dxi-item dataField="matricule" colSpan="3"></dxi-item>
+                    <dxi-item itemType="group" colCount="2">
+                        <dxi-item dataField="localizations" colSpan="2"></dxi-item>
+                        <dxi-item dataField="matricule" colSpan="2"></dxi-item>
                         <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
                         <dxi-item dataField="vacantLand" editorType="dxCheckBox"></dxi-item>
-                        <dxi-item dataField="isParent" editorType="dxCheckBox" [editorOptions]="{'readOnly': true}"></dxi-item>
                     </dxi-item>
                     <dxi-item itemType="group">
                         <dxi-item dataField="picture" [label]="{visible: false}"></dxi-item>
@@ -103,7 +101,7 @@
     </dxo-editing>
 
     <div *dxTemplate="let field of 'listButton'">
-        <dx-button text="{{'childBuildings' | translate}}" (onClick)="showPopup('childBuildings')" [disabled]="!isParent"></dx-button>
+        <dx-button text="{{'childBuildings' | translate}}" (onClick)="showPopup('childBuildings')" [disabled]="parent"></dx-button>
         <dx-button text="{{'contacts' | translate}}" (onClick)="showPopup('contacts')"></dx-button>
         <dx-button text="{{'pnap' | translate}}" (onClick)="showPopup('pnap')"></dx-button>
         <dx-button text="{{'hazardousMaterials' | translate}}" (onClick)="showPopup('hazardousMaterials')"></dx-button>
@@ -124,7 +122,7 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.childBuildings">
     <div *dxTemplate="let data of 'content'">
-        <app-managementbuilding-list [isParent]="false" [parentBuilding]="selectedBuidling"></app-managementbuilding-list>
+        <app-managementbuilding-list [parentBuilding]="selectedBuidling"></app-managementbuilding-list>
     </div>
 </dx-popup>
 <dx-popup

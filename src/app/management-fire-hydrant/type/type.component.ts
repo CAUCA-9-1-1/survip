@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {environment} from '../../../environments/environment';
 
+import {environment} from '../../../environments/environment';
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
@@ -16,6 +16,10 @@ export class TypeComponent extends GridWithCrudService implements OnInit {
 
     constructor(fireHydrantTypeService: FireHydrantTypeService) {
         super(fireHydrantTypeService);
+    }
+
+    setModel(data: any) {
+        return FireHydrantType.fromJSON(data);
     }
 
     ngOnInit() {

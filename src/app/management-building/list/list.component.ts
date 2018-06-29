@@ -12,7 +12,6 @@ import {RiskLevel} from '../shared/models/risk-level.model';
 import {RiskLevelService} from '../shared/services/risk-level.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {TranslateService} from '@ngx-translate/core';
-import {Picture} from '../../shared/models/picture.model';
 
 
 @Component({
@@ -27,11 +26,12 @@ import {Picture} from '../../shared/models/picture.model';
     ]
 })
 export class ListComponent extends GridWithCrudService implements OnInit {
-    @Input() isParent: boolean;
     @Input()
     set parentBuilding(building: Building) {
+        console.log('parent', building);
         this.parent = building;
-        this.loadSource(this.parent.id);
+        this.isParent = (building ? false : true);
+        this.loadSource(this.parent ? this.parent.id : undefined);
     }
 
     labels: any = {};
@@ -40,6 +40,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     riskLevels: RiskLevel[] = [];
     selectedBuidling: string;
     parent: Building;
+    isParent = true;
     popupVisible = {
         childBuildings: false,
         contacts: false,
@@ -80,11 +81,11 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         });
     }
 
-    ngOnInit() {
-        if (this.isParent) {
-            this.loadSource();
-        }
+    setModel(data: any) {
+        return Building.fromJSON(data);
+    }
 
+    ngOnInit() {
         this.loadLane();
         this.loadUtilisationCode();
         this.loadRiskLevel();
@@ -99,14 +100,22 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     onInitNewRow(e) {
         const building = new Building();
 
-        e.data = Object.assign(this.parent || building, {
-            localizations: null,
-            buildingValue: building.buildingValue,
-            yearOfConstruction: building.yearOfConstruction,
-            isParent: this.isParent,
-        });
-
         this.selectedBuidling = null;
+
+        if (this.parent) {
+            e.data = Object.assign(this.parent, {
+                id: undefined,
+                localizations: undefined,
+                createdOn: undefined,
+                idPicture: undefined,
+                idParentBuilding: this.parent.id,
+                buildingValue: building.buildingValue,
+                yearOfConstruction: building.yearOfConstruction,
+                childType: 1,
+            });
+        } else {
+            e.data = Object.assign({}, building);
+        }
     }
 
     onEditingStart(e) {

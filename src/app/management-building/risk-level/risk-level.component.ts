@@ -22,6 +22,10 @@ export class RiskLevelComponent extends GridWithCrudService implements OnInit {
         super(riskLevelService);
     }
 
+    setModel(data: any) {
+        return RiskLevel.fromJSON(data);
+    }
+
     ngOnInit() {
         this.loadSource();
     }

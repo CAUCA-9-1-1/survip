@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {environment} from '../../../environments/environment';
 
+import {environment} from '../../../environments/environment';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {City} from '../shared/models/city.model';
 import {CityService} from '../shared/services/city.service';
 import {CityType} from '../shared/models/citytype.model';
 import {CityTypeService} from '../shared/services/citytype.service';
 import {County} from '../shared/models/county.model';
 import {CountyService} from '../shared/services/county.service';
-import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 
 
 @Component({
@@ -30,6 +30,10 @@ export class CityComponent extends GridWithCrudService implements OnInit {
         private countyService: CountyService
     ) {
         super(cityService);
+    }
+
+    setModel(data: any) {
+        return City.fromJSON(data);
     }
 
     ngOnInit() {

@@ -1,7 +1,7 @@
 import {environment} from '../../../environments/environment';
 
 
-export class GridWithCrudService {
+export abstract class GridWithCrudService {
     dataSource = [];
     popup: any;
 
@@ -46,7 +46,9 @@ export class GridWithCrudService {
     }
 
     onRowInserted(e) {
-        this.sourceService.save(e.data).subscribe(info => {
+        this.sourceService.save(
+            this.setModel(e.data)
+        ).subscribe(info => {
             this.loadSource(this.loadSpecificOpts);
         }, error => {
             this.loadSource(this.loadSpecificOpts);
@@ -54,12 +56,16 @@ export class GridWithCrudService {
     }
 
     onRowUpdated(e) {
-        this.sourceService.save(e.key).subscribe(() => this.loadSource(this.loadSpecificOpts));
+        this.sourceService.save(
+            this.setModel(e.key)
+        ).subscribe(() => this.loadSource(this.loadSpecificOpts));
     }
 
     onRowRemoved(e) {
         this.sourceService.remove(e.key.id).subscribe(() => this.loadSource(this.loadSpecificOpts));
     }
+
+    protected abstract setModel(data: any): any;
 
     protected loadSource(opts?: any) {
         this.loadSpecificOpts = opts;

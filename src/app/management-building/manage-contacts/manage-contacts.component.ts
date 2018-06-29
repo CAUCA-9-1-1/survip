@@ -3,6 +3,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {BuildingContactService} from '../shared/services/building-contact.service';
 import {InspectionBuildingContactService} from '../../inspection-approval/shared/services/inspection-building-contact.service';
+import {BuildingContact} from '../shared/models/building-contact.model';
 
 
 @Component({
@@ -29,6 +30,10 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
         private buildingService: BuildingContactService
     ) {
         super();
+    }
+
+    setModel(data: any) {
+        return BuildingContact.fromJSON(data);
     }
 
     ngOnInit() { }

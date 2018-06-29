@@ -16,7 +16,7 @@ export class BuildingHazardousMaterial extends BaseModel {
     sector = '';
     wall = '';
     tankType = 0;
-    supplyLone = '';
+    supplyLine = '';
 
     static fromJSON(data: object): BuildingHazardousMaterial {
         const material = new BuildingHazardousMaterial();

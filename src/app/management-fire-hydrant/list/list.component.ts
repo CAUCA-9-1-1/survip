@@ -14,6 +14,7 @@ import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {CityService} from '../../management-address/shared/services/city.service';
 import {City} from '../../management-address/shared/models/city.model';
+import {FireHydrant} from '../shared/models/fire-hydrant.model';
 
 
 @Component({
@@ -73,6 +74,10 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
         private laneService: LaneService,
     ) {
         super(fireHydrantService);
+    }
+
+    setModel(data: any) {
+        return FireHydrant.fromJSON(data);
     }
 
     ngOnInit() {

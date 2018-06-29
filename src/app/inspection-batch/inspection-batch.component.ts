@@ -11,6 +11,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {WebuserForWeb} from '../management-access/shared/models/webuser-for-web.model';
 import {BuildingService} from '../management-building/shared/services/building.service';
 import {InspectionService} from '../inspection-approval/shared/services/inspection.service';
+import {InspectionBatch} from './shared/models/inspection-batch.model';
 
 
 @Component({
@@ -85,6 +86,10 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
                 }
             }];
         });
+    }
+
+    setModel(data: any) {
+        return InspectionBatch.fromJSON(data);
     }
 
     ngOnInit() {

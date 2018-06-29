@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {environment} from '../../../environments/environment';
 
-import { Country } from '../shared/models/country.model';
-import { CountryService } from '../shared/services/country.service';
+import {environment} from '../../../environments/environment';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {Country} from '../shared/models/country.model';
+import {CountryService} from '../shared/services/country.service';
 
 
 @Component({
@@ -16,6 +16,10 @@ export class CountryComponent extends GridWithCrudService implements OnInit {
 
     constructor(countryService: CountryService) {
         super(countryService);
+    }
+
+    setModel(data: any) {
+        return Country.fromJSON(data);
     }
 
     ngOnInit() {

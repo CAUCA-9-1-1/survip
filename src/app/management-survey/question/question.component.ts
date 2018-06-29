@@ -1,13 +1,15 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import {MatSnackBar} from '@angular/material';
+import {DxTreeViewComponent} from 'devextreme-angular';
+import {confirm} from 'devextreme/ui/dialog';
+
+import {environment} from '../../../environments/environment';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {Question} from '../shared/models/question.model';
 import {QuestionService} from '../shared/services/question.service';
 import {ChoiceService} from '../shared/services/choice.service';
-import {environment} from '../../../environments/environment';
-import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
-import {confirm} from 'devextreme/ui/dialog';
-import {MatSnackBar} from '@angular/material';
-import {DxTreeViewComponent} from 'devextreme-angular';
+import {Choice} from '../shared/models/choice.model';
 
 @Component({
     selector: 'app-managementsurvey-question',
@@ -40,6 +42,10 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         private notification: MatSnackBar,
     ) {
         super(choiceService);
+    }
+
+    setModel(data: any) {
+        return Choice.fromJSON(data);
     }
 
     ngOnInit() {

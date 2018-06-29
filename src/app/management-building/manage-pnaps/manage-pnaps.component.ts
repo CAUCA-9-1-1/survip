@@ -5,6 +5,7 @@ import {BuildingPnapsService} from '../shared/services/building-pnaps.service';
 import {InspectionBuildingPnapsService} from '../../inspection-approval/shared/services/inspection-building-pnaps.service';
 import {PersonRequiringAssistanceTypeService} from '../shared/services/person-requiring-assistance-type.service';
 import {PersonRequiringAssistanceType} from '../shared/models/person-requiring-assistance-type.model';
+import {BuildingPnaps} from '../shared/models/building-pnaps.model';
 
 
 @Component({
@@ -34,6 +35,10 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
         private pnapsTypeService: PersonRequiringAssistanceTypeService,
     ) {
         super();
+    }
+
+    setModel(data: any) {
+        return BuildingPnaps.fromJSON(data);
     }
 
     ngOnInit() {

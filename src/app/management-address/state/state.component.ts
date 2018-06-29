@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {environment} from '../../../environments/environment';
+import {Component, OnInit} from '@angular/core';
 
-import { State } from '../shared/models/state.model';
-import { StateService } from '../shared/services/state.service';
-import { Country } from '../shared/models/country.model';
-import { CountryService } from '../shared/services/country.service';
+import {environment} from '../../../environments/environment';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {State} from '../shared/models/state.model';
+import {StateService} from '../shared/services/state.service';
+import {Country} from '../shared/models/country.model';
+import {CountryService} from '../shared/services/country.service';
+
 
 
 @Component({
@@ -25,6 +26,10 @@ export class StateComponent extends GridWithCrudService implements OnInit {
         private countryService: CountryService
     ) {
         super(stateService);
+    }
+
+    setModel(data: any) {
+        return State.fromJSON(data);
     }
 
     ngOnInit() {

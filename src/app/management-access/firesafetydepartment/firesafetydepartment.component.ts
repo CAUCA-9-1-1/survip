@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '../../../environments/environment';
+import {Component, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
-import { FireSafetyDepartment } from '../shared/models/firesafetydepartment.model';
-import { FireSafetyDepartmentService } from '../shared/services/firesafetydepartment.service';
-import { County } from '../../management-address/shared/models/county.model';
-import { CountyService } from '../../management-address/shared/services/county.service';
+import {environment} from '../../../environments/environment';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
+import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
+import {County} from '../../management-address/shared/models/county.model';
+import {CountyService} from '../../management-address/shared/services/county.service';
 
 
 @Component({
@@ -28,6 +28,10 @@ export class FireSafetyDepartmentComponent extends GridWithCrudService implement
         private translateService: TranslateService
     ) {
         super(fireSafetyDepartmentService);
+    }
+
+    setModel(data: any) {
+        return FireSafetyDepartment.fromJSON(data);
     }
 
     ngOnInit() {
