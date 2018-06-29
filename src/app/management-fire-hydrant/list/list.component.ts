@@ -149,7 +149,7 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     }
 
     onInitNewRow(e) {
-        e.data.color = 'red';
+        e.data.color = '#FF0000';
         e.data.isActive = true;
     }
 
