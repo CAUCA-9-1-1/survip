@@ -76,12 +76,16 @@
                         </dxo-lookup>
                     </dxi-column>
                     <dxi-column dataField="isActive" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
-                    <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+                    <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
                     </dxo-editing>
 
                     <div *dxTemplate="let field of 'editname'">
-                        <app-multilang [isRequired]="true" [value]="field.row.data.localizations"
-                                       (valueChanged)="field.setValue($event.value);"></app-multilang>
+                        <app-multilang
+                                [validationGroup]="validationGroup"
+                                [isRequired]="true"
+                                [value]="field.row.data.localizations"
+                                (valueChanged)="field.setValue($event.value);">
+                        </app-multilang>
                     </div>
                 </dx-data-grid>
             </div>

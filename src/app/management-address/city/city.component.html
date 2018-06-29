@@ -36,7 +36,7 @@
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
-    <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-popup title="{{'city' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="1">
@@ -51,6 +51,11 @@
     </dxo-editing>
 
     <div *dxTemplate="let field of 'editname'">
-        <app-multilang [isRequired]="true" [value]="field.row.data.localizations" (valueChanged)="field.setValue($event.value);"></app-multilang>
+        <app-multilang
+                [validationGroup]="validationGroup"
+                [isRequired]="true"
+                [value]="field.row.data.localizations"
+                (valueChanged)="field.setValue($event.value);">
+        </app-multilang>
     </div>
 </dx-data-grid>
