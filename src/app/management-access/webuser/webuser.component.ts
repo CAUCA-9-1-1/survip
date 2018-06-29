@@ -148,6 +148,32 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         this.selectedPassword = '';
     }
 
+    onRowUpdated(e) {
+        const fieldUser = ['id', 'createOn', 'isActive', 'password', 'username', 'fireSafetyDepartments'];
+
+        for (const attr in e.data) {
+            if (e.data[attr] && fieldUser.indexOf(attr) === -1) {
+                const selectAttr = e.key.attributes.filter(item => {
+                    if (item.attribute_name === attr) {
+                        return item;
+                    }
+                });
+
+                if (selectAttr.length) {
+                    console.log(selectAttr);
+                } else {
+                    e.key.attributes.push({
+                        attributeName: attr,
+                        attributeValue: e.data[attr],
+                        idWebuser: e.key.id,
+                    });
+                }
+            }
+        }
+console.log(e.key);
+        super.onRowUpdated(e);
+    }
+
     setDepartmentField(field) {
         this.departmentField = field;
 
