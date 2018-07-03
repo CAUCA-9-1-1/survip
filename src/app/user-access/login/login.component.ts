@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
         this.translateService.get([
-            'badLogin', 'errorDuringLoggin'
+            'badLogin', 'errorDuringLogin'
         ]).subscribe(labels => {
             this.labels = labels;
         });
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
                 this.notify(this.labels['badLogin']);
             }
         }, error => {
-            this.notify(this.labels['errorDuringLoggin']);
+            this.notify(this.labels['errorDuringLogin']);
         });
 
         return false;

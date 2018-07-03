@@ -21,8 +21,8 @@ export class AuthenticationService {
         });
     }
 
-    login(username: string, password: string) {
-        return this.http.post(environment.apiUrl + 'Authentification/Logon?user=' + username + '&password=' + password, {
+    login(username: string, password: string): Observable<any> {
+        return this.http.post<any>(environment.apiUrl + 'Authentification/Logon?user=' + username + '&password=' + password, {
             username: username,
             password: password,
         }).pipe(
@@ -37,22 +37,20 @@ export class AuthenticationService {
         localStorage.removeItem('currentWebuser');
     }
 
-    private status() {
-        return this.http.get(environment.apiUrl + 'Authentification/SessionStatus', {
+    private status(): Observable<boolean> {
+        return this.http.get<boolean>(environment.apiUrl + 'Authentification/SessionStatus', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('currentToken'),
             }
-        }).pipe(
-            map(response => true)
-        );
+        });
     }
 
     private onResponse(response) {
         if (response.data.accessToken) {
-            this.isLogged.next(true);
-
             localStorage.setItem('currentToken', response.data.accessToken);
             localStorage.setItem('currentWebuser', response.data.idWebuser);
+
+            this.isLogged.next(true);
         }
 
         return response.data;

@@ -33,6 +33,7 @@ export class AppComponent {
         environment.locale.use = localStorage.getItem('locale') || environment.locale.use;
 
         this.auth.isLogged.subscribe(logged => {
+console.log('app : ' + logged);
             this.isLogged = logged;
         }, error => {
             this.isLogged = false;
