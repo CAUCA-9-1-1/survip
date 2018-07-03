@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 import {environment} from '../../../environments/environment';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {Webuser} from '../shared/models/webuser.model';
 import {WebuserService} from '../shared/services/webuser.service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
-import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
-import {environment} from '../../../environments/environment';
 import {Password} from '../../shared/classes/password';
 import {Color} from '../../shared/classes/color';
-import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
