@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import 'rxjs/add/operator/catch';
+
 
 import {RequestService} from '../../../shared/services/request.service';
 import {DashboardInspection} from '../models/dashboard-inspection.model';

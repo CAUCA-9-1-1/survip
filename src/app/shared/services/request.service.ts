@@ -1,9 +1,10 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injector } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { environment } from '../../../environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 
 
 export class RequestService {
@@ -38,6 +39,6 @@ export class RequestService {
                 break;
         }
 
-        return Observable.throw(error.statusText);
+        return observableThrowError(error.statusText);
     }
 }

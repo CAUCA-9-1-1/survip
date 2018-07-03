@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import 'rxjs/add/operator/catch';
+
 
 import {City} from '../models/city.model';
 import {RequestService} from '../../../shared/services/request.service';
