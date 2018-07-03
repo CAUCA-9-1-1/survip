@@ -18,11 +18,7 @@ export class AuthenticationService {
     }
 
     status(): Observable<boolean> {
-        return this.http.get<boolean>(environment.apiUrl + 'Authentification/SessionStatus', {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('currentToken'),
-            }
-        });
+        return this.isLogged.asObservable();
     }
 
     login(username: string, password: string) {
