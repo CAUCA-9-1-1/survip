@@ -33,10 +33,7 @@ export class AppComponent {
         environment.locale.use = localStorage.getItem('locale') || environment.locale.use;
 
         this.auth.status().subscribe(logged => {
-            this.isLogged = true;
-        }, error => {
-            this.isLogged = false;
-            this.logout();
+            this.isLogged = logged;
         });
 
         this.setAngular();
