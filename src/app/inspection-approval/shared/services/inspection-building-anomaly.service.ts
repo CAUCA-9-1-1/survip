@@ -1,6 +1,8 @@
 import {Injectable, Injector} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+
 import {RequestService} from '../../../shared/services/request.service';
+import {BuildingAnomaly} from '../../../management-building/shared/models/building-anomaly.model';
 
 @Injectable()
 export class InspectionBuildingAnomalyService extends RequestService {
@@ -10,7 +12,7 @@ export class InspectionBuildingAnomalyService extends RequestService {
     }
 
     getBuildingAnomaly(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/anomaly', {
+        return this.http.get<BuildingAnomaly>(this.apiUrl + 'inspection/building/' + id + '/anomaly', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
