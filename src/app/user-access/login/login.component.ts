@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
-import { AuthenticationService } from '../shared/services/authentification.service';
-import { MatSnackBar } from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
+
+import {AuthenticationService} from '../shared/services/authentification.service';
 
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
+    providers: [AuthenticationService],
 })
 export class LoginComponent implements OnInit {
     username = '';

@@ -1,25 +1,28 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BuildingPnapsComponent } from './building-pnaps.component';
+import {TestModule} from '../../test.module.spec';
+import {BuildingPnapsComponent} from './building-pnaps.component';
+
 
 describe('BuildingPnapsComponent', () => {
-  let component: BuildingPnapsComponent;
-  let fixture: ComponentFixture<BuildingPnapsComponent>;
+    let component: BuildingPnapsComponent;
+    let fixture: ComponentFixture<BuildingPnapsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BuildingPnapsComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule],
+            declarations: [BuildingPnapsComponent]
+        })
+        .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BuildingPnapsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(BuildingPnapsComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

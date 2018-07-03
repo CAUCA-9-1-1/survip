@@ -1,15 +1,18 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { BuildingHazardousMaterialService } from './building-hazardous-material.service';
+import {TestModule} from '../../../test.module.spec';
+import {BuildingHazardousMaterialService} from './building-hazardous-material.service';
+
 
 describe('InspectionBuildingHazardousMaterialService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [BuildingHazardousMaterialService]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule],
+            providers: [BuildingHazardousMaterialService]
+        });
     });
-  });
 
-  it('should be created', inject([BuildingHazardousMaterialService], (service: BuildingHazardousMaterialService) => {
-    expect(service).toBeTruthy();
-  }));
+    it('should be created', inject([BuildingHazardousMaterialService], (service: BuildingHazardousMaterialService) => {
+        expect(service).toBeTruthy();
+    }));
 });

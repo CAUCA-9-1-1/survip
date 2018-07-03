@@ -1,15 +1,18 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { BuildingContactService } from './building-contact.service';
+import {TestModule} from '../../../test.module.spec';
+import {BuildingContactService} from './building-contact.service';
+
 
 describe('InspectionBuildingContactService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [BuildingContactService]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule],
+            providers: [BuildingContactService]
+        });
     });
-  });
 
-  it('should be created', inject([BuildingContactService], (service: BuildingContactService) => {
-    expect(service).toBeTruthy();
-  }));
+    it('should be created', inject([BuildingContactService], (service: BuildingContactService) => {
+        expect(service).toBeTruthy();
+    }));
 });

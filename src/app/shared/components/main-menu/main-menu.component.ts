@@ -61,6 +61,10 @@ export class MainMenuComponent implements OnInit {
     }
 
     isSelected(path) {
+        if (!this.selected) {
+            return '';
+        }
+
         return (this.selected.indexOf(path) > -1 ? 'selected' : '');
     }
 }

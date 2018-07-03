@@ -1,15 +1,18 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { InspectionService } from './inspection.service';
+import {TestModule} from '../../../test.module.spec';
+import {InspectionService} from './inspection.service';
+
 
 describe('DashboardService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [InspectionService]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule],
+            providers: [InspectionService]
+        });
     });
-  });
 
-  it('should be created', inject([InspectionService], (service: InspectionService) => {
-    expect(service).toBeTruthy();
-  }));
+    it('should be created', inject([InspectionService], (service: InspectionService) => {
+        expect(service).toBeTruthy();
+    }));
 });

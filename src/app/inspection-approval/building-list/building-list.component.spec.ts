@@ -1,25 +1,30 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
-import { BuildingListComponent } from './building-list.component';
+import {TestModule} from '../../test.module.spec';
+import {BuildingListComponent} from './building-list.component';
+
 
 describe('BuildingListComponent', () => {
-  let component: BuildingListComponent;
-  let fixture: ComponentFixture<BuildingListComponent>;
+    let component: BuildingListComponent;
+    let fixture: ComponentFixture<BuildingListComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BuildingListComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule],
+            declarations: [BuildingListComponent],
+            schemas: [NO_ERRORS_SCHEMA]
+        })
+        .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BuildingListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(BuildingListComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

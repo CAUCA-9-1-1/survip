@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {InspectionService} from '../shared/services/inspection.service';
+import {BuildingDetailsComponent} from '../building-details/building-details.component';
 
 
 @Component({

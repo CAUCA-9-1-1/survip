@@ -1,17 +1,18 @@
 import {TestBed, inject} from '@angular/core/testing';
 
-import {TestModule} from '../../../test.module';
+import {TestModule} from '../../../test.module.spec';
 import {PermissionObjectService} from './permissionobject.service';
 
-describe('PermissionObjectService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [ TestModule ],
-      providers: [ PermissionObjectService ]
-    });
-  });
 
-  it('should ...', inject([PermissionObjectService], (service: PermissionObjectService) => {
-    expect(service).toBeTruthy();
-  }));
+describe('PermissionObjectService', () => {
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule],
+            providers: [PermissionObjectService]
+        });
+    });
+
+    it('should ...', inject([PermissionObjectService], (service: PermissionObjectService) => {
+        expect(service).toBeTruthy();
+    }));
 });

@@ -1,6 +1,6 @@
 import {TestBed, inject} from '@angular/core/testing';
 
-import {TestModule} from '../../../test.module';
+import {TestModule} from '../../../test.module.spec';
 import {SurveyService} from './survey.service';
 
 describe('SurveyService', () => {

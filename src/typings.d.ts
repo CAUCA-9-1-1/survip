@@ -11,6 +11,8 @@ declare module '*.json' {
 
 interface String {
     toSnakeCase(): string;
+
     pick(min: number, max?: number): string;
+
     shuffle(): string;
 }
