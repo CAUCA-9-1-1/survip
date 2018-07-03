@@ -6,7 +6,7 @@ import {PermissionComponent} from './permission/permission.component';
 import {WebuserComponent} from './webuser/webuser.component';
 import {ApisactionComponent} from './apisaction/apisaction.component';
 import {FireSafetyDepartmentComponent} from './firesafetydepartment/firesafetydepartment.component';
-import {StatisticsComponent} from './statistics/statistics.component';
+
 
 describe('ManagementAccessComponent', () => {
   let component: ManagementAccessComponent;
@@ -20,7 +20,6 @@ describe('ManagementAccessComponent', () => {
         ApisactionComponent,
         FireSafetyDepartmentComponent,
         PermissionComponent,
-        StatisticsComponent,
         WebuserComponent,
       ],
       providers: []

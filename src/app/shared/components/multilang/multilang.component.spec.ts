@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MultilangComponent } from './multilang.component';
 
+
 describe('MultilangComponent', () => {
   let component: MultilangComponent;
   let fixture: ComponentFixture<MultilangComponent>;
