@@ -110,6 +110,9 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     onInitNewRow(e) {
         e.data.isActive = true;
         e.data.resetPassword = true;
+        e.data.fireSafetyDepartments = [];
+
+        this.webuserFireSafetyDepartments = [];
     }
 
     onEditingStart(e) {
@@ -123,7 +126,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
     onRowInserted(e) {
         e.data.attributes = this.setWebuserAttributes(e);
-console.log(e.data);
+console.log(e);
         super.onRowInserted(e);
     }
 
@@ -147,6 +150,10 @@ console.log(e.data);
     }
 
     onUserDepartmentChanged(e) {
+        if (this.departmentField.data.fireSafetyDepartments.length === 0) {
+            this.departmentField.data.fireSafetyDepartments.push(e.data);
+        }
+
         this.departmentField.setValue(this.departmentField.data.fireSafetyDepartments);
     }
 
