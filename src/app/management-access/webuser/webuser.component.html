@@ -10,14 +10,14 @@
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
-            dataField="firstname"
+            dataField="firstName"
             caption="{{'firstName' | translate}}"
             [calculateCellValue]="getFirstname"
             sortOrder="asc"
             sortIndex="0">
     </dxi-column>
     <dxi-column
-            dataField="lastname"
+            dataField="lastName"
             caption="{{'lastName' | translate}}"
             [calculateCellValue]="getLastname"
             sortOrder="asc"
@@ -59,8 +59,8 @@
             <dxi-item dataField="resetPassword" editorType="dxCheckBox"></dxi-item>
             <dxi-item dataField="fireSafetyDepartments" colSpan="2"></dxi-item>
             <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
-                <dxi-item dataField="firstname" [isRequired]="true"></dxi-item>
-                <dxi-item dataField="lastname" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="firstName" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="lastName" [isRequired]="true"></dxi-item>
                 <dxi-item dataField="email" [editorOptions]="{mode: 'email'}">
                     <dxi-validation-rule type="email"></dxi-validation-rule>
                 </dxi-item>

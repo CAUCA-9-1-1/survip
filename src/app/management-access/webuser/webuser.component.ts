@@ -67,19 +67,19 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     }
 
     getFirstname = (e) => {
-        return this.getAttribute('first_name', e);
+        return this.getWebuserAttribute('first_name', e);
     }
 
     getLastname = (e) => {
-        return this.getAttribute('last_name', e);
+        return this.getWebuserAttribute('last_name', e);
     }
 
     getEmail = (e) => {
-        return this.getAttribute('email', e);
+        return this.getWebuserAttribute('email', e);
     }
 
     getTelephone = (e) => {
-        return this.getAttribute('telephone', e);
+        return this.getWebuserAttribute('telephone', e);
     }
 
     getDepartmentName(data) {
@@ -114,33 +114,21 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
     onEditingStart(e) {
         e.data.password = '';
-        e.data.resetPassword = this.getAttribute('resetPassword', e.data);
+        e.data.resetPassword = this.getWebuserAttribute('reset_password', e.data);
 
         this.webuserFireSafetyDepartments = e.data.fireSafetyDepartments;
         this.selectedIdWebuser = e.data.id;
         this.selectedPassword = '';
     }
 
+    onRowInserted(e) {
+        e.data.attributes = this.setWebuserAttributes(e);
+console.log(e.data);
+        super.onRowInserted(e);
+    }
+
     onRowUpdated(e) {
-        const fieldUser = ['id', 'createOn', 'isActive', 'password', 'username', 'fireSafetyDepartments'];
-
-        for (const attr in e.data) {
-            if (e.data[attr] && fieldUser.indexOf(attr) === -1) {
-                const selectAttr = e.key.attributes.findIndex(item => {
-                    return item.attributeName === attr;
-                });
-
-                if (selectAttr > -1) {
-                    e.key.attributes[selectAttr].attributeValue = e.data[attr];
-                } else {
-                    e.key.attributes.push({
-                        attributeName: attr,
-                        attributeValue: e.data[attr],
-                        idWebuser: e.key.id,
-                    });
-                }
-            }
-        }
+        e.key.attributes = this.setWebuserAttributes(e);
 
         super.onRowUpdated(e);
     }
@@ -162,7 +150,37 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         this.departmentField.setValue(this.departmentField.data.fireSafetyDepartments);
     }
 
-    private getAttribute(field, e) {
+    private setWebuserAttributes(e) {
+        const fieldUser = ['__KEY__', 'id', 'createOn', 'isActive', 'password', 'username', 'fireSafetyDepartments'];
+
+        for (const attr in e.data) {
+            if (e.data[attr] && fieldUser.indexOf(attr) === -1) {
+                let selectAttr = -1;
+
+                if (e.key.attributes) {
+                    selectAttr = e.key.attributes.findIndex(item => {
+                        return item.attributeName === attr;
+                    });
+                } else {
+                    e.key.attributes = [];
+                }
+
+                if (selectAttr > -1) {
+                    e.key.attributes[selectAttr].attributeValue = e.data[attr];
+                } else {
+                    e.key.attributes.push({
+                        attributeName: attr.toSnakeCase(),
+                        attributeValue: e.data[attr],
+                        idWebuser: e.key.id,
+                    });
+                }
+            }
+        }
+
+        return e.key.attributes;
+    }
+
+    private getWebuserAttribute(field, e) {
         let name = '';
 
         if (e.attributes) {

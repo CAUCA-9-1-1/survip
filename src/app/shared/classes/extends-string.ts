@@ -1,11 +1,16 @@
-import {} from '@angular/core';
-
-declare global {
-    interface String {
-        pick(min: number, max?: number): string;
-        shuffle(): string;
-    }
+interface String {
+    toSnakeCase(): string;
+    pick(min: number, max?: number): string;
+    shuffle(): string;
 }
+
+String.prototype.toSnakeCase = function() {
+    return this.replace(
+        /(?:^|\.?)([A-Z])/g,
+        (x, y) => {
+            return '_' + y.toLowerCase();
+        }).replace(/^_/, '');
+};
 
 String.prototype.pick = function(min: number, max: number): string {
     let chars = '';
