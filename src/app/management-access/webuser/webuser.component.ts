@@ -113,6 +113,8 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         e.data.fireSafetyDepartments = [];
 
         this.webuserFireSafetyDepartments = [];
+        this.selectedIdWebuser = undefined;
+        this.selectedPassword = '';
     }
 
     onEditingStart(e) {
@@ -126,7 +128,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
     onRowInserted(e) {
         e.data.attributes = this.setWebuserAttributes(e);
-console.log(e);
+
         super.onRowInserted(e);
     }
 
@@ -140,7 +142,7 @@ console.log(e);
         this.departmentField = field;
 
         if (!this.departmentField.value) {
-            this.departmentField.value = {};
+            this.departmentField.value = [];
         }
     }
 
@@ -149,9 +151,37 @@ console.log(e);
         e.data.isActive = true;
     }
 
-    onUserDepartmentChanged(e) {
-        if (this.departmentField.data.fireSafetyDepartments.length === 0) {
+    onUserDepartmentInserted(e) {
+        if (!this.selectedIdWebuser) {
             this.departmentField.data.fireSafetyDepartments.push(e.data);
+        }
+
+        this.departmentField.setValue(this.departmentField.data.fireSafetyDepartments);
+    }
+
+    onUserDepartmentUpdated(e) {
+        if (!this.selectedIdWebuser) {
+            const department = this.departmentField.data.fireSafetyDepartments.findIndex(item => {
+                return item.idFireSafetyDepartment === e.key.idFireSafetyDepartment;
+            });
+
+            if (department > -1) {
+                this.departmentField.data.fireSafetyDepartments[department] = e.key;
+            }
+        }
+
+        this.departmentField.setValue(this.departmentField.data.fireSafetyDepartments);
+    }
+
+    onUserDepartmentRemoved(e) {
+        if (!this.selectedIdWebuser) {
+            const department = this.departmentField.data.fireSafetyDepartments.findIndex(item => {
+                return item.idFireSafetyDepartment === e.key.idFireSafetyDepartment;
+            });
+
+            if (department > -1) {
+                this.departmentField.data.fireSafetyDepartments.splice(department, 1);
+            }
         }
 
         this.departmentField.setValue(this.departmentField.data.fireSafetyDepartments);

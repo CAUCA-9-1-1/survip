@@ -78,9 +78,9 @@
                 [rowAlternationEnabled]="true"
                 (onInitialized)="setDepartmentField(field)"
                 (onInitNewRow)="onNewUserDepartment($event)"
-                (onRowInserted)="onUserDepartmentChanged($event)"
-                (onRowUpdated)="onUserDepartmentChanged($event)"
-                (onRowRemoved)="onUserDepartmentChanged($event)">
+                (onRowInserted)="onUserDepartmentInserted($event)"
+                (onRowUpdated)="onUserDepartmentUpdated($event)"
+                (onRowRemoved)="onUserDepartmentRemoved($event)">
             <dxi-column dataField="idFireSafetyDepartment" caption="{{'fireSafetyDepartment' | translate}}">
                 <dxo-lookup [dataSource]="departments" [displayExpr]="getDepartmentName" valueExpr="id">
                 </dxo-lookup>
