@@ -81,7 +81,10 @@
                 (onRowInserted)="onUserDepartmentInserted($event)"
                 (onRowUpdated)="onUserDepartmentUpdated($event)"
                 (onRowRemoved)="onUserDepartmentRemoved($event)">
-            <dxi-column dataField="idFireSafetyDepartment" caption="{{'fireSafetyDepartment' | translate}}">
+            <dxi-column
+                    dataField="idFireSafetyDepartment"
+                    [validationRules]="[{ type: 'required' }]"
+                    caption="{{'fireSafetyDepartment' | translate}}">
                 <dxo-lookup [dataSource]="departments" [displayExpr]="getDepartmentName" valueExpr="id">
                 </dxo-lookup>
             </dxi-column>
