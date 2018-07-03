@@ -66,46 +66,20 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         this.loadDepartments();
     }
 
-    getFirstname(e) {
-        let name = '';
-
-        if (e.attributes) {
-            e.attributes.forEach(attribute => {
-                if (attribute.attributeName === 'first_name') {
-                    name = attribute.attributeValue;
-                }
-            });
-        }
-
-        return name;
+    getFirstname = (e) => {
+        return this.getAttribute('first_name', e);
     }
 
-    getLastname(e) {
-        let name = '';
-
-        if (e.attributes) {
-            e.attributes.forEach(attribute => {
-                if (attribute.attributeName === 'last_name') {
-                    name = attribute.attributeValue;
-                }
-            });
-        }
-
-        return name;
+    getLastname = (e) => {
+        return this.getAttribute('last_name', e);
     }
 
-    getAttribute(field, e) {
-        let name = '';
+    getEmail = (e) => {
+        return this.getAttribute('email', e);
+    }
 
-        if (e.attributes) {
-            e.attributes.forEach(attribute => {
-                if (attribute.attributeName === field) {
-                    name = attribute.attributeValue;
-                }
-            });
-        }
-
-        return name;
+    getTelephone = (e) => {
+        return this.getAttribute('telephone', e);
     }
 
     getDepartmentName(data) {
@@ -152,14 +126,12 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
         for (const attr in e.data) {
             if (e.data[attr] && fieldUser.indexOf(attr) === -1) {
-                const selectAttr = e.key.attributes.filter(item => {
-                    if (item.attribute_name === attr) {
-                        return item;
-                    }
+                const selectAttr = e.key.attributes.findIndex(item => {
+                    return item.attributeName === attr;
                 });
 
-                if (selectAttr.length) {
-                    console.log(selectAttr);
+                if (selectAttr > -1) {
+                    e.key.attributes[selectAttr].attributeValue = e.data[attr];
                 } else {
                     e.key.attributes.push({
                         attributeName: attr,
@@ -169,7 +141,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
                 }
             }
         }
-console.log(e.key);
+
         super.onRowUpdated(e);
     }
 
@@ -188,6 +160,20 @@ console.log(e.key);
 
     onUserDepartmentChanged(e) {
         this.departmentField.setValue(this.departmentField.data.fireSafetyDepartments);
+    }
+
+    private getAttribute(field, e) {
+        let name = '';
+
+        if (e.attributes) {
+            e.attributes.forEach(attribute => {
+                if (attribute.attributeName === field) {
+                    name = attribute.attributeValue;
+                }
+            });
+        }
+
+        return name;
     }
 
     private loadDepartments() {
