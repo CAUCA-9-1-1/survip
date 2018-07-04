@@ -5,6 +5,7 @@ import 'rxjs/add/observable/of';
 
 import {TestModule} from '../../test.module.spec';
 import {LoginComponent} from './login.component';
+import {AuthenticationService} from '../shared/services/authentification.service';
 
 
 describe('LoginComponent', () => {
@@ -20,7 +21,7 @@ describe('LoginComponent', () => {
                 useValue: {
                     snapshot: { queryParams: Observable.of({}) }
                 }
-            }]
+            }, AuthenticationService]
         })
         .compileComponents();
     }));

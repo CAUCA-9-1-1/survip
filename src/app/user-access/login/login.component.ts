@@ -10,7 +10,7 @@ import {AuthenticationService} from '../shared/services/authentification.service
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    providers: [AuthenticationService],
+    providers: [],
 })
 export class LoginComponent implements OnInit {
     username = '';

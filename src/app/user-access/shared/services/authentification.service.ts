@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, BehaviorSubject} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 import {environment} from '../../../../environments/environment';
 
@@ -26,7 +26,8 @@ export class AuthenticationService {
             username: username,
             password: password,
         }).pipe(
-            map(response => this.onResponse(response))
+            tap(() => this.isLogged.next(true)),
+            map(response => this.onResponse(response)),
         );
     }
 
@@ -49,8 +50,6 @@ export class AuthenticationService {
         if (response.data.accessToken) {
             localStorage.setItem('currentToken', response.data.accessToken);
             localStorage.setItem('currentWebuser', response.data.idWebuser);
-
-            this.isLogged.next(true);
         }
 
         return response.data;

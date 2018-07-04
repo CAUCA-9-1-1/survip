@@ -23,7 +23,7 @@ export class AppComponent {
     @ViewChild('menuContainer') menuContainer: ElementRef;
 
     title = 'app';
-    isLogged = (localStorage.getItem('currentToken') ? true : false);
+    isLogged = false;
 
     constructor(
         private ngxLanguage: TranslateService,
@@ -33,7 +33,6 @@ export class AppComponent {
         environment.locale.use = localStorage.getItem('locale') || environment.locale.use;
 
         this.auth.isLogged.subscribe(logged => {
-console.log('app : ' + logged);
             this.isLogged = logged;
         }, error => {
             this.isLogged = false;
