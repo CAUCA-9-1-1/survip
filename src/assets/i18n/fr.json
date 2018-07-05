@@ -207,6 +207,8 @@
   "owner": "Propriétaire",
   "picture": "Photo",
   "approve": "Approuver",
+  "generateReport": "Générer le rapport",
+  "generate": "Générer",
   "refuse": "Décliner / Refus",
   "utilisationDescription": "Description de l'utilisation",
   "details": "Détails",

@@ -202,6 +202,8 @@
   "owner": "Owner",
   "picture": "Picture",
   "approve": "Approve",
+  "generateReport": "Generate Report",
+  "generate": "Generate",
   "refuse": "Reject",
   "utilisationDescription": "Utilisation description",
   "details": "Details",

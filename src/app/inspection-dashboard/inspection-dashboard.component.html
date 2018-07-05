@@ -27,6 +27,9 @@
     <div *dxTemplate="let field of 'approveInspection'">
         <button mat-button [fxShow]="selectedMode == 'mode2'" color="primary" (click)="showInspection(field)">{{'approve' | translate}}</button>
     </div>
+    <div *dxTemplate="let field of 'generateReport'">
+        <button mat-button [fxShow]="selectedMode == 'mode3'" color="primary" (click)="generateReport(field)">{{'generate' | translate}}</button>
+    </div>
     <div *dxTemplate="let field of 'groupBatch'" fxLayout="row" fxLayoutAlign="left center">
         <div fxFlex="">
             <button mat-button [fxShow]="selectedMode == 'mode1'" color="primary" (click)="showBatch(field)">{{'see' | translate}}</button>
