@@ -1,3 +1,8 @@
-<p>
-  report-configuration works!
-</p>
+<app-text-editor
+  [(documentContent)]="documentContent"
+  (loadDataEvent)="fetchTemplate()"
+  (saveDataEvent)="saveTemplate()">
+</app-text-editor>
+
+
+

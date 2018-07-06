@@ -21,6 +21,7 @@
   "buildingParticularRisks": "Risques particulier du bâtiment",
   "buildingAnomalies": "Anomalies du bâtiment",
   "inspectionManagement": "Niveau de risque par SSI",
+  "reportConfiguration": "Configuration des rapports",
   "cancel": "Annuler",
   "create": "Créer",
   "left": "Gauche",

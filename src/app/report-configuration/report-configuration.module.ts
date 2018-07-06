@@ -1,13 +1,16 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
 import {ReportConfigurationComponent} from './report-configuration.component';
+import {TextEditorModule} from 'report-configuration';
 
 @NgModule({
   imports: [
-    CommonModule
+    BrowserModule,
+    TextEditorModule
   ],
   declarations: [
-    ReportConfigurationComponent,
+    ReportConfigurationComponent
   ]
 })
 export class ReportConfigurationModule { }
