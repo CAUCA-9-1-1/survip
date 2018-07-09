@@ -1,8 +1,3 @@
-interface String {
-    toSnakeCase(): string;
-    pick(min: number, max?: number): string;
-    shuffle(): string;
-}
 
 String.prototype.toSnakeCase = function() {
     return this.replace(

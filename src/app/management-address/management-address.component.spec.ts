@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TestModule} from '../test.module';
+import {TestModule} from '../test.module.spec';
 import {ManagementAddressComponent} from './management-address.component';
 import {CountryComponent} from './country/country.component';
 import {CountryService} from './shared/services/country.service';

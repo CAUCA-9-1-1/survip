@@ -3,7 +3,7 @@ import {BaseModel} from '../../../shared/models/base.model';
 
 export class BuildingContact extends BaseModel {
     idBuilding = '';
-    firstName: '';
+    firstName = '';
     lastName = '';
     isOwner = false;
     callPriority = 0;

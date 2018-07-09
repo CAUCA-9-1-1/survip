@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {RequestService} from './request.service';
 import {Picture} from '../models/picture.model';
+import 'rxjs/add/operator/catch';
 
 
 @Injectable()
@@ -19,7 +20,7 @@ export class PictureService extends RequestService {
     }
 
     save(picture: Picture) {
-        return this.http.put(
+        return this.http.put<string>(
             this.apiUrl + 'Picture',
             JSON.stringify(picture),
             {

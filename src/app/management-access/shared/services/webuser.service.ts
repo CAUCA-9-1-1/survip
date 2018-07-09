@@ -1,9 +1,9 @@
-import { Injectable, Injector } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import 'rxjs/add/operator/catch';
+import {Injectable, Injector} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
-import { Webuser } from '../models/webuser.model';
-import { RequestService } from '../../../shared/services/request.service';
+import {Webuser} from '../models/webuser.model';
+import {RequestService} from '../../../shared/services/request.service';
+import {WebuserForWeb} from '../models/webuser-for-web.model';
 
 
 @Injectable()
@@ -20,7 +20,7 @@ export class WebuserService extends RequestService {
     }
 
     getActive() {
-        return this.http.get<Webuser[]>(this.apiUrl + 'Webuser/Active', {
+        return this.http.get<WebuserForWeb[]>(this.apiUrl + 'Webuser/Active', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }

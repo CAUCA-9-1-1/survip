@@ -68,11 +68,11 @@ export class SlideshowComponent implements OnInit {
 
     restart() {
         if (this.timer) {
-            clearInterval(this.timer);
+            window.clearInterval(this.timer);
         }
 
         if (this.images && this.images.length) {
-            this.timer = setInterval(() => this.changed('next'), 5000);
+            this.timer = window.setInterval(() => this.changed('next'), 5000);
         }
     }
 

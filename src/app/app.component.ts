@@ -23,7 +23,7 @@ export class AppComponent {
     @ViewChild('menuContainer') menuContainer: ElementRef;
 
     title = 'app';
-    isLogged = (localStorage.getItem('currentToken') ? true : false);
+    isLogged = false;
 
     constructor(
         private ngxLanguage: TranslateService,

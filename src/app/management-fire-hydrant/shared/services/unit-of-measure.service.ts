@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import 'rxjs/add/operator/catch';
+
 
 import {UnitOfMeasure} from '../models/unit-of-measure.model';
 import {RequestService} from '../../../shared/services/request.service';
@@ -36,25 +36,25 @@ export class UnitOfMeasureService extends RequestService {
     }
 
     getCapacity() {
-        return this.http.get(this.apiUrl + 'UnitOfMeasure/capacity', {
+        return this.http.get<UnitOfMeasure[]>(this.apiUrl + 'UnitOfMeasure/capacity', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
     getDimension() {
-        return this.http.get(this.apiUrl + 'UnitOfMeasure/dimension', {
+        return this.http.get<UnitOfMeasure[]>(this.apiUrl + 'UnitOfMeasure/dimension', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
     getPressure() {
-        return this.http.get(this.apiUrl + 'UnitOfMeasure/pressure', {
+        return this.http.get<UnitOfMeasure[]>(this.apiUrl + 'UnitOfMeasure/pressure', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
     getRate() {
-        return this.http.get(this.apiUrl + 'UnitOfMeasure/rate', {
+        return this.http.get<UnitOfMeasure[]>(this.apiUrl + 'UnitOfMeasure/rate', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }

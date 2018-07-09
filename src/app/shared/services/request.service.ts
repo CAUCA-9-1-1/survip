@@ -1,9 +1,9 @@
-import { Injector } from '@angular/core';
-import { Router } from '@angular/router';
+import {Inject, Injector} from '@angular/core';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {throwError as observableThrowError} from 'rxjs';
 
-import { environment } from '../../../environments/environment';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {environment} from '../../../environments/environment';
 
 
 export class RequestService {
@@ -11,8 +11,8 @@ export class RequestService {
     protected headers: any;
     protected apiUrl: string;
 
-    constructor(injector: Injector) {
-        this.router = injector.get(Router);
+    constructor(@Inject(Injector) injector: Injector) {
+        this.router = injector ? injector.get(Router) : null;
 
         this.headers = {
             'Authorization': 'Bearer ' + localStorage.getItem('currentToken'),
@@ -38,6 +38,6 @@ export class RequestService {
                 break;
         }
 
-        return Observable.throw(error.statusText);
+        return observableThrowError(error.statusText);
     }
 }

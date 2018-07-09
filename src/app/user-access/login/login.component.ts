@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
-import { AuthenticationService } from '../shared/services/authentification.service';
-import { MatSnackBar } from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
+
+import {AuthenticationService} from '../shared/services/authentification.service';
 
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
+    providers: [],
 })
 export class LoginComponent implements OnInit {
     username = '';
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
         this.translateService.get([
-            'badLogin', 'errorDuringLoggin'
+            'badLogin', 'errorDuringLogin'
         ]).subscribe(labels => {
             this.labels = labels;
         });
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
                 this.notify(this.labels['badLogin']);
             }
         }, error => {
-            this.notify(this.labels['errorDuringLoggin']);
+            this.notify(this.labels['errorDuringLogin']);
         });
 
         return false;

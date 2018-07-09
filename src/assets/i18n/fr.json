@@ -260,7 +260,7 @@
   "wantToDeleteBatch": "Êtes-vous certain de vouloir supprimer ce lot?",
   "logout": "Déconnecter",
   "badLogin": "Mauvais nom d'utilisateur ou mot de passe",
-  "errorDuringLoggin": "Une erreur est survenue durant la connexion",
+  "errorDuringLogin": "Une erreur est survenue durant la connexion",
   "childBuildings": "Bâtiments enfant",
   "save": "Sauvegarder",
   "youNeedToSaveYourNewItem": "Vous devez sauvegarder votre nouvel élément avant de continuer",

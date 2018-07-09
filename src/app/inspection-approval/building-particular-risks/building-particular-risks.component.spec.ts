@@ -1,25 +1,30 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BuildingParticularRisksComponent } from './building-particular-risks.component';
+import {TestModule} from '../../test.module.spec';
+import {BuildingParticularRisksComponent} from './building-particular-risks.component';
+
 
 describe('BuildingParticularRisksComponent', () => {
-  let component: BuildingParticularRisksComponent;
-  let fixture: ComponentFixture<BuildingParticularRisksComponent>;
+    let component: BuildingParticularRisksComponent;
+    let fixture: ComponentFixture<BuildingParticularRisksComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BuildingParticularRisksComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                TestModule,
+            ],
+            declarations: [BuildingParticularRisksComponent]
+        })
+        .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BuildingParticularRisksComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(BuildingParticularRisksComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

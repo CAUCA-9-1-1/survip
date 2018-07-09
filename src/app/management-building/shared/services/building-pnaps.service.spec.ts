@@ -1,15 +1,18 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { BuildingPnapsService } from './building-pnaps.service';
+import {TestModule} from '../../../test.module.spec';
+import {BuildingPnapsService} from './building-pnaps.service';
+
 
 describe('InspectionBuildingPnapsService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [BuildingPnapsService]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule],
+            providers: [BuildingPnapsService]
+        });
     });
-  });
 
-  it('should be created', inject([BuildingPnapsService], (service: BuildingPnapsService) => {
-    expect(service).toBeTruthy();
-  }));
+    it('should be created', inject([BuildingPnapsService], (service: BuildingPnapsService) => {
+        expect(service).toBeTruthy();
+    }));
 });

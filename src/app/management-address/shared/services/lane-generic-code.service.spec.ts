@@ -1,15 +1,18 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { LaneGenericCodeService } from './lane-generic-code.service';
+import {TestModule} from '../../../test.module.spec';
+import {LaneGenericCodeService} from './lane-generic-code.service';
+
 
 describe('LaneGenericCodeService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [LaneGenericCodeService]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule],
+            providers: [LaneGenericCodeService]
+        });
     });
-  });
 
-  it('should be created', inject([LaneGenericCodeService], (service: LaneGenericCodeService) => {
-    expect(service).toBeTruthy();
-  }));
+    it('should be created', inject([LaneGenericCodeService], (service: LaneGenericCodeService) => {
+        expect(service).toBeTruthy();
+    }));
 });

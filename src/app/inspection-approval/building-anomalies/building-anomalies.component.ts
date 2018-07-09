@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {InspectionBuildingAnomalyService} from '../shared/services/inspection-building-anomaly.service';
+import {BuildingAnomaly} from '../../management-building/shared/models/building-anomaly.model';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class BuildingAnomaliesComponent implements OnInit {
 
     private idBuilding: string;
 
-    anomalies: any = [];
+    anomalies: BuildingAnomaly[] = [];
 
     constructor(
         private anomalyService: InspectionBuildingAnomalyService,

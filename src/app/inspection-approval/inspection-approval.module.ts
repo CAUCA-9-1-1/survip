@@ -36,7 +36,7 @@ import {BuildingListComponent} from './building-list/building-list.component';
         InspectionGeneralInfoComponent,
         InspectionImplantationPlanComponent,
         InspectionCourseComponent,
-        BuildingListComponent
+        BuildingListComponent,
     ],
     imports: [
         SharedModule,
