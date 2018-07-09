@@ -32,6 +32,10 @@
         <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
+    <dxi-column dataField="idCity" caption="{{'city' | translate}}">
+        <dxo-lookup [dataSource]="cities" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
     <dxi-column dataField="suite" caption="{{'suite' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="appartmentNumber" caption="{{'appartmentNumber' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="floor" caption="{{'floor' | translate}}" [visible]="false"></dxi-column>
@@ -82,6 +86,7 @@
                     </dxi-item>
                 </dxi-tab>
                 <dxi-tab title="{{'address' | translate}}" colCount="2">
+                    <dxi-item dataField="idCity" [isRequired]="true"></dxi-item>
                     <dxi-item dataField="idLane" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
                     <dxi-item dataField="civicNumber" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
                     <dxi-item dataField="civicLetter" [editorOptions]="{'readOnly': !isParent}"></dxi-item>

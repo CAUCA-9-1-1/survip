@@ -9,6 +9,7 @@ import {UtilisationCodeService} from '../shared/services/utilisation-code.servic
 import {RiskLevelService} from '../shared/services/risk-level.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {TranslateService} from '@ngx-translate/core';
+import {CityService} from '../../management-address/shared/services/city.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ import {TranslateService} from '@ngx-translate/core';
     providers: [
         BuildingService,
         LaneService,
+        CityService,
         UtilisationCodeService,
         RiskLevelService,
     ]
@@ -32,7 +34,9 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     }
 
     labels: any = {};
+    cities: any = {};
     lanes: any = {};
+    lanesOfCity: any = {};
     utilisationCodes: any = {};
     riskLevels: any = {};
     selectedBuidling: string;
@@ -49,6 +53,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     constructor(
         buildingService: BuildingService,
         private laneService: LaneService,
+        private cityService: CityService,
         private utilisationCode: UtilisationCodeService,
         private riskLevelService: RiskLevelService,
         private translateServive: TranslateService,
@@ -83,6 +88,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     }
 
     ngOnInit() {
+        this.loadCity();
         this.loadLane();
         this.loadUtilisationCode();
         this.loadRiskLevel();
@@ -95,7 +101,19 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     }
 
     onEditorPreparing(e) {
-        if (e.dataField === 'idLane' || e.dataField === 'idUtilisationCode') {
+        if (e.dataField === 'idCity') {
+            e.editorName = 'dxSelectBox';
+            e.editorOptions.onValueChanged = (ev) => {
+                e.setValue(ev.value);
+
+                this.loadLaneByCity(ev.value);
+            };
+        } else if (e.dataField === 'idLane') {
+            e.editorName = 'dxLookup';
+            e.editorOptions.onOpened = (ev) => {
+                ev.component.option('dataSource', this.lanesOfCity);
+            };
+        } else if (e.dataField === 'idUtilisationCode') {
             e.editorName = 'dxLookup';
         }
     }
@@ -123,6 +141,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
 
     onEditingStart(e) {
         this.selectedBuidling = e.data;
+        this.loadLaneByCity(e.data.idCity);
     }
 
     showPopup(popupName: string) {
@@ -145,6 +164,16 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         });
     }
 
+    private loadCity() {
+        this.cityService.localized().subscribe(data => {
+            this.cities = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
+    }
+
     private loadUtilisationCode() {
         this.utilisationCode.localized().subscribe(data => {
             this.utilisationCodes = {
@@ -158,6 +187,16 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     private loadRiskLevel() {
         this.riskLevelService.localized().subscribe(data => {
             this.riskLevels = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
+    }
+
+    private loadLaneByCity(idCity: string) {
+        this.laneService.getAllOfCity(idCity).subscribe(data => {
+            this.lanesOfCity = {
                 store: data,
                 select: ['id', 'name'],
                 sort: ['name'],
