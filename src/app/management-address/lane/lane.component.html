@@ -21,7 +21,7 @@
             caption="{{'city' | translate}}"
             sortOrder="asc"
             sortIndex="0">
-        <dxo-lookup [dataSource]="cities" [displayExpr]="getCityName" valueExpr="id">
+        <dxo-lookup [dataSource]="cities" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="idPublicCode" caption="{{'publicLaneCode' | translate}}" [visible]="false">

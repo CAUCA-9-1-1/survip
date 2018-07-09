@@ -34,7 +34,7 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
     fireHydrantTypes: FireHydrantType[] = [];
-    cities: City[] = [];
+    cities: any = {};
     lanes: any = {};
     lanesOfCity: any = {};
     operatorTypes: OperatorType[] = [];
@@ -133,12 +133,6 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
         return type.getLocalization(environment.locale.use);
     }
 
-    getCityName(data) {
-        const city = City.fromJSON(data);
-
-        return city.getLocalization(environment.locale.use);
-    }
-
     getUnitOfMeasureName(data) {
         const unit = UnitOfMeasure.fromJSON(data);
 
@@ -164,7 +158,13 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     }
 
     private loadCity() {
-        this.cityService.getAll().subscribe(data => this.cities = data);
+        this.cityService.localized().subscribe(data => {
+            this.cities = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 
     private loadLane() {

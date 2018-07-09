@@ -25,7 +25,7 @@ import DataSource from 'devextreme/data/data_source';
     ]
 })
 export class LaneComponent extends GridWithCrudService implements OnInit {
-    cities: City[] = [];
+    cities: any = {};
     publicCodes: any = {};
     genericCodes: any = {};
 
@@ -55,18 +55,18 @@ export class LaneComponent extends GridWithCrudService implements OnInit {
         return lane.getLocalization(environment.locale.use);
     }
 
-    getCityName(data) {
-        const city = City.fromJSON(data);
-
-        return city.getLocalization(environment.locale.use);
-    }
-
     onInitNewRow(e) {
         e.data.isActive = true;
     }
 
     private loadCity() {
-        this.cityService.getAll().subscribe(data => this.cities = data);
+        this.cityService.localized().subscribe(data => {
+            this.cities = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 
     private loadPublicCode() {

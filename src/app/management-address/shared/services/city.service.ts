@@ -4,6 +4,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {City} from '../models/city.model';
 import {RequestService} from '../../../shared/services/request.service';
+import {Lane} from '../models/lane.model';
 
 @Injectable()
 export class CityService extends RequestService {
@@ -14,6 +15,12 @@ export class CityService extends RequestService {
 
     getAll() {
         return this.http.get<City[]>(this.apiUrl + 'City', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    localized() {
+        return this.http.get<City[]>(this.apiUrl + 'City/localized', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
