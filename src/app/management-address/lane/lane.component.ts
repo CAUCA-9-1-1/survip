@@ -10,6 +10,7 @@ import {LaneGenericCode} from '../shared/models/lane-generic-code.model';
 import {LanePublicCode} from '../shared/models/lane-public-code.model';
 import {LaneGenericCodeService} from '../shared/services/lane-generic-code.service';
 import {LanePublicCodeService} from '../shared/services/lane-public-code.service';
+import DataSource from 'devextreme/data/data_source';
 
 
 @Component({
@@ -25,8 +26,8 @@ import {LanePublicCodeService} from '../shared/services/lane-public-code.service
 })
 export class LaneComponent extends GridWithCrudService implements OnInit {
     cities: City[] = [];
-    publicCodes: LanePublicCode[] = [];
-    genericCodes: LaneGenericCode[] = [];
+    publicCodes: any = {};
+    genericCodes: any = {};
 
     constructor(
         laneService: LaneService,
@@ -69,10 +70,22 @@ export class LaneComponent extends GridWithCrudService implements OnInit {
     }
 
     private loadPublicCode() {
-        this.publicCode.getAll().subscribe(data => this.publicCodes = data);
+        this.publicCode.getAll().subscribe(data => {
+            this.publicCodes = {
+                store: data,
+                select: ['id', 'description'],
+                sort: ['description'],
+            };
+        });
     }
 
     private loadGenericCode() {
-        this.genericCode.getAll().subscribe(data => this.genericCodes = data);
+        this.genericCode.getAll().subscribe(data => {
+            this.genericCodes = {
+                store: data,
+                select: ['id', 'description'],
+                sort: ['description'],
+            };
+        });
     }
 }
