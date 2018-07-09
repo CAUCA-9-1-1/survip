@@ -21,8 +21,8 @@ import {RegionService} from '../shared/services/region.service';
     ]
     })
 export class CountyComponent extends GridWithCrudService implements OnInit {
-    states: State[] = [];
-    regions: Region[] = [];
+    states: any = {};
+    regions: any = {};
 
     constructor(
         countyService: CountyService,
@@ -48,27 +48,27 @@ export class CountyComponent extends GridWithCrudService implements OnInit {
         return county.getLocalization(environment.locale.use);
     }
 
-    getRegionName(data) {
-        const region = Region.fromJSON(data);
-
-        return region.getLocalization(environment.locale.use);
-    }
-
-    getStateName(data) {
-        const state = State.fromJSON(data);
-
-        return state.getLocalization(environment.locale.use);
-    }
-
     onInitNewRow(e) {
         e.data.isActive = true;
     }
 
     private loadState() {
-        this.stateService.getAll().subscribe(data => this.states = data);
+        this.stateService.localized().subscribe(data => {
+            this.states = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 
     private loadRegion() {
-        this.regionService.getAll().subscribe(data => this.regions = data);
+        this.regionService.localized().subscribe(data => {
+            this.regions = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 }

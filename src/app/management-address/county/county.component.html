@@ -21,13 +21,13 @@
             caption="{{'state' | translate}}"
             sortOrder="asc"
             sortIndex="0">
-        <dxo-lookup [dataSource]="states" [displayExpr]="getStateName" valueExpr="id">
+        <dxo-lookup [dataSource]="states" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column
             dataField="idRegion"
             caption="{{'region' | translate}}">
-        <dxo-lookup [dataSource]="regions" [displayExpr]="getRegionName" valueExpr="id">
+        <dxo-lookup [dataSource]="regions" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
