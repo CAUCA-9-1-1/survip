@@ -35,9 +35,9 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     }
 
     labels: any = {};
-    lanes: Lane[] = [];
-    utilisationCodes: UtilisationCode[] = [];
-    riskLevels: RiskLevel[] = [];
+    lanes: any = {};
+    utilisationCodes: any = {};
+    riskLevels: any = {};
     selectedBuidling: string;
     parent: Building;
     isParent = true;
@@ -97,6 +97,12 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         return building.getLocalization(environment.locale.use);
     }
 
+    onEditorPreparing(e) {
+        if (e.dataField === 'idLane' || e.dataField === 'idUtilisationCode') {
+            e.editorName = 'dxLookup';
+        }
+    }
+
     onInitNewRow(e) {
         const building = new Building();
 
@@ -133,14 +139,32 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     }
 
     private loadLane() {
-        this.laneService.localized().subscribe(data => this.lanes = data);
+        this.laneService.localized().subscribe(data => {
+            this.lanes = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 
     private loadUtilisationCode() {
-        this.utilisationCode.localized().subscribe(data => this.utilisationCodes = data);
+        this.utilisationCode.localized().subscribe(data => {
+            this.utilisationCodes = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 
     private loadRiskLevel() {
-        this.riskLevelService.localized().subscribe(data => this.riskLevels = data);
+        this.riskLevelService.localized().subscribe(data => {
+            this.riskLevels = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 }
