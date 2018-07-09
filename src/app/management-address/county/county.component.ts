@@ -4,9 +4,7 @@ import {environment} from '../../../environments/environment';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {County} from '../shared/models/county.model';
 import {CountyService} from '../shared/services/county.service';
-import {State} from '../shared/models/state.model';
 import {StateService} from '../shared/services/state.service';
-import {Region} from '../shared/models/region.model';
 import {RegionService} from '../shared/services/region.service';
 
 

@@ -5,7 +5,6 @@ import {environment} from '../../../environments/environment';
 import {FireHydrantService} from '../shared/services/fire-hydrant.service';
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.service';
-import {Lane} from '../../management-address/shared/models/lane.model';
 import {LaneService} from '../../management-address/shared/services/lane.service';
 import {OperatorType} from '../shared/models/operator-type.model';
 import {OperatorTypeService} from '../shared/services/operator-type.service';
@@ -13,7 +12,6 @@ import {UnitOfMeasure} from '../shared/models/unit-of-measure.model';
 import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {CityService} from '../../management-address/shared/services/city.service';
-import {City} from '../../management-address/shared/models/city.model';
 import {FireHydrant} from '../shared/models/fire-hydrant.model';
 
 

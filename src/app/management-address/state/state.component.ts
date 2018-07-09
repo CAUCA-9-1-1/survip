@@ -4,9 +4,7 @@ import {environment} from '../../../environments/environment';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {State} from '../shared/models/state.model';
 import {StateService} from '../shared/services/state.service';
-import {Country} from '../shared/models/country.model';
 import {CountryService} from '../shared/services/country.service';
-
 
 
 @Component({
@@ -19,7 +17,7 @@ import {CountryService} from '../shared/services/country.service';
     ]
 })
 export class StateComponent extends GridWithCrudService implements OnInit {
-    countries: Country[] = [];
+    countries: any = {};
 
     constructor(
         stateService: StateService,
@@ -43,17 +41,17 @@ export class StateComponent extends GridWithCrudService implements OnInit {
         return state.getLocalization(environment.locale.use);
     }
 
-    getCountryName(data) {
-        const country = Country.fromJSON(data);
-
-        return country.getLocalization(environment.locale.use);
-    }
-
     onInitNewRow(e) {
         e.data.isActive = true;
     }
 
     private loadCountry() {
-        this.countryService.getAll().subscribe(data => this.countries = data);
+        this.countryService.getAll().subscribe(data => {
+            this.countries = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 }
