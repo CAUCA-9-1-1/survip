@@ -72,11 +72,11 @@
             [allowDeleting]="true">
         <dxo-popup title="{{'building' | translate}}" [showTitle]="true"></dxo-popup>
 
-        <dxo-form colCount="1">
+        <dxo-form colCount="1" [showValidationSummary]="true">
             <dxi-item itemType="tabbed" [tabPanelOptions]="{ deferRendering: false }">
                 <dxi-tab title="{{'general' | translate}}" colCount="2">
                     <dxi-item itemType="group" colCount="2">
-                        <dxi-item dataField="localizations" colSpan="2"></dxi-item>
+                        <dxi-item dataField="localizations" [isRequired]="true" colSpan="2"></dxi-item>
                         <dxi-item dataField="matricule" colSpan="2"></dxi-item>
                         <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
                         <dxi-item dataField="vacantLand" editorType="dxCheckBox"></dxi-item>
@@ -113,21 +113,24 @@
 
     <div *dxTemplate="let field of 'listButton'">
         <dx-button text="{{'childBuildings' | translate}}" (onClick)="showPopup('childBuildings')" [disabled]="parent"></dx-button>
+        &nbsp;
         <dx-button text="{{'contacts' | translate}}" (onClick)="showPopup('contacts')"></dx-button>
+        &nbsp;
         <dx-button text="{{'pnap' | translate}}" (onClick)="showPopup('pnap')"></dx-button>
+        &nbsp;
         <dx-button text="{{'hazardousMaterials' | translate}}" (onClick)="showPopup('hazardousMaterials')"></dx-button>
     </div>
     <div *dxTemplate="let field of 'editname'">
         <app-multilang
                 [validationGroup]="validationGroup"
-                [isRequired]="true"
+                [dataField]="field"
                 [value]="field.row.data.localizations"
                 (valueChanged)="field.setValue($event.value);">
         </app-multilang>
     </div>
     <div *dxTemplate="let field of 'editphoto'">
         <span class="dx-field-item-label-text">{{'picture' | translate}}:</span>
-        <app-image [idImage]="field.row.data.idPicture" height="400px" [allowChange]="true" (valueChanged)="field.setValue($event)"></app-image>
+        <app-image [idImage]="field.row.data.idPicture" height="350px" [allowChange]="true" (valueChanged)="field.setValue($event)"></app-image>
     </div>
 </dx-data-grid>
 <dx-popup

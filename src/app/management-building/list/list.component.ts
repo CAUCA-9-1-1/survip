@@ -27,7 +27,6 @@ import {CityService} from '../../management-address/shared/services/city.service
 export class ListComponent extends GridWithCrudService implements OnInit {
     @Input()
     set parentBuilding(building: Building) {
-        console.log('parent', building);
         this.parent = building;
         this.isParent = (building ? false : true);
         this.loadSource(this.parent ? this.parent.id : undefined);
