@@ -46,7 +46,7 @@ export class StateComponent extends GridWithCrudService implements OnInit {
     }
 
     private loadCountry() {
-        this.countryService.getAll().subscribe(data => {
+        this.countryService.localized().subscribe(data => {
             this.countries = {
                 store: data,
                 select: ['id', 'name'],
