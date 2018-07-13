@@ -15,22 +15,20 @@ export class ReportConfigurationService extends RequestService {
   }
 
   getTemplateList() {
-    return this.http.get<ConfigurationTemplate[]>(this.apiUrl + 'ReportConfiguration/List/', {
+    return this.http.get<ConfigurationTemplate[]>(this.apiUrl + 'ReportConfigurationTemplate/', {
       headers: this.headers
     }).catch((error: HttpErrorResponse) => this.error(error));
   }
 
   getTemplate(id: string) {
-    return this.http.get<ConfigurationTemplate[]>(this.apiUrl + 'ReportConfiguration/Template/' + id, {
+    return this.http.get<ConfigurationTemplate>(this.apiUrl + 'ReportConfigurationTemplate/' + id, {
       headers: this.headers
     }).catch((error: HttpErrorResponse) => this.error(error));
   }
 
-  saveTemplate(template: string, id: string) {
-    return this.http.post<ConfigurationTemplate[]>(this.apiUrl + 'ReportConfiguration/Template/' + id,
-      JSON.stringify(
-        templateCSSPreprocessor + template
-      ),
+  saveTemplate(template: ConfigurationTemplate) {
+    return this.http.post(this.apiUrl + 'ReportConfigurationTemplate/',
+      JSON.stringify(template),
       {
       headers: this.headers,
     }).catch((error: HttpErrorResponse) => this.error(error));

@@ -46,6 +46,12 @@ export class ReportConfigurationComponent implements OnInit {
   }
 
   saveTemplate(): void {
-    this.reportConfigurationService.saveTemplate(this.documentContent, this.selectedTemplateId).subscribe();
+    this.templates.forEach((template) => {
+      if (template.id === this.selectedTemplateId) {
+        template.data = this.documentContent;
+        this.reportConfigurationService.saveTemplate(template).subscribe();
+        return;
+      }
+    });
   }
 }
