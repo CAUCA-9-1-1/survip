@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ReportConfigurationService} from './shared/services/report-configuration.service';
 import {ConfigurationTemplate} from './shared/models/configuration-template.model';
 
@@ -16,7 +16,8 @@ export class ReportConfigurationComponent implements OnInit {
   templates: ConfigurationTemplate[];
 
   constructor(
-    private reportConfigurationService: ReportConfigurationService
+    private reportConfigurationService: ReportConfigurationService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -39,6 +40,7 @@ export class ReportConfigurationComponent implements OnInit {
         this.reportConfigurationService.getTemplate(this.selectedTemplateId).subscribe( res => {
           template.data = res.data;
           this.documentContent = res.data;
+          this.changeDetectorRef.detectChanges();
         });
         return;
       }
