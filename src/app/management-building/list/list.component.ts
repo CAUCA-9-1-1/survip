@@ -109,11 +109,13 @@ export class ListComponent extends GridWithCrudService implements OnInit {
             };
         } else if (e.dataField === 'idLane') {
             e.editorName = 'dxLookup';
+            e.editorOptions.closeOnOutsideClick = true;
             e.editorOptions.onOpened = (ev) => {
                 ev.component.option('dataSource', this.lanesOfCity);
             };
         } else if (e.dataField === 'idUtilisationCode') {
             e.editorName = 'dxLookup';
+            e.editorOptions.closeOnOutsideClick = true;
         }
     }
 

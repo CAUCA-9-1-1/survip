@@ -90,6 +90,7 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
     onEditorPreparing(e) {
         if (e.dataField === 'idHazardousMaterial') {
             e.editorName = 'dxLookup';
+            e.editorOptions.closeOnOutsideClick = true;
         } else if (e.dataField === 'securityPerimeter' || e.dataField === 'otherInformation') {
             e.editorName = 'dxTextArea';
         }

@@ -103,6 +103,7 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
                     };
                 } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
                     e.editorName = 'dxLookup';
+                    e.editorOptions.closeOnOutsideClick = true;
                     e.editorOptions.onOpened = (ev) => {
                         ev.component.option('dataSource', this.lanesOfCity);
                     };

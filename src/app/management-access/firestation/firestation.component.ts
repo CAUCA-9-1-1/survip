@@ -23,7 +23,9 @@ import {Firestation} from '../shared/models/firestation.model';
 export class FirestationComponent extends GridWithCrudService implements OnInit {
     departments: FireSafetyDepartment[] = [];
     buildings: Building[] = [];
-    buildingLookup: {};
+    buildingLookup: {
+        closeOnOutsideClick: true,
+    };
 
     constructor(
         firestationService: FirestationService,
@@ -63,6 +65,7 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
                 }
             };
             e.editorOptions.dataSource = this.buildings;
+            e.editorOptions.closeOnOutsideClick = true;
         }
 
     }
