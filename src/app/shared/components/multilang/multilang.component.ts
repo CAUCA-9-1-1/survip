@@ -14,15 +14,15 @@ import {environment} from '../../../../environments/environment';
 export class MultilangComponent implements OnInit {
     @ViewChild(DxTabPanelComponent) tabs: DxTabPanelComponent;
     @Output() valueChanged = new EventEmitter();
-    @Input() value: any = [];
     @Input() validationGroup: string;
     @Input() fieldName = 'name';
     @Input() dataField: any;
-    @Input() isRequired: boolean;
+    @Input() value: any = [];
 
     labels: string[] = [];
     languages: string[] = [];
     selectedTab: string;
+    isRequired: boolean;
 
     constructor(private translate: TranslateService) {
         this.languages = environment.locale.available;
@@ -38,7 +38,15 @@ export class MultilangComponent implements OnInit {
 
     ngOnInit() {
         this.selectedTab = this.languages[0];
+
+        this.initializeValidations();
         this.initializeValueForAllLanguages();
+    }
+
+    private initializeValidations() {
+        if (this.dataField.item) {
+            this.isRequired = this.dataField.item.isRequired;
+        }
     }
 
     private initializeValueForAllLanguages() {

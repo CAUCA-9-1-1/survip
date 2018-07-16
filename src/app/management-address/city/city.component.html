@@ -53,7 +53,7 @@
     <div *dxTemplate="let field of 'editname'">
         <app-multilang
                 [validationGroup]="validationGroup"
-                [isRequired]="true"
+                [dataField]="field"
                 [value]="field.row.data.localizations"
                 (valueChanged)="field.setValue($event.value);">
         </app-multilang>
