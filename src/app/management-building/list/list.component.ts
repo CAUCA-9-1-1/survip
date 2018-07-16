@@ -48,6 +48,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         hazardousMaterials: false,
     };
     toolbarItems = [];
+    formFieldLane: any = null;
 
     constructor(
         buildingService: BuildingService,
@@ -106,10 +107,16 @@ export class ListComponent extends GridWithCrudService implements OnInit {
                 e.setValue(ev.value);
 
                 this.loadLaneByCity(ev.value);
+                if (this.formFieldLane) {
+                    this.formFieldLane.option('value', '');
+                }
             };
         } else if (e.dataField === 'idLane') {
             e.editorName = 'dxLookup';
             e.editorOptions.closeOnOutsideClick = true;
+            e.editorOptions.onInitialized = (ev) => {
+                this.formFieldLane = ev.component;
+            };
             e.editorOptions.onOpened = (ev) => {
                 ev.component.option('dataSource', this.lanesOfCity);
             };

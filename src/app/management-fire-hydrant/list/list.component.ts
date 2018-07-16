@@ -38,6 +38,8 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     operatorTypes: OperatorType[] = [];
     rateUnits: UnitOfMeasure[] = [];
     pressureUnits: UnitOfMeasure[] = [];
+    formFieldidLane: any = null;
+    formFieldidIntersection: any = null;
     colors = [{
         id: '#000000',
         color: '#000000',
@@ -100,10 +102,18 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
                         e.setValue(ev.value);
 
                         this.loadLaneByCity(ev.value);
+                        if (this.formFieldidLane) {
+                            this.formFieldidLane.option('value', '');
+                            this.formFieldidIntersection.option('value', '');
+                        }
                     };
                 } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
                     e.editorName = 'dxLookup';
                     e.editorOptions.closeOnOutsideClick = true;
+                    e.editorOptions.onInitialized = (ev) => {
+                        console.log(e);
+                        this['formField' + e.dataField] = ev.component;
+                    };
                     e.editorOptions.onOpened = (ev) => {
                         ev.component.option('dataSource', this.lanesOfCity);
                     };
