@@ -19,7 +19,7 @@
     <dxi-column
             dataField="idCityType"
             caption="{{'cityType' | translate}}">
-        <dxo-lookup [dataSource]="citiesType" [displayExpr]="getCityTypeName" valueExpr="id">
+        <dxo-lookup [dataSource]="citiesType" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column
@@ -27,7 +27,7 @@
             caption="{{'county' | translate}}"
             sortOrder="asc"
             sortIndex="0">
-        <dxo-lookup [dataSource]="counties" [displayExpr]="getCountyName" valueExpr="id">
+        <dxo-lookup [dataSource]="counties" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="code" caption="{{'code' | translate}}" [visible]="false"></dxi-column>

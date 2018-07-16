@@ -21,7 +21,7 @@
             caption="{{'country' | translate}}"
             sortOrder="asc"
             sortIndex="0">
-        <dxo-lookup [dataSource]="countries" [displayExpr]="getCountryName" valueExpr="id">
+        <dxo-lookup [dataSource]="countries" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="ansiCode" caption="{{'code' | translate}}"></dxi-column>

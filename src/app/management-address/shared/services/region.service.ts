@@ -4,7 +4,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {Region} from '../models/region.model';
 import {RequestService} from '../../../shared/services/request.service';
-import {State} from '../models/state.model';
+
 
 @Injectable()
 export class RegionService extends RequestService {
@@ -13,22 +13,28 @@ export class RegionService extends RequestService {
         super(injector);
     }
 
-    public getAll() {
+    getAll() {
         return this.http.get<Region[]>(this.apiUrl + 'Region', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    public save(state: State) {
+    localized() {
+        return this.http.get<Region[]>(this.apiUrl + 'Region/localized', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    save(region: Region) {
         return this.http.post(
             this.apiUrl + 'Region',
-            JSON.stringify(state), {
+            JSON.stringify(region), {
                 headers: this.headers
             }
         ).catch((error: HttpErrorResponse) => this.error(error));
     }
 
-    public remove(idState: string) {
+    remove(idState: string) {
         return this.http.delete(this.apiUrl + 'Region/' + idState, {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));

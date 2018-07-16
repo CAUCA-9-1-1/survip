@@ -5,7 +5,6 @@ import {environment} from '../../../environments/environment';
 import {FireHydrantService} from '../shared/services/fire-hydrant.service';
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.service';
-import {Lane} from '../../management-address/shared/models/lane.model';
 import {LaneService} from '../../management-address/shared/services/lane.service';
 import {OperatorType} from '../shared/models/operator-type.model';
 import {OperatorTypeService} from '../shared/services/operator-type.service';
@@ -13,7 +12,6 @@ import {UnitOfMeasure} from '../shared/models/unit-of-measure.model';
 import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {CityService} from '../../management-address/shared/services/city.service';
-import {City} from '../../management-address/shared/models/city.model';
 import {FireHydrant} from '../shared/models/fire-hydrant.model';
 
 
@@ -34,9 +32,9 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
     fireHydrantTypes: FireHydrantType[] = [];
-    cities: City[] = [];
-    lanes: Lane[] = [];
-    lanesOfCity: Lane[] = [];
+    cities: any = {};
+    lanes: any = {};
+    lanesOfCity: any = {};
     operatorTypes: OperatorType[] = [];
     rateUnits: UnitOfMeasure[] = [];
     pressureUnits: UnitOfMeasure[] = [];
@@ -97,19 +95,19 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
             },
             onEditorPreparing: (e) => {
                 if (e.dataField === 'idCity') {
-                    e.editorOptions.type = 'dxSelectBox';
+                    e.editorName = 'dxSelectBox';
                     e.editorOptions.onValueChanged = (ev) => {
                         e.setValue(ev.value);
 
                         this.loadLaneByCity(ev.value);
                     };
                 } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
-                    e.editorOptions.type = 'dxSelectBox';
+                    e.editorName = 'dxLookup';
                     e.editorOptions.onOpened = (ev) => {
                         ev.component.option('dataSource', this.lanesOfCity);
                     };
                 } else if (e.dataField === 'color') {
-                    e.editorOptions.type = 'dxSelectBox';
+                    e.editorName = 'dxSelectBox';
                     e.editorOptions.fieldTemplate = (data, container) => {
                         container.innerHTML = '<div class="dx-texteditor-container">' +
                                 '<div class="fireHydrantField">' +
@@ -131,16 +129,6 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
         const type = FireHydrantType.fromJSON(data);
 
         return type.getLocalization(environment.locale.use);
-    }
-
-    getCityName(data) {
-        const city = City.fromJSON(data);
-
-        return city.getLocalization(environment.locale.use);
-    }
-
-    getIntersectionName(data) {
-        return '';
     }
 
     getUnitOfMeasureName(data) {
@@ -168,14 +156,32 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     }
 
     private loadCity() {
-        this.cityService.getAll().subscribe(data => this.cities = data);
+        this.cityService.localized().subscribe(data => {
+            this.cities = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 
     private loadLane() {
-        this.laneService.localized().subscribe(data => this.lanes = data);
+        this.laneService.localized().subscribe(data => {
+            this.lanes = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 
     private loadLaneByCity(idCity: string) {
-        this.laneService.getAllOfCity(idCity).subscribe(data => this.lanesOfCity = data);
+        this.laneService.getAllOfCity(idCity).subscribe(data => {
+            this.lanesOfCity = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 }

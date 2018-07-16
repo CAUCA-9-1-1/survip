@@ -19,6 +19,12 @@ export class CityTypeService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    localized() {
+        return this.http.get<CityType[]>(this.apiUrl + 'CityType/localized', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     save(cityType: CityType) {
         return this.http.post(
             this.apiUrl + 'CityType',

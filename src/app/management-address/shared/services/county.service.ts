@@ -19,6 +19,12 @@ export class CountyService extends RequestService {
         }).catch((error: HttpErrorResponse) => this.error(error));
     }
 
+    localized() {
+        return this.http.get<County[]>(this.apiUrl + 'County/localized', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
     save(county: County) {
         return this.http.post(
             this.apiUrl + 'County',

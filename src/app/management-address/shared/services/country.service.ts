@@ -2,8 +2,8 @@ import {Injectable, Injector} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 
-import { RequestService } from '../../../shared/services/request.service';
-import { Country } from '../models/country.model';
+import {RequestService} from '../../../shared/services/request.service';
+import {Country} from '../models/country.model';
 
 
 @Injectable()
@@ -15,6 +15,12 @@ export class CountryService extends RequestService {
 
     getAll() {
         return this.http.get<Country[]>(this.apiUrl + 'Country', {
+            headers: this.headers
+        }).catch((error: HttpErrorResponse) => this.error(error));
+    }
+
+    localized() {
+        return this.http.get<Country[]>(this.apiUrl + 'Country/localized', {
             headers: this.headers
         }).catch((error: HttpErrorResponse) => this.error(error));
     }

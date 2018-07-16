@@ -4,11 +4,8 @@ import {alert} from 'devextreme/ui/dialog';
 import {environment} from '../../../environments/environment';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
-import {Lane} from '../../management-address/shared/models/lane.model';
 import {LaneService} from '../../management-address/shared/services/lane.service';
-import {UtilisationCode} from '../shared/models/utilisation-code.model';
 import {UtilisationCodeService} from '../shared/services/utilisation-code.service';
-import {RiskLevel} from '../shared/models/risk-level.model';
 import {RiskLevelService} from '../shared/services/risk-level.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {TranslateService} from '@ngx-translate/core';
@@ -35,9 +32,9 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     }
 
     labels: any = {};
-    lanes: Lane[] = [];
-    utilisationCodes: UtilisationCode[] = [];
-    riskLevels: RiskLevel[] = [];
+    lanes: any = {};
+    utilisationCodes: any = {};
+    riskLevels: any = {};
     selectedBuidling: string;
     parent: Building;
     isParent = true;
@@ -97,6 +94,12 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         return building.getLocalization(environment.locale.use);
     }
 
+    onEditorPreparing(e) {
+        if (e.dataField === 'idLane' || e.dataField === 'idUtilisationCode') {
+            e.editorName = 'dxLookup';
+        }
+    }
+
     onInitNewRow(e) {
         const building = new Building();
 
@@ -133,14 +136,32 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     }
 
     private loadLane() {
-        this.laneService.localized().subscribe(data => this.lanes = data);
+        this.laneService.localized().subscribe(data => {
+            this.lanes = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 
     private loadUtilisationCode() {
-        this.utilisationCode.localized().subscribe(data => this.utilisationCodes = data);
+        this.utilisationCode.localized().subscribe(data => {
+            this.utilisationCodes = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 
     private loadRiskLevel() {
-        this.riskLevelService.localized().subscribe(data => this.riskLevels = data);
+        this.riskLevelService.localized().subscribe(data => {
+            this.riskLevels = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 }

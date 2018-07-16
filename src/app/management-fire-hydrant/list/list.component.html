@@ -17,7 +17,7 @@
     <dxi-column
             dataField="idCity"
             caption="{{'city' | translate}}">
-        <dxo-lookup [dataSource]="cities" [displayExpr]="getCityName" valueExpr="id">
+        <dxo-lookup [dataSource]="cities" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column
