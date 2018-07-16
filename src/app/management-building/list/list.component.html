@@ -98,13 +98,13 @@
                     <dxi-item dataField="floor" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
                 </dxi-tab>
                 <dxi-tab title="{{'details' | translate}}" colCount="2">
+                    <dxi-item dataField="idRiskLevel" [isRequired]="true"></dxi-item>
+                    <dxi-item dataField="idUtilisationCode"></dxi-item>
                     <dxi-item dataField="numberOfFloor" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
                     <dxi-item dataField="numberOfAppartment" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
                     <dxi-item dataField="numberOfBuilding" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
                     <dxi-item dataField="yearOfConstruction"></dxi-item>
                     <dxi-item dataField="buildingValue"></dxi-item>
-                    <dxi-item dataField="idUtilisationCode"></dxi-item>
-                    <dxi-item dataField="idRiskLevel"></dxi-item>
                 </dxi-tab>
             </dxi-item>
             <dxi-item template="listButton"></dxi-item>
