@@ -4,6 +4,8 @@
         [rowAlternationEnabled]="true"
         (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
+        (onEditingStart)="onEditingStart($event)"
+        (onEditorPreparing)="onEditorPreparing($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
