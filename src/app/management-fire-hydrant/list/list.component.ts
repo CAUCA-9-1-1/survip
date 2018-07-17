@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 
 import {environment} from '../../../environments/environment';
@@ -28,8 +28,16 @@ import {FireHydrant} from '../shared/models/fire-hydrant.model';
         LaneService,
     ]
 })
-export class ListComponent extends GridWithCrudService implements OnInit, AfterViewInit {
+export class ListComponent extends GridWithCrudService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+    @Input()
+    set isShow(value: boolean) {
+        if (value) {
+            this.loadFireHydrantType();
+            this.loadOperatorType();
+            this.loadUnitOfMeasure();
+        }
+    }
 
     fireHydrantTypes: FireHydrantType[] = [];
     cities: any = {};
@@ -38,8 +46,10 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     operatorTypes: OperatorType[] = [];
     rateUnits: UnitOfMeasure[] = [];
     pressureUnits: UnitOfMeasure[] = [];
-    formFieldidLane: any = null;
-    formFieldidIntersection: any = null;
+    formFields = {
+        idLane: null,
+        idIntersection: null,
+    };
     colors = [{
         id: '#000000',
         color: '#000000',
@@ -83,57 +93,9 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
 
     ngOnInit() {
         this.loadSource();
-        this.loadFireHydrantType();
-        this.loadOperatorType();
-        this.loadUnitOfMeasure();
         this.loadCity();
         this.loadLane();
-    }
-
-    ngAfterViewInit() {
-        this.dataGrid.instance.option({
-            onEditingStart: (e) => {
-                this.loadLaneByCity(e.data.idCity);
-            },
-            onEditorPreparing: (e) => {
-                if (e.dataField === 'idCity') {
-                    e.editorName = 'dxSelectBox';
-                    e.editorOptions.onValueChanged = (ev) => {
-                        e.setValue(ev.value);
-
-                        this.loadLaneByCity(ev.value);
-                        if (this.formFieldidLane) {
-                            this.formFieldidLane.option('value', '');
-                            this.formFieldidIntersection.option('value', '');
-                        }
-                    };
-                } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
-                    e.editorName = 'dxLookup';
-                    e.editorOptions.closeOnOutsideClick = true;
-                    e.editorOptions.onInitialized = (ev) => {
-                        console.log(e);
-                        this['formField' + e.dataField] = ev.component;
-                    };
-                    e.editorOptions.onOpened = (ev) => {
-                        ev.component.option('dataSource', this.lanesOfCity);
-                    };
-                } else if (e.dataField === 'color') {
-                    e.editorName = 'dxSelectBox';
-                    e.editorOptions.fieldTemplate = (data, container) => {
-                        container.innerHTML = '<div class="dx-texteditor-container">' +
-                                '<div class="fireHydrantField">' +
-                                    '<div class="textbox"><input class="dx-texteditor-input" value="' + data.color + '" readOnly="true" /></div>' +
-                                    '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>' +
-                                '</div>' +
-                                '<div class="dx-texteditor-buttons-container"></div>' +
-                            '</div>';
-                    };
-                    e.editorOptions.itemTemplate = (data, index, container) => {
-                        container.innerHTML = '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>';
-                    };
-                }
-            }
-        });
+        this.loadFireHydrantType();
     }
 
     getFireHydrantTypeName(data) {
@@ -151,6 +113,48 @@ export class ListComponent extends GridWithCrudService implements OnInit, AfterV
     onInitNewRow(e) {
         e.data.color = '#FF0000';
         e.data.isActive = true;
+    }
+
+    onEditingStart(e) {
+        this.loadLaneByCity(e.data.idCity);
+    }
+
+    onEditorPreparing(e) {
+        if (e.dataField === 'idCity') {
+            e.editorName = 'dxSelectBox';
+            e.editorOptions.onValueChanged = (ev) => {
+                e.setValue(ev.value);
+
+                this.loadLaneByCity(ev.value);
+                if (this.formFields.idLane) {
+                    this.formFields.idLane.option('value', '');
+                    this.formFields.idIntersection.option('value', '');
+                }
+            };
+        } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
+            e.editorName = 'dxLookup';
+            e.editorOptions.closeOnOutsideClick = true;
+            e.editorOptions.onInitialized = (ev) => {
+                this.formFields[e.dataField] = ev.component;
+            };
+            e.editorOptions.onOpened = (ev) => {
+                ev.component.option('dataSource', this.lanesOfCity);
+            };
+        } else if (e.dataField === 'color') {
+            e.editorName = 'dxSelectBox';
+            e.editorOptions.fieldTemplate = (data, container) => {
+                container.innerHTML = '<div class="dx-texteditor-container">' +
+                    '<div class="fireHydrantField">' +
+                        '<div class="textbox"><input class="dx-texteditor-input" value="' + data.color + '" readOnly="true" /></div>' +
+                        '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>' +
+                    '</div>' +
+                    '<div class="dx-texteditor-buttons-container"></div>' +
+                '</div>';
+            };
+            e.editorOptions.itemTemplate = (data, index, container) => {
+                container.innerHTML = '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>';
+            };
+        }
     }
 
     private loadFireHydrantType() {
