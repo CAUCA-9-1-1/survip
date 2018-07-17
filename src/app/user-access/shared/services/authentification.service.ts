@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 
-import {environment} from '../../../../environments/environment';
+import config from '../../../../assets/config/config.json';
 
 
 @Injectable()
@@ -22,7 +22,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string): Observable<any> {
-        return this.http.post<any>(environment.apiUrl + 'Authentification/Logon?user=' + username + '&password=' + password, {
+        return this.http.post<any>(config.apiUrl + 'Authentification/Logon?user=' + username + '&password=' + password, {
             username: username,
             password: password,
         }).pipe(
@@ -39,7 +39,7 @@ export class AuthenticationService {
     }
 
     private status(): Observable<boolean> {
-        return this.http.get<boolean>(environment.apiUrl + 'Authentification/SessionStatus', {
+        return this.http.get<boolean>(config.apiUrl + 'Authentification/SessionStatus', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('currentToken'),
             }

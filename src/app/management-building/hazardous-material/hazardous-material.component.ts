@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {HazardousMaterial} from '../shared/models/hazardous-material.model';
 import {HazardousMaterialService} from '../shared/services/hazardous-material.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
@@ -33,7 +33,7 @@ export class HazardousMaterialComponent extends GridWithCrudService implements O
     getMaterialName(data) {
         const material = HazardousMaterial.fromJSON(data);
 
-        return material.getLocalization(environment.locale.use);
+        return material.getLocalization(config.locale.use);
     }
 
     onInitNewRow(e) {

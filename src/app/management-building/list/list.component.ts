@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {alert} from 'devextreme/ui/dialog';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 import {LaneService} from '../../management-address/shared/services/lane.service';
@@ -97,7 +97,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     getBuildingName(data) {
         const building = Building.fromJSON(data);
 
-        return building.getLocalization(environment.locale.use);
+        return building.getLocalization(config.locale.use);
     }
 
     onEditorPreparing(e) {

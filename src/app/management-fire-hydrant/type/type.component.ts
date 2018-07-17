@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
@@ -29,7 +29,7 @@ export class TypeComponent extends GridWithCrudService implements OnInit {
     getTypeName(data) {
         const type = FireHydrantType.fromJSON(data);
 
-        return type.getLocalization(environment.locale.use);
+        return type.getLocalization(config.locale.use);
     }
 
     onInitNewRow(e) {

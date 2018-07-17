@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {PersonRequiringAssistanceType} from '../shared/models/person-requiring-assistance-type.model';
 import {PersonRequiringAssistanceTypeService} from '../shared/services/person-requiring-assistance-type.service';
@@ -33,7 +33,7 @@ export class PersonRequiringAssistanceTypeComponent extends GridWithCrudService 
     getTypeName(data) {
         const type = PersonRequiringAssistanceType.fromJSON(data);
 
-        return type.getLocalization(environment.locale.use);
+        return type.getLocalization(config.locale.use);
     }
 
     onInitNewRow(e) {

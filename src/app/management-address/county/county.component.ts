@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {County} from '../shared/models/county.model';
 import {CountyService} from '../shared/services/county.service';
@@ -43,7 +43,7 @@ export class CountyComponent extends GridWithCrudService implements OnInit {
     getCountyName(data) {
         const county = County.fromJSON(data);
 
-        return county.getLocalization(environment.locale.use);
+        return county.getLocalization(config.locale.use);
     }
 
     onInitNewRow(e) {

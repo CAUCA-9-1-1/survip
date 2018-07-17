@@ -3,7 +3,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {throwError as observableThrowError} from 'rxjs';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 
 
 export class RequestService {
@@ -17,10 +17,10 @@ export class RequestService {
         this.headers = {
             'Authorization': 'Bearer ' + localStorage.getItem('currentToken'),
             'Content-Type': 'application/json; charset=UTF-8',
-            'languageCode': environment.locale.use,
+            'languageCode': config.locale.use,
         };
 
-        this.apiUrl = environment.apiUrl;
+        this.apiUrl = config.apiUrl;
     }
 
     error(error: HttpErrorResponse) {

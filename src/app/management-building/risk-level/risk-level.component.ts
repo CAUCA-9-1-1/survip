@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {RiskLevelService} from '../shared/services/risk-level.service';
 import {RiskLevel} from '../shared/models/risk-level.model';
@@ -33,7 +33,7 @@ export class RiskLevelComponent extends GridWithCrudService implements OnInit {
     getRiskLevelName(data) {
         const level = RiskLevel.fromJSON(data);
 
-        return level.getLocalization(environment.locale.use);
+        return level.getLocalization(config.locale.use);
     }
 
     onInitNewRow(e) {

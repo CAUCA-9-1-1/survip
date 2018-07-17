@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {UtilisationCode} from '../shared/models/utilisation-code.model';
 import {UtilisationCodeService} from '../shared/services/utilisation-code.service';
@@ -33,7 +33,7 @@ export class UtilisationCodeComponent extends GridWithCrudService implements OnI
     getCodeName(data) {
         const code = UtilisationCode.fromJSON(data);
 
-        return code.getLocalization(environment.locale.use, 'description');
+        return code.getLocalization(config.locale.use, 'description');
     }
 
     onInitNewRow(e) {

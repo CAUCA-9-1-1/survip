@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {Survey} from '../shared/models/survey.model';
 import {SurveyService} from '../shared/services/survey.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
@@ -32,7 +32,7 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
 
     getSurveyName(data)  {
         const survey = Survey.fromJSON(data);
-        return survey.getLocalization(environment.locale.use);
+        return survey.getLocalization(config.locale.use);
     }
 
     public onInitNewRow(e) {

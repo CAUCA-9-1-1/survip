@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {TranslateService} from '@ngx-translate/core';
 import {DxTabPanelComponent} from 'devextreme-angular';
 
-import {environment} from '../../../../environments/environment';
+import config from '../../../../assets/config/config.json';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class MultilangComponent implements OnInit {
     isRequired: boolean;
 
     constructor(private translate: TranslateService) {
-        this.languages = environment.locale.available;
+        this.languages = config.locale.available;
 
         this.translate.get(this.languages).subscribe(labels => {
             for (const i in labels) {

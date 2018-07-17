@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {Webuser} from '../shared/models/webuser.model';
 import {WebuserService} from '../shared/services/webuser.service';
@@ -85,7 +85,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     getDepartmentName(data) {
         const departments = FireSafetyDepartment.fromJSON(data);
 
-        return departments.getLocalization(environment.locale.use);
+        return departments.getLocalization(config.locale.use);
     }
 
     onPasswordChanged = (e) => {

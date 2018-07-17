@@ -6,7 +6,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {confirm} from 'devextreme/ui/dialog';
 import CustomStore from 'devextreme/data/custom_store';
 
-import {environment} from '../../environments/environment';
+import config from '../../assets/config/config.json';
 import {DashboardService} from './shared/services/dashboard.service';
 import {LaneService} from '../management-address/shared/services/lane.service';
 import {Lane} from '../management-address/shared/models/lane.model';
@@ -343,7 +343,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 displayExpr: (data) => {
                     const city = City.fromJSON(data);
 
-                    return city.getLocalization(environment.locale.use);
+                    return city.getLocalization(config.locale.use);
                 }
             },
         }, {
@@ -429,7 +429,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 displayExpr: (data) => {
                     const code = UtilisationCode.fromJSON(data);
 
-                    return code.getLocalization(environment.locale.use, 'description');
+                    return code.getLocalization(config.locale.use, 'description');
                 }
             },
             visible: visible[13],

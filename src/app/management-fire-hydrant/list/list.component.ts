@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {FireHydrantService} from '../shared/services/fire-hydrant.service';
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.service';
@@ -101,13 +101,13 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     getFireHydrantTypeName(data) {
         const type = FireHydrantType.fromJSON(data);
 
-        return type.getLocalization(environment.locale.use);
+        return type.getLocalization(config.locale.use);
     }
 
     getUnitOfMeasureName(data) {
         const unit = UnitOfMeasure.fromJSON(data);
 
-        return unit.getLocalization(environment.locale.use);
+        return unit.getLocalization(config.locale.use);
     }
 
     onInitNewRow(e) {

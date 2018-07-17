@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {FireHydrantConnectionType} from '../shared/models/fire-hydrant-connection-type.model';
 import {FireHydrantConnectionTypeService} from '../shared/services/fire-hydrant-connection-type.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
@@ -29,7 +29,7 @@ export class ConnectionTypeComponent extends GridWithCrudService implements OnIn
     getTypeName(data) {
         const type = FireHydrantConnectionType.fromJSON(data);
 
-        return type.getLocalization(environment.locale.use);
+        return type.getLocalization(config.locale.use);
     }
 
     onInitNewRow(e) {

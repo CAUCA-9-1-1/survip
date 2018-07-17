@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {FirestationService} from '../shared/services/firestation.service';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
@@ -48,7 +48,7 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
     getDepartmentName(data) {
         const department = FireSafetyDepartment.fromJSON(data);
 
-        return department.getLocalization(environment.locale.use);
+        return department.getLocalization(config.locale.use);
     }
 
     getBuildingName(data) {

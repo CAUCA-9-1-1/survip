@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {Lane} from '../shared/models/lane.model';
 import {LaneService} from '../shared/services/lane.service';
@@ -48,7 +48,7 @@ export class LaneComponent extends GridWithCrudService implements OnInit {
     getLaneName(data) {
         const lane = Lane.fromJSON(data);
 
-        return lane.getLocalization(environment.locale.use);
+        return lane.getLocalization(config.locale.use);
     }
 
     onInitNewRow(e) {

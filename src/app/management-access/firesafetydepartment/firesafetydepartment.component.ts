@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
@@ -43,13 +43,13 @@ export class FireSafetyDepartmentComponent extends GridWithCrudService implement
     getDepartmentName(data) {
         const department = FireSafetyDepartment.fromJSON(data);
 
-        return department.getLocalization(environment.locale.use);
+        return department.getLocalization(config.locale.use);
     }
 
     getCountyName(data) {
         const county = County.fromJSON(data);
 
-        return county.getLocalization(environment.locale.use);
+        return county.getLocalization(config.locale.use);
     }
 
     onInitNewRow(e) {
@@ -61,7 +61,7 @@ export class FireSafetyDepartmentComponent extends GridWithCrudService implement
     }
 
     private loadTranslation() {
-        this.translateService.get(environment.locale.available).subscribe(data => {
+        this.translateService.get(config.locale.available).subscribe(data => {
             for (const key in data) {
                 if (data[key]) {
                     this.languages.push({

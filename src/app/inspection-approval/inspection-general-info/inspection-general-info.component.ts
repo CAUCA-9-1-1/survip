@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {LaneService} from '../../management-address/shared/services/lane.service';
 import {RiskLevelService} from '../../management-building/shared/services/risk-level.service';
 import {UtilisationCodeService} from '../../management-building/shared/services/utilisation-code.service';
@@ -67,7 +67,7 @@ export class InspectionGeneralInfoComponent implements OnInit {
                     if (code.id === data.mainBuildingIdUtilisationCode) {
                         code = UtilisationCode.fromJSON(code);
 
-                        this.utilisationCode = code.getLocalization(environment.locale.use, 'description');
+                        this.utilisationCode = code.getLocalization(config.locale.use, 'description');
                     }
                 });
             });
