@@ -32,7 +32,7 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
 
     getSurveyName(data)  {
         const survey = Survey.fromJSON(data);
-        return survey.getLocalization(config.locale.use);
+        return survey.getLocalization(config.locale);
     }
 
     public onInitNewRow(e) {

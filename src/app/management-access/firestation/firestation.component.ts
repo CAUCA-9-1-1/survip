@@ -48,7 +48,7 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
     getDepartmentName(data) {
         const department = FireSafetyDepartment.fromJSON(data);
 
-        return department.getLocalization(config.locale.use);
+        return department.getLocalization(config.locale);
     }
 
     getBuildingName(data) {

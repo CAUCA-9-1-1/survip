@@ -44,7 +44,7 @@ export class UnitOfMeasureComponent extends GridWithCrudService implements OnIni
     getUnitName(data) {
         const unit = UnitOfMeasure.fromJSON(data);
 
-        return unit.getLocalization(config.locale.use);
+        return unit.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

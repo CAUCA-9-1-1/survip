@@ -33,7 +33,7 @@ export class HazardousMaterialComponent extends GridWithCrudService implements O
     getMaterialName(data) {
         const material = HazardousMaterial.fromJSON(data);
 
-        return material.getLocalization(config.locale.use);
+        return material.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

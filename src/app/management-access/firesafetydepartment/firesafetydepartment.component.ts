@@ -43,13 +43,13 @@ export class FireSafetyDepartmentComponent extends GridWithCrudService implement
     getDepartmentName(data) {
         const department = FireSafetyDepartment.fromJSON(data);
 
-        return department.getLocalization(config.locale.use);
+        return department.getLocalization(config.locale);
     }
 
     getCountyName(data) {
         const county = County.fromJSON(data);
 
-        return county.getLocalization(config.locale.use);
+        return county.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

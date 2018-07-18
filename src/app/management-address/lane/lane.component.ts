@@ -48,7 +48,7 @@ export class LaneComponent extends GridWithCrudService implements OnInit {
     getLaneName(data) {
         const lane = Lane.fromJSON(data);
 
-        return lane.getLocalization(config.locale.use);
+        return lane.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

@@ -67,7 +67,7 @@ export class InspectionGeneralInfoComponent implements OnInit {
                     if (code.id === data.mainBuildingIdUtilisationCode) {
                         code = UtilisationCode.fromJSON(code);
 
-                        this.utilisationCode = code.getLocalization(config.locale.use, 'description');
+                        this.utilisationCode = code.getLocalization(config.locale, 'description');
                     }
                 });
             });

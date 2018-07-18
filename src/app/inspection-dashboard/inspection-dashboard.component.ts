@@ -343,7 +343,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 displayExpr: (data) => {
                     const city = City.fromJSON(data);
 
-                    return city.getLocalization(config.locale.use);
+                    return city.getLocalization(config.locale);
                 }
             },
         }, {
@@ -429,7 +429,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 displayExpr: (data) => {
                     const code = UtilisationCode.fromJSON(data);
 
-                    return code.getLocalization(config.locale.use, 'description');
+                    return code.getLocalization(config.locale, 'description');
                 }
             },
             visible: visible[13],

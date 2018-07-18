@@ -38,7 +38,7 @@ export class StateComponent extends GridWithCrudService implements OnInit {
     getStateName(data) {
         const state = State.fromJSON(data);
 
-        return state.getLocalization(config.locale.use);
+        return state.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

@@ -1,4 +1,5 @@
 {
   "name": "cause-surviprevention-web",
-  "version": "__package_version__"
+  "version": "__package_version__",
+  "locale": ["fr", "en"]
 }

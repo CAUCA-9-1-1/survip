@@ -63,7 +63,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
     getQuestionTreeviewTitle(data, index, element) {
         const question = Question.fromJSON(data);
-        element.innerHTML = question.getLocalization(config.locale.use);
+        element.innerHTML = question.getLocalization(config.locale);
         if (element.innerHTML === '') {
             element.innerHTML = 'Pas de titre';
         }
@@ -71,7 +71,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
     getLocalizedTitle(data) {
         const question = Question.fromJSON(data);
-        return question.getLocalization(config.locale.use);
+        return question.getLocalization(config.locale);
     }
 
     onAddQuestion() {

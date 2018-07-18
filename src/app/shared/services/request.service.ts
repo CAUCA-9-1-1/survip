@@ -17,7 +17,7 @@ export class RequestService {
         this.headers = {
             'Authorization': 'Bearer ' + localStorage.getItem('currentToken'),
             'Content-Type': 'application/json; charset=UTF-8',
-            'languageCode': config.locale.use,
+            'languageCode': config.locale,
         };
 
         this.apiUrl = config.apiUrl;

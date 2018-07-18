@@ -29,7 +29,7 @@ export class TypeComponent extends GridWithCrudService implements OnInit {
     getTypeName(data) {
         const type = FireHydrantType.fromJSON(data);
 
-        return type.getLocalization(config.locale.use);
+        return type.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

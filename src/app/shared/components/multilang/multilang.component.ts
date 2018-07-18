@@ -3,6 +3,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {DxTabPanelComponent} from 'devextreme-angular';
 
 import config from '../../../../assets/config/config.json';
+import packageInfo from '../../../../assets/config/package.json';
 
 
 @Component({
@@ -20,14 +21,11 @@ export class MultilangComponent implements OnInit {
     @Input() value: any = [];
 
     labels: string[] = [];
-    languages: string[] = [];
     selectedTab: string;
     isRequired: boolean;
 
     constructor(private translate: TranslateService) {
-        this.languages = config.locale.available;
-
-        this.translate.get(this.languages).subscribe(labels => {
+        this.translate.get(packageInfo.locale).subscribe(labels => {
             for (const i in labels) {
                 if (labels[i]) {
                     this.labels.push(labels[i]);
@@ -37,7 +35,7 @@ export class MultilangComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.selectedTab = this.languages[0];
+        this.selectedTab = packageInfo.locale[0];
 
         this.initializeValidations();
         this.initializeValueForAllLanguages();
@@ -54,8 +52,8 @@ export class MultilangComponent implements OnInit {
             this.value = [];
         }
 
-        if (this.value.length !== this.languages.length) {
-            this.languages.forEach(language => {
+        if (this.value.length !== packageInfo.locale.length) {
+            packageInfo.locale.forEach(language => {
                 if (!this.hasLanguageIndex(language.toLowerCase())) {
                     const languageItem = {
                         languageCode: language.toLowerCase(),
@@ -118,7 +116,7 @@ export class MultilangComponent implements OnInit {
     }
 
     onTabChanged(e) {
-        this.selectedTab = this.languages[e.component.option('selectedIndex')];
+        this.selectedTab = packageInfo.locale[e.component.option('selectedIndex')];
     }
 
     onValidation(e) {

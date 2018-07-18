@@ -101,13 +101,13 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     getFireHydrantTypeName(data) {
         const type = FireHydrantType.fromJSON(data);
 
-        return type.getLocalization(config.locale.use);
+        return type.getLocalization(config.locale);
     }
 
     getUnitOfMeasureName(data) {
         const unit = UnitOfMeasure.fromJSON(data);
 
-        return unit.getLocalization(config.locale.use);
+        return unit.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

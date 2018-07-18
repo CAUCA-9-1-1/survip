@@ -29,7 +29,7 @@ export class ConnectionTypeComponent extends GridWithCrudService implements OnIn
     getTypeName(data) {
         const type = FireHydrantConnectionType.fromJSON(data);
 
-        return type.getLocalization(config.locale.use);
+        return type.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

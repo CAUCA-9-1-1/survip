@@ -33,7 +33,7 @@ export class PersonRequiringAssistanceTypeComponent extends GridWithCrudService 
     getTypeName(data) {
         const type = PersonRequiringAssistanceType.fromJSON(data);
 
-        return type.getLocalization(config.locale.use);
+        return type.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

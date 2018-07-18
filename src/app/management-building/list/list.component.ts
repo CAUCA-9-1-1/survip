@@ -97,7 +97,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     getBuildingName(data) {
         const building = Building.fromJSON(data);
 
-        return building.getLocalization(config.locale.use);
+        return building.getLocalization(config.locale);
     }
 
     onEditorPreparing(e) {

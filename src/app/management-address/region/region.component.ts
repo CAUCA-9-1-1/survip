@@ -35,7 +35,7 @@ export class RegionComponent extends GridWithCrudService implements OnInit {
     getRegionName(data) {
         const region = Region.fromJSON(data);
 
-        return region.getLocalization(config.locale.use);
+        return region.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

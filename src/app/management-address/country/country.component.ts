@@ -29,7 +29,7 @@ export class CountryComponent extends GridWithCrudService implements OnInit {
     getCountryName(data) {
         const country = Country.fromJSON(data);
 
-        return country.getLocalization(config.locale.use);
+        return country.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

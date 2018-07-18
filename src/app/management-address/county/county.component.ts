@@ -43,7 +43,7 @@ export class CountyComponent extends GridWithCrudService implements OnInit {
     getCountyName(data) {
         const county = County.fromJSON(data);
 
-        return county.getLocalization(config.locale.use);
+        return county.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

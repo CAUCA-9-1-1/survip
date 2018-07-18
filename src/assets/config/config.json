@@ -1,8 +1,5 @@
 {
-  "--apiUrl": "http://192.168.123.34:5555/api/",
-  "apiUrl": "http://localhost:5555/api/",
-  "locale": {
-    "available": ["fr", "en"],
-    "use": "fr"
-  }
+  "apiUrl": "http://192.168.123.34:5555/api/",
+  "--apiUrl": "http://localhost:5555/api/",
+  "locale": "fr"
 }

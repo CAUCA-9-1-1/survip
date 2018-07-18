@@ -33,7 +33,7 @@ export class RiskLevelComponent extends GridWithCrudService implements OnInit {
     getRiskLevelName(data) {
         const level = RiskLevel.fromJSON(data);
 
-        return level.getLocalization(config.locale.use);
+        return level.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

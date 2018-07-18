@@ -85,7 +85,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     getDepartmentName(data) {
         const departments = FireSafetyDepartment.fromJSON(data);
 
-        return departments.getLocalization(config.locale.use);
+        return departments.getLocalization(config.locale);
     }
 
     onPasswordChanged = (e) => {

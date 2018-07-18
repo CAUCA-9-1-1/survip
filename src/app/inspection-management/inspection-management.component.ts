@@ -66,13 +66,13 @@ export class InspectionManagementComponent extends GridWithCrudService implement
     getFireSafetyDepartmentName(data) {
         const ssi = FireSafetyDepartment.fromJSON(data);
 
-        return ssi.getLocalization(config.locale.use);
+        return ssi.getLocalization(config.locale);
     }
 
     getSurveyName(data) {
         const survey = Survey.fromJSON(data);
 
-        return survey.getLocalization(config.locale.use);
+        return survey.getLocalization(config.locale);
     }
 
     private loadFireSafetyDepartment() {
