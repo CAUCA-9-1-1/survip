@@ -1,34 +1,26 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Survey} from '../models/survey.model';
+import {Observable} from 'rxjs/Observable';
+
 import {RequestService} from '../../../shared/services/request.service';
+import {Survey} from '../models/survey.model';
+
 
 @Injectable()
 export class SurveyService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<Survey[]>(this.apiUrl + 'Survey', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(): Observable<Survey[]> {
+        return this.get('Survey');
     }
 
     save(survey: Survey) {
-        return this.http.post(
-            this.apiUrl + 'Survey',
-            JSON.stringify(survey),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('Survey', survey);
     }
 
     remove(id: string) {
-        return this.http.delete(this.apiUrl + 'Survey/' + id, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('Survey/' + id);
     }
 }

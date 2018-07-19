@@ -1,6 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-
+import {Observable} from 'rxjs/Observable';
 
 import {UtilisationCode} from '../models/utilisation-code.model';
 import {RequestService} from '../../../shared/services/request.service';
@@ -9,35 +8,23 @@ import {RequestService} from '../../../shared/services/request.service';
 @Injectable()
 export class UtilisationCodeService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<UtilisationCode[]>(this.apiUrl + 'UtilisationCode', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(): Observable<UtilisationCode[]> {
+        return this.get('UtilisationCode');
     }
 
-    localized() {
-        return this.http.get<UtilisationCode[]>(this.apiUrl + 'UtilisationCode/localized', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    localized(): Observable<UtilisationCode[]> {
+        return this.get('UtilisationCode/localized');
     }
 
     save(code: UtilisationCode) {
-        return this.http.post(
-            this.apiUrl + 'UtilisationCode',
-            JSON.stringify(code),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('UtilisationCode', code);
     }
 
     remove(idCode: string) {
-        return this.http.delete(this.apiUrl + 'UtilisationCode/' + idCode, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('UtilisationCode/' + idCode);
     }
 }

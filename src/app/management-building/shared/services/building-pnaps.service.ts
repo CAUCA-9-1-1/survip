@@ -1,43 +1,30 @@
 import {Injectable, Injector} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
 import {RequestService} from '../../../shared/services/request.service';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BuildingPnaps} from '../models/building-pnaps.model';
 
 
 @Injectable()
 export class BuildingPnapsService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll(idBuilding: string) {
-        return this.http.get<BuildingPnaps[]>(this.apiUrl + 'Building/' + idBuilding + '/pnaps', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(idBuilding: string): Observable<BuildingPnaps[]> {
+        return this.get('Building/' + idBuilding + '/pnaps');
     }
 
-    get(idPnaps: string) {
-        return this.http.get<BuildingPnaps[]>(this.apiUrl + 'Building/pnaps/' + idPnaps, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getOne(idPnaps: string): Observable<BuildingPnaps> {
+        return this.get('Building/pnaps/' + idPnaps);
     }
 
     save(pnaps: BuildingPnaps) {
-        return this.http.post(
-            this.apiUrl + 'Building/pnaps',
-            JSON.stringify(pnaps),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('Building/pnaps', pnaps);
     }
 
     remove(idPnaps: string) {
-        return this.http.delete(this.apiUrl + 'Building/pnaps/' + idPnaps, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('Building/pnaps/' + idPnaps);
     }
-
 }

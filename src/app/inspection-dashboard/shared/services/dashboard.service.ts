@@ -1,6 +1,4 @@
 import {Injectable, Injector} from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
 
 import {RequestService} from '../../../shared/services/request.service';
 import {DashboardInspection} from '../models/dashboard-inspection.model';
@@ -9,7 +7,7 @@ import {DashboardInspection} from '../models/dashboard-inspection.model';
 @Injectable()
 export class DashboardService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
@@ -18,7 +16,7 @@ export class DashboardService extends RequestService {
 
         return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ToDoInspection', {
             headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        });
     }
 
     getForApproval(loadOptions) {
@@ -26,7 +24,7 @@ export class DashboardService extends RequestService {
 
         return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ForApprovalInspection', {
             headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        });
     }
 
     getBuildingHistory(loadOptions) {
@@ -34,7 +32,7 @@ export class DashboardService extends RequestService {
 
         return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithHistory', {
             headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        });
     }
 
     getBuildingToDo(loadOptions) {
@@ -42,6 +40,6 @@ export class DashboardService extends RequestService {
 
         return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
             headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        });
     }
 }

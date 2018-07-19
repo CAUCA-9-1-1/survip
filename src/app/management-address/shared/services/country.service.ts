@@ -1,6 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-
+import {Observable} from 'rxjs/Observable';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {Country} from '../models/country.model';
@@ -9,35 +8,23 @@ import {Country} from '../models/country.model';
 @Injectable()
 export class CountryService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<Country[]>(this.apiUrl + 'Country', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(): Observable<Country[]> {
+        return this.get('Country');
     }
 
-    localized() {
-        return this.http.get<Country[]>(this.apiUrl + 'Country/localized', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    localized(): Observable<Country[]> {
+        return this.get('Country/localized');
     }
 
     save(country: Country) {
-        return this.http.post(
-            this.apiUrl + 'Country',
-            JSON.stringify(country),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('Country', country);
     }
 
     remove(idCountry: string) {
-        return this.http.delete(this.apiUrl + 'Country/' + idCountry, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('Country/' + idCountry);
     }
 }

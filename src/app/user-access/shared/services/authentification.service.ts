@@ -13,7 +13,7 @@ export class AuthenticationService {
     constructor(
         private http: HttpClient
     ) {
-        this.isLogged.next(localStorage.getItem('currentToken') ? true : false);
+        this.isLogged.next(sessionStorage.getItem('currentToken') ? true : false);
         this.status().subscribe(logged => {
             this.isLogged.next(logged);
         }, error => {
@@ -34,22 +34,22 @@ export class AuthenticationService {
     logout() {
         this.isLogged.next(false);
 
-        localStorage.removeItem('currentToken');
-        localStorage.removeItem('currentWebuser');
+        sessionStorage.removeItem('currentToken');
+        sessionStorage.removeItem('currentWebuser');
     }
 
     private status(): Observable<boolean> {
         return this.http.get<boolean>(config.apiUrl + 'Authentification/SessionStatus', {
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('currentToken'),
+                'Authorization': 'Bearer ' + sessionStorage.getItem('currentToken'),
             }
         });
     }
 
     private onResponse(response) {
         if (response.data.accessToken) {
-            localStorage.setItem('currentToken', response.data.accessToken);
-            localStorage.setItem('currentWebuser', response.data.idWebuser);
+            sessionStorage.setItem('currentToken', response.data.accessToken);
+            sessionStorage.setItem('currentWebuser', response.data.idWebuser);
         }
 
         return response.data;

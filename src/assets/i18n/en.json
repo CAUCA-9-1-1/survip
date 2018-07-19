@@ -293,5 +293,8 @@
   "underground": "Underground",
   "aboveground": "Aboveground",
   "orDropFileHere": "or drop file here",
+  "requestTimeout": "The request can not be completed, please try again later.",
+  "requestServer404": "The server is unable to find the URL.<br />'{{url}}'",
+  "requestServer500": "The server returns an error. The administrator has been notified, so please try again later.",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
 }

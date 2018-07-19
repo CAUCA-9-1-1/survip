@@ -1,6 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-
+import {Observable} from 'rxjs/Observable';
 
 import {Region} from '../models/region.model';
 import {RequestService} from '../../../shared/services/request.service';
@@ -9,34 +8,23 @@ import {RequestService} from '../../../shared/services/request.service';
 @Injectable()
 export class RegionService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<Region[]>(this.apiUrl + 'Region', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(): Observable<Region[]> {
+        return this.get('Region');
     }
 
-    localized() {
-        return this.http.get<Region[]>(this.apiUrl + 'Region/localized', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    localized(): Observable<Region[]> {
+        return this.get('Region/localized');
     }
 
     save(region: Region) {
-        return this.http.post(
-            this.apiUrl + 'Region',
-            JSON.stringify(region), {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('Region', region);
     }
 
     remove(idState: string) {
-        return this.http.delete(this.apiUrl + 'Region/' + idState, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('Region/' + idState);
     }
 }

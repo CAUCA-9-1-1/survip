@@ -1,40 +1,30 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import { Choice } from '../models/choice.model';
+import {Observable} from 'rxjs/Observable';
+
 import {RequestService} from '../../../shared/services/request.service';
+import {Choice} from '../models/choice.model';
+
 
 @Injectable()
 export class ChoiceService extends RequestService  {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll(idSurveyQuestion: string) {
-        return this.http.get<Choice[]>(this.apiUrl + 'SurveyQuestionChoice/SurveyQuestion/' + idSurveyQuestion, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(idSurveyQuestion: string): Observable<Choice[]> {
+        return this.get('SurveyQuestionChoice/SurveyQuestion/' + idSurveyQuestion);
     }
 
     save(surveyQuestionChoice: Choice) {
-        return this.http.post(
-            this.apiUrl + 'SurveyQuestionChoice',
-            JSON.stringify(surveyQuestionChoice),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('SurveyQuestionChoice', surveyQuestionChoice);
     }
 
     remove(idSurveyQuestionChoice: string) {
-        return this.http.delete(this.apiUrl + 'SurveyQuestionChoice/' + idSurveyQuestionChoice, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('SurveyQuestionChoice/' + idSurveyQuestionChoice);
     }
 
     deleteQuestionsChoices(idSurveyQuestion: string) {
-        return this.http.delete(this.apiUrl + 'SurveyQuestionChoice/SurveyQuestion/' + idSurveyQuestion, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('SurveyQuestionChoice/SurveyQuestion/' + idSurveyQuestion);
     }
 }

@@ -9,7 +9,7 @@ export class PermissionService {
 
   constructor(private http: HttpClient) { }
 
-  public get(idPermissionObject) {
+  public getOne(idPermissionObject) {
     /*return this.http.get('permission/' + idPermissionObject).map((response: Response) => {
       const result = response.json();
 
