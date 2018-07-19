@@ -1,6 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-
+import {Observable} from 'rxjs/Observable';
 
 import {County} from '../models/county.model';
 import {RequestService} from '../../../shared/services/request.service';
@@ -9,35 +8,23 @@ import {RequestService} from '../../../shared/services/request.service';
 @Injectable()
 export class CountyService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<County[]>(this.apiUrl + 'County', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(): Observable<County[]> {
+        return this.get('County');
     }
 
-    localized() {
-        return this.http.get<County[]>(this.apiUrl + 'County/localized', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    localized(): Observable<County[]> {
+        return this.get('County/localized');
     }
 
     save(county: County) {
-        return this.http.post(
-            this.apiUrl + 'County',
-            JSON.stringify(county),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('County', county);
     }
 
     remove(idCounty: string) {
-        return this.http.delete(this.apiUrl + 'County/' + idCounty, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('County/' + idCounty);
     }
 }

@@ -7,7 +7,7 @@ export class AuthGuardService implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (localStorage.getItem('currentToken')) {
+        if (sessionStorage.getItem('accessToken')) {
             return true;
         }
 

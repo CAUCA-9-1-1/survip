@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    login(e) {
+    login() {
         if (!this.username || !this.password) {
             return false;
         }

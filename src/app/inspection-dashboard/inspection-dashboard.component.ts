@@ -160,7 +160,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             if (result && result.description) {
                 const batch = InspectionBatch.fromJSON({
                     description: result.description,
-                    idWebuserCreatedBy: localStorage.getItem('currentWebuser'),
+                    idWebuserCreatedBy: sessionStorage.getItem('currentWebuser'),
                     isActive: true,
                     isReadyForInspection: false,
                     inspections: [],
@@ -169,7 +169,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 buildings.forEach(building => {
                     batch.inspections.push({
                         idBuilding: building,
-                        idWebuserCreatedBy: localStorage.getItem('currentWebuser'),
+                        idWebuserCreatedBy: sessionStorage.getItem('currentWebuser'),
                         isActive: true,
                     });
                 });
@@ -494,7 +494,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     private showPicture(container, options) {
         if (options.data.idPicture) {
-            this.pictureService.get(options.data.idPicture).subscribe((data) => {
+            this.pictureService.getOne(options.data.idPicture).subscribe((data) => {
                 container.innerHTML = '<img height="100" src="' + data.dataUri + '" />';
             });
         }

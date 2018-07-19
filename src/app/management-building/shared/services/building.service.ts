@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {Building} from '../models/building.model';
@@ -8,41 +8,29 @@ import {Building} from '../models/building.model';
 @Injectable()
 export class BuildingService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll(id?: string) {
-        let url = this.apiUrl + 'Building';
+    getAll(id?: string): Observable<Building[]> {
+        let url = 'Building';
 
         if (id) {
             url += '/child/' + id;
         }
 
-        return this.http.get<Building[]>(url, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.get(url);
     }
 
-    getActive() {
-        return this.http.get<Building[]>(this.apiUrl + 'Building/Active', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getActive(): Observable<Building[]> {
+        return this.get('Building/Active');
     }
 
     save(building: Building) {
-        return this.http.post(
-            this.apiUrl + 'Building',
-            JSON.stringify(building),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('Building', building);
     }
 
     remove(idBuilding: string) {
-        return this.http.delete(this.apiUrl + 'Building/' + idBuilding, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('Building/' + idBuilding);
     }
 }

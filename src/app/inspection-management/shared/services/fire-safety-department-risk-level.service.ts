@@ -1,34 +1,26 @@
 import {Injectable, Injector} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+
 import {RequestService} from '../../../shared/services/request.service';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {FireSafetyDepartmentRiskLevel} from '../models/fire-safety-department-risk-level.model';
+
 
 @Injectable()
 export class FireSafetyDepartmentRiskLevelService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<FireSafetyDepartmentRiskLevel[]>(this.apiUrl + 'FireSafetyDepartmentRiskLevel', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(): Observable<FireSafetyDepartmentRiskLevel[]> {
+        return this.get('FireSafetyDepartmentRiskLevel');
     }
 
     save(ssi: FireSafetyDepartmentRiskLevel) {
-        return this.http.post(
-            this.apiUrl + 'FireSafetyDepartmentRiskLevel',
-            JSON.stringify(ssi),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('FireSafetyDepartmentRiskLevel', ssi);
     }
 
     remove(idFireSafetyDepartmentRiskLevel: string) {
-        return this.http.delete(this.apiUrl + 'FireSafetyDepartmentRiskLevel/' + idFireSafetyDepartmentRiskLevel, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('FireSafetyDepartmentRiskLevel/' + idFireSafetyDepartmentRiskLevel);
     }
 }

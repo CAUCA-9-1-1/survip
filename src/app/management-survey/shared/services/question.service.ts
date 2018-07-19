@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {Question} from '../models/question.model';
@@ -8,37 +8,24 @@ import {Question} from '../models/question.model';
 @Injectable()
 export class QuestionService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll(id_survey: string) {
-        return this.http.get<Question[]>(this.apiUrl + 'SurveyQuestion/Survey/' + id_survey, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(id_survey: string): Observable<Question[]> {
+        return this.get('SurveyQuestion/Survey/' + id_survey);
     }
 
     save(surveyQuestion: Question) {
-        return this.http.post(
-            this.apiUrl + 'SurveyQuestion',
-            JSON.stringify(surveyQuestion),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('SurveyQuestion', surveyQuestion);
     }
 
     remove(id: string) {
-        return this.http.delete(this.apiUrl + 'SurveyQuestion/' + id, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('SurveyQuestion/' + id);
     }
 
     move(id: string, sequence: number) {
-        return this.http.post(
-            this.apiUrl + 'SurveyQuestion/' + id + '/Sequence/' + sequence, '[]' ,
-            {headers: this.headers}
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('SurveyQuestion/' + id + '/Sequence/' + sequence, {});
     }
 }
 

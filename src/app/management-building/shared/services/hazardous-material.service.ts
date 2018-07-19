@@ -1,49 +1,34 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 import {HazardousMaterial} from '../models/hazardous-material.model';
 import {RequestService} from '../../../shared/services/request.service';
-import {PersonRequiringAssistanceType} from '../models/person-requiring-assistance-type.model';
 
 
 @Injectable()
 export class HazardousMaterialService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<HazardousMaterial[]>(this.apiUrl + 'HazardousMaterial', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(): Observable<HazardousMaterial[]> {
+        return this.get('HazardousMaterial');
     }
 
-    localized() {
-        return this.http.get<HazardousMaterial[]>(this.apiUrl + 'HazardousMaterial/localized', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    localized(): Observable<HazardousMaterial[]> {
+        return this.get('HazardousMaterial/localized');
     }
 
-    get(idHazardousMaterial: string) {
-        return this.http.get<HazardousMaterial[]>(this.apiUrl + 'HazardousMaterial/' + idHazardousMaterial, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getOne(idHazardousMaterial: string): Observable<HazardousMaterial> {
+        return this.get('HazardousMaterial/' + idHazardousMaterial);
     }
 
     save(material: HazardousMaterial) {
-        return this.http.post(
-            this.apiUrl + 'HazardousMaterial',
-            JSON.stringify(material),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('HazardousMaterial', material);
     }
 
     remove(idHazardousMaterial: string) {
-        return this.http.delete(this.apiUrl + 'HazardousMaterial/' + idHazardousMaterial, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('HazardousMaterial/' + idHazardousMaterial);
     }
 }
