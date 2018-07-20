@@ -7,7 +7,8 @@ import 'devextreme-intl';
 import * as frMessages from 'devextreme/localization/messages/fr.json';
 import {locale, loadMessages} from 'devextreme/localization';
 
-import {environment} from '../environments/environment';
+import config from '../assets/config/config.json';
+import packageInfo from '../assets/config/package.json';
 import {AuthenticationService} from './user-access/shared/services/authentification.service';
 
 
@@ -30,7 +31,7 @@ export class AppComponent {
         private auth: AuthenticationService,
         private router: Router,
     ) {
-        environment.locale.use = localStorage.getItem('locale') || environment.locale.use;
+        config.locale = localStorage.getItem('locale') || config.locale;
 
         this.auth.isLogged.subscribe(logged => {
             this.isLogged = logged;
@@ -59,17 +60,22 @@ export class AppComponent {
     }
 
     private setAngular() {
-        registerLocaleData(localeFr, 'fr');
+        if (packageInfo.locale.includes('fr')) {
+            registerLocaleData(localeFr, 'fr');
+        }
     }
 
     private setDevExtreme() {
-        loadMessages(frMessages);
-        locale(environment.locale.use);
+        if (packageInfo.locale.includes('fr')) {
+            loadMessages(frMessages);
+        }
+
+        locale(config.locale);
     }
 
     private setNgxTranslator() {
-        this.ngxLanguage.addLangs(environment.locale.available);
-        this.ngxLanguage.setDefaultLang(environment.locale.use);
-        this.ngxLanguage.use(environment.locale.use);
+        this.ngxLanguage.addLangs(packageInfo.locale);
+        this.ngxLanguage.setDefaultLang(config.locale);
+        this.ngxLanguage.use(config.locale);
     }
 }

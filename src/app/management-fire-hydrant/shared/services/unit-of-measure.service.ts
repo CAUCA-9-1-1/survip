@@ -1,6 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-
+import {Observable} from 'rxjs/Observable';
 
 import {UnitOfMeasure} from '../models/unit-of-measure.model';
 import {RequestService} from '../../../shared/services/request.service';
@@ -9,53 +8,35 @@ import {RequestService} from '../../../shared/services/request.service';
 @Injectable()
 export class UnitOfMeasureService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<UnitOfMeasure[]>(this.apiUrl + 'UnitOfMeasure', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(): Observable<UnitOfMeasure[]> {
+        return this.get('UnitOfMeasure');
     }
 
     save(unit: UnitOfMeasure) {
-        return this.http.post(
-            this.apiUrl + 'UnitOfMeasure',
-            JSON.stringify(unit),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('UnitOfMeasure', unit);
     }
 
     remove(idUnitOfMeasure: string) {
-        return this.http.delete(this.apiUrl + 'UnitOfMeasure/' + idUnitOfMeasure, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('UnitOfMeasure/' + idUnitOfMeasure);
     }
 
-    getCapacity() {
-        return this.http.get<UnitOfMeasure[]>(this.apiUrl + 'UnitOfMeasure/capacity', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getCapacity(): Observable<UnitOfMeasure[]> {
+        return this.get('UnitOfMeasure/capacity');
     }
 
-    getDimension() {
-        return this.http.get<UnitOfMeasure[]>(this.apiUrl + 'UnitOfMeasure/dimension', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getDimension(): Observable<UnitOfMeasure[]> {
+        return this.get('UnitOfMeasure/dimension');
     }
 
-    getPressure() {
-        return this.http.get<UnitOfMeasure[]>(this.apiUrl + 'UnitOfMeasure/pressure', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getPressure(): Observable<UnitOfMeasure[]> {
+        return this.get('UnitOfMeasure/pressure');
     }
 
-    getRate() {
-        return this.http.get<UnitOfMeasure[]>(this.apiUrl + 'UnitOfMeasure/rate', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getRate(): Observable<UnitOfMeasure[]> {
+        return this.get('UnitOfMeasure/rate');
     }
 }

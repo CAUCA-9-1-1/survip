@@ -4,7 +4,7 @@ import {MatSnackBar} from '@angular/material';
 import {DxTreeViewComponent} from 'devextreme-angular';
 import {confirm} from 'devextreme/ui/dialog';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {Question} from '../shared/models/question.model';
 import {QuestionService} from '../shared/services/question.service';
@@ -63,7 +63,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
     getQuestionTreeviewTitle(data, index, element) {
         const question = Question.fromJSON(data);
-        element.innerHTML = question.getLocalization(environment.locale.use);
+        element.innerHTML = question.getLocalization(config.locale);
         if (element.innerHTML === '') {
             element.innerHTML = 'Pas de titre';
         }
@@ -71,7 +71,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
     getLocalizedTitle(data) {
         const question = Question.fromJSON(data);
-        return question.getLocalization(environment.locale.use);
+        return question.getLocalization(config.locale);
     }
 
     onAddQuestion() {
@@ -100,7 +100,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         this.displayOptionDetails(question.questionType);
         question.sequence = this.getLastQuestionSequence();
         question.localizations = [];
-        environment.locale.available.forEach(language => {
+        config.locale.available.forEach(language => {
             const languageItem = {
                 languageCode: language.toLowerCase(),
                 isActive: true,

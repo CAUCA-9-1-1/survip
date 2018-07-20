@@ -22,7 +22,7 @@ export class ImageComponent implements OnInit {
         this.idPicture = id;
 
         if (id) {
-            this.pictureService.get(id).subscribe(data => {
+            this.pictureService.getOne(id).subscribe(data => {
                 this.src = data.dataUri;
             });
         }

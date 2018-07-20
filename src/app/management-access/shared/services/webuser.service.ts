@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 import {Webuser} from '../models/webuser.model';
 import {RequestService} from '../../../shared/services/request.service';
@@ -9,35 +9,23 @@ import {WebuserForWeb} from '../models/webuser-for-web.model';
 @Injectable()
 export class WebuserService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<Webuser[]>(this.apiUrl + 'Webuser', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(): Observable<Webuser[]> {
+        return this.get('Webuser');
     }
 
-    getActive() {
-        return this.http.get<WebuserForWeb[]>(this.apiUrl + 'Webuser/Active', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getActive(): Observable<WebuserForWeb[]> {
+        return this.get('Webuser/Active');
     }
 
     save(webuser: Webuser) {
-        return this.http.post(
-            this.apiUrl + 'Webuser',
-            JSON.stringify(webuser),
-            {
-                headers: this.headers
-            }
-        ).catch((error: HttpErrorResponse) => this.error(error));
+        return this.post('Webuser', webuser);
     }
 
     remove(idWebuser: string) {
-        return this.http.delete(this.apiUrl + 'Webuser/' + idWebuser, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.delete('Webuser/' + idWebuser);
     }
 }

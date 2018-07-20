@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {State} from '../shared/models/state.model';
 import {StateService} from '../shared/services/state.service';
@@ -38,7 +38,7 @@ export class StateComponent extends GridWithCrudService implements OnInit {
     getStateName(data) {
         const state = State.fromJSON(data);
 
-        return state.getLocalization(environment.locale.use);
+        return state.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

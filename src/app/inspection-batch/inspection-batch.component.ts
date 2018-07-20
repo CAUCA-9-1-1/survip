@@ -106,7 +106,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         this.setBuildingInspected({});
         this.setBuildingNotInspected();
 
-        e.data.idWebuserCreatedBy = localStorage.getItem('currentWebuser');
+        e.data.idWebuserCreatedBy = sessionStorage.getItem('currentWebuser');
         e.data.isReadyForInspection = false;
         e.data.createOn = (new Date());
         e.data.isActive = true;
@@ -311,7 +311,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
                 idBatch: this.formInspectionField.data.id,
                 idBuilding: building.id,
                 idWebuserAssignedTo: null,
-                idWebuserCreatedBy: localStorage.getItem('currentWebuser'),
+                idWebuserCreatedBy: sessionStorage.getItem('currentWebuser'),
             };
 
             this.moveBuildingsSource('buildingsNotInspected', 'buildingsInspected', building.id);

@@ -5,9 +5,4 @@
 
 export const environment = {
     production: false,
-    locale: {
-        available: ['fr', 'en'],
-        use: 'fr',
-    },
-    apiUrl: '//cadevsprevention1.ad.cauca.ca:5555/api/',
 };

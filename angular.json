@@ -28,39 +28,6 @@
             "scripts": []
           },
           "configurations": {
-            "vm": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.vm.ts"
-                }
-              ]
-            },
-            "local": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
-                }
-              ]
-            },
-            "test": {
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.test.ts"
-                }
-              ]
-            },
             "production": {
               "optimization": true,
               "outputHashing": "all",
@@ -86,15 +53,6 @@
             "browserTarget": "SURVI-Prevention:build"
           },
           "configurations": {
-            "vm": {
-              "browserTarget": "SURVI-Prevention:build:vm"
-            },
-            "local": {
-              "browserTarget": "SURVI-Prevention:build:local"
-            },
-            "test": {
-              "browserTarget": "SURVI-Prevention:build:test"
-            },
             "production": {
               "browserTarget": "SURVI-Prevention:build:production"
             }

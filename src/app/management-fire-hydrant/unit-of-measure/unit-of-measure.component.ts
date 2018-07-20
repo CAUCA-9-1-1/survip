@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {UnitOfMeasure} from '../shared/models/unit-of-measure.model';
@@ -44,7 +44,7 @@ export class UnitOfMeasureComponent extends GridWithCrudService implements OnIni
     getUnitName(data) {
         const unit = UnitOfMeasure.fromJSON(data);
 
-        return unit.getLocalization(environment.locale.use);
+        return unit.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

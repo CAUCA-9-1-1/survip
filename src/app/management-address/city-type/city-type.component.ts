@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {CityType} from '../shared/models/citytype.model';
 import {CityTypeService} from '../shared/services/citytype.service';
@@ -29,7 +29,7 @@ export class CityTypeComponent extends GridWithCrudService implements OnInit {
     getCityTypeName(data) {
         const cityType = CityType.fromJSON(data);
 
-        return cityType.getLocalization(environment.locale.use);
+        return cityType.getLocalization(config.locale);
     }
 
     onInitNewRow(e) {

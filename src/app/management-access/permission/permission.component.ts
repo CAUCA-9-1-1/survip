@@ -89,7 +89,7 @@ export class PermissionComponent implements OnInit {
 
   public onRowSelected(e) {
     this.lastPermissionObject = e.itemData;
-    // this.permissionService.get(e.itemData.idPermissionObject).subscribe(data => this.features = data);
+    // this.permissionService.getOne(e.itemData.idPermissionObject).subscribe(data => this.features = data);
   }
 
   private loadObject() {
