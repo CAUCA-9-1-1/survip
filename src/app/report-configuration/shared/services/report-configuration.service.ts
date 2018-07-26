@@ -27,6 +27,7 @@ export class ReportConfigurationService extends RequestService {
   }
 
   saveTemplate(template: ConfigurationTemplate) {
+    template.data = templateCSSPreprocessor + template.data
     return this.http.post(this.apiUrl + 'ReportConfigurationTemplate/',
       JSON.stringify(template),
       {
