@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 
-import {environment} from '../../../../environments/environment';
+import config from '../../../../assets/config/config.json';
 
 
 @Injectable()
@@ -13,7 +13,7 @@ export class AuthenticationService {
     constructor(
         private http: HttpClient
     ) {
-        this.isLogged.next(localStorage.getItem('currentToken') ? true : false);
+        this.isLogged.next(sessionStorage.getItem('accessToken') ? true : false);
         this.status().subscribe(logged => {
             this.isLogged.next(logged);
         }, error => {
@@ -22,7 +22,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string): Observable<any> {
-        return this.http.post<any>(environment.apiUrl + 'Authentification/Logon?user=' + username + '&password=' + password, {
+        return this.http.post<any>(config.apiUrl + 'Authentification/Logon?user=' + username + '&password=' + password, {
             username: username,
             password: password,
         }).pipe(
@@ -34,22 +34,23 @@ export class AuthenticationService {
     logout() {
         this.isLogged.next(false);
 
-        localStorage.removeItem('currentToken');
-        localStorage.removeItem('currentWebuser');
+        sessionStorage.clear();
     }
 
     private status(): Observable<boolean> {
-        return this.http.get<boolean>(environment.apiUrl + 'Authentification/SessionStatus', {
+        return this.http.get<boolean>(config.apiUrl + 'Authentification/SessionStatus', {
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('currentToken'),
+                'Authorization': sessionStorage.getItem('authorizationType') + ' ' + sessionStorage.getItem('accessToken'),
             }
         });
     }
 
     private onResponse(response) {
+        console.log(response);
         if (response.data.accessToken) {
-            localStorage.setItem('currentToken', response.data.accessToken);
-            localStorage.setItem('currentWebuser', response.data.idWebuser);
+            sessionStorage.setItem('authorizationType', 'Bearer');
+            sessionStorage.setItem('accessToken', response.data.accessToken);
+            sessionStorage.setItem('currentWebuser', response.data.idWebuser);
         }
 
         return response.data;

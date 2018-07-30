@@ -24,6 +24,7 @@ import {MainMenuComponent} from './components/main-menu/main-menu.component';
 import {SlideshowComponent} from './components/slideshow/slideshow.component';
 import {ImageComponent} from './components/image/image.component';
 import {UploadComponent} from './components/upload/upload.component';
+import {FilterByPipe} from './pipes/filter.pipe';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -39,6 +40,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         SlideshowComponent,
         ImageComponent,
         UploadComponent,
+        FilterByPipe,
     ],
     exports: [
         BrowserModule,

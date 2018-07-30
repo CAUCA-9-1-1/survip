@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {Inspection} from '../models/inspection.model';
@@ -13,14 +13,12 @@ import {BuildingDetails} from '../models/building-details.model';
 @Injectable()
 export class InspectionService extends RequestService {
 
-    constructor(private http: HttpClient, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
     }
 
-    getAll() {
-        return this.http.get<Inspection[]>(this.apiUrl + 'Inspection', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getAll(): Observable<Inspection[]> {
+        return this.get('Inspection');
     }
 
     getBuildingToDo(search?: string) {
@@ -38,96 +36,66 @@ export class InspectionService extends RequestService {
             data: Inspection[];
         }>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
             headers: this.headers,
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        });
     }
 
-    getGeneralInfo(id: string) {
-        return this.http.get<InspectionGeneralInfo>(this.apiUrl + 'inspection/' + id + '/detail', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getGeneralInfo(id: string): Observable<InspectionGeneralInfo> {
+        return this.get('inspection/' + id + '/detail');
     }
 
-    getCourse(id: string) {
-        return this.http.get<InspectionCourses[]>(this.apiUrl + 'inspection/' + id + '/course', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getCourse(id: string): Observable<InspectionCourses[]> {
+        return this.get('inspection/' + id + '/course');
     }
 
-    getCourseLane(id: string) {
-        return this.http.get<InspectionCourse>(this.apiUrl + 'inspection/course/' + id, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getCourseLane(id: string): Observable<InspectionCourse> {
+        return this.get('inspection/course/' + id);
     }
 
     getFireHydrant(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/' + id + '/firehydrant', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.get('inspection/' + id + '/firehydrant');
     }
 
     getSurveySummary(id: string) {
-        return this.http.get(this.apiUrl + 'InspectionQuestion/Inspection/' + id + '/Summary', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.get('InspectionQuestion/Inspection/' + id + '/Summary');
     }
 
-    getBuildings(id: string) {
-        return this.http.get<Building[]>(this.apiUrl + 'inspection/' + id + '/building', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getBuildings(id: string): Observable<Building[]> {
+        return this.get('inspection/' + id + '/building');
     }
 
-    getBuildingDetail(id: string) {
-        return this.http.get<BuildingDetails>(this.apiUrl + 'inspection/building/' + id + '/detail', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    getBuildingDetail(id: string): Observable<BuildingDetails> {
+        return this.get('inspection/building/' + id + '/detail');
     }
 
     getBuildingContact(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/contact', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.get('inspection/building/' + id + '/contact');
     }
 
     getBuildingPNAPS(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/pnaps', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.get('inspection/building/' + id + '/pnaps');
     }
 
     getBuildingSprinkler(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/sprinkler', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.get('inspection/building/' + id + '/sprinkler');
     }
 
     getBuildingAlarmPanel(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/alarmpanel', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.get('inspection/building/' + id + '/alarmpanel');
     }
 
     getBuildingHazardousMaterial(id: string) {
-        return this.http.get(this.apiUrl + 'inspection/building/' + id + '/hazardousmaterial', {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+        return this.get('inspection/building/' + id + '/hazardousmaterial');
     }
 
-    approve(id: string) {
-        return this.http.post<Boolean>(this.apiUrl + 'Inspection/' + id + '/approve', {}, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    approve(id: string): Observable<Boolean> {
+        return this.post('Inspection/' + id + '/approve', {});
     }
 
-    refuse(id: string) {
-        return this.http.post<Boolean>(this.apiUrl + 'Inspection/' + id + '/refuse', {}, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    refuse(id: string): Observable<Boolean> {
+        return this.post('Inspection/' + id + '/refuse', {});
     }
 
-    cancel(id: string) {
-        return this.http.post<Boolean>(this.apiUrl + 'Inspection/' + id + '/cancel', {}, {
-            headers: this.headers
-        }).catch((error: HttpErrorResponse) => this.error(error));
+    cancel(id: string): Observable<Boolean> {
+        return this.post('Inspection/' + id + '/cancel', {});
     }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {environment} from '../../environments/environment';
+import config from '../../assets/config/config.json';
 import {GridWithCrudService} from '../shared/classes/grid-with-crud-service';
 import {FireSafetyDepartmentRiskLevelService} from './shared/services/fire-safety-department-risk-level.service';
 import {FireSafetyDepartmentService} from '../management-access/shared/services/firesafetydepartment.service';
@@ -66,13 +66,13 @@ export class InspectionManagementComponent extends GridWithCrudService implement
     getFireSafetyDepartmentName(data) {
         const ssi = FireSafetyDepartment.fromJSON(data);
 
-        return ssi.getLocalization(environment.locale.use);
+        return ssi.getLocalization(config.locale);
     }
 
     getSurveyName(data) {
         const survey = Survey.fromJSON(data);
 
-        return survey.getLocalization(environment.locale.use);
+        return survey.getLocalization(config.locale);
     }
 
     private loadFireSafetyDepartment() {

@@ -35,7 +35,7 @@ export class InspectionImplantationPlanComponent implements OnInit {
             return null;
         }
 
-        this.pictureService.get(this.idImplantationPlan).subscribe(data => {
+        this.pictureService.getOne(this.idImplantationPlan).subscribe(data => {
             this.picturePlan = 'data:image/jpeg;base64,' + data['picture'];
         });
     }
