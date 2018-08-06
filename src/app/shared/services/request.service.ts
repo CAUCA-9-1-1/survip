@@ -95,7 +95,7 @@ console.log(error);
                 message = this.translateService.instant(error.error);
                 break;
             case 401:
-                this.onLogout(error);
+                this.refresh();
                 break;
             case 404:
                 message = this.translateService.instant('requestServer404', {url: error.url});
