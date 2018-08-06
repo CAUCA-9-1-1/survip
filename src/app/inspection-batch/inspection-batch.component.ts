@@ -429,7 +429,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
         this.timer = setTimeout((function(search) {
             this.inspectionService.getBuildingToDo(search).subscribe(data => {
-                this.buildingsWithoutInspection = data.data;
+                this.buildingsWithoutInspection = data;
                 this.setBuildingNotInspected();
             });
         }).bind(this, e.value), 1000);
@@ -448,6 +448,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     private loadInspection() {
-        this.inspectionService.getBuildingToDo().subscribe(data => this.buildingsWithoutInspection = data.data);
+        this.inspectionService.getBuildingToDo().subscribe(data => this.buildingsWithoutInspection = data);
     }
 }

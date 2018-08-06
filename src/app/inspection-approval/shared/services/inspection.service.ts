@@ -1,5 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import {map} from 'rxjs/operators';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {Inspection} from '../models/inspection.model';
@@ -21,22 +22,20 @@ export class InspectionService extends RequestService {
         return this.get('Inspection');
     }
 
-    getBuildingToDo(search?: string) {
-        const loadOptions = {
-            take: 20,
-        };
+    getBuildingToDo(search?: string): Observable<Inspection[]> {
+        let params = '?$orderby=fullLaneName&$top=201';
 
         if (search) {
-            loadOptions['filter'] = [[search]];
+            params += '&$filter=(contains(fullCivicNumber,\'' + search + '\'))';
+            params += ' or (contains(fullLaneName,\'' + search + '\'))';
+            params += ' or (contains(matricule,\'' + search + '\'))';
         }
 
-        this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
-
-        return this.http.get<{
-            data: Inspection[];
-        }>(this.apiUrl + 'Inspection/BuildingWithoutInspection', {
-            headers: this.headers,
-        });
+        return this.get('odata/BuildingsWithoutInspection' + params).pipe(
+            map(data => {
+                return data.value;
+            })
+        );
     }
 
     getGeneralInfo(id: string): Observable<InspectionGeneralInfo> {

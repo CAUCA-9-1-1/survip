@@ -77,12 +77,11 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         this.loadUtilisationCode();
 
         this.translateService.get([
-            'riskLevel', 'address', 'transversal', 'city', 'postalCode', 'batch', 'status', 'note', 'anomaly',
-            'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details',
-            'matricule', 'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see',
-            'vacantLand', 'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building',
-            'approve', 'todo', 'started', 'absent', 'waitingApprobation', 'approved', 'refused', 'canceled',
-            'collapseAll', 'expandAll', 'delete', 'wantToDeleteBatch'
+            'riskLevel', 'civicNumber', 'lane', 'transversal', 'city', 'postalCode', 'batch', 'status', 'note', 'anomaly',
+            'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details', 'matricule',
+            'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see', 'vacantLand', 'delete',
+            'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building', 'approve', 'todo', 'absent',
+            'started', 'waitingApprobation', 'approved', 'refused', 'canceled', 'collapseAll', 'expandAll', 'wantToDeleteBatch'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -101,24 +100,23 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     showBatch(field) {
         if (field.data && field.data.items.length) {
-            this.router.navigate(['/inspection/batch', field.data.items[0].idBatch]);
+            this.router.navigate(['/inspection/batch', field.data.items[0].idBatch.toString()]);
         }
     }
 
     removeBatch(field) {
         confirm(this.labels['wantToDeleteBatch'], this.labels['delete']).then((result) => {
             if (result) {
-                this.batchService.remove(field.data.items[0].idBatch).subscribe(() => this.loadData());
+                this.batchService.remove(field.data.items[0].idBatch.toString()).subscribe(() => this.loadData());
             }
         });
     }
 
     showInspection(field) {
         if (field.data) {
-            this.router.navigate(['/inspection/dashboard', field.data.id]);
+            this.router.navigate(['/inspection/dashboard', field.data.idInspection.toString()]);
         }
     }
-
     private checkLoadedElement(): boolean {
         if (
             this.angularIsLoaded && this.labels !== {} &&
@@ -188,11 +186,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         this.dataGrid.instance.option({
             allowColumnResizing: true,
             filterRow: {
-                visible: false,
-            },
-            searchPanel: {
                 visible: true,
-                width: (screen.width / 2),
             },
             columns: columns,
             columnChooser: {
@@ -259,31 +253,31 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     private getDefaultColumnVisible() {
         const visible = [
-            false, true, true, false, false, false, false, false, false, false, false, false,
+            false, true, true, true, false, false, false, false, false, false, false, false, false,
             false, false, false, false, false, false, false, false, false, false, false, false
         ];
 
         switch (this.selectedMode) {
             case 'mode1':
-                visible[6] = true;
-                visible[7] = true;
-                visible[8] = true;
-                break;
-            case 'mode2':
-                visible[0] = true;
-                visible[6] = true;
                 visible[7] = true;
                 visible[8] = true;
                 visible[9] = true;
-                visible[10] = true;
                 break;
-            case 'mode3':
+            case 'mode2':
+                visible[0] = true;
+                visible[7] = true;
+                visible[8] = true;
                 visible[9] = true;
                 visible[10] = true;
                 visible[11] = true;
                 break;
+            case 'mode3':
+                visible[10] = true;
+                visible[11] = true;
+                visible[12] = true;
+                break;
             case 'mode4':
-                visible[4] = true;
+                visible[5] = true;
                 break;
             default:
                 break;
@@ -316,11 +310,17 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[1],
             width: width[1] || null,
         }, {
-            dataField: 'address',
-            caption: this.labels['address'],
+            dataField: 'fullCivicNumber',
+            caption: this.labels['civicNumber'],
             dataType: 'string',
             visible: visible[2],
             width: width[2] || null,
+        }, {
+            dataField: 'fullLaneName',
+            caption: this.labels['lane'],
+            dataType: 'string',
+            visible: visible[3],
+            width: width[3] || null,
         }, {
             dataField: 'idLaneTransversal',
             caption: this.labels['transversal'],
@@ -330,14 +330,14 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 valueExpr: 'id',
                 displayExpr: 'name',
             },
-            visible: visible[3],
-            width: width[3] || null,
+            visible: visible[4],
+            width: width[4] || null,
         }, {
             dataField: 'idCity',
             caption: this.labels['city'],
             dataType: 'string',
-            visible: visible[4],
-            width: width[4] || null,
+            visible: visible[5],
+            width: width[5] || null,
             lookup: {
                 dataSource: this.cities,
                 valueExpr: 'id',
@@ -351,28 +351,28 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             dataField: 'postalCode',
             caption: this.labels['postalCode'],
             dataType: 'string',
-            visible: visible[5],
-            width: width[5] || null,
+            visible: visible[6],
+            width: width[6] || null,
         }, {
             dataField: 'webuserAssignedTo',
             caption: this.labels['webuserAssignedTo'],
             dataType: 'string',
-            visible: visible[6],
-            width: width[6] || null,
+            visible: visible[7],
+            width: width[7] || null,
         }, {
             dataField: 'batchDescription',
             caption: this.labels['batch'],
             dataType: 'string',
-            visible: visible[7],
-            width: width[7] || null,
+            visible: visible[8],
+            width: width[8] || null,
             groupIndex: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? 0 : null),
             groupCellTemplate: 'groupBatch',
         }, {
             dataField: 'inspectionStatus',
             caption: this.labels['status'],
             dataType: 'string',
-            visible: visible[8],
-            width: width[8] || null,
+            visible: visible[9],
+            width: width[9] || null,
             lookup: {
                 displayExpr: 'name',
                 valueExpr: 'id',
@@ -400,26 +400,26 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             dataField: 'hasAnomaly',
             caption: this.labels['anomaly'],
             dataType: 'boolean',
-            visible: visible[9],
-            width: width[9] || null,
+            visible: visible[10],
+            width: width[10] || null,
         }, {
             dataField: 'lastInspectionOn',
             caption: this.labels['lastInspection'],
             dataType: 'date',
-            visible: visible[10],
-            width: width[10] || null,
-        }, {
-            dataField: 'contact',
-            caption: this.labels['contact'],
-            dataType: 'string',
             visible: visible[11],
             width: width[11] || null,
+        }, {
+            dataField: 'contacts',
+            caption: this.labels['contact'],
+            dataType: 'string',
+            visible: visible[12],
+            width: width[12] || null,
         }, {
             dataField: 'owner',
             caption: this.labels['owner'],
             dataType: 'string',
-            visible: visible[12],
-            width: width[12] || null,
+            visible: visible[13],
+            width: width[13] || null,
         }, {
             dataField: 'idUtilisationCode',
             caption: this.labels['utilisationCode'],
@@ -433,63 +433,63 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                     return code.getLocalization(config.locale, 'description');
                 }
             },
-            visible: visible[13],
-            width: width[13] || null,
+            visible: visible[14],
+            width: width[14] || null,
         }, {
             dataField: 'idPicture',
             caption: this.labels['picture'],
             dataType: 'object',
-            visible: visible[14],
-            width: width[14] || null,
+            visible: visible[15],
+            width: width[15] || null,
             cellTemplate: (container, options) => this.showPicture(container, options),
         }, {
             dataField: 'buildingValue',
             caption: this.labels['buildingValue'],
             dataType: 'string',
-            visible: visible[15],
-            width: width[15] || null,
+            visible: visible[16],
+            width: width[16] || null,
         }, {
             dataField: 'matricule',
             caption: this.labels['matricule'],
             dataType: 'string',
-            visible: visible[16],
-            width: width[16] || null,
+            visible: visible[17],
+            width: width[17] || null,
         }, {
             dataField: 'numberOfAppartment',
             caption: this.labels['numberOfAppartment'],
             dataType: 'number',
-            visible: visible[17],
-            width: width[17] || null,
+            visible: visible[18],
+            width: width[18] || null,
         }, {
             dataField: 'numberOfBuilding',
             caption: this.labels['numberOfBuilding'],
             dataType: 'number',
-            visible: visible[18],
-            width: width[18] || null,
+            visible: visible[19],
+            width: width[19] || null,
         }, {
             dataField: 'numberOfFloor',
             caption: this.labels['numberOfFloor'],
             dataType: 'number',
-            visible: visible[19],
-            width: width[19] || null,
+            visible: visible[20],
+            width: width[20] || null,
         }, {
             dataField: 'vacantLand',
             caption: this.labels['vacantLand'],
             dataType: 'boolean',
-            visible: visible[20],
-            width: width[20] || null,
+            visible: visible[21],
+            width: width[21] || null,
         }, {
             dataField: 'yearOfConstruction',
             caption: this.labels['yearOfConstruction'],
             dataType: 'number',
-            visible: visible[21],
-            width: width[21] || null,
+            visible: visible[22],
+            width: width[22] || null,
         }, {
             dataField: 'details',
             caption: this.labels['details'],
             dataType: 'string',
-            visible: visible[22],
-            width: width[22] || null,
+            visible: visible[23],
+            width: width[23] || null,
         }];
     }
 
@@ -504,16 +504,16 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     private loadData() {
         switch (this.selectedMode) {
             case 'mode1':
-                this.createStore('getToDo');
+                this.createStore('InspectionsToDo');
                 break;
             case 'mode2':
-                this.createStore('getForApproval');
+                this.createStore('InspectionsForApproval');
                 break;
             case 'mode3':
-                this.createStore('getBuildingHistory');
+                this.createStore('InspectionsCompleted');
                 break;
             case 'mode4':
-                this.createStore('getBuildingToDo');
+                this.createStore('BuildingsWithoutInspection');
                 break;
             default:
                 this.dataSource = [];
@@ -521,12 +521,12 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }
     }
 
-    private createStore(getFunction: string) {
+    private createStore(url: string) {
         this.dataSource = {
             store: new ODataService({
-                url: 'Inspection/BuildingWithoutInspectionOData',
+                url: url,
                 key: 'idBuilding',
-                keyType: 'string',
+                keyType: 'Guid',
             }),
         };
     }

@@ -1,22 +1,23 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import ODataStore from 'devextreme/data/odata/store';
 
-import {environment} from '../../../environments/environment';
 import {ODataConfig} from '../models/o-data-config.model';
+import config from '../../../assets/config/config.json';
 
 
 @Injectable()
 export class ODataService {
 
-    constructor(config: ODataConfig) {
+    constructor(configOData: ODataConfig) {
         return new ODataStore({
             beforeSend: request => {
-                request.headers['Authorization'] = 'Bearer ' + localStorage.getItem('currentToken');
-                request.headers['languageCode'] = environment.locale.use;
+                request.headers['Authorization'] =
+                    sessionStorage.getItem('authorizationType') + ' ' + sessionStorage.getItem('accessToken');
+                request.headers['languageCode'] = config.locale;
             },
-            url: environment.apiUrl + config.url,
-            key: config.key,
-            keyType: config.keyType,
+            url: config.apiUrl + 'odata/' + configOData.url,
+            key: configOData.key,
+            keyType: configOData.keyType,
             version: 4,
         });
     }
