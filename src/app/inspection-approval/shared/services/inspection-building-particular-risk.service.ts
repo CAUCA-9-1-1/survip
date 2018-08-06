@@ -33,6 +33,6 @@ export class InspectionBuildingParticularRiskService extends RequestService {
     }
 
     getPictures(id: string): Observable<Picture[]> {
-        return this.get(this.apiUrl + 'inspection/building/particularrisk/' + id + '/picture');
+        return this.get('inspection/building/particularrisk/' + id + '/picture');
     }
 }

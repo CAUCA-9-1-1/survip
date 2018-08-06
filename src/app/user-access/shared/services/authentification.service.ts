@@ -46,7 +46,6 @@ export class AuthenticationService {
     }
 
     private onResponse(response) {
-        console.log(response);
         if (response.data.accessToken) {
             sessionStorage.setItem('authorizationType', 'Bearer');
             sessionStorage.setItem('accessToken', response.data.accessToken);

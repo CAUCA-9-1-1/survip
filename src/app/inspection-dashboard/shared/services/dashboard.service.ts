@@ -2,6 +2,7 @@ import {Injectable, Injector} from '@angular/core';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {DashboardInspection} from '../models/dashboard-inspection.model';
+import {Observable} from 'rxjs/Observable';
 
 
 @Injectable()
@@ -11,35 +12,19 @@ export class DashboardService extends RequestService {
         super(injector);
     }
 
-    getToDo(loadOptions) {
-        this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
-
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ToDoInspection', {
-            headers: this.headers
-        });
+    getToDo(loadOptions): Observable<DashboardInspection[]> {
+        return this.get('Inspection/ToDoInspection');
     }
 
-    getForApproval(loadOptions) {
-        this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
-
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/ForApprovalInspection', {
-            headers: this.headers
-        });
+    getForApproval(loadOptions): Observable<DashboardInspection[]> {
+        return this.get('Inspection/ForApprovalInspection');
     }
 
-    getBuildingHistory(loadOptions) {
-        this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
-
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithHistory', {
-            headers: this.headers
-        });
+    getBuildingHistory(loadOptions): Observable<DashboardInspection[]> {
+        return this.get('Inspection/BuildingWithHistory');
     }
 
-    getBuildingToDo(loadOptions) {
-        this.headers['queryLoadOptions'] = JSON.stringify(loadOptions);
-
-        return this.http.get<DashboardInspection[]>(this.apiUrl + 'Inspection/BuildingWithoutInspectionOData', {
-            headers: this.headers
-        });
+    getBuildingToDo(loadOptions): Observable<DashboardInspection[]> {
+        return this.get('Inspection/BuildingWithoutInspectionOData');
     }
 }

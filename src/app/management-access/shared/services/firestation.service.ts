@@ -13,7 +13,7 @@ export class FirestationService extends RequestService {
     }
 
     getAll(): Observable<Firestation[]> {
-        return this.get(this.apiUrl + 'Firestation');
+        return this.get('Firestation');
     }
 
     save(station: Firestation) {
