@@ -20,6 +20,7 @@ export class InspectionCourseComponent implements OnInit {
 
     private idInspection: string;
     courses: any = [];
+    modeEdit = false;
 
     constructor(
         private inspectionService: InspectionService,
@@ -47,5 +48,17 @@ export class InspectionCourseComponent implements OnInit {
                 });
             });
         });
+    }
+
+    activeEditMode(idCourse) {
+        if (this.modeEdit) {
+            this.save();
+        } else {
+            this.modeEdit = true;
+        }
+    }
+
+    save() {
+        this.modeEdit = false;
     }
 }

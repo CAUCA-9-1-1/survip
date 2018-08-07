@@ -1,19 +1,21 @@
 <mat-toolbar>
     <mat-toolbar-row>
-        <span class="fill-space"></span>
-        <span>
-            <button mat-raised-button (click)="activeEditMode()">
-                <mat-icon [fxShow]="!modeEdit">edit</mat-icon>
-                <mat-icon [fxShow]="modeEdit">save</mat-icon>
-            </button>
-        </span>
+        <span class="title">{{'implantationPlan' | translate}}</span>
     </mat-toolbar-row>
 </mat-toolbar>
 <div [fxShow]="picturePlan">
-    <app-image
-            height="400px"
-            [idImage]="implantationPlan"
-            [allowChange]="modeEdit"
-            (valueChanged)="uploadImage($event)">
-    </app-image>
+    <div fxFlex="90%">
+        <app-image
+                height="400px"
+                [idImage]="implantationPlan"
+                [allowChange]="modeEdit"
+                (valueChanged)="uploadImage($event)">
+        </app-image>
+    </div>
+    <div fxFlex="10%">
+        <button mat-raised-button (click)="activeEditMode()">
+            <mat-icon [fxShow]="!modeEdit">edit</mat-icon>
+            <mat-icon [fxShow]="modeEdit">save</mat-icon>
+        </button>
+    </div>
 </div>

@@ -1,4 +1,8 @@
-<h3>{{'fireHydrants' | translate}}</h3>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span class="title">{{'fireHydrants' | translate}}</span>
+    </mat-toolbar-row>
+</mat-toolbar>
 <div fxLayout="row" *ngFor="let fireHydrant of fireHydrants">
     <div fxFlex="30%">{{fireHydrant.number}}</div>
     <div>{{fireHydrant.address}}</div>

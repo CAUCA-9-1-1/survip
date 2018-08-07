@@ -1,3 +1,8 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span class="title">{{selected | translate}}</span>
+    </mat-toolbar-row>
+</mat-toolbar>
 <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedIndexChange)="selectBuilding($event)">
     <mat-tab *ngFor="let building of buildings" [label]="building.name">
         <div [fxShow]="selected == 'buildingDetails'">
