@@ -65,10 +65,13 @@ export class InspectionImplantationPlanComponent implements OnInit {
     }
 
     saveImage() {
-        this.modeEdit = false;
+        if (this.picture) {
+            this.pictureService.save(this.picture).subscribe(id => {
+                this.inspectionService.saveImplantationPlan(this.idBuildingDetail, id).subscribe();
+            });
+        }
 
-        this.pictureService.save(this.picture).subscribe(id => {
-            this.inspectionService.saveImplantationPlan(this.idBuildingDetail, id).subscribe();
-        });
+        this.modeEdit = false;
+        this.picture = undefined;
     }
 }
