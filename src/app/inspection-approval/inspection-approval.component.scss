@@ -2,6 +2,10 @@
   height: 100%;
 }
 
+:host ::ng-deep mat-toolbar {
+  margin-bottom: 5px;
+}
+
 .title {
   font-size: 2em;
   font-weight: bolder;
@@ -11,6 +15,10 @@
 .tools {
   padding-top: 10px;
   text-align: center;
+}
+
+.tools button {
+  margin: 0 5px;
 }
 
 .details {

@@ -25,3 +25,7 @@ body {
   height: calc(100% - 4em);
   overflow: auto;
 }
+
+mat-toolbar-row .fill-space {
+  flex: 1 1 auto;
+}

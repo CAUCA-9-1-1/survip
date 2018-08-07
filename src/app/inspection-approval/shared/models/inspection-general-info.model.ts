@@ -3,6 +3,7 @@ import {BaseModel} from '../../../shared/models/base.model';
 
 export class InspectionGeneralInfo extends BaseModel {
     idCity: string;
+    idDetail: string;
     mainBuildingIdLane: string;
     mainBuildingAddress: string;
     mainBuildingIdRiskLevel: string;

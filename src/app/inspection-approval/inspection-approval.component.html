@@ -10,7 +10,7 @@
                 <app-inspection-general-info [inspectionId]="selected == 'generalInfo' ? inspectionId : ''"></app-inspection-general-info>
             </div>
             <div [fxShow]="selected == 'implantationPlan'">
-                <app-inspection-implantation-plan [implantationPlan]="idImplantationPlan"></app-inspection-implantation-plan>
+                <app-inspection-implantation-plan [idBuildingDetail]="idBuildingDetail" [implantationPlan]="idImplantationPlan"></app-inspection-implantation-plan>
             </div>
             <div [fxShow]="selected == 'course'">
                 <app-inspection-course [inspection]="selected == 'course' ? inspectionId : ''"></app-inspection-course>
@@ -21,7 +21,7 @@
             <div [fxShow]="selected == 'survey'">
                 <app-inspection-survey [inspection]="selected == 'survey' ? inspectionId : ''"></app-inspection-survey>
             </div>
-            <div [fxShow]="isBuildingSection">
+            <div [fxShow]="isBuildingSection()">
                 <app-building-list [selected]="selected" [inspection]="isBuildingSection() ? inspectionId : ''"></app-building-list>
             </div>
         </div>
