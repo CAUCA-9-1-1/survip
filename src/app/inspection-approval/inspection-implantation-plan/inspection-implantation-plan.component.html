@@ -1,3 +1,19 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span class="fill-space"></span>
+        <span>
+            <button mat-raised-button (click)="activeEditMode()">
+                <mat-icon [fxShow]="!modeEdit">edit</mat-icon>
+                <mat-icon [fxShow]="modeEdit">save</mat-icon>
+            </button>
+        </span>
+    </mat-toolbar-row>
+</mat-toolbar>
 <div [fxShow]="picturePlan">
-    <img [src]="picturePlan" />
+    <app-image
+            height="400px"
+            [idImage]="implantationPlan"
+            [allowChange]="modeEdit"
+            (valueChanged)="uploadImage($event)">
+    </app-image>
 </div>

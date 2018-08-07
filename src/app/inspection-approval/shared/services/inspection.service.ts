@@ -9,6 +9,7 @@ import {InspectionCourse} from '../models/inspection-course.model';
 import {InspectionCourses} from '../models/inspection-courses.model';
 import {Building} from '../../../management-building/shared/models/building.model';
 import {BuildingDetails} from '../models/building-details.model';
+import {Picture} from '../../../shared/models/picture.model';
 
 
 @Injectable()
@@ -40,6 +41,10 @@ export class InspectionService extends RequestService {
 
     getGeneralInfo(id: string): Observable<InspectionGeneralInfo> {
         return this.get('inspection/' + id + '/detail');
+    }
+
+    saveImplantationPlan(idBuildingDetail: string, idPicture: string) {
+        return this.post('inspection/buildingdetail/' + idBuildingDetail + '/idPicture/' + idPicture, {});
     }
 
     getCourse(id: string): Observable<InspectionCourses[]> {

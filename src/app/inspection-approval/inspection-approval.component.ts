@@ -18,6 +18,7 @@ export class InspectionApprovalComponent implements OnInit {
     title = '';
     inspectionId: string;
     idImplantationPlan: string;
+    idBuildingDetail: string;
 
     constructor(
         private activeRoute: ActivatedRoute,
@@ -29,6 +30,7 @@ export class InspectionApprovalComponent implements OnInit {
 
             this.inspectionService.getGeneralInfo(param.idInspection).subscribe(data => {
                 this.title = data.mainBuildingAddress;
+                this.idBuildingDetail = data.idDetail;
                 this.idImplantationPlan = data.idPictureSitePlan;
             });
         });
