@@ -1,6 +1,7 @@
 
 export class InspectionCourses {
     id: string;
+    idFirestation: string;
     description: string;
 
     static fromJSON(data: object): InspectionCourses {

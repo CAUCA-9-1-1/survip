@@ -5,11 +5,8 @@ import {map} from 'rxjs/operators';
 import {RequestService} from '../../../shared/services/request.service';
 import {Inspection} from '../models/inspection.model';
 import {InspectionGeneralInfo} from '../models/inspection-general-info.model';
-import {InspectionCourse} from '../models/inspection-course.model';
-import {InspectionCourses} from '../models/inspection-courses.model';
 import {Building} from '../../../management-building/shared/models/building.model';
 import {BuildingDetails} from '../models/building-details.model';
-import {Picture} from '../../../shared/models/picture.model';
 
 
 @Injectable()
@@ -45,14 +42,6 @@ export class InspectionService extends RequestService {
 
     saveImplantationPlan(idBuildingDetail: string, idPicture: string) {
         return this.post('inspection/buildingdetail/' + idBuildingDetail + '/idPicture/' + idPicture, {});
-    }
-
-    getCourse(id: string): Observable<InspectionCourses[]> {
-        return this.get('inspection/' + id + '/course');
-    }
-
-    getCourseLane(id: string): Observable<InspectionCourse> {
-        return this.get('inspection/course/' + id);
     }
 
     getFireHydrant(id: string) {

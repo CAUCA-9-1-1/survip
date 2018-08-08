@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
-import {MatCardModule} from '@angular/material';
+import {MatCardModule, MatSelectModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {DxButtonModule, DxDataGridModule} from 'devextreme-angular';
 
 import {InspectionApprovalComponent} from './inspection-approval.component';
 import {SharedModule} from '../shared/shared.module';
@@ -42,6 +43,10 @@ import {BuildingListComponent} from './building-list/building-list.component';
         SharedModule,
         MatCardModule,
         MatExpansionModule,
+        MatSelectModule,
+
+        DxButtonModule,
+        DxDataGridModule,
     ],
 })
 export class InspectionApprovalModule { }

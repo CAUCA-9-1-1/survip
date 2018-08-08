@@ -6,6 +6,11 @@
   margin-bottom: 5px;
 }
 
+:host ::ng-deep .actions button {
+  min-width: 50px;
+  margin: 0 2px;
+}
+
 .title {
   font-size: 2em;
   font-weight: bolder;
