@@ -10,20 +10,20 @@ import {templateCSSPreprocessor} from '../models/template-preprocessor';
 @Injectable()
 export class ReportConfigurationService extends RequestService {
 
-  constructor(private http: HttpClient, injector: Injector) {
+  constructor(http: HttpClient, injector: Injector) {
     super(injector);
   }
 
   getTemplateList() {
     return this.http.get<ConfigurationTemplate[]>(this.apiUrl + 'ReportConfigurationTemplate/', {
       headers: this.headers
-    }).catch((error: HttpErrorResponse) => this.error(error));
+    });
   }
 
   getTemplate(id: string) {
     return this.http.get<ConfigurationTemplate>(this.apiUrl + 'ReportConfigurationTemplate/' + id, {
       headers: this.headers
-    }).catch((error: HttpErrorResponse) => this.error(error));
+    });
   }
 
   saveTemplate(template: ConfigurationTemplate) {
@@ -32,6 +32,6 @@ export class ReportConfigurationService extends RequestService {
       JSON.stringify(template),
       {
       headers: this.headers,
-    }).catch((error: HttpErrorResponse) => this.error(error));
+    });
   }
 }
