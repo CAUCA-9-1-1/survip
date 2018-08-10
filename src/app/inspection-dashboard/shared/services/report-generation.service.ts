@@ -1,10 +1,8 @@
 import {Injectable, Injector} from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 
 import {RequestService} from '../../../shared/services/request.service';
-import {Observable} from 'rxjs/Observable';
-import {ResponseContentType} from '@angular/http';
 
 
 @Injectable()
@@ -14,9 +12,9 @@ export class ReportGenerationService extends RequestService {
     super(injector);
   }
 
-  generateReport(guid: string) {
+  generateReport(buildingId: string, templateId: string) {
     return this.http.get(
-      this.apiUrl + 'ReportGeneration/generate/' + guid,
+      this.apiUrl + 'ReportGeneration/building/' + buildingId + '/template/' + templateId,
       { headers: this.headers, responseType: 'blob'}
       );
   }
