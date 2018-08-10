@@ -10,7 +10,7 @@ import {ResponseContentType} from '@angular/http';
 @Injectable()
 export class ReportGenerationService extends RequestService {
 
-  constructor(private http: HttpClient, injector: Injector) {
+  constructor(http: HttpClient, injector: Injector) {
     super(injector);
   }
 
