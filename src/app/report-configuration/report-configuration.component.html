@@ -1,6 +1,12 @@
+<label>
+  <select [(ngModel)]="selectedTemplateId" (change)="fetchTemplateData()">
+    <option disabled selected hidden [ngValue]="undefined">{{'chooseTemplate' | translate}}</option>
+    <option *ngFor="let template of templateIdentifiers" [ngValue]="template.id">{{template.name}}</option>
+  </select>
+</label>
 <app-text-editor
-  [(documentContent)]="documentContent"
-  (loadDataEvent)="fetchTemplate()"
+  [(documentContent)]="templateData"
+  (loadDataEvent)="fetchTemplateData()"
   (saveDataEvent)="saveTemplate()">
 </app-text-editor>
 

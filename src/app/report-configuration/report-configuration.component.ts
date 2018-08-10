@@ -1,56 +1,51 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ReportConfigurationService} from './shared/services/report-configuration.service';
-import {ConfigurationTemplate} from './shared/models/configuration-template.model';
+
+import {ReportTemplateService} from '../shared/services/report-template.service';
+import {ConfigurationTemplate} from '../shared/models/configuration-template.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-report-configuration',
   templateUrl: './report-configuration.component.html',
   styleUrls: ['./report-configuration.component.scss'],
-  providers: [ReportConfigurationService]
+  providers: [ReportTemplateService]
 })
 export class ReportConfigurationComponent implements OnInit {
-  // TODO replace constant with a list of available templates.
-  readonly TEMPLATE_NAME = 'Rapport Cauca';
-  documentContent: string;
+  templateData: string;
   selectedTemplateId: string;
-  templates: ConfigurationTemplate[];
+  templateIdentifiers: ConfigurationTemplate[];
 
   constructor(
-    private reportConfigurationService: ReportConfigurationService,
+    private translateService: TranslateService,
+    private reportConfigurationService: ReportTemplateService,
     private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    this.templates = [];
-    this.fetchTemplates();
+    this.templateIdentifiers = [];
+    this.fetchTemplateIdentifiers();
   }
 
-  fetchTemplates(): void {
+  fetchTemplateIdentifiers(): void {
     this.reportConfigurationService.getTemplateList().subscribe(data => {
-      data.forEach((template) => {
-        this.templates.push(template);
+      data.forEach((templateIdentifier) => {
+        this.templateIdentifiers.push(templateIdentifier);
       });
     });
   }
 
-  fetchTemplate(): void {
-    this.templates.forEach((template) => {
-      if (template.name === this.TEMPLATE_NAME) {
-        this.selectedTemplateId = template.id;
+  fetchTemplateData(): void {
         this.reportConfigurationService.getTemplate(this.selectedTemplateId).subscribe( res => {
-          template.data = res.data;
-          this.documentContent = res.data;
+          this.templateData = res.data;
           this.changeDetectorRef.detectChanges();
         });
         return;
-      }
-    });
   }
 
   saveTemplate(): void {
-    this.templates.forEach((template) => {
+    this.templateIdentifiers.forEach((template) => {
       if (template.id === this.selectedTemplateId) {
-        template.data = this.documentContent;
+        template.data = this.templateData;
         this.reportConfigurationService.saveTemplate(template).subscribe();
         return;
       }
