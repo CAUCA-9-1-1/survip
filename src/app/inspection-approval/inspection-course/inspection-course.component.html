@@ -3,52 +3,54 @@
         <span class="title">{{'courses' | translate}}</span>
     </mat-toolbar-row>
 </mat-toolbar>
-<div fxLayout="row" *ngFor="let course of courses">
-    <div fxFlex="30%">
-        <span [fxShow]="!modeEdit">{{course.description}}</span>
-        <span [fxShow]="modeEdit">
-            <mat-select placeholder="firestation" [ngModel]="course.idFirestation">
-                <mat-option *ngFor="let station of firestations" [value]="station.id">
-                    {{station.name}}
-                </mat-option>
-            </mat-select>
-        </span>
-    </div>
-    <div fxFlex="60%">
-        <span [fxShow]="!modeEdit">
-            <ul>
-                <li *ngFor="let lane of course.lanes">
-                    {{lane.description}}
-                </li>
-            </ul>
-        </span>
-        <span [fxShow]="modeEdit">
-            <dx-data-grid
-                    [dataSource]="course.lanes"
-                    [hoverStateEnabled]="true"
-                    [rowAlternationEnabled]="true">
-                <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="10%" caption=" "></dxi-column>
-                <dxi-column dataField="idLane" caption="{{'lane' | translate}}" [lookup]="lookupLanes"></dxi-column>
-                <dxi-column  dataField="direction" caption="{{'direction' | translate}}" [lookup]="lookupDirection"></dxi-column>
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="idFirestation"
+            caption="{{'description' | translate}}"
+            sortIndex="0"
+            sortOrder="asc"
+            width="30%"
+            [lookup]="lookupFirestations"></dxi-column>
+    <dxi-column dataField="lanes" caption="{{'course' | translate}}" cellTemplate="listLaneDescription" editCellTemplate="editCourseLane"></dxi-column>
 
-                <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-                </dxo-editing>
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'course' | translate}}" [showTitle]="true"></dxo-popup>
 
-                <div *dxTemplate="let field of 'showmove'">
-                    <dx-button icon="arrowup" (onClick)="moveUp(field)"></dx-button>
-                    <dx-button icon="arrowdown" (onClick)="moveDown(field)"></dx-button>
-                </div>
-            </dx-data-grid>
-        </span>
+        <dxo-form colCount="1"></dxo-form>
+    </dxo-editing>
+
+    <div *dxTemplate="let field of 'listLaneDescription'">
+        <ul>
+            <li *ngFor="let courselane of field.value">{{getLaneName(courselane.idLane)}}{{getDirection(courselane.direction)}}</li>
+        </ul>
     </div>
-    <div fxFlex="10%" class="actions">
-        <button mat-raised-button (click)="activeEditMode(course.id)">
-            <mat-icon [fxShow]="!modeEdit">edit</mat-icon>
-            <mat-icon [fxShow]="modeEdit">save</mat-icon>
-        </button>
-        <button mat-raised-button (click)="deleteCourse(course.id)">
-            <mat-icon [fxShow]="!modeEdit">delete</mat-icon>
-            <mat-icon [fxShow]="modeEdit">undo</mat-icon>
-        </button>
+    <div *dxTemplate="let field of 'editCourseLane'">
+        <dx-data-grid
+                [dataSource]="field.value"
+                [hoverStateEnabled]="true"
+                [rowAlternationEnabled]="true"
+                (onInitialized)="setFormCourseLaneField(field)"
+                (onInitNewRow)="onNewLane($event)"
+                (onRowInserted)="onLaneInserted($event)"
+                (onRowUpdated)="onLaneUpdated($event)"
+                (onRowRemoved)="onLaneRemoved($event)">
+            <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="10%" caption=" "></dxi-column>
+            <dxi-column dataField="idLane" caption="{{'lane' | translate}}" [lookup]="lookupLanes"></dxi-column>
+            <dxi-column dataField="direction" caption="{{'direction' | translate}}" [lookup]="lookupDirection"></dxi-column>
+
+            <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+            </dxo-editing>
+
+            <div *dxTemplate="let field of 'showmove'">
+                <dx-button icon="arrowup" (onClick)="moveUp(field)"></dx-button>
+                <dx-button icon="arrowdown" (onClick)="moveDown(field)"></dx-button>
+            </div>
+        </dx-data-grid>
     </div>
-</div>
+</dx-data-grid>
