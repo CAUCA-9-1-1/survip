@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {DxDataGridModule} from 'devextreme-angular';
-import {MatButtonToggleModule, MatDialogModule} from '@angular/material';
+import {MatButtonToggleModule, MatDialogModule, MatSelectModule, MatOptionModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {SharedModule} from '../shared/shared.module';
@@ -22,6 +22,8 @@ import {AskBatchDescriptionComponent} from './ask-batch-description/ask-batch-de
         ReactiveFormsModule,
         MatButtonToggleModule,
         MatDialogModule,
+        MatSelectModule,
+        MatOptionModule,
         DxDataGridModule,
     ],
 })

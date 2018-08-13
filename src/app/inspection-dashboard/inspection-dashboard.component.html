@@ -27,9 +27,19 @@
     <div *dxTemplate="let field of 'approveInspection'">
         <button mat-button [fxShow]="selectedMode == 'mode2'" color="primary" (click)="showInspection(field)">{{'approve' | translate}}</button>
     </div>
+    <div *dxTemplate="let field of 'generateReport'" [fxShow]="selectedMode == 'mode3'">
+      <mat-form-field>
+        <mat-select placeholder="{{'generate' | translate}}" (selectionChange)="generateReport(field.data.id, $event.value)">
+          <mat-select-trigger>{{'generate' | translate}}</mat-select-trigger>
+          <mat-option *ngFor="let template of templateIdentifiers" [value]="template.id">
+            {{template.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div *dxTemplate="let field of 'groupBatch'" fxLayout="row" fxLayoutAlign="left center">
         <div fxFlex="">
-            <button mat-button [fxShow]="selectedMode == 'mode1'" color="primary" (click)="showBatch(field)">{{'see' | translate}}</button>
+          <button mat-button [fxShow]="selectedMode == 'mode1'" color="primary" (click)="showBatch(field)">{{'see' | translate}}</button>
         </div>
         <div fxFlex="">{{'batch' | translate}} : {{field.value}}</div>
         <div fxFlex="">{{(field.data.items ? field.data.items[0].shouldStartOn : '') | date:'yyyy-MM-dd'}}</div>

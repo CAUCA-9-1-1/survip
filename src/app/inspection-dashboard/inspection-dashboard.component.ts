@@ -2,9 +2,10 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {DxDataGridComponent} from 'devextreme-angular';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatSnackBar} from '@angular/material';
 import {confirm} from 'devextreme/ui/dialog';
 import ODataStore from 'devextreme/data/odata/store';
+import {saveAs} from 'file-saver';
 
 import config from '../../assets/config/config.json';
 import {DashboardService} from './shared/services/dashboard.service';
@@ -23,6 +24,9 @@ import {WebuserForWeb} from '../management-access/shared/models/webuser-for-web.
 import {WebuserService} from '../management-access/shared/services/webuser.service';
 import {PictureService} from '../shared/services/picture.service';
 import {ODataService} from '../shared/services/o-data.service';
+import {ReportGenerationService} from './shared/services/report-generation.service';
+import {ConfigurationTemplate} from '../shared/models/configuration-template.model';
+import {ReportTemplateService} from '../shared/services/report-template.service';
 
 
 @Component({
@@ -38,11 +42,14 @@ import {ODataService} from '../shared/services/o-data.service';
         InspectionBatchService,
         PictureService,
         WebuserService,
+        ReportGenerationService,
+        ReportTemplateService
     ]
 })
 export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
+    templateIdentifiers: ConfigurationTemplate[];
     dataSource: any = {};
     webusers: WebuserForWeb[] = [];
     lanes: Lane[] = [];
@@ -66,22 +73,27 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         private batchService: InspectionBatchService,
         private pictureService: PictureService,
         private router: Router,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private reportGenerationService: ReportGenerationService,
+        private reportTemplateService: ReportTemplateService
     ) { }
 
     ngOnInit() {
+        this.templateIdentifiers = [];
+
         this.loadRiskLevel();
         this.loadCities();
         this.loadLanes();
         this.loadWebusers();
         this.loadUtilisationCode();
+        this.fetchTemplateIdentifiers();
 
         this.translateService.get([
             'riskLevel', 'civicNumber', 'lane', 'transversal', 'city', 'postalCode', 'batch', 'status', 'note', 'anomaly',
             'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details', 'matricule',
             'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see', 'vacantLand', 'delete',
             'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building', 'approve', 'todo', 'absent',
-            'started', 'waitingApprobation', 'approved', 'refused', 'canceled', 'collapseAll', 'expandAll', 'wantToDeleteBatch'
+            'started', 'waitingApprobation', 'approved', 'refused', 'canceled', 'collapseAll', 'expandAll', 'wantToDeleteBatch', 'generateReport'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -117,6 +129,22 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             this.router.navigate(['/inspection/dashboard', field.data.idInspection.toString()]);
         }
     }
+
+    fetchTemplateIdentifiers(): void {
+      this.reportTemplateService.getTemplateList().subscribe(data => {
+        data.forEach((templateIdentifier) => {
+          this.templateIdentifiers.push(templateIdentifier);
+        });
+      });
+    }
+
+    generateReport(buildingId: string, templateId: string) {
+      this.reportGenerationService.generateReport(buildingId, templateId).subscribe( data => {
+          const blob = new Blob([data], {type: 'application/pdf'});
+          saveAs(blob, buildingId);
+      });
+    }
+
     private checkLoadedElement(): boolean {
         if (
             this.angularIsLoaded && this.labels !== {} &&
@@ -490,6 +518,12 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             dataType: 'string',
             visible: visible[23],
             width: width[23] || null,
+        }, {
+          caption: this.labels['generateReport'],
+          dataType: 'string',
+          visible: visible[24],
+          width: width[24] || null,
+          cellTemplate: 'generateReport',
         }];
     }
 
