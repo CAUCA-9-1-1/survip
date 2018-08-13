@@ -21,7 +21,7 @@ export class InspectionFireHydrantService extends RequestService {
         return this.post('inspection/building/' + idBuilding + '/firehydrant/' + idFireHydrant, {});
     }
 
-    delete(id: string) {
+    remove(id: string) {
         return this.delete('inspection/buildingFireHydrant/' + id);
     }
 }
