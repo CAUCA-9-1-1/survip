@@ -19,6 +19,7 @@ import {Lane} from '../../management-address/shared/models/lane.model';
     ],
 })
 export class InspectionWaterSupplyComponent extends GridWithCrudService implements OnInit {
+    @Input() idBuilding = '';
     @Input()
     set inspection(id: string) {
         this.idInspection = id;
@@ -86,7 +87,15 @@ export class InspectionWaterSupplyComponent extends GridWithCrudService implemen
     }
 
     public onRowInserted(e) {
-        console.log(e);
+        this.sourceService.save(this.idBuilding, e.data.idFireHydrant).subscribe(data => {
+            this.loadSource(this.idInspection);
+        });
+    }
+
+    public onRowRemoved(e) {
+        this.sourceService.remove(e.data.id).subscribe(data => {
+            this.loadSource(this.idInspection);
+        });
     }
 
     private getAddress(fireHydrant) {
