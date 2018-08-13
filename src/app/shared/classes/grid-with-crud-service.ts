@@ -84,7 +84,7 @@ export abstract class GridWithCrudService {
         } else if (typeof(opts) === 'string' || typeof(opts) === 'object') {
             this.loadSpecificItem(opts);
         } else {
-            this.sourceService.getAll().subscribe(data => this.dataSource = data);
+            this.sourceService.getAll().subscribe(data => this.dataSource = data || []);
         }
     }
 

@@ -44,10 +44,6 @@ export class InspectionService extends RequestService {
         return this.post('inspection/buildingdetail/' + idBuildingDetail + '/idPicture/' + idPicture, {});
     }
 
-    getFireHydrant(id: string) {
-        return this.get('inspection/' + id + '/firehydrant');
-    }
-
     getSurveySummary(id: string) {
         return this.get('InspectionQuestion/Inspection/' + id + '/Summary');
     }

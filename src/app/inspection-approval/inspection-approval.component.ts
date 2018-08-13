@@ -17,6 +17,7 @@ export class InspectionApprovalComponent implements OnInit {
     isClosed = false;
     title = '';
     inspectionId: string;
+    buildingId: string;
     idImplantationPlan: string;
     idBuildingDetail: string;
 
@@ -30,6 +31,7 @@ export class InspectionApprovalComponent implements OnInit {
 
             this.inspectionService.getGeneralInfo(param.idInspection).subscribe(data => {
                 this.title = data.mainBuildingAddress;
+                this.buildingId = data.idBuilding;
                 this.idBuildingDetail = data.idDetail;
                 this.idImplantationPlan = data.idPictureSitePlan;
             });
