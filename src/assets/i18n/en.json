@@ -205,7 +205,7 @@
   "approve": "Approve",
   "generateReport": "Generate report",
   "generate": "Generate",
-  "chooseTemplate": "Choose template",
+  "chooseTemplate": "Choose existing template",
   "refuse": "Reject",
   "utilisationDescription": "Utilisation description",
   "details": "Details",
@@ -300,5 +300,7 @@
   "requestTimeout": "The request can not be completed, please try again later.",
   "requestServer404": "The server is unable to find the URL.<br />'{{url}}'",
   "requestServer500": "The server returns an error. The administrator has been notified, so please try again later.",
-  "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
+  "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?",
+  "open": "Open",
+  "orNew": "Or create a new one"
 }

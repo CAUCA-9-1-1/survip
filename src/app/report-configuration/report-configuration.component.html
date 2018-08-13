@@ -1,12 +1,7 @@
-<label>
-  <select [(ngModel)]="selectedTemplateId" (change)="fetchTemplateData()">
-    <option disabled selected hidden [ngValue]="undefined">{{'chooseTemplate' | translate}}</option>
-    <option *ngFor="let template of templateIdentifiers" [ngValue]="template.id">{{template.name}}</option>
-  </select>
-</label>
+<h1 align="center">{{selectedTemplate.name == null ? 'New Document' : selectedTemplate.name}}</h1>
 <app-text-editor
-  [(documentContent)]="templateData"
-  (loadDataEvent)="fetchTemplateData()"
+  [(documentContent)]="selectedTemplate.data"
+  (loadDataEvent)="openDialog()"
   (saveDataEvent)="saveTemplate()">
 </app-text-editor>
 

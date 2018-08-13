@@ -210,7 +210,7 @@
   "approve": "Approuver",
   "generateReport": "Générer le rapport",
   "generate": "Générer",
-  "chooseTemplate": "Choisir le gabarit",
+  "chooseTemplate": "Choisir un gabarit existant",
   "refuse": "Décliner / Refus",
   "utilisationDescription": "Description de l'utilisation",
   "details": "Détails",
@@ -305,5 +305,6 @@
   "requestTimeout": "La demande ne peut pas être terminée, veuillez réessayer plus tard",
   "requestServer404": "Le serveur est dans l'impossibilité de trouver le URL<br />'{{url}}'.",
   "requestServer500": "Le serveur retourne une erreur.<br />L'administrateur a été informé, veuillez donc réessayer plus tard.",
-  "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?"
+  "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?",
+  "orNew": "Ou créez-en un nouveau"
 }
