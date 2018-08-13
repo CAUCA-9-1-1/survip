@@ -302,5 +302,6 @@
   "requestServer500": "The server returns an error. The administrator has been notified, so please try again later.",
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?",
   "open": "Open",
-  "orNew": "Or create a new one"
+  "orNew": "Or create a new one",
+  "templateName": "TemplateName"
 }

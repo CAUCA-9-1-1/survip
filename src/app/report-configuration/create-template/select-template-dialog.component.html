@@ -3,12 +3,18 @@
 <mat-dialog-content [formGroup]="form">
   <p>
   <mat-form-field>
-    <mat-select id='reportSelector' placeholder="{{'select' | translate}}" (selectionChange)="openExistingTemplate($event.value)">
+    <mat-select placeholder="{{'select' | translate}}" (selectionChange)="openExistingTemplate($event.value)">
       <mat-option *ngFor="let template of templateIdentifiers" [value]="template">
         {{template.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
+  </p>
+  <h2 mat-dialog-title>{{'orNew' | translate}}</h2>
+  <p>
+    <mat-form-field>
+      <input matInput #nameInput placeholder="{{'templateName' | translate}}" (keyup)="textAreaEmpty(nameInput.value)">
+    </mat-form-field>
   </p>
 </mat-dialog-content>
 

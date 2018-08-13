@@ -1,11 +1,10 @@
-///<reference path="../shared/models/configuration-template.model.ts"/>
 import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 
 import {ReportTemplateService} from '../shared/services/report-template.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ConfigurationTemplate} from '../shared/models/configuration-template.model';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {CreateTemplateComponent} from './create-template/create-template.component';
+import {SelectTemplateDialogComponent} from './create-template/select-template-dialog.component';
 
 @Component({
   selector: 'app-report-configuration',
@@ -49,11 +48,15 @@ export class ReportConfigurationComponent implements OnInit {
   }
 
   saveTemplate(): void {
-      this.reportConfigurationService.saveTemplate(this.selectedTemplate).subscribe();
+    this.reportConfigurationService.saveTemplate(this.selectedTemplate).subscribe(res => {
+      if (this.selectedTemplate.id == null) {
+        this.selectedTemplate.id = res.id;
+      }
+    });
   }
 
   openDialog() {
-    // Needs tp be run inside the NgZone because the function is sometims called as an emit from CKEditor
+    // Needs tp be run inside the NgZone because the function is sometimes called as an emit from CKEditor
     this.ngZone.run(() => {
       const dialogConfig = new MatDialogConfig();
 
@@ -65,7 +68,7 @@ export class ReportConfigurationComponent implements OnInit {
         templateIdentifiers: this.templateIdentifiers
       };
 
-      const dialogRef = this.dialog.open(CreateTemplateComponent, dialogConfig);
+      const dialogRef = this.dialog.open(SelectTemplateDialogComponent, dialogConfig);
 
       dialogRef.afterClosed().subscribe(result => {
         if (result == null) {
@@ -74,6 +77,10 @@ export class ReportConfigurationComponent implements OnInit {
           if (result.id != null) {
             this.selectedTemplate = result;
             this.fetchTemplateData();
+          } else {
+            this.templateIdentifiers.push(result);
+            this.selectedTemplate = result;
+            this.saveTemplate();
           }
         }
       });

@@ -306,5 +306,6 @@
   "requestServer404": "Le serveur est dans l'impossibilité de trouver le URL<br />'{{url}}'.",
   "requestServer500": "Le serveur retourne une erreur.<br />L'administrateur a été informé, veuillez donc réessayer plus tard.",
   "removeQuestionChoices": "En changeant ce type de réponse vous perdrez vos choix enregistrés, voulez-vous continuer ?",
-  "orNew": "Ou créez-en un nouveau"
+  "orNew": "Ou créez-en un nouveau",
+  "templateName": "Nom du gabarit"
 }

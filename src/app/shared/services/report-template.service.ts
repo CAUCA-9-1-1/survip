@@ -5,6 +5,8 @@ import 'rxjs/add/operator/catch';
 import {RequestService} from './request.service';
 import {ConfigurationTemplate} from '../models/configuration-template.model';
 import {templateCSSPreprocessor} from '../../report-configuration/shared/models/template-preprocessor';
+import {Observable} from 'rxjs/Observable';
+import {PostModel} from '../models/post.model';
 
 
 @Injectable()
@@ -26,9 +28,9 @@ export class ReportTemplateService extends RequestService {
     });
   }
 
-  saveTemplate(template: ConfigurationTemplate) {
+  saveTemplate(template: ConfigurationTemplate): Observable<PostModel> {
     template.data = templateCSSPreprocessor + template.data
-    return this.http.post(this.apiUrl + 'ReportConfigurationTemplate/',
+    return this.http.post<PostModel>(this.apiUrl + 'ReportConfigurationTemplate/',
       JSON.stringify(template),
       {
         headers: this.headers,

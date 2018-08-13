@@ -6,10 +6,10 @@ import {ConfigurationTemplate} from '../../shared/models/configuration-template.
 
 @Component({
   selector: 'app-template-selection',
-  templateUrl: './create-template.component.html',
-  styleUrls: ['./create-template.component.css']
+  templateUrl: './select-template-dialog.component.html',
+  styleUrls: ['./select-template-dialog.component.css']
 })
-export class CreateTemplateComponent implements OnInit {
+export class SelectTemplateDialogComponent implements OnInit {
 
   form: FormGroup;
   templateIdentifiers: ConfigurationTemplate[];
@@ -17,7 +17,7 @@ export class CreateTemplateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<CreateTemplateComponent>,
+    private dialogRef: MatDialogRef<SelectTemplateDialogComponent>,
     private translateService: TranslateService,
     @Inject(MAT_DIALOG_DATA) data) {
     this.templateIdentifiers = data.templateIdentifiers;
@@ -37,6 +37,10 @@ export class CreateTemplateComponent implements OnInit {
   }
 
   create(name: string) {
+    const template = new ConfigurationTemplate();
+    template.name = name;
+    template.data = '';
+    this.dialogRef.close(template);
   }
 
   cancel() {
