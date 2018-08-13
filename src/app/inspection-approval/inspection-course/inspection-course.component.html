@@ -7,6 +7,7 @@
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
+        (onInitNewRow)="onNewCourse($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
@@ -14,7 +15,7 @@
             dataField="idFirestation"
             caption="{{'description' | translate}}"
             sortIndex="0"
-            sortOrder="asc"
+            sortOrder="desc"
             width="30%"
             [lookup]="lookupFirestations"></dxi-column>
     <dxi-column dataField="lanes" caption="{{'course' | translate}}" cellTemplate="listLaneDescription" editCellTemplate="editCourseLane"></dxi-column>

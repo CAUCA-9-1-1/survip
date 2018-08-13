@@ -2,12 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {InspectionCourseService} from '../shared/services/inspection-course.service';
 import {FirestationService} from '../../management-access/shared/services/firestation.service';
-import {Firestation} from '../../management-access/shared/models/firestation.model';
 import {LaneService} from '../../management-address/shared/services/lane.service';
-import {Lane} from '../../management-address/shared/models/lane.model';
 import {TranslateService} from '@ngx-translate/core';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
-import {InspectionBatch} from '../../inspection-batch/shared/models/inspection-batch.model';
 import {Course} from '../shared/models/course.model';
 
 
@@ -22,6 +19,7 @@ import {Course} from '../shared/models/course.model';
     ]
 })
 export class InspectionCourseComponent extends GridWithCrudService implements OnInit {
+    @Input() idBuilding = '';
     @Input()
     set inspection(id: string) {
         this.idInspection = id;
@@ -137,8 +135,14 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
         }
     }
 
+    onNewCourse(e) {
+        e.data.idBuilding = this.idBuilding;
+        e.data.isActive = true;
+        e.data.lanes = [];
+    }
+
     onNewLane(e) {
-        e.data.sequence = this.formCourseLaneField.data.lanes.length + 1;
+        e.data.sequence = this.formCourseLaneField.data.lanes ? this.formCourseLaneField.data.lanes.length + 1 : 1;
         e.data.idBuildingCourse = this.formCourseLaneField.data.id;
         e.data.isActive = true;
     }

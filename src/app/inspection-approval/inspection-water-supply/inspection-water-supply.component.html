@@ -3,7 +3,28 @@
         <span class="title">{{'fireHydrants' | translate}}</span>
     </mat-toolbar-row>
 </mat-toolbar>
-<div fxLayout="row" *ngFor="let fireHydrant of fireHydrants">
-    <div fxFlex="30%">{{fireHydrant.number}}</div>
-    <div>{{fireHydrant.address}}</div>
-</div>
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onEditorPreparing)="onEditorPreparing($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="idFireHydrant"
+            caption="{{'number' | translate}}"
+            sortIndex="0"
+            sortOrder="asc"
+            width="30%"
+            [lookup]="lookupFireHydrants"></dxi-column>
+    <dxi-column dataField="address" caption="{{'address' | translate}}"></dxi-column>
+
+    <dxo-editing mode="popup" [useIcons]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'fireHydrant' | translate}}" [showTitle]="true"></dxo-popup>
+
+        <dxo-form colCount="1">
+            <dxi-item dataField="idFireHydrant" [isRequired]="true" editorType="dxLookup" [editorOptions]="listFireHydrants"></dxi-item>
+        </dxo-form>
+    </dxo-editing>
+</dx-data-grid>

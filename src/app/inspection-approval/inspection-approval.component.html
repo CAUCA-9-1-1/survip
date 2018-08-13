@@ -13,7 +13,7 @@
                 <app-inspection-implantation-plan [idBuildingDetail]="idBuildingDetail" [implantationPlan]="idImplantationPlan"></app-inspection-implantation-plan>
             </div>
             <div [fxShow]="selected == 'course'">
-                <app-inspection-course [inspection]="selected == 'course' ? inspectionId : ''"></app-inspection-course>
+                <app-inspection-course [idBuilding]="buildingId" [inspection]="selected == 'course' ? inspectionId : ''"></app-inspection-course>
             </div>
             <div [fxShow]="selected == 'waterSupply'">
                 <app-inspection-water-supply [inspection]="selected == 'waterSupply' ? inspectionId : ''"></app-inspection-water-supply>
