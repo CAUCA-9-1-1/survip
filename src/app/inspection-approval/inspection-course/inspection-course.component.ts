@@ -6,6 +6,9 @@ import {Firestation} from '../../management-access/shared/models/firestation.mod
 import {LaneService} from '../../management-address/shared/services/lane.service';
 import {Lane} from '../../management-address/shared/models/lane.model';
 import {TranslateService} from '@ngx-translate/core';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {InspectionBatch} from '../../inspection-batch/shared/models/inspection-batch.model';
+import {Course} from '../shared/models/course.model';
 
 
 @Component({
@@ -18,7 +21,7 @@ import {TranslateService} from '@ngx-translate/core';
         LaneService
     ]
 })
-export class InspectionCourseComponent implements OnInit {
+export class InspectionCourseComponent extends GridWithCrudService implements OnInit {
     @Input()
     set inspection(id: string) {
         this.idInspection = id;
@@ -27,8 +30,12 @@ export class InspectionCourseComponent implements OnInit {
 
     private idInspection: string;
     courses: any = [];
-    modeEdit = false;
-    firestations: Firestation[];
+    formCourseLaneField: any;
+    lookupFirestations = {
+        valueExpr: 'id',
+        displayExpr: 'name',
+        dataSource: [],
+    };
     lookupLanes = {
         valueExpr: 'id',
         displayExpr: 'name',
@@ -41,20 +48,29 @@ export class InspectionCourseComponent implements OnInit {
     };
 
     constructor(
-        private inspectionCourseService: InspectionCourseService,
+        inspectionCourseService: InspectionCourseService,
         private firestationService: FirestationService,
         private laneService: LaneService,
         private translateService: TranslateService,
     ) {
-        this.translateService.get(['right', 'left']).subscribe(labels => {
+        super(inspectionCourseService);
+
+        this.translateService.get(['right', 'left', 'straightAhead']).subscribe(labels => {
             this.lookupDirection.dataSource = [{
                 id: 0,
                 name: labels['left']
             }, {
                 id: 1,
                 name: labels['right']
+            }, {
+                id: 2,
+                name: labels['straightAhead']
             }];
         });
+    }
+
+    setModel(data: any) {
+        return Course.fromJSON(data);
     }
 
     ngOnInit() { }
@@ -64,33 +80,29 @@ export class InspectionCourseComponent implements OnInit {
             return null;
         }
 
-        this.firestationService.getAll().subscribe(data => this.firestations = data);
         this.laneService.localized().subscribe( data => this.lookupLanes.dataSource = data);
+        this.firestationService.getAll().subscribe(data => this.lookupFirestations.dataSource = data);
+        this.loadSource(this.idInspection);
+    }
 
-        this.inspectionCourseService.getCourse(this.idInspection).subscribe(data => {
-            this.courses = data.sort((a, b) => {
-                return a.description > b.description ? 1 : -1;
-            });
+    getDirection(direction) {
+        if (direction === 2) {
+            return '';
+        }
 
-            data.forEach((course, index) => {
-                this.inspectionCourseService.getCourseLane(course.id).subscribe(infos => {
-                    const lanes = infos.lanes.sort((a, b) => {
-                        return a.sequence > b.sequence ? 1 : -1;
-                    });
+        const result = this.lookupDirection.dataSource.filter(dir => dir.id === direction);
 
-                    this.courses[index].idFirestation = infos.course['idFirestation'];
-                    this.courses[index].lanes = [];
+        return ' (' + result[0].name + ')';
+    }
 
-                    lanes.forEach((courselane) => {
-                        this.inspectionCourseService.getCourseLaneDetail(courselane.id).subscribe(lane => {
-                            lane.description = courselane.description;
+    getLaneName(idLane: string) {
+        const result = this.lookupLanes.dataSource.filter(lane => lane.id === idLane);
 
-                            this.courses[index].lanes.push(lane);
-                        });
-                    });
-                });
-            });
-        });
+        if (result.length) {
+            return result[0].name;
+        }
+
+        return '';
     }
 
     moveUp(field) {
@@ -117,23 +129,33 @@ export class InspectionCourseComponent implements OnInit {
         }
     }
 
-    activeEditMode(idCourse: string) {
-        if (this.modeEdit) {
-            this.save();
-        } else {
-            this.modeEdit = true;
+    setFormCourseLaneField(field) {
+        this.formCourseLaneField = field;
+
+        if (!this.formCourseLaneField.value) {
+            this.formCourseLaneField.value = [];
         }
     }
 
-    deleteCourse(idCourse: string) {
-        if (this.modeEdit) {
-            this.modeEdit = false;
-        } else {
-            this.inspectionCourseService.deleteCourse(idCourse).subscribe();
-        }
+    onNewLane(e) {
+        e.data.sequence = this.formCourseLaneField.data.lanes.length + 1;
+        e.data.idBuildingCourse = this.formCourseLaneField.data.id;
+        e.data.isActive = true;
     }
 
-    save() {
-        this.modeEdit = false;
+    onLaneInserted(e) {
+        this.formCourseLaneField.setValue(this.formCourseLaneField.data.lanes);
+    }
+
+    onLaneUpdated(e) {
+        this.formCourseLaneField.setValue(this.formCourseLaneField.data.lanes);
+    }
+
+    onLaneRemoved(e) {
+        this.formCourseLaneField.setValue(this.formCourseLaneField.data.lanes);
+
+        if (this.formCourseLaneField.data.lanes.length === 0) {
+            this.formCourseLaneField.setValue(false);
+        }
     }
 }
