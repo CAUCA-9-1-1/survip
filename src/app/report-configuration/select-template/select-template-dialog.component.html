@@ -20,5 +20,5 @@
 
 <mat-dialog-actions align="center">
   <button class="mat-raised-button"(click)="cancel()">{{'cancel' | translate}}</button>
-  <button class="mat-raised-button mat-primary"(click)="create(nameInput.value)" [disabled]="isDisabled">{{'create' | translate}}</button>
+  <button class="mat-raised-button mat-primary"(click)="create(nameInput.value)" [disabled]="isOpenDisabled">{{'create' | translate}}</button>
 </mat-dialog-actions>

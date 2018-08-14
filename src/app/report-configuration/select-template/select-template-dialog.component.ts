@@ -13,10 +13,10 @@ export class SelectTemplateDialogComponent implements OnInit {
 
   form: FormGroup;
   templateIdentifiers: ConfigurationTemplate[];
-  isDisabled: boolean;
+  isOpenDisabled: boolean;
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<SelectTemplateDialogComponent>,
     private translateService: TranslateService,
     @Inject(MAT_DIALOG_DATA) data) {
@@ -24,8 +24,8 @@ export class SelectTemplateDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.form = this.fb.group([]);
-    this.isDisabled = true;
+    this.form = this.formBuilder.group([]);
+    this.isOpenDisabled = true;
   }
 
   openExistingTemplate(template: ConfigurationTemplate) {
@@ -33,7 +33,7 @@ export class SelectTemplateDialogComponent implements OnInit {
   }
 
   textAreaEmpty(name: string) {
-    this.isDisabled = name.trim().length === 0;
+    this.isOpenDisabled = name.trim().length === 0;
   }
 
   create(name: string) {

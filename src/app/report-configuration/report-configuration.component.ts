@@ -4,7 +4,7 @@ import {ReportTemplateService} from '../shared/services/report-template.service'
 import {TranslateService} from '@ngx-translate/core';
 import {ConfigurationTemplate} from '../shared/models/configuration-template.model';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {SelectTemplateDialogComponent} from './create-template/select-template-dialog.component';
+import {SelectTemplateDialogComponent} from './select-template/select-template-dialog.component';
 
 @Component({
   selector: 'app-report-configuration',
@@ -71,19 +71,23 @@ export class ReportConfigurationComponent implements OnInit {
       const dialogRef = this.dialog.open(SelectTemplateDialogComponent, dialogConfig);
 
       dialogRef.afterClosed().subscribe(result => {
-        if (result == null) {
-          return;
-        } else {
-          if (result.id != null) {
-            this.selectedTemplate = result;
-            this.fetchTemplateData();
-          } else {
-            this.templateIdentifiers.push(result);
-            this.selectedTemplate = result;
-            this.saveTemplate();
-          }
-        }
+        this.selectOrCreateTemplate(result);
       });
     });
+  }
+
+  selectOrCreateTemplate(template: ConfigurationTemplate) {
+    if (template == null) {
+      return;
+    } else {
+      if (template.id != null) {
+        this.selectedTemplate = template;
+        this.fetchTemplateData();
+      } else {
+        this.templateIdentifiers.push(template);
+        this.selectedTemplate = template;
+        this.saveTemplate();
+      }
+    }
   }
 }

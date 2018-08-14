@@ -303,5 +303,6 @@
   "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?",
   "open": "Open",
   "orNew": "Or create a new one",
-  "templateName": "TemplateName"
+  "templateName": "TemplateName",
+  "newDocument": "New Document"
 }
