@@ -47,7 +47,7 @@ export class AuthenticationService {
 
     private onResponse(response) {
         if (response.data.accessToken) {
-            localStorage.setItem('refreshToken', response.refreshToken);
+            sessionStorage.setItem('refreshToken', response.data.refreshToken);
             sessionStorage.setItem('authorizationType', 'Bearer');
             sessionStorage.setItem('accessToken', response.data.accessToken);
             sessionStorage.setItem('currentWebuser', response.data.idWebuser);

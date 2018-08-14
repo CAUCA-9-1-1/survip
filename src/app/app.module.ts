@@ -16,7 +16,6 @@ import {InspectionManagementModule} from './inspection-management/inspection-man
 import {StatisticsModule} from './statistics/statistics.module';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
-
 @NgModule({
     bootstrap: [
         AppComponent,
@@ -39,7 +38,8 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
         StatisticsModule,
         AppRoutingModule,
     ],
-    providers: [{
+    providers: [
+      {
         provide: LocationStrategy,
         useClass: HashLocationStrategy,
     }],

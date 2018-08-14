@@ -1,4 +1,4 @@
-import {Inject, Injector} from '@angular/core';
+import {Inject, Injectable, Injector} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
@@ -10,7 +10,7 @@ import {catchError} from 'rxjs/operators';
 import config from '../../../assets/config/config.json';
 import {RequestConfig} from '../models/request-config.model';
 
-
+@Injectable()
 export class RequestService {
     private router: Router;
     private notification: MatSnackBar;
@@ -86,7 +86,7 @@ export class RequestService {
 
     private onError(error: HttpErrorResponse) {
         let message = '';
-console.log(error);
+        console.log(error);
         switch (error.status) {
             case 0:
                 message = this.translateService.instant('requestTimeout');
@@ -95,7 +95,8 @@ console.log(error);
                 message = this.translateService.instant(error.error);
                 break;
             case 401:
-                this.refresh();
+                // this.refresh();
+                console.log('401 in request.service.');
                 break;
             case 404:
                 message = this.translateService.instant('requestServer404', {url: error.url});
@@ -113,31 +114,5 @@ console.log(error);
         }
 
         return observableThrowError(error.statusText);
-    }
-
-    private refresh() {
-        this.http.post(this.apiUrl + 'Authentification/Refresh', {
-            accessToken: sessionStorage.getItem('accessToken'),
-            refreshToken: localStorage.getItem('refreshToken'),
-        }).subscribe(
-            response => this.onRefresh(response),
-            error => this.onLogout(error)
-        );
-    }
-
-    private onLogout(error) {
-        if (this.router) {
-            sessionStorage.clear();
-
-            this.router.navigate(['login']);
-        }
-    }
-
-    private onRefresh(response) {
-        if (response.accessToken) {
-            sessionStorage.setItem('accessToken', response.accessToken);
-
-            this.onRefreshLogin();
-        }
     }
 }
