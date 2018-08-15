@@ -21,6 +21,7 @@
   "buildingParticularRisks": "Building particular risks",
   "buildingAnomalies": "Building anomalies",
   "inspectionManagement": "Level of risk by SSI",
+  "reportConfiguration": "Reports' configuration",
   "cancel": "Cancel",
   "create": "Create",
   "modify": "Modify",
@@ -202,8 +203,9 @@
   "owner": "Owner",
   "picture": "Picture",
   "approve": "Approve",
-  "generateReport": "Generate Report",
+  "generateReport": "Generate report",
   "generate": "Generate",
+  "chooseTemplate": "Choose existing template",
   "refuse": "Reject",
   "utilisationDescription": "Utilisation description",
   "details": "Details",
@@ -298,5 +300,9 @@
   "requestTimeout": "The request can not be completed, please try again later.",
   "requestServer404": "The server is unable to find the URL.<br />'{{url}}'",
   "requestServer500": "The server returns an error. The administrator has been notified, so please try again later.",
-  "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?"
+  "removeQuestionChoices": "Changing that question type will make you lose your saved choices, do you want to continue ?",
+  "open": "Open",
+  "orNew": "Or create a new one",
+  "templateName": "TemplateName",
+  "newDocument": "New Document"
 }

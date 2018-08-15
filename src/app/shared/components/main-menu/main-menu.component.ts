@@ -41,6 +41,9 @@ export class MainMenuComponent implements OnInit {
         }, {
             name: 'inspectionManagement',
             path: '/inspection/management',
+        }, {
+            name: 'reportConfiguration',
+            path: '/report-configuration',
         }]
     }];
 

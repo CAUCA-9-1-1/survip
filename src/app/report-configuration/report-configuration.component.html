@@ -1,0 +1,9 @@
+<h1 align="center">{{selectedTemplate.name == null ? ('newDocument' | translate) : selectedTemplate.name}}</h1>
+<app-text-editor
+  [(documentContent)]="selectedTemplate.data"
+  (loadDataEvent)="openDialog()"
+  (saveDataEvent)="saveTemplate()">
+</app-text-editor>
+
+
+
