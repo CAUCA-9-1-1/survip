@@ -17,7 +17,6 @@ import {StatisticsModule} from './statistics/statistics.module';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {ReportConfigurationModule} from './report-configuration/report-configuration.module';
 
-
 @NgModule({
     bootstrap: [
         AppComponent,
@@ -41,7 +40,8 @@ import {ReportConfigurationModule} from './report-configuration/report-configura
         AppRoutingModule,
         ReportConfigurationModule,
     ],
-    providers: [{
+    providers: [
+      {
         provide: LocationStrategy,
         useClass: HashLocationStrategy,
     }],

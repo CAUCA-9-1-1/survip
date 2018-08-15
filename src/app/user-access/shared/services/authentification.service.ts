@@ -22,7 +22,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string): Observable<any> {
-        return this.http.post<any>(config.apiUrl + 'Authentification/Logon?user=' + username + '&password=' + password, {
+        return this.http.post<any>(config.apiUrl + 'Authentification/Logon', {
             username: username,
             password: password,
         }).pipe(
@@ -47,6 +47,7 @@ export class AuthenticationService {
 
     private onResponse(response) {
         if (response.data.accessToken) {
+            sessionStorage.setItem('refreshToken', response.data.refreshToken);
             sessionStorage.setItem('authorizationType', 'Bearer');
             sessionStorage.setItem('accessToken', response.data.accessToken);
             sessionStorage.setItem('currentWebuser', response.data.idWebuser);
