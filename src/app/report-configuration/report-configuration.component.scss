@@ -1,0 +1,34 @@
+mat-list {
+  flex-grow: 1;
+  border: 1px solid #544e51;
+  overflow: auto;
+  max-height: 700px;
+}
+
+#mainArea {
+  width: 100%;
+  overflow: hidden;
+}
+
+#leftPanel {
+  width: 80%;
+  float: left;
+  vertical-align: top;
+}
+
+#rightPanel {
+  padding: 30px;
+  vertical-align: top;
+}
+
+#placeholder {
+  width: 100%;
+}
+
+#placeholderButton {
+  float: right;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}

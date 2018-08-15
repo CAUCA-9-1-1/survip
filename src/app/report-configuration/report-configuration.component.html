@@ -1,9 +1,26 @@
 <h1 align="center">{{selectedTemplate.name == null ? ('newDocument' | translate) : selectedTemplate.name}}</h1>
-<app-text-editor
-  [(documentContent)]="selectedTemplate.data"
-  (loadDataEvent)="openDialog()"
-  (saveDataEvent)="saveTemplate()">
-</app-text-editor>
 
+<div name="mainArea">
+  <div id="leftPanel">
+    <app-text-editor #textEditor
+                     id="textEditor"
+                     [(documentContent)]="selectedTemplate.data"
+                     (loadDataEvent)="openDialog()"
+                     (saveDataEvent)="saveTemplate()">
 
-
+    </app-text-editor>
+  </div>
+  <div id="rightPanel">
+    <h2 align="center">{{'placeholders' | translate}}</h2>
+    <mat-list role="list">
+      <mat-list-item id='placeholder' *ngFor="let placeholder of placeholders">{{ placeholder }}
+        <span class="fill-remaining-space"></span>
+        <button id='placeholderButton'
+                class="mat-raised-button mat-primary"
+                (click)="insertPlaceholderAtCaret(placeholder)">
+          {{'add' | translate}}
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

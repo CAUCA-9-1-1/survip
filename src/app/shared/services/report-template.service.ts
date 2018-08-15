@@ -16,6 +16,12 @@ export class ReportTemplateService extends RequestService {
     super(injector);
   }
 
+  getPlaceholderList() {
+    return this.http.get<String[]>(this.apiUrl + 'ReportConfigurationTemplate/placeholders', {
+      headers: this.headers
+    });
+  }
+
   getTemplateList() {
     return this.http.get<ConfigurationTemplate[]>(this.apiUrl + 'ReportConfigurationTemplate', {
       headers: this.headers

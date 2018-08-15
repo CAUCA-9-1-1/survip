@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
+import {ChangeDetectorRef, ViewChild, Component, NgZone, OnInit, ElementRef, AfterViewInit} from '@angular/core';
 
 import {ReportTemplateService} from '../shared/services/report-template.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -6,25 +6,34 @@ import {ConfigurationTemplate} from '../shared/models/configuration-template.mod
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {SelectTemplateDialogComponent} from './select-template/select-template-dialog.component';
 
+
 @Component({
   selector: 'app-report-configuration',
   templateUrl: './report-configuration.component.html',
   styleUrls: ['./report-configuration.component.scss'],
   providers: [ReportTemplateService]
 })
-export class ReportConfigurationComponent implements OnInit {
+export class ReportConfigurationComponent implements OnInit, AfterViewInit {
   selectedTemplate: ConfigurationTemplate;
   templateIdentifiers: ConfigurationTemplate[];
+  placeholders: String[];
+  @ViewChild('textEditor') textEditorComponent: any;
+
 
   constructor(
     private dialog: MatDialog,
     private translateService: TranslateService,
     private reportConfigurationService: ReportTemplateService,
     private changeDetectorRef: ChangeDetectorRef,
-    private ngZone: NgZone
+    private ngZone: NgZone,
   ) { }
 
+  ngAfterViewInit() {}
+
   ngOnInit() {
+    this.reportConfigurationService.getPlaceholderList().subscribe(res => {
+      this.placeholders = res;
+    });
     this.templateIdentifiers = [];
     this.fetchTemplateIdentifiers();
     this.selectedTemplate = new ConfigurationTemplate();
@@ -89,5 +98,9 @@ export class ReportConfigurationComponent implements OnInit {
         this.saveTemplate();
       }
     }
+  }
+
+  insertPlaceholderAtCaret(placeholder: string) {
+    this.textEditorComponent.insertAtCaret('{{' + placeholder + '}}');
   }
 }
