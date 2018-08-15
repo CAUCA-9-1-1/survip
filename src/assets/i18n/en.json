@@ -305,5 +305,6 @@
   "open": "Open",
   "orNew": "Or create a new one",
   "templateName": "TemplateName",
-  "newDocument": "New Document"
+  "newDocument": "New Document",
+  "placeholders": "Placeholders"
 }

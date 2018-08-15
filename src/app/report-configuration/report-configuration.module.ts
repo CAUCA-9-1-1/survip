@@ -6,7 +6,8 @@ import {ReportConfigurationComponent} from './report-configuration.component';
 import {TextEditorModule} from 'report-configuration';
 import {TranslateModule} from '@ngx-translate/core';
 import {SelectTemplateDialogComponent} from './select-template/select-template-dialog.component';
-import {MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatInputModule} from '@angular/material';
+import {MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatInputModule, MatListModule} from '@angular/material';
+
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import {MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, M
     MatSelectModule,
     MatOptionModule,
     MatInputModule,
+    MatListModule,
     ReactiveFormsModule,
     TranslateModule
   ],
