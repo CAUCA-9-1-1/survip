@@ -15,6 +15,7 @@
     <dxi-column
             dataField="localizations"
             caption="{{'name' | translate}}"
+            [allowSorting]="false"
             [calculateCellValue]="getBuildingName"
             editCellTemplate="editname">
     </dxi-column>
@@ -64,7 +65,7 @@
             mode="popup"
             [useIcons]="true"
             [allowUpdating]="true"
-            [allowAdding]="activeAdding"
+            [allowAdding]="false"
             [allowDeleting]="true">
         <dxo-popup title="{{'building' | translate}}" [showTitle]="true"></dxo-popup>
 

@@ -43,7 +43,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         }
     }
 
-    public activeAdding = false;
+    public addingButton: any;
     public dataSource: any;
     public selectedCity = '';
     public fireHydrantTypes: FireHydrantType[] = [];
@@ -142,7 +142,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
                 this.form = ev.component;
             };
             options.popup.onHiding = (ev) => {
-                this.dataSource.reload();
+                this.dataSource.load();
             };
 
             e.component.option('editing', options);
@@ -152,6 +152,21 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
+        toolbarItems.unshift({
+            widget: 'dxButton',
+            location: 'after',
+            options: {
+                icon: 'plus',
+                width: 50,
+                disabled: true,
+                onInitialized: (ev) => {
+                    this.addingButton = ev.component;
+                },
+                onClick: (ev) => {
+                    e.component.addRow();
+                },
+            }
+        });
         toolbarItems.unshift({
             widget: 'dxLookup',
             options: {
@@ -163,9 +178,8 @@ export class ListComponent extends GridWithCrudService implements OnInit {
                     ev.component.option('dataSource', this.cities);
                 },
                 onValueChanged: (ev) => {
-                    console.log(ev.value);
-                    this.activeAdding = true;
                     this.selectedCity = ev.value;
+                    this.addingButton.option('disabled', false);
                     this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
                     this.dataSource.load();
                     this.loadLaneByCity(ev.value);

@@ -33,16 +33,16 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         this.parent = building;
         this.isParent = (building ? false : true);
 
-        if (this.selectedCity) {
+        if (this.isParent && this.selectedCity) {
             this.dataSource.filter(['idCity', '=', new Guid(this.selectedCity)]);
         } else {
-            this.dataSource.clearFilter();
+            this.dataSource.filter(null);
         }
 
         this.dataSource.load();
     }
 
-    public activeAdding = false;
+    public addingButton: any;
     public dataSource: any;
     public cities: any = {};
     public lanes: any = {};
@@ -75,6 +75,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         super(buildingService);
 
         this.dataSource = new DataSource({
+            expand: 'localizations',
             store: new ODataService({
                 url: 'Building',
                 key: 'id',
@@ -131,7 +132,7 @@ export class ListComponent extends GridWithCrudService implements OnInit {
                 this.form = ev.component;
             };
             options.popup.onHiding = (ev) => {
-                this.dataSource.reload();
+                this.dataSource.load();
             };
 
             e.component.option('editing', options);
@@ -141,6 +142,21 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
+        toolbarItems.unshift({
+            widget: 'dxButton',
+            location: 'after',
+            options: {
+                icon: 'plus',
+                width: 50,
+                disabled: true,
+                onInitialized: (ev) => {
+                    this.addingButton = ev.component;
+                },
+                onClick: (ev) => {
+                    e.component.addRow();
+                },
+            }
+        });
         toolbarItems.unshift({
             widget: 'dxLookup',
             options: {
@@ -152,8 +168,8 @@ export class ListComponent extends GridWithCrudService implements OnInit {
                     ev.component.option('dataSource', this.cities);
                 },
                 onValueChanged: (ev) => {
-                    this.activeAdding = true;
                     this.selectedCity = ev.value;
+                    this.addingButton.option('disabled', false);
                     this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
                     this.dataSource.load();
                     this.loadLaneByCity(ev.value);
