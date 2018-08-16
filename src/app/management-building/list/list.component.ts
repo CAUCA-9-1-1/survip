@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {alert} from 'devextreme/ui/dialog';
 import DataSource from 'devextreme/data/data_source';
+import Guid from 'devextreme/core/guid';
 
 import config from '../../../assets/config/config.json';
 import {BuildingService} from '../shared/services/building.service';
@@ -33,40 +34,21 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         this.isParent = (building ? false : true);
 
         if (this.selectedCity) {
-            this.dataSource.filter(['idCity', '=', this.selectedCity]);
+            this.dataSource.filter(['idCity', '=', new Guid(this.selectedCity)]);
         } else {
             this.dataSource.clearFilter();
         }
+
+        this.dataSource.load();
     }
 
     public activeAdding = false;
     public dataSource: any;
-    public labels: any = {};
-    public cities = {
-        store: [],
-        select: ['id', 'name'],
-        sort: ['name'],
-    };
-    public lanes = {
-        store: [],
-        select: ['id', 'name'],
-        sort: ['name'],
-    };
-    public lanesOfCity = {
-        store: [],
-        select: ['id', 'name'],
-        sort: ['name'],
-    };
-    public utilisationCodes = {
-        store: [],
-        select: ['id', 'name'],
-        sort: ['name'],
-    };
-    public riskLevels = {
-        store: [],
-        select: ['id', 'name'],
-        sort: ['name'],
-    };
+    public cities: any = {};
+    public lanes: any = {};
+    public lanesOfCity: any = {};
+    public utilisationCodes: any = {};
+    public riskLevels: any = {};
     public selectedCity: string;
     public selectedBuidling: string;
     public parent: Building;
@@ -80,25 +62,27 @@ export class ListComponent extends GridWithCrudService implements OnInit {
     public toolbarItems = [];
     public formFieldLane: any = null;
 
+    private labels: any = {};
+
     public constructor(
         buildingService: BuildingService,
         private laneService: LaneService,
         private cityService: CityService,
         private utilisationCode: UtilisationCodeService,
         private riskLevelService: RiskLevelService,
-        private translateServive: TranslateService,
+        private translateService: TranslateService,
     ) {
         super(buildingService);
 
         this.dataSource = new DataSource({
             store: new ODataService({
                 url: 'Building',
-                key: 'idBuilding',
+                key: 'id',
                 keyType: 'string',
             }),
         });
 
-        this.translateServive.get([
+        this.translateService.get([
             'close', 'save', 'youNeedToSaveYourNewItem', 'selectCity'
         ]).subscribe(labels => {
             this.labels = labels;
@@ -170,7 +154,8 @@ export class ListComponent extends GridWithCrudService implements OnInit {
                 onValueChanged: (ev) => {
                     this.activeAdding = true;
                     this.selectedCity = ev.value;
-                    this.dataSource.filter(['idCity', '=', ev.value]);
+                    this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
+                    this.dataSource.load();
                     this.loadLaneByCity(ev.value);
                 }
             }
@@ -231,31 +216,51 @@ export class ListComponent extends GridWithCrudService implements OnInit {
 
     private loadLane() {
         this.laneService.localized().subscribe(data => {
-            this.lanes.store = data;
+            this.lanes = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
         });
     }
 
     private loadCity() {
         this.cityService.localized().subscribe(data => {
-            this.cities.store = data;
+            this.cities = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
         });
     }
 
     private loadUtilisationCode() {
         this.utilisationCode.localized().subscribe(data => {
-            this.utilisationCodes.store = data;
+            this.utilisationCodes = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
         });
     }
 
     private loadRiskLevel() {
         this.riskLevelService.localized().subscribe(data => {
-            this.riskLevels.store = data;
+            this.riskLevels = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
         });
     }
 
     private loadLaneByCity(idCity: string) {
         this.laneService.getAllOfCity(idCity).subscribe(data => {
-            this.lanesOfCity.store = data;
+            this.lanesOfCity = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
         });
     }
 }
