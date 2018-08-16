@@ -2,13 +2,11 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {DxDataGridComponent} from 'devextreme-angular';
-import {MatDialog, MatDialogConfig, MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {confirm} from 'devextreme/ui/dialog';
-import ODataStore from 'devextreme/data/odata/store';
 import {saveAs} from 'file-saver';
 
 import config from '../../assets/config/config.json';
-import {DashboardService} from './shared/services/dashboard.service';
 import {LaneService} from '../management-address/shared/services/lane.service';
 import {Lane} from '../management-address/shared/models/lane.model';
 import {RiskLevelService} from '../management-building/shared/services/risk-level.service';
@@ -34,7 +32,6 @@ import {ReportTemplateService} from '../shared/services/report-template.service'
     templateUrl: './inspection-dashboard.component.html',
     styleUrls: ['./inspection-dashboard.component.scss'],
     providers: [
-        DashboardService,
         LaneService,
         CityService,
         RiskLevelService,
@@ -62,7 +59,6 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     everythingIsLoaded = false;
 
     constructor(
-        private dashboardService: DashboardService,
         private webuserService: WebuserService,
         private laneService: LaneService,
         private cityService: CityService,
@@ -93,7 +89,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'lastInspection', 'inspectionType', 'contact', 'owner', 'picture', 'buildingValue', 'details', 'matricule',
             'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see', 'vacantLand', 'delete',
             'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building', 'approve', 'todo', 'absent',
-            'started', 'waitingApprobation', 'approved', 'refused', 'canceled', 'collapseAll', 'expandAll', 'wantToDeleteBatch', 'generateReport'
+            'started', 'waitingApprobation', 'approved', 'refused', 'canceled', 'collapseAll', 'expandAll', 'wantToDeleteBatch',
+            'generateReport'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
