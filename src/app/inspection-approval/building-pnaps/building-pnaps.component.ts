@@ -1,6 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {InspectionService} from '../shared/services/inspection.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {InspectionBuildingPnapsService} from '../shared/services/inspection-building-pnaps.service';
+import {PersonRequiringAssistanceType} from '../../management-building/shared/models/person-requiring-assistance-type.model';
+import {PersonRequiringAssistanceTypeService} from '../../management-building/shared/services/person-requiring-assistance-type.service';
+import {BuildingPnaps} from '../../management-building/shared/models/building-pnaps.model';
 
 
 @Component({
@@ -8,34 +12,48 @@ import {InspectionService} from '../shared/services/inspection.service';
     templateUrl: './building-pnaps.component.html',
     styleUrls: ['./building-pnaps.component.scss'],
     providers: [
-        InspectionService,
+        InspectionBuildingPnapsService,
+        PersonRequiringAssistanceTypeService,
     ]
 })
-export class BuildingPnapsComponent implements OnInit {
+export class BuildingPnapsComponent extends GridWithCrudService implements OnInit {
     @Input()
     set building(id: string) {
         this.idBuilding = id;
-        this.pnaps = [];
-        this.loadData();
+        this.dataSource = [];
+
+        if (this.idBuilding) {
+            this.loadSource(this.idBuilding);
+        }
     }
 
+    public pnapsType: PersonRequiringAssistanceType[];
     private idBuilding: string;
-    pnaps: any = [];
 
     constructor(
-        private inspectionService: InspectionService,
-    ) { }
-
-    ngOnInit() {
+        inspectionBuildingPnapsService: InspectionBuildingPnapsService,
+        private pnapsTypeService: PersonRequiringAssistanceTypeService,
+    ) {
+        super(inspectionBuildingPnapsService);
     }
 
-    loadData() {
-        if (!this.idBuilding) {
-            return null;
-        }
+    public ngOnInit() {
+        this.loadType();
+    }
 
-        this.inspectionService.getBuildingPNAPS(this.idBuilding).subscribe(data => {
-            this.pnaps = data;
-        });
+    public setModel(data: any) {
+        return BuildingPnaps.fromJSON(data);
+    }
+
+    public onInitNewRow(e) {
+        e.data.idBuilding = this.idBuilding;
+        e.data.dayIsApproximate = false;
+        e.data.eveningIsApproximate = false;
+        e.data.nightIsApproximate = false;
+        e.data.isActive = true;
+    }
+
+    private loadType() {
+        this.pnapsTypeService.localized().subscribe(data => this.pnapsType = data);
     }
 }
