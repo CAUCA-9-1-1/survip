@@ -13,7 +13,7 @@ export class InspectionBuildingContactService extends RequestService {
     }
 
     getAll(idBuilding: string): Observable<BuildingContact[]> {
-        return this.get('Inspection/Building/' + idBuilding + '/Contact');
+        return this.get('Inspection/Building/' + idBuilding + '/ContactList');
     }
 
     getOne(idContact: string): Observable<BuildingContact[]> {

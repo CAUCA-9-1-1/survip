@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {InspectionService} from '../shared/services/inspection.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {InspectionBuildingContactService} from '../shared/services/inspection-building-contact.service';
+import {BuildingContact} from '../../management-building/shared/models/building-contact.model';
 
 
 @Component({
@@ -8,35 +10,38 @@ import {InspectionService} from '../shared/services/inspection.service';
     templateUrl: './building-contacts.component.html',
     styleUrls: ['./building-contacts.component.scss'],
     providers: [
-        InspectionService,
+        InspectionBuildingContactService,
     ]
 })
-export class BuildingContactsComponent implements OnInit {
+export class BuildingContactsComponent extends GridWithCrudService implements OnInit {
     @Input()
     set building(id: string) {
         this.idBuilding = id;
-        this.contacts = [];
-        this.loadData();
+        this.dataSource = [];
+
+        if (this.idBuilding) {
+            this.loadSource(this.idBuilding);
+        }
     }
 
     private idBuilding: string;
 
-    contacts: any = [];
-
-    constructor(
-        private inspectionService: InspectionService,
-    ) { }
-
-    ngOnInit() {
+    public constructor(
+        inspectionBuildingContactService: InspectionBuildingContactService,
+    ) {
+        super(inspectionBuildingContactService);
     }
 
-    loadData() {
-        if (!this.idBuilding) {
-            return null;
-        }
+    public ngOnInit() {
+    }
 
-        this.inspectionService.getBuildingContact(this.idBuilding).subscribe(data => {
-            this.contacts = data;
-        });
+    public setModel(data: any) {
+        return BuildingContact.fromJSON(data);
+    }
+
+    public onInitNewRow(e) {
+        e.data.idBuilding = this.idBuilding;
+        e.data.isOwner = false;
+        e.data.callPriority = 0;
     }
 }

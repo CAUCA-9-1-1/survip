@@ -1,3 +1,55 @@
-<div fxLayout="row" *ngFor="let contact of contacts">
-    <div>{{contact.name}}</div>
-</div>
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="firstName"
+            caption="{{'firstName' | translate}}"
+            sortIndex="1"
+            sortOrder="desc">
+    </dxi-column>
+    <dxi-column
+            dataField="lastName"
+            caption="{{'lastName' | translate}}"
+            sortIndex="2"
+            sortOrder="desc">
+    </dxi-column>
+    <dxi-column dataField="isOwner" caption="{{'owner' | translate}}" dataType="boolean"></dxi-column>
+    <dxi-column
+            dataField="callPriority"
+            caption="{{'priority' | translate}}"
+            sortIndex="0"
+            sortOrder="desc"
+            dataType="integer">
+    </dxi-column>
+    <dxi-column dataField="phoneNumber" caption="{{'phoneNumber' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="phoneNumberExtension" caption="{{'phoneNumberExtension' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="cellphoneNumber" caption="{{'cellphoneNumber' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="pagerNumber" caption="{{'pagerNumber' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="pagerCode" caption="{{'pagerCode' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="otherNumber" caption="{{'otherNumber' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="otherNumberExtension" caption="{{'otherNumberExtension' | translate}}" [visible]="false"></dxi-column>
+
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'contact' | translate}}" [showTitle]="true"></dxo-popup>
+
+        <dxo-form colCount="2">
+            <dxi-item dataField="firstName" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="lastName" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="isOwner"></dxi-item>
+            <dxi-item dataField="callPriority"></dxi-item>
+            <dxi-item dataField="phoneNumber" [editorOptions]="{ mask: '(000) 000-0000' }"></dxi-item>
+            <dxi-item dataField="phoneNumberExtension"></dxi-item>
+            <dxi-item dataField="cellphoneNumber" [editorOptions]="{ mask: '(000) 000-0000' }"></dxi-item>
+            <dxi-item itemType="empty"></dxi-item>
+            <dxi-item dataField="pagerNumber" [editorOptions]="{ mask: '(000) 000-0000' }"></dxi-item>
+            <dxi-item dataField="pagerCode"></dxi-item>
+            <dxi-item dataField="otherNumber" [editorOptions]="{ mask: '(000) 000-0000' }"></dxi-item>
+            <dxi-item dataField="otherNumberExtension"></dxi-item>
+        </dxo-form>
+    </dxo-editing>
+</dx-data-grid>
