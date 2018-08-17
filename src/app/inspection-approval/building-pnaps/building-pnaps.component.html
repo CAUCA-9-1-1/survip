@@ -1,4 +1,62 @@
-<div fxLayout="row" *ngFor="let pnap of pnaps">
-    <div fxFlex="50%">{{pnap.name}}</div>
-    <div>{{pnap.typeDescription}}</div>
-</div>
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="idPersonRequiringAssistanceType"
+            caption="{{'pnapType' | translate}}"
+            sortOrder="asc"
+            sortIndex="0">
+        <dxo-lookup [dataSource]="pnapsType" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+            dataField="personName"
+            caption="{{'personName' | translate}}"
+            sortOrder="asc"
+            sortIndex="1">
+    </dxi-column>
+    <dxi-column dataField="floor" caption="{{'floor' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="local" caption="{{'local' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="contactName" caption="{{'name' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="contactPhoneNumber" caption="{{'phoneNumber' | translate}}"></dxi-column>
+    <dxi-column dataField="dayResidentCount" caption="{{'residentCount' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="dayIsApproximate" dataType="boolean" caption="{{'approximate' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="eveningResidentCount" caption="{{'residentCount' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="eveningIsApproximate" dataType="boolean" caption="{{'approximate' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="nightResidentCount" caption="{{'residentCount' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="nightIsApproximate" dataType="boolean" caption="{{'approximate' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="description" caption="{{'description' | translate}}" [visible]="false"></dxi-column>
+
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'pnap' | translate}}" [showTitle]="true"></dxo-popup>
+
+        <dxo-form colCount="2">
+            <dxi-item dataField="idPersonRequiringAssistanceType" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="personName" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="floor" [editorOptions]="{ maxLength: 3 }"></dxi-item>
+            <dxi-item dataField="local" [editorOptions]="{ maxLength: 10 }"></dxi-item>
+            <dxi-item itemType="group" caption="{{'contact' | translate}}" colSpan="2" colCount="2">
+                <dxi-item dataField="contactName"></dxi-item>
+                <dxi-item dataField="contactPhoneNumber" [editorOptions]="{'mask': '(000) 000-0000'}"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'day' | translate}}" colSpan="2" colCount="2">
+                <dxi-item dataField="dayResidentCount"></dxi-item>
+                <dxi-item dataField="dayIsApproximate" editorType="dxCheckBox"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'evening' | translate}}" colSpan="2" colCount="2">
+                <dxi-item dataField="eveningResidentCount"></dxi-item>
+                <dxi-item dataField="eveningIsApproximate" editorType="dxCheckBox"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'night' | translate}}" colSpan="2" colCount="2">
+                <dxi-item dataField="nightResidentCount"></dxi-item>
+                <dxi-item dataField="nightIsApproximate" editorType="dxCheckBox"></dxi-item>
+            </dxi-item>
+            <dxi-item dataField="description" colSpan="2"></dxi-item>
+        </dxo-form>
+    </dxo-editing>
+</dx-data-grid>

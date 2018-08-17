@@ -38,13 +38,13 @@
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-        <dxo-popup title="{{'contact' | translate}}" [showTitle]="true"></dxo-popup>
+        <dxo-popup title="{{'pnap' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="2">
             <dxi-item dataField="idPersonRequiringAssistanceType" [isRequired]="true"></dxi-item>
             <dxi-item dataField="personName" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="floor" editorType="dxCheckBox"></dxi-item>
-            <dxi-item dataField="local"></dxi-item>
+            <dxi-item dataField="floor" [editorOptions]="{ maxLength: 3 }"></dxi-item>
+            <dxi-item dataField="local" [editorOptions]="{ maxLength: 10 }"></dxi-item>
             <dxi-item dataField="description"></dxi-item>
             <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
             <dxi-item itemType="group" caption="{{'contact' | translate}}" colSpan="2" colCount="2">
