@@ -1,7 +1,9 @@
+<br />
 <dx-data-grid
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
+        (onToolbarPreparing)="onToolbarPreparing($event)"
         (onInitialized)="onInitialized($event)"
         (onEditorPreparing)="onEditorPreparing($event)"
         (onInitNewRow)="onInitNewRow($event)"
@@ -13,10 +15,9 @@
     <dxi-column
             dataField="localizations"
             caption="{{'name' | translate}}"
+            [allowSorting]="false"
             [calculateCellValue]="getBuildingName"
-            editCellTemplate="editname"
-            sortOrder="asc"
-            sortIndex="0">
+            editCellTemplate="editname">
     </dxi-column>
     <dxi-column
             dataField="picture"
@@ -24,16 +25,12 @@
             editCellTemplate="editphoto"
             [visible]="false">
     </dxi-column>
-    <dxi-column dataField="civicNumber" caption="{{'civicNumber' | translate}}"></dxi-column>
+    <dxi-column dataField="civicNumber" caption="{{'civicNumber' | translate}}" sortOrder="asc" sortIndex="1"></dxi-column>
     <dxi-column dataField="civicLetter" caption="{{'civicLetter' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="civicSupp" caption="{{'civicSupp' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="civicLetterSupp" caption="{{'civicLetterSupp' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="idLane" caption="{{'lane' | translate}}">
+    <dxi-column dataField="idLane" caption="{{'lane' | translate}}" sortOrder="asc" sortIndex="0">
         <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
-        </dxo-lookup>
-    </dxi-column>
-    <dxi-column dataField="idCity" caption="{{'city' | translate}}">
-        <dxo-lookup [dataSource]="cities" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="suite" caption="{{'suite' | translate}}" [visible]="false"></dxi-column>
@@ -68,7 +65,7 @@
             mode="popup"
             [useIcons]="true"
             [allowUpdating]="true"
-            [allowAdding]="true"
+            [allowAdding]="false"
             [allowDeleting]="true">
         <dxo-popup title="{{'building' | translate}}" [showTitle]="true"></dxo-popup>
 
@@ -86,8 +83,8 @@
                     </dxi-item>
                 </dxi-tab>
                 <dxi-tab title="{{'address' | translate}}" colCount="2">
-                    <dxi-item dataField="idCity" [isRequired]="true"></dxi-item>
                     <dxi-item dataField="idLane" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item itemType="empty"></dxi-item>
                     <dxi-item dataField="civicNumber" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
                     <dxi-item dataField="civicLetter" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
                     <dxi-item dataField="civicSupp" [editorOptions]="{'readOnly': !isParent}"></dxi-item>

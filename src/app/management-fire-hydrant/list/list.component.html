@@ -1,7 +1,9 @@
+<br />
 <dx-data-grid
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
+        (onToolbarPreparing)="onToolbarPreparing($event)"
         (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onEditingStart)="onEditingStart($event)"
@@ -14,12 +16,6 @@
             dataField="idFireHydrantType"
             caption="{{'fireHydrantType' | translate}}">
         <dxo-lookup [dataSource]="fireHydrantTypes" [displayExpr]="getFireHydrantTypeName" valueExpr="id">
-        </dxo-lookup>
-    </dxi-column>
-    <dxi-column
-            dataField="idCity"
-            caption="{{'city' | translate}}">
-        <dxo-lookup [dataSource]="cities" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column
@@ -76,16 +72,16 @@
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
-    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="false" [allowDeleting]="true">
         <dxo-popup title="{{'fireHydrant' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="2">
             <dxi-item dataField="number" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idFireHydrantType" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="idCity" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idLane" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idIntersection"></dxi-item>
             <dxi-item dataField="altitude"></dxi-item>
+            <dxi-item itemType="empty"></dxi-item>
             <dxi-item itemType="group" caption="{{'rate' | translate}}">
                 <dxi-item dataField="idOperatorTypeRate" [isRequired]="true"></dxi-item>
                 <dxi-item dataField="rateFrom" [isRequired]="true"></dxi-item>

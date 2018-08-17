@@ -1,5 +1,8 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
+import {TranslateService} from '@ngx-translate/core';
+import DataSource from 'devextreme/data/data_source';
+import Guid from 'devextreme/core/guid';
 
 import config from '../../../assets/config/config.json';
 import {FireHydrantService} from '../shared/services/fire-hydrant.service';
@@ -13,6 +16,7 @@ import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {CityService} from '../../management-address/shared/services/city.service';
 import {FireHydrant} from '../shared/models/fire-hydrant.model';
+import {ODataService} from '../../shared/services/o-data.service';
 
 
 @Component({
@@ -39,18 +43,21 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         }
     }
 
-    fireHydrantTypes: FireHydrantType[] = [];
-    cities: any = {};
-    lanes: any = {};
-    lanesOfCity: any = {};
-    operatorTypes: OperatorType[] = [];
-    rateUnits: UnitOfMeasure[] = [];
-    pressureUnits: UnitOfMeasure[] = [];
-    formFields = {
+    public addingButton: any;
+    public dataSource: any;
+    public selectedCity = '';
+    public fireHydrantTypes: FireHydrantType[] = [];
+    public cities: any = {};
+    public lanes: any = {};
+    public lanesOfCity: any = {};
+    public operatorTypes: OperatorType[] = [];
+    public rateUnits: UnitOfMeasure[] = [];
+    public pressureUnits: UnitOfMeasure[] = [];
+    public formFields = {
         idLane: null,
         idIntersection: null,
     };
-    colors = [{
+    public colors = [{
         id: '#000000',
         color: '#000000',
     }, {
@@ -76,62 +83,123 @@ export class ListComponent extends GridWithCrudService implements OnInit {
         color: '#CB42F4',
     }];
 
-    constructor(
+    private labels: any = {};
+
+    public constructor(
         fireHydrantService: FireHydrantService,
         private fireHydrantTypeService: FireHydrantTypeService,
         private operatorTypeService: OperatorTypeService,
         private unitOfMeasureService: UnitOfMeasureService,
         private cityService: CityService,
         private laneService: LaneService,
+        private translateService: TranslateService,
     ) {
         super(fireHydrantService);
+
+        this.dataSource = new DataSource({
+            store: new ODataService({
+                url: 'FireHydrant',
+                key: 'id',
+                keyType: 'string',
+            }),
+        });
+
+        this.translateService.get([
+            'selectCity'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
-    setModel(data: any) {
+    public setModel(data: any) {
         return FireHydrant.fromJSON(data);
     }
 
-    ngOnInit() {
-        this.loadSource();
+    public ngOnInit() {
         this.loadCity();
         this.loadLane();
         this.loadFireHydrantType();
     }
 
-    getFireHydrantTypeName(data) {
+    public getFireHydrantTypeName(data) {
         const type = FireHydrantType.fromJSON(data);
 
         return type.getLocalization(config.locale);
     }
 
-    getUnitOfMeasureName(data) {
+    public getUnitOfMeasureName(data) {
         const unit = UnitOfMeasure.fromJSON(data);
 
         return unit.getLocalization(config.locale);
     }
 
-    onInitNewRow(e) {
+    public onInitialized(e) {
+        const options = e.component.option('editing');
+
+        if (options.popup) {
+            options.form.validationGroup = this.validationGroup;
+            options.form.onInitialized = (ev) => {
+                this.form = ev.component;
+            };
+            options.popup.onHiding = (ev) => {
+                this.dataSource.load();
+            };
+
+            e.component.option('editing', options);
+        }
+    }
+
+    public onToolbarPreparing(e) {
+        const toolbarItems = e.toolbarOptions.items;
+
+        toolbarItems.unshift({
+            widget: 'dxButton',
+            location: 'after',
+            options: {
+                icon: 'plus',
+                width: 50,
+                disabled: true,
+                onInitialized: (ev) => {
+                    this.addingButton = ev.component;
+                },
+                onClick: (ev) => {
+                    e.component.addRow();
+                },
+            }
+        });
+        toolbarItems.unshift({
+            widget: 'dxLookup',
+            options: {
+                displayExpr: 'name',
+                valueExpr: 'id',
+                width: 300,
+                placeholder: this.labels['selectCity'],
+                title: this.labels['selectCity'],
+                closeOnOutsideClick: true,
+                onOpened: (ev) => {
+                    ev.component.option('dataSource', this.cities);
+                },
+                onValueChanged: (ev) => {
+                    this.selectedCity = ev.value;
+                    this.addingButton.option('disabled', false);
+                    this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
+                    this.dataSource.load();
+                    this.loadLaneByCity(ev.value);
+                }
+            }
+        });
+    }
+
+    public onInitNewRow(e) {
         e.data.color = '#FF0000';
         e.data.isActive = true;
+        e.data.idCity = this.selectedCity;
     }
 
-    onEditingStart(e) {
-        this.loadLaneByCity(e.data.idCity);
-    }
+    public onEditingStart(e) { }
 
-    onEditorPreparing(e) {
-        if (e.dataField === 'idCity') {
-            e.editorName = 'dxSelectBox';
-            e.editorOptions.onValueChanged = (ev) => {
-                e.setValue(ev.value);
-
-                this.loadLaneByCity(ev.value);
-                if (this.formFields.idLane) {
-                    this.formFields.idLane.option('value', '');
-                    this.formFields.idIntersection.option('value', '');
-                }
-            };
-        } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
+    public onEditorPreparing(e) {
+        if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
             e.editorName = 'dxLookup';
             e.editorOptions.closeOnOutsideClick = true;
             e.editorOptions.onInitialized = (ev) => {

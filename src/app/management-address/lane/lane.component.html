@@ -1,7 +1,9 @@
+<br />
 <dx-data-grid
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
+        (onToolbarPreparing)="onToolbarPreparing($event)"
         (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onRowValidating)="onRowValidating($event)"
@@ -11,20 +13,15 @@
     <dxi-column
             dataField="localizations"
             caption="{{'name' | translate}}"
+            [allowSorting]="false"
             [calculateCellValue]="getLaneName"
-            editCellTemplate="editname"
-            sortOrder="asc"
-            sortIndex="1">
+            editCellTemplate="editname">
     </dxi-column>
     <dxi-column
-            dataField="idCity"
-            caption="{{'city' | translate}}"
+            dataField="idPublicCode"
+            caption="{{'publicLaneCode' | translate}}"
             sortOrder="asc"
             sortIndex="0">
-        <dxo-lookup [dataSource]="cities" displayExpr="name" valueExpr="id">
-        </dxo-lookup>
-    </dxi-column>
-    <dxi-column dataField="idPublicCode" caption="{{'publicLaneCode' | translate}}" [visible]="false">
         <dxo-lookup [dataSource]="publicCodes" displayExpr="description" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
@@ -35,12 +32,11 @@
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
-    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="false" [allowDeleting]="true">
         <dxo-popup title="{{'lane' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="1">
             <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="idCity" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idPublicCode" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idLaneGenericCode" [isRequired]="true"></dxi-item>
             <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>

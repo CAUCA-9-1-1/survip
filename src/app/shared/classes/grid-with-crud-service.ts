@@ -2,17 +2,17 @@ import validationEngine from 'devextreme/ui/validation_engine';
 
 
 export abstract class GridWithCrudService {
-    dataSource = [];
-    validationGroup = 'custom-validation-group-' + (new Date()).getTime();
+    public dataSource = [];
+    public validationGroup = 'custom-validation-group-' + (new Date()).getTime();
 
-    private form: any;
-    private loadSpecificOpts: any;
+    protected form: any;
+    protected loadSpecificOpts: any;
 
     constructor(
         protected sourceService?: any,
     ) { }
 
-    onInitialized(e) {
+    public onInitialized(e) {
         const options = e.component.option('editing');
 
         if (options.popup) {
@@ -28,7 +28,7 @@ export abstract class GridWithCrudService {
         }
     }
 
-    onRowValidating(e) {
+    public onRowValidating(e) {
         const validation = validationEngine.validateGroup(this.validationGroup);
         const panel = this.form.element().querySelector('.dx-tabpanel');
         const tabs = panel.querySelectorAll('.dx-tabpanel-tabs .dx-tab');
@@ -54,7 +54,7 @@ export abstract class GridWithCrudService {
         }
     }
 
-    onRowInserted(e) {
+    public onRowInserted(e) {
         this.sourceService.save(
             this.setModel(e.data)
         ).subscribe(info => {
@@ -64,13 +64,13 @@ export abstract class GridWithCrudService {
         });
     }
 
-    onRowUpdated(e) {
+    public onRowUpdated(e) {
         this.sourceService.save(
             this.setModel(e.key)
         ).subscribe(() => this.loadSource(this.loadSpecificOpts));
     }
 
-    onRowRemoved(e) {
+    public onRowRemoved(e) {
         this.sourceService.remove(e.key.id).subscribe(() => this.loadSource(this.loadSpecificOpts));
     }
 
@@ -81,14 +81,14 @@ export abstract class GridWithCrudService {
 
         if (typeof(opts) === 'function') {
             this.loadWithCallback(opts);
-        } else if (typeof(opts) === 'string') {
+        } else if (typeof(opts) === 'string' || typeof(opts) === 'object') {
             this.loadSpecificItem(opts);
         } else {
             this.sourceService.getAll().subscribe(data => this.dataSource = data);
         }
     }
 
-    private loadSpecificItem(id: string) {
+    private loadSpecificItem(id: object|string) {
         this.sourceService.getAll(id).subscribe(data => this.dataSource = data);
     }
 

@@ -12,16 +12,6 @@ export class BuildingService extends RequestService {
         super(injector);
     }
 
-    getAll(id?: string): Observable<Building[]> {
-        let url = 'Building';
-
-        if (id) {
-            url += '/child/' + id;
-        }
-
-        return this.get(url);
-    }
-
     getActive(): Observable<Building[]> {
         return this.get('Building/Active');
     }
