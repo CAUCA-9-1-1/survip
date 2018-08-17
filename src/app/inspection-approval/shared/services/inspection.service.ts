@@ -56,10 +56,6 @@ export class InspectionService extends RequestService {
         return this.get('inspection/building/' + id + '/detail');
     }
 
-    getBuildingContact(id: string) {
-        return this.get('inspection/building/' + id + '/contact');
-    }
-
     getBuildingPNAPS(id: string) {
         return this.get('inspection/building/' + id + '/pnaps');
     }
