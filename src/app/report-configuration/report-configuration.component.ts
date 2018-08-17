@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, ViewChild, Component, NgZone, OnInit, ElementRef, AfterViewInit} from '@angular/core';
+import {ChangeDetectorRef, ViewChild, Component, NgZone, OnInit, AfterViewInit} from '@angular/core';
 
 import {ReportTemplateService} from '../shared/services/report-template.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -13,12 +13,10 @@ import {SelectTemplateDialogComponent} from './select-template/select-template-d
   styleUrls: ['./report-configuration.component.scss'],
   providers: [ReportTemplateService]
 })
-export class ReportConfigurationComponent implements OnInit, AfterViewInit {
+export class ReportConfigurationComponent implements OnInit {
   selectedTemplate: ConfigurationTemplate;
   templateIdentifiers: ConfigurationTemplate[];
   placeholders: String[];
-  @ViewChild('textEditor') textEditorComponent: any;
-
 
   constructor(
     private dialog: MatDialog,
@@ -27,8 +25,6 @@ export class ReportConfigurationComponent implements OnInit, AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef,
     private ngZone: NgZone,
   ) { }
-
-  ngAfterViewInit() {}
 
   ngOnInit() {
     this.reportConfigurationService.getPlaceholderList().subscribe(res => {
@@ -98,9 +94,5 @@ export class ReportConfigurationComponent implements OnInit, AfterViewInit {
         this.saveTemplate();
       }
     }
-  }
-
-  insertPlaceholderAtCaret(placeholder: string) {
-    this.textEditorComponent.insertAtCaret('{{' + placeholder + '}}');
   }
 }
