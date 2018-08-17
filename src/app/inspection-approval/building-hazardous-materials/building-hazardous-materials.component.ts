@@ -1,6 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {InspectionService} from '../shared/services/inspection.service';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {InspectionBuildingHazardousMaterialService} from '../shared/services/inspection-building-hazardous-material.service';
+import {BuildingHazardousMaterial} from '../../management-building/shared/models/building-hazardous-material.model';
+import {HazardousMaterialService} from '../../management-building/shared/services/hazardous-material.service';
+import {UnitOfMeasureService} from '../../management-fire-hydrant/shared/services/unit-of-measure.service';
+import {HazardousMaterial} from '../../management-building/shared/models/hazardous-material.model';
+import {UnitOfMeasure} from '../../management-fire-hydrant/shared/models/unit-of-measure.model';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -8,35 +15,85 @@ import {InspectionService} from '../shared/services/inspection.service';
     templateUrl: './building-hazardous-materials.component.html',
     styleUrls: ['./building-hazardous-materials.component.scss'],
     providers: [
-        InspectionService,
+        InspectionBuildingHazardousMaterialService,
+        HazardousMaterialService,
+        UnitOfMeasureService,
     ]
 })
-export class BuildingHazardousMaterialsComponent implements OnInit {
+export class BuildingHazardousMaterialsComponent extends GridWithCrudService implements OnInit {
     @Input()
     set building(id: string) {
         this.idBuilding = id;
-        this.materials = [];
-        this.loadData();
+        this.dataSource = [];
+
+        if (this.idBuilding) {
+            this.loadSource(this.idBuilding);
+        }
     }
 
+    public hazardousMaterials: HazardousMaterial[];
+    public unitOfMeasures: UnitOfMeasure[];
+    public tankTypes: any = [];
     private idBuilding: string;
 
-    materials: any = [];
+    public constructor(
+        inspectionBuildingHazardousMaterialService: InspectionBuildingHazardousMaterialService,
+        private hazardousMaterialService: HazardousMaterialService,
+        private unitOfMeasureService: UnitOfMeasureService,
+        private translateService: TranslateService,
+    ) {
+        super(inspectionBuildingHazardousMaterialService);
 
-    constructor(
-        private inspectionService: InspectionService,
-    ) { }
-
-    ngOnInit() {
+        this.translateService.get([
+            'unknown', 'underground', 'aboveground'
+        ]).subscribe(labels => {
+            this.tankTypes = [{
+                id: 0,
+                name: labels['unknown'],
+            }, {
+                id: 1,
+                name: labels['underground'],
+            }, {
+                id: 2,
+                name: labels['aboveground'],
+            }];
+        });
     }
 
-    loadData() {
-        if (!this.idBuilding) {
-            return null;
-        }
+    public ngOnInit() {
+        this.loadHazardousMaterial();
+        this.loadUnitOfMeasure();
+    }
 
-        this.inspectionService.getBuildingHazardousMaterial(this.idBuilding).subscribe(data => {
-            this.materials = data;
-        });
+    public setModel(data: any) {
+        return BuildingHazardousMaterial.fromJSON(data);
+    }
+
+    public getMaterialName(data) {
+        if (data) {
+            return data.number + ' - ' + data.name;
+        }
+    }
+
+    public onInitNewRow(e) {
+        e.data.idBuilding = this.idBuilding;
+        e.data.isActive = true;
+    }
+
+    public onEditorPreparing(e) {
+        if (e.dataField === 'idHazardousMaterial') {
+            e.editorName = 'dxLookup';
+            e.editorOptions.closeOnOutsideClick = true;
+        } else if (e.dataField === 'securityPerimeter' || e.dataField === 'otherInformation') {
+            e.editorName = 'dxTextArea';
+        }
+    }
+
+    private loadHazardousMaterial() {
+        this.hazardousMaterialService.localized().subscribe(data => this.hazardousMaterials = data);
+    }
+
+    private loadUnitOfMeasure() {
+        this.unitOfMeasureService.getCapacity().subscribe(data => this.unitOfMeasures = data);
     }
 }

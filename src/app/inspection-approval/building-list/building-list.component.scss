@@ -1,4 +1,4 @@
 .mat-tab-group,
 .mat-tab-group ::ng-deep div.mat-tab-body-wrapper {
-  height: 100%;
+  height: calc(100% - 69px);
 }

@@ -13,18 +13,18 @@ export class InspectionBuildingHazardousMaterialService extends RequestService {
     }
 
     getAll(idBuilding: string): Observable<BuildingHazardousMaterial[]> {
-        return this.get('Building/' + idBuilding + '/hazardousmaterial');
+        return this.get('inspection/building/' + idBuilding + '/hazardousmateriallist');
     }
 
     getOne(idHazardousMatereial: string): Observable<BuildingHazardousMaterial[]> {
-        return this.get('Building/hazardousmaterial/' + idHazardousMatereial);
+        return this.get('inspection/building/hazardousmaterial/' + idHazardousMatereial);
     }
 
     save(idHazardousMatereial: BuildingHazardousMaterial) {
-        return this.post('Building/hazardousmaterial', idHazardousMatereial);
+        return this.post('inspection/building/hazardousmaterial', idHazardousMatereial);
     }
 
     remove(idPnaps: string) {
-        return this.delete('Building/hazardousmaterial/' + idPnaps);
+        return this.delete('inspection/building/hazardousmaterial/' + idPnaps);
     }
 }
