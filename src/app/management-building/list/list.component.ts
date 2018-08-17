@@ -164,6 +164,8 @@ export class ListComponent extends GridWithCrudService implements OnInit {
                 valueExpr: 'id',
                 width: 300,
                 placeholder: this.labels['selectCity'],
+                title: this.labels['selectCity'],
+                closeOnOutsideClick: true,
                 onOpened: (ev) => {
                     ev.component.option('dataSource', this.cities);
                 },
