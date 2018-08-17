@@ -1,4 +1,69 @@
-<div fxLayout="row"  *ngFor="let material of materials">
-    <div fxFlex="50%">{{material.hazardousMaterialName}}</div>
-    <div>{{material.quantityDescription}}</div>
-</div>
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onEditorPreparing)="onEditorPreparing($event)"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="idHazardousMaterial"
+            caption="{{'name' | translate}}"
+            sortOrder="asc"
+            sortIndex="0">
+        <dxo-lookup [dataSource]="hazardousMaterials" [displayExpr]="getMaterialName" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="quantity" caption="{{'quantity' | translate}}"></dxi-column>
+    <dxi-column dataField="container" caption="{{'type' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="tankType" caption="{{'tank' | translate}}" [visible]="false">
+        <dxo-lookup [dataSource]="tankTypes" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="supplyLine" caption="{{'supplyLine' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="capacity" caption="{{'capacity' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="unitOfMeasure" caption="{{'unitOfMeasure' | translate}}" [visible]="false">
+        <dxo-lookup [dataSource]="unitOfMeasures" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="place" caption="{{'place' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="floor" caption="{{'floor' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="wall" caption="{{'wall' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="sector" caption="{{'sector' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="gasInlet" caption="{{'gasInlet' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="securityPerimeter" caption="{{'securityPerimeter' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="otherInformation" caption="{{'otherInformation' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'hazardousMaterial' | translate}}" [showTitle]="true"></dxo-popup>
+
+        <dxo-form colCount="2">
+            <dxi-item dataField="idHazardousMaterial" [isRequired]="true"></dxi-item>
+            <dxi-item itemType="empty"></dxi-item>
+            <dxi-item itemType="group" caption="{{'container' | translate}}" colSpan="2" colCount="4">
+                <dxi-item dataField="quantity"></dxi-item>
+                <dxi-item dataField="container"></dxi-item>
+                <dxi-item dataField="tankType"></dxi-item>
+                <dxi-item dataField="supplyLine"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'capacityContainer' | translate}}" colSpan="2" colCount="4">
+                <dxi-item dataField="capacity"></dxi-item>
+                <dxi-item dataField="unitOfMeasure"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'localization' | translate}}" colSpan="2" colCount="4">
+                <dxi-item dataField="place"></dxi-item>
+                <dxi-item dataField="floor"></dxi-item>
+                <dxi-item dataField="wall"></dxi-item>
+                <dxi-item dataField="sector"></dxi-item>
+                <dxi-item dataField="gasInlet"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="{{'other' | translate}}" colSpan="2" colCount="2">
+                <dxi-item dataField="securityPerimeter"></dxi-item>
+                <dxi-item dataField="otherInformation"></dxi-item>
+            </dxi-item>
+        </dxo-form>
+    </dxo-editing>
+</dx-data-grid>
