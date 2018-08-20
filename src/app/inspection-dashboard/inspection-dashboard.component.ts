@@ -55,6 +55,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     utilisationCodes: UtilisationCode[] = [];
     labels = {};
     selectedMode = 'mode1';
+    buttons: any = {};
     angularIsLoaded = false;
     everythingIsLoaded = false;
 
@@ -104,6 +105,10 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     changeMode(mode) {
         this.selectedMode = mode;
+        if (this.buttons['createBatch']) {
+            this.buttons['createBatch'].option('visible', this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? false : true);
+            this.buttons['closeAll'].option('visible', this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? true : false);
+        }
         this.checkLoadedElement();
     }
 
@@ -247,7 +252,10 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             options: {
                 text: this.labels['collapseAll'],
                 icon: 'spinright',
-                disabled: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? false : true),
+                visible: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? true : false),
+                onInitialized: (ev) => {
+                    this.buttons['closeAll'] = ev.component;
+                },
                 onClick: (ev) => this.openCloseGroup(ev,0)},
             location: 'after',
         });
@@ -257,7 +265,10 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             options: {
                 text: this.labels['createBatch'],
                 icon: 'group',
-                disabled: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? true : false),
+                visible: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? false : true),
+                onInitialized: (ev) => {
+                    this.buttons['createBatch'] = ev.component;
+                },
                 onClick: (ev) => this.createBatch(ev)
             },
             location: 'after',
