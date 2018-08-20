@@ -1,5 +1,13 @@
 <div #container class="slideshow">
+    <ng-container *ngIf="allowChange">
+        <app-upload accept="image/*" (readend)="addPicture($event)" icon="plus"></app-upload>
+    </ng-container>
     <div *ngFor="let url of images; let index = index;" [@slideLeftRight]="getState(index)">
-        <img src="{{url}}" />
+        <div *ngIf="isImage(url)">
+            <img [src]="url" />
+        </div>
+        <div *ngIf="!isImage(url)">
+            <app-image [idImage]="url" [height]="height" [allowChange]="true" (valueChanged)="changePicture($event)"></app-image>
+        </div>
     </div>
 </div>

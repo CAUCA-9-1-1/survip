@@ -28,18 +28,25 @@ export class InspectionImplantationPlanComponent implements OnInit {
     private idImplantationPlan: string;
     private picture: Picture;
 
-    picturePlan = '';
-    modeEdit = false;
+    public picturePlan = '';
 
-    constructor(
+    public constructor(
         private pictureService: PictureService,
         private inspectionService: InspectionService,
     ) { }
 
-    ngOnInit() {
+    public ngOnInit() {
     }
 
-    loadData() {
+    public uploadImage(e) {
+        this.picture = e;
+        this.picture.id = undefined;
+
+        this.picturePlan = e.dataUri;
+        this.saveImage();
+    }
+
+    private loadData() {
         if (!this.idImplantationPlan) {
             return null;
         }
@@ -49,29 +56,13 @@ export class InspectionImplantationPlanComponent implements OnInit {
         });
     }
 
-    activeEditMode() {
-        if (this.modeEdit) {
-            this.saveImage();
-        } else {
-            this.modeEdit = true;
-        }
-    }
-
-    uploadImage(e) {
-        this.picture = e;
-        this.picture.id = undefined;
-
-        this.picturePlan = e.dataUri;
-    }
-
-    saveImage() {
+    private saveImage() {
         if (this.picture) {
             this.pictureService.save(this.picture).subscribe(id => {
                 this.inspectionService.saveImplantationPlan(this.idBuildingDetail, id).subscribe();
             });
         }
 
-        this.modeEdit = false;
         this.picture = undefined;
     }
 }

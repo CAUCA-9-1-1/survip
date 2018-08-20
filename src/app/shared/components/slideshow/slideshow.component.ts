@@ -1,5 +1,6 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Picture} from '../../models/picture.model';
 
 
 @Component({
@@ -33,9 +34,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class SlideshowComponent implements OnInit {
     @ViewChild('container') container: ElementRef;
-
-    @Input() height: number;
-    @Input() autoPlay: boolean;
+    @Output() valueChanged = new EventEmitter();
+    @Input() height = '150px';
+    @Input() autoPlay = true;
+    @Input() allowChange = false;
     @Input('images')
     set images(list: string[]) {
         this.items = list;
@@ -51,14 +53,14 @@ export class SlideshowComponent implements OnInit {
     private states: string[] = [];
     private selectedIndex = 0;
 
-    constructor() { }
+    public constructor() { }
 
-    ngOnInit() {
-        this.container.nativeElement.style.height = this.height + 'px';
+    public ngOnInit() {
+        this.container.nativeElement.style.height = this.height;
         this.container.nativeElement.style.width = '100%';
     }
 
-    getState(index: number) {
+    public getState(index: number) {
         if (this.states[index]) {
             return this.states[index];
         }
@@ -66,7 +68,11 @@ export class SlideshowComponent implements OnInit {
         return (this.selectedIndex === index ? 'in' : 'out');
     }
 
-    restart() {
+    public isImage(url) {
+        return false;
+    }
+
+    public restart() {
         if (this.timer) {
             window.clearInterval(this.timer);
         }
@@ -76,12 +82,28 @@ export class SlideshowComponent implements OnInit {
         }
     }
 
-    next() {
+    public next() {
         if (this.selectedIndex < this.items.length - 1) {
             this.selectedIndex++;
         } else {
             this.selectedIndex = 0;
         }
+    }
+
+    public changePicture(e) {
+        this.valueChanged.emit(e);
+    }
+
+    public addPicture(e) {
+        const picture = new Picture();
+
+        picture.id = undefined;
+        picture.name = e.name;
+        picture.data = '';
+        picture.mimeType = '';
+        picture.dataUri = e.content;
+
+        this.valueChanged.emit(picture);
     }
 
     private changed(action: string) {

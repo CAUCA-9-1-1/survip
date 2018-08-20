@@ -10,13 +10,13 @@ export class UploadComponent implements OnInit {
     @Output() readend = new EventEmitter();
     @Input() accept: string;
     @Input() multiple = false;
+    @Input() icon = 'plus';
 
-    constructor() { }
+    public constructor() { }
 
-    ngOnInit() {
-    }
+    public ngOnInit() { }
 
-    onSelectFile(e) {
+    public onSelectFile(e) {
         for (let i = 0, j = e.target.files.length; i < j; i++) {
             const file = e.target.files[i];
             const reader = new FileReader();
@@ -26,7 +26,7 @@ export class UploadComponent implements OnInit {
         }
     }
 
-    openDialog(e) {
+    public openDialog(e) {
         if (this.file) {
             this.file.nativeElement.click();
         }

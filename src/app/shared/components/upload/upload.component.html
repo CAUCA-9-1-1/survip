@@ -1,4 +1,4 @@
-<dx-button icon="plus" (onClick)="openDialog($event)"></dx-button>
+<dx-button [icon]="icon" (onClick)="openDialog($event)"></dx-button>
 <ng-container *ngIf="multiple; else notMultipleInput">
     <input #file type="file" (change)="onSelectFile($event)" [accept]="accept" multiple="multiple" />
 </ng-container>
