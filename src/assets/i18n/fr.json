@@ -13,6 +13,8 @@
     "localization": "Localisation"
   },
   "newTheme": "Nouveau thème",
+  "actionOnInspection": "Action sur l'inspection",
+  "cancelInspection": "Annuler l'inspection",
   "generalInformation": "Information général",
   "implantationPlan": "Plan d'implantation",
   "buildingContacts": "Contacts du bâtiment",

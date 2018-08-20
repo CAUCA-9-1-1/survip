@@ -15,11 +15,22 @@
   font-size: 2em;
   font-weight: bolder;
   text-align: center;
+  padding: 10px;
+  background-color: #ccc;
 }
 
 .tools {
-  padding-top: 10px;
+  padding: 10px;
+  width: 60%;
+  margin: 0 auto;
   text-align: center;
+  border: solid 2px #ccc;
+  border-radius: 10px;
+}
+
+.tools .actionTitle {
+  font-weight: bolder;
+  margin-bottom: 5px;
 }
 
 .tools button {
