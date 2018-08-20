@@ -1,3 +1,17 @@
+@import '../../../../theme';
+
+$primary: map-get($theme, primary);
+
 input[type="file"] {
   display: none;
+}
+
+.dx-button {
+  margin: 5px;
+  border-color: mat-color($primary, default-contrast);
+  background-color: mat-color($primary);
+}
+
+.dx-button ::ng-deep .dx-icon {
+  color: mat-color($primary, default-contrast);
 }

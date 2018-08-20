@@ -1,9 +1,37 @@
-<div *ngFor="let theme of anomalies">
-    <h3>{{theme.theme}}</h3>
-    <div fxLayout="row" *ngFor="let anomaly of theme.anomalies">
-        <div fxFlex="50%">{{anomaly.notes}}</div>
-        <div fxFlex="50%" [fxShow]="anomaly.pictures && anomaly.pictures.length">
-            <app-slideshow height="200" [images]="anomaly.pictures"></app-slideshow>
-        </div>
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onEditingStart)="onEditingStart($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="theme"
+            caption="{{'theme' | translate}}"
+            sortIndex="0"
+            sortOrder="desc">
+    </dxi-column>
+    <dxi-column dataField="notes" caption="{{'notes' | translate}}"></dxi-column>
+    <dxi-column dataField="pictures" [visible]="false" editCellTemplate="editphoto"></dxi-column>
+
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'anomaly' | translate}}" [showTitle]="true"></dxo-popup>
+
+        <dxo-form colCount="2">
+            <dxi-item itemType="group">
+                <dxi-item dataField="theme" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="notes" [isRequired]="true"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group">
+                <dxi-item dataField="pictures" [label]="{visible: false}"></dxi-item>
+            </dxi-item>
+        </dxo-form>
+    </dxo-editing>
+
+    <div *dxTemplate="let field of 'editphoto'">
+        <span class="dx-field-item-label-text">{{'picture' | translate}}:</span>
+        <app-slideshow [images]="getImages(field)" height="350px" [allowChange]="true" (valueChanged)="uploadPicture($event)"></app-slideshow>
     </div>
-</div>
+</dx-data-grid>

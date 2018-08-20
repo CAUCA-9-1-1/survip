@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {InspectionBuildingAnomalyService} from '../shared/services/inspection-building-anomaly.service';
 import {BuildingAnomaly} from '../../management-building/shared/models/building-anomaly.model';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {PictureService} from '../../shared/services/picture.service';
+import {BuildingAnomalyPicture} from '../../management-building/shared/models/building-anomaly-picture.model';
 
 
 @Component({
@@ -10,48 +13,75 @@ import {BuildingAnomaly} from '../../management-building/shared/models/building-
     styleUrls: ['./building-anomalies.component.scss'],
     providers: [
         InspectionBuildingAnomalyService,
+        PictureService,
     ]
 })
-export class BuildingAnomaliesComponent implements OnInit {
+export class BuildingAnomaliesComponent extends GridWithCrudService implements OnInit {
     @Input()
     set building(id: string) {
         this.idBuilding = id;
-        this.anomalies = [];
-        this.loadData();
-    }
+        this.dataSource = [];
 
-    private idBuilding: string;
-
-    anomalies: BuildingAnomaly[] = [];
-
-    constructor(
-        private anomalyService: InspectionBuildingAnomalyService,
-    ) { }
-
-    ngOnInit() {
-    }
-
-    loadData() {
-        if (!this.idBuilding) {
-            return null;
+        if (this.idBuilding) {
+            this.loadSource(this.idBuilding);
         }
+    }
 
-        this.anomalyService.getBuildingAnomaly(this.idBuilding).subscribe(data => {
-            this.anomalies = data;
+    private selectRow: any;
+    private idBuilding: string;
+    private formImageField: any;
 
-            data.forEach((theme, indexTheme) => {
-                theme.anomalies.forEach((anomaly, indexAnomaly) => {
-                    this.anomalyService.getPictures(anomaly.id).subscribe( pictures => {
-                        this.anomalies[indexTheme].anomalies[indexAnomaly].pictures = [];
+    public constructor(
+        anomalyService: InspectionBuildingAnomalyService,
+        private pictureService: PictureService,
+    ) {
+        super(anomalyService);
+    }
 
-                        pictures.forEach(image => {
-                            this.anomalies[indexTheme]
-                                .anomalies[indexAnomaly]
-                                .pictures.push('data:image/jpeg;base64,' + image['pictureData']);
-                        });
-                    });
-                });
-            });
+    public ngOnInit() {
+    }
+
+    public setModel(data: any) {
+        return BuildingAnomaly.fromJSON(data);
+    }
+
+    public getImages(field) {
+        const images = [];
+
+        this.formImageField = field;
+        field.row.data.pictures.forEach(image => {
+            images.push(image.picture.id);
         });
+
+        return images;
+    }
+
+    public onInitNewRow(e) {
+        this.selectRow = {};
+
+        e.data.idBuilding = this.idBuilding;
+        e.data.isActive = true;
+    }
+
+    public onEditingStart(e) {
+        this.selectRow = e.data;
+    }
+
+    public uploadPicture(picture) {
+        const images = this.formImageField.value;
+
+        if (picture.id) {
+            this.pictureService.save(picture).subscribe();
+        } else if (this.selectRow.id) {
+            const anomalyPicture = new BuildingAnomalyPicture();
+            anomalyPicture.pictureData = picture.dataUri;
+            anomalyPicture.idParent = this.selectRow.id;
+
+            this.sourceService.savePicture(anomalyPicture).subscribe(idAnomalyPicture => {
+                images.push(idAnomalyPicture);
+
+                this.formImageField.setValue(images);
+            });
+        }
     }
 }

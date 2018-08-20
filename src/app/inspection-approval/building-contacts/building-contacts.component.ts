@@ -43,5 +43,6 @@ export class BuildingContactsComponent extends GridWithCrudService implements On
         e.data.idBuilding = this.idBuilding;
         e.data.isOwner = false;
         e.data.callPriority = 0;
+        e.data.isActive = true;
     }
 }

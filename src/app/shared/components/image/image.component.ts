@@ -13,35 +13,36 @@ import {Picture} from '../../models/picture.model';
 export class ImageComponent implements OnInit {
     @ViewChild('container') container: ElementRef;
     @Output() valueChanged = new EventEmitter();
-    @Input() height: string;
+    @Input() height = '150px';
     @Input() allowChange = false;
     @Input() autoApiChange = false;
     @Input()
     set idImage(id) {
         this.src = '';
+        this.icon = 'plus';
         this.idPicture = id;
 
         if (id) {
+            this.icon = 'edit';
             this.pictureService.getOne(id).subscribe(data => {
                 this.src = data.dataUri;
             });
         }
     }
 
-    idPicture: string;
-    src: string;
+    public idPicture: string;
+    public src: string;
+    public icon = 'plus';
 
-    constructor(
+    public constructor(
         private pictureService: PictureService,
-    ) {
-        this.height = '150px';
-    }
+    ) { }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.container.nativeElement.style.height = this.height;
     }
 
-    uploadPicture(e) {
+    public uploadPicture(e) {
         const picture = new Picture();
 
         picture.id = this.idPicture || undefined;
