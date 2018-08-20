@@ -13,7 +13,9 @@
     "localization": "Localization"
   },
   "newTheme": "New theme",
-  "generalInformation": "Général information",
+  "actionOnInspection": "Action on inspection",
+  "cancelInspection": "Cancel inspection",
+  "generalInformation": "General information",
   "implantationPlan": "Implantation plan",
   "buildingContacts": "Building contacts",
   "buildingPnaps": "Building PNAPS",
