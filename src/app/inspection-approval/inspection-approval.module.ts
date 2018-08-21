@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
-import {MatCardModule, MatSelectModule} from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatCardModule, MatDialogModule, MatSelectModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {DxButtonModule, DxDataGridModule} from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxSelectBoxModule} from 'devextreme-angular';
 
 import {InspectionApprovalComponent} from './inspection-approval.component';
 import {SharedModule} from '../shared/shared.module';
@@ -19,6 +20,7 @@ import {InspectionGeneralInfoComponent} from './inspection-general-info/inspecti
 import {InspectionImplantationPlanComponent} from './inspection-implantation-plan/inspection-implantation-plan.component';
 import {InspectionCourseComponent} from './inspection-course/inspection-course.component';
 import {BuildingListComponent} from './building-list/building-list.component';
+import {AskNewThemeComponent} from './ask-new-theme/ask-new-theme.component';
 
 
 @NgModule({
@@ -38,15 +40,23 @@ import {BuildingListComponent} from './building-list/building-list.component';
         InspectionImplantationPlanComponent,
         InspectionCourseComponent,
         BuildingListComponent,
+        AskNewThemeComponent,
+    ],
+    entryComponents: [
+        AskNewThemeComponent,
     ],
     imports: [
         SharedModule,
+        FormsModule,
+        ReactiveFormsModule,
         MatCardModule,
+        MatDialogModule,
         MatExpansionModule,
         MatSelectModule,
 
         DxButtonModule,
         DxDataGridModule,
+        DxSelectBoxModule,
     ],
 })
 export class InspectionApprovalModule { }

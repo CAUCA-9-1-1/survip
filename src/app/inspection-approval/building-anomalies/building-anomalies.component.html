@@ -2,6 +2,7 @@
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
+        (onEditorPreparing)="onEditorPreparing($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onEditingStart)="onEditingStart($event)"
         (onRowInserted)="onRowInserted($event)"
@@ -10,6 +11,7 @@
     <dxi-column
             dataField="theme"
             caption="{{'theme' | translate}}"
+            editCellTemplate="edittheme"
             sortIndex="0"
             sortOrder="desc">
     </dxi-column>
@@ -30,6 +32,14 @@
         </dxo-form>
     </dxo-editing>
 
+    <div *dxTemplate="let field of 'edittheme'">
+        <div fxFlex="90%">
+            <dx-select-box [items]="themes"></dx-select-box>
+        </div>
+        <div fxFlex="10%">
+            <dx-button icon="plus" (onClick)="addTheme($event)"></dx-button>
+        </div>
+    </div>
     <div *dxTemplate="let field of 'editphoto'">
         <span class="dx-field-item-label-text">{{'picture' | translate}}:</span>
         <app-slideshow [images]="getImages(field)" height="350px" [allowChange]="true" (valueChanged)="uploadPicture($event)"></app-slideshow>
