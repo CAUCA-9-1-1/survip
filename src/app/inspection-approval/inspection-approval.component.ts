@@ -13,15 +13,16 @@ import {InspectionService} from './shared/services/inspection.service';
     ]
 })
 export class InspectionApprovalComponent implements OnInit {
-    selected = 'generalInfo';
-    isClosed = false;
-    title = '';
-    inspectionId: string;
-    buildingId: string;
-    idImplantationPlan: string;
-    idBuildingDetail: string;
+    public selected = 'generalInfo';
+    public isClosed = false;
+    public title = '';
+    public inspectionId: string;
+    public buildingId: string;
+    public cityId: string;
+    public idImplantationPlan: string;
+    public idBuildingDetail: string;
 
-    constructor(
+    public constructor(
         private activeRoute: ActivatedRoute,
         private router: Router,
         private inspectionService: InspectionService
@@ -32,20 +33,21 @@ export class InspectionApprovalComponent implements OnInit {
             this.inspectionService.getGeneralInfo(param.idInspection).subscribe(data => {
                 this.title = data.mainBuildingAddress;
                 this.buildingId = data.idBuilding;
+                this.cityId = data.idCity;
                 this.idBuildingDetail = data.idDetail;
                 this.idImplantationPlan = data.idPictureSitePlan;
             });
         });
     }
 
-    ngOnInit() {
+    public ngOnInit() {
     }
 
-    sectionChange(section) {
+    public sectionChange(section) {
         this.selected = section;
     }
 
-    isBuildingSection() {
+    public isBuildingSection() {
         return (
             this.selected === 'buildingDetails' ||
             this.selected === 'contacts' ||
@@ -57,19 +59,19 @@ export class InspectionApprovalComponent implements OnInit {
         );
     }
 
-    approve() {
+    public approve() {
         this.inspectionService.approve(this.inspectionId).subscribe(() => this.isClosed = true);
     }
 
-    refuse() {
+    public refuse() {
         this.inspectionService.refuse(this.inspectionId).subscribe(() => this.isClosed = true);
     }
 
-    cancel() {
+    public cancel() {
         this.inspectionService.cancel(this.inspectionId).subscribe(() => this.isClosed = true);
     }
 
-    close() {
+    public close() {
         this.router.navigate(['inspection/dashboard']);
     }
 }

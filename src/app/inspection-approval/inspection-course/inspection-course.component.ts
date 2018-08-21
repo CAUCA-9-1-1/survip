@@ -20,6 +20,7 @@ import {Course} from '../shared/models/course.model';
 })
 export class InspectionCourseComponent extends GridWithCrudService implements OnInit {
     @Input() idBuilding = '';
+    @Input() idCity = '';
     @Input()
     set inspection(id: string) {
         this.idInspection = id;
@@ -78,7 +79,7 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
             return null;
         }
 
-        this.laneService.localized().subscribe( data => this.lookupLanes.dataSource = data);
+        this.laneService.getAllOfCity(this.idCity).subscribe( data => this.lookupLanes.dataSource = data);
         this.firestationService.getAll().subscribe(data => this.lookupFirestations.dataSource = data);
         this.loadSource(this.idInspection);
     }
