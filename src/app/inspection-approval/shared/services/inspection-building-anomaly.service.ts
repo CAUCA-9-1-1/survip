@@ -17,6 +17,10 @@ export class InspectionBuildingAnomalyService extends RequestService {
         return this.get('inspection/building/' + id + '/anomalylist');
     }
 
+    getTheme(): Observable<string[]> {
+        return this.get('inspection/anomalythemes');
+    }
+
     savePicture(anomalyPicture: BuildingAnomalyPicture) {
         return this.post('inspection/building/anomaly/picture', anomalyPicture);
     }

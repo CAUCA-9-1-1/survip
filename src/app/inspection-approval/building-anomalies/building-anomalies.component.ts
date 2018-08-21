@@ -5,6 +5,10 @@ import {BuildingAnomaly} from '../../management-building/shared/models/building-
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {PictureService} from '../../shared/services/picture.service';
 import {BuildingAnomalyPicture} from '../../management-building/shared/models/building-anomaly-picture.model';
+import {AskBatchDescriptionComponent} from '../../inspection-dashboard/ask-batch-description/ask-batch-description.component';
+import {InspectionBatch} from '../../inspection-batch/shared/models/inspection-batch.model';
+import {MatDialog} from '@angular/material';
+import {AskNewThemeComponent} from '../ask-new-theme/ask-new-theme.component';
 
 
 @Component({
@@ -27,6 +31,8 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         }
     }
 
+    public themes: any = {};
+
     private selectRow: any;
     private idBuilding: string;
     private formImageField: any;
@@ -34,11 +40,13 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
     public constructor(
         anomalyService: InspectionBuildingAnomalyService,
         private pictureService: PictureService,
+        private dialog: MatDialog,
     ) {
         super(anomalyService);
     }
 
     public ngOnInit() {
+        this.sourceService.getTheme().subscribe(data => this.themes = data);
     }
 
     public setModel(data: any) {
@@ -49,11 +57,22 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         const images = [];
 
         this.formImageField = field;
-        field.row.data.pictures.forEach(image => {
-            images.push(image.picture.id);
-        });
+        if (field.row.data.pictures) {
+            field.row.data.pictures.forEach(image => {
+                images.push(image.picture.id);
+            });
+        }
 
         return images;
+    }
+
+    public onEditorPreparing(e) {
+        if (e.dataField === 'theme') {
+            e.editorName = 'dxSelectBox';
+            e.editorOptions = {
+                items: this.themes
+            };
+        }
     }
 
     public onInitNewRow(e) {
@@ -65,6 +84,18 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
 
     public onEditingStart(e) {
         this.selectRow = e.data;
+    }
+
+    public addTheme(e) {
+        const dialogRef = this.dialog.open(AskNewThemeComponent, {
+            width: '400px'
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result && result.name) {
+                this.themes.push(result.name);
+            }
+        });
     }
 
     public uploadPicture(picture) {

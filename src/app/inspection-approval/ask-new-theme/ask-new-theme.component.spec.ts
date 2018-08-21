@@ -2,17 +2,17 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 import {TestModule} from '../../test.module.spec';
-import {AskBatchDescriptionComponent} from './ask-batch-description.component';
+import {AskNewThemeComponent} from './ask-new-theme.component';
 
 
 describe('AskNewThemeComponent', () => {
-    let component: AskBatchDescriptionComponent;
-    let fixture: ComponentFixture<AskBatchDescriptionComponent>;
+    let component: AskNewThemeComponent;
+    let fixture: ComponentFixture<AskNewThemeComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [TestModule],
-            declarations: [AskBatchDescriptionComponent],
+            declarations: [AskNewThemeComponent],
             providers: [
                 { provide: MatDialogRef, useValue: {} },
                 { provide: MAT_DIALOG_DATA, useValue: [] }
@@ -22,7 +22,7 @@ describe('AskNewThemeComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(AskBatchDescriptionComponent);
+        fixture = TestBed.createComponent(AskNewThemeComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
