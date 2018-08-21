@@ -20,6 +20,7 @@ import {Lane} from '../../management-address/shared/models/lane.model';
 })
 export class InspectionWaterSupplyComponent extends GridWithCrudService implements OnInit {
     @Input() idBuilding = '';
+    @Input() idCity = '';
     @Input()
     set inspection(id: string) {
         this.idInspection = id;
@@ -65,7 +66,7 @@ export class InspectionWaterSupplyComponent extends GridWithCrudService implemen
             return null;
         }
 
-        this.laneService.localized().subscribe( lanes => {
+        this.laneService.getAllOfCity(this.idCity).subscribe( lanes => {
             this.lanes = lanes;
 
             this.fireHydrantService.getAll().subscribe( data => {
