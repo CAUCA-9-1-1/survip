@@ -90,7 +90,12 @@ export class BuildingHazardousMaterialsComponent extends GridWithCrudService imp
     }
 
     private loadHazardousMaterial() {
-        this.hazardousMaterialService.localized().subscribe(data => this.hazardousMaterials = data);
+        this.hazardousMaterialService.localized().subscribe(data => {
+            data.sort((mat1, mat2) => {
+                return mat1.number > mat2.number ? 1 : -1;
+            });
+            this.hazardousMaterials = data;
+        });
     }
 
     private loadUnitOfMeasure() {

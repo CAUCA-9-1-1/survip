@@ -106,7 +106,7 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
 
     public setOrderLane(lanes) {
         lanes.sort((lane1, lane2) => {
-            return lane1.sequence > lane2.sequence;
+            return lane1.sequence > lane2.sequence ? 1 : -1;
         });
 
         return lanes;

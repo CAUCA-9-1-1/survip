@@ -10,7 +10,7 @@
     <dxi-column
             dataField="idHazardousMaterial"
             caption="{{'name' | translate}}"
-            sortOrder="asc"
+            sortOrder="desc"
             sortIndex="0">
         <dxo-lookup [dataSource]="hazardousMaterials" [displayExpr]="getMaterialName" valueExpr="id">
         </dxo-lookup>
