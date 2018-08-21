@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>{{data.title | translate}}</h2>
+
+<mat-dialog-content [formGroup]="form">
+    <h4>{{data.message | translate}}</h4>
+    <div *ngIf="data.title == 'refuse'">
+        <mat-form-field>
+            <textarea matInput placeholder="{{'reason' | translate}}" formControlName="reason" [required]="true"></textarea>
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="confirm()">{{'ok' | translate}}</button>
+    <button mat-raised-button (click)="cancel()">{{'cancel' | translate}}</button>
+</mat-dialog-actions>

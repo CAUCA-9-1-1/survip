@@ -2,17 +2,17 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 import {TestModule} from '../../test.module.spec';
-import {AskBatchDescriptionComponent} from './ask-batch-description.component';
+import {AskConfirmationComponent} from './ask-confirmation.component';
 
 
-describe('AskBatchDescriptionComponent', () => {
-    let component: AskBatchDescriptionComponent;
-    let fixture: ComponentFixture<AskBatchDescriptionComponent>;
+describe('AskConfirmationComponent', () => {
+    let component: AskConfirmationComponent;
+    let fixture: ComponentFixture<AskConfirmationComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [TestModule],
-            declarations: [AskBatchDescriptionComponent],
+            declarations: [AskConfirmationComponent],
             providers: [
                 { provide: MatDialogRef, useValue: {} },
                 { provide: MAT_DIALOG_DATA, useValue: [] }
@@ -22,7 +22,7 @@ describe('AskBatchDescriptionComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(AskBatchDescriptionComponent);
+        fixture = TestBed.createComponent(AskConfirmationComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
