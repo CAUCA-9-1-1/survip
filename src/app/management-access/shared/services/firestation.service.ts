@@ -16,6 +16,10 @@ export class FirestationService extends RequestService {
         return this.get('Firestation');
     }
 
+    getAllOfCity(idCity: string): Observable<Firestation[]> {
+        return this.get('city/' + idCity + '/firestations');
+    }
+
     save(station: Firestation) {
         return this.post('Firestation', station);
     }

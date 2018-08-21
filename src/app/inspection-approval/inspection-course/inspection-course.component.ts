@@ -30,16 +30,8 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
     private idInspection: string;
     public courses: any = [];
     public formCourseLaneField: any;
-    public lookupFirestations = {
-        valueExpr: 'id',
-        displayExpr: 'name',
-        dataSource: [],
-    };
-    public lookupLanes = {
-        valueExpr: 'id',
-        displayExpr: 'name',
-        dataSource: [],
-    };
+    public lookupFirestations: any = {};
+    public lookupLanes: any = {};
     public lookupDirection = {
         valueExpr: 'id',
         displayExpr: 'name',
@@ -75,12 +67,20 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
     public ngOnInit() { }
 
     public loadData() {
-        if (!this.idInspection) {
+        if (!this.idInspection || !this.idCity) {
             return null;
         }
 
-        this.laneService.getAllOfCity(this.idCity).subscribe( data => this.lookupLanes.dataSource = data);
-        this.firestationService.getAll().subscribe(data => this.lookupFirestations.dataSource = data);
+        this.laneService.getAllOfCity(this.idCity).subscribe( data => this.lookupLanes = {
+            valueExpr: 'id',
+            displayExpr: 'name',
+            dataSource: data,
+        });
+        this.firestationService.getAllOfCity(this.idCity).subscribe(data => this.lookupFirestations = {
+            valueExpr: 'id',
+            displayExpr: 'name',
+            dataSource: data,
+        });
         this.loadSource(this.idInspection);
     }
 
