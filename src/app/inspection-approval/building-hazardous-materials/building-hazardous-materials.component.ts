@@ -75,6 +75,18 @@ export class BuildingHazardousMaterialsComponent extends GridWithCrudService imp
         }
     }
 
+    public validateUnitOfMeasure(e) {
+        const validationGroup = e.validator.option('validationGroup');
+
+        if ('capacityContainer' in validationGroup.data) {
+            return (validationGroup.data.capacityContainer && e.value ? true : false);
+        } else if (validationGroup.key.capacityContainer) {
+            return (e.value ? true : false);
+        }
+
+        return true;
+    }
+
     public onInitNewRow(e) {
         e.data.idBuilding = this.idBuilding;
         e.data.isActive = true;
