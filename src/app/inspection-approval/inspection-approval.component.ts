@@ -28,9 +28,9 @@ export class InspectionApprovalComponent implements OnInit {
         private inspectionService: InspectionService
     ) {
         this.activeRoute.params.subscribe(param => {
-            this.inspectionId = param.idInspection;
-
             this.inspectionService.getGeneralInfo(param.idInspection).subscribe(data => {
+                this.inspectionId = param.idInspection;
+
                 this.title = data.mainBuildingAddress;
                 this.buildingId = data.idBuilding;
                 this.cityId = data.idCity;
