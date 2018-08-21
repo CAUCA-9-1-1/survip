@@ -41,11 +41,7 @@ export class InspectionWaterSupplyComponent extends GridWithCrudService implemen
             return data.number + ', ' + data.address;
         }
     };
-    public lookupFireHydrants = {
-        dataSource: [],
-        valueExpr: 'id',
-        displayExpr: 'number',
-    };
+    public lookupFireHydrants: any = {};
 
     constructor(
         inspectionFireHydrantService: InspectionFireHydrantService,
@@ -69,9 +65,13 @@ export class InspectionWaterSupplyComponent extends GridWithCrudService implemen
         this.laneService.getAllOfCity(this.idCity).subscribe( lanes => {
             this.lanes = lanes;
 
-            this.fireHydrantService.getAll().subscribe( data => {
+            this.fireHydrantService.getAllOfCity(this.idCity).subscribe( data => {
                 this.listFireHydrants.dataSource = data;
-                this.lookupFireHydrants.dataSource = data;
+                this.lookupFireHydrants = {
+                    dataSource: data,
+                    valueExpr: 'id',
+                    displayExpr: 'number',
+                };
 
                 this.listFireHydrants.dataSource.forEach((item, index) => {
                     this.listFireHydrants.dataSource[index].address = this.getAddress(item);
