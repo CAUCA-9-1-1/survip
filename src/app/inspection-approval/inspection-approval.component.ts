@@ -5,6 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 
 import {InspectionService} from './shared/services/inspection.service';
 import {AskConfirmationComponent} from './ask-confirmation/ask-confirmation.component';
+import {InspectionDetailService} from './shared/services/inspection-detail.service';
 
 
 @Component({
@@ -19,32 +20,20 @@ import {AskConfirmationComponent} from './ask-confirmation/ask-confirmation.comp
 export class InspectionApprovalComponent implements OnInit {
     public selected = 'generalInfo';
     public isClosed = false;
-    public title = '';
     public inspectionId: string;
-    public buildingId: string;
-    public cityId: string;
-    public idImplantationPlan: string;
-    public idBuildingDetail: string;
-
-    private labels: any = {};
+    public generalInfo: any = {};
 
     public constructor(
         private activeRoute: ActivatedRoute,
         private router: Router,
         private inspectionService: InspectionService,
+        private inspectionDetailService: InspectionDetailService,
         private dialog: MatDialog,
-        private notification: MatSnackBar,
-        private translateService: TranslateService,
     ) {
         this.activeRoute.params.subscribe(param => {
-            this.inspectionService.getGeneralInfo(param.idInspection).subscribe(data => {
+            this.inspectionDetailService.getGeneralInfo(param.idInspection).subscribe(data => {
                 this.inspectionId = param.idInspection;
-
-                this.title = data.mainBuildingAddress;
-                this.buildingId = data.idBuilding;
-                this.cityId = data.idCity;
-                this.idBuildingDetail = data.idDetail;
-                this.idImplantationPlan = data.idPictureSitePlan;
+                this.generalInfo = data;
             });
         });
     }
