@@ -28,7 +28,7 @@
 
     <div *dxTemplate="let field of 'listLaneDescription'">
         <ul>
-            <li *ngFor="let courselane of field.value">{{getLaneName(courselane.idLane)}}{{getDirection(courselane.direction)}}</li>
+            <li *ngFor="let courselane of setOrderLane(field.value)">{{getLaneName(courselane.idLane)}}{{getDirection(courselane.direction)}}</li>
         </ul>
     </div>
     <div *dxTemplate="let field of 'editCourseLane'">

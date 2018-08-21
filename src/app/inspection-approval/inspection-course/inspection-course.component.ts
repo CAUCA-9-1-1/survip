@@ -27,25 +27,25 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
     }
 
     private idInspection: string;
-    courses: any = [];
-    formCourseLaneField: any;
-    lookupFirestations = {
+    public courses: any = [];
+    public formCourseLaneField: any;
+    public lookupFirestations = {
         valueExpr: 'id',
         displayExpr: 'name',
         dataSource: [],
     };
-    lookupLanes = {
+    public lookupLanes = {
         valueExpr: 'id',
         displayExpr: 'name',
         dataSource: [],
     };
-    lookupDirection = {
+    public lookupDirection = {
         valueExpr: 'id',
         displayExpr: 'name',
         dataSource: [],
     };
 
-    constructor(
+    public constructor(
         inspectionCourseService: InspectionCourseService,
         private firestationService: FirestationService,
         private laneService: LaneService,
@@ -67,13 +67,13 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
         });
     }
 
-    setModel(data: any) {
+    public setModel(data: any) {
         return Course.fromJSON(data);
     }
 
-    ngOnInit() { }
+    public ngOnInit() { }
 
-    loadData() {
+    public loadData() {
         if (!this.idInspection) {
             return null;
         }
@@ -83,7 +83,7 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
         this.loadSource(this.idInspection);
     }
 
-    getDirection(direction) {
+    public getDirection(direction) {
         if (direction === 2) {
             return '';
         }
@@ -93,7 +93,7 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
         return ' (' + result[0].name + ')';
     }
 
-    getLaneName(idLane: string) {
+    public getLaneName(idLane: string) {
         const result = this.lookupLanes.dataSource.filter(lane => lane.id === idLane);
 
         if (result.length) {
@@ -103,7 +103,15 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
         return '';
     }
 
-    moveUp(field) {
+    public setOrderLane(lanes) {
+        lanes.sort((lane1, lane2) => {
+            return lane1.sequence > lane2.sequence;
+        });
+
+        return lanes;
+    }
+
+    public moveUp(field) {
         if (field.rowIndex > 0) {
             field.component.editCell(field.rowIndex, 0);
             field.component.cellValue(field.rowIndex, 0, (field.data.sequence - 1));
@@ -115,7 +123,7 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
         }
     }
 
-    moveDown(field) {
+    public moveDown(field) {
         if (field.rowIndex < field.component.totalCount() - 1) {
             field.component.editCell(field.rowIndex + 1, 0);
             field.component.cellValue(field.rowIndex + 1, 0, field.data.sequence);
@@ -127,7 +135,7 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
         }
     }
 
-    setFormCourseLaneField(field) {
+    public setFormCourseLaneField(field) {
         this.formCourseLaneField = field;
 
         if (!this.formCourseLaneField.value) {
@@ -135,27 +143,27 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
         }
     }
 
-    onNewCourse(e) {
+    public onNewCourse(e) {
         e.data.idBuilding = this.idBuilding;
         e.data.isActive = true;
         e.data.lanes = [];
     }
 
-    onNewLane(e) {
+    public onNewLane(e) {
         e.data.sequence = this.formCourseLaneField.data.lanes ? this.formCourseLaneField.data.lanes.length + 1 : 1;
         e.data.idBuildingCourse = this.formCourseLaneField.data.id;
         e.data.isActive = true;
     }
 
-    onLaneInserted(e) {
+    public onLaneInserted(e) {
         this.formCourseLaneField.setValue(this.formCourseLaneField.data.lanes);
     }
 
-    onLaneUpdated(e) {
+    public onLaneUpdated(e) {
         this.formCourseLaneField.setValue(this.formCourseLaneField.data.lanes);
     }
 
-    onLaneRemoved(e) {
+    public onLaneRemoved(e) {
         this.formCourseLaneField.setValue(this.formCourseLaneField.data.lanes);
 
         if (this.formCourseLaneField.data.lanes.length === 0) {
