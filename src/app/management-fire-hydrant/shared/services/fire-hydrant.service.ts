@@ -16,6 +16,10 @@ export class FireHydrantService extends RequestService {
         return this.get('FireHydrant');
     }
 
+    getAllOfCity(idCity: string): Observable<FireHydrant[]> {
+        return this.get('FireHydrant/city/' + idCity);
+    }
+
     save(fireHydrant: FireHydrant) {
         return this.post('FireHydrant', fireHydrant);
     }
