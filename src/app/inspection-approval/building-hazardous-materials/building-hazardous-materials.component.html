@@ -22,8 +22,8 @@
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="supplyLine" caption="{{'supplyLine' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="capacity" caption="{{'capacity' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="unitOfMeasure" caption="{{'unitOfMeasure' | translate}}" [visible]="false">
+    <dxi-column dataField="capacityContainer" caption="{{'capacity' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="idUnitOfMeasure" caption="{{'unitOfMeasure' | translate}}" [visible]="false">
         <dxo-lookup [dataSource]="unitOfMeasures" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
@@ -34,33 +34,33 @@
     <dxi-column dataField="gasInlet" caption="{{'gasInlet' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="securityPerimeter" caption="{{'securityPerimeter' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="otherInformation" caption="{{'otherInformation' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-popup title="{{'hazardousMaterial' | translate}}" [showTitle]="true"></dxo-popup>
 
-        <dxo-form colCount="2">
+        <dxo-form colCount="1">
             <dxi-item dataField="idHazardousMaterial" [isRequired]="true"></dxi-item>
-            <dxi-item itemType="empty"></dxi-item>
-            <dxi-item itemType="group" caption="{{'container' | translate}}" colSpan="2" colCount="4">
+            <dxi-item itemType="group" caption="{{'container' | translate}}" colCount="4">
                 <dxi-item dataField="quantity"></dxi-item>
                 <dxi-item dataField="container"></dxi-item>
                 <dxi-item dataField="tankType"></dxi-item>
                 <dxi-item dataField="supplyLine"></dxi-item>
             </dxi-item>
-            <dxi-item itemType="group" caption="{{'capacityContainer' | translate}}" colSpan="2" colCount="4">
-                <dxi-item dataField="capacity"></dxi-item>
-                <dxi-item dataField="unitOfMeasure"></dxi-item>
+            <dxi-item itemType="group" caption="{{'capacityContainer' | translate}}" colCount="4">
+                <dxi-item dataField="capacityContainer"></dxi-item>
+                <dxi-item dataField="idUnitOfMeasure">
+                    <dxi-validation-rule type="custom" [validationCallback]="validateUnitOfMeasure"></dxi-validation-rule>
+                </dxi-item>
             </dxi-item>
-            <dxi-item itemType="group" caption="{{'localization' | translate}}" colSpan="2" colCount="4">
+            <dxi-item itemType="group" caption="{{'localization' | translate}}" colCount="4">
                 <dxi-item dataField="place"></dxi-item>
                 <dxi-item dataField="floor"></dxi-item>
                 <dxi-item dataField="wall"></dxi-item>
                 <dxi-item dataField="sector"></dxi-item>
                 <dxi-item dataField="gasInlet"></dxi-item>
             </dxi-item>
-            <dxi-item itemType="group" caption="{{'other' | translate}}" colSpan="2" colCount="2">
+            <dxi-item itemType="group" caption="{{'other' | translate}}" colCount="2">
                 <dxi-item dataField="securityPerimeter"></dxi-item>
                 <dxi-item dataField="otherInformation"></dxi-item>
             </dxi-item>
