@@ -57,8 +57,8 @@ export class BuildingFireProtectionComponent implements OnInit {
     }
 
     public onInitNewRow(e) {
-        e.IsActive = true;
-        e.IdBuilding = this.idBuilding;
+        e.data.isActive = true;
+        e.data.idBuilding = this.idBuilding;
     }
 
     public onAlarmPanelInserted(e) {
