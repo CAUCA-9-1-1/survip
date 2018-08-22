@@ -17,6 +17,7 @@ import {
 import {DxButtonModule, DxPopupModule, DxTabPanelModule, DxTextBoxModule, DxValidatorModule, DxPopupModule} from 'devextreme-angular';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {WebSketchToolModule} from 'lib-sketch-tool';
 
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {MultilangComponent} from './components/multilang/multilang.component';
@@ -99,6 +100,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         DxTextBoxModule,
         DxValidatorModule,
         DxPopupModule,
+        WebSketchToolModule,        
 
         TranslateModule.forRoot({
             loader: {
