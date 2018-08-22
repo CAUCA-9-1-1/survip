@@ -39,7 +39,7 @@ export class InspectionGeneralInfoComponent implements OnInit {
         private utilisationCodeService: UtilisationCodeService,
     ) { }
 
-    public ngOnInit() { }
+    public ngOnInit() {}
 
     public onChange(e) {
         if (this.generalInfo.idLaneTransversal !== e.component.option('value')) {
