@@ -58,6 +58,7 @@ export class BuildingParticularRisksComponent implements OnInit {
 
         if (this.risks[index][key] !== e.component.option('value')) {
             this.risks[index][key] = e.component.option('value');
+            this.risks[index]['idBuilding'] = this.idBuilding;
 
             switch (index) {
                 case '0':
