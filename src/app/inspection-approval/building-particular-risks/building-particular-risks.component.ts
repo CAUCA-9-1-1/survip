@@ -3,6 +3,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {InspectionService} from '../shared/services/inspection.service';
 import {InspectionBuildingParticularRiskService} from '../shared/services/inspection-building-particular-risk.service';
 import {TranslateService} from '@ngx-translate/core';
+import {StaticDataService} from '../../shared/services/static-data.service';
 
 
 @Component({
@@ -12,6 +13,7 @@ import {TranslateService} from '@ngx-translate/core';
     providers: [
         InspectionService,
         InspectionBuildingParticularRiskService,
+        StaticDataService,
     ]
 })
 export class BuildingParticularRisksComponent implements OnInit {
@@ -33,6 +35,7 @@ export class BuildingParticularRisksComponent implements OnInit {
     constructor(
         private inspectionService: InspectionService,
         private particularRisksService: InspectionBuildingParticularRiskService,
+        private staticService: StaticDataService,
         private translateService: TranslateService,
     ) {
         this.translateService.get([
@@ -48,8 +51,8 @@ export class BuildingParticularRisksComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.walls = ['M1', 'M2', 'M3', 'M4', 'S1', 'S2', 'S3', 'S4', 'S5'];
-        this.sectors = ['A', 'B', 'C', 'D'];
+        this.walls = this.staticService.getWalls();
+        this.sectors = this.staticService.getSectors();
     }
 
     public onChange(e) {

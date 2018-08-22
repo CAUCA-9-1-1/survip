@@ -1,7 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 
 import {RequestService} from '../../../shared/services/request.service';
-import {Course} from '../models/course.model';
 
 
 @Injectable({
