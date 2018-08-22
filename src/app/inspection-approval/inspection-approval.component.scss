@@ -10,24 +10,6 @@
   background-color: #ccc;
 }
 
-.tools {
-  padding: 10px;
-  width: 60%;
-  margin: 0 auto;
-  text-align: center;
-  border: solid 2px #ccc;
-  border-radius: 10px;
-}
-
-.tools .actionTitle {
-  font-weight: bolder;
-  margin-bottom: 5px;
-}
-
-.tools button {
-  margin: 0 5px;
-}
-
 .details {
   height: 100%;
 }
@@ -44,4 +26,26 @@
 
 .details ::ng-deep div[fxLayout="row"] > div[fxFlex="30%"] {
   font-weight: bolder;
+}
+
+.tools {
+  background-color: #ccc;
+}
+
+.tools > div {
+  padding: 8px 30px;
+  width: fit-content;
+  margin: 8px auto;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.tools .actionTitle {
+  font-weight: bolder;
+  margin-bottom: 5px;
+}
+
+.tools button {
+  margin: 0 5px;
 }
