@@ -30,10 +30,12 @@ export class ImageComponent implements OnInit {
             if (this.useDataCopy) {
               this.inspectionPictureService.getOne(id).subscribe(data => {
                 this.src = data.dataUri;
+                this.picture = data;
               });
             } else {
               this.pictureService.getOne(id).subscribe(data => {
                 this.src = data.dataUri;
+                this.picture = data;
               });
             }
         }
@@ -41,7 +43,9 @@ export class ImageComponent implements OnInit {
 
     public idPicture: string;
     public src: string;
+    public picture: Picture;
     public icon = 'plus';
+    public isPopupVisible = false;
 
     public constructor(
         private pictureService: PictureService,
@@ -85,4 +89,11 @@ export class ImageComponent implements OnInit {
 
     this.idPicture = id;
   }
+
+    public editPicture() {
+        console.log('edit');
+        this.isPopupVisible = true;
+        console.log(this.picture);
+    }
+    
 }
