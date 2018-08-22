@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule, MatDialogModule, MatSelectModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {DxButtonModule, DxDataGridModule, DxSelectBoxModule} from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxSelectBoxModule, DxSwitchModule, DxTextAreaModule} from 'devextreme-angular';
 
 import {InspectionApprovalComponent} from './inspection-approval.component';
 import {SharedModule} from '../shared/shared.module';
@@ -60,6 +60,8 @@ import {AskConfirmationComponent} from './ask-confirmation/ask-confirmation.comp
         DxButtonModule,
         DxDataGridModule,
         DxSelectBoxModule,
+        DxSwitchModule,
+        DxTextAreaModule,
     ],
 })
 export class InspectionApprovalModule { }

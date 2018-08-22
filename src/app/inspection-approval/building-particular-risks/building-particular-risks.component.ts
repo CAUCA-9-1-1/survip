@@ -24,9 +24,11 @@ export class BuildingParticularRisksComponent implements OnInit {
 
     private idBuilding: string;
 
-    description: string[];
-    pictures: any[] = [];
-    risks: any[] = [];
+    public labels: string[];
+    public pictures: any[] = [];
+    public risks: any[] = [];
+    public walls: any[] = [];
+    public sectors: any[] = [];
 
     constructor(
         private inspectionService: InspectionService,
@@ -36,7 +38,7 @@ export class BuildingParticularRisksComponent implements OnInit {
         this.translateService.get([
             'risks.foundation', 'risks.floor', 'risks.walls', 'risks.roof'
         ]).subscribe(data => {
-            this.description = [
+            this.labels = [
                 data['risks.foundation'],
                 data['risks.floor'],
                 data['risks.walls'],
@@ -45,15 +47,41 @@ export class BuildingParticularRisksComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
+    public ngOnInit() {
+        this.walls = ['M1', 'M2', 'M3', 'M4', 'S1', 'S2', 'S3', 'S4', 'S5'];
+        this.sectors = ['A', 'B', 'C', 'D'];
     }
 
-    resetData() {
+    public onChange(e) {
+        const name = e.component.option('name');
+        const [key, index] = name.split('.');
+
+        if (this.risks[index][key] !== e.component.option('value')) {
+            this.risks[index][key] = e.component.option('value');
+
+            switch (index) {
+                case '0':
+                    this.particularRisksService.saveFoundation(this.risks[index]).subscribe();
+                    break;
+                case '1':
+                    this.particularRisksService.saveFloor(this.risks[index]).subscribe();
+                    break;
+                case '2':
+                    this.particularRisksService.saveWall(this.risks[index]).subscribe();
+                    break;
+                case '3':
+                    this.particularRisksService.saveRoof(this.risks[index]).subscribe();
+                    break;
+            }
+        }
+    }
+
+    private resetData() {
         this.risks = [{}, {}, {}, {}];
         this.pictures = [[], [], [], []];
     }
 
-    loadData() {
+    private loadData() {
         if (!this.idBuilding) {
             return null;
         }
