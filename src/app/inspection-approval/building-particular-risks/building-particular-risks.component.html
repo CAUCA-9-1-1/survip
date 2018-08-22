@@ -1,34 +1,75 @@
-<mat-accordion>
-    <mat-expansion-panel  [expanded]="false" *ngFor="let label of description; let index = index;">
-        <mat-expansion-panel-header>
-            <h4>{{label}}</h4>
-        </mat-expansion-panel-header>
+<div fxLayout="row">
+    <div fxFlex="1 1 auto" *ngFor="let label of labels; let index = index;">
+        <h4 class="title">{{label}}</h4>
 
         <div *ngIf="risks[index]">
-            <div fxLayout="row">
-                <div fxFlex="25%" class="title">{{'risks.weakened' | translate}}</div>
-                <div fxFlex="25%">{{risks[index].isWeakened ? 'yes' : 'no' | translate}}</div>
-                <div fxFlex="25%" class="title">{{'risks.opening' | translate}}</div>
-                <div fxFlex="25%">{{risks[index].hasOpening ? 'yes' : 'no' | translate}}</div>
-            </div>
-            <div fxLayout="row" [fxShow]="index === 0">
-                <div fxFlex="25%" class="title">{{'risks.dimension' | translate}}</div>
-                <div fxFlex="75%">{{risks[index].dimension}}</div>
-            </div>
-            <h4 class="section">{{'risks.localization' | translate}}</h4>
-            <div fxLayout="row">
-                <div fxFlex="25%" class="title">{{'risks.wall' | translate}}</div>
-                <div fxFlex="25%">{{risks[index].wall}}</div>
-                <div fxFlex="25%" class="title">{{'risks.sector' | translate}}</div>
-                <div fxFlex="25%">{{risks[index].sector}}</div>
-            </div>
-            <h4 class="section">{{'risks.comments' | translate}}</h4>
-            <div fxLayout="row">
-                <div>{{risks[index].comments}}</div>
-            </div>
+            <mat-card>
+                <mat-card-content>
+                    <div fxLayout="row">
+                        <div fxFlex="50%" class="title">{{'risks.weakened' | translate}}</div>
+                        <div fxFlex="50%">
+                            <dx-switch name="isWeakened.{{index}}" [value]="risks[index].isWeakened" (onValueChanged)="onChange($event)"></dx-switch>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <div fxFlex="50%" class="title">{{'risks.opening' | translate}}</div>
+                        <div fxFlex="50%">
+                            <dx-switch name="hasOpening.{{index}}" [value]="risks[index].hasOpening" (onValueChanged)="onChange($event)"></dx-switch>
+                        </div>
+                    </div>
+                    <div fxLayout="row" [fxShow]="index === 0">
+                        <div fxFlex="50%" class="title">{{'risks.dimension' | translate}}</div>
+                        <div fxFlex="50%">
+                            <dx-text-box name="dimension.{{index}}" [value]="risks[index].dimension" (onValueChanged)="onChange($event)"></dx-text-box>
+                        </div>
+                    </div>
+                    <div fxLayout="row" [fxShow]="index !== 0">
+                        <div fxFlex="100%">&nbsp;</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-title>{{'risks.localization' | translate}}</mat-card-title>
+                <mat-card-content>
+                    <div fxLayout="row">
+                        <div fxFlex="50%" class="title">{{'risks.wall' | translate}}</div>
+                        <div fxFlex="50%">
+                            <dx-select-box
+                                    [items]="walls"
+                                    height="100%"
+                                    name="wall.{{index}}"
+                                    (onValueChanged)="onChange($event)"
+                                    [value]="risks[index].wall">
+                            </dx-select-box>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <div fxFlex="50%" class="title">{{'risks.sector' | translate}}</div>
+                        <div fxFlex="50%">
+                            <dx-select-box
+                                    [items]="sectors"
+                                    height="100%"
+                                    name="sector.{{index}}"
+                                    (onValueChanged)="onChange($event)"
+                                    [value]="risks[index].sector">
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-title>{{'risks.comments' | translate}}</mat-card-title>
+                <mat-card-content>
+                    <div fxLayout="row">
+                        <dx-text-area name="comments.{{index}}" [value]="risks[index].comments" (onValueChanged)="onChange($event)"></dx-text-area>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card [fxShow]="pictures[index] && pictures[index].length">
+                <mat-card-content>
+                    <app-slideshow height="200px" [images]="pictures[index]"></app-slideshow>
+                </mat-card-content>
+            </mat-card>
         </div>
-        <div fxLayout="row" [fxShow]="pictures[index] && pictures[index].length">
-            <app-slideshow height="200px" [images]="pictures[index]"></app-slideshow>
-        </div>
-    </mat-expansion-panel>
-</mat-accordion>
+    </div>
+</div>

@@ -1,8 +1,32 @@
+@import '../../../theme';
+
+$primary: map-get($theme, primary);
+$accent: map-get($theme, accent);
+
+h4.title {
+  padding: 3px 5px;
+  color: mat-color($primary, default-contrast);
+  background-color: mat-color($primary);
+}
+
 .title {
   font-weight: bolder;
 }
 
-.section {
+h4.section {
   padding: 3px 5px;
-  background-color: #ccc;
+  font-size: 120%;
+}
+
+:host > [fxLayout="row"] > div {
+  border-right: solid 2px #ccc;
+}
+
+:host > [fxLayout="row"] > div:last-child {
+  border-right: none;
+}
+
+dx-text-area {
+  width: 100%;
+  height: 80px;
 }

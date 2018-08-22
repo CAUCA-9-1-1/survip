@@ -20,16 +20,32 @@ export class InspectionBuildingParticularRiskService extends RequestService {
         return this.get('inspection/building/' + id + '/particularrisk/floor');
     }
 
+    saveFloor(risk: ParticularRiskFloor) {
+        return this.post('inspection/building/particularrisk/floor', risk);
+    }
+
     getFoundation(id: string): Observable<ParticularRiskFoundation> {
         return this.get('inspection/building/' + id + '/particularrisk/foundation');
+    }
+
+    saveFoundation(risk: ParticularRiskFoundation) {
+        return this.post('inspection/building/particularrisk/foundation', risk);
     }
 
     getRoof(id: string): Observable<ParticularRiskRoof> {
         return this.get('inspection/building/' + id + '/particularrisk/roof');
     }
 
+    saveRoof(risk: ParticularRiskRoof) {
+        return this.post('inspection/building/particularrisk/roof', risk);
+    }
+
     getWall(id: string): Observable<ParticularRiskWall> {
         return this.get('inspection/building/' + id + '/particularrisk/wall');
+    }
+
+    saveWall(risk: ParticularRiskWall) {
+        return this.post('inspection/building/particularrisk/wall', risk);
     }
 
     getPictures(id: string): Observable<Picture[]> {

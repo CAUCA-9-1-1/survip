@@ -1,5 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+
 import {Picture} from '../../models/picture.model';
 
 
@@ -69,6 +70,10 @@ export class SlideshowComponent implements OnInit {
     }
 
     public isImage(url) {
+        if (url.indexOf('data:image') > -1 || url.indexOf('/') > -1) {
+            return true;
+        }
+
         return false;
     }
 
