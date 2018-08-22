@@ -1,14 +1,5 @@
-:host > div div[fxLayout='column'] {
+:host > div[fxLayout='column'] {
   height: 100%;
-}
-
-:host ::ng-deep mat-toolbar {
-  margin-bottom: 5px;
-}
-
-:host .actions button {
-  min-width: 50px;
-  margin: 0 2px;
 }
 
 .title {
@@ -41,29 +32,16 @@
   height: 100%;
 }
 
+.details div[fxFlex="80%"] {
+  height: 100%;
+  overflow: auto;
+}
+
 .details ::ng-deep div[fxLayout="row"] {
-  line-height: 3em;
+  line-height: 2.5em;
   border-bottom: solid 1px #cccccc;
 }
 
 .details ::ng-deep div[fxLayout="row"] > div[fxFlex="30%"] {
   font-weight: bolder;
-}
-
-.details ::ng-deep div[fxLayout="row"] ul {
-  line-height: 1.5em;
-}
-
-.details div[fxFlex="80%"] > div {
-  height: 100%;
-}
-
-.details div[fxFlex="80%"] > div > * {
-  display: block;
-  height: 100%;
-  overflow: auto;
-}
-
-.details ::ng-deep mat-card {
-  margin-bottom: 1em;
 }
