@@ -48,10 +48,6 @@ export class InspectionService extends RequestService {
         return this.get('inspection/' + id + '/building');
     }
 
-    getBuildingDetail(id: string): Observable<BuildingDetails> {
-        return this.get('inspection/building/' + id + '/detail');
-    }
-
     getBuildingSprinkler(id: string) {
         return this.get('inspection/building/' + id + '/sprinkler');
     }
