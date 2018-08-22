@@ -57,7 +57,6 @@ export class ImageComponent implements OnInit {
 
         picture.id = this.idPicture || undefined;
         picture.name = e.name;
-        picture.data = '';
         picture.mimeType = '';
         picture.dataUri = e.content;
 

@@ -1,5 +1,8 @@
 <ng-container *ngIf="allowChange">
-    <app-upload class="float" accept="image/*" (readend)="uploadPicture($event)" [icon]="icon"></app-upload>
+    <div class="float">
+        <app-upload  accept="image/*" (readend)="uploadPicture($event)" [icon]="icon"></app-upload>
+        <dx-button class="edit-button" icon="toolbox" (onClick)="editPicture()"></dx-button>
+    </div>
 </ng-container>
 <div #container>
     <img [src]="src" />
