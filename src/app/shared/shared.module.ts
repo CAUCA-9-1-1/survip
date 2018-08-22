@@ -14,7 +14,7 @@ import {
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
-import {DxButtonModule, DxPopupModule, DxTabPanelModule, DxTextBoxModule, DxValidatorModule} from 'devextreme-angular';
+import {DxButtonModule, DxPopupModule, DxTabPanelModule, DxTextBoxModule, DxValidatorModule, DxPopupModule} from 'devextreme-angular';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
@@ -67,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         DxTabPanelModule,
         DxTextBoxModule,
         DxValidatorModule,
+        DxPopupModule,
 
         TranslateModule,
         MainMenuComponent,
@@ -97,6 +98,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         DxTabPanelModule,
         DxTextBoxModule,
         DxValidatorModule,
+        DxPopupModule,
 
         TranslateModule.forRoot({
             loader: {
