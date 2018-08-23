@@ -28,6 +28,7 @@
     </div>
 </div>
 <div fxFlex="5%" class="tools">
+    <div class="actionTitle">{{'actionOnInspection' | translate}}</div>
     <button mat-raised-button color="accent" (click)="approve()" [fxShow]="!isClosed">
         <mat-icon>check_circle_outline</mat-icon>
         {{'approve' | translate}}
@@ -38,7 +39,7 @@
     </button>
     <button mat-raised-button color="warn" (click)="cancel()" [fxShow]="!isClosed">
         <mat-icon>clear</mat-icon>
-        {{'cancel' | translate}}
+        {{'cancelInspection' | translate}}
     </button>
     <button mat-raised-button (click)="close()" [fxShow]="isClosed">
         <mat-icon>close</mat-icon>

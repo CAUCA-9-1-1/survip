@@ -21,6 +21,7 @@ import {InspectionImplantationPlanComponent} from './inspection-implantation-pla
 import {InspectionCourseComponent} from './inspection-course/inspection-course.component';
 import {BuildingListComponent} from './building-list/building-list.component';
 import {AskNewThemeComponent} from './ask-new-theme/ask-new-theme.component';
+import {AskConfirmationComponent} from './ask-confirmation/ask-confirmation.component';
 
 
 @NgModule({
@@ -40,9 +41,11 @@ import {AskNewThemeComponent} from './ask-new-theme/ask-new-theme.component';
         InspectionImplantationPlanComponent,
         InspectionCourseComponent,
         BuildingListComponent,
+        AskConfirmationComponent,
         AskNewThemeComponent,
     ],
     entryComponents: [
+        AskConfirmationComponent,
         AskNewThemeComponent,
     ],
     imports: [

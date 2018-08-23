@@ -76,8 +76,8 @@ export class InspectionService extends RequestService {
         return this.post('Inspection/' + id + '/approve', {});
     }
 
-    refuse(id: string): Observable<Boolean> {
-        return this.post('Inspection/' + id + '/refuse', {});
+    refuse(id: string, reason: string): Observable<Boolean> {
+        return this.post('Inspection/' + id + '/refuse', reason);
     }
 
     cancel(id: string): Observable<Boolean> {
