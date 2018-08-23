@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
 
 import {InspectionService} from './shared/services/inspection.service';
+import {AskConfirmationComponent} from './ask-confirmation/ask-confirmation.component';
+import {InspectionDetailService} from './shared/services/inspection-detail.service';
 
 
 @Component({
@@ -10,32 +14,26 @@ import {InspectionService} from './shared/services/inspection.service';
     styleUrls: ['./inspection-approval.component.scss'],
     providers: [
         InspectionService,
+        TranslateService
     ]
 })
 export class InspectionApprovalComponent implements OnInit {
     public selected = 'generalInfo';
     public isClosed = false;
-    public title = '';
     public inspectionId: string;
-    public buildingId: string;
-    public cityId: string;
-    public idImplantationPlan: string;
-    public idBuildingDetail: string;
+    public generalInfo: any = {};
 
     public constructor(
         private activeRoute: ActivatedRoute,
         private router: Router,
-        private inspectionService: InspectionService
+        private inspectionService: InspectionService,
+        private inspectionDetailService: InspectionDetailService,
+        private dialog: MatDialog,
     ) {
         this.activeRoute.params.subscribe(param => {
-            this.inspectionService.getGeneralInfo(param.idInspection).subscribe(data => {
+            this.inspectionDetailService.getGeneralInfo(param.idInspection).subscribe(data => {
                 this.inspectionId = param.idInspection;
-
-                this.title = data.mainBuildingAddress;
-                this.buildingId = data.idBuilding;
-                this.cityId = data.idCity;
-                this.idBuildingDetail = data.idDetail;
-                this.idImplantationPlan = data.idPictureSitePlan;
+                this.generalInfo = data;
             });
         });
     }
@@ -60,15 +58,51 @@ export class InspectionApprovalComponent implements OnInit {
     }
 
     public approve() {
-        this.inspectionService.approve(this.inspectionId).subscribe(() => this.isClosed = true);
+        const dialogRef = this.dialog.open(AskConfirmationComponent, {
+            width: '500px',
+            data: {
+                title: 'approve',
+                message: 'approveQuestion',
+            },
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.inspectionService.approve(this.inspectionId).subscribe(() => this.isClosed = true);
+            }
+        });
     }
 
     public refuse() {
-        this.inspectionService.refuse(this.inspectionId).subscribe(() => this.isClosed = true);
+        const dialogRef = this.dialog.open(AskConfirmationComponent, {
+            width: '500px',
+            data: {
+                title: 'refuse',
+                message: 'refuseQuestion',
+            },
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.inspectionService.refuse(this.inspectionId, result.reason).subscribe(() => this.isClosed = true);
+            }
+        });
     }
 
     public cancel() {
-        this.inspectionService.cancel(this.inspectionId).subscribe(() => this.isClosed = true);
+        const dialogRef = this.dialog.open(AskConfirmationComponent, {
+            width: '500px',
+            data: {
+                title: 'cancelInspection',
+                message: 'cancelInspectionQuestion',
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.inspectionService.cancel(this.inspectionId).subscribe(() => this.isClosed = true);
+            }
+        });
     }
 
     public close() {

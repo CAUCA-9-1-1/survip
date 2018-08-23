@@ -1,47 +1,51 @@
 <div fxLayout="column">
-<div fxFlex="5%" class="title">{{title}}</div>
-<div fxFlex="90%">
-    <div fxLayout="row" class="details">
-        <div fxFlex="20%">
-            <app-section-list (selectionChange)="sectionChange($event)"></app-section-list>
-        </div>
-        <div fxFlex="80%">
-            <div [fxShow]="selected == 'generalInfo'">
-                <app-inspection-general-info [inspectionId]="selected == 'generalInfo' ? inspectionId : ''"></app-inspection-general-info>
+    <div fxFlex="5%" class="title">{{generalInfo.mainBuildingAddress}}</div>
+    <div fxFlex="85%">
+        <div fxLayout="row" class="details">
+            <div fxFlex="20%">
+                <app-section-list (selectionChange)="sectionChange($event)"></app-section-list>
             </div>
-            <div [fxShow]="selected == 'implantationPlan'">
-                <app-inspection-implantation-plan [idBuildingDetail]="idBuildingDetail" [implantationPlan]="idImplantationPlan"></app-inspection-implantation-plan>
-            </div>
-            <div [fxShow]="selected == 'course'">
-                <app-inspection-course [idBuilding]="buildingId" [idCity]="cityId" [inspection]="selected == 'course' ? inspectionId : ''"></app-inspection-course>
-            </div>
-            <div [fxShow]="selected == 'waterSupply'">
-                <app-inspection-water-supply [idBuilding]="buildingId" [idCity]="cityId" [inspection]="selected == 'waterSupply' ? inspectionId : ''"></app-inspection-water-supply>
-            </div>
-            <div [fxShow]="selected == 'survey'">
-                <app-inspection-survey [inspection]="selected == 'survey' ? inspectionId : ''"></app-inspection-survey>
-            </div>
-            <div [fxShow]="isBuildingSection()">
-                <app-building-list [selected]="selected" [inspection]="isBuildingSection() ? inspectionId : ''"></app-building-list>
+            <div fxFlex="80%">
+                <div [fxShow]="selected == 'generalInfo'">
+                    <app-inspection-general-info [data]="selected == 'generalInfo' ? generalInfo : ''"></app-inspection-general-info>
+                </div>
+                <div [fxShow]="selected == 'implantationPlan'">
+                    <app-inspection-implantation-plan [idBuildingDetail]="generalInfo.idDetail" [implantationPlan]="generalInfo.idPictureSitePlan"></app-inspection-implantation-plan>
+                </div>
+                <div [fxShow]="selected == 'course'">
+                    <app-inspection-course [idBuilding]="generalInfo.idBuilding" [idCity]="generalInfo.idCity" [inspection]="selected == 'course' ? inspectionId : ''"></app-inspection-course>
+                </div>
+                <div [fxShow]="selected == 'waterSupply'">
+                    <app-inspection-water-supply [idBuilding]="generalInfo.idBuilding" [idCity]="generalInfo.idCity" [inspection]="selected == 'waterSupply' ? inspectionId : ''"></app-inspection-water-supply>
+                </div>
+                <div [fxShow]="selected == 'survey'">
+                    <app-inspection-survey [inspection]="selected == 'survey' ? inspectionId : ''"></app-inspection-survey>
+                </div>
+                <div [fxShow]="isBuildingSection()">
+                    <app-building-list [selected]="selected" [inspection]="isBuildingSection() ? inspectionId : ''"></app-building-list>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div fxFlex="5%" class="tools">
-    <button mat-raised-button color="accent" (click)="approve()" [fxShow]="!isClosed">
-        <mat-icon>check_circle_outline</mat-icon>
-        {{'approve' | translate}}
-    </button>
-    <button mat-raised-button color="primary" (click)="refuse()" [fxShow]="!isClosed">
-        <mat-icon>warning</mat-icon>
-        {{'refuse' | translate}}
-    </button>
-    <button mat-raised-button color="warn" (click)="cancel()" [fxShow]="!isClosed">
-        <mat-icon>clear</mat-icon>
-        {{'cancel' | translate}}
-    </button>
-    <button mat-raised-button (click)="close()" [fxShow]="isClosed">
-        <mat-icon>close</mat-icon>
-        {{'close' | translate}}
-    </button>
+    <div fxFlex="10%">
+        <div class="tools">
+            <div class="actionTitle">{{'actionOnInspection' | translate}}</div>
+            <button mat-raised-button color="accent" (click)="approve()" [fxShow]="!isClosed">
+                <mat-icon>check_circle_outline</mat-icon>
+                {{'approve' | translate}}
+            </button>
+            <button mat-raised-button color="primary" (click)="refuse()" [fxShow]="!isClosed">
+                <mat-icon>warning</mat-icon>
+                {{'refuse' | translate}}
+            </button>
+            <button mat-raised-button color="warn" (click)="cancel()" [fxShow]="!isClosed">
+                <mat-icon>clear</mat-icon>
+                {{'cancelInspection' | translate}}
+            </button>
+            <button mat-raised-button (click)="close()" [fxShow]="isClosed">
+                <mat-icon>close</mat-icon>
+                {{'close' | translate}}
+            </button>
+        </div>
+    </div>
 </div>

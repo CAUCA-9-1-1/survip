@@ -5,7 +5,7 @@ import {LaneService} from '../../management-address/shared/services/lane.service
 import {RiskLevelService} from '../../management-building/shared/services/risk-level.service';
 import {UtilisationCodeService} from '../../management-building/shared/services/utilisation-code.service';
 import {UtilisationCode} from '../../management-building/shared/models/utilisation-code.model';
-import {InspectionService} from '../shared/services/inspection.service';
+import {InspectionDetailService} from '../shared/services/inspection-detail.service';
 
 
 @Component({
@@ -13,63 +13,70 @@ import {InspectionService} from '../shared/services/inspection.service';
     templateUrl: './inspection-general-info.component.html',
     styleUrls: ['./inspection-general-info.component.scss'],
     providers: [
-        InspectionService,
+        InspectionDetailService,
         LaneService,
         RiskLevelService,
         UtilisationCodeService,
     ]
 })
 export class InspectionGeneralInfoComponent implements OnInit {
-    @Input() inspectionId: string;
+    @Input()
+    set data(info: string) {
+        this.generalInfo = info;
+        this.loadData();
+    }
 
-    generalInfo: any = {};
-    lane: string;
-    transversal: string;
-    riskLevel: string;
-    utilisationCode: string;
+    public generalInfo: any = {};
+    public lane: string;
+    public lanes: any = [];
+    public riskLevel: string;
+    public utilisationCode: string;
 
     constructor(
-        private inspectionService: InspectionService,
+        private inspectionDetailService: InspectionDetailService,
         private laneService: LaneService,
         private riskService: RiskLevelService,
         private utilisationCodeService: UtilisationCodeService,
     ) { }
 
-    ngOnInit() {
-        if (!this.inspectionId) {
+    public ngOnInit() {}
+
+    public onChange(e) {
+        if (this.generalInfo.idLaneTransversal !== e.component.option('value')) {
+            this.inspectionDetailService.saveTransversale(this.generalInfo.idBuilding, e.component.option('value'));
+        }
+    }
+
+    private loadData() {
+        if (!this.generalInfo.idInspection) {
             return null;
         }
 
-        this.inspectionService.getGeneralInfo(this.inspectionId).subscribe(data => {
-            this.generalInfo = data;
+        this.laneService.getAllOfCity(this.generalInfo.idCity).subscribe(lanes => {
+            this.lanes = lanes;
 
-            this.laneService.getAllOfCity(data.idCity).subscribe(lanes => {
-                lanes.forEach( lane => {
-                    if (lane.id === data.mainBuildingIdLane) {
-                        this.lane = lane.name;
-                    }
-                    if (lane.id === data.idLaneTransversal) {
-                        this.transversal = lane.name;
-                    }
-                });
+            this.lanes.forEach( lane => {
+                if (lane.id === this.generalInfo.mainBuildingIdLane) {
+                    this.lane = lane.name;
+                }
             });
+        });
 
-            this.riskService.localized().subscribe(risks => {
-                risks.forEach( risk => {
-                    if (risk.id === data.mainBuildingIdRiskLevel) {
-                        this.riskLevel = risk.name;
-                    }
-                });
+        this.riskService.localized().subscribe(risks => {
+            risks.forEach( risk => {
+                if (risk.id === this.generalInfo.mainBuildingIdRiskLevel) {
+                    this.riskLevel = risk.name;
+                }
             });
+        });
 
-            this.utilisationCodeService.getAll().subscribe(codes => {
-                codes.forEach( code => {
-                    if (code.id === data.mainBuildingIdUtilisationCode) {
-                        code = UtilisationCode.fromJSON(code);
+        this.utilisationCodeService.getAll().subscribe(codes => {
+            codes.forEach( code => {
+                if (code.id === this.generalInfo.mainBuildingIdUtilisationCode) {
+                    code = UtilisationCode.fromJSON(code);
 
-                        this.utilisationCode = code.getLocalization(config.locale, 'description');
-                    }
-                });
+                    this.utilisationCode = code.getLocalization(config.locale, 'description');
+                }
             });
         });
     }

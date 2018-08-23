@@ -3,19 +3,69 @@
     <mat-card-content>
         <div fxLayout="row">
             <div fxFlex="30%">{{'type' | translate}}</div>
-            <div>{{buildingType}}</div>
+            <div fxFlex="70%">
+                <dx-select-box
+                        [dataSource]="buildingTypes"
+                        displayExpr="name"
+                        valueExpr="id"
+                        width="50%"
+                        height="100%"
+                        name="idBuildingType"
+                        (onValueChanged)="onChange($event)"
+                        [value]="detail.idBuildingType">
+                </dx-select-box>
+            </div>
         </div>
         <div fxLayout="row">
             <div fxFlex="30%">{{'garage' | translate}}</div>
-            <div>{{garageType | translate}}</div>
+            <div fxFlex="70%">
+                <dx-select-box
+                        [dataSource]="garageTypes"
+                        displayExpr="name"
+                        valueExpr="id"
+                        width="50%"
+                        height="100%"
+                        name="garageType"
+                        (onValueChanged)="onChange($event)"
+                        [value]="detail.garageType">
+                </dx-select-box>
+            </div>
         </div>
         <div fxLayout="row">
             <div fxFlex="30%">{{'height' | translate}}</div>
-            <div>{{detail.height}} {{unitHeight}}</div>
+            <div fxFlex="10%">
+                <dx-text-box [value]="detail.height" name="height" (onValueChanged)="onChange($event)"></dx-text-box>
+            </div>
+            <div fxFlex="60%">
+                <dx-select-box
+                        [dataSource]="dimensionUnits"
+                        displayExpr="name"
+                        valueExpr="id"
+                        width="50%"
+                        height="100%"
+                        name="idUnitOfMeasureHeight"
+                        (onValueChanged)="onChange($event)"
+                        [value]="detail.idUnitOfMeasureHeight">
+                </dx-select-box>
+            </div>
         </div>
         <div fxLayout="row">
             <div fxFlex="30%">{{'estimatedWaterFlow' | translate}}</div>
-            <div>{{detail.estimatedWaterFlow}} {{unitEstimatedWaterFlow}}</div>
+            <div fxFlex="10%">
+                <dx-text-box [value]="detail.estimatedWaterFlow" name="height" (onValueChanged)="onChange($event)"></dx-text-box>
+            </div>
+            <div fxFlex="60%">
+                <dx-select-box
+                        [dataSource]="rateUnits"
+                        displayExpr="name"
+                        valueExpr="id"
+                        width="50%"
+                        height="100%"
+                        name="idUnitOfMeasureEstimatedWaterFlow"
+                        (onValueChanged)="onChange($event)"
+                        [value]="detail.idUnitOfMeasureEstimatedWaterFlow">
+                </dx-select-box>
+            </div>
         </div>
     </mat-card-content>
 </mat-card>
@@ -24,15 +74,48 @@
     <mat-card-content>
         <div fxLayout="row">
             <div fxFlex="30%">{{'type' | translate}}</div>
-            <div>{{constructionType}}</div>
+            <div fxFlex="70%">
+                <dx-select-box
+                        [dataSource]="constructionTypes"
+                        displayExpr="name"
+                        valueExpr="id"
+                        width="50%"
+                        height="100%"
+                        name="idConstructionType"
+                        (onValueChanged)="onChange($event)"
+                        [value]="detail.idConstructionType">
+                </dx-select-box>
+            </div>
         </div>
         <div fxLayout="row">
             <div fxFlex="30%">{{'fireResistance' | translate}}</div>
-            <div>{{fireResistance}}</div>
+            <div fxFlex="70%">
+                <dx-select-box
+                        [dataSource]="fireResistanceTypes"
+                        displayExpr="name"
+                        valueExpr="id"
+                        width="50%"
+                        height="100%"
+                        name="idConstructionFireResistanceType"
+                        (onValueChanged)="onChange($event)"
+                        [value]="detail.idConstructionFireResistanceType">
+                </dx-select-box>
+            </div>
         </div>
         <div fxLayout="row">
             <div fxFlex="30%">{{'siding' | translate}}</div>
-            <div>{{sidingType}}</div>
+            <div fxFlex="70%">
+                <dx-select-box
+                        [dataSource]="sidingTypes"
+                        displayExpr="name"
+                        valueExpr="id"
+                        width="50%"
+                        height="100%"
+                        name="idBuildingSidingType"
+                        (onValueChanged)="onChange($event)"
+                        [value]="detail.idBuildingSidingType">
+                </dx-select-box>
+            </div>
         </div>
     </mat-card-content>
 </mat-card>
@@ -41,11 +124,33 @@
     <mat-card-content>
         <div fxLayout="row">
             <div fxFlex="30%">{{'type' | translate}}</div>
-            <div>{{roofType}}</div>
+            <div fxFlex="70%">
+                <dx-select-box
+                        [dataSource]="roofTypes"
+                        displayExpr="name"
+                        valueExpr="id"
+                        width="50%"
+                        height="100%"
+                        name="idRoofType"
+                        (onValueChanged)="onChange($event)"
+                        [value]="detail.idRoofType">
+                </dx-select-box>
+            </div>
         </div>
         <div fxLayout="row">
             <div fxFlex="30%">{{'material' | translate}}</div>
-            <div>{{roofMaterialType}}</div>
+            <div fxFlex="70%">
+                <dx-select-box
+                        [dataSource]="roofMaterialTypes"
+                        displayExpr="name"
+                        valueExpr="id"
+                        width="50%"
+                        height="100%"
+                        name="idRoofMaterialType"
+                        (onValueChanged)="onChange($event)"
+                        [value]="detail.idRoofMaterialType">
+                </dx-select-box>
+            </div>
         </div>
     </mat-card-content>
 </mat-card>

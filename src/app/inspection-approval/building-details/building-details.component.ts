@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 import {ConstructionService} from '../../management-building/shared/services/construction.service';
 import {UnitOfMeasureService} from '../../management-fire-hydrant/shared/services/unit-of-measure.service';
-import {InspectionService} from '../shared/services/inspection.service';
+import {InspectionBuildingService} from '../shared/services/inspection-building.service';
 
 
 @Component({
@@ -10,9 +11,10 @@ import {InspectionService} from '../shared/services/inspection.service';
     templateUrl: './building-details.component.html',
     styleUrls: ['./building-details.component.scss'],
     providers: [
-        InspectionService,
+        InspectionBuildingService,
         ConstructionService,
         UnitOfMeasureService,
+        TranslateService,
     ]
 })
 export class BuildingDetailsComponent implements OnInit {
@@ -20,114 +22,70 @@ export class BuildingDetailsComponent implements OnInit {
     set building(id: string) {
         this.idBuilding = id;
         this.detail = {};
-        this.buildingType = '';
-        this.garageType = '';
-        this.unitHeight = '';
-        this.unitEstimatedWaterFlow = '';
-        this.constructionType = '';
-        this.fireResistance = '';
-        this.sidingType = '';
-        this.roofType = '';
-        this.roofMaterialType = '';
         this.loadData();
     }
 
     private idBuilding: string;
-    private garageTypes = ['no', 'yes', 'detached'];
+    private isInitialize = false;
 
-    detail: any = {};
-    buildingType: string;
-    garageType: string;
-    unitHeight: string;
-    unitEstimatedWaterFlow: string;
-    constructionType: string;
-    fireResistance: string;
-    sidingType: string;
-    roofType: string;
-    roofMaterialType: string;
+    public detail: any = {};
+    public garageTypes: any = [];
+    public rateUnits: any = [];
+    public dimensionUnits: any = [];
+    public buildingTypes: any = [];
+    public constructionTypes: any = [];
+    public fireResistanceTypes: any = [];
+    public sidingTypes: any = [];
+    public roofTypes: any = [];
+    public roofMaterialTypes: any = [];
 
-    constructor(
-        private inspectionService: InspectionService,
+    public constructor(
+        private inspectionBuildingService: InspectionBuildingService,
         private constructionService: ConstructionService,
         private measureService: UnitOfMeasureService,
-    ) { }
+        translateService: TranslateService,
+    ) {
+        translateService.get(['no', 'yes', 'detached']).subscribe(labels => {
+            this.garageTypes = [{
+                id: 0,
+                name: labels['no']
+            }, {
+                id: 1,
+                name: labels['yes']
+            }, {
+                id: 2,
+                name: labels['detached']
+            }];
+        });
+    }
 
-    ngOnInit() { }
+    public ngOnInit() {
+        this.measureService.getRate().subscribe( units => this.rateUnits = units);
+        this.measureService.getDimension().subscribe( units => this.dimensionUnits = units);
+        this.constructionService.getBuildingTypes().subscribe(types => this.buildingTypes = types);
+        this.constructionService.getConstructionTypes().subscribe(types => this.constructionTypes = types);
+        this.constructionService.getFireResistanceTypes().subscribe(types => this.fireResistanceTypes = types);
+        this.constructionService.getSidingTypes().subscribe(types => this.sidingTypes = types);
+        this.constructionService.getRoofTypes().subscribe(types => this.roofTypes = types);
+        this.constructionService.getRoofMaterialTypes().subscribe(types => this.roofMaterialTypes = types);
+        this.isInitialize = true;
+    }
 
-    loadData() {
+    public onChange(e) {
+        if (this.detail[e.component.option('name')] !== e.component.option('value')) {
+            this.detail[e.component.option('name')] = e.component.option('value');
+
+            this.inspectionBuildingService.saveDetail(this.detail).subscribe();
+        }
+    }
+
+    private loadData() {
         if (!this.idBuilding) {
             return null;
         }
 
-        this.inspectionService.getBuildingDetail(this.idBuilding).subscribe(data => {
+        this.inspectionBuildingService.getDetail(this.idBuilding).subscribe(data => {
             this.detail = data;
-
-            this.garageType = this.garageTypes[data.garageType];
-
-            this.constructionService.getBuildingTypes().subscribe(types => {
-                types.forEach( type => {
-                    if (type.id === data.idBuildingType) {
-                        this.buildingType = type.name;
-                    }
-                });
-            });
-
-            this.measureService.getDimension().subscribe( units => {
-                units.forEach( unit => {
-                    if (unit.id === data.idUnitOfMeasureHeight) {
-                        this.unitHeight = unit.name;
-                    }
-                });
-            });
-
-            this.measureService.getRate().subscribe( units => {
-                units.forEach( unit => {
-                    if (unit.id === data.idUnitOfMeasureEstimatedWaterFlow) {
-                        this.unitEstimatedWaterFlow = unit.name;
-                    }
-                });
-            });
-
-            this.constructionService.getConstructionTypes().subscribe(types => {
-                types.forEach( type => {
-                    if (type.id === data.idConstructionType) {
-                        this.constructionType = type.name;
-                    }
-                });
-            });
-
-            this.constructionService.getFireResistanceTypes().subscribe(types => {
-                types.forEach( type => {
-                    if (type.id === data.idConstructionFireResistanceType) {
-                        this.fireResistance = type.name;
-                    }
-                });
-            });
-
-            this.constructionService.getSidingTypes().subscribe(types => {
-                types.forEach( type => {
-                    if (type.id === data.idBuildingSidingType) {
-                        this.sidingType = type.name;
-                    }
-                });
-            });
-
-            this.constructionService.getRoofTypes().subscribe(types => {
-                types.forEach( type => {
-                    if (type.id === data.idRoofType) {
-                        this.roofType = type.name;
-                    }
-                });
-            });
-
-            this.constructionService.getRoofMaterialTypes().subscribe(types => {
-                types.forEach( type => {
-                    if (type.id === data.idRoofMaterialType) {
-                        this.roofMaterialType = type.name;
-                    }
-                });
-            });
         });
     }
-
 }
