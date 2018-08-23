@@ -5,25 +5,36 @@
 </mat-toolbar>
 <div fxLayout="row">
     <div fxFlex="30%">{{'riskLevel' | translate}}</div>
-    <div>{{riskLevel}}</div>
+    <div fxFlex="70%">{{riskLevel}}</div>
 </div>
 <div fxLayout="row">
     <div fxFlex="30%">{{'assignment' | translate}}</div>
-    <div>{{utilisationCode}}</div>
+    <div fxFlex="70%">{{utilisationCode}}</div>
 </div>
 <div fxLayout="row">
     <div fxFlex="30%">{{'matricule' | translate}}</div>
-    <div>{{generalInfo.mainBuildingMatricule}}</div>
+    <div fxFlex="70%">{{generalInfo.mainBuildingMatricule}}</div>
 </div>
 <div fxLayout="row">
-    <div fxFlex="30%">{{'alias' | translate}}</div>
-    <div>{{generalInfo.mainBuildingName}}</div>
+    <div fxFlex="30%">{{'name' | translate}}</div>
+    <div fxFlex="70%">{{generalInfo.mainBuildingName}}</div>
 </div>
 <div fxLayout="row">
     <div fxFlex="30%">{{'lane' | translate}}</div>
-    <div>{{lane}}</div>
+    <div fxFlex="70%">{{lane}}</div>
 </div>
 <div fxLayout="row">
     <div fxFlex="30%">{{'transversal' | translate}}</div>
-    <div>{{transversal}}</div>
+    <div fxFlex="70%">
+        <dx-select-box
+                [dataSource]="lanes"
+                displayExpr="name"
+                valueExpr="id"
+                width="50%"
+                height="100%"
+                name="idTransversal"
+                (onValueChanged)="onChange($event)"
+                [value]="generalInfo.idLaneTransversal">
+        </dx-select-box>
+    </div>
 </div>

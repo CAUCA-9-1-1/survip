@@ -36,10 +36,6 @@ export class InspectionService extends RequestService {
         );
     }
 
-    getGeneralInfo(id: string): Observable<InspectionGeneralInfo> {
-        return this.get('inspection/' + id + '/detail');
-    }
-
     saveImplantationPlan(idBuildingDetail: string, idPicture: string) {
         return this.post('inspection/buildingdetail/' + idBuildingDetail + '/idPicture/' + idPicture, {});
     }
@@ -56,10 +52,6 @@ export class InspectionService extends RequestService {
         return this.get('inspection/building/' + id + '/detail');
     }
 
-    getBuildingPNAPS(id: string) {
-        return this.get('inspection/building/' + id + '/pnaps');
-    }
-
     getBuildingSprinkler(id: string) {
         return this.get('inspection/building/' + id + '/sprinkler');
     }
@@ -68,16 +60,12 @@ export class InspectionService extends RequestService {
         return this.get('inspection/building/' + id + '/alarmpanel');
     }
 
-    getBuildingHazardousMaterial(id: string) {
-        return this.get('inspection/building/' + id + '/hazardousmaterial');
-    }
-
     approve(id: string): Observable<Boolean> {
         return this.post('Inspection/' + id + '/approve', {});
     }
 
-    refuse(id: string): Observable<Boolean> {
-        return this.post('Inspection/' + id + '/refuse', {});
+    refuse(id: string, reason: string): Observable<Boolean> {
+        return this.post('Inspection/' + id + '/refuse', reason);
     }
 
     cancel(id: string): Observable<Boolean> {
