@@ -25,8 +25,6 @@ export class InspectionImplantationPlanComponent implements OnInit {
         return this.idImplantationPlan;
     }
 
-    public picturePlan: string;
-
     private idImplantationPlan: string;
     private picture: Picture;
 
