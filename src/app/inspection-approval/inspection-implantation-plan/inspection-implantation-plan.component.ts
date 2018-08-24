@@ -25,6 +25,8 @@ export class InspectionImplantationPlanComponent implements OnInit {
         return this.idImplantationPlan;
     }
 
+    public picturePlan: string;
+
     private idImplantationPlan: string;
     private picture: Picture;
 
@@ -40,8 +42,7 @@ export class InspectionImplantationPlanComponent implements OnInit {
 
     public uploadImage(e) {
         this.picture = e;
-        this.picture.id = undefined;
-
+        this.picture.id = this.idImplantationPlan;
         this.picturePlan = e.dataUri;
         this.saveImage();
     }
@@ -53,16 +54,16 @@ export class InspectionImplantationPlanComponent implements OnInit {
 
         this.pictureService.getOne(this.idImplantationPlan).subscribe(data => {
             this.picturePlan = data['dataUri'];
+            this.picture = data;
         });
     }
 
     private saveImage() {
         if (this.picture) {
             this.pictureService.save(this.picture).subscribe(id => {
-                this.inspectionService.saveImplantationPlan(this.idBuildingDetail, id).subscribe();
+              this.implantationPlan = id;
+              this.inspectionService.saveImplantationPlan(this.idBuildingDetail, id).subscribe();
             });
         }
-
-        this.picture = undefined;
     }
 }

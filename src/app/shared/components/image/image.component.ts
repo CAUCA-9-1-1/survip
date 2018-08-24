@@ -47,6 +47,8 @@ export class ImageComponent implements OnInit {
     public icon = 'plus';
     public isPopupVisible = false;
 
+    private canvas = null;
+
     public constructor(
         private pictureService: PictureService,
         private inspectionPictureService: InspectionPictureService
@@ -59,12 +61,13 @@ export class ImageComponent implements OnInit {
     public uploadPicture(e) {
         const picture = new Picture();
 
-        picture.id = this.idPicture || undefined;
+        picture.id = this.idPicture;
         picture.name = e.name;
         picture.mimeType = '';
         picture.dataUri = e.content;
 
         this.src = e.content;
+        this.picture = picture;
 
         if (this.autoApiChange) {
           if (this.useDataCopy) {
@@ -93,6 +96,19 @@ export class ImageComponent implements OnInit {
     public editPicture() {
         this.isPopupVisible = true;
     }
+
+    public updateCanvas(event) {
+      this.canvas = event;
     }
-    
+
+    public saveModifiedPicture() {
+      if (this.canvas) {
+
+        this.picture.dataUri = this.canvas.toDataURL();
+        this.src = this.picture.dataUri;
+        this.picture.sketchJson = JSON.stringify(this.canvas.toJSON());
+
+        this.valueChanged.emit(this.picture);
+      }
+    }
 }
