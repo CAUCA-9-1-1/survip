@@ -6,4 +6,5 @@ export class Picture extends BaseModel {
     data: any;
     mimeType: string;
     dataUri: string;
+    sketchJson: string;
 }
