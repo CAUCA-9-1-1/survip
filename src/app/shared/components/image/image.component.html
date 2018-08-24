@@ -6,15 +6,12 @@
 </ng-container>
 <div #container>
     <img [src]="src" />
-
-    <dx-popup
-    title="Popup Title"
-    [(visible)]="isPopupVisible">
-
-    <div *dxTemplate="let data of 'content'">
-        <lib-web-sketch-tool [dataUri]="picture.dataUri" [json]="picture.sketchJson"></lib-web-sketch-tool>
-    </div>
-    </dx-popup>
-
 </div>
+
+<dx-popup [(visible)]="isPopupVisible" (onHiding)="saveModifiedPicture()">
+
+  <div *dxTemplate="let data of 'content'">
+      <lib-web-sketch-tool [imageData]="picture.dataUri" [loadedJson]="picture.sketchJson" (canvas)="updateCanvas($event)"></lib-web-sketch-tool>
+  </div>
+</dx-popup>
 

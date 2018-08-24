@@ -281,7 +281,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 onInitialized: (ev) => {
                     this.buttons['closeAll'] = ev.component;
                 },
-                onClick: (ev) => this.openCloseGroup(ev,0)},
+                onClick: (ev) => this.openCloseGroup(ev, 0)},
             location: 'after',
         });
 

@@ -22,6 +22,7 @@ import {InspectionCourseComponent} from './inspection-course/inspection-course.c
 import {BuildingListComponent} from './building-list/building-list.component';
 import {AskNewThemeComponent} from './ask-new-theme/ask-new-theme.component';
 import {AskConfirmationComponent} from './ask-confirmation/ask-confirmation.component';
+import {WebSketchToolModule} from 'lib-sketch-tool';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import {AskConfirmationComponent} from './ask-confirmation/ask-confirmation.comp
     imports: [
         SharedModule,
         FormsModule,
+        WebSketchToolModule,
         ReactiveFormsModule,
         MatCardModule,
         MatDialogModule,
