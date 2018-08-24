@@ -34,7 +34,7 @@
 
     <div *dxTemplate="let field of 'edittheme'">
         <div fxFlex="90%">
-            <dx-select-box [items]="themes" (onValueChanged)="field.setValue($event.value)"></dx-select-box>
+            <dx-select-box [items]="themes" [value]="field.value" (onValueChanged)="field.setValue($event.value)"></dx-select-box>
         </div>
         <div fxFlex="10%">
             <dx-button icon="plus" (onClick)="addTheme($event)"></dx-button>

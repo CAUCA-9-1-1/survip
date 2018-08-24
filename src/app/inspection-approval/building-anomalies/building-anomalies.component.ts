@@ -59,7 +59,11 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         this.formImageField = field;
         if (field.row.data.pictures) {
             field.row.data.pictures.forEach(image => {
-                images.push(image.picture.id);
+                if (image.picture.id) {
+                    images.push(image.picture.id);
+                } else {
+                    images.push(image.picture.dataUri);
+                }
             });
         }
 
@@ -79,6 +83,7 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         this.selectRow = {};
 
         e.data.idBuilding = this.idBuilding;
+        e.data.pictures = [];
         e.data.isActive = true;
     }
 
@@ -99,20 +104,28 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
     }
 
     public uploadPicture(picture) {
-        const images = this.formImageField.value;
+        const images = this.formImageField.value || [];
 
         if (picture.id) {
             this.pictureService.save(picture).subscribe();
-        } else if (this.selectRow.id) {
-            const anomalyPicture = new BuildingAnomalyPicture();
-            anomalyPicture.pictureData = picture.dataUri;
-            anomalyPicture.idParent = this.selectRow.id || undefined;
+        } else {
+            if (this.selectRow.id) {
+                const anomalyPicture = new BuildingAnomalyPicture();
+                anomalyPicture.pictureData = picture.dataUri;
+                anomalyPicture.idParent = this.selectRow.id || undefined;
 
-            this.sourceService.savePicture(anomalyPicture).subscribe(idAnomalyPicture => {
-                images.push(idAnomalyPicture);
+                this.sourceService.savePicture(anomalyPicture).subscribe(idAnomalyPicture => {
+                    images.push(idAnomalyPicture);
+
+                    this.formImageField.setValue(images);
+                });
+            } else {
+                images.push({
+                    picture: picture
+                });
 
                 this.formImageField.setValue(images);
-            });
+            }
         }
     }
 }
