@@ -91,9 +91,8 @@ export class ImageComponent implements OnInit {
   }
 
     public editPicture() {
-        console.log('edit');
         this.isPopupVisible = true;
-        console.log(this.picture);
+    }
     }
     
 }
