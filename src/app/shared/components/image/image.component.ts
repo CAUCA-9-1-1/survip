@@ -41,6 +41,10 @@ export class ImageComponent implements OnInit {
         }
     }
 
+    get json(): string {
+        return (this.picture.sketchJson)? this.picture.sketchJson : null;
+    }
+
     public idPicture: string;
     public src: string;
     public picture: Picture;

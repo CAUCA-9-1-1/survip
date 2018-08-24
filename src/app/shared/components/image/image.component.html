@@ -11,7 +11,7 @@
 <dx-popup [(visible)]="isPopupVisible" (onHiding)="saveModifiedPicture()">
 
   <div *dxTemplate="let data of 'content'">
-      <lib-web-sketch-tool [imageData]="picture.dataUri" [loadedJson]="picture.sketchJson" (canvas)="updateCanvas($event)"></lib-web-sketch-tool>
+      <lib-web-sketch-tool [imageData]="src" [loadedJson]="json" (canvas)="updateCanvas($event)"></lib-web-sketch-tool>
   </div>
 </dx-popup>
 
