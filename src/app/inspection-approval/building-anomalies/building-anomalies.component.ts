@@ -3,11 +3,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {InspectionBuildingAnomalyService} from '../shared/services/inspection-building-anomaly.service';
 import {BuildingAnomaly} from '../../management-building/shared/models/building-anomaly.model';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
-import {PictureService} from '../../shared/services/picture.service';
 import {BuildingAnomalyPicture} from '../../management-building/shared/models/building-anomaly-picture.model';
 import {MatDialog} from '@angular/material';
 import {AskNewThemeComponent} from '../ask-new-theme/ask-new-theme.component';
-import {InspectionPictureService} from '../../shared/services/inspection-picture.service';
+import {InspectionPictureService} from '../shared/services/inspection-picture.service';
 
 
 @Component({
@@ -16,7 +15,7 @@ import {InspectionPictureService} from '../../shared/services/inspection-picture
     styleUrls: ['./building-anomalies.component.scss'],
     providers: [
         InspectionBuildingAnomalyService,
-        PictureService,
+        InspectionPictureService,
     ]
 })
 export class BuildingAnomaliesComponent extends GridWithCrudService implements OnInit {

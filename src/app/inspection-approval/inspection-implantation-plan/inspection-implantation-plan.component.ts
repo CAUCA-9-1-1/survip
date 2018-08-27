@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {InspectionPictureService} from '../../shared/services/inspection-picture.service';
+import {InspectionPictureService} from '../shared/services/inspection-picture.service';
 import {Picture} from '../../shared/models/picture.model';
 import {InspectionService} from '../shared/services/inspection.service';
 

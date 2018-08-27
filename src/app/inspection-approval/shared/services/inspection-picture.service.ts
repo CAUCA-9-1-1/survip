@@ -1,7 +1,7 @@
-import {Injectable, Injector} from "@angular/core";
-import {RequestService} from "./request.service";
-import {Observable} from "rxjs/index";
-import {Picture} from "../models/picture.model";
+import {Injectable, Injector} from '@angular/core';
+import {RequestService} from '../../../shared/services/request.service';
+import {Observable} from 'rxjs/index';
+import {Picture} from '../../../shared/models/picture.model';
 
 @Injectable()
 export class InspectionPictureService extends RequestService {
