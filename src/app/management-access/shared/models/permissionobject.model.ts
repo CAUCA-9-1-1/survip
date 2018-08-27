@@ -1,5 +1,5 @@
 export class PermissionObject {
-  idPermissionObject: string;
+  id: string;
   idPermissionObjectParent: string;
   objectTable: string;
   genericId: string;

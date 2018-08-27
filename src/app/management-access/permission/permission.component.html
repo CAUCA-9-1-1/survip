@@ -1,19 +1,21 @@
 <div fxLayout="row">
-    <div fxFlex="35%">
-        <div class="title">{{'webuser' | translate}}</div>
+    <div fxFlex="30%">
+        <div class="title">{{'groups-webusers' | translate}}</div>
         <div class="content">
             <dx-tree-view
-                [dataSource]="objects"
-                displayExpr="text"
+                [dataSource]="permissionObjects"
+                displayExpr="groupName"
                 itemsExpr="children"
-                keyExpr="idPermissionObject"
+                keyExpr="id"
                 selectionMode="single"
+                dataStructure="plain"
+                parentIdExpr="idPermissionObjectParent"
                 [selectByClick]="true"
                 (onItemSelectionChanged)="onRowSelected($event)">
             </dx-tree-view>
         </div>
     </div>
-    <div fxFlex="65%">
+    <div fxFlex="70%">
         <dx-data-grid
                 [dataSource]="features"
                 [filterRow]="filter"
@@ -21,13 +23,13 @@
                 [hoverStateEnabled]="true"
                 (onRowUpdated)="onRowUpdated($event)">
             <dxi-column
-                    dataField="description"
+                    dataField="feature.description"
                     caption="{{'description' | translate}}"
                     sortOrder="asc"
                     sortIndex="0">
             </dxi-column>
             <dxi-column
-                    dataField="defaultValue"
+                    dataField="feature.defaultValue"
                     caption="{{'defaultValue' | translate}}"
                     [lookup]="defaultLookup"
                     width="20%">
