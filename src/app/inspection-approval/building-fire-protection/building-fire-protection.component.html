@@ -1,10 +1,66 @@
-<h3>{{'alarmPanels' | translate}}</h3>
-<div fxLayout="row"  *ngFor="let panel of alarmPanels">
-    <div fxFlex="50%">{{panel.locationDescription}}</div>
-    <div>{{panel.typeDescription}}</div>
-</div>
-<h3>{{'sprinklers' | translate}}</h3>
-<div fxLayout="row"  *ngFor="let sprinkler of sprinklers">
-    <div fxFlex="50%">{{sprinkler.locationDescription}}</div>
-    <div>{{sprinkler.typeDescription}}</div>
-</div>
+<mat-card>
+    <mat-card-title>{{'alarmPanels' | translate}}</mat-card-title>
+    <mat-card-content>
+        <dx-data-grid
+                [dataSource]="alarmPanels"
+                [hoverStateEnabled]="true"
+                [rowAlternationEnabled]="true"
+                (onEditorPreparing)="onEditorPreparing($event)"
+                (onInitNewRow)="onInitNewRow($event)"
+                (onRowInserted)="onAlarmPanelInserted($event)"
+                (onRowUpdated)="onAlarmPanelUpdated($event)"
+                (onRowRemoved)="onAlarmPanelRemoved($event)">
+            <dxi-column dataField="idAlarmPanelType" caption="{{'type' | translate}}">
+                <dxo-lookup [dataSource]="alarmPanelTypes" displayExpr="name" valueExpr="id">
+                </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="floor" caption="{{'floor' | translate}}"></dxi-column>
+            <dxi-column dataField="wall" caption="{{'wall' | translate}}"></dxi-column>
+            <dxi-column dataField="sector" caption="{{'sector' | translate}}"></dxi-column>
+
+            <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+                <dxo-popup title="{{'alarmPanel' | translate}}" [showTitle]="true"></dxo-popup>
+
+                <dxo-form colCount="1">
+                    <dxi-item dataField="idAlarmPanelType" [isRequired]="true"></dxi-item>
+                    <dxi-item dataField="floor"></dxi-item>
+                    <dxi-item dataField="wall"></dxi-item>
+                    <dxi-item dataField="sector"></dxi-item>
+                </dxo-form>
+            </dxo-editing>
+        </dx-data-grid>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-title>{{'sprinklers' | translate}}</mat-card-title>
+    <mat-card-content>
+        <dx-data-grid
+                [dataSource]="sprinklers"
+                [hoverStateEnabled]="true"
+                [rowAlternationEnabled]="true"
+                (onEditorPreparing)="onEditorPreparing($event)"
+                (onInitNewRow)="onInitNewRow($event)"
+                (onRowInserted)="onSprinklerInserted($event)"
+                (onRowUpdated)="onSprinklerUpdated($event)"
+                (onRowRemoved)="onSprinklerRemoved($event)">
+            <dxi-column dataField="idSprinklerType" caption="{{'type' | translate}}">
+                <dxo-lookup [dataSource]="sprinklerTypes" displayExpr="name" valueExpr="id">
+                </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="floor" caption="{{'floor' | translate}}"></dxi-column>
+            <dxi-column dataField="wall" caption="{{'wall' | translate}}"></dxi-column>
+            <dxi-column dataField="sector" caption="{{'sector' | translate}}"></dxi-column>
+
+            <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+                <dxo-popup title="{{'sprinkler' | translate}}" [showTitle]="true"></dxo-popup>
+
+                <dxo-form colCount="1">
+                    <dxi-item dataField="idSprinklerType" [isRequired]="true"></dxi-item>
+                    <dxi-item dataField="floor"></dxi-item>
+                    <dxi-item dataField="wall"></dxi-item>
+                    <dxi-item dataField="sector"></dxi-item>
+                </dxo-form>
+            </dxo-editing>
+        </dx-data-grid>
+    </mat-card-content>
+</mat-card>
