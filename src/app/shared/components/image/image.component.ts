@@ -41,12 +41,10 @@ export class ImageComponent implements OnInit {
         }
     }
 
-    get json(): string {
-        return (this.picture.sketchJson)? this.picture.sketchJson : null;
-    }
-
     public idPicture: string;
     public src: string;
+    public sketchImage = '';
+    public sketchJson = '';
     public picture: Picture;
     public icon = 'plus';
     public isPopupVisible = false;
@@ -99,6 +97,8 @@ export class ImageComponent implements OnInit {
 
     public editPicture() {
         this.isPopupVisible = true;
+        this.sketchImage = this.src;
+        this.sketchJson = this.picture.sketchJson;
     }
 
     public updateCanvas(event) {
@@ -106,7 +106,7 @@ export class ImageComponent implements OnInit {
     }
 
     public saveModifiedPicture() {
-      if (this.canvas) {
+      if (this.canvas && this.picture) {
 
         this.picture.dataUri = this.canvas.toDataURL();
         this.src = this.picture.dataUri;
