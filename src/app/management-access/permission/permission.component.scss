@@ -1,7 +1,11 @@
 div.title {
-    padding: 7px;
+  color: #959595;
+  padding: 0 20px;
+  line-height: 67px;
+  border-right: solid 1px #ddd;
+  border-bottom: solid 2px #ddd;
 }
 
-div[fxflex="35%"] {
-    background-color: rgba(255, 255, 255, 0.5);
+div[fxflex="30%"] {
+  border-right: solid 1px #ddd;
 }

@@ -1,33 +1,21 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable, Injector} from '@angular/core';
 
 import {Permission} from '../models/permission.model';
+import {RequestService} from '../../../shared/services/request.service';
 
 
 @Injectable()
-export class PermissionService {
+export class PermissionService extends RequestService {
 
-  constructor(private http: HttpClient) { }
+    public constructor(injector: Injector) {
+        super(injector);
+    }
 
-  public getOne(idPermissionObject) {
-    /*return this.http.get('permission/' + idPermissionObject).map((response: Response) => {
-      const result = response.json();
+    public getOne(idPermissionObject) {
+        return this.get('permission/' + idPermissionObject);
+    }
 
-      return result.data;
-    });*/
-  }
-
-  public create(object: Permission) {
-    /*return this.http.post(
-      'permission',
-      JSON.stringify(object)
-    ).map((response: Response) => response.json());*/
-  }
-
-  public update(object: Permission) {
-    /*return this.http.put(
-      'permission',
-      JSON.stringify(object)
-    ).map((response: Response) => response.json());*/
-  }
+    public save(object: Permission) {
+        return this.post('permission', object);
+    }
 }

@@ -16,6 +16,7 @@
   "actionOnInspection": "Action on inspection",
   "cancelInspection": "Cancel inspection",
   "reason": "Reason",
+  "groups-webusers": "Groups / Users",
   "approveQuestion": "Are you sure you want to approve this inspection?",
   "refuseQuestion": "Are you sure you want to reject this inspection?",
   "cancelInspectionQuestion": "Are you sure you want to cancel this inspection?",
