@@ -5,10 +5,9 @@ import {BuildingAnomaly} from '../../management-building/shared/models/building-
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {PictureService} from '../../shared/services/picture.service';
 import {BuildingAnomalyPicture} from '../../management-building/shared/models/building-anomaly-picture.model';
-import {AskBatchDescriptionComponent} from '../../inspection-dashboard/ask-batch-description/ask-batch-description.component';
-import {InspectionBatch} from '../../inspection-batch/shared/models/inspection-batch.model';
 import {MatDialog} from '@angular/material';
 import {AskNewThemeComponent} from '../ask-new-theme/ask-new-theme.component';
+import {InspectionPictureService} from '../../shared/services/inspection-picture.service';
 
 
 @Component({
@@ -39,7 +38,7 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
 
     public constructor(
         anomalyService: InspectionBuildingAnomalyService,
-        private pictureService: PictureService,
+        private pictureService: InspectionPictureService,
         private dialog: MatDialog,
     ) {
         super(anomalyService);

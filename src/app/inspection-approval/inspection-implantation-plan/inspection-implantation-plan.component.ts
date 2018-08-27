@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {PictureService} from '../../shared/services/picture.service';
+import {InspectionPictureService} from '../../shared/services/inspection-picture.service';
 import {Picture} from '../../shared/models/picture.model';
 import {InspectionService} from '../shared/services/inspection.service';
 
@@ -10,7 +10,7 @@ import {InspectionService} from '../shared/services/inspection.service';
     templateUrl: './inspection-implantation-plan.component.html',
     styleUrls: ['./inspection-implantation-plan.component.scss'],
     providers: [
-        PictureService,
+        InspectionPictureService,
     ],
 })
 export class InspectionImplantationPlanComponent implements OnInit {
@@ -31,7 +31,7 @@ export class InspectionImplantationPlanComponent implements OnInit {
     public picturePlan = '';
 
     public constructor(
-        private pictureService: PictureService,
+        private pictureService: InspectionPictureService,
         private inspectionService: InspectionService,
     ) { }
 
