@@ -1,5 +1,5 @@
 export class Permission {
-  idPermission: string;
+  id: string;
   idPermissionObject: string;
   idPermissionSystem: string;
   idPermissionSystemFeature: string;
