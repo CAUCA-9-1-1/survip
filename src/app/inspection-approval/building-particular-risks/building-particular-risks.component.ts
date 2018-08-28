@@ -59,7 +59,7 @@ export class BuildingParticularRisksComponent implements OnInit {
         const name = e.component.option('name');
         const [key, index] = name.split('.');
 
-        if (this.risks[index][key] !== e.component.option('value')) {
+        if (this.idBuilding && this.risks[index][key] !== e.component.option('value')) {
             this.risks[index][key] = e.component.option('value');
             this.risks[index]['idBuilding'] = this.idBuilding;
 
