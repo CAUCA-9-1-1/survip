@@ -12,6 +12,10 @@
     "comments": "Comments",
     "localization": "Localization"
   },
+  "addGroup": "Add group",
+  "addUser": "Add user",
+  "removeItem": "Remove selected item",
+  "removeSelectedItem": "Are you sure you want to delete this item?",
   "newTheme": "New theme",
   "actionOnInspection": "Action on inspection",
   "cancelInspection": "Cancel inspection",

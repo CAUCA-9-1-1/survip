@@ -19,4 +19,8 @@ export class PermissionObjectService extends RequestService {
     public save(object: PermissionObject) {
         return this.post('PermissionObject', object);
     }
+
+    public remove(id: string) {
+        return this.delete('PermissionObject/' + id);
+    }
 }

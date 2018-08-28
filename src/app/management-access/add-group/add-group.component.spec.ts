@@ -2,17 +2,17 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 import {TestModule} from '../../test.module.spec';
-import {AskBatchDescriptionComponent} from './ask-batch-description.component';
+import {AddGroupComponent} from './add-group.component';
 
 
 describe('AskRemoveItemComponent', () => {
-    let component: AskBatchDescriptionComponent;
-    let fixture: ComponentFixture<AskBatchDescriptionComponent>;
+    let component: AddGroupComponent;
+    let fixture: ComponentFixture<AddGroupComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [TestModule],
-            declarations: [AskBatchDescriptionComponent],
+            declarations: [AddGroupComponent],
             providers: [
                 { provide: MatDialogRef, useValue: {} },
                 { provide: MAT_DIALOG_DATA, useValue: [] }
@@ -22,7 +22,7 @@ describe('AskRemoveItemComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(AskBatchDescriptionComponent);
+        fixture = TestBed.createComponent(AddGroupComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

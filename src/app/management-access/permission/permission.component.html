@@ -1,6 +1,11 @@
 <div fxLayout="row">
     <div fxFlex="30%">
-        <div class="title">{{'groups-webusers' | translate}}</div>
+        <div class="title">
+            <dx-button #removeItem icon="trash" (onClick)="onRemoveItem()" [disabled]="true"></dx-button>
+            <dx-button #addUser icon="user" (onClick)="onAddUser()" [disabled]="true"></dx-button>
+            <dx-button icon="group" (onClick)="onAddGroup()"></dx-button>
+            {{'groups-webusers' | translate}}
+        </div>
         <div class="content">
             <dx-tree-view
                 [dataSource]="permissionObjects"
