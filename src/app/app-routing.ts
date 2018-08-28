@@ -15,6 +15,7 @@ import {InspectionApprovalComponent} from './inspection-approval/inspection-appr
 import {InspectionManagementComponent} from './inspection-management/inspection-management.component';
 import {StatisticsComponent} from './statistics/statistics.component';
 import {ReportConfigurationComponent} from './report-configuration/report-configuration.component';
+import {PermissionService} from './management-access/shared/services/permission.service';
 
 
 const appRoutes: Routes = [{
@@ -82,7 +83,8 @@ const appRoutes: Routes = [{
         RouterModule
     ],
     providers: [
-        AuthGuardService
+        AuthGuardService,
+        PermissionService,
     ]
 })
 
