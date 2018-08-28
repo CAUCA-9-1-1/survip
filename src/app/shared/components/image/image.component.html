@@ -8,7 +8,7 @@
     <img [src]="src" />
 </div>
 
-<dx-popup [(visible)]="isPopupVisible" (onHiding)="saveModifiedPicture()">
+<dx-popup [title]="sketchName" [(visible)]="isPopupVisible" [deferRendering]="false" (onHiding)="saveModifiedPicture()">
 
   <div *dxTemplate="let data of 'content'">
       <lib-web-sketch-tool [imageData]="sketchImage" [loadedJson]="sketchJson" (canvas)="updateCanvas($event)"></lib-web-sketch-tool>

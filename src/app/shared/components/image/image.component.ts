@@ -43,8 +43,9 @@ export class ImageComponent implements OnInit {
 
     public idPicture: string;
     public src: string;
-    public sketchImage = '';
-    public sketchJson = '';
+    public sketchImage: string;
+    public sketchJson: string;
+    public sketchName: string;
     public picture: Picture;
     public icon = 'plus';
     public isPopupVisible = false;
@@ -69,6 +70,7 @@ export class ImageComponent implements OnInit {
         picture.dataUri = e.content;
 
         this.src = e.content;
+        this.sketchName = e.name;
         this.picture = picture;
 
         if (this.autoApiChange) {
