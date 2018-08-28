@@ -11,13 +11,17 @@
             <dx-tree-view
                     [dataSource]="questions"
                     displayExpr="localizations"
-                    [itemTemplate]="getQuestionTreeviewTitle"
+                    itemTemplate="listItem"
                     keyExpr="id"
                     selectionMode="single"
                     [selectByClick]="true"
                     (onItemSelectionChanged)="onQuestionSelected($event)"
                     parentIdExpr="idSurveyQuestionParent"
                     dataStructure="plain">
+                <div class="parent-item" *dxTemplate="let itemData of 'listItem'; let itemIndex = index">
+                    <dx-button class="child-add" *ngIf="itemData.questionType == 4" icon="add" (onClick)="onAddChildQuestion(itemData)"></dx-button>
+                    <span>{{getQuestionTreeviewTitle(itemData)}}</span>
+                </div>
             </dx-tree-view>
         </div>
     </div>

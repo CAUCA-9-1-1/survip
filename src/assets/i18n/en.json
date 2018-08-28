@@ -330,5 +330,6 @@
   "orNew": "Or create a new one",
   "templateName": "TemplateName",
   "newDocument": "New Document",
-  "placeholders": "Placeholders"
+  "placeholders": "Placeholders",
+  "groupedQuestion":"Grouped question"
 }
