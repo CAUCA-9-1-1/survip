@@ -1,7 +1,8 @@
 import {Injectable, Injector} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
-import {Permission} from '../models/permission.model';
 import {RequestService} from '../../../shared/services/request.service';
+import {Permission} from '../models/permission.model';
 
 
 @Injectable()
@@ -11,8 +12,12 @@ export class PermissionService extends RequestService {
         super(injector);
     }
 
-    public getOne(idPermissionObject) {
+    public getObjectPermission(idPermissionObject): Observable<Permission[]> {
         return this.get('permission/' + idPermissionObject);
+    }
+
+    public getUserPermission(idWebuser): Observable<Permission[]> {
+        return this.get('permission/webuser/' + idWebuser);
     }
 
     public save(object: Permission) {
