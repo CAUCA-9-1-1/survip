@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{'removeItem' | translate}}</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+</mat-dialog-content>
+  {{'removeSelectedItem' | translate}}
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="remove()">{{'ok' | translate}}</button>
+  <button mat-raised-button (click)="cancel()">{{'cancel' | translate}}</button>
+</mat-dialog-actions>
