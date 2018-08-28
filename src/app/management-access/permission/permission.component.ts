@@ -3,7 +3,6 @@ import {MatDialog} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 import {DxButtonComponent} from 'devextreme-angular';
 
-import {PermissionSystemFeature} from '../shared/models/permissionsystemfeature.model';
 import {PermissionObjectService} from '../shared/services/permissionobject.service';
 import {PermissionObject} from '../shared/models/permissionobject.model';
 import {PermissionService} from '../shared/services/permission.service';
@@ -11,6 +10,7 @@ import {AddUserInGroupComponent} from '../add-user-in-group/add-user-in-group.co
 import {WebuserService} from '../shared/services/webuser.service';
 import {AddGroupComponent} from '../add-group/add-group.component';
 import {AskRemoveItemComponent} from '../ask-remove-item/ask-remove-item.component';
+import {Permission} from '../shared/models/permission.model';
 
 @Component({
     selector: 'app-management-access-permission',
@@ -26,7 +26,7 @@ export class PermissionComponent implements OnInit {
     @ViewChild('removeItem') removeItem: DxButtonComponent;
     @ViewChild('addUser') addUser: DxButtonComponent;
 
-    features: PermissionSystemFeature[] = [];
+    features: Permission[] = [];
     permissionObjects: PermissionObject[] = [];
     editing: object = {};
     filter: object = {};
@@ -178,7 +178,7 @@ export class PermissionComponent implements OnInit {
     }
 
     private loadSystemFeature() {
-        this.permissionService.getOne(this.selectedPermissionObject.id).subscribe(data => this.features = data);
+        this.permissionService.getObjectPermission(this.selectedPermissionObject.id).subscribe(data => this.features = data);
     }
 
     private loadPermissionObject() {
