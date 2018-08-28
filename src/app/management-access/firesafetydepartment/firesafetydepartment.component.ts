@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
 import config from '../../../assets/config/config.json';
+import packageInfo from '../../../assets/config/package.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
@@ -61,7 +62,7 @@ export class FireSafetyDepartmentComponent extends GridWithCrudService implement
     }
 
     private loadTranslation() {
-        this.translateService.get(config.locale.available).subscribe(data => {
+        this.translateService.get(packageInfo.locale).subscribe(data => {
             for (const key in data) {
                 if (data[key]) {
                     this.languages.push({

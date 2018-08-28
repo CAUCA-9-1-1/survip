@@ -12,6 +12,10 @@
     "comments": "Commentaires",
     "localization": "Localisation"
   },
+  "addGroup": "Ajouter un groupe",
+  "addUser": "Ajouter un utilisateur",
+  "removeItem": "Supprimer l'élément sélectionner",
+  "removeSelectedItem": "Voulez-vous vraiment supprimer cet élément?",
   "newTheme": "Nouveau thème",
   "actionOnInspection": "Action sur l'inspection",
   "cancelInspection": "Annuler l'inspection",
