@@ -6,8 +6,10 @@
 <div [fxShow]="picturePlan">
     <app-image
             height="400px"
+
             [idImage]="implantationPlan"
             [allowChange]="true"
+            [useDataCopy]="true"
             (valueChanged)="uploadImage($event)">
     </app-image>
 </div>

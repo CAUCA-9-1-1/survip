@@ -1,6 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {PictureService} from '../../services/picture.service';
 import {Picture} from '../../models/picture.model';
+import {InspectionPictureService} from "../../../inspection-approval/shared/services/inspection-picture.service";
 
 @Component({
     selector: 'app-image',
@@ -8,6 +9,7 @@ import {Picture} from '../../models/picture.model';
     styleUrls: ['./image.component.scss'],
     providers: [
         PictureService,
+        InspectionPictureService
     ]
 })
 export class ImageComponent implements OnInit {
@@ -16,6 +18,7 @@ export class ImageComponent implements OnInit {
     @Input() height = '150px';
     @Input() allowChange = false;
     @Input() autoApiChange = false;
+    @Input() useDataCopy = false;
     @Input()
     set idImage(id) {
         this.src = '';
@@ -24,9 +27,15 @@ export class ImageComponent implements OnInit {
 
         if (id) {
             this.icon = 'edit';
-            this.pictureService.getOne(id).subscribe(data => {
+            if (this.useDataCopy) {
+              this.inspectionPictureService.getOne(id).subscribe(data => {
                 this.src = data.dataUri;
-            });
+              });
+            } else {
+              this.pictureService.getOne(id).subscribe(data => {
+                this.src = data.dataUri;
+              });
+            }
         }
     }
 
@@ -36,6 +45,7 @@ export class ImageComponent implements OnInit {
 
     public constructor(
         private pictureService: PictureService,
+        private inspectionPictureService: InspectionPictureService
     ) { }
 
     public ngOnInit() {
@@ -54,16 +64,26 @@ export class ImageComponent implements OnInit {
         this.src = e.content;
 
         if (this.autoApiChange) {
-            this.pictureService.save(picture).subscribe(id => {
-                this.valueChanged.emit({
-                    value: id,
-                    oldValue: this.idPicture,
-                });
-
-                this.idPicture = id;
+          if (this.useDataCopy) {
+            this.inspectionPictureService.save(picture).subscribe(id => {
+              this.emitValueChanged(id);
             });
+          } else {
+            this.pictureService.save(picture).subscribe(id => {
+              this.emitValueChanged(id);
+            });
+          }
         } else {
             this.valueChanged.emit(picture);
         }
     }
+
+  private emitValueChanged(id) {
+    this.valueChanged.emit({
+      value: id,
+      oldValue: this.idPicture,
+    });
+
+    this.idPicture = id;
+  }
 }
