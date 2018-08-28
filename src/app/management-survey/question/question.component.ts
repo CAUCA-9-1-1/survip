@@ -5,6 +5,7 @@ import {DxTreeViewComponent} from 'devextreme-angular';
 import {confirm} from 'devextreme/ui/dialog';
 
 import config from '../../../assets/config/config.json';
+import packageInfo from '../../../assets/config/package.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {Question} from '../shared/models/question.model';
 import {QuestionService} from '../shared/services/question.service';
@@ -100,7 +101,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         this.displayOptionDetails(question.questionType);
         question.sequence = this.getLastQuestionSequence();
         question.localizations = [];
-        config.locale.available.forEach(language => {
+        packageInfo.locale.forEach(language => {
             const languageItem = {
                 languageCode: language.toLowerCase(),
                 isActive: true,
@@ -290,6 +291,10 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     getLastQuestionSequence() {
-        return this.questions[this.questions.length - 1].sequence + 1;
+        if (this.questions.length > 0) {
+            return this.questions[this.questions.length - 1].sequence + 1;
+        } else {
+            return 1;
+        }
     }
 }

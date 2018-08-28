@@ -15,7 +15,9 @@
                     keyExpr="id"
                     selectionMode="single"
                     [selectByClick]="true"
-                    (onItemSelectionChanged)="onQuestionSelected($event)">
+                    (onItemSelectionChanged)="onQuestionSelected($event)"
+                    parentIdExpr="idSurveyQuestionParent"
+                    dataStructure="plain">
             </dx-tree-view>
         </div>
     </div>
