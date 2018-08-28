@@ -22,3 +22,24 @@ div.content {
 .multilang {
     padding : 2px;
 }
+
+.child-add{
+    float: right;
+}
+
+.dx-treeview::ng-deep .dx-treeview-item .child-add .dx-icon {
+    width: 8px;
+    height: 8px;
+    background-position: 0px 0px;
+    background-size: 12px 12px;
+    padding: 0px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 10px;
+    margin-top: -3px;
+    margin-right:4px;
+}
+
+.dx-treeview::ng-deep .dx-treeview-node:not(.dx-treeview-item-with-checkbox).dx-state-focused > .dx-treeview-item .dx-icon{
+    color:#333;
+}

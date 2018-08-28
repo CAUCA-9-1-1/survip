@@ -51,23 +51,25 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
     ngOnInit() {
         this.loadQuestion();
-        this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion', 'choiceAnswer', 'textAnswer', 'dateAnswer', 'removeQuestionChoices'])
+        this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion', 'choiceAnswer', 'textAnswer', 'dateAnswer', 'removeQuestionChoices', 'groupedQuestion'])
             .subscribe(labels => {
                 this.messages = labels;
                 this.questionTypeOptions.dataSource = [
                     {value: 1, text: labels['choiceAnswer']},
                     {value: 2, text: labels['textAnswer']},
                     {value: 3, text: labels['dateAnswer']},
+                    {value: 4, text: labels['groupedQuestion']}
                 ];
             });
     }
 
-    getQuestionTreeviewTitle(data, index, element) {
+    getQuestionTreeviewTitle(data) {
         const question = Question.fromJSON(data);
-        element.innerHTML = question.getLocalization(config.locale);
-        if (element.innerHTML === '') {
-            element.innerHTML = 'Pas de titre';
+        let title = question.getLocalization(config.locale);
+        if (title === '') {
+            title = 'Pas de titre';
         }
+        return title;
     }
 
     getLocalizedTitle(data) {
@@ -75,10 +77,21 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         return question.getLocalization(config.locale);
     }
 
+    onAddChildQuestion(data) {
+        const childQuestion = this.createNewQuestion();
+        childQuestion.idSurveyQuestionParent = data.id;
+        this.saveTargetQuestion(childQuestion);
+    }
+
+
     onAddQuestion() {
         this.isLoading = true ;
         const question = this.createNewQuestion();
 
+        this.saveTargetQuestion(question);
+    }
+
+    saveTargetQuestion(question: Question) {
         this.questionService.save(question)
             .subscribe(info => {
                     question.id = info['id'];

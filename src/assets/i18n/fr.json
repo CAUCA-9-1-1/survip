@@ -332,5 +332,6 @@
   "orNew": "Ou créez-en un nouveau",
   "templateName": "Nom du gabarit",
   "newDocument": "Nouveau Document",
-  "placeholders": "Remplisseurs"
+  "placeholders": "Remplisseurs",
+  "groupedQuestion":"Groupe de question"
 }
