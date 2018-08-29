@@ -7,6 +7,7 @@ export class Question extends WithLocalization {
   sequence: number;
   questionType: number;
   idSurveyQuestionParent: string;
+  expanded = true;
 
     static fromJSON(data: object): Question {
         const question = new Question();

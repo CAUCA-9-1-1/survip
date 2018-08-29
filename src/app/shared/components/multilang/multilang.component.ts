@@ -83,8 +83,10 @@ export class MultilangComponent implements OnInit {
     }
 
     private initializeValidations() {
-        if (this.dataField.item) {
-            this.isRequired = this.dataField.item.isRequired;
+        if (this.dataField) {
+            if (this.dataField.item) {
+                this.isRequired = this.dataField.item.isRequired;
+            }
         }
     }
 
