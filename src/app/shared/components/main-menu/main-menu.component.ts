@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
+
 import {AuthGuardService} from '../../services/auth-guard.service';
 
 
@@ -12,53 +13,87 @@ export class MainMenuComponent implements OnInit {
     @Output() click = new EventEmitter();
 
     selected = '';
-    menus = [{
-        name: 'inspectionDashboard',
-        path: '/inspection/dashboard',
-    }, {
-        name: 'statistics',
-        path: '/statistics',
-    }, {
-        name: 'management',
-        path: '',
-        items: [{
-            name: 'surveyManagement',
-            path: '/management/survey',
-        }, {
-            name: 'buildingManagement',
-            path: '/management/building',
-        }, {
-            name: 'addressManagement',
-            path: '/management/address',
-        }, {
-            name: 'fireHydrantManagement',
-            path: '/management/firehydrant',
-        }, {
-            name: 'accessManagement',
-            path: '/management/access',
-        }, {
-            name: 'inspectionBatchManagement',
-            path: '/inspection/batch',
-        }, {
-            name: 'inspectionManagement',
-            path: '/inspection/management',
-        }, {
-            name: 'reportConfiguration',
-            path: '/report-configuration',
-        }]
-    }];
+    menus = [];
 
-    constructor(
+    public constructor(
         private router: Router,
         private authGuardService: AuthGuardService,
     ) {
         this.selected = this.router.url;
     }
 
-    ngOnInit() { }
+    public ngOnInit() {}
 
-    goto(path) {
-        if (!this.authGuardService.hasPermission(path)) {
+    public refresh() {
+        const items = [];
+        const management = {
+            name: 'management',
+            path: '',
+            items: [],
+        };
+
+        if (this.authGuardService.hasRight('RightDashboard')) {
+            items.push({
+                name: 'inspectionDashboard',
+                path: '/inspection/dashboard',
+            });
+        }
+
+        if (this.authGuardService.hasRight('RightStatistics')) {
+            items.push({
+                name: 'statistics',
+                path: '/statistics',
+            });
+        }
+
+        if (this.authGuardService.hasRight('RightManagement')) {
+            management.items.push({
+                name: 'buildingManagement',
+                path: '/management/building',
+            });
+
+            management.items.push({
+                name: 'inspectionManagement',
+                path: '/inspection/management',
+            });
+        }
+
+        if (this.authGuardService.hasRight('RightAdmin')) {
+            management.items.push({
+                name: 'addressManagement',
+                path: '/management/address',
+            });
+
+            management.items.push({
+                name: 'fireHydrantManagement',
+                path: '/management/firehydrant',
+            });
+
+            management.items.push({
+                name: 'surveyManagement',
+                path: '/management/survey',
+            });
+
+            management.items.push({
+                name: 'accessManagement',
+                path: '/management/access',
+            });
+
+            management.items.push({
+                name: 'reportConfiguration',
+                path: '/report-configuration',
+            });
+        }
+
+        if (management.items.length) {
+            items.push(management);
+        }
+
+        this.menus = items;
+    }
+
+    public goto(path) {
+        if (!this.authGuardService.hasUrlAccess(path)) {
             return false;
         }
 
@@ -69,7 +104,7 @@ export class MainMenuComponent implements OnInit {
         });
     }
 
-    isSelected(path) {
+    public isSelected(path) {
         if (!this.selected) {
             return '';
         }

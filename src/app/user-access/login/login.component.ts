@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 
 import {AuthenticationService} from '../shared/services/authentification.service';
+import {PermissionService} from '../shared/services/permission.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private auth: AuthenticationService,
+        private permissionService: PermissionService,
         private notification: MatSnackBar,
         private translateService: TranslateService,
     ) { }
@@ -44,7 +46,11 @@ export class LoginComponent implements OnInit {
 
         this.auth.login(this.username, this.password).subscribe(token => {
             if (token.accessToken) {
-                this.router.navigate([this.returnUrl]);
+                this.permissionService.getUserPermission(token.idWebuser).subscribe(data => {
+                    sessionStorage.setItem('currentPermission', JSON.stringify(data));
+
+                    this.router.navigate([this.returnUrl]);
+                });
             } else {
                 this.notify(this.labels['badLogin']);
             }
