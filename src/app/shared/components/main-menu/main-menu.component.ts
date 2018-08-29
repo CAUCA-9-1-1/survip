@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
+import {AuthGuardService} from '../../services/auth-guard.service';
 
 
 @Component({
@@ -49,6 +50,7 @@ export class MainMenuComponent implements OnInit {
 
     constructor(
         private router: Router,
+        private authGuardService: AuthGuardService,
     ) {
         this.selected = this.router.url;
     }
@@ -56,6 +58,10 @@ export class MainMenuComponent implements OnInit {
     ngOnInit() { }
 
     goto(path) {
+        if (!this.authGuardService.hasPermission(path)) {
+            return false;
+        }
+
         this.selected = path;
         this.router.navigate([path]);
         this.click.emit({

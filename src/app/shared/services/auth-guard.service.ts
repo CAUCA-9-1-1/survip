@@ -36,7 +36,7 @@ export class AuthGuardService implements CanActivate {
         return access;
     }
 
-    private hasPermission(url) {
+    public hasPermission(url) {
         let right = '';
 
         switch (url) {
