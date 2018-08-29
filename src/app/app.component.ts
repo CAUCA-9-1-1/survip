@@ -10,6 +10,7 @@ import {locale, loadMessages} from 'devextreme/localization';
 import config from '../assets/config/config.json';
 import packageInfo from '../assets/config/package.json';
 import {AuthenticationService} from './user-access/shared/services/authentification.service';
+import {MainMenuComponent} from './shared/components/main-menu/main-menu.component';
 
 
 @Component({
@@ -22,6 +23,7 @@ import {AuthenticationService} from './user-access/shared/services/authentificat
 })
 export class AppComponent {
     @ViewChild('menuContainer') menuContainer: ElementRef;
+    @ViewChild(MainMenuComponent) menu: MainMenuComponent;
 
     title = 'app';
     isLogged = false;
@@ -53,6 +55,7 @@ export class AppComponent {
 
     showMenu() {
         if (!this.menuContainer.nativeElement.offsetWidth) {
+            this.menu.refresh();
             this.menuContainer.nativeElement.style.width = '20%';
         } else {
             this.menuContainer.nativeElement.style.width = '0';

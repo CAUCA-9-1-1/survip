@@ -5,12 +5,12 @@ import {DxButtonComponent} from 'devextreme-angular';
 
 import {PermissionObjectService} from '../shared/services/permissionobject.service';
 import {PermissionObject} from '../shared/models/permissionobject.model';
-import {PermissionService} from '../shared/services/permission.service';
+import {PermissionService} from '../../user-access/shared/services/permission.service';
 import {AddUserInGroupComponent} from '../add-user-in-group/add-user-in-group.component';
 import {WebuserService} from '../shared/services/webuser.service';
 import {AddGroupComponent} from '../add-group/add-group.component';
 import {AskRemoveItemComponent} from '../ask-remove-item/ask-remove-item.component';
-import {Permission} from '../shared/models/permission.model';
+import {Permission} from '../../user-access/shared/models/permission.model';
 
 @Component({
     selector: 'app-management-access-permission',
