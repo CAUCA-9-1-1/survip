@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 
-import {PermissionService} from '../../management-access/shared/services/permission.service';
-import {Permission} from '../../management-access/shared/models/permission.model';
+import {Permission} from '../../user-access/shared/models/permission.model';
 
 
 @Injectable()
@@ -11,19 +10,13 @@ export class AuthGuardService implements CanActivate {
 
     public constructor(
         private router: Router,
-        private permissionService: PermissionService,
     ) { }
 
-    public async canActivate(
+    public canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
     ) {
-        this.permissions = await this.permissionService.getUserPermission(sessionStorage.getItem('currentWebuser')).toPromise();
-
-        let access = false;
-        if (sessionStorage.getItem('accessToken') && this.permissions.length > 0) {
-            access = this.hasPermission(state.url);
-        }
+        const access = this.hasUrlAccess(state.url);
 
         if (!access) {
             if (sessionStorage.getItem('accessToken')) {
@@ -36,7 +29,7 @@ export class AuthGuardService implements CanActivate {
         return access;
     }
 
-    public hasPermission(url) {
+    public hasUrlAccess(url) {
         let right = '';
 
         switch (url) {
@@ -55,9 +48,16 @@ export class AuthGuardService implements CanActivate {
             case '/management/address':
             case '/management/firehydrant':
             case '/management/survey':
+            case '/report-configuration':
                 right = 'RightAdmin';
                 break;
         }
+
+        return this.hasRight(right);
+    }
+
+    public hasRight(right) {
+        this.checkToLoadPermission();
 
         const access = this.permissions.filter(item => {
             if (item.feature.featureName === right) {
@@ -68,5 +68,13 @@ export class AuthGuardService implements CanActivate {
         });
 
         return (access.length > 0);
+    }
+
+    private checkToLoadPermission() {
+        this.permissions = [];
+
+        if (sessionStorage.getItem('currentWebuser') && sessionStorage.getItem('currentPermission')) {
+            this.permissions = JSON.parse(sessionStorage.getItem('currentPermission'));
+        }
     }
 }
