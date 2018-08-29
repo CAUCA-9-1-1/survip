@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {Question} from '../models/question.model';
+import {map} from 'rxjs/operators';
 
 
 @Injectable()
@@ -13,7 +14,14 @@ export class QuestionService extends RequestService {
     }
 
     getAll(id_survey: string): Observable<Question[]> {
-        return this.get('SurveyQuestion/Survey/' + id_survey);
+        return this.get('SurveyQuestion/Survey/' + id_survey)
+            .pipe(map(result => {
+                const list = [];
+                result.forEach((question) => {
+                    list.push(Question.fromJSON(question));
+                });
+                return list;
+            }));
     }
 
     save(surveyQuestion: Question) {

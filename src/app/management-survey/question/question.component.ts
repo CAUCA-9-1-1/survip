@@ -25,16 +25,16 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     @Input() survey = '';
     @ViewChild(DxTreeViewComponent) treeViewQuestion: DxTreeViewComponent;
 
-    questions: Question[] = [];
-    nextQuestions: Question[] = [];
-    selectedIndex = -1;
-    editing: object = {};
-    timer = null;
-    messages: object = {};
-    isLoading = false;
-    optionsChoiceVisible = true;
-    questionTypeOptions = {dataSource: [], displayExpr: 'text', valueExpr: 'value', onValueChanged: this.QuestionTypeChanged.bind(this)};
-    questionTypeChoiceCanceled = false;
+    public questions: Question[] = [];
+    public nextQuestions: Question[] = [];
+    public selectedIndex = -1;
+    public editing: object = {};
+    public timer = null;
+    public messages: object = {};
+    public isLoading = false;
+    public optionsChoiceVisible = true;
+    public questionTypeOptions = {dataSource: [], displayExpr: 'text', valueExpr: 'value', onValueChanged: this.QuestionTypeChanged.bind(this)};
+    public questionTypeChoiceCanceled = false;
 
     constructor(
         private questionService: QuestionService,
@@ -45,13 +45,14 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         super(choiceService);
     }
 
-    setModel(data: any) {
+    public setModel(data: any) {
         return Choice.fromJSON(data);
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.loadQuestion();
-        this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion', 'choiceAnswer', 'textAnswer', 'dateAnswer', 'removeQuestionChoices', 'groupedQuestion'])
+        this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion', 'choiceAnswer',
+                                 'textAnswer', 'dateAnswer', 'removeQuestionChoices', 'groupedQuestion'])
             .subscribe(labels => {
                 this.messages = labels;
                 this.questionTypeOptions.dataSource = [
@@ -63,7 +64,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             });
     }
 
-    getQuestionTreeviewTitle(data) {
+    public getQuestionTreeviewTitle(data) {
         const question = Question.fromJSON(data);
         let title = question.getLocalization(config.locale);
         if (title === '') {
@@ -72,31 +73,29 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         return title;
     }
 
-    getLocalizedTitle(data) {
+    public getLocalizedTitle(data) {
         const question = Question.fromJSON(data);
         return question.getLocalization(config.locale);
     }
 
-    onAddChildQuestion(data) {
+    public onAddChildQuestion(data) {
         const childQuestion = this.createNewQuestion();
         childQuestion.idSurveyQuestionParent = data.id;
         this.saveTargetQuestion(childQuestion);
     }
 
 
-    onAddQuestion() {
+    public onAddQuestion() {
         this.isLoading = true ;
         const question = this.createNewQuestion();
-
         this.saveTargetQuestion(question);
     }
 
-    saveTargetQuestion(question: Question) {
+    public saveTargetQuestion(question: Question) {
         this.questionService.save(question)
             .subscribe(info => {
                     question.id = info['id'];
-                    this.selectedIndex = this.questions.length - 1;
-                    this.loadQuestion();
+                    this.loadQuestion(question.id);
                     this.dataSource = [];
                     this.loadSource(question.id);
                 },
@@ -107,7 +106,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
                 });
     }
 
-    createNewQuestion() {
+    public createNewQuestion() {
         const question = new Question();
         question.idSurvey = this.survey;
         question.questionType = 2;
@@ -128,7 +127,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         return question;
     }
 
-    onMoveUp() {
+    public onMoveUp() {
         if (this.selectedIndex - 1 > -1) {
             const sequence1 = this.questions[this.selectedIndex].sequence;
             const sequence2 = this.questions[this.selectedIndex - 1].sequence;
@@ -144,7 +143,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         }
     }
 
-    onMoveDown() {
+    public onMoveDown() {
         if ((this.selectedIndex > -1) && (this.selectedIndex + 1 < this.questions.length)) {
 
             const sequence1 = this.questions[this.selectedIndex].sequence;
@@ -161,7 +160,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         }
     }
 
-    QuestionTypeChanged(data) {
+    public QuestionTypeChanged(data) {
         if (this.questionTypeChoiceCanceled) {
             this.questionTypeChoiceCanceled = false;
             return;
@@ -190,7 +189,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         this.isLoading = false;
     }
 
-    onQuestionSelected(e) {
+    public onQuestionSelected(e) {
         this.isLoading = true;
         if (this.selectedIndex !== e.itemIndex) {
 
@@ -204,14 +203,14 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         }
     }
 
-    onFormUpdated(item, e) {
+    public onFormUpdated(item, e) {
         if (item !== 'form') {
             this.questions[this.selectedIndex][item] = e.value;
         }
         this.saveQuestion();
     }
 
-    saveQuestion() {
+    public saveQuestion() {
         if (this.timer) {
             clearTimeout(this.timer);
         }
@@ -220,7 +219,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         }, 1000);
     }
 
-    moveQuestion() {
+    public moveQuestion() {
         if (this.timer) {
             clearTimeout(this.timer);
         }
@@ -229,7 +228,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         }, 1000);
     }
 
-    onRemoveQuestion() {
+    public onRemoveQuestion() {
         if (this.selectedIndex > -1) {
             confirm(this.messages['removeQuestion'], this.messages['question']).then((result) => {
                 if (result) {
@@ -243,12 +242,12 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         }
     }
 
-    onInitNewChoice(e) {
+    public onInitNewChoice(e) {
         e.data.isActive = true;
         e.data.idSurveyQuestion = this.questions[this.selectedIndex].id;
     }
 
-    addNewQuestionChoice(e) {
+    public addNewQuestionChoice(e) {
         this.choiceService.save(e.data).subscribe(info => {
             this.loadSource(this.questions[this.selectedIndex].id);
         }, error => {
@@ -256,7 +255,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         });
     }
 
-    setNextQuestion() {
+    public setNextQuestion() {
         this.nextQuestions = [];
 
         this.questions.forEach((next_question) => {
@@ -266,25 +265,32 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         });
     }
 
-    loadQuestion() {
+    public loadQuestion(newId?: string) {
         this.questionService.getAll(this.survey).subscribe(data => {
             this.questions = data;
             this.filteredActiveQuestion();
-            this.questions.forEach((question, index) => {
-                if (this.selectedIndex > -1 && question.id === this.questions[this.selectedIndex].id) {
-                    this.questions[index]['selected'] = true;
+            if (newId) {
+                this.selectedIndex = this.findQuestionIndex(newId);
+                this.questions[this.selectedIndex]['selected'] = true;
+            } else {
+                if (this.selectedIndex > -1) {
+                    this.questions.forEach((question, index) => {
+                        if (this.selectedIndex > -1 && question.id === this.questions[this.selectedIndex].id) {
+                            this.questions[index]['selected'] = true;
+                        }
+                    });
                 }
-            });
+            }
         });
     }
 
-    filteredActiveQuestion() {
+    public filteredActiveQuestion() {
         this.questions = this.questions.filter((item) => {
             return (item.isActive);
         });
     }
 
-    onMultiLangValueChanged(item, e) {
+    public onMultiLangValueChanged(item, e) {
         if (this.timer) {
             clearTimeout(this.timer);
         }
@@ -295,7 +301,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         this.treeViewQuestion.instance.option('dataSource', this.questions);
     }
 
-    displayOptionDetails(questionType) {
+    public displayOptionDetails(questionType) {
         if (questionType === 1) {
             this.optionsChoiceVisible = true;
         } else {
@@ -303,11 +309,20 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         }
     }
 
-    getLastQuestionSequence() {
+    public getLastQuestionSequence() {
         if (this.questions.length > 0) {
             return this.questions[this.questions.length - 1].sequence + 1;
         } else {
             return 1;
+        }
+    }
+
+    private findQuestionIndex(idQuestion: string) {
+        const questionCount = this.questions.length;
+        for (let index = 0; index < questionCount; index++) {
+            if (this.questions[index].id === idQuestion) {
+                return index;
+            }
         }
     }
 }
