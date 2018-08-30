@@ -5,11 +5,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {GridWithCrudService} from '../shared/classes/grid-with-crud-service';
 import {InspectionBatchService} from './shared/services/inspection-batch.service';
-import {WebuserService} from '../management-access/shared/services/webuser.service';
-import {Building} from '../management-building/shared/models/building.model';
+import {WebuserService} from '../management-system/shared/services/webuser.service';
+import {Building} from '../management-department/shared/models/building.model';
 import {TranslateService} from '@ngx-translate/core';
-import {WebuserForWeb} from '../management-access/shared/models/webuser-for-web.model';
-import {BuildingService} from '../management-building/shared/services/building.service';
+import {WebuserForWeb} from '../management-system/shared/models/webuser-for-web.model';
+import {BuildingService} from '../management-department/shared/services/building.service';
 import {InspectionService} from '../inspection-approval/shared/services/inspection.service';
 import {InspectionBatch} from './shared/models/inspection-batch.model';
 import {Inspection} from '../inspection-approval/shared/models/inspection.model';

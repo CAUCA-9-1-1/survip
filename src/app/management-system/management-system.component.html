@@ -1,0 +1,21 @@
+<app-no-access [fxShow]="!accessTo.webuser && !accessTo.permission && !accessTo.department && !accessTo.hazardousMaterial && !accessTo.riskLevel && !accessTo.utilisationCode"></app-no-access>
+<mat-tab-group>
+    <mat-tab label="{{'webuser' | translate}}" [disabled]="!accessTo.webuser">
+        <app-management-system-webuser [fxShow]="accessTo.webuser"></app-management-system-webuser>
+    </mat-tab>
+    <mat-tab label="{{'permission' | translate}}" [disabled]="!accessTo.permission">
+        <app-management-system-permission [fxShow]="accessTo.permission"></app-management-system-permission>
+    </mat-tab>
+    <mat-tab label="{{'fireSafetyDepartment' | translate}}" [disabled]="!accessTo.department">
+        <app-management-system-department [fxShow]="accessTo.department"></app-management-system-department>
+    </mat-tab>
+    <mat-tab label="{{'hazardousMaterials' | translate}}" [disabled]="!accessTo.hazardousMaterial">
+        <app-management-system-hazardous-material [fxShow]="accessTo.hazardousMaterial"></app-management-system-hazardous-material>
+    </mat-tab>
+    <mat-tab label="{{'riskLevels' | translate}}" [disabled]="!accessTo.riskLevel">
+        <app-management-system-risk-level [fxShow]="accessTo.riskLevel"></app-management-system-risk-level>
+    </mat-tab>
+    <mat-tab label="{{'utilisationCodes' | translate}}" [disabled]="!accessTo.utilisationCode">
+        <app-management-system-utilisation-code [fxShow]="accessTo.utilisationCode"></app-management-system-utilisation-code>
+    </mat-tab>
+</mat-tab-group>

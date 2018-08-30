@@ -2,7 +2,7 @@ import {Injectable, Injector} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {RequestService} from '../../../shared/services/request.service';
-import {BuildingContact} from '../../../management-building/shared/models/building-contact.model';
+import {BuildingContact} from '../../../management-department/shared/models/building-contact.model';
 
 
 @Injectable()

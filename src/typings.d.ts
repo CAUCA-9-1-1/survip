@@ -15,4 +15,6 @@ interface String {
     pick(min: number, max?: number): string;
 
     shuffle(): string;
+
+    replaceAll(find: string, replaceWith: string): string;
 }

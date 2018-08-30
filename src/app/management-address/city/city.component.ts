@@ -4,12 +4,12 @@ import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {City} from '../shared/models/city.model';
 import {CityService} from '../shared/services/city.service';
-import {CityTypeService} from '../shared/services/citytype.service';
+import {CityTypeService} from '../../management-type-system/shared/services/citytype.service';
 import {CountyService} from '../shared/services/county.service';
 
 
 @Component({
-    selector: 'app-managementaddress-city',
+    selector: 'app-management-address-city',
     templateUrl: './city.component.html',
     styleUrls: ['./city.component.scss'],
     providers: [

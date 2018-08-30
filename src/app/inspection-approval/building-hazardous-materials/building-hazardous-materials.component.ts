@@ -2,11 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {InspectionBuildingHazardousMaterialService} from '../shared/services/inspection-building-hazardous-material.service';
-import {BuildingHazardousMaterial} from '../../management-building/shared/models/building-hazardous-material.model';
-import {HazardousMaterialService} from '../../management-building/shared/services/hazardous-material.service';
-import {UnitOfMeasureService} from '../../management-fire-hydrant/shared/services/unit-of-measure.service';
-import {HazardousMaterial} from '../../management-building/shared/models/hazardous-material.model';
-import {UnitOfMeasure} from '../../management-fire-hydrant/shared/models/unit-of-measure.model';
+import {BuildingHazardousMaterial} from '../../management-department/shared/models/building-hazardous-material.model';
+import {HazardousMaterialService} from '../../management-system/shared/services/hazardous-material.service';
+import {UnitOfMeasureService} from '../../management-type-system/shared/services/unit-of-measure.service';
+import {HazardousMaterial} from '../../management-system/shared/models/hazardous-material.model';
+import {UnitOfMeasure} from '../../management-type-system/shared/models/unit-of-measure.model';
 import {TranslateService} from '@ngx-translate/core';
 
 
