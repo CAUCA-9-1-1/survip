@@ -1,0 +1,177 @@
+<br />
+<dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onToolbarPreparing)="onToolbarPreparing($event)"
+        (onInitialized)="onInitialized($event)"
+        (onEditorPreparing)="onEditorPreparing($event)"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onEditingStart)="onEditingStart($event)"
+        (onRowValidating)="onRowValidating($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="localizations"
+            caption="{{'name' | translate}}"
+            [allowSorting]="false"
+            [calculateCellValue]="getBuildingName"
+            editCellTemplate="editname">
+    </dxi-column>
+    <dxi-column
+            dataField="picture"
+            caption="{{'picture' | translate}}"
+            editCellTemplate="editphoto"
+            [visible]="false">
+    </dxi-column>
+    <dxi-column dataField="civicNumber" caption="{{'civicNumber' | translate}}" sortOrder="asc" sortIndex="1"></dxi-column>
+    <dxi-column dataField="civicLetter" caption="{{'civicLetter' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="civicSupp" caption="{{'civicSupp' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="civicLetterSupp" caption="{{'civicLetterSupp' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="idLane" caption="{{'lane' | translate}}" sortOrder="asc" sortIndex="0">
+        <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="suite" caption="{{'suite' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="appartmentNumber" caption="{{'appartmentNumber' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="floor" caption="{{'floor' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="numberOfFloor" caption="{{'numberOfFloor' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="numberOfAppartment" caption="{{'numberOfAppartment' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="numberOfBuilding" caption="{{'numberOfBuilding' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="yearOfConstruction" caption="{{'yearOfConstruction' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="buildingValue" caption="{{'buildingValue' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="postalCode" caption="{{'postalCode' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column
+            dataField="idUtilisationCode"
+            caption="{{'utilisationCode' | translate}}"
+            [visible]="false">
+        <dxo-lookup [dataSource]="utilisationCodes" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+            dataField="idRiskLevel"
+            caption="{{'riskLevel' | translate}}"
+            [visible]="false">
+        <dxo-lookup [dataSource]="riskLevels" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="matricule" caption="{{'matricule' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="vacantLand" dataType="boolean" caption="{{'vacantLand' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-editing
+            mode="popup"
+            [useIcons]="true"
+            [allowUpdating]="true"
+            [allowAdding]="false"
+            [allowDeleting]="true">
+        <dxo-popup title="{{'building' | translate}}" [showTitle]="true"></dxo-popup>
+
+        <dxo-form colCount="1">
+            <dxi-item itemType="tabbed" [tabPanelOptions]="{ deferRendering: false }">
+                <dxi-tab title="{{'general' | translate}}" colCount="2">
+                    <dxi-item itemType="group" colCount="2">
+                        <dxi-item dataField="localizations" [isRequired]="true" colSpan="2"></dxi-item>
+                        <dxi-item dataField="matricule" colSpan="2"></dxi-item>
+                        <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+                        <dxi-item dataField="vacantLand" editorType="dxCheckBox"></dxi-item>
+                    </dxi-item>
+                    <dxi-item itemType="group">
+                        <dxi-item dataField="picture" [label]="{visible: false}"></dxi-item>
+                    </dxi-item>
+                </dxi-tab>
+                <dxi-tab title="{{'address' | translate}}" colCount="2">
+                    <dxi-item dataField="idLane" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item itemType="empty"></dxi-item>
+                    <dxi-item dataField="civicNumber" [isRequired]="true" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item dataField="civicLetter" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item dataField="civicSupp" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item dataField="civicLetterSupp" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item dataField="suite" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item dataField="appartmentNumber" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item dataField="postalCode" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item dataField="floor" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                </dxi-tab>
+                <dxi-tab title="{{'details' | translate}}" colCount="2">
+                    <dxi-item dataField="idRiskLevel" [isRequired]="true"></dxi-item>
+                    <dxi-item dataField="idUtilisationCode"></dxi-item>
+                    <dxi-item dataField="numberOfFloor" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item dataField="numberOfAppartment" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item dataField="numberOfBuilding" [editorOptions]="{'readOnly': !isParent}"></dxi-item>
+                    <dxi-item dataField="yearOfConstruction"></dxi-item>
+                    <dxi-item dataField="buildingValue"></dxi-item>
+                </dxi-tab>
+            </dxi-item>
+            <dxi-item template="listButton"></dxi-item>
+        </dxo-form>
+    </dxo-editing>
+
+    <div *dxTemplate="let field of 'listButton'">
+        <dx-button text="{{'childBuildings' | translate}}" (onClick)="showPopup('childBuildings')" [disabled]="parent"></dx-button>
+        &nbsp;
+        <dx-button text="{{'contacts' | translate}}" (onClick)="showPopup('contacts')"></dx-button>
+        &nbsp;
+        <dx-button text="{{'pnap' | translate}}" (onClick)="showPopup('pnap')"></dx-button>
+        &nbsp;
+        <dx-button text="{{'hazardousMaterials' | translate}}" (onClick)="showPopup('hazardousMaterials')"></dx-button>
+    </div>
+    <div *dxTemplate="let field of 'editname'">
+        <app-multilang
+                [validationGroup]="validationGroup"
+                [dataField]="field"
+                [value]="field.row.data.localizations"
+                (valueChanged)="field.setValue($event.value);">
+        </app-multilang>
+    </div>
+    <div *dxTemplate="let field of 'editphoto'">
+        <span class="dx-field-item-label-text">{{'picture' | translate}}:</span>
+        <app-image [idImage]="field.row.data.idPicture" height="350px" [allowChange]="true" (valueChanged)="field.setValue($event)"></app-image>
+    </div>
+</dx-data-grid>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        title="{{'childBuildings' | translate}}"
+        [closeOnOutsideClick]="true"
+        [toolbarItems]="toolbarItems"
+        [(visible)]="popupVisible.childBuildings">
+    <div *dxTemplate="let data of 'content'">
+        <app-management-department-building [parentBuilding]="selectedBuidling"></app-management-department-building>
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        title="{{'contacts' | translate}}"
+        [closeOnOutsideClick]="true"
+        [toolbarItems]="toolbarItems"
+        [(visible)]="popupVisible.contacts">
+    <div *dxTemplate="let data of 'content'">
+        <app-manage-contacts [service]="'building'" [building]="selectedBuidling.id"></app-manage-contacts>
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        title="{{'pnaps' | translate}}"
+        [closeOnOutsideClick]="true"
+        [toolbarItems]="toolbarItems"
+        [(visible)]="popupVisible.pnap">
+    <div *dxTemplate="let data of 'content'">
+        <app-manage-pnaps [service]="'building'" [building]="selectedBuidling.id"></app-manage-pnaps>
+    </div>
+</dx-popup>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        title="{{'hazardousMaterial' | translate}}"
+        [closeOnOutsideClick]="true"
+        [toolbarItems]="toolbarItems"
+        [(visible)]="popupVisible.hazardousMaterials">
+    <div *dxTemplate="let data of 'content'">
+        <app-manage-hazardous-material [service]="'building'" [building]="selectedBuidling.id"></app-manage-hazardous-material>
+    </div>
+</dx-popup>

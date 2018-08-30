@@ -32,53 +32,56 @@ export class MainMenuComponent implements OnInit {
             items: [],
         };
 
-        if (this.authGuardService.hasRight('RightDashboard')) {
+        if (this.authGuardService.hasUrlAccess('/inspection/dashboard')) {
             items.push({
                 name: 'inspectionDashboard',
                 path: '/inspection/dashboard',
             });
         }
 
-        if (this.authGuardService.hasRight('RightStatistics')) {
+        if (this.authGuardService.hasUrlAccess('/statistics')) {
             items.push({
                 name: 'statistics',
                 path: '/statistics',
             });
         }
 
-        if (this.authGuardService.hasRight('RightManagement')) {
+        if (this.authGuardService.hasUrlAccess('/management/department')) {
             management.items.push({
-                name: 'buildingManagement',
-                path: '/management/building',
-            });
-
-            management.items.push({
-                name: 'inspectionManagement',
-                path: '/inspection/management',
+                name: 'departmentManagement',
+                path: '/management/department',
             });
         }
 
-        if (this.authGuardService.hasRight('RightAdmin')) {
-            management.items.push({
-                name: 'addressManagement',
-                path: '/management/address',
-            });
-
-            management.items.push({
-                name: 'fireHydrantManagement',
-                path: '/management/firehydrant',
-            });
-
+        if (this.authGuardService.hasUrlAccess('/management/survey')) {
             management.items.push({
                 name: 'surveyManagement',
                 path: '/management/survey',
             });
+        }
 
+        if (this.authGuardService.hasUrlAccess('/management/address')) {
             management.items.push({
-                name: 'accessManagement',
-                path: '/management/access',
+                name: 'addressManagement',
+                path: '/management/city',
             });
+        }
 
+        if (this.authGuardService.hasUrlAccess('/management/system')) {
+            management.items.push({
+                name: 'systemManagement',
+                path: '/management/system',
+            });
+        }
+
+        if (this.authGuardService.hasUrlAccess('/management/typesystem')) {
+            management.items.push({
+                name: 'typeSystemManagement',
+                path: '/management/typesystem',
+            });
+        }
+
+        if (this.authGuardService.hasUrlAccess('/report-configuration')) {
             management.items.push({
                 name: 'reportConfiguration',
                 path: '/report-configuration',

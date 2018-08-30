@@ -1,4 +1,4 @@
-import {PermissionSystemFeature} from '../../../management-access/shared/models/permissionsystemfeature.model';
+import {PermissionSystemFeature} from '../../../management-system/shared/models/permissionsystemfeature.model';
 
 
 export class Permission {

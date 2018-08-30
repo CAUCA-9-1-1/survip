@@ -1,5 +1,5 @@
 import {BaseModel} from '../../../shared/models/base.model';
-import {Firestation} from '../../../management-access/shared/models/firestation.model';
+import {Firestation} from '../../../management-department/shared/models/firestation.model';
 import {CourseLane} from './course-lane.model';
 
 
