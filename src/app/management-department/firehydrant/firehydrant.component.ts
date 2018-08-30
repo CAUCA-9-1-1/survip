@@ -55,6 +55,7 @@ export class FirehydrantComponent extends GridWithCrudService implements OnInit 
     public pressureUnits: UnitOfMeasure[] = [];
     public formFields = {
         idLane: null,
+        idCity: null,
         idIntersection: null,
     };
     public colors = [{
@@ -176,8 +177,8 @@ export class FirehydrantComponent extends GridWithCrudService implements OnInit 
                 placeholder: this.labels['selectCity'],
                 title: this.labels['selectCity'],
                 closeOnOutsideClick: true,
-                onOpened: (ev) => {
-                    ev.component.option('dataSource', this.cities);
+                onInitialized: (ev) => {
+                    this.formFields.idCity = ev.component;
                 },
                 onValueChanged: (ev) => {
                     this.selectedCity = ev.value;
@@ -248,11 +249,12 @@ export class FirehydrantComponent extends GridWithCrudService implements OnInit 
 
     private loadCity() {
         this.cityService.localized().subscribe(data => {
-            this.cities = {
+            this.formFields.idCity.option('value', (data[0] ? data[0].id : ''));
+            this.formFields.idCity.option('dataSource', {
                 store: data,
                 select: ['id', 'name'],
                 sort: ['name'],
-            };
+            });
         });
     }
 
