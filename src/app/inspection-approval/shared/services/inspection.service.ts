@@ -4,9 +4,7 @@ import {map} from 'rxjs/operators';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {Inspection} from '../models/inspection.model';
-import {InspectionGeneralInfo} from '../models/inspection-general-info.model';
 import {Building} from '../../../management-building/shared/models/building.model';
-import {BuildingDetails} from '../models/building-details.model';
 
 
 @Injectable()

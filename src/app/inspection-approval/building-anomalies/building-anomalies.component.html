@@ -42,6 +42,6 @@
     </div>
     <div *dxTemplate="let field of 'editphoto'">
         <span class="dx-field-item-label-text">{{'picture' | translate}}:</span>
-        <app-slideshow [images]="getImages(field)" height="350px" [allowChange]="true" (valueChanged)="uploadPicture($event)"></app-slideshow>
+        <app-slideshow [images]="getImages(field)" height="350px" [allowChange]="true" [useDataCopy]="true" (valueChanged)="uploadPicture($event)"></app-slideshow>
     </div>
 </dx-data-grid>

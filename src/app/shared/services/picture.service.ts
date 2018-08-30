@@ -20,3 +20,5 @@ export class PictureService extends RequestService {
         return this.put('Picture', picture);
     }
 }
+
+

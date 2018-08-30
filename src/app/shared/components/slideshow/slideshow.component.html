@@ -7,7 +7,7 @@
             <img [src]="url" />
         </div>
         <div *ngIf="!isImage(url)">
-            <app-image [idImage]="url" [height]="height" [allowChange]="true" (valueChanged)="changePicture($event)"></app-image>
+            <app-image [useDataCopy]="useDataCopy" [idImage]="url" [height]="height" [allowChange]="true" (valueChanged)="changePicture($event)"></app-image>
         </div>
     </div>
 </div>

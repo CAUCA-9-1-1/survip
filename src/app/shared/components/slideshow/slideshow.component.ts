@@ -39,6 +39,7 @@ export class SlideshowComponent implements OnInit {
     @Input() height = '150px';
     @Input() autoPlay = true;
     @Input() allowChange = false;
+    @Input() useDataCopy = false;
     @Input('images')
     set images(list: string[]) {
         this.items = list;
