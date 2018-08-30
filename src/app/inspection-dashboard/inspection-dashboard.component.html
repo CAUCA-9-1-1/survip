@@ -2,7 +2,7 @@
     <mat-button-toggle value="mode1" [checked]="selectedMode == 'mode1'" [disabled]="!everythingIsLoaded">
         {{'mode1' | translate}}
     </mat-button-toggle>
-    <mat-button-toggle value="mode2" [checked]="selectedMode == 'mode2'" [disabled]="!everythingIsLoaded">
+    <mat-button-toggle value="mode2" [fxShow]="accessTo.approveInspection" [checked]="selectedMode == 'mode2'" [disabled]="!everythingIsLoaded">
         {{'mode2' | translate}}
     </mat-button-toggle>
     <mat-button-toggle value="mode3" [checked]="selectedMode == 'mode3'" [disabled]="!everythingIsLoaded">
@@ -26,7 +26,7 @@
     <dxo-paging [pageSize]="20"></dxo-paging>
 
     <div *dxTemplate="let field of 'approveInspection'">
-        <button mat-button [fxShow]="selectedMode == 'mode2'" color="primary" (click)="showInspection(field)">{{'approve' | translate}}</button>
+        <button mat-button [fxShow]="accessTo.approveInspection && selectedMode == 'mode2'" color="primary" (click)="showInspection(field)">{{'approve' | translate}}</button>
     </div>
     <div *dxTemplate="let field of 'generateReport'" [fxShow]="selectedMode == 'mode3'">
       <mat-form-field>
@@ -40,13 +40,13 @@
     </div>
     <div *dxTemplate="let field of 'groupBatch'" fxLayout="row" fxLayoutAlign="left center">
         <div fxFlex="">
-          <button mat-button [fxShow]="selectedMode == 'mode1'" color="primary" (click)="showBatch(field)">{{'see' | translate}}</button>
+          <button mat-button [fxShow]="accessTo.batchManagement && selectedMode == 'mode1'" color="primary" (click)="showBatch(field)">{{'see' | translate}}</button>
         </div>
         <div fxFlex="">{{'batch' | translate}} : {{field.value}}</div>
         <div fxFlex="">{{(field.data.items ? field.data.items[0].shouldStartOn : '') | date:'yyyy-MM-dd'}}</div>
         <div fxFlex="">{{(field.data.items && field.data.items[0].isReadyForInspection ? 'isReadyForInspection' : '') | translate}}</div>
         <div fxFlex="5">
-            <button mat-button [fxShow]="selectedMode == 'mode1'" color="primary" (click)="removeBatch(field)"><mat-icon>delete</mat-icon></button>
+            <button mat-button [fxShow]="accessTo.batchManagement && selectedMode == 'mode1'" color="primary" (click)="removeBatch(field)"><mat-icon>delete</mat-icon></button>
         </div>
     </div>
 </dx-data-grid>
