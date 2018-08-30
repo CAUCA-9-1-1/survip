@@ -183,9 +183,17 @@ export class BuildingComponent extends GridWithCrudService implements OnInit {
     public onEditorPreparing(e) {
         if (e.dataField === 'idLane') {
             e.editorName = 'dxLookup';
+            e.editorOptions.showClearButton = true;
             e.editorOptions.closeOnOutsideClick = true;
             e.editorOptions.onInitialized = (ev) => {
                 this.formFieldLane = ev.component;
+            };
+            e.editorOptions.onValueChanged = (ev) => {
+                if (ev.value) {
+                    e.component.filter('idLane', '=', new Guid(ev.value));
+                } else {
+                    e.component.clearFilter('idLane');
+                }
             };
             e.editorOptions.onOpened = (ev) => {
                 ev.component.option('dataSource', this.lanesOfCity);
