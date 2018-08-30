@@ -201,9 +201,17 @@ export class FirehydrantComponent extends GridWithCrudService implements OnInit 
     public onEditorPreparing(e) {
         if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
             e.editorName = 'dxLookup';
+            e.editorOptions.showClearButton = true;
             e.editorOptions.closeOnOutsideClick = true;
             e.editorOptions.onInitialized = (ev) => {
                 this.formFields[e.dataField] = ev.component;
+            };
+            e.editorOptions.onValueChanged = (ev) => {
+                if (ev.value) {
+                    e.component.filter(e.dataField, '=', new Guid(ev.value));
+                } else {
+                    e.component.clearFilter(e.dataField);
+                }
             };
             e.editorOptions.onOpened = (ev) => {
                 ev.component.option('dataSource', this.lanesOfCity);
