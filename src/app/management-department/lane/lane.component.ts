@@ -27,10 +27,10 @@ import {ODataService} from '../../shared/services/o-data.service';
 export class LaneComponent extends GridWithCrudService implements OnInit {
     public addingButton: any;
     public dataSource: any;
-    public cities: any = {};
-    public publicCodes: any = {};
-    public genericCodes: any = {};
+    public publicCodes: any = [];
+    public genericCodes: any = [];
 
+    private formFieldCity: any = null;
     private selectedCity = '';
     private labels: any = {};
 
@@ -118,8 +118,8 @@ export class LaneComponent extends GridWithCrudService implements OnInit {
                 placeholder: this.labels['selectCity'],
                 title: this.labels['selectCity'],
                 closeOnOutsideClick: true,
-                onOpened: (ev) => {
-                    ev.component.option('dataSource', this.cities);
+                onInitialized: (ev) => {
+                    this.formFieldCity = ev.component;
                 },
                 onValueChanged: (ev) => {
                     this.selectedCity = ev.value;
@@ -138,11 +138,12 @@ export class LaneComponent extends GridWithCrudService implements OnInit {
 
     private loadCity() {
         this.cityService.localized().subscribe(data => {
-            this.cities = {
+            this.formFieldCity.option('value', (data[0] ? data[0].id : ''));
+            this.formFieldCity.option('dataSource', {
                 store: data,
                 select: ['id', 'name'],
                 sort: ['name'],
-            };
+            });
         });
     }
 
