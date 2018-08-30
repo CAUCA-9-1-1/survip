@@ -52,7 +52,7 @@
         <div fxLayout="row">
             <div fxFlex="30%">{{'estimatedWaterFlow' | translate}}</div>
             <div fxFlex="10%">
-                <dx-text-box [value]="detail.estimatedWaterFlow" name="height" (onValueChanged)="onChange($event)"></dx-text-box>
+                <dx-text-box [value]="detail.estimatedWaterFlow" name="estimatedWaterFlow" (onValueChanged)="onChange($event)"></dx-text-box>
             </div>
             <div fxFlex="60%">
                 <dx-select-box
