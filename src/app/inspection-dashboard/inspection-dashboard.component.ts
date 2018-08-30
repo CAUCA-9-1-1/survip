@@ -25,6 +25,7 @@ import {ODataService} from '../shared/services/o-data.service';
 import {ReportGenerationService} from './shared/services/report-generation.service';
 import {ConfigurationTemplate} from '../shared/models/configuration-template.model';
 import {ReportTemplateService} from '../shared/services/report-template.service';
+import {AuthGuardService} from '../shared/services/auth-guard.service';
 
 
 @Component({
@@ -46,18 +47,22 @@ import {ReportTemplateService} from '../shared/services/report-template.service'
 export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-    templateIdentifiers: ConfigurationTemplate[];
-    dataSource: any = {};
-    webusers: WebuserForWeb[] = [];
-    lanes: Lane[] = [];
-    cities: City[] = [];
-    riskLevels: RiskLevel[] = [];
-    utilisationCodes: UtilisationCode[] = [];
-    labels = {};
-    selectedMode = 'mode1';
-    buttons: any = {};
-    angularIsLoaded = false;
-    everythingIsLoaded = false;
+    public templateIdentifiers: ConfigurationTemplate[];
+    public dataSource: any = {};
+    public webusers: WebuserForWeb[] = [];
+    public lanes: Lane[] = [];
+    public cities: City[] = [];
+    public riskLevels: RiskLevel[] = [];
+    public utilisationCodes: UtilisationCode[] = [];
+    public labels = {};
+    public selectedMode = 'mode1';
+    public buttons: any = {};
+    public angularIsLoaded = false;
+    public everythingIsLoaded = false;
+    public accessTo = {
+        approveInspection: false,
+        batchManagement: false,
+    };
 
     constructor(
         private webuserService: WebuserService,
@@ -72,7 +77,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         private router: Router,
         private dialog: MatDialog,
         private reportGenerationService: ReportGenerationService,
-        private reportTemplateService: ReportTemplateService
+        private reportTemplateService: ReportTemplateService,
+        private authGuardService: AuthGuardService,
     ) { }
 
     ngOnInit() {
@@ -96,6 +102,9 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             this.labels = labels;
             this.checkLoadedElement();
         });
+
+        this.accessTo.approveInspection = this.authGuardService.hasRight('RightApproveInspection');
+        this.accessTo.batchManagement = this.authGuardService.hasRight('RightBatchManagement');
     }
 
     ngAfterViewInit() {
@@ -105,10 +114,6 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     changeMode(mode) {
         this.selectedMode = mode;
-        if (this.buttons['createBatch']) {
-            this.buttons['createBatch'].option('visible', this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? false : true);
-            this.buttons['closeAll'].option('visible', this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? true : false);
-        }
         this.checkLoadedElement();
     }
 
@@ -252,7 +257,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             options: {
                 text: this.labels['collapseAll'],
                 icon: 'spinright',
-                visible: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? true : false),
+                visible: this.canCollapseGroup(),
                 onInitialized: (ev) => {
                     this.buttons['closeAll'] = ev.component;
                 },
@@ -265,7 +270,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             options: {
                 text: this.labels['createBatch'],
                 icon: 'group',
-                visible: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? false : true),
+                visible: this.canManageBatch(),
                 onInitialized: (ev) => {
                     this.buttons['createBatch'] = ev.component;
                 },
@@ -273,6 +278,17 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             },
             location: 'after',
         });
+    }
+
+    private canManageBatch() {
+        return (
+            this.accessTo.batchManagement &&
+            (this.selectedMode === 'mode3' || this.selectedMode === 'mode4') ? true : false
+        );
+    }
+
+    private canCollapseGroup() {
+        return (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? true : false);
     }
 
     private openCloseGroup(e, groupIndex) {
