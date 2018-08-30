@@ -5,17 +5,16 @@ import {AppRoutingModule} from './app-routing';
 import {SharedModule} from './shared/shared.module';
 import {UserAccessModule} from './user-access/user-access.module';
 import {ManagementAddressModule} from './management-address/management-address.module';
-import {ManagementAccessModule} from './management-access/management-access.module';
-import {ManagementBuildingModule} from './management-building/management-building.module';
-import {ManagementFireHydrantModule} from './management-fire-hydrant/management-fire-hydrant.module';
+import {ManagementDepartmentModule} from './management-department/management-department.module';
+import {ManagementTypeSystemModule} from './management-type-system/management-type-system.module';
 import {ManagementSurveyModule} from './management-survey/management-survey.module';
 import {InspectionDashboardModule} from './inspection-dashboard/inspection-dashboard.module';
 import {InspectionBatchModule} from './inspection-batch/inspection-batch.module';
 import {InspectionApprovalModule} from './inspection-approval/inspection-approval.module';
-import {InspectionManagementModule} from './inspection-management/inspection-management.module';
 import {StatisticsModule} from './statistics/statistics.module';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {ReportConfigurationModule} from './report-configuration/report-configuration.module';
+import {ManagementSystemModule} from './management-system/management-system.module';
 
 @NgModule({
     bootstrap: [
@@ -29,12 +28,11 @@ import {ReportConfigurationModule} from './report-configuration/report-configura
         InspectionApprovalModule,
         InspectionBatchModule,
         InspectionDashboardModule,
-        InspectionManagementModule,
         ManagementAddressModule,
-        ManagementAccessModule,
-        ManagementBuildingModule,
-        ManagementFireHydrantModule,
+        ManagementDepartmentModule,
+        ManagementTypeSystemModule,
         ManagementSurveyModule,
+        ManagementSystemModule,
         UserAccessModule,
         StatisticsModule,
         AppRoutingModule,

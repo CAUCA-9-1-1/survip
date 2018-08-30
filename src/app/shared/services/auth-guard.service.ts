@@ -30,30 +30,11 @@ export class AuthGuardService implements CanActivate {
     }
 
     public hasUrlAccess(url) {
-        let right = '';
-
-        switch (url) {
-            case '/inspection/dashboard':
-            case '/inspection/batch':
-                right = 'RightDashboard';
-                break;
-            case '/statistics':
-                right = 'RightStatistics';
-                break;
-            case '/inspection/management':
-            case '/management/building':
-                right = 'RightManagement';
-                break;
-            case '/management/access':
-            case '/management/address':
-            case '/management/firehydrant':
-            case '/management/survey':
-            case '/report-configuration':
-                right = 'RightAdmin';
-                break;
+        if (url === '/inspection/batch') {
+            url = '/inspection/dashboard';
         }
 
-        return this.hasRight(right);
+        return this.hasRight('url' + url.replaceAll('/', '-'));
     }
 
     public hasRight(right) {

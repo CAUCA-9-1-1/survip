@@ -1,0 +1,21 @@
+<app-no-access [fxShow]="!accessTo.cityType && !accessTo.connectionType && !accessTo.fireHydrantType && !accessTo.operatorType && !accessTo.PRAType && !accessTo.unitOfMeasure"></app-no-access>
+<mat-tab-group (selectedTabChange)="onSelectionChanged($event)">
+    <mat-tab label="{{'cityType' | translate}}" [disabled]="!accessTo.cityType">
+        <app-management-system-city-type [fxShow]="accessTo.cityType"></app-management-system-city-type>
+    </mat-tab>
+    <mat-tab label="{{'connectionType' | translate}}" [disabled]="!accessTo.connectionType">
+        <app-management-system-connection-type [fxShow]="accessTo.connectionType"></app-management-system-connection-type>
+    </mat-tab>
+    <mat-tab label="{{'fireHydrantType' | translate}}" [disabled]="!accessTo.fireHydrantType">
+        <app-management-system-fire-hydrant-type [fxShow]="accessTo.fireHydrantType"></app-management-system-fire-hydrant-type>
+    </mat-tab>
+    <mat-tab label="{{'operator' | translate}}" [disabled]="!accessTo.operatorType">
+        <app-management-system-operator-type [fxShow]="accessTo.operatorType"></app-management-system-operator-type>
+    </mat-tab>
+    <mat-tab label="{{'personRequiringAssistanceTypes' | translate}}" [disabled]="!accessTo.PRAType">
+        <app-management-system-person-requiring-assistance-type [fxShow]="accessTo.PRAType"></app-management-system-person-requiring-assistance-type>
+    </mat-tab>
+    <mat-tab label="{{'unitOfMeasure' | translate}}" [disabled]="!accessTo.unitOfMeasure">
+        <app-management-system-unit-of-measure [fxShow]="accessTo.unitOfMeasure"></app-management-system-unit-of-measure>
+    </mat-tab>
+</mat-tab-group>

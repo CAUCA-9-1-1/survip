@@ -1,0 +1,18 @@
+<app-no-access [fxShow]="!accessTo.firestation && !accessTo.departmentRiskLevel && !accessTo.building && !accessTo.lane && !accessTo.fireHydrant"></app-no-access>
+<mat-tab-group>
+    <mat-tab label="{{'firestations' | translate}}" [disabled]="!accessTo.firestation">
+        <app-management-department-firestation [fxShow]="accessTo.firestation"></app-management-department-firestation>
+    </mat-tab>
+    <mat-tab label="{{'departmentRiskLevel' | translate}}" [disabled]="!accessTo.departmentRiskLevel">
+        <app-management-department-department-risk-level [fxShow]="accessTo.departmentRiskLevel"></app-management-department-department-risk-level>
+    </mat-tab>
+    <mat-tab label="{{'buildings' | translate}}" [disabled]="!accessTo.building">
+        <app-management-department-building [fxShow]="accessTo.building" [parentBuilding]="undefined"></app-management-department-building>
+    </mat-tab>
+    <mat-tab label="{{'lanes' | translate}}" [disabled]="!accessTo.lane">
+        <app-management-department-lane [fxShow]="accessTo.lane"></app-management-department-lane>
+    </mat-tab>
+    <mat-tab label="{{'fireHydrants' | translate}}" [disabled]="!accessTo.fireHydrant">
+        <app-management-department-firehydrant [fxShow]="accessTo.fireHydrant"></app-management-department-firehydrant>
+    </mat-tab>
+</mat-tab-group>

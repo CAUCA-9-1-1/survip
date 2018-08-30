@@ -9,7 +9,7 @@ import {RegionService} from '../shared/services/region.service';
 
 
 @Component({
-    selector: 'app-managementaddress-county',
+    selector: 'app-management-address-county',
     templateUrl: './county.component.html',
     styleUrls: ['./county.component.scss'],
     providers: [

@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import config from '../../../assets/config/config.json';
-import {LaneService} from '../../management-address/shared/services/lane.service';
-import {RiskLevelService} from '../../management-building/shared/services/risk-level.service';
-import {UtilisationCodeService} from '../../management-building/shared/services/utilisation-code.service';
-import {UtilisationCode} from '../../management-building/shared/models/utilisation-code.model';
+import {LaneService} from '../../management-department/shared/services/lane.service';
+import {RiskLevelService} from '../../management-system/shared/services/risk-level.service';
+import {UtilisationCodeService} from '../../management-system/shared/services/utilisation-code.service';
+import {UtilisationCode} from '../../management-system/shared/models/utilisation-code.model';
 import {InspectionDetailService} from '../shared/services/inspection-detail.service';
 
 

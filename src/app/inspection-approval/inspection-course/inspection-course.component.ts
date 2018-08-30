@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {InspectionCourseService} from '../shared/services/inspection-course.service';
-import {FirestationService} from '../../management-access/shared/services/firestation.service';
-import {LaneService} from '../../management-address/shared/services/lane.service';
+import {FirestationService} from '../../management-department/shared/services/firestation.service';
+import {LaneService} from '../../management-department/shared/services/lane.service';
 import {TranslateService} from '@ngx-translate/core';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {Course} from '../shared/models/course.model';

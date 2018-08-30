@@ -6,9 +6,9 @@ import {CountryComponent} from './country/country.component';
 import {CountryService} from './shared/services/country.service';
 import {StateComponent} from './state/state.component';
 import {RegionComponent} from './region/region.component';
-import {LaneComponent} from './lane/lane.component';
+import {LaneComponent} from '../management-department/lane/lane.component';
 import {CountyComponent} from './county/county.component';
-import {CityTypeComponent} from './city-type/city-type.component';
+import {CityTypeComponent} from '../management-type-system/city-type/city-type.component';
 import {CityComponent} from './city/city.component';
 
 describe('ManagementAddressComponent', () => {

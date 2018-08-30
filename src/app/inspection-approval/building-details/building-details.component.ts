@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
-import {ConstructionService} from '../../management-building/shared/services/construction.service';
-import {UnitOfMeasureService} from '../../management-fire-hydrant/shared/services/unit-of-measure.service';
+import {ConstructionService} from '../../management-system/shared/services/construction.service';
+import {UnitOfMeasureService} from '../../management-type-system/shared/services/unit-of-measure.service';
 import {InspectionBuildingService} from '../shared/services/inspection-building.service';
 
 

@@ -1,5 +1,5 @@
 import {BaseModel} from '../../../shared/models/base.model';
-import {Lane} from '../../../management-address/shared/models/lane.model';
+import {Lane} from '../../../management-department/shared/models/lane.model';
 
 
 export class CourseLane extends BaseModel {

@@ -2,8 +2,8 @@ import {Injectable, Injector} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {RequestService} from '../../../shared/services/request.service';
-import {BuildingPnaps} from '../../../management-building/shared/models/building-pnaps.model';
-import {BuildingContact} from '../../../management-building/shared/models/building-contact.model';
+import {BuildingPnaps} from '../../../management-department/shared/models/building-pnaps.model';
+import {BuildingContact} from '../../../management-department/shared/models/building-contact.model';
 
 
 @Injectable()
