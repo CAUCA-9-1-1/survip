@@ -19,7 +19,8 @@
                     parentIdExpr="idSurveyQuestionParent"
                     dataStructure="plain">
                 <div class="parent-item" *dxTemplate="let itemData of 'listItem'; let itemIndex = index">
-                    <dx-button class="child-add" *ngIf="itemData.questionType == 4" icon="add" (onClick)="onAddChildQuestion(itemData)"></dx-button>
+                    <dx-button class="child-add" *ngIf="itemData.questionType == 4" icon="add"
+                               (onClick)="onAddChildQuestion(itemData)"></dx-button>
                     <span>{{getQuestionTreeviewTitle(itemData)}}</span>
                 </div>
             </dx-tree-view>
@@ -27,27 +28,52 @@
     </div>
     <div fxFlex="65%">
         <div *ngIf="selectedIndex > -1">
-            <dx-form [formData]="questions[selectedIndex]" (onFieldDataChanged)="onFormUpdated('form',$event)">
-                <dxi-item></dxi-item>
-                <dxi-item [label]="{text: 'title' | translate}" dataField="localizations" class="multilang">
+            <dx-form [formData]="questions[selectedIndex]" (onFieldDataChanged)="onFormUpdated('form',$event)"
+                     [colCount]="4">
+                <dxi-item [colSpan]="4"></dxi-item>
+                <dxi-item [label]="{text: 'title' | translate}" dataField="localizations" class="multilang"
+                          [colSpan]="4">
                     <app-multilang [value]="questions[selectedIndex].localizations" fieldName="title"
                                    (valueChanged)="onMultiLangValueChanged('title',$event);"></app-multilang>
                 </dxi-item>
-                <dxi-item [label]="{text: 'description' | translate}" dataField="localizations" class="multilang">
+                <dxi-item [label]="{text: 'description' | translate}" dataField="localizations" class="multilang"
+                          [colSpan]="4">
                     <app-multilang [value]="questions[selectedIndex].localizations" fieldName="name"
                                    (valueChanged)="onMultiLangValueChanged('description',$event);"></app-multilang>
                 </dxi-item>
+            </dx-form>
+            <br>
+            <dx-form [formData]="questions[selectedIndex]" (onFieldDataChanged)="onFormUpdated('form',$event)"
+                      [colCount]="4">
                 <dxi-item
                         [label]="{text: 'questionType' | translate}"
                         dataField="questionType"
                         editorType="dxSelectBox"
-                        [editorOptions]="questionTypeOptions">
+                        [editorOptions]="questionTypeOptions"
+                        [colSpan]="4">
+                </dxi-item>
+                <dxi-item
+                        [label]="{text: 'maxOccurrenceQuestion' | translate}"
+                        dataField="maxOccurrence"
+                        editorType="dxNumberBox"
+                        [editorOptions]="questionOccurrenceOptions"
+                        [colSpan]="2"
+                        [visible]="questions[selectedIndex].questionType === 4">
+                </dxi-item>
+                <dxi-item
+                        [label]="{text: 'minOccurrenceQuestion' | translate}"
+                        dataField="minOccurrence"
+                        editorType="dxNumberBox"
+                        [editorOptions]="questionOccurrenceOptions"
+                        [colSpan]="2"
+                        [visible]="questions[selectedIndex].questionType === 4">
                 </dxi-item>
                 <dxi-item
                         [label]="{text: 'nextQuestion' | translate}"
                         dataField="idSurveyQuestionNext"
                         editorType="dxSelectBox"
-                        [editorOptions]="{dataSource: nextQuestions, displayExpr:getLocalizedTitle , valueExpr: 'id'}">
+                        [editorOptions]="{dataSource: nextQuestions, displayExpr:getLocalizedTitle , valueExpr: 'id'}"
+                        [colSpan]="4">
                 </dxi-item>
             </dx-form>
             <br>
@@ -84,7 +110,8 @@
                     <dxi-column dataField="isActive" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
                     <dxo-load-panel [enabled]="true"></dxo-load-panel>
-                    <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+                    <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true"
+                                 [allowDeleting]="true">
                     </dxo-editing>
 
                     <div *dxTemplate="let field of 'editname'">
