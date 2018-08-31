@@ -1,5 +1,5 @@
 <div fxLayout="row">
-    <div fxFlex="35%">
+    <div class="list" fxFlex="40%">
         <div class="title">
             <dx-button icon="trash" (onClick)="onRemoveQuestion()"></dx-button>
             <dx-button icon="add" (onClick)="onAddQuestion()"></dx-button>
@@ -26,7 +26,7 @@
             </dx-tree-view>
         </div>
     </div>
-    <div fxFlex="65%">
+    <div class="details" fxFlex="60%">
         <div *ngIf="selectedIndex > -1">
             <dx-form [formData]="questions[selectedIndex]" (onFieldDataChanged)="onFormUpdated('form',$event)"
                      [colCount]="4">
