@@ -331,5 +331,7 @@
   "templateName": "TemplateName",
   "newDocument": "New Document",
   "placeholders": "Placeholders",
-  "groupedQuestion":"Grouped question"
+  "groupedQuestion":"Grouped question",
+  "maxOccurrenceQuestion":"Max. occurrence",
+  "minOccurrenceQuestion":"Min. occurrence"
 }

@@ -34,6 +34,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     public isLoading = false;
     public optionsChoiceVisible = true;
     public questionTypeOptions = {dataSource: [], displayExpr: 'text', valueExpr: 'value', onValueChanged: this.QuestionTypeChanged.bind(this)};
+    public questionOccurrenceOptions = {displayExpr: 'text', valueExpr: 'value', maxValue: 4, MinValue: 0, defaultValue: 0};
     public questionTypeChoiceCanceled = false;
 
     constructor(
@@ -79,8 +80,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     public onAddChildQuestion(data) {
-        const childQuestion = this.createNewQuestion();
-        childQuestion.idSurveyQuestionParent = data.id;
+        const childQuestion = this.createNewQuestion(data.id);
         this.saveTargetQuestion(childQuestion);
     }
 
@@ -106,25 +106,33 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
                 });
     }
 
-    public createNewQuestion() {
+    public createNewQuestion(idQuestionParent?: string) {
         const question = new Question();
         question.idSurvey = this.survey;
         question.questionType = 2;
+        if (idQuestionParent) {
+            question.idSurveyQuestionParent = idQuestionParent;
+        }
         this.displayOptionDetails(question.questionType);
         question.sequence = this.getLastQuestionSequence();
-        question.localizations = [];
+        question.localizations = this.InitNewQuestionLocalization(question.idSurveyQuestionParent);
+        this.questions.push(question);
+        return question;
+    }
+
+    public InitNewQuestionLocalization(idQuestionParent: string) {
+        const parentLocalization = this.questions.filter(parent => parent.id === idQuestionParent) as Question[];
+        const localizations = [];
         packageInfo.locale.forEach(language => {
             const languageItem = {
                 languageCode: language.toLowerCase(),
                 isActive: true,
                 name: '',
-                title: ''
+                title: parentLocalization ? parentLocalization[0].getLocalization(language.toLowerCase()) : ''
             };
-            question.localizations.push(languageItem);
+            localizations.push(languageItem);
         });
-
-        this.questions.push(question);
-        return question;
+        return localizations;
     }
 
     public onMoveUp() {
