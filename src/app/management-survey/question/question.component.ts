@@ -33,7 +33,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     public messages: object = {};
     public isLoading = false;
     public optionsChoiceVisible = true;
-    public questionTypeOptions = {dataSource: [], displayExpr: 'text', valueExpr: 'value', onValueChanged: this.QuestionTypeChanged.bind(this)};
+    public questionTypeOptions = {dataSource: [], displayExpr: 'text', valueExpr: 'value',
+                                  onValueChanged: this.QuestionTypeChanged.bind(this)};
     public questionOccurrenceOptions = {displayExpr: 'text', valueExpr: 'value', maxValue: 4, MinValue: 0, defaultValue: 0};
     public questionTypeChoiceCanceled = false;
 
@@ -121,14 +122,17 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     public InitNewQuestionLocalization(idQuestionParent: string) {
-        const parentLocalization = this.questions.filter(parent => parent.id === idQuestionParent) as Question[];
+        let parentLocalization = [];
+        if (idQuestionParent) {
+            parentLocalization = this.questions.filter(parent => parent.id === idQuestionParent) as Question[];
+        }
         const localizations = [];
         packageInfo.locale.forEach(language => {
             const languageItem = {
                 languageCode: language.toLowerCase(),
                 isActive: true,
                 name: '',
-                title: parentLocalization ? parentLocalization[0].getLocalization(language.toLowerCase()) : ''
+                title: parentLocalization[0] ? parentLocalization[0].getLocalization(language.toLowerCase()) : ''
             };
             localizations.push(languageItem);
         });
@@ -253,6 +257,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     public onInitNewChoice(e) {
         e.data.isActive = true;
         e.data.idSurveyQuestion = this.questions[this.selectedIndex].id;
+        e.data.sequence = this.dataSource.length + 1;
     }
 
     public addNewQuestionChoice(e) {
