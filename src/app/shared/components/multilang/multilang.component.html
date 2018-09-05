@@ -4,7 +4,7 @@
         (onSelectionChanged)="onTabChanged($event)">
     <ng-container *ngFor="let lang of labels; let i = index">
         <dxi-item [title]="lang">
-            <dx-text-box (onKeyUp)="onTabValueChanged($event)" [value]="getLanguageValue()" [placeholder]="lang">
+            <dx-text-box (onKeyUp)="onTabValueChanged($event)" [value]="languageValue" [placeholder]="lang">
                 <dx-validator [validationGroup]="validationGroup" (onValidated)="onValidation($event)">
                     <dxi-validation-rule type="required"></dxi-validation-rule>
                 </dx-validator>
