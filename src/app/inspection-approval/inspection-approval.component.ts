@@ -68,7 +68,7 @@ export class InspectionApprovalComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.inspectionService.approve(this.inspectionId).subscribe(() => this.isClosed = true);
+                this.inspectionService.approve(this.inspectionId).subscribe(() => this.onClose());
             }
         });
     }
@@ -84,7 +84,7 @@ export class InspectionApprovalComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.inspectionService.refuse(this.inspectionId, result.reason).subscribe(() => this.isClosed = true);
+                this.inspectionService.refuse(this.inspectionId, result.reason).subscribe(() => this.onClose());
             }
         });
     }
@@ -100,12 +100,17 @@ export class InspectionApprovalComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.inspectionService.cancel(this.inspectionId).subscribe(() => this.isClosed = true);
+                this.inspectionService.cancel(this.inspectionId).subscribe(() => this.onClose());
             }
         });
     }
 
     public close() {
+        this.router.navigate(['inspection/dashboard']);
+    }
+
+    private onClose() {
+        this.isClosed = true;
         this.router.navigate(['inspection/dashboard']);
     }
 }
