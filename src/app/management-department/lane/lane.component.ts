@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import DataSource from 'devextreme/data/data_source';
 import Guid from 'devextreme/core/guid';
 
 import config from '../../../assets/config/config.json';
@@ -26,7 +25,6 @@ import {ODataService} from '../../shared/services/o-data.service';
 })
 export class LaneComponent extends GridWithOdataService implements OnInit {
     public addingButton: any;
-    public dataSource: any;
     public publicCodes: any = [];
     public genericCodes: any = [];
 
@@ -35,15 +33,12 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
     private labels: any = {};
 
     public constructor(
-        laneService: LaneService,
         private cityService: CityService,
         private publicCode: LanePublicCodeService,
         private genericCode: LaneGenericCodeService,
         private translateService: TranslateService,
     ) {
-        super(laneService);
-
-        this.dataSource = new DataSource({
+        super({
             expand: 'localizations',
             store: new ODataService({
                 url: 'Lane',
@@ -73,22 +68,6 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
         const lane = Lane.fromJSON(data);
 
         return lane.getLocalization(config.locale);
-    }
-
-    public onInitialized(e) {
-        const options = e.component.option('editing');
-
-        if (options.popup) {
-            options.form.validationGroup = this.validationGroup;
-            options.form.onInitialized = (ev) => {
-                this.form = ev.component;
-            };
-            options.popup.onHiding = (ev) => {
-                this.dataSource.load();
-            };
-
-            e.component.option('editing', options);
-        }
     }
 
     public onToolbarPreparing(e) {
