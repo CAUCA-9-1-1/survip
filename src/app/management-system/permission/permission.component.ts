@@ -37,6 +37,7 @@ export class PermissionComponent implements OnInit {
     accessLookup: object = {};
     users: any = [];
     selectedPermissionObject: any = {};
+    isLoading = false;
 
     constructor(
         private webuserService: WebuserService,
@@ -86,6 +87,7 @@ export class PermissionComponent implements OnInit {
     }
 
     public onRowSelected(e) {
+        this.isLoading = true;
         this.selectedPermissionObject = e.itemData;
         this.loadSystemFeature();
 
@@ -187,7 +189,10 @@ export class PermissionComponent implements OnInit {
     }
 
     private loadSystemFeature() {
-        this.permissionService.getObjectPermission(this.selectedPermissionObject.id).subscribe(data => this.features = data);
+        this.permissionService.getObjectPermission(this.selectedPermissionObject.id).subscribe(data => {
+            this.features = data;
+            this.isLoading = false;
+        });
     }
 
     private loadPermissionObject() {
