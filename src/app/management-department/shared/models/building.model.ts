@@ -4,7 +4,7 @@ import {Picture} from '../../../shared/models/picture.model';
 
 export class Building extends WithLocalization {
     appartmentNumber = '';
-    buildingValue = 0;
+    buildingValue = 0.0;
     childType = 0;
     civicLetter = '';
     civicLetterSupp = '';
