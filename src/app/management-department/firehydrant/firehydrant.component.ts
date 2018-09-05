@@ -13,7 +13,7 @@ import {OperatorType} from '../../management-type-system/shared/models/operator-
 import {OperatorTypeService} from '../../management-type-system/shared/services/operator-type.service';
 import {UnitOfMeasure} from '../../management-type-system/shared/models/unit-of-measure.model';
 import {UnitOfMeasureService} from '../../management-type-system/shared/services/unit-of-measure.service';
-import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {GridWithOdataService} from '../../shared/classes/grid-with-odata-service';
 import {CityService} from '../../management-address/shared/services/city.service';
 import {FireHydrant} from '../../management-type-system/shared/models/fire-hydrant.model';
 import {ODataService} from '../../shared/services/o-data.service';
@@ -32,22 +32,13 @@ import {ODataService} from '../../shared/services/o-data.service';
         LaneService,
     ]
 })
-export class FirehydrantComponent extends GridWithCrudService implements OnInit {
+export class FirehydrantComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
-    @Input()
-    set isShow(value: boolean) {
-        if (value) {
-            this.loadFireHydrantType();
-            this.loadOperatorType();
-            this.loadUnitOfMeasure();
-        }
-    }
 
     public addingButton: any;
     public dataSource: any;
     public selectedCity = '';
     public fireHydrantTypes: FireHydrantType[] = [];
-    public cities: any = {};
     public lanes: any = {};
     public lanesOfCity: any = {};
     public operatorTypes: OperatorType[] = [];
@@ -101,7 +92,7 @@ export class FirehydrantComponent extends GridWithCrudService implements OnInit 
             store: new ODataService({
                 url: 'FireHydrant',
                 key: 'id',
-                keyType: 'string',
+                keyType: 'Guid',
             }),
         });
 
@@ -120,6 +111,8 @@ export class FirehydrantComponent extends GridWithCrudService implements OnInit 
         this.loadCity();
         this.loadLane();
         this.loadFireHydrantType();
+        this.loadOperatorType();
+        this.loadUnitOfMeasure();
     }
 
     public getFireHydrantTypeName(data) {
@@ -208,10 +201,14 @@ export class FirehydrantComponent extends GridWithCrudService implements OnInit 
                 this.formFields[e.dataField] = ev.component;
             };
             e.editorOptions.onValueChanged = (ev) => {
-                if (ev.value) {
-                    e.component.filter(e.dataField, '=', new Guid(ev.value));
+                if (ev.element.className.indexOf('dx-validator') === -1) {
+                    if (ev.value) {
+                        e.component.filter(e.dataField, '=', new Guid(ev.value));
+                    } else {
+                        e.component.clearFilter('idLane');
+                    }
                 } else {
-                    e.component.clearFilter(e.dataField);
+                    e.setValue(ev.value);
                 }
             };
             e.editorOptions.onOpened = (ev) => {
