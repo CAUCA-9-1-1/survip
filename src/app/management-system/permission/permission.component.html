@@ -9,6 +9,7 @@
         <div class="content">
             <dx-tree-view
                 [dataSource]="permissionObjects"
+                [disabled]="isLoading"
                 displayExpr="groupName"
                 itemsExpr="children"
                 keyExpr="id"
@@ -16,7 +17,7 @@
                 dataStructure="plain"
                 parentIdExpr="idPermissionObjectParent"
                 [selectByClick]="true"
-                (onItemSelectionChanged)="onRowSelected($event)">
+                (onItemClick)="onRowSelected($event)">
             </dx-tree-view>
         </div>
     </div>
