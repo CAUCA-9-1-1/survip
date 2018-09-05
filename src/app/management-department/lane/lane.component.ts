@@ -4,7 +4,7 @@ import DataSource from 'devextreme/data/data_source';
 import Guid from 'devextreme/core/guid';
 
 import config from '../../../assets/config/config.json';
-import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {GridWithOdataService} from '../../shared/classes/grid-with-odata-service';
 import {Lane} from '../shared/models/lane.model';
 import {LaneService} from '../shared/services/lane.service';
 import {CityService} from '../../management-address/shared/services/city.service';
@@ -24,7 +24,7 @@ import {ODataService} from '../../shared/services/o-data.service';
         LanePublicCodeService,
     ]
 })
-export class LaneComponent extends GridWithCrudService implements OnInit {
+export class LaneComponent extends GridWithOdataService implements OnInit {
     public addingButton: any;
     public dataSource: any;
     public publicCodes: any = [];
@@ -48,7 +48,7 @@ export class LaneComponent extends GridWithCrudService implements OnInit {
             store: new ODataService({
                 url: 'Lane',
                 key: 'id',
-                keyType: 'string',
+                keyType: 'Guid',
             }),
         });
 
@@ -132,8 +132,9 @@ export class LaneComponent extends GridWithCrudService implements OnInit {
     }
 
     public onInitNewRow(e) {
+        e.data = Object.assign({}, new Lane());
+        e.data.id = new Guid();
         e.data.idCity = this.selectedCity;
-        e.data.isActive = true;
     }
 
     private loadCity() {

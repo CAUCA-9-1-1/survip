@@ -21,5 +21,4 @@ export class ODataService {
             version: 4,
         });
     }
-
 }
