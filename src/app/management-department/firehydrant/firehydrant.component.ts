@@ -1,7 +1,6 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {TranslateService} from '@ngx-translate/core';
-import DataSource from 'devextreme/data/data_source';
 import Guid from 'devextreme/core/guid';
 
 import config from '../../../assets/config/config.json';
@@ -36,7 +35,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
     public addingButton: any;
-    public dataSource: any;
     public selectedCity = '';
     public fireHydrantTypes: FireHydrantType[] = [];
     public lanes: any = {};
@@ -78,7 +76,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     private labels: any = {};
 
     public constructor(
-        fireHydrantService: FireHydrantService,
         private fireHydrantTypeService: FireHydrantTypeService,
         private operatorTypeService: OperatorTypeService,
         private unitOfMeasureService: UnitOfMeasureService,
@@ -86,9 +83,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         private laneService: LaneService,
         private translateService: TranslateService,
     ) {
-        super(fireHydrantService);
-
-        this.dataSource = new DataSource({
+        super({
             store: new ODataService({
                 url: 'FireHydrant',
                 key: 'id',
@@ -125,22 +120,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         const unit = UnitOfMeasure.fromJSON(data);
 
         return unit.getLocalization(config.locale);
-    }
-
-    public onInitialized(e) {
-        const options = e.component.option('editing');
-
-        if (options.popup) {
-            options.form.validationGroup = this.validationGroup;
-            options.form.onInitialized = (ev) => {
-                this.form = ev.component;
-            };
-            options.popup.onHiding = (ev) => {
-                this.dataSource.load();
-            };
-
-            e.component.option('editing', options);
-        }
     }
 
     public onToolbarPreparing(e) {
