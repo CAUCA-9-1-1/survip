@@ -8,10 +8,7 @@
         (onEditorPreparing)="onEditorPreparing($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onEditingStart)="onEditingStart($event)"
-        (onRowValidating)="onRowValidating($event)"
-        (onRowInserted)="onRowInserted($event)"
-        (onRowUpdated)="onRowUpdated($event)"
-        (onRowRemoved)="onRowRemoved($event)">
+        (onRowValidating)="onRowValidating($event)">
     <dxi-column
             dataField="localizations"
             caption="{{'name' | translate}}"
@@ -40,7 +37,9 @@
     <dxi-column dataField="numberOfAppartment" caption="{{'numberOfAppartment' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="numberOfBuilding" caption="{{'numberOfBuilding' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="yearOfConstruction" caption="{{'yearOfConstruction' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="buildingValue" caption="{{'buildingValue' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="buildingValue" caption="{{'buildingValue' | translate}}" [visible]="false">
+        <dxo-format type="fixedPoint" [precision]="2"></dxo-format>
+    </dxi-column>
     <dxi-column dataField="postalCode" caption="{{'postalCode' | translate}}" [visible]="false"></dxi-column>
     <dxi-column
             dataField="idUtilisationCode"

@@ -10,7 +10,7 @@ import {Building} from '../shared/models/building.model';
 import {LaneService} from '../shared/services/lane.service';
 import {UtilisationCodeService} from '../../management-system/shared/services/utilisation-code.service';
 import {RiskLevelService} from '../../management-system/shared/services/risk-level.service';
-import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {GridWithOdataService} from '../../shared/classes/grid-with-odata-service';
 import {CityService} from '../../management-address/shared/services/city.service';
 import {ODataService} from '../../shared/services/o-data.service';
 
@@ -27,7 +27,7 @@ import {ODataService} from '../../shared/services/o-data.service';
         RiskLevelService,
     ]
 })
-export class BuildingComponent extends GridWithCrudService implements OnInit {
+export class BuildingComponent extends GridWithOdataService implements OnInit {
     @Input()
     set parentBuilding(building: Building) {
         this.parent = building;
@@ -79,7 +79,7 @@ export class BuildingComponent extends GridWithCrudService implements OnInit {
             store: new ODataService({
                 url: 'Building',
                 key: 'id',
-                keyType: 'string',
+                keyType: 'Guid',
             }),
         });
 
@@ -189,10 +189,14 @@ export class BuildingComponent extends GridWithCrudService implements OnInit {
                 this.formFieldLane = ev.component;
             };
             e.editorOptions.onValueChanged = (ev) => {
-                if (ev.value) {
-                    e.component.filter('idLane', '=', new Guid(ev.value));
+                if (ev.element.className.indexOf('dx-validator') === -1) {
+                    if (ev.value) {
+                        e.component.filter('idLane', '=', new Guid(ev.value));
+                    } else {
+                        e.component.clearFilter('idLane');
+                    }
                 } else {
-                    e.component.clearFilter('idLane');
+                    e.setValue(ev.value);
                 }
             };
             e.editorOptions.onOpened = (ev) => {
@@ -211,7 +215,7 @@ export class BuildingComponent extends GridWithCrudService implements OnInit {
 
         if (this.parent) {
             e.data = Object.assign(this.parent, {
-                id: undefined,
+                id: new Guid(),
                 localizations: undefined,
                 createdOn: undefined,
                 idPicture: undefined,
@@ -222,6 +226,7 @@ export class BuildingComponent extends GridWithCrudService implements OnInit {
             });
         } else {
             e.data = Object.assign({}, building);
+            e.data.id = new Guid();
             e.data.idCity = this.selectedCity;
         }
     }

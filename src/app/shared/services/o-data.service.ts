@@ -8,7 +8,7 @@ import config from '../../../assets/config/config.json';
 @Injectable()
 export class ODataService {
 
-    constructor(configOData: ODataConfig) {
+    public constructor(configOData: ODataConfig) {
         return new ODataStore({
             beforeSend: request => {
                 request.headers['Authorization'] =
