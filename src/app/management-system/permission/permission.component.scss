@@ -1,0 +1,16 @@
+div.title {
+  color: #959595;
+  padding: 0 20px;
+  line-height: 67px;
+  border-right: solid 1px #ddd;
+  border-bottom: solid 2px #ddd;
+}
+
+div.title dx-button {
+  float: right;
+  margin: 0 2px;
+}
+
+div[fxflex="30%"] {
+  border-right: solid 1px #ddd;
+}

@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
-import {FireHydrant} from '../../management-fire-hydrant/shared/models/fire-hydrant.model';
+import {FireHydrant} from '../../management-type-system/shared/models/fire-hydrant.model';
 import {InspectionFireHydrantService} from '../shared/services/inspection-fire-hydrant.service';
-import {FireHydrantService} from '../../management-fire-hydrant/shared/services/fire-hydrant.service';
-import {LaneService} from '../../management-address/shared/services/lane.service';
-import {Lane} from '../../management-address/shared/models/lane.model';
+import {FireHydrantService} from '../../management-type-system/shared/services/fire-hydrant.service';
+import {LaneService} from '../../management-department/shared/services/lane.service';
+import {Lane} from '../../management-department/shared/models/lane.model';
 
 
 @Component({

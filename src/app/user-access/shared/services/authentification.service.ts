@@ -11,7 +11,7 @@ export class AuthenticationService {
     isLogged = new BehaviorSubject<boolean>(false);
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
     ) {
         this.isLogged.next(sessionStorage.getItem('accessToken') ? true : false);
         this.status().subscribe(logged => {

@@ -9,7 +9,7 @@ import {ListComponent} from './list/list.component';
 import {QuestionComponent} from './question/question.component';
 
 
-describe('ManagementSurveyComponent', () => {
+describe('ManagementSystemComponent', () => {
     let component: ManagementSurveyComponent;
     let fixture: ComponentFixture<ManagementSurveyComponent>;
 

@@ -5,9 +5,9 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing';
 import {UserAccessModule} from './user-access/user-access.module';
 import {InspectionApprovalModule} from './inspection-approval/inspection-approval.module';
-import {ManagementAccessModule} from './management-access/management-access.module';
-import {ManagementFireHydrantModule} from './management-fire-hydrant/management-fire-hydrant.module';
-import {InspectionManagementModule} from './inspection-management/inspection-management.module';
+import {ManagementDepartmentModule} from './management-department/management-department.module';
+import {ManagementTypeSystemModule} from './management-type-system/management-type-system.module';
+import {InspectionManagementModule} from './management-department/department-risk-level/inspection-management.module';
 import {InspectionBatchModule} from './inspection-batch/inspection-batch.module';
 import {ManagementAddressModule} from './management-address/management-address.module';
 import {ManagementBuildingModule} from './management-building/management-building.module';
@@ -26,9 +26,9 @@ describe('AppComponent', () => {
                 InspectionDashboardModule,
                 InspectionManagementModule,
                 ManagementAddressModule,
-                ManagementAccessModule,
+                ManagementDepartmentModule,
                 ManagementBuildingModule,
-                ManagementFireHydrantModule,
+                ManagementTypeSystemModule,
                 ManagementSurveyModule,
                 UserAccessModule,
                 StatisticsModule,

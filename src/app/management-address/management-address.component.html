@@ -1,23 +1,18 @@
+<app-no-access [fxShow]="!accessTo.city && !accessTo.county && !accessTo.region && !accessTo.state && !accessTo.country"></app-no-access>
 <mat-tab-group>
-    <mat-tab label="{{'lane' | translate}}">
-        <app-managementaddress-lane></app-managementaddress-lane>
+    <mat-tab label="{{'city' | translate}}" [disabled]="!accessTo.city">
+        <app-management-address-city [fxShow]="accessTo.city"></app-management-address-city>
     </mat-tab>
-    <mat-tab label="{{'city' | translate}}">
-        <app-managementaddress-city></app-managementaddress-city>
+    <mat-tab label="{{'county' | translate}}" [disabled]="!accessTo.county">
+        <app-management-address-county [fxShow]="accessTo.county"></app-management-address-county>
     </mat-tab>
-    <mat-tab label="{{'cityType' | translate}}">
-        <app-managementaddress-citytype></app-managementaddress-citytype>
+    <mat-tab label="{{'region' | translate}}" [disabled]="!accessTo.region">
+        <app-management-address-region [fxShow]="accessTo.region"></app-management-address-region>
     </mat-tab>
-    <mat-tab label="{{'county' | translate}}">
-        <app-managementaddress-county></app-managementaddress-county>
+    <mat-tab label="{{'state' | translate}}" [disabled]="!accessTo.state">
+        <app-management-address-state [fxShow]="accessTo.state"></app-management-address-state>
     </mat-tab>
-    <mat-tab label="{{'region' | translate}}">
-        <app-managementaddress-region></app-managementaddress-region>
-    </mat-tab>
-    <mat-tab label="{{'state' | translate}}">
-        <app-managementaddress-state></app-managementaddress-state>
-    </mat-tab>
-    <mat-tab label="{{'country' | translate}}">
-        <app-managementaddress-country></app-managementaddress-country>
+    <mat-tab label="{{'country' | translate}}" [disabled]="!accessTo.country">
+        <app-management-address-country [fxShow]="accessTo.country"></app-management-address-country>
     </mat-tab>
 </mat-tab-group>

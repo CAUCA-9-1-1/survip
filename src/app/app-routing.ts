@@ -5,16 +5,16 @@ import {AuthGuardService} from './shared/services/auth-guard.service';
 import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
 import {InspectionDashboardComponent} from './inspection-dashboard/inspection-dashboard.component';
 import {InspectionBatchComponent} from './inspection-batch/inspection-batch.component';
-import {ManagementAccessComponent} from './management-access/management-access.component';
+import {ManagementDepartmentComponent} from './management-department/management-department.component';
 import {ManagementAddressComponent} from './management-address/management-address.component';
-import {ManagementBuildingComponent} from './management-building/management-building.component';
-import {ManagementFireHydrantComponent} from './management-fire-hydrant/management-fire-hydrant.component';
+import {ManagementTypeSystemComponent} from './management-type-system/management-type-system.component';
 import {ManagementSurveyComponent} from './management-survey/management-survey.component';
 import {LoginComponent} from './user-access/login/login.component';
 import {InspectionApprovalComponent} from './inspection-approval/inspection-approval.component';
-import {InspectionManagementComponent} from './inspection-management/inspection-management.component';
 import {StatisticsComponent} from './statistics/statistics.component';
 import {ReportConfigurationComponent} from './report-configuration/report-configuration.component';
+import {PermissionService} from './user-access/shared/services/permission.service';
+import {ManagementSystemComponent} from './management-system/management-system.component';
 
 
 const appRoutes: Routes = [{
@@ -43,28 +43,25 @@ const appRoutes: Routes = [{
     }, {
         path: 'batch/:idBatch',
         component: InspectionBatchComponent
-    }, {
-        path: 'management',
-        component: InspectionManagementComponent
     }]
 }, {
     path: 'management',
     canActivate: [AuthGuardService],
     children: [{
+        path: 'department',
+        component: ManagementDepartmentComponent,
+    }, {
         path: 'survey',
         component: ManagementSurveyComponent
-    }, {
-        path: 'building',
-        component: ManagementBuildingComponent
     }, {
         path: 'address',
         component: ManagementAddressComponent
     }, {
-        path: 'firehydrant',
-        component: ManagementFireHydrantComponent
+        path: 'system',
+        component: ManagementSystemComponent,
     }, {
-        path: 'access',
-        component: ManagementAccessComponent,
+        path: 'typesystem',
+        component: ManagementTypeSystemComponent
     }]
 }, {
     path: 'report-configuration',
@@ -82,7 +79,8 @@ const appRoutes: Routes = [{
         RouterModule
     ],
     providers: [
-        AuthGuardService
+        AuthGuardService,
+        PermissionService,
     ]
 })
 

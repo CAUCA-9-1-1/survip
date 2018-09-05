@@ -5,7 +5,7 @@ import {TestModule} from '../../test.module.spec';
 import {AskBatchDescriptionComponent} from './ask-batch-description.component';
 
 
-describe('AskBatchDescriptionComponent', () => {
+describe('AskRemoveItemComponent', () => {
     let component: AskBatchDescriptionComponent;
     let fixture: ComponentFixture<AskBatchDescriptionComponent>;
 

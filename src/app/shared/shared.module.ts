@@ -26,8 +26,8 @@ import {ImageComponent} from './components/image/image.component';
 import {UploadComponent} from './components/upload/upload.component';
 import {FilterByPipe} from './pipes/filter.pipe';
 import {ExpiredTokenInterceptor} from './services/expired-token.interceptor';
-import {RequestService} from './services/request.service';
-import {RefreshTokenService} from "./services/refresh-token.service";
+import {RefreshTokenService} from './services/refresh-token.service';
+import { NoAccessComponent } from './components/no-access/no-access.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -43,6 +43,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ImageComponent,
         UploadComponent,
         FilterByPipe,
+        NoAccessComponent,
     ],
     exports: [
         BrowserModule,
@@ -70,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         SlideshowComponent,
         ImageComponent,
         UploadComponent,
+        NoAccessComponent,
     ],
     imports: [
         BrowserModule,
@@ -102,7 +104,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     providers: [
         RefreshTokenService,
         HttpClientModule,
-      { provide: HTTP_INTERCEPTORS, useClass: ExpiredTokenInterceptor, multi: true },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ExpiredTokenInterceptor,
+            multi: true
+        },
     ]
 })
 export class SharedModule { }

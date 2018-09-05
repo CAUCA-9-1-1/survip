@@ -1,9 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {InspectionBuildingAnomalyService} from '../shared/services/inspection-building-anomaly.service';
-import {BuildingAnomaly} from '../../management-building/shared/models/building-anomaly.model';
+import {BuildingAnomaly} from '../../management-department/shared/models/building-anomaly.model';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
-import {BuildingAnomalyPicture} from '../../management-building/shared/models/building-anomaly-picture.model';
+import {PictureService} from '../../shared/services/picture.service';
+import {BuildingAnomalyPicture} from '../../management-department/shared/models/building-anomaly-picture.model';
+import {AskBatchDescriptionComponent} from '../../inspection-dashboard/ask-batch-description/ask-batch-description.component';
+import {InspectionBatch} from '../../inspection-batch/shared/models/inspection-batch.model';
 import {MatDialog} from '@angular/material';
 import {AskNewThemeComponent} from '../ask-new-theme/ask-new-theme.component';
 import {InspectionPictureService} from '../shared/services/inspection-picture.service';

@@ -4,7 +4,7 @@ import {TestModule} from '../../test.module.spec';
 import {ListComponent} from './list.component';
 
 
-describe('ListComponent', () => {
+describe('FirehydrantComponent', () => {
     let component: ListComponent;
     let fixture: ComponentFixture<ListComponent>;
 

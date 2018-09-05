@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 
+import {AuthGuardService} from '../../services/auth-guard.service';
+
 
 @Component({
     selector: 'app-main-menu',
@@ -11,51 +13,93 @@ export class MainMenuComponent implements OnInit {
     @Output() click = new EventEmitter();
 
     selected = '';
-    menus = [{
-        name: 'inspectionDashboard',
-        path: '/inspection/dashboard',
-    }, {
-        name: 'statistics',
-        path: '/statistics',
-    }, {
-        name: 'management',
-        path: '',
-        items: [{
-            name: 'surveyManagement',
-            path: '/management/survey',
-        }, {
-            name: 'buildingManagement',
-            path: '/management/building',
-        }, {
-            name: 'addressManagement',
-            path: '/management/address',
-        }, {
-            name: 'fireHydrantManagement',
-            path: '/management/firehydrant',
-        }, {
-            name: 'accessManagement',
-            path: '/management/access',
-        }, {
-            name: 'inspectionBatchManagement',
-            path: '/inspection/batch',
-        }, {
-            name: 'inspectionManagement',
-            path: '/inspection/management',
-        }, {
-            name: 'reportConfiguration',
-            path: '/report-configuration',
-        }]
-    }];
+    menus = [];
 
-    constructor(
+    public constructor(
         private router: Router,
+        private authGuardService: AuthGuardService,
     ) {
         this.selected = this.router.url;
     }
 
-    ngOnInit() { }
+    public ngOnInit() {}
 
-    goto(path) {
+    public refresh() {
+        const items = [];
+        const management = {
+            name: 'management',
+            path: '',
+            items: [],
+        };
+
+        if (this.authGuardService.hasUrlAccess('/inspection/dashboard')) {
+            items.push({
+                name: 'inspectionDashboard',
+                path: '/inspection/dashboard',
+            });
+        }
+
+        if (this.authGuardService.hasUrlAccess('/statistics')) {
+            items.push({
+                name: 'statistics',
+                path: '/statistics',
+            });
+        }
+
+        if (this.authGuardService.hasUrlAccess('/management/department')) {
+            management.items.push({
+                name: 'departmentManagement',
+                path: '/management/department',
+            });
+        }
+
+        if (this.authGuardService.hasUrlAccess('/management/survey')) {
+            management.items.push({
+                name: 'surveyManagement',
+                path: '/management/survey',
+            });
+        }
+
+        if (this.authGuardService.hasUrlAccess('/management/address')) {
+            management.items.push({
+                name: 'addressManagement',
+                path: '/management/city',
+            });
+        }
+
+        if (this.authGuardService.hasUrlAccess('/management/system')) {
+            management.items.push({
+                name: 'systemManagement',
+                path: '/management/system',
+            });
+        }
+
+        if (this.authGuardService.hasUrlAccess('/management/typesystem')) {
+            management.items.push({
+                name: 'typeSystemManagement',
+                path: '/management/typesystem',
+            });
+        }
+
+        if (this.authGuardService.hasUrlAccess('/report-configuration')) {
+            management.items.push({
+                name: 'reportConfiguration',
+                path: '/report-configuration',
+            });
+        }
+
+        if (management.items.length) {
+            items.push(management);
+        }
+
+        this.menus = items;
+    }
+
+    public goto(path) {
+        if (!this.authGuardService.hasUrlAccess(path)) {
+            return false;
+        }
+
         this.selected = path;
         this.router.navigate([path]);
         this.click.emit({
@@ -63,7 +107,7 @@ export class MainMenuComponent implements OnInit {
         });
     }
 
-    isSelected(path) {
+    public isSelected(path) {
         if (!this.selected) {
             return '';
         }

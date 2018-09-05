@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {InspectionBuildingContactService} from '../shared/services/inspection-building-contact.service';
-import {BuildingContact} from '../../management-building/shared/models/building-contact.model';
+import {BuildingContact} from '../../management-department/shared/models/building-contact.model';
 
 
 @Component({

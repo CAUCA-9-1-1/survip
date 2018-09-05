@@ -20,7 +20,7 @@ String.prototype.pick = function(min: number, max: number): string {
     return chars;
 };
 
-String.prototype.shuffle = function () {
+String.prototype.shuffle = function() {
     const array = this.split('');
     let tmp, current, top = array.length;
 
@@ -34,4 +34,10 @@ String.prototype.shuffle = function () {
     }
 
     return array.join('');
+};
+
+String.prototype.replaceAll = function(find: string, replaceWith: string) {
+    const regex = new RegExp(find, 'g');
+
+    return this.replace(regex, replaceWith);
 };

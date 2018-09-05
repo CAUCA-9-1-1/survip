@@ -2,9 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {InspectionBuildingPnapsService} from '../shared/services/inspection-building-pnaps.service';
-import {PersonRequiringAssistanceType} from '../../management-building/shared/models/person-requiring-assistance-type.model';
-import {PersonRequiringAssistanceTypeService} from '../../management-building/shared/services/person-requiring-assistance-type.service';
-import {BuildingPnaps} from '../../management-building/shared/models/building-pnaps.model';
+import {PersonRequiringAssistanceType} from '../../management-type-system/shared/models/person-requiring-assistance-type.model';
+import {PersonRequiringAssistanceTypeService} from '../../management-type-system/shared/services/person-requiring-assistance-type.service';
+import {BuildingPnaps} from '../../management-department/shared/models/building-pnaps.model';
 
 
 @Component({

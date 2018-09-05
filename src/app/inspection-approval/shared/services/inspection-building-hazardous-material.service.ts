@@ -2,7 +2,7 @@ import {Injectable, Injector} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {RequestService} from '../../../shared/services/request.service';
-import {BuildingHazardousMaterial} from '../../../management-building/shared/models/building-hazardous-material.model';
+import {BuildingHazardousMaterial} from '../../../management-department/shared/models/building-hazardous-material.model';
 
 
 @Injectable()
