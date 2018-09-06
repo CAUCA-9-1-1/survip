@@ -1,5 +1,5 @@
 <div fxLayout="row">
-    <div class="list" fxFlex="40%">
+    <div class="list" fxFlex="35%">
         <div class="title">
             <dx-button icon="trash" (onClick)="onRemoveQuestion()"></dx-button>
             <dx-button icon="add" (onClick)="onAddQuestion()"></dx-button>
@@ -26,7 +26,7 @@
             </dx-tree-view>
         </div>
     </div>
-    <div class="details" fxFlex="60%">
+    <div class="details" fxFlex="65%">
         <div *ngIf="selectedIndex > -1">
             <dx-form [formData]="questions[selectedIndex]" (onFieldDataChanged)="onFormUpdated('form',$event)"
                      [colCount]="4">
@@ -34,12 +34,12 @@
                 <dxi-item [label]="{text: 'title' | translate}" dataField="localizations" class="multilang"
                           [colSpan]="4">
                     <app-multilang [value]="questions[selectedIndex].localizations" fieldName="title"
-                                   (valueChanged)="onMultiLangValueChanged('title',$event);"></app-multilang>
+                                   (valueChanged)="onMultiLangValueChanged('localizations',$event);"></app-multilang>
                 </dxi-item>
                 <dxi-item [label]="{text: 'description' | translate}" dataField="localizations" class="multilang"
                           [colSpan]="4">
                     <app-multilang [value]="questions[selectedIndex].localizations" fieldName="name"
-                                   (valueChanged)="onMultiLangValueChanged('description',$event);"></app-multilang>
+                                   (valueChanged)="onMultiLangValueChanged('localizations',$event);"></app-multilang>
                 </dxi-item>
             </dx-form>
             <br>
@@ -53,20 +53,30 @@
                         [colSpan]="4">
                 </dxi-item>
                 <dxi-item
-                        [label]="{text: 'maxOccurrenceQuestion' | translate}"
-                        dataField="maxOccurrence"
-                        editorType="dxNumberBox"
-                        [editorOptions]="questionOccurrenceOptions"
-                        [colSpan]="2"
-                        [visible]="questions[selectedIndex].questionType === 4">
-                </dxi-item>
-                <dxi-item
                         [label]="{text: 'minOccurrenceQuestion' | translate}"
                         dataField="minOccurrence"
                         editorType="dxNumberBox"
                         [editorOptions]="questionOccurrenceOptions"
                         [colSpan]="2"
                         [visible]="questions[selectedIndex].questionType === 4">
+                    <dxi-validation-rule
+                            type="custom"
+                            [validationCallback]="occurrenceValidation"
+                            message="{{'questionOccurrenceValidation' | translate}}">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item
+                        [label]="{text: 'maxOccurrenceQuestion' | translate}"
+                        dataField="maxOccurrence"
+                        editorType="dxNumberBox"
+                        [editorOptions]="questionOccurrenceOptions"
+                        [colSpan]="2"
+                        [visible]="questions[selectedIndex].questionType === 4">
+                    <dxi-validation-rule
+                            type="custom"
+                            [validationCallback]="occurrenceValidation"
+                            message="{{'questionOccurrenceValidation' | translate}}">
+                    </dxi-validation-rule>
                 </dxi-item>
                 <dxi-item
                         [label]="{text: 'nextQuestion' | translate}"

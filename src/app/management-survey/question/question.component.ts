@@ -45,6 +45,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         private notification: MatSnackBar,
     ) {
         super(choiceService);
+        this.occurrenceValidation = this.occurrenceValidation.bind(this);
     }
 
     public setModel(data: any) {
@@ -84,7 +85,6 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         const childQuestion = this.createNewQuestion(data.id);
         this.saveTargetQuestion(childQuestion);
     }
-
 
     public onAddQuestion() {
         this.isLoading = true ;
@@ -216,10 +216,10 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     public onFormUpdated(item, e) {
-        if (item !== 'form') {
-            this.questions[this.selectedIndex][item] = e.value;
-        }
-        this.saveQuestion();
+            if (item !== 'form') {
+                this.questions[this.selectedIndex][item] = e.value;
+            }
+            this.saveQuestion();
     }
 
     public saveQuestion() {
@@ -337,5 +337,12 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
                 return index;
             }
         }
+    }
+
+    public occurrenceValidation() {
+        if (this.questions[this.selectedIndex].maxOccurrence < this.questions[this.selectedIndex].minOccurrence) {
+            return false;
+        }
+        return true;
     }
 }

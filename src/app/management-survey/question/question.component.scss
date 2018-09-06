@@ -46,8 +46,10 @@ div.content {
 }
 
 .list{
-    padding-right:3px;
+    padding-right:10px;
+    height: -webkit-fill-available;
+    border-right: black solid 1px;
 }
 .details{
-    padding-left:3px;
+    padding-left:10px;
 }
