@@ -41,7 +41,7 @@ export class InspectionService extends RequestService {
     }
 
     getSurveySummary(id: string) {
-        return this.get('InspectionQuestion/Inspection/' + id + '/Summary');
+        return this.get('InspectionSurveyAnswer/Inspection/' + id + '/Summary');
     }
 
     getBuildings(id: string): Observable<Building[]> {
