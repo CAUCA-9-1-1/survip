@@ -333,5 +333,6 @@
   "placeholders": "Placeholders",
   "groupedQuestion":"Grouped question",
   "maxOccurrenceQuestion":"Max. occurrence",
-  "minOccurrenceQuestion":"Min. occurrence"
+  "minOccurrenceQuestion":"Min. occurrence",
+  "questionOccurrenceValidation":"Maximum occurrence must be equal or greater than the minimum occurrence."
 }
