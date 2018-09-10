@@ -63,7 +63,7 @@ export class MainMenuComponent implements OnInit {
         if (this.authGuardService.hasUrlAccess('/management/address')) {
             management.items.push({
                 name: 'addressManagement',
-                path: '/management/city',
+                path: '/management/address',
             });
         }
 
