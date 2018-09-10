@@ -38,7 +38,7 @@ export class RequestService {
         this.headers = {
             'Authorization': sessionStorage.getItem('authorizationType') + ' ' + sessionStorage.getItem('accessToken'),
             'Content-Type': 'application/json; charset=UTF-8',
-            'languageCode': config.locale,
+            'Language-Code': config.locale,
         };
 
         this.apiUrl = requestConfig.url || config.apiUrl;
