@@ -1,5 +1,5 @@
 <app-no-access [fxShow]="!accessTo.firestation && !accessTo.departmentRiskLevel && !accessTo.building && !accessTo.lane && !accessTo.fireHydrant"></app-no-access>
-<mat-tab-group>
+<mat-tab-group [selectedIndex]="accessTo.firestation ? 0 : accessTo.departmentRiskLevel ? 1 : accessTo.building ? 2 : accessTo.lane ? 3 : 4">
     <mat-tab label="{{'firestations' | translate}}" [disabled]="!accessTo.firestation">
         <app-management-department-firestation [fxShow]="accessTo.firestation"></app-management-department-firestation>
     </mat-tab>
