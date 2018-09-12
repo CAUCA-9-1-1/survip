@@ -13,7 +13,7 @@ export class ODataService {
             beforeSend: request => {
                 request.headers['Authorization'] =
                     sessionStorage.getItem('authorizationType') + ' ' + sessionStorage.getItem('accessToken');
-                request.headers['languageCode'] = config.locale;
+                request.headers['Language-Code'] = config.locale;
             },
             url: config.apiUrl + 'odata/' + configOData.url,
             key: configOData.key,
