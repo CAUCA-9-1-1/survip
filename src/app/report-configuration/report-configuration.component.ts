@@ -1,10 +1,11 @@
-import {ChangeDetectorRef, ViewChild, Component, NgZone, OnInit, AfterViewInit} from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 
 import {ReportTemplateService} from '../shared/services/report-template.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ConfigurationTemplate} from '../shared/models/configuration-template.model';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {SelectTemplateDialogComponent} from './select-template/select-template-dialog.component';
+import {PlaceholderGroup} from './shared/models/placeholder-group';
 
 
 @Component({
@@ -16,7 +17,7 @@ import {SelectTemplateDialogComponent} from './select-template/select-template-d
 export class ReportConfigurationComponent implements OnInit {
   selectedTemplate: ConfigurationTemplate;
   templateIdentifiers: ConfigurationTemplate[];
-  placeholders: String[];
+  placeholders: PlaceholderGroup[];
 
   constructor(
     private dialog: MatDialog,
