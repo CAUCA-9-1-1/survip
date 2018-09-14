@@ -7,6 +7,7 @@ import {ConfigurationTemplate} from '../models/configuration-template.model';
 import {templateCSSPreprocessor} from '../../report-configuration/shared/models/template-preprocessor';
 import {Observable} from 'rxjs/Observable';
 import {PostModel} from '../models/post.model';
+import {PlaceholderGroup} from '../../report-configuration/shared/models/placeholder-group';
 
 
 @Injectable()
@@ -17,7 +18,7 @@ export class ReportTemplateService extends RequestService {
   }
 
   getPlaceholderList() {
-    return this.http.get<String[]>(this.apiUrl + 'ReportConfigurationTemplate/placeholders', {
+    return this.http.get<PlaceholderGroup[]>(this.apiUrl + 'ReportConfigurationTemplate/placeholders', {
       headers: this.headers
     });
   }
