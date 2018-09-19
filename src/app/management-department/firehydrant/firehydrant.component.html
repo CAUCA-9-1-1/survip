@@ -6,13 +6,23 @@
         (onToolbarPreparing)="onToolbarPreparing($event)"
         (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
-        (onEditingStart)="onEditingStart($event)"
         (onEditorPreparing)="onEditorPreparing($event)">
     <dxi-column dataField="number" caption="{{'fireHydrantNumber' | translate}}"></dxi-column>
     <dxi-column
             dataField="idFireHydrantType"
             caption="{{'fireHydrantType' | translate}}">
         <dxo-lookup [dataSource]="fireHydrantTypes" [displayExpr]="getFireHydrantTypeName" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="locationType" caption="{{'locationType' | translate}}" [visible]="false">
+        <dxo-lookup [dataSource]="locationTypes" displayExpr="text" valueExpr="id">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="coordinates" caption="{{'coordinates' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="physicalPosition" caption="{{'physicalPosition' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="civicNumber" caption="{{'civicNumber' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="addressLocationType" caption="{{'address' | translate}}" [visible]="false">
+        <dxo-lookup [dataSource]="addressLocationTypes" displayExpr="text" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column
@@ -27,7 +37,6 @@
         <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="altitude" caption="{{'altitude' | translate}}" [visible]="false"></dxi-column>
     <dxi-column
             dataField="idOperatorTypeRate"
             caption="{{'operator' | translate}}"
@@ -76,10 +85,15 @@
         <dxo-form colCount="2">
             <dxi-item dataField="number" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idFireHydrantType" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="idLane" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="idIntersection"></dxi-item>
-            <dxi-item dataField="altitude"></dxi-item>
-            <dxi-item itemType="empty"></dxi-item>
+            <dxi-item dataField="locationType" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
+            <dxi-item dataField="civicNumber" [visible]="locationType == 0"></dxi-item>
+            <dxi-item dataField="addressLocationType" [visible]="locationType == 0"></dxi-item>
+            <dxi-item dataField="idLane" [isRequired]="true" [visible]="locationType == 0 || locationType == 1"></dxi-item>
+            <dxi-item dataField="idIntersection" [visible]="locationType == 1"></dxi-item>
+            <dxi-item dataField="coordinates" [visible]="locationType == 2"></dxi-item>
+            <dxi-item dataField="physicalPosition" [visible]="locationType == 3"></dxi-item>
+            <dxi-item itemType="empty" [visible]="locationType == 0 || locationType == 2 || locationType == 3"></dxi-item>
             <dxi-item itemType="group" caption="{{'rate' | translate}}">
                 <dxi-item dataField="idOperatorTypeRate" [isRequired]="true"></dxi-item>
                 <dxi-item dataField="rateFrom"></dxi-item>
@@ -94,8 +108,6 @@
             </dxi-item>
             <dxi-item dataField="color" [isRequired]="true"></dxi-item>
             <dxi-item dataField="comments"></dxi-item>
-            <dxi-item dataField="physicalPosition"></dxi-item>
-            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
 </dx-data-grid>
