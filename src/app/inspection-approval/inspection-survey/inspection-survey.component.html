@@ -6,18 +6,18 @@
 <mat-card *ngFor="let category of summary">
     <mat-card-title>{{category.title}}</mat-card-title>
     <mat-card-content>
-        <div *ngFor="let recursive of category.answerSummary; let index = index;">
-            <div *ngIf="recursive.isRecursive && recursive.recursiveAnswer.length">
-                <h4>{{recursive.questionTitle}} #{{index + 1}}</h4>
-                <div fxLayout="row" *ngFor="let question of recursive.recursiveAnswer">
-                    <div fxFlex="60%">{{question.questionDescription}}</div>
-                    <div>{{question.answer}}</div>
+        <div *ngFor="let answer of category.answerSummary; let index = index;">
+            <div  *ngIf="answer.questionType === 4 && answer.childSurveyAnswerList != null &&  answer.childSurveyAnswerList.length > 0">
+                <h4>{{answer.questionTitle}} #{{index + 1}}</h4>
+                <div fxLayout="row" *ngFor="let answerChild of answer.childSurveyAnswerList">
+                    <div fxFlex="60%">{{answerChild.questionDescription}}</div>
+                    <div>{{answerChild.answer}}</div>
                 </div>
             </div>
-            <div *ngIf="!recursive.isRecursive">
+            <div *ngIf="answer.questionType !== 4">
                 <div fxLayout="row">
-                    <div fxFlex="60%">{{recursive.questionDescription}}</div>
-                    <div>{{recursive.answer}}</div>
+                    <div fxFlex="60%">{{answer.questionDescription}}</div>
+                    <div>{{answer.answer}}</div>
                 </div>
             </div>
         </div>
