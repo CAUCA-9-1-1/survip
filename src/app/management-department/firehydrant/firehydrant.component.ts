@@ -167,9 +167,15 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         e.data.color = '#FF0000';
         e.data.isActive = true;
         e.data.idCity = this.selectedCity;
+        e.data.idOperatorTypeRate = 'f13400a9-70b8-4325-b732-7fe7db721850';
+        e.data.idOperatorTypePressure = 'f13400a9-70b8-4325-b732-7fe7db721850';
+        e.data.idUnitOfMeasureRate = 'f13400a9-70b8-4325-b732-7fe7db721861';
+        e.data.idUnitOfMeasurePressure = 'f13400a9-70b8-4325-b732-7fe7db72186a';
     }
 
-    public onEditingStart(e) { }
+    public onEditingStart(e) {
+        console.log(e);
+    }
 
     public onEditorPreparing(e) {
         if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
