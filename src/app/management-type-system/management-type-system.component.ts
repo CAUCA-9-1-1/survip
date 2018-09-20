@@ -14,7 +14,6 @@ export class ManagementTypeSystemComponent implements OnInit {
         cityType: false,
         connectionType: false,
         fireHydrantType: false,
-        operatorType: false,
         PRAType: false,
         unitOfMeasure: false,
     };
@@ -27,7 +26,6 @@ export class ManagementTypeSystemComponent implements OnInit {
         this.accessTo.cityType = this.authGuardService.hasRight('RightCityTypeManagement');
         this.accessTo.connectionType = this.authGuardService.hasRight('RightConnectionTypeManagement');
         this.accessTo.fireHydrantType = this.authGuardService.hasRight('RightFireHydrantTypeManagement');
-        this.accessTo.operatorType = this.authGuardService.hasRight('RightOperatorManagement');
         this.accessTo.PRAType = this.authGuardService.hasRight('RightRPATypeManagement');
         this.accessTo.unitOfMeasure = this.authGuardService.hasRight('RightUnitManagement');
     }

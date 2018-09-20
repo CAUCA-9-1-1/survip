@@ -34,6 +34,7 @@ import {ODataService} from '../../shared/services/o-data.service';
 export class FirehydrantComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
+    public selectedLocationType = 0;
     public locationTypes: any[] = [];
     public addressLocationTypes: any[] = [];
     public addingButton: any;
@@ -98,9 +99,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         ]).subscribe(labels => {
             this.labels = labels;
             this.locationTypes.push({id: 0, text: this.labels['address']});
-            this.locationTypes.push({id: 0, text: this.labels['laneAndIntersection']});
-            this.locationTypes.push({id: 0, text: this.labels['coordinates']});
-            this.locationTypes.push({id: 0, text: this.labels['text']});
+            this.locationTypes.push({id: 1, text: this.labels['laneAndIntersection']});
+            this.locationTypes.push({id: 2, text: this.labels['coordinates']});
+            this.locationTypes.push({id: 3, text: this.labels['text']});
             this.addressLocationTypes.push({id: 0, text: this.labels['nextTo']});
             this.addressLocationTypes.push({id: 1, text: this.labels['atTheAddress']});
             this.addressLocationTypes.push({id: 2, text: this.labels['backWard']});
@@ -180,14 +181,24 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public onInitNewRow(e) {
+        this.selectedLocationType = 0;
+
         e.data.color = '#FF0000';
         e.data.isActive = true;
         e.data.idCity = this.selectedCity;
-        e.data.idOperatorTypeRate = 'f13400a9-70b8-4325-b732-7fe7db721850';
-        e.data.idOperatorTypePressure = 'f13400a9-70b8-4325-b732-7fe7db721850';
-        e.data.idUnitOfMeasureRate = 'f13400a9-70b8-4325-b732-7fe7db721861';
-        e.data.idUnitOfMeasurePressure = 'f13400a9-70b8-4325-b732-7fe7db72186a';
         e.data.locationType = 0;
+        e.data.idOperatorTypeRate = 'Equal';
+        e.data.idOperatorTypePressure = 'Equal';
+        e.data.idUnitOfMeasureRate = 'f13400a9-70b8-4325-b732-7fe7db72185c';
+        e.data.idUnitOfMeasurePressure = 'f13400a9-70b8-4325-b732-7fe7db721865';
+    }
+
+    public onEditingStart(e) {
+        this.selectedLocationType = e.data.locationType;
+    }
+
+    public locationTypeChange(e) {
+        this.selectedLocationType = e.value;
     }
 
     public onEditorPreparing(e) {
