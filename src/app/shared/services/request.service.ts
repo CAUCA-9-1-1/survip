@@ -14,9 +14,9 @@ import {RequestConfig} from '../models/request-config.model';
 export class RequestService {
     private router: Router;
     private notification: MatSnackBar;
-    private translateService: TranslateService;
     private onRefreshLogin: () => void;
 
+    protected translateService: TranslateService;
     protected http: HttpClient;
     protected headers: any;
     protected apiUrl: string;
