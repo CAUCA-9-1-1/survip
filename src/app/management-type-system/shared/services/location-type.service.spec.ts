@@ -1,17 +1,17 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { TestModule } from '../../../test.module.spec';
-import { OperatorTypeService } from './operator-type.service';
+import { LocationTypeService } from './location-type.service';
 
-describe('OperatorTypeService', () => {
+describe('LocationTypeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ TestModule ],
-      providers: [OperatorTypeService]
+      providers: [LocationTypeService]
     });
   });
 
-  it('should ...', inject([OperatorTypeService], (service: OperatorTypeService) => {
+  it('should ...', inject([LocationTypeService], (service: LocationTypeService) => {
     expect(service).toBeTruthy();
   }));
 });

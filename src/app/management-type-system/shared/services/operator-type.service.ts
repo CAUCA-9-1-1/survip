@@ -1,8 +1,8 @@
 import {Injectable, Injector} from '@angular/core';
 import {Observable, of} from 'rxjs';
 
-import {OperatorType} from '../models/operator-type.model';
 import {RequestService} from '../../../shared/services/request.service';
+import {EnumModel} from '../models/enum.model';
 
 
 @Injectable()
@@ -12,27 +12,32 @@ export class OperatorTypeService extends RequestService {
         super(injector);
     }
 
-    getAll(): Observable<OperatorType[]> {
+    getAll(): Observable<EnumModel[]> {
         return of([
-            OperatorType.fromJSON({
-                id: 'Equal',
-                symbol: '='
+            EnumModel.fromJSON({
+                value: 0,
+                name: 'Equal',
+                text: '='
             }),
-            OperatorType.fromJSON({
-                id: 'Greater',
-                symbol: '>'
+            EnumModel.fromJSON({
+                value: 1,
+                name: 'Greater',
+                text: '>'
             }),
-            OperatorType.fromJSON({
-                id: 'GreaterOrEqual',
-                symbol: '>='
+            EnumModel.fromJSON({
+                value: 2,
+                name: 'GreaterOrEqual',
+                text: '>='
             }),
-            OperatorType.fromJSON({
-                id: 'Less',
-                symbol: '<'
+            EnumModel.fromJSON({
+                value: 3,
+                name: 'Less',
+                text: '<'
             }),
-            OperatorType.fromJSON({
-                id: 'LessOrEqual',
-                symbol: '<='
+            EnumModel.fromJSON({
+                value: 4,
+                name: 'LessOrEqual',
+                text: '<='
             })
         ]);
     }

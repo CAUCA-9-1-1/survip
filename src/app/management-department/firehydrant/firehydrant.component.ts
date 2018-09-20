@@ -4,18 +4,20 @@ import {TranslateService} from '@ngx-translate/core';
 import Guid from 'devextreme/core/guid';
 
 import config from '../../../assets/config/config.json';
-import {FireHydrantService} from '../../management-type-system/shared/services/fire-hydrant.service';
+import {FireHydrantService} from '../shared/services/fire-hydrant.service';
 import {FireHydrantType} from '../../management-type-system/shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../../management-type-system/shared/services/fire-hydrant-type.service';
 import {LaneService} from '../shared/services/lane.service';
-import {OperatorType} from '../../management-type-system/shared/models/operator-type.model';
 import {OperatorTypeService} from '../../management-type-system/shared/services/operator-type.service';
 import {UnitOfMeasure} from '../../management-type-system/shared/models/unit-of-measure.model';
 import {UnitOfMeasureService} from '../../management-type-system/shared/services/unit-of-measure.service';
 import {GridWithOdataService} from '../../shared/classes/grid-with-odata-service';
 import {CityService} from '../../management-address/shared/services/city.service';
-import {FireHydrant} from '../../management-type-system/shared/models/fire-hydrant.model';
+import {FireHydrant} from '../shared/models/fire-hydrant.model';
 import {ODataService} from '../../shared/services/o-data.service';
+import {LocationTypeService} from '../../management-type-system/shared/services/location-type.service';
+import {AddressLocationTypeService} from '../../management-type-system/shared/services/address-location-type.service';
+import {EnumModel} from '../../management-type-system/shared/models/enum.model';
 
 
 @Component({
@@ -26,6 +28,8 @@ import {ODataService} from '../../shared/services/o-data.service';
         FireHydrantService,
         FireHydrantTypeService,
         OperatorTypeService,
+        LocationTypeService,
+        AddressLocationTypeService,
         UnitOfMeasureService,
         CityService,
         LaneService,
@@ -34,15 +38,15 @@ import {ODataService} from '../../shared/services/o-data.service';
 export class FirehydrantComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-    public selectedLocationType = 0;
-    public locationTypes: any[] = [];
-    public addressLocationTypes: any[] = [];
+    public selectedLocationType = 'Address';
+    public locationTypes: EnumModel[] = [];
+    public addressLocationTypes: EnumModel[] = [];
     public addingButton: any;
     public selectedCity = '';
     public fireHydrantTypes: FireHydrantType[] = [];
     public lanes: any = {};
     public lanesOfCity: any = {};
-    public operatorTypes: OperatorType[] = [];
+    public operatorTypes: EnumModel[] = [];
     public rateUnits: UnitOfMeasure[] = [];
     public pressureUnits: UnitOfMeasure[] = [];
     public formFields = {
@@ -81,6 +85,8 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     public constructor(
         private fireHydrantTypeService: FireHydrantTypeService,
         private operatorTypeService: OperatorTypeService,
+        private locationTypeService: LocationTypeService,
+        private addressLocationTypeService: AddressLocationTypeService,
         private unitOfMeasureService: UnitOfMeasureService,
         private cityService: CityService,
         private laneService: LaneService,
@@ -95,23 +101,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         });
 
         this.translateService.get([
-            'selectCity', 'address', 'laneAndIntersection', 'coordinates', 'text'
+            'selectCity'
         ]).subscribe(labels => {
             this.labels = labels;
-            this.locationTypes.push({id: 0, text: this.labels['address']});
-            this.locationTypes.push({id: 1, text: this.labels['laneAndIntersection']});
-            this.locationTypes.push({id: 2, text: this.labels['coordinates']});
-            this.locationTypes.push({id: 3, text: this.labels['text']});
-            this.addressLocationTypes.push({id: 0, text: this.labels['nextTo']});
-            this.addressLocationTypes.push({id: 1, text: this.labels['atTheAddress']});
-            this.addressLocationTypes.push({id: 2, text: this.labels['backWard']});
-            this.addressLocationTypes.push({id: 3, text: this.labels['atEnd']});
-            this.addressLocationTypes.push({id: 4, text: this.labels['atCorner']});
-            this.addressLocationTypes.push({id: 5, text: this.labels['above']});
-            this.addressLocationTypes.push({id: 6, text: this.labels['under']});
-            this.addressLocationTypes.push({id: 7, text: this.labels['inFront']});
-            this.addressLocationTypes.push({id: 8, text: this.labels['near']});
-            this.addressLocationTypes.push({id: 9, text: this.labels['visibleFrom']});
         });
     }
 
@@ -181,12 +173,12 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public onInitNewRow(e) {
-        this.selectedLocationType = 0;
+        this.selectedLocationType = 'Address';
 
         e.data.color = '#FF0000';
         e.data.isActive = true;
         e.data.idCity = this.selectedCity;
-        e.data.locationType = 0;
+        e.data.locationType = this.selectedLocationType;
         e.data.idOperatorTypeRate = 'Equal';
         e.data.idOperatorTypePressure = 'Equal';
         e.data.idUnitOfMeasureRate = 'f13400a9-70b8-4325-b732-7fe7db72185c';
@@ -246,6 +238,8 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     private loadOperatorType() {
         this.operatorTypeService.getAll().subscribe(data => this.operatorTypes = data);
+        this.locationTypeService.getAll().subscribe(data => this.locationTypes = data);
+        this.addressLocationTypeService.getAll().subscribe(data => this.addressLocationTypes = data);
     }
 
     private loadUnitOfMeasure() {
