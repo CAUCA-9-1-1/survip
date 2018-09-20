@@ -38,7 +38,6 @@ import {EnumModel} from '../../management-type-system/shared/models/enum.model';
 export class FirehydrantComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-    public selectedLocationType = 'Address';
     public locationTypes: EnumModel[] = [];
     public addressLocationTypes: EnumModel[] = [];
     public addingButton: any;
@@ -173,28 +172,30 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public onInitNewRow(e) {
-        this.selectedLocationType = 'Address';
-
         e.data.color = '#FF0000';
         e.data.isActive = true;
         e.data.idCity = this.selectedCity;
-        e.data.locationType = this.selectedLocationType;
+        e.data.locationType = 'Address';
         e.data.idOperatorTypeRate = 'Equal';
         e.data.idOperatorTypePressure = 'Equal';
         e.data.idUnitOfMeasureRate = 'f13400a9-70b8-4325-b732-7fe7db72185c';
         e.data.idUnitOfMeasurePressure = 'f13400a9-70b8-4325-b732-7fe7db721865';
+
+        this.displayLocationField(e.component, e.data.locationType);
     }
 
     public onEditingStart(e) {
-        this.selectedLocationType = e.data.locationType;
-    }
-
-    public locationTypeChange(e) {
-        this.selectedLocationType = e.value;
+        this.displayLocationField(e.component, e.data.locationType);
     }
 
     public onEditorPreparing(e) {
-        if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
+        if (e.dataField === 'locationType') {
+            e.editorOptions.onValueChanged = (ev) => {
+                e.setValue(ev.value);
+
+                this.displayLocationField(e.component, ev.value);
+            };
+        } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
             e.editorName = 'dxLookup';
             e.editorOptions.showClearButton = true;
             e.editorOptions.closeOnOutsideClick = true;
@@ -220,8 +221,10 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
             e.editorOptions.fieldTemplate = (data, container) => {
                 container.innerHTML = '<div class="dx-texteditor-container">' +
                     '<div class="fireHydrantField">' +
-                        '<div class="textbox"><input class="dx-texteditor-input" value="' + data.color + '" readOnly="true" /></div>' +
-                        '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>' +
+                        '<div class="textbox">' +
+                            '<input class="dx-texteditor-input" value="' + (data ? data.color : '') + '" readOnly="true" />' +
+                        '</div>' +
+                        '<div class="fireHydrant" style="background-color: ' + (data ? data.color : '') + '"></div>' +
                     '</div>' +
                     '<div class="dx-texteditor-buttons-container"></div>' +
                 '</div>';
@@ -229,6 +232,26 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
             e.editorOptions.itemTemplate = (data, index, container) => {
                 container.innerHTML = '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>';
             };
+        }
+    }
+
+    private displayLocationField(component, value) {
+        const columns = component.option('columns');
+        const hiddenFields = {
+            'Address': ['idIntersection', 'coordinates', 'physicalPosition'],
+            'LaneAndIntersection': ['civicNumber', 'addressLocationType', 'coordinates', 'physicalPosition'],
+            'Coordinates': ['civicNumber', 'addressLocationType', 'idLane', 'idIntersection', 'physicalPosition'],
+            'Text': ['civicNumber', 'addressLocationType', 'idLane', 'idIntersection', 'coordinates']
+        };
+
+        if (this.form) {
+            columns.forEach(column => {
+                if (hiddenFields[value].indexOf(column.dataField) > -1) {
+                    this.form.itemOption(column.dataField, 'visible', false);
+                } else {
+                    this.form.itemOption(column.dataField, 'visible', true);
+                }
+            });
         }
     }
 

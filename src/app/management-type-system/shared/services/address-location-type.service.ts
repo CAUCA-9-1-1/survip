@@ -31,17 +31,17 @@ export class AddressLocationTypeService extends RequestService {
                     EnumModel.fromJSON({
                         value: 2,
                         name: 'BackWard',
-                        text: this.translateService.instant('backWard'),
+                        text: this.translateService.instant('backward'),
                     }),
                     EnumModel.fromJSON({
                         value: 3,
                         name: 'AtEnd',
-                        text: this.translateService.instant('atEnd'),
+                        text: this.translateService.instant('atTheEnd'),
                     }),
                     EnumModel.fromJSON({
                         value: 4,
                         name: 'AtCorner',
-                        text: this.translateService.instant('atCorner'),
+                        text: this.translateService.instant('atTheCorner'),
                     }),
                     EnumModel.fromJSON({
                         value: 5,
