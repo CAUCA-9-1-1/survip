@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable, of} from 'rxjs';
 
 import {OperatorType} from '../models/operator-type.model';
 import {RequestService} from '../../../shared/services/request.service';
@@ -13,14 +13,27 @@ export class OperatorTypeService extends RequestService {
     }
 
     getAll(): Observable<OperatorType[]> {
-        return this.get('OperatorType');
-    }
-
-    save(operator: OperatorType) {
-        return this.post('OperatorType', operator);
-    }
-
-    remove(idOperator: string) {
-        return this.delete('OperatorType/' + idOperator);
+        return of([
+            OperatorType.fromJSON({
+                id: 'Equal',
+                symbol: '='
+            }),
+            OperatorType.fromJSON({
+                id: 'Greater',
+                symbol: '>'
+            }),
+            OperatorType.fromJSON({
+                id: 'GreaterOrEqual',
+                symbol: '>='
+            }),
+            OperatorType.fromJSON({
+                id: 'Less',
+                symbol: '<'
+            }),
+            OperatorType.fromJSON({
+                id: 'LessOrEqual',
+                symbol: '<='
+            })
+        ]);
     }
 }
