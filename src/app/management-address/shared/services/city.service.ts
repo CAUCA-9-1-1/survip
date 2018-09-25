@@ -16,6 +16,10 @@ export class CityService extends RequestService {
         return this.get('City');
     }
 
+    geolocation(idCity: string): Observable<City> {
+        return this.get('City/' + idCity + '/geolocation');
+    }
+
     localized(): Observable<City[]> {
         return this.get('City/localized');
     }

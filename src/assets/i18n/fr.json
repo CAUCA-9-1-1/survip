@@ -212,6 +212,7 @@
   "addressLocationType": "Type de positionnement",
   "laneAndIntersection": "Rue et intersection",
   "coordinates": "Geolocalisation",
+  "locate": "Localiser",
   "text": "Location approximative",
   "physicalPosition": "Position physique",
   "nextTo": "À côté",

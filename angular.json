@@ -29,6 +29,7 @@
               "node_modules/devextreme/dist/css/dx.common.css",
               "node_modules/devextreme/dist/css/dx.light.css",
               "node_modules/material-design-icons/iconfont/material-icons.css",
+              "node_modules/ol/ol.css",
               "src/styles.scss"
             ],
             "scripts": []

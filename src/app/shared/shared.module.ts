@@ -14,7 +14,7 @@ import {
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
-import {DxButtonModule, DxTabPanelModule, DxTextBoxModule, DxValidatorModule} from 'devextreme-angular';
+import {DxButtonModule, DxPopupModule, DxTabPanelModule, DxTextBoxModule, DxValidatorModule} from 'devextreme-angular';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
@@ -28,6 +28,7 @@ import {FilterByPipe} from './pipes/filter.pipe';
 import {ExpiredTokenInterceptor} from './services/expired-token.interceptor';
 import {RefreshTokenService} from './services/refresh-token.service';
 import { NoAccessComponent } from './components/no-access/no-access.component';
+import { GeolocationComponent } from './components/geolocation/geolocation.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -44,6 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         UploadComponent,
         FilterByPipe,
         NoAccessComponent,
+        GeolocationComponent,
     ],
     exports: [
         BrowserModule,
@@ -61,6 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatTabsModule,
         MatToolbarModule,
 
+        DxPopupModule,
         DxTabPanelModule,
         DxTextBoxModule,
         DxValidatorModule,
@@ -72,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ImageComponent,
         UploadComponent,
         NoAccessComponent,
+        GeolocationComponent,
     ],
     imports: [
         BrowserModule,
@@ -89,6 +93,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatTabsModule,
         MatToolbarModule,
         DxButtonModule,
+        DxPopupModule,
         DxTabPanelModule,
         DxTextBoxModule,
         DxValidatorModule,

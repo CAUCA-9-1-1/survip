@@ -1,0 +1,25 @@
+.maps {
+  text-align: center;
+}
+
+mat-icon {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  font-size: 30px;
+  margin-top: 3px;
+}
+
+#map,
+.dx-overlay-content .dx-popup-content > .dx-template-wrapper > div {
+  height: 100%;
+}
+
+#cursor {
+  z-index: 10;
+  position: absolute;
+}
+
+#cursor .mat-icon {
+  margin-top: 0;
+}
