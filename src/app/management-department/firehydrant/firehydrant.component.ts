@@ -42,6 +42,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     public addressLocationTypes: EnumModel[] = [];
     public addingButton: any;
     public selectedCity = '';
+    public selectedCityGeometry: any = {};
     public fireHydrantTypes: FireHydrantType[] = [];
     public lanes: any = {};
     public lanesOfCity: any = {};
@@ -161,6 +162,10 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                     this.formFields.idCity = ev.component;
                 },
                 onValueChanged: (ev) => {
+                    this.cityService.geolocation(ev.value).subscribe(data => {
+                        this.selectedCityGeometry = data['features'][0];
+                    });
+
                     this.selectedCity = ev.value;
                     this.addingButton.option('disabled', false);
                     this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
@@ -246,12 +251,18 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
         if (this.form) {
             columns.forEach(column => {
-                if (hiddenFields[value].indexOf(column.dataField) > -1) {
+                const visible = this.form.itemOption(column.dataField, 'visible') || true;
+
+                if (hiddenFields[value].indexOf(column.dataField) > -1 && visible) {
                     this.form.itemOption(column.dataField, 'visible', false);
                 } else {
                     this.form.itemOption(column.dataField, 'visible', true);
                 }
             });
+        } else {
+            setTimeout(() => {
+                this.displayLocationField(component, value);
+            }, 10);
         }
     }
 

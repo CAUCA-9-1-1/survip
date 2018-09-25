@@ -36,6 +36,7 @@
     "jasmine": "^3.1.0",
     "material-design-icons": "^3.0.1",
     "ng2-ckeditor": "^1.2.0",
+    "ol": "^5.2.0",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.1",
     "stream": "0.0.2",

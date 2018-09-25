@@ -1,0 +1,24 @@
+<div fxLayout="row">
+    <div fxFlex="80%">
+        <dx-text-box [readOnly]="true" [value]="coordinatesAsText"></dx-text-box>
+    </div>
+    <div fxFlex="20%" class="maps">
+        <mat-icon (click)="openMap()">my_location</mat-icon>
+    </div>
+</div>
+<dx-popup
+        class="popup"
+        [showTitle]="true"
+        title="{{'coordinates' | translate}}"
+        [closeOnOutsideClick]="true"
+        (onShown)="centerMap()"
+        (onShowing)="createMap()"
+        [toolbarItems]="toolbarItems"
+        [(visible)]="popupIsVisible">
+    <div *dxTemplate="let data of 'content'">
+        <div id="cursor">
+            <mat-icon>my_location</mat-icon>
+        </div>
+        <div id="map"></div>
+    </div>
+</dx-popup>

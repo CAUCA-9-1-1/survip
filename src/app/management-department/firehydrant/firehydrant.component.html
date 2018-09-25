@@ -19,7 +19,7 @@
         <dxo-lookup [dataSource]="locationTypes" displayExpr="text" valueExpr="name">
         </dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="coordinates" caption="{{'coordinates' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="coordinates" caption="{{'coordinates' | translate}}" editCellTemplate="editcoordinates" [visible]="false"></dxi-column>
     <dxi-column dataField="physicalPosition" caption="{{'physicalPosition' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="civicNumber" caption="{{'civicNumber' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="addressLocationType" caption="{{'addressLocationType' | translate}}" [visible]="false">
@@ -91,7 +91,7 @@
             <dxi-item itemType="group" colCount="2" colSpan="2">
                 <dxi-item dataField="civicNumber"></dxi-item>
                 <dxi-item dataField="addressLocationType"></dxi-item>
-                <dxi-item dataField="idLane" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="idLane"></dxi-item>
                 <dxi-item dataField="idIntersection" [visible]="false"></dxi-item>
                 <dxi-item dataField="coordinates" [visible]="false"></dxi-item>
                 <dxi-item dataField="physicalPosition" [visible]="false"></dxi-item>
@@ -112,4 +112,8 @@
             <dxi-item dataField="comments"></dxi-item>
         </dxo-form>
     </dxo-editing>
+
+    <div *dxTemplate="let field of 'editcoordinates'">
+        <app-geolocation [limitTo]="selectedCityGeometry" [value]="field.row.data.coordinates" (valueChanged)="field.setValue($event)"></app-geolocation>
+    </div>
 </dx-data-grid>
