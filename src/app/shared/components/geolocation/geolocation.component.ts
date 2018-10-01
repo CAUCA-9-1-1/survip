@@ -37,7 +37,9 @@ export class GeolocationComponent implements OnInit {
         return '';
     }
     set value(coordinates: string) {
-        this.selectedCoordinates = (new WKT()).readGeometry(coordinates).transform('EPSG:4326', 'EPSG:3857');
+        if (coordinates) {
+            this.selectedCoordinates = (new WKT()).readGeometry(coordinates).transform('EPSG:4326', 'EPSG:3857');
+        }
     }
 
     get coordinatesAsText(): string {
