@@ -244,6 +244,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     private displayLocationField(component, value) {
         const columns = component.option('columns');
+        const fieldToCheck = ['civicNumber', 'addressLocationType', 'coordinates', 'idLane', 'idIntersection', 'physicalPosition'];
         const hiddenFields = {
             'Address': ['idIntersection', 'coordinates', 'physicalPosition'],
             'LaneAndIntersection': ['civicNumber', 'addressLocationType', 'coordinates', 'physicalPosition'],
@@ -253,12 +254,14 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
         if (this.form) {
             columns.forEach(column => {
-                const visible = this.form.itemOption(column.dataField, 'visible') || true;
+                if (fieldToCheck.indexOf(column.dataField) > -1) {
+                    const visible = this.form.itemOption(column.dataField, 'visible') || true;
 
-                if (hiddenFields[value].indexOf(column.dataField) > -1 && visible) {
-                    this.form.itemOption(column.dataField, 'visible', false);
-                } else {
-                    this.form.itemOption(column.dataField, 'visible', true);
+                    if (hiddenFields[value].indexOf(column.dataField) > -1 && visible) {
+                        this.form.itemOption(column.dataField, 'visible', false);
+                    } else {
+                        this.form.itemOption(column.dataField, 'visible', true);
+                    }
                 }
             });
         } else {

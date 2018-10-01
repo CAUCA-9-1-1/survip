@@ -114,6 +114,8 @@
     </dxo-editing>
 
     <div *dxTemplate="let field of 'editcoordinates'">
-        <app-geolocation [limitTo]="selectedCityGeometry" [value]="field.row.data.coordinates" (valueChanged)="field.setValue($event)"></app-geolocation>
+        <ng-container *ngIf="field.row.data.locationType === 'Coordinates'">
+            <app-geolocation [limitTo]="selectedCityGeometry" [value]="field.row.data.coordinates" (valueChanged)="field.setValue($event)"></app-geolocation>
+        </ng-container>
     </div>
 </dx-data-grid>

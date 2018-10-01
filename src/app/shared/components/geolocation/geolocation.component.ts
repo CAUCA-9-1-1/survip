@@ -18,9 +18,10 @@ export class GeolocationComponent implements OnInit {
     @Output() valueChanged = new EventEmitter();
     @Input()
     set limitTo(coordinates) {
-        if (coordinates) {
+        if (coordinates && this.originalLimitOfMap !== JSON.stringify(coordinates)) {
             const features = (new GeoJSON()).readFeatures(coordinates);
 
+            this.originalLimitOfMap = JSON.stringify(coordinates);
             this.limitOfMap = features[0].getGeometry().transform('EPSG:4326', 'EPSG:3857');
         }
     }
@@ -37,7 +38,8 @@ export class GeolocationComponent implements OnInit {
         return '';
     }
     set value(coordinates: string) {
-        if (coordinates) {
+        if (coordinates && this.originalCoordinates !== coordinates) {
+            this.originalCoordinates = coordinates;
             this.selectedCoordinates = (new WKT()).readGeometry(coordinates).transform('EPSG:4326', 'EPSG:3857');
         }
     }
@@ -55,6 +57,8 @@ export class GeolocationComponent implements OnInit {
     public popupIsVisible = false;
     public toolbarItems = [];
 
+    private originalLimitOfMap: string;
+    private originalCoordinates: string;
     private selectedCoordinates: Point;
     private limitOfMap: Polygon;
     private layerWithStreet: TileLayer;
@@ -76,13 +80,13 @@ export class GeolocationComponent implements OnInit {
         });
     }
 
-    public ngOnInit() {
+    public ngOnInit() { }
+
+    public openMap() {
         this.layerWithStreet = new TileLayer({
             source: new OSM()
         });
-    }
 
-    public openMap() {
         this.popupIsVisible = true;
     }
 
