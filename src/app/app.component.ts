@@ -4,7 +4,7 @@ import {registerLocaleData} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import localeFr from '@angular/common/locales/fr';
 import 'devextreme-intl';
-import * as frMessages from 'devextreme/localization/messages/fr.json';
+import frMessages from 'devextreme/localization/messages/fr.json';
 import {locale, loadMessages} from 'devextreme/localization';
 
 import config from '../assets/config/config.json';
