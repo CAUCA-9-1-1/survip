@@ -177,12 +177,13 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public onInitNewRow(e) {
+        e.data.id = new Guid();
         e.data.color = '#FF0000';
         e.data.isActive = true;
         e.data.idCity = this.selectedCity;
         e.data.locationType = 'Address';
-        e.data.idOperatorTypeRate = 'Equal';
-        e.data.idOperatorTypePressure = 'Equal';
+        e.data.rateOperatorType = 'Equal';
+        e.data.pressureOperatorType = 'Equal';
         e.data.coordinates = null;
         e.data.idUnitOfMeasureRate = 'f13400a9-70b8-4325-b732-7fe7db72185c';
         e.data.idUnitOfMeasurePressure = 'f13400a9-70b8-4325-b732-7fe7db721865';
@@ -209,11 +210,11 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                 this.formFields[e.dataField] = ev.component;
             };
             e.editorOptions.onValueChanged = (ev) => {
-                if (ev.element.className.indexOf('dx-validator') === -1) {
+                if (ev.element.parentNode.className.indexOf('dx-editor-container') > -1) {
                     if (ev.value) {
                         e.component.filter(e.dataField, '=', new Guid(ev.value));
                     } else {
-                        e.component.clearFilter('idLane');
+                        e.component.clearFilter(e.dataField);
                     }
                 } else {
                     e.setValue(ev.value);
