@@ -1,6 +1,6 @@
-<app-no-access [fxShow]="!accessTo.cityType && !accessTo.connectionType && !accessTo.fireHydrantType && !accessTo.operatorType && !accessTo.PRAType && !accessTo.unitOfMeasure"></app-no-access>
+<app-no-access [fxShow]="!accessTo.cityType && !accessTo.connectionType && !accessTo.fireHydrantType && !accessTo.PRAType && !accessTo.unitOfMeasure"></app-no-access>
 <mat-tab-group
-        [selectedIndex]="accessTo.cityType ? 0 : accessTo.connectionType ? 1 : accessTo.fireHydrantType ? 2 : accessTo.operatorType ? 3 : accessTo.PRAType ? 4 : 5"
+        [selectedIndex]="accessTo.cityType ? 0 : accessTo.connectionType ? 1 : accessTo.fireHydrantType ? 2 : accessTo.PRAType ? 3 : 4"
         (selectedTabChange)="onSelectionChanged($event)">
     <mat-tab label="{{'cityType' | translate}}" [disabled]="!accessTo.cityType">
         <app-management-system-city-type [fxShow]="accessTo.cityType"></app-management-system-city-type>
