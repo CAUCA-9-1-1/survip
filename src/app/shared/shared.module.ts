@@ -14,7 +14,7 @@ import {
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
-import {DxButtonModule, DxPopupModule, DxTabPanelModule, DxTextBoxModule, DxValidatorModule, DxPopupModule} from 'devextreme-angular';
+import {DxButtonModule, DxPopupModule, DxTabPanelModule, DxTextBoxModule, DxValidatorModule} from 'devextreme-angular';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {WebSketchToolModule} from 'lib-sketch-tool';
