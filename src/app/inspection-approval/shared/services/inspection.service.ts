@@ -18,16 +18,8 @@ export class InspectionService extends RequestService {
         return this.get('Inspection');
     }
 
-    getBuildingToDo(search?: string): Observable<Inspection[]> {
-        let params = '?$orderby=fullLaneName&$top=201';
-
-        if (search) {
-            params += '&$filter=(contains(fullCivicNumber,\'' + search + '\'))';
-            params += ' or (contains(fullLaneName,\'' + search + '\'))';
-            params += ' or (contains(matricule,\'' + search + '\'))';
-        }
-
-        return this.get('odata/BuildingsWithoutInspection' + params).pipe(
+    getBuildingToDo(): Observable<Inspection[]> {
+        return this.get('odata/BuildingsWithoutInspection').pipe(
             map(data => {
                 return data.value;
             })
