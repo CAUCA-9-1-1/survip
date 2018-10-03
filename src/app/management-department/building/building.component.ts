@@ -172,7 +172,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                     if (ev.value) {
                         e.component.filter('idLane', '=', new Guid(ev.value));
                     } else {
-                        e.component.clearFilter('idLane');
+                        e.component.clearFilter();
                     }
                 } else {
                     e.setValue(ev.value);

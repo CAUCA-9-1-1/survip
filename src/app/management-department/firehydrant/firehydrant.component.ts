@@ -214,7 +214,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                     if (ev.value) {
                         e.component.filter(e.dataField, '=', new Guid(ev.value));
                     } else {
-                        e.component.clearFilter(e.dataField);
+                        e.component.clearFilter();
                     }
                 } else {
                     e.setValue(ev.value);
