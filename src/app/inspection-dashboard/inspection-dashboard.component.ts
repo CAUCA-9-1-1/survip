@@ -26,6 +26,7 @@ import {ReportGenerationService} from './shared/services/report-generation.servi
 import {ConfigurationTemplate} from '../shared/models/configuration-template.model';
 import {ReportTemplateService} from '../shared/services/report-template.service';
 import {AuthGuardService} from '../shared/services/auth-guard.service';
+import Guid from 'devextreme/core/guid';
 
 
 @Component({
@@ -241,6 +242,20 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
                 localStorage.setItem('column-visible-' + this.selectedMode, JSON.stringify(visible));
                 localStorage.setItem('column-width-' + this.selectedMode, JSON.stringify(width));
+            },
+            onEditorPreparing: (e) => {
+                if (e.dataField === 'idLaneTransversal' || e.dataField === 'idCity') {
+                    e.editorName = 'dxLookup';
+                    e.editorOptions.showClearButton = true;
+                    e.editorOptions.closeOnOutsideClick = true;
+                    e.editorOptions.onValueChanged = (ev) => {
+                        if (ev.value) {
+                            e.component.filter(e.dataField, '=', new Guid(ev.value));
+                        } else {
+                            e.component.clearFilter();
+                        }
+                    };
+                }
             },
             selection: {
                 mode: 'multiple'
