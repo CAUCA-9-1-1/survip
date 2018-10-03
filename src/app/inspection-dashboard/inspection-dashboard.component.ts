@@ -8,7 +8,6 @@ import {saveAs} from 'file-saver';
 
 import config from '../../assets/config/config.json';
 import {LaneService} from '../management-department/shared/services/lane.service';
-import {Lane} from '../management-department/shared/models/lane.model';
 import {RiskLevelService} from '../management-system/shared/services/risk-level.service';
 import {RiskLevel} from '../management-system/shared/models/risk-level.model';
 import {UtilisationCode} from '../management-system/shared/models/utilisation-code.model';
@@ -51,8 +50,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     public templateIdentifiers: ConfigurationTemplate[];
     public dataSource: any = {};
     public webusers: WebuserForWeb[] = [];
-    public lanes: Lane[] = [];
-    public cities: City[] = [];
+    public lanes: any = { store: [] };
+    public cities: any = { store: [] };
     public riskLevels: RiskLevel[] = [];
     public utilisationCodes: UtilisationCode[] = [];
     public labels = {};
@@ -156,8 +155,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     private checkLoadedElement(): boolean {
         if (
             this.angularIsLoaded && this.labels !== {} &&
-            this.riskLevels.length && this.lanes.length &&
-            this.cities.length && this.utilisationCodes.length &&
+            this.riskLevels.length && this.lanes.store.length &&
+            this.cities.store.length && this.utilisationCodes.length &&
             this.webusers.length
         ) {
             this.setDatagrid();
@@ -244,7 +243,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 localStorage.setItem('column-width-' + this.selectedMode, JSON.stringify(width));
             },
             onEditorPreparing: (e) => {
-                if (e.dataField === 'idLaneTransversal' || e.dataField === 'idCity') {
+                if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal' || e.dataField === 'idCity') {
                     e.editorName = 'dxLookup';
                     e.editorOptions.showClearButton = true;
                     e.editorOptions.closeOnOutsideClick = true;
@@ -383,9 +382,14 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[2],
             width: width[2] || null,
         }, {
-            dataField: 'fullLaneName',
+            dataField: 'idLane',
             caption: this.labels['lane'],
             dataType: 'string',
+            lookup: {
+                dataSource: this.lanes,
+                valueExpr: 'id',
+                displayExpr: 'name',
+            },
             visible: visible[3],
             width: width[3] || null,
         }, {
@@ -408,11 +412,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             lookup: {
                 dataSource: this.cities,
                 valueExpr: 'id',
-                displayExpr: (data) => {
-                    const city = City.fromJSON(data);
-
-                    return city.getLocalization(config.locale);
-                }
+                displayExpr: 'name'
             },
         }, {
             dataField: 'postalCode',
@@ -613,14 +613,22 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     private loadLanes() {
         this.laneService.localized().subscribe(data => {
-            this.lanes = data;
+            this.lanes = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
             this.checkLoadedElement();
         });
     }
 
     private loadCities() {
-        this.cityService.getAll().subscribe(data => {
-            this.cities = data;
+        this.cityService.localized().subscribe(data => {
+            this.cities = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
             this.checkLoadedElement();
         });
     }
