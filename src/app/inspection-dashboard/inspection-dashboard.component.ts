@@ -412,7 +412,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[7],
             width: width[7] || null,
         }, {
-            dataField: 'batchDescription',
+            dataField: 'idBatch',
             caption: this.labels['batch'],
             dataType: 'string',
             visible: visible[8],
