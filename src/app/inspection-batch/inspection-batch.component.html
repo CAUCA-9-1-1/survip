@@ -67,9 +67,8 @@
                 (onInitialized)="setFormInspectionField(field)"
                 (onRowUpdated)="onBuildingsUpdated($event)"
                 (onRowRemoved)="onBuildingsRemoved($event)">
-            <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="8%" caption=" "></dxi-column>
-            <dxi-column
-                    dataField="civicNumber"
+            <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="90px" caption=" "></dxi-column>
+            <dxi-column dataField="civicNumber"
                     caption="{{'civicNumber' | translate}}"
                     [allowEditing]="false"
                     width="14%">
