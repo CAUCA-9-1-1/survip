@@ -26,6 +26,8 @@ import {ConfigurationTemplate} from '../shared/models/configuration-template.mod
 import {ReportTemplateService} from '../shared/services/report-template.service';
 import {AuthGuardService} from '../shared/services/auth-guard.service';
 import Guid from 'devextreme/core/guid';
+import {InspectionStatusService} from './shared/services/inspection-status.service';
+import {EnumModel} from '../management-type-system/shared/models/enum.model';
 
 
 @Component({
@@ -41,7 +43,8 @@ import Guid from 'devextreme/core/guid';
         PictureService,
         WebuserService,
         ReportGenerationService,
-        ReportTemplateService
+        ReportTemplateService,
+        InspectionStatusService,
     ]
 })
 export class InspectionDashboardComponent implements OnInit, AfterViewInit {
@@ -64,10 +67,13 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         batchManagement: false,
     };
 
+    private inspectionStatus: EnumModel[] = [];
+
     constructor(
         private webuserService: WebuserService,
         private laneService: LaneService,
         private cityService: CityService,
+        private inspectionStatusService: InspectionStatusService,
         private riskLevelService: RiskLevelService,
         private utilisationCodeService: UtilisationCodeService,
         private translateService: TranslateService,
@@ -84,6 +90,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.templateIdentifiers = [];
 
+        this.inspectionStatusService.getAll().subscribe(data => this.inspectionStatus = data);
         this.loadRiskLevel();
         this.loadCities();
         this.loadLanes();
@@ -441,27 +448,9 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[9],
             width: width[9] || null,
             lookup: {
-                displayExpr: 'name',
-                valueExpr: 'id',
-                dataSource: [{
-                    id: 'Todo',
-                    name: this.labels['todo']
-                }, {
-                    id: 'Started',
-                    name: this.labels['started']
-                }, {
-                    id: 'WaitingForApprobation',
-                    name: this.labels['waitingForApprobation']
-                }, {
-                    id: 'Approved',
-                    name: this.labels['approved']
-                }, {
-                    id: 'Refused',
-                    name: this.labels['refused']
-                }, {
-                    id: 'Canceled',
-                    name: this.labels['canceled']
-                }]
+                displayExpr: 'text',
+                valueExpr: 'name',
+                dataSource: this.inspectionStatus
             }
         }, {
             dataField: 'hasAnomaly',

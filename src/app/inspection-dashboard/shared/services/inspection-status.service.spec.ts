@@ -1,17 +1,17 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { TestModule } from '../../../test.module.spec';
-import { OperatorTypeService } from './operator-type.service';
+import { InspectionStatusService } from './inspection-status.service';
 
 describe('InspectionStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ TestModule ],
-      providers: [OperatorTypeService]
+      providers: [InspectionStatusService]
     });
   });
 
-  it('should ...', inject([OperatorTypeService], (service: OperatorTypeService) => {
+  it('should ...', inject([InspectionStatusService], (service: InspectionStatusService) => {
     expect(service).toBeTruthy();
   }));
 });
