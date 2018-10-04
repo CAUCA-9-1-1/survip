@@ -55,7 +55,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     public ngOnInit() {
         this.loadQuestion();
         this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion', 'choiceAnswer',
-                                 'textAnswer', 'dateAnswer', 'removeQuestionChoices', 'groupedQuestion'])
+                                 'textAnswer', 'dateAnswer', 'removeQuestionChoices', 'groupedQuestion',
+                                 'endGroupQuestion'])
             .subscribe(labels => {
                 this.messages = labels;
                 this.questionTypeOptions.dataSource = [
@@ -121,7 +122,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         return question;
     }
 
-    public InitNewQuestionLocalization(idQuestionParent: string) {
+    private InitNewQuestionLocalization(idQuestionParent: string, newName: string = '') {
         let parentLocalization = [];
         if (idQuestionParent) {
             parentLocalization = this.questions.filter(parent => parent.id === idQuestionParent) as Question[];
@@ -131,7 +132,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             const languageItem = {
                 languageCode: language.toLowerCase(),
                 isActive: true,
-                name: '',
+                name: newName,
                 title: parentLocalization[0] ? parentLocalization[0].getLocalization(language.toLowerCase()) : ''
             };
             localizations.push(languageItem);
@@ -271,11 +272,24 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     public setNextQuestion() {
         this.nextQuestions = [];
 
-        this.questions.forEach((next_question) => {
-            if (next_question.id !== this.questions[this.selectedIndex].id) {
+        this.addCompleteGroupQuestion();
+
+        this.questions.sort((a, b) => a.sequence > b.sequence ? 1 : -1).forEach((next_question) => {
+            if ((next_question.id !== this.questions[this.selectedIndex].id) &&
+                (next_question.idSurveyQuestionParent === this.questions[this.selectedIndex].idSurveyQuestionParent)) {
                 this.nextQuestions.push(next_question);
             }
         });
+    }
+    public addCompleteGroupQuestion() {
+        const endGroupQuestion = new Question();
+        const idParent = this.questions[this.selectedIndex].idSurveyQuestionParent;
+        if (idParent) {
+            endGroupQuestion.idSurveyQuestionParent = idParent;
+            endGroupQuestion.idSurveyQuestionNext = '-1';
+            endGroupQuestion.localizations = this.InitNewQuestionLocalization(idParent, this.messages['endGroupQuestion']);
+            this.nextQuestions.push(endGroupQuestion);
+        }
     }
 
     public loadQuestion(newId?: string) {
