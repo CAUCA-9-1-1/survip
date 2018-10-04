@@ -289,7 +289,7 @@
   "todo": "Todo",
   "started": "Started",
   "absent": "Absent",
-  "waitingApprobation": "Waiting approbation",
+  "waitingForApprobation": "Waiting for approbation",
   "approved": "Approved",
   "refused": "Refused",
   "canceled": "Canceled",

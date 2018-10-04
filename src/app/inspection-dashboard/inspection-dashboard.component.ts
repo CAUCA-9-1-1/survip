@@ -444,22 +444,22 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 displayExpr: 'name',
                 valueExpr: 'id',
                 dataSource: [{
-                    id: 0,
+                    id: 'Todo',
                     name: this.labels['todo']
                 }, {
-                    id: 1,
+                    id: 'Started',
                     name: this.labels['started']
                 }, {
-                    id: 2,
-                    name: this.labels['waitingApprobation']
+                    id: 'WaitingForApprobation',
+                    name: this.labels['waitingForApprobation']
                 }, {
-                    id: 3,
+                    id: 'Approved',
                     name: this.labels['approved']
                 }, {
-                    id: 4,
+                    id: 'Refused',
                     name: this.labels['refused']
                 }, {
-                    id: 5,
+                    id: 'Canceled',
                     name: this.labels['canceled']
                 }]
             }
