@@ -352,5 +352,6 @@
   "groupedQuestion":"Groupe de question",
   "maxOccurrenceQuestion":"Occurrence max.",
   "minOccurrenceQuestion":"Occurrence min.",
-  "questionOccurrenceValidation":"L'occurrence maximum doit être égale ou supérieure à l'occurrence minimum."
+  "questionOccurrenceValidation":"L'occurrence maximum doit être égale ou supérieure à l'occurrence minimum.",
+  "endGroupQuestion":"Dernière question du groupe"
 }
