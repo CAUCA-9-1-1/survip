@@ -272,7 +272,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         this.nextQuestions = [];
 
         this.questions.forEach((next_question) => {
-            if (next_question.id !== this.questions[this.selectedIndex].id) {
+            if ((next_question.id !== this.questions[this.selectedIndex].id) &&
+                (next_question.idSurveyQuestionParent === this.questions[this.selectedIndex].idSurveyQuestionParent)) {
                 this.nextQuestions.push(next_question);
             }
         });
