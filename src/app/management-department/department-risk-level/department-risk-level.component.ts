@@ -47,6 +47,18 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
         this.loadSurvey();
     }
 
+  changeDropDownBoxValue(e, dropDownBoxInstance) {
+      console.log('drop down changed', JSON.stringify(e.selectedRowKeys))
+      const keys = e.selectedRowKeys;
+      dropDownBoxInstance.option('value', keys);
+  }
+
+  onValueChanged(args, setValueMethod) {
+
+    console.log('nw value:', args.value);
+    setValueMethod(args.value);
+  }
+
     onInitNewRow(e) {
         e.data.hasGeneralInformation = true;
         e.data.hasImplantationPlan = false;

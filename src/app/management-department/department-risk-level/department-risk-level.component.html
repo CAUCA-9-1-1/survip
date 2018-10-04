@@ -13,10 +13,10 @@
         </dxo-lookup>
     </dxi-column>
     <dxi-column
-            dataField="idRiskLevel"
-            caption="{{'riskLevel' | translate}}">
-        <dxo-lookup [dataSource]="riskLevels" displayExpr="name" valueExpr="id">
-        </dxo-lookup>
+            dataField="riskLevelIds"
+            caption="{{'riskLevel' | translate}}"
+            editCellTemplate="riskLevelTemplate"
+    >
     </dxi-column>
     <dxi-column
             dataField="idSurvey"
@@ -37,6 +37,9 @@
     <dxi-column dataField="hasBuildingAnomalies" dataType="boolean" caption="{{'buildingAnomalies' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
+
+
+
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
@@ -44,7 +47,7 @@
 
         <dxo-form colCount="4">
             <dxi-item dataField="idFireSafetyDepartment" [colSpan]="4" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="idRiskLevel" [colSpan]="2" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="riskLevelIds" [colSpan]="2" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idSurvey" [colSpan]="2"></dxi-item>
             <dxi-item dataField="hasGeneralInformation" [editorOptions]="{ disabled: true }"></dxi-item>
             <dxi-item dataField="hasImplantationPlan"></dxi-item>
@@ -60,4 +63,24 @@
             <dxi-item dataField="isActive"></dxi-item>
         </dxo-form>
     </dxo-editing>
+
+  <div *dxTemplate="let cellData of 'riskLevelTemplate'">
+    <!-- -->
+    <dx-drop-down-box #ddBox  [value]="cellData.value"  [dataSource]="riskLevels" displayExpr="name" valueExpr="id"  [showClearButton]="true" (onValueChanged)="onValueChanged($event, cellData.setValue)">
+
+      <dxo-drop-down-options [height]="500"></dxo-drop-down-options>
+
+      <div *dxTemplate="let data of 'content'">
+
+        <!-- "-->
+        <dx-data-grid keyExpr="id" [selectedRowKeys]="[cellData.value]" width="100%" [dataSource]="riskLevels" [selection]='{ mode: "multiple"}' (onSelectionChanged)="changeDropDownBoxValue($event, ddBox.instance)">
+          <dxi-column dataField="name" caption="Nom"></dxi-column>
+          <dxo-scrolling mode="infinite"></dxo-scrolling>
+          <!--<dxo-selection mode="single" >-->
+
+        </dx-data-grid>
+
+      </div>
+    </dx-drop-down-box>
+  </div>
 </dx-data-grid>
