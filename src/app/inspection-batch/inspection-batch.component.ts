@@ -13,6 +13,7 @@ import {BuildingService} from '../management-department/shared/services/building
 import {InspectionService} from '../inspection-approval/shared/services/inspection.service';
 import {InspectionBatch} from './shared/models/inspection-batch.model';
 import {Inspection} from '../inspection-approval/shared/models/inspection.model';
+import {BuildingNotInspected} from './shared/models/building-not-inspected.model';
 
 
 @Component({
@@ -40,15 +41,12 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     inspectorsList: WebuserForWeb[] = [];
     buildings: Building[] = [];
     buildingsInspected: Building[] = [];
-    buildingsNotInspected: Building[] = [];
+    buildingsNotInspected: BuildingNotInspected[] = [];
     buildingsWithoutInspection: Inspection[] = [];
     popupBuildingVisible = false;
     popupBuildingSelected = [];
     popupButtons: any[];
     lastSelected: any = {};
-    searchEditorOptions = {
-        onValueChanged: (e) => this.onSearch(e)
-    };
 
     constructor(
         translateService: TranslateService,
@@ -412,27 +410,17 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
                 if (building.id === inspection['idBuilding']) {
                     building = Object.assign({}, building);
 
-                    this.buildingsNotInspected.push(building);
+                    this.buildingsNotInspected.push(BuildingNotInspected.fromJSON({
+                        id: building.id,
+                        civicNumber: inspection['fullCivicNumber'],
+                        laneName: inspection['fullLaneName'],
+                        cityName: building['city'],
+                        matricule: inspection['matricule'],
+                        riskLevel: building['riskLevel'],
+                    }));
                 }
             });
         });
-    }
-
-    private onSearch(e) {
-        if (!e.value) {
-            return null;
-        }
-
-        if (this.timer) {
-            clearTimeout(this.timer);
-        }
-
-        this.timer = setTimeout((function(search) {
-            this.inspectionService.getBuildingToDo(search).subscribe(data => {
-                this.buildingsWithoutInspection = data;
-                this.setBuildingNotInspected();
-            });
-        }).bind(this, e.value), 1000);
     }
 
     private loadWebuser() {
@@ -442,12 +430,22 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     private loadBuilding() {
         this.buildingService.getActive().subscribe(data => {
             this.buildings = data;
-            this.setBuildingInspected();
-            this.setBuildingNotInspected();
+
+            if (this.buildingsWithoutInspection.length) {
+                this.setBuildingInspected();
+                this.setBuildingNotInspected();
+            }
         });
     }
 
     private loadInspection() {
-        this.inspectionService.getBuildingToDo().subscribe(data => this.buildingsWithoutInspection = data);
+        this.inspectionService.getBuildingToDo().subscribe(data => {
+            this.buildingsWithoutInspection = data;
+
+            if (this.buildings.length) {
+                this.setBuildingInspected();
+                this.setBuildingNotInspected();
+            }
+        });
     }
 }

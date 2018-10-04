@@ -107,11 +107,12 @@
                 pageLoadMode="scrollBottom"
                 [(selectedItems)]="popupBuildingSelected"
                 [searchEnabled]="true"
-                [searchEditorOptions]="searchEditorOptions"
+                [searchExpr]="['civicNumber','laneName', 'cityName', 'matricule', 'riskLevel']"
+                [searchTimeout]="1000"
                 selectionMode="multiple">
             <div *dxTemplate="let item of 'listItem'">
-                <div>{{item.civicNumber}}</div>&nbsp;<div>{{item.lane}}</div>,
-                <div>{{item.city}}</div>, <div>{{item.riskLevel}}</div>
+                <div>{{item.civicNumber}}</div>&nbsp;<div>{{item.laneName}}</div>,
+                <div>{{item.cityName}}</div>, <div>{{item.riskLevel}} ({{item.matricule}})</div>
             </div>
         </dx-list>
     </div>
