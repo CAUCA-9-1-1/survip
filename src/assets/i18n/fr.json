@@ -292,7 +292,7 @@
   "todo": "À faire",
   "started": "Débutée",
   "absent": "Absent",
-  "waitingApprobation": "En attente d'approbation",
+  "waitingForApprobation": "En attente d'approbation",
   "approved": "Approuvée",
   "refused": "Refusée",
   "canceled": "Annulée",
