@@ -300,7 +300,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         const idParent = this.questions[this.selectedIndex].idSurveyQuestionParent;
         if (idParent) {
             endGroupQuestion.idSurveyQuestionParent = idParent;
-            endGroupQuestion.idSurveyQuestionNext = '00000000-0000-0000-0000-000000000000';
+            endGroupQuestion.id = '00000000-0000-0000-0000-000000000000';
             endGroupQuestion.localizations = this.InitNewQuestionLocalization(idParent, this.messages['endGroupQuestion']);
             this.nextQuestions.push(endGroupQuestion);
         }
