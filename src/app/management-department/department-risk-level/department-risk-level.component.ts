@@ -66,7 +66,7 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
         e.data.hasWaterSupply = false;
         e.data.hasBuildingDetails = true;
         e.data.hasBuildingContacts = false;
-        e.data.hasBuildingPNAPS = false;
+        e.data.hasBuildingPnaps = false;
         e.data.hasBuildingHazardousMaterials = false;
         e.data.hasBuildingFireProtection = false;
         e.data.hasBuildingParticularRisks = false;

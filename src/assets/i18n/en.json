@@ -32,7 +32,7 @@
   "buildingFireProtection": "Building fire protection",
   "buildingParticularRisks": "Building particular risks",
   "buildingAnomalies": "Building anomalies",
-  "departmentRiskLevel": "Level of risk by SSI",
+  "departmentRiskLevel": "Risk levels by fire department",
   "reportConfiguration": "Reports' configuration",
   "cancel": "Cancel",
   "create": "Create",
@@ -352,4 +352,8 @@
   "minOccurrenceQuestion":"Min. occurrence",
   "questionOccurrenceValidation":"Maximum occurrence must be equal or greater than the minimum occurrence.",
   "endGroupQuestion":"[Last group question]"
+  "questionOccurrenceValidation":"Maximum occurrence must be equal or greater than the minimum occurrence.",
+  "groupTitleFireSafetyDepartmentRiskLevel": "Fire safety department - risk levels",
+  "groupTitleSurvey": "Survey",
+  "groupTitleConfiguration": "Configuration"
 }

@@ -16,6 +16,7 @@
             dataField="riskLevelIds"
             caption="{{'riskLevel' | translate}}"
             editCellTemplate="riskLevelTemplate"
+            cellTemplate="riskLevelTemplateReadOnly"
     >
     </dxi-column>
     <dxi-column
@@ -30,57 +31,61 @@
     <dxi-column dataField="hasWaterSupply" dataType="boolean" caption="{{'waterSupply' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="hasBuildingDetails" dataType="boolean" caption="{{'buildingDetails' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="hasBuildingContacts" dataType="boolean" caption="{{'buildingContacts' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="hasBuildingPNAPS" dataType="boolean" caption="{{'buildingPnaps' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="hasBuildingPnaps" dataType="boolean" caption="{{'buildingPnaps' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="hasBuildingHazardousMaterials" dataType="boolean" caption="{{'buildingHazardousMaterials' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="hasBuildingFireProtection" dataType="boolean" caption="{{'buildingFireProtection' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="hasBuildingParticularRisks" dataType="boolean" caption="{{'buildingParticularRisks' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="hasBuildingAnomalies" dataType="boolean" caption="{{'buildingAnomalies' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
-
-
-
+    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%" [visible]="false"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-        <dxo-popup title="{{'inspectionManagement' | translate}}" [showTitle]="true"></dxo-popup>
+        <dxo-popup title="{{'departmentRiskLevel' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="4">
-            <dxi-item dataField="idFireSafetyDepartment" [colSpan]="4" [isRequired]="true"></dxi-item>
+          <dxi-item itemType="group" caption="{{'groupTitleFireSafetyDepartmentRiskLevel' | translate}}" [colSpan]="4" [colCount]="4">
+            <dxi-item dataField="idFireSafetyDepartment" [colSpan]="2" [isRequired]="true"></dxi-item>
             <dxi-item dataField="riskLevelIds" [colSpan]="2" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="idSurvey" [colSpan]="2"></dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group" caption="{{'groupTitleConfiguration' | translate}}" [colCount]="4" [colSpan]="4">
             <dxi-item dataField="hasGeneralInformation" [editorOptions]="{ disabled: true }"></dxi-item>
             <dxi-item dataField="hasImplantationPlan"></dxi-item>
             <dxi-item dataField="hasCourse"></dxi-item>
             <dxi-item dataField="hasWaterSupply"></dxi-item>
             <dxi-item dataField="hasBuildingDetails"></dxi-item>
             <dxi-item dataField="hasBuildingContacts"></dxi-item>
-            <dxi-item dataField="hasBuildingPNAPS"></dxi-item>
+            <dxi-item dataField="hasBuildingPnaps"></dxi-item>
             <dxi-item dataField="hasBuildingHazardousMaterials"></dxi-item>
             <dxi-item dataField="hasBuildingFireProtection"></dxi-item>
             <dxi-item dataField="hasBuildingParticularRisks"></dxi-item>
             <dxi-item dataField="hasBuildingAnomalies"></dxi-item>
-            <dxi-item dataField="isActive"></dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group" caption="{{'groupTitleSurvey' | translate}}" [colCount]="4" [colSpan]="4">
+            <dxi-item dataField="idSurvey" [colSpan]="2"></dxi-item>
+          </dxi-item>
         </dxo-form>
     </dxo-editing>
 
   <div *dxTemplate="let cellData of 'riskLevelTemplate'">
-    <!-- -->
     <dx-drop-down-box #ddBox  [value]="cellData.value"  [dataSource]="riskLevels" displayExpr="name" valueExpr="id"  [showClearButton]="true" (onValueChanged)="onValueChanged($event, cellData.setValue)">
 
       <dxo-drop-down-options [height]="500"></dxo-drop-down-options>
 
       <div *dxTemplate="let data of 'content'">
 
-        <!-- "-->
-        <dx-data-grid keyExpr="id" [selectedRowKeys]="[cellData.value]" width="100%" [dataSource]="riskLevels" [selection]='{ mode: "multiple"}' (onSelectionChanged)="changeDropDownBoxValue($event, ddBox.instance)">
+        <dx-data-grid keyExpr="id" [selectedRowKeys]="cellData.value" width="100%" [dataSource]="riskLevels" (onSelectionChanged)="changeDropDownBoxValue($event, ddBox.instance)">
           <dxi-column dataField="name" caption="Nom"></dxi-column>
+          <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
           <dxo-scrolling mode="infinite"></dxo-scrolling>
-          <!--<dxo-selection mode="single" >-->
-
         </dx-data-grid>
 
       </div>
+    </dx-drop-down-box>
+  </div>
+
+  <div *dxTemplate="let cellData of 'riskLevelTemplateReadOnly'">
+    <dx-drop-down-box #ddBox  [value]="cellData.value"  [dataSource]="riskLevels" displayExpr="name" valueExpr="id" [showDropDownButton]="false"  [showClearButton]="false" [readOnly]="true">
     </dx-drop-down-box>
   </div>
 </dx-data-grid>
