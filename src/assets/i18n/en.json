@@ -351,5 +351,5 @@
   "maxOccurrenceQuestion":"Max. occurrence",
   "minOccurrenceQuestion":"Min. occurrence",
   "questionOccurrenceValidation":"Maximum occurrence must be equal or greater than the minimum occurrence.",
-  "endGroupQuestion":"Last group question"
+  "endGroupQuestion":"[Last group question]"
 }
