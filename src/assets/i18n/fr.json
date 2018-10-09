@@ -355,7 +355,7 @@
   "questionOccurrenceValidation":"L'occurrence maximum doit être égale ou supérieure à l'occurrence minimum.",
   "groupTitleFireSafetyDepartmentRiskLevel": "SSI - Niveaux de risque",
   "groupTitleSurvey": "Questionnaire",
-  "groupTitleConfiguration": "Configuration"
+  "groupTitleConfiguration": "Configuration",
   "questionOccurrenceValidation":"L'occurrence maximum doit être égale ou supérieure à l'occurrence minimum.",
   "endGroupQuestion":"[Dernière question du groupe]"
 }
