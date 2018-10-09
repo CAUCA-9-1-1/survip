@@ -36,7 +36,7 @@
     "fabric": "^2.3.6",
     "file-saver": "^1.3.3",
     "jasmine": "^3.1.0",
-    "lib-sketch-tool": "3.0.8",
+    "lib-sketch-tool": "3.0.12",
     "material-design-icons": "^3.0.1",
     "ng2-ckeditor": "^1.2.0",
     "ngx-color-picker": "^6.6.0",
