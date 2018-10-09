@@ -149,6 +149,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             .sort((a, b) => b.sequence > a.sequence ? 1 : -1);
 
         if (previousSequencedQuestion[0]) {
+            const idToFollow = this.questions[this.selectedIndex].id;
             const sequence1 = this.questions[this.selectedIndex].sequence;
             const sequence2 = previousSequencedQuestion[0].sequence;
 
@@ -157,7 +158,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
             this.orderQuestion(this.questions[this.selectedIndex], previousSequencedQuestion[0]);
 
-            this.selectedIndex = this.findQuestionIndex(this.questions[this.selectedIndex].id);
+            this.selectedIndex = this.findQuestionIndex(idToFollow);
+            this.questions[this.selectedIndex]['selected'] = true;
 
             this.moveQuestion();
         }
@@ -169,6 +171,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
                 question.idSurveyQuestionParent === this.questions[this.selectedIndex].idSurveyQuestionParent);
 
         if (nextSequencedQuestion[0]) {
+            const idToFollow = this.questions[this.selectedIndex].id;
             const sequence1 = this.questions[this.selectedIndex].sequence;
             const sequence2 = nextSequencedQuestion[0].sequence;
 
@@ -177,7 +180,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
             this.orderQuestion(this.questions[this.selectedIndex], nextSequencedQuestion[0]);
 
-            this.selectedIndex = this.findQuestionIndex(this.questions[this.selectedIndex].id);
+            this.selectedIndex = this.findQuestionIndex(idToFollow);
+            this.questions[this.selectedIndex]['selected'] = true;
 
             this.moveQuestion();
         }
