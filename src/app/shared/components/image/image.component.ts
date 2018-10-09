@@ -26,7 +26,7 @@ export class ImageComponent implements OnInit {
         this.idPicture = id;
 
         if (id) {
-            this.icon = 'edit';
+            this.icon = 'image';
             if (this.useDataCopy) {
               this.inspectionPictureService.getOne(id).subscribe(data => {
                 this.src = data.dataUri;
