@@ -56,6 +56,9 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
   }
 
   private changeFireSafetyDepartment(fireSafetyDepartmentId: string) {
+    if (!fireSafetyDepartmentId) {
+      fireSafetyDepartmentId = '00000000-0000-0000-0000-000000000000';
+    }
     this.availableRiskLevels = [];
     this.loadingVisible = true;
     this.inspectionManagementService.getUsedRiskLevel(this.currentConfigurationId, fireSafetyDepartmentId)
@@ -65,12 +68,12 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
       });
   }
 
-  changeDropDownBoxValue(e, dropDownBoxInstance) {
+  public changeDropDownBoxValue(e, dropDownBoxInstance) {
     const keys = e.selectedRowKeys;
     dropDownBoxInstance.option('value', keys);
   }
 
-  onValueChanged(args, setValueMethod) {
+  public onValueChanged(args, setValueMethod) {
     setValueMethod(args.value);
   }
 
@@ -80,6 +83,8 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
   }
 
   onInitNewRow(e) {
+    this.currentConfigurationId = '00000000-0000-0000-0000-000000000000';
+    this.changeFireSafetyDepartment( e.data.idFireSafetyDepartment);
     e.data.hasGeneralInformation = true;
     e.data.hasImplantationPlan = false;
     e.data.hasCourse = false;

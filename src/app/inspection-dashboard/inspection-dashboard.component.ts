@@ -12,7 +12,6 @@ import {RiskLevelService} from '../management-system/shared/services/risk-level.
 import {RiskLevel} from '../management-system/shared/models/risk-level.model';
 import {UtilisationCode} from '../management-system/shared/models/utilisation-code.model';
 import {UtilisationCodeService} from '../management-system/shared/services/utilisation-code.service';
-import {City} from '../management-address/shared/models/city.model';
 import {CityService} from '../management-address/shared/services/city.service';
 import {InspectionBatchService} from '../inspection-batch/shared/services/inspection-batch.service';
 import {InspectionBatch} from '../inspection-batch/shared/models/inspection-batch.model';

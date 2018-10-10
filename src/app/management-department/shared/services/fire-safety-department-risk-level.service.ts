@@ -17,7 +17,6 @@ export class FireSafetyDepartmentRiskLevelService extends RequestService {
   }
 
   save(ssi: FireSafetyDepartmentRiskLevel) {
-    console.log('saving...', JSON.stringify(ssi));
     return this.post('FireSafetyDepartmentRiskLevel', ssi);
   }
 
