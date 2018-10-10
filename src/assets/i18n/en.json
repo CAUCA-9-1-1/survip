@@ -352,7 +352,14 @@
   "minOccurrenceQuestion":"Min. occurrence",
   "questionOccurrenceValidation":"Maximum occurrence must be equal or greater than the minimum occurrence.",
   "endGroupQuestion":"[Last group question]",
-  "questionOccurrenceValidation":"Maximum occurrence must be equal or greater than the minimum occurrence.",
+  "groupedQuestionTypeChangedWarning":"You have to delete all question within the group to change the type 'Grouped question'.",
+  "warning":"Warning",
+  "enumQuestionType": {
+    "choiceAnswer":"Answer with multiple choice",
+    "textAnswer":"Answer with text",
+    "dateAnswer":"Answer with date",
+    "groupedQuestion":"Grouped question"
+  },
   "groupTitleFireSafetyDepartmentRiskLevel": "Fire safety department - risk levels",
   "groupTitleSurvey": "Survey",
   "groupTitleConfiguration": "Configuration"

@@ -15,3 +15,10 @@ export class Question extends WithLocalization {
         return Object.assign(question, data);
     }
 }
+
+export enum SurveyQuestionTypeEnum {
+    choiceAnswer = 1,
+    textAnswer = 2,
+    dateAnswer = 3,
+    groupedQuestion = 4
+};

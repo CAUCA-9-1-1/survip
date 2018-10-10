@@ -2,12 +2,12 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {MatSnackBar} from '@angular/material';
 import {DxTreeViewComponent} from 'devextreme-angular';
-import {confirm} from 'devextreme/ui/dialog';
+import {confirm, alert} from 'devextreme/ui/dialog';
 
 import config from '../../../assets/config/config.json';
 import packageInfo from '../../../assets/config/package.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
-import {Question} from '../shared/models/question.model';
+import {Question, SurveyQuestionTypeEnum} from '../shared/models/question.model';
 import {QuestionService} from '../shared/services/question.service';
 import {ChoiceService} from '../shared/services/choice.service';
 import {Choice} from '../shared/models/choice.model';
@@ -25,6 +25,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     @Input() survey = '';
     @ViewChild(DxTreeViewComponent) treeViewQuestion: DxTreeViewComponent;
 
+    public questionTypeEnum = SurveyQuestionTypeEnum;
     public questions: Question[] = [];
     public nextQuestions: Question[] = [];
     public selectedIndex = -1;
@@ -58,16 +59,11 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         this.loadQuestion();
         this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion', 'choiceAnswer',
             'textAnswer', 'dateAnswer', 'removeQuestionChoices', 'groupedQuestion',
-            'endGroupQuestion'])
+            'endGroupQuestion', 'groupedQuestionTypeChangedWarning', 'warning'])
             .subscribe(labels => {
                 this.messages = labels;
-                this.questionTypeOptions.dataSource = [
-                    {value: 1, text: labels['choiceAnswer']},
-                    {value: 2, text: labels['textAnswer']},
-                    {value: 3, text: labels['dateAnswer']},
-                    {value: 4, text: labels['groupedQuestion']}
-                ];
             });
+        this.questionTypeOptions.dataSource = this.questionService.getEnumsKeysCollection(SurveyQuestionTypeEnum);
     }
 
     public getQuestionTreeviewTitle(data) {
@@ -113,7 +109,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     public createNewQuestion(idQuestionParent: string = null) {
         const question = new Question();
         question.idSurvey = this.survey;
-        question.questionType = 2;
+        question.questionType = SurveyQuestionTypeEnum.textAnswer;
         if (idQuestionParent) {
             question.idSurveyQuestionParent = idQuestionParent;
         }
@@ -201,27 +197,37 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             return;
         }
 
-        let questionType = data.value;
-        if ((data.previousValue === 1) && (!this.isLoading) && (this.dataSource.length > 0)) {
+        this.choiceQuestionTypeChanged(data);
+
+        this.groupedQuestionTypeChanged(data);
+
+        this.isLoading = false;
+    }
+
+    private choiceQuestionTypeChanged(data) {
+        if ((data.previousValue === SurveyQuestionTypeEnum.choiceAnswer) && (!this.isLoading) && (this.dataSource.length > 0)) {
             confirm(this.messages['removeQuestionChoices'], this.messages['question']).then((result) => {
                 if (!result) {
                     this.questionTypeChoiceCanceled = true;
                     data.component.option('value', data.previousValue);
-                    questionType = data.previousValue;
+                    this.displayOptionDetails(data.previousValue);
                 } else {
                     this.choiceService.deleteQuestionsChoices(this.questions[this.selectedIndex].id)
-                        .subscribe(deleteResult => {
-                            if (deleteResult) {
-                                console.log('Les choix de réponses pour cette question ont été supprimés');
-                            } else {
-                                console.log('Erreur lors de la suppression des choix de la question');
-                            }
-                        });
+                        .subscribe(deleteResult => console.log('Suppression des choix de réponse: ', deleteResult));
                 }
             });
         }
-        this.displayOptionDetails(questionType);
-        this.isLoading = false;
+    }
+
+    private groupedQuestionTypeChanged(data) {
+        if ((data.previousValue === SurveyQuestionTypeEnum.groupedQuestion) &&
+            (!this.isLoading) &&
+            (this.questions.filter(q => q.idSurveyQuestionParent === this.questions[this.selectedIndex].id).length > 0)) {
+
+            alert(this.messages['groupedQuestionTypeChangedWarning'], this.messages['warning']);
+            this.questionTypeChoiceCanceled = true;
+            data.component.option('value', data.previousValue);
+        }
     }
 
     public onQuestionSelected(e) {
@@ -264,7 +270,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             confirm(this.messages['removeQuestion'], this.messages['question']).then((result) => {
                 if (result) {
                     this.questionService.remove(this.questions[this.selectedIndex].id)
-                        .subscribe(removeResult => {
+                        .subscribe(() => {
                             this.selectedIndex = 0;
                             this.loadQuestion();
                         });
@@ -343,7 +349,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     public displayOptionDetails(questionType) {
-        if (questionType === 1) {
+        if (questionType === SurveyQuestionTypeEnum.choiceAnswer) {
             this.optionsChoiceVisible = true;
         } else {
             this.optionsChoiceVisible = false;

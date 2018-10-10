@@ -356,6 +356,13 @@
   "groupTitleFireSafetyDepartmentRiskLevel": "SSI - Niveaux de risque",
   "groupTitleSurvey": "Questionnaire",
   "groupTitleConfiguration": "Configuration",
-  "questionOccurrenceValidation":"L'occurrence maximum doit être égale ou supérieure à l'occurrence minimum.",
-  "endGroupQuestion":"[Dernière question du groupe]"
+  "endGroupQuestion":"[Dernière question du groupe]",
+  "groupedQuestionTypeChangedWarning":"Vous devez supprimer les questions groupées avant de changer le type 'groupe de question'.",
+  "warning":"Avertissement",
+  "enumQuestionType": {
+    "choiceAnswer":"Réponse à choix multiple",
+    "textAnswer":"Réponse à développement",
+    "dateAnswer":"Réponse avec date",
+    "groupedQuestion":"Groupe de question"
+  }
 }
