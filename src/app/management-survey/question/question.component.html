@@ -28,8 +28,7 @@
     </div>
     <div class="details" fxFlex="65%">
         <div *ngIf="selectedIndex > -1">
-            <dx-form [formData]="questions[selectedIndex]" (onFieldDataChanged)="onFormUpdated('form',$event)"
-                     [colCount]="4">
+            <dx-form [formData]="questions[selectedIndex]" [colCount]="4">
                 <dxi-item [colSpan]="4"></dxi-item>
                 <dxi-item [label]="{text: 'title' | translate}" dataField="localizations" class="multilang"
                           [colSpan]="4">
