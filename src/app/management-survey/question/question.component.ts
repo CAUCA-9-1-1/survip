@@ -241,6 +241,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             this.displayOptionDetails(this.questions[this.selectedIndex].questionType);
 
             this.loadSource(this.questions[this.selectedIndex].id);
+
+            this.isLoading = false;
         }
     }
 
