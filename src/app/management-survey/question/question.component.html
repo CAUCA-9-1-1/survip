@@ -19,7 +19,7 @@
                     parentIdExpr="idSurveyQuestionParent"
                     dataStructure="plain">
                 <div class="parent-item" *dxTemplate="let itemData of 'listItem'; let itemIndex = index">
-                    <dx-button class="child-add" *ngIf="itemData.questionType == 4" icon="add"
+                    <dx-button class="child-add" *ngIf="itemData.questionType == questionTypeEnum.groupedQuestion" icon="add"
                                (onClick)="onAddChildQuestion(itemData)"></dx-button>
                     <span>{{getQuestionTreeviewTitle(itemData)}}</span>
                 </div>
@@ -57,7 +57,7 @@
                         editorType="dxNumberBox"
                         [editorOptions]="questionOccurrenceOptions"
                         [colSpan]="2"
-                        [visible]="questions[selectedIndex].questionType === 4">
+                        [visible]="questions[selectedIndex].questionType === questionTypeEnum.groupedQuestion">
                     <dxi-validation-rule
                             type="custom"
                             [validationCallback]="occurrenceValidation"
@@ -70,7 +70,7 @@
                         editorType="dxNumberBox"
                         [editorOptions]="questionOccurrenceOptions"
                         [colSpan]="2"
-                        [visible]="questions[selectedIndex].questionType === 4">
+                        [visible]="questions[selectedIndex].questionType === questionTypeEnum.groupedQuestion">
                     <dxi-validation-rule
                             type="custom"
                             [validationCallback]="occurrenceValidation"

@@ -35,6 +35,18 @@ export class QuestionService extends RequestService {
     move(id: string, sequence: number) {
         return this.post('SurveyQuestion/' + id + '/Sequence/' + sequence, {});
     }
+
+    getEnumsKeysCollection(enumCollection: any): any[] {
+        const retValue = [];
+        const keys = Object.keys(enumCollection)
+                .map(k => enumCollection[k])
+                .filter(v => typeof v === 'number') as number[];
+
+        keys.forEach(k => {
+            retValue.push({value: k, text:  this.translateService.instant('enumQuestionType.' + enumCollection[k])});
+        });
+        return retValue;
+    }
 }
 
 
