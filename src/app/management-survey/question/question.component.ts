@@ -192,16 +192,17 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     public QuestionTypeChanged(data) {
-        if (this.questionTypeChoiceCanceled) {
+        this.displayOptionDetails(data.value);
+
+        if (this.questionTypeChoiceCanceled || this.isLoading) {
             this.questionTypeChoiceCanceled = false;
+            this.isLoading = false;
             return;
         }
 
         this.choiceQuestionTypeChanged(data);
 
         this.groupedQuestionTypeChanged(data);
-
-        this.isLoading = false;
     }
 
     private choiceQuestionTypeChanged(data) {
@@ -231,8 +232,11 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     public onQuestionSelected(e) {
-        this.isLoading = true;
         if (this.selectedIndex !== e.itemIndex) {
+
+            if (this.selectedIndex > -1) {
+                this.isLoading = true;
+            }
 
             this.selectedIndex = e.itemIndex;
 
@@ -241,8 +245,6 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             this.displayOptionDetails(this.questions[this.selectedIndex].questionType);
 
             this.loadSource(this.questions[this.selectedIndex].id);
-
-            this.isLoading = false;
         }
     }
 
