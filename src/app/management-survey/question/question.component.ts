@@ -187,7 +187,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         }
     }
 
-    private orderQuestion(question1: Question , question2: Question) {
+    private orderQuestion(question1: Question, question2: Question) {
         const index1 = this.findQuestionIndex(question1.id);
         const index2 = this.findQuestionIndex(question2.id);
 
@@ -251,7 +251,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         }
         this.timer = setTimeout(() => {
             this.questionService.save(this.questions[this.selectedIndex]).subscribe();
-        }, 1000);
+            console.log('save', this.questions[this.selectedIndex]);
+        }, 500);
     }
 
     public moveQuestion() {
@@ -336,13 +337,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     public onMultiLangValueChanged(item, e) {
-        if (this.timer) {
-            clearTimeout(this.timer);
-        }
-        this.timer = setTimeout(() => {
-            this.onFormUpdated(item, e);
-        }, 1500);
-
+        this.questions[this.selectedIndex][item] = e.value;
+        this.saveQuestion();
         this.treeViewQuestion.instance.option('dataSource', this.questions);
     }
 
