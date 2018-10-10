@@ -13,18 +13,18 @@
     <dxi-column
             dataField="idFireSafetyDepartment"
             editCellTemplate="fireSafetyDepartmentsTemplate"
-            cellTemplate="fireSafetyDepartmentsTemplateReadOnly"
             sortOrder="asc"
             [sortIndex]="0"
             caption="{{'fireSafetyDepartment' | translate}}">
-      <dxi-validation-rule type="required"></dxi-validation-rule>
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+        <dxo-lookup [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName" valueExpr="id" [allowClearing]="true">
+        </dxo-lookup>
     </dxi-column>
     <dxi-column
             dataField="riskLevelIds"
             caption="{{'riskLevel' | translate}}"
             editCellTemplate="riskLevelTemplate"
-            cellTemplate="riskLevelTemplateReadOnly"
-    >
+            [cellTemplate]="showRiskLevel">
       <dxi-validation-rule type="custom" [validationCallback]="validateRiskLevels"></dxi-validation-rule>
     </dxi-column>
     <dxi-column
@@ -81,11 +81,6 @@
     </dx-lookup>
   </div>
 
-  <div *dxTemplate="let cellData of 'fireSafetyDepartmentsTemplateReadOnly'">
-    <dx-drop-down-box #ddBox  [value]="cellData.value"  [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName" valueExpr="id" [showDropDownButton]="false"  [showClearButton]="false" [readOnly]="true">
-    </dx-drop-down-box>
-  </div>
-
   <div *dxTemplate="let cellData of 'riskLevelTemplate'">
     <dx-drop-down-box #ddBox  [value]="cellData.value"  [dataSource]="riskLevels" displayExpr="name" valueExpr="id"  [showClearButton]="true" (onValueChanged)="onValueChanged($event, cellData.setValue)">
       <dxo-drop-down-options [height]="500"></dxo-drop-down-options>
@@ -99,11 +94,6 @@
         </dx-data-grid>
 
       </div>
-    </dx-drop-down-box>
-  </div>
-
-  <div *dxTemplate="let cellData of 'riskLevelTemplateReadOnly'">
-    <dx-drop-down-box #ddBox  [value]="cellData.value"  [dataSource]="riskLevels" displayExpr="name" valueExpr="id" [showDropDownButton]="false"  [showClearButton]="false" [readOnly]="true">
     </dx-drop-down-box>
   </div>
 </dx-data-grid>
