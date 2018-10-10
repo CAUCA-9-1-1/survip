@@ -1,7 +1,15 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule, MatSelectModule} from '@angular/material';
-import {DxButtonModule, DxDataGridModule, DxFormModule, DxLookupModule, DxPopupModule, DxTreeViewModule} from 'devextreme-angular';
+import {
+  DxButtonModule,
+  DxDataGridModule,
+  DxDropDownBoxModule,
+  DxFormModule, DxLoadPanelModule,
+  DxLookupModule,
+  DxPopupModule,
+  DxTreeViewModule
+} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {ManagementDepartmentComponent} from './management-department.component';
@@ -41,6 +49,8 @@ import {DepartmentRiskLevelComponent} from './department-risk-level/department-r
         DxLookupModule,
         DxTreeViewModule,
         DxPopupModule,
+        DxDropDownBoxModule,
+        DxLoadPanelModule,
     ],
     providers: []
 })

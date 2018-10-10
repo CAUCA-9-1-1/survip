@@ -3,7 +3,7 @@ import {BaseModel} from '../../../shared/models/base.model';
 
 export class FireSafetyDepartmentRiskLevel extends BaseModel {
     idFireSafetyDepartment: string;
-    idRiskLevel: string;
+    riskLevelIds: string;
     idSurvey: string;
     hasGeneralInformation: string;
     hasCourse: string;
