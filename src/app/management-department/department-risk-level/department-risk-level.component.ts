@@ -68,6 +68,10 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
       });
   }
 
+  public validateRiskLevels(e) {
+    return e.value != null && e.value.length > 0;
+  }
+
   public changeDropDownBoxValue(e, dropDownBoxInstance) {
     const keys = e.selectedRowKeys;
     dropDownBoxInstance.option('value', keys);

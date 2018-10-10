@@ -14,7 +14,10 @@
             dataField="idFireSafetyDepartment"
             editCellTemplate="fireSafetyDepartmentsTemplate"
             cellTemplate="fireSafetyDepartmentsTemplateReadOnly"
+            sortOrder="asc"
+            [sortIndex]="0"
             caption="{{'fireSafetyDepartment' | translate}}">
+      <dxi-validation-rule type="required"></dxi-validation-rule>
     </dxi-column>
     <dxi-column
             dataField="riskLevelIds"
@@ -22,6 +25,7 @@
             editCellTemplate="riskLevelTemplate"
             cellTemplate="riskLevelTemplateReadOnly"
     >
+      <dxi-validation-rule type="custom" [validationCallback]="validateRiskLevels"></dxi-validation-rule>
     </dxi-column>
     <dxi-column
             dataField="idSurvey"
@@ -48,7 +52,8 @@
         <dxo-popup title="{{'departmentRiskLevel' | translate}}" [showTitle]="true"></dxo-popup>
         <dxo-form colCount="4">
           <dxi-item itemType="group" caption="{{'groupTitleFireSafetyDepartmentRiskLevel' | translate}}" [colSpan]="4" [colCount]="4">
-            <dxi-item dataField="idFireSafetyDepartment" [colSpan]="2" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="idFireSafetyDepartment" [colSpan]="2">
+            </dxi-item>
             <dxi-item dataField="riskLevelIds" [colSpan]="2" [isRequired]="true"></dxi-item>
           </dxi-item>
           <dxi-item itemType="group" caption="{{'groupTitleConfiguration' | translate}}" [colCount]="4" [colSpan]="4">
@@ -83,7 +88,6 @@
 
   <div *dxTemplate="let cellData of 'riskLevelTemplate'">
     <dx-drop-down-box #ddBox  [value]="cellData.value"  [dataSource]="riskLevels" displayExpr="name" valueExpr="id"  [showClearButton]="true" (onValueChanged)="onValueChanged($event, cellData.setValue)">
-
       <dxo-drop-down-options [height]="500"></dxo-drop-down-options>
 
       <div *dxTemplate="let data of 'content'">
