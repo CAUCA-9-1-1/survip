@@ -5,7 +5,7 @@ import {
   DxButtonModule,
   DxDataGridModule,
   DxDropDownBoxModule,
-  DxFormModule,
+  DxFormModule, DxLoadPanelModule,
   DxLookupModule,
   DxPopupModule,
   DxTreeViewModule
@@ -49,7 +49,8 @@ import {DepartmentRiskLevelComponent} from './department-risk-level/department-r
         DxLookupModule,
         DxTreeViewModule,
         DxPopupModule,
-        DxDropDownBoxModule
+        DxDropDownBoxModule,
+        DxLoadPanelModule,
     ],
     providers: []
 })

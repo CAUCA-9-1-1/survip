@@ -1,3 +1,6 @@
+<dx-load-panel [showIndicator]="false" [showPane]="true" [closeOnOutsideClick]="false" [(visible)]="loadingVisible">
+</dx-load-panel>
+
 <dx-data-grid
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
@@ -5,12 +8,13 @@
         (onInitNewRow)="onInitNewRow($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
+        (onEditingStart)="onEditingStart($event)"
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
             dataField="idFireSafetyDepartment"
+            editCellTemplate="fireSafetyDepartmentsTemplate"
+            cellTemplate="fireSafetyDepartmentsTemplateReadOnly"
             caption="{{'fireSafetyDepartment' | translate}}">
-        <dxo-lookup [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName" valueExpr="id">
-        </dxo-lookup>
     </dxi-column>
     <dxi-column
             dataField="riskLevelIds"
@@ -42,7 +46,6 @@
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-popup title="{{'departmentRiskLevel' | translate}}" [showTitle]="true"></dxo-popup>
-
         <dxo-form colCount="4">
           <dxi-item itemType="group" caption="{{'groupTitleFireSafetyDepartmentRiskLevel' | translate}}" [colSpan]="4" [colCount]="4">
             <dxi-item dataField="idFireSafetyDepartment" [colSpan]="2" [isRequired]="true"></dxi-item>
@@ -67,6 +70,17 @@
         </dxo-form>
     </dxo-editing>
 
+
+  <div *dxTemplate="let cellData of 'fireSafetyDepartmentsTemplate'">
+    <dx-lookup [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName" valueExpr="id" [value]="cellData.value" (onValueChanged)="onFireSafetyValueChanged($event, cellData.setValue)">
+    </dx-lookup>
+  </div>
+
+  <div *dxTemplate="let cellData of 'fireSafetyDepartmentsTemplateReadOnly'">
+    <dx-drop-down-box #ddBox  [value]="cellData.value"  [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName" valueExpr="id" [showDropDownButton]="false"  [showClearButton]="false" [readOnly]="true">
+    </dx-drop-down-box>
+  </div>
+
   <div *dxTemplate="let cellData of 'riskLevelTemplate'">
     <dx-drop-down-box #ddBox  [value]="cellData.value"  [dataSource]="riskLevels" displayExpr="name" valueExpr="id"  [showClearButton]="true" (onValueChanged)="onValueChanged($event, cellData.setValue)">
 
@@ -74,7 +88,7 @@
 
       <div *dxTemplate="let data of 'content'">
 
-        <dx-data-grid keyExpr="id" [selectedRowKeys]="cellData.value" width="100%" [dataSource]="riskLevels" (onSelectionChanged)="changeDropDownBoxValue($event, ddBox.instance)">
+        <dx-data-grid keyExpr="id" [selectedRowKeys]="cellData.value" width="100%" [dataSource]="availableRiskLevels" (onSelectionChanged)="changeDropDownBoxValue($event, ddBox.instance)">
           <dxi-column dataField="name" caption="Nom"></dxi-column>
           <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
           <dxo-scrolling mode="infinite"></dxo-scrolling>

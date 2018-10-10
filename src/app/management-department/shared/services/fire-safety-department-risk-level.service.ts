@@ -8,20 +8,24 @@ import {FireSafetyDepartmentRiskLevel} from '../models/fire-safety-department-ri
 @Injectable()
 export class FireSafetyDepartmentRiskLevelService extends RequestService {
 
-    constructor(injector: Injector) {
-        super(injector);
-    }
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
-    getAll(): Observable<FireSafetyDepartmentRiskLevel[]> {
-        return this.get('FireSafetyDepartmentRiskLevel');
-    }
+  getAll(): Observable<FireSafetyDepartmentRiskLevel[]> {
+    return this.get('FireSafetyDepartmentRiskLevel');
+  }
 
-    save(ssi: FireSafetyDepartmentRiskLevel) {
-        console.log("saving...", JSON.stringify(ssi));
-        return this.post('FireSafetyDepartmentRiskLevel', ssi);
-    }
+  save(ssi: FireSafetyDepartmentRiskLevel) {
+    console.log('saving...', JSON.stringify(ssi));
+    return this.post('FireSafetyDepartmentRiskLevel', ssi);
+  }
 
-    remove(idFireSafetyDepartmentRiskLevel: string) {
-        return this.delete('FireSafetyDepartmentRiskLevel/' + idFireSafetyDepartmentRiskLevel);
-    }
+  getUsedRiskLevel(fireSafetyDepartmentConfigurationId: string, fireSafetyDepartmentId: string) {
+    return this.get('FireSafetyDepartmentRiskLevel/' + fireSafetyDepartmentConfigurationId + '/UsedRiskLevels/' + fireSafetyDepartmentId);
+  }
+
+  remove(idFireSafetyDepartmentRiskLevel: string) {
+    return this.delete('FireSafetyDepartmentRiskLevel/' + idFireSafetyDepartmentRiskLevel);
+  }
 }

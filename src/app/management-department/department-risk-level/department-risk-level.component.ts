@@ -23,79 +23,99 @@ import {Inspection} from '../../inspection-approval/shared/models/inspection.mod
     ]
 })
 export class DepartmentRiskLevelComponent extends GridWithCrudService implements OnInit {
-    fireSafetyDepartments: FireSafetyDepartment[];
-    riskLevels: RiskLevel[];
-    surveys: Survey[];
+  fireSafetyDepartments: FireSafetyDepartment[];
+  riskLevels: RiskLevel[];
+  availableRiskLevels: RiskLevel[] = [];
+  surveys: Survey[];
+  loadingVisible = false;
+  currentConfigurationId: string;
 
-    constructor(
-        private inspectionManagementService: FireSafetyDepartmentRiskLevelService,
-        private fireSafetyDepartmentService: FireSafetyDepartmentService,
-        private riskLevelService: RiskLevelService,
-        private surveyService: SurveyService,
-    ) {
-        super(inspectionManagementService);
-    }
+  constructor(
+    private inspectionManagementService: FireSafetyDepartmentRiskLevelService,
+    private fireSafetyDepartmentService: FireSafetyDepartmentService,
+    private riskLevelService: RiskLevelService,
+    private surveyService: SurveyService,
+  ) {
+    super(inspectionManagementService);
+  }
 
-    setModel(data: any) {
-        return Inspection.fromJSON(data);
-    }
+  setModel(data: any) {
+    return Inspection.fromJSON(data);
+  }
 
-    ngOnInit() {
-        this.loadSource();
-        this.loadFireSafetyDepartment();
-        this.loadRiskLevel();
-        this.loadSurvey();
-    }
+  ngOnInit() {
+    this.loadSource();
+    this.loadFireSafetyDepartment();
+    this.loadRiskLevel();
+    this.loadSurvey();
+  }
+
+  public onEditingStart(e) {
+    this.currentConfigurationId = e.data.id;
+    this.changeFireSafetyDepartment( e.data.idFireSafetyDepartment);
+  }
+
+  private changeFireSafetyDepartment(fireSafetyDepartmentId: string) {
+    this.availableRiskLevels = [];
+    this.loadingVisible = true;
+    this.inspectionManagementService.getUsedRiskLevel(this.currentConfigurationId, fireSafetyDepartmentId)
+      .subscribe(data => {
+          this.availableRiskLevels = this.riskLevels.filter(risk => !data.some(id => id === risk.id));
+          this.loadingVisible = false;
+      });
+  }
 
   changeDropDownBoxValue(e, dropDownBoxInstance) {
-      console.log('drop down changed', JSON.stringify(e.selectedRowKeys))
-      const keys = e.selectedRowKeys;
-      dropDownBoxInstance.option('value', keys);
+    const keys = e.selectedRowKeys;
+    dropDownBoxInstance.option('value', keys);
   }
 
   onValueChanged(args, setValueMethod) {
-
-    console.log('nw value:', args.value);
     setValueMethod(args.value);
   }
 
-    onInitNewRow(e) {
-        e.data.hasGeneralInformation = true;
-        e.data.hasImplantationPlan = false;
-        e.data.hasCourse = false;
-        e.data.hasWaterSupply = false;
-        e.data.hasBuildingDetails = true;
-        e.data.hasBuildingContacts = false;
-        e.data.hasBuildingPnaps = false;
-        e.data.hasBuildingHazardousMaterials = false;
-        e.data.hasBuildingFireProtection = false;
-        e.data.hasBuildingParticularRisks = false;
-        e.data.hasBuildingAnomalies = false;
-        e.data.hasCourse = false;
-        e.data.isActive = true;
-    }
+  onFireSafetyValueChanged(args, setValueMethod) {
+    setValueMethod(args.value);
+    this.changeFireSafetyDepartment(args.value);
+  }
 
-    getFireSafetyDepartmentName(data) {
-        const ssi = FireSafetyDepartment.fromJSON(data);
+  onInitNewRow(e) {
+    e.data.hasGeneralInformation = true;
+    e.data.hasImplantationPlan = false;
+    e.data.hasCourse = false;
+    e.data.hasWaterSupply = false;
+    e.data.hasBuildingDetails = true;
+    e.data.hasBuildingContacts = false;
+    e.data.hasBuildingPnaps = false;
+    e.data.hasBuildingHazardousMaterials = false;
+    e.data.hasBuildingFireProtection = false;
+    e.data.hasBuildingParticularRisks = false;
+    e.data.hasBuildingAnomalies = false;
+    e.data.hasCourse = false;
+    e.data.isActive = true;
+  }
 
-        return ssi.getLocalization(config.locale);
-    }
+  getFireSafetyDepartmentName(data) {
+    const ssi = FireSafetyDepartment.fromJSON(data);
 
-    getSurveyName(data) {
-        const survey = Survey.fromJSON(data);
+    return ssi.getLocalization(config.locale);
+  }
 
-        return survey.getLocalization(config.locale);
-    }
+  getSurveyName(data) {
+    const survey = Survey.fromJSON(data);
 
-    private loadFireSafetyDepartment() {
-        this.fireSafetyDepartmentService.getAll().subscribe(data => this.fireSafetyDepartments = data);
-    }
+    return survey.getLocalization(config.locale);
+  }
 
-    private loadRiskLevel() {
-        this.riskLevelService.localized().subscribe(data => this.riskLevels = data);
-    }
+  private loadFireSafetyDepartment() {
+    this.fireSafetyDepartmentService.getAll().subscribe(data => this.fireSafetyDepartments = data);
+  }
 
-    private loadSurvey() {
-        this.surveyService.getAll().subscribe(data => this.surveys = data);
-    }
+  private loadRiskLevel() {
+    this.riskLevelService.localized().subscribe(data => this.riskLevels = data);
+  }
+
+  private loadSurvey() {
+    this.surveyService.getAll().subscribe(data => this.surveys = data);
+  }
 }
