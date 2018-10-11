@@ -99,6 +99,7 @@ export class ImageComponent implements OnInit {
 
     public editPicture() {
         this.isPopupVisible = true;
+        this.sketchName = this.picture.name;     
         this.sketchImage = this.src;
         this.sketchJson = this.picture.sketchJson;
     }
