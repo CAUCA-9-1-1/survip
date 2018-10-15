@@ -358,6 +358,15 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         return visible;
     }
 
+    private trimLeadingZeroes(str): string {
+      const xLastChr = str.length - 2;
+      let xChrIdx = 0;
+      while (str[xChrIdx] === '0' && xChrIdx < xLastChr) {
+        xChrIdx++;
+      }
+      return xChrIdx > 0 ? str.substr(xChrIdx) : str;
+    }
+
     private getColumns(): any[] {
         const visible = JSON.parse(localStorage.getItem('column-visible-' + this.selectedMode)) || this.getDefaultColumnVisible();
         const width = JSON.parse(localStorage.getItem('column-width-' + this.selectedMode)) || [];
@@ -382,7 +391,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[1],
             width: width[1] || null,
         }, {
-            dataField: 'fullCivicNumber',
+            dataField: 'fullCivicNumberSortable',
+            customizeText: (cellInfo) => this.trimLeadingZeroes(cellInfo.value),
             caption: this.labels['civicNumber'],
             dataType: 'string',
             visible: visible[2],
