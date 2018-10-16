@@ -359,7 +359,10 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     }
 
     private trimLeadingZeroes(str): string {
-      const xLastChr = str.length - 2;
+        if (!str) {
+            return '';
+        }
+      const xLastChr = str.length - 1;
       let xChrIdx = 0;
       while (str[xChrIdx] === '0' && xChrIdx < xLastChr) {
         xChrIdx++;
