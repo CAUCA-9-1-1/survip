@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{'chooseTemplate' | translate }}</h2>
+<!-- <h2 mat-dialog-title>{{'chooseTemplate' | translate }}</h2>
 
 <mat-dialog-content [formGroup]="form">
   <p>
@@ -22,3 +22,36 @@
   <button class="mat-raised-button" (click)="cancel()">{{'cancel' | translate}}</button>
   <button class="mat-raised-button mat-primary" (click)="create(nameInput.value)" [disabled]="isOpenDisabled">{{'create' | translate}}</button>
 </mat-dialog-actions>
+ -->
+
+ <dx-data-grid
+        [dataSource]="dataSource"
+        [hoverStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        (onEditorPreparing)="onEditorPreparing($event)"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onEditingStart)="onEditingStart($event)"
+        (onRowInserted)="onRowInserted($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)">
+    <dxi-column
+            dataField="template"
+            caption="{{'template' | translate}}"
+            editCellTemplate="editTemplate"
+            sortIndex="0"
+            sortOrder="desc">
+    </dxi-column>
+    <dxi-column caption="{{'rename' | translate}}"></dxi-column>
+    <dxi-column caption="{{'edit' | translate}}"></dxi-column>
+    <dxi-column caption="{{'remove' | translate}}"></dxi-column>
+
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="{{'Rename' | translate}}" [showTitle]="true"></dxo-popup>
+
+        <dxo-form colCount="1">
+            <dxi-item itemType="group">
+                <dxi-item dataField="name" [isRequired]="true"></dxi-item>
+            </dxi-item>
+        </dxo-form>
+    </dxo-editing>
+</dx-data-grid>
