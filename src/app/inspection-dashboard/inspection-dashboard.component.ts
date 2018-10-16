@@ -249,18 +249,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 localStorage.setItem('column-width-' + this.selectedMode, JSON.stringify(width));
             },
             onEditorPreparing: (e) => {
-                if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal' || e.dataField === 'idCity') {
-                    e.editorName = 'dxLookup';
-                    e.editorOptions.showClearButton = true;
-                    e.editorOptions.closeOnOutsideClick = true;
-                    e.editorOptions.onValueChanged = (ev) => {
-                        if (ev.value) {
-                            e.component.filter(e.dataField, '=', new Guid(ev.value));
-                        } else {
-                            e.component.clearFilter();
-                        }
-                    };
-                }
+                this.prepareEditorForLaneTransversalAndCity(e);
+                this.prepareEditorForRiskLevel(e);
             },
             selection: {
                 mode: 'multiple'
@@ -269,7 +259,34 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         });
     }
 
-    private customizeToolbar(e) {
+  private prepareEditorForLaneTransversalAndCity(e) {
+    if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal' || e.dataField === 'idCity') {
+      e.editorName = 'dxLookup';
+      e.editorOptions.showClearButton = true;
+      e.editorOptions.closeOnOutsideClick = true;
+      e.editorOptions.onValueChanged = (ev) => {
+        if (ev.value) {
+          e.component.filter(e.dataField, '=', new Guid(ev.value));
+        } else {
+          e.component.clearFilter();
+        }
+      };
+    }
+  }
+
+  private prepareEditorForRiskLevel(e) {
+    if (e.dataField === 'idRiskLevel') {
+      e.editorOptions.onValueChanged = (ev) => {
+        if (ev.value) {
+          e.component.filter(e.dataField, '=', new Guid(ev.value));
+        } else {
+          e.component.clearFilter();
+        }
+      };
+    }
+  }
+
+  private customizeToolbar(e) {
         const toolbarItems = e.toolbarOptions.items;
 
         toolbarItems.unshift({
