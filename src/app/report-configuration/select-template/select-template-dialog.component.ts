@@ -12,6 +12,7 @@ import {ConfigurationTemplate} from '../../shared/models/configuration-template.
 export class SelectTemplateDialogComponent implements OnInit {
 
   form: FormGroup;
+  dataSource: any = {};
   templateIdentifiers: ConfigurationTemplate[];
   isOpenDisabled: boolean;
 
