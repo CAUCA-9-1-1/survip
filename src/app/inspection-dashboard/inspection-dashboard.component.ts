@@ -52,8 +52,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     public templateIdentifiers: ConfigurationTemplate[];
     public dataSource: any = {};
     public webusers: WebuserForWeb[] = [];
-    public lanes: any = { store: [] };
-    public cities: any = { store: [] };
+    public lanes: any = {store: []};
+    public cities: any = {store: []};
     public riskLevels: RiskLevel[] = [];
     public utilisationCodes: UtilisationCode[] = [];
     public labels = {};
@@ -84,7 +84,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         private reportGenerationService: ReportGenerationService,
         private reportTemplateService: ReportTemplateService,
         private authGuardService: AuthGuardService,
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         this.templateIdentifiers = [];
@@ -144,18 +145,18 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     }
 
     fetchTemplateIdentifiers(): void {
-      this.reportTemplateService.getTemplateList().subscribe(data => {
-        data.forEach((templateIdentifier) => {
-          this.templateIdentifiers.push(templateIdentifier);
+        this.reportTemplateService.getTemplateList().subscribe(data => {
+            data.forEach((templateIdentifier) => {
+                this.templateIdentifiers.push(templateIdentifier);
+            });
         });
-      });
     }
 
     generateReport(buildingId: string, templateId: string) {
-      this.reportGenerationService.generateReport(buildingId, templateId).subscribe( data => {
-          const blob = new Blob([data], {type: 'application/pdf'});
-          saveAs(blob, buildingId);
-      });
+        this.reportGenerationService.generateReport(buildingId, templateId).subscribe(data => {
+            const blob = new Blob([data], {type: 'application/pdf'});
+            saveAs(blob, buildingId);
+        });
     }
 
     private checkLoadedElement(): boolean {
@@ -183,7 +184,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         });
 
         if (buildings.length === 0) {
-            return this.notification.open( this.labels['needMinimum1Building'], '', {
+            return this.notification.open(this.labels['needMinimum1Building'], '', {
                 duration: 5000,
             });
         }
@@ -259,34 +260,35 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         });
     }
 
-  private prepareEditorForLaneTransversalAndCity(e) {
-    if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal' || e.dataField === 'idCity') {
-      e.editorName = 'dxLookup';
-      e.editorOptions.showClearButton = true;
-      e.editorOptions.closeOnOutsideClick = true;
-      e.editorOptions.onValueChanged = (ev) => {
-        if (ev.value) {
-          e.component.filter(e.dataField, '=', new Guid(ev.value));
-        } else {
-          e.component.clearFilter();
+    private prepareEditorForLaneTransversalAndCity(e) {
+        if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal' ||
+            e.dataField === 'idCity' || e.dataField === 'idUtilisationCode') {
+            e.editorName = 'dxLookup';
+            e.editorOptions.showClearButton = true;
+            e.editorOptions.closeOnOutsideClick = true;
+            e.editorOptions.onValueChanged = (ev) => {
+                if (ev.value) {
+                    e.component.filter(e.dataField, '=', new Guid(ev.value));
+                } else {
+                    e.component.clearFilter();
+                }
+            };
         }
-      };
     }
-  }
 
-  private prepareEditorForRiskLevel(e) {
-    if (e.dataField === 'idRiskLevel') {
-      e.editorOptions.onValueChanged = (ev) => {
-        if (ev.value) {
-          e.component.filter(e.dataField, '=', new Guid(ev.value));
-        } else {
-          e.component.clearFilter();
+    private prepareEditorForRiskLevel(e) {
+        if (e.dataField === 'idRiskLevel') {
+            e.editorOptions.onValueChanged = (ev) => {
+                if (ev.value) {
+                    e.component.filter(e.dataField, '=', new Guid(ev.value));
+                } else {
+                    e.component.clearFilter();
+                }
+            };
         }
-      };
     }
-  }
 
-  private customizeToolbar(e) {
+    private customizeToolbar(e) {
         const toolbarItems = e.toolbarOptions.items;
 
         toolbarItems.unshift({
@@ -298,7 +300,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 onInitialized: (ev) => {
                     this.buttons['closeAll'] = ev.component;
                 },
-                onClick: (ev) => this.openCloseGroup(ev, 0)},
+                onClick: (ev) => this.openCloseGroup(ev, 0)
+            },
             location: 'after',
         });
 
@@ -379,12 +382,12 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         if (!str) {
             return '';
         }
-      const xLastChr = str.length - 1;
-      let xChrIdx = 0;
-      while (str[xChrIdx] === '0' && xChrIdx < xLastChr) {
-        xChrIdx++;
-      }
-      return xChrIdx > 0 ? str.substr(xChrIdx) : str;
+        const xLastChr = str.length - 1;
+        let xChrIdx = 0;
+        while (str[xChrIdx] === '0' && xChrIdx < xLastChr) {
+            xChrIdx++;
+        }
+        return xChrIdx > 0 ? str.substr(xChrIdx) : str;
     }
 
     private getColumns(): any[] {
@@ -512,11 +515,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             lookup: {
                 dataSource: this.utilisationCodes,
                 valueExpr: 'id',
-                displayExpr: (data) => {
-                    const code = UtilisationCode.fromJSON(data);
-
-                    return code.getLocalization(config.locale, 'description');
-                }
+                displayExpr: 'name'
             },
             visible: visible[14],
             width: width[14] || null,
@@ -576,11 +575,11 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[23],
             width: width[23] || null,
         }, {
-          caption: this.labels['generateReport'],
-          dataType: 'string',
-          visible: visible[24],
-          width: width[24] || null,
-          cellTemplate: 'generateReport',
+            caption: this.labels['generateReport'],
+            dataType: 'string',
+            visible: visible[24],
+            width: width[24] || null,
+            cellTemplate: 'generateReport',
         }];
     }
 
@@ -659,7 +658,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     }
 
     private loadUtilisationCode() {
-        this.utilisationCodeService.getAll().subscribe(data => {
+        this.utilisationCodeService.localized().subscribe(data => {
+            console.log('loadUtilisationCode');
             this.utilisationCodes = data;
             this.checkLoadedElement();
         });
