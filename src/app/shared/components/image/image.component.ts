@@ -122,7 +122,7 @@ export class ImageComponent implements OnInit {
 
         this.picture.dataUri = this.canvas.toDataURL();
         this.src = this.picture.dataUri;
-        this.picture.sketchJson = JSON.stringify(this.canvas.toJSON());
+        this.picture.sketchJson = JSON.stringify(this.canvas.toJSON(['width', 'height']));
 
         this.valueChanged.emit(this.picture);
       }
