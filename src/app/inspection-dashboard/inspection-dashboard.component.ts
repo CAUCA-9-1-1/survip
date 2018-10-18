@@ -252,6 +252,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             onEditorPreparing: (e) => {
                 this.prepareEditorForLaneTransversalAndCity(e);
                 this.prepareEditorForRiskLevel(e);
+                this.prepareEditorForNumber(e);
             },
             selection: {
                 mode: 'multiple'
@@ -283,6 +284,23 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                     e.component.filter(e.dataField, '=', new Guid(ev.value));
                 } else {
                     e.component.clearFilter();
+                }
+            };
+        }
+    }
+
+    private prepareEditorForNumber(e) {
+        if (e.dataField === 'numberOfAppartment' || e.dataField === 'numberOfBuilding' ||
+            e.dataField === 'numberOfFloor' || e.dataField === 'yearOfConstruction') {
+            e.editorOptions.inputAttr = { maxLength: 4};
+            e.editorOptions.onKeyDown = (ev) => {
+                if (!ev.event.key.match(/[0-9]/) && ([8, 13, 9, 46].indexOf(ev.event.keyCode) < 0)) {
+                        ev.event.preventDefault();
+                    }
+            };
+            e.editorOptions.onValueChanged = (ev) => {
+                if (ev.value < 0) {
+                    ev.component.instance('dxNumberBox').option('value', 0);
                 }
             };
         }
@@ -541,19 +559,16 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'numberOfAppartment',
             caption: this.labels['numberOfAppartment'],
-            dataType: 'number',
             visible: visible[18],
             width: width[18] || null,
         }, {
             dataField: 'numberOfBuilding',
             caption: this.labels['numberOfBuilding'],
-            dataType: 'number',
             visible: visible[19],
             width: width[19] || null,
         }, {
             dataField: 'numberOfFloor',
             caption: this.labels['numberOfFloor'],
-            dataType: 'number',
             visible: visible[20],
             width: width[20] || null,
         }, {
@@ -565,7 +580,6 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'yearOfConstruction',
             caption: this.labels['yearOfConstruction'],
-            dataType: 'number',
             visible: visible[22],
             width: width[22] || null,
         }, {
