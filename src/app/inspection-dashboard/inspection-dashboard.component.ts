@@ -659,7 +659,6 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     private loadUtilisationCode() {
         this.utilisationCodeService.localized().subscribe(data => {
-            console.log('loadUtilisationCode');
             this.utilisationCodes = data;
             this.checkLoadedElement();
         });
