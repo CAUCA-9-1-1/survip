@@ -254,6 +254,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 this.prepareEditorForRiskLevel(e);
                 this.prepareEditorForNumber(e);
                 this.prepareEditorForDecimal(e);
+                this.prepareEditorForMatricule(e);
             },
             selection: {
                 mode: 'multiple'
@@ -296,6 +297,16 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             const keys = [8, 13, 9, 46];
 
             e.editorOptions.inputAttr = { maxLength: 4};
+
+            this.initDigitEditorEvents(e, keys);
+        }
+    }
+
+    private prepareEditorForMatricule(e) {
+        if (e.dataField === 'matricule') {
+            const keys = [8, 13, 9, 46];
+
+            e.editorOptions.inputAttr = { maxLength: 18};
 
             this.initDigitEditorEvents(e, keys);
         }
