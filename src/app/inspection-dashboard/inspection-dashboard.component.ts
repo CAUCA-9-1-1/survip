@@ -253,6 +253,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 this.prepareEditorForLaneTransversalAndCity(e);
                 this.prepareEditorForRiskLevel(e);
                 this.prepareEditorForNumber(e);
+                this.prepareEditorForDecimal(e);
             },
             selection: {
                 mode: 'multiple'
@@ -292,18 +293,29 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     private prepareEditorForNumber(e) {
         if (e.dataField === 'numberOfAppartment' || e.dataField === 'numberOfBuilding' ||
             e.dataField === 'numberOfFloor' || e.dataField === 'yearOfConstruction') {
+            const keys = [8, 13, 9, 46];
+
             e.editorOptions.inputAttr = { maxLength: 4};
-            e.editorOptions.onKeyDown = (ev) => {
-                if (!ev.event.key.match(/[0-9]/) && ([8, 13, 9, 46].indexOf(ev.event.keyCode) < 0)) {
-                        ev.event.preventDefault();
-                    }
-            };
-            e.editorOptions.onValueChanged = (ev) => {
-                if (ev.value < 0) {
-                    ev.component.instance('dxNumberBox').option('value', 0);
-                }
-            };
+
+            this.initDigitEditorEvents(e, keys);
         }
+    }
+
+    private prepareEditorForDecimal(e) {
+        if (e.dataField === 'buildingValue') {
+            const keys = [8, 13, 9, 46, 110];
+
+            this.initDigitEditorEvents(e, keys);
+        }
+    }
+
+    private initDigitEditorEvents(e, keys) {
+        e.editorOptions.onKeyDown = (ev) => {
+           ev.component.instance('dxNumberBox').option('min', 0);
+            if (!ev.event.key.match(/[0-9]/) && (keys.indexOf(ev.event.keyCode) < 0)) {
+                ev.event.preventDefault();
+            }
+        };
     }
 
     private customizeToolbar(e) {
@@ -547,7 +559,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         }, {
             dataField: 'buildingValue',
             caption: this.labels['buildingValue'],
-            dataType: 'string',
+            dataType: 'number',
             visible: visible[16],
             width: width[16] || null,
         }, {
