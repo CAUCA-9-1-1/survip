@@ -1,7 +1,8 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {PictureService} from '../../services/picture.service';
 import {Picture} from '../../models/picture.model';
-import {InspectionPictureService} from "../../../inspection-approval/shared/services/inspection-picture.service";
+import {InspectionPictureService} from '../../../inspection-approval/shared/services/inspection-picture.service';
+import { v4 as uuid } from 'uuid';
 
 @Component({
     selector: 'app-image',
@@ -54,7 +55,7 @@ export class ImageComponent implements OnInit {
 
     public constructor(
         private pictureService: PictureService,
-        private inspectionPictureService: InspectionPictureService
+        private inspectionPictureService: InspectionPictureService,
     ) { }
 
     public ngOnInit() {
@@ -63,8 +64,7 @@ export class ImageComponent implements OnInit {
 
     public uploadPicture(e) {
         const picture = new Picture();
-
-        picture.id = this.idPicture;
+        picture.id = this.idPicture ? this.idPicture : uuid();
         picture.name = e.name;
         picture.mimeType = '';
         picture.dataUri = e.content;
@@ -99,7 +99,7 @@ export class ImageComponent implements OnInit {
 
     public editPicture() {
         this.isPopupVisible = true;
-        this.sketchName = this.picture.name;     
+        this.sketchName = this.picture.name;
         this.sketchImage = this.src;
         this.sketchJson = this.picture.sketchJson;
     }
