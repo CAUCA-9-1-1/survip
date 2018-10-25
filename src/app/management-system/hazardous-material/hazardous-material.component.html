@@ -20,7 +20,6 @@
     <dxi-column dataField="guideNumber" caption="{{'guideNumber' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="reactToWater" dataType="boolean" caption="{{'reactionToWater' | translate}}"></dxi-column>
     <dxi-column dataField="toxicInhalationHazard" dataType="boolean" caption="{{'toxicInhalationHazard' | translate}}"></dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -33,7 +32,6 @@
             <dxi-item dataField="guideNumber" [isRequired]="true"></dxi-item>
             <dxi-item dataField="reactToWater" editorType="dxCheckBox"></dxi-item>
             <dxi-item dataField="toxicInhalationHazard" editorType="dxCheckBox"></dxi-item>
-            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
 

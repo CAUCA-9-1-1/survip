@@ -57,7 +57,6 @@
     </dxi-column>
     <dxi-column dataField="matricule" caption="{{'matricule' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="vacantLand" dataType="boolean" caption="{{'vacantLand' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -75,7 +74,6 @@
                     <dxi-item itemType="group" colCount="2">
                         <dxi-item dataField="localizations" [isRequired]="true" colSpan="2"></dxi-item>
                         <dxi-item dataField="matricule" colSpan="2"></dxi-item>
-                        <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
                         <dxi-item dataField="vacantLand" editorType="dxCheckBox"></dxi-item>
                     </dxi-item>
                     <dxi-item itemType="group">
