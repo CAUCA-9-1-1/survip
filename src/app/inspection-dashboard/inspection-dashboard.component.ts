@@ -441,6 +441,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[0],
             width: width[0] || null,
             cellTemplate: 'approveInspection',
+            showInColumnChooser: false,
         }, {
             dataField: 'idRiskLevel',
             caption: this.labels['riskLevel'],
@@ -514,6 +515,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             width: width[8] || null,
             groupIndex: (this.selectedMode === 'mode1' || this.selectedMode === 'mode2' ? 0 : null),
             groupCellTemplate: 'groupBatch',
+            showWhenGrouped: false,
+            showInColumnChooser: false,
         }, {
             dataField: 'inspectionStatus',
             caption: this.labels['status'],
@@ -567,6 +570,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[15],
             width: width[15] || null,
             cellTemplate: (container, options) => this.showPicture(container, options),
+            allowFiltering: false,
         }, {
             dataField: 'buildingValue',
             caption: this.labels['buildingValue'],
@@ -617,6 +621,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[24],
             width: width[24] || null,
             cellTemplate: 'generateReport',
+            showInColumnChooser: false,
         }];
     }
 
@@ -670,7 +675,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             this.lanes = {
                 store: data,
                 select: ['id', 'name'],
-                sort: ['name'],
+                sort: [ 'name'],
             };
             this.checkLoadedElement();
         });
