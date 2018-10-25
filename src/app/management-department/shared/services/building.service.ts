@@ -12,6 +12,10 @@ export class BuildingService extends RequestService {
         super(injector);
     }
 
+    getActiveForFireSafetyDepartment(idFireSafetyDepartment: string): Observable<Building[]> {
+        return this.get('Building/Active/' + idFireSafetyDepartment);
+    }
+
     getActive(): Observable<Building[]> {
         return this.get('Building/Active');
     }

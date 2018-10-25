@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-
-import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {FirestationService} from '../shared/services/firestation.service';
 import {FireSafetyDepartmentService} from '../../management-system/shared/services/firesafetydepartment.service';
-import {FireSafetyDepartment} from '../../management-system/shared/models/firesafetydepartment.model';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 import {Firestation} from '../shared/models/firestation.model';
@@ -26,7 +23,6 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
     buildingLookup: {
         closeOnOutsideClick: true,
     };
-
     constructor(
         firestationService: FirestationService,
         private fireSafetyDepartmentService: FireSafetyDepartmentService,
@@ -62,11 +58,17 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
             e.editorOptions.closeOnOutsideClick = true;
         }
 
+        if (e.dataField === 'idFireSafetyDepartment') {
+            const defaultValueChanged = e.editorOptions.onValueChanged;
+            e.editorOptions.onValueChanged = ev => {
+                this.loadBuilding(ev.value);
+                defaultValueChanged(ev);
+            };
+        }
     }
 
     onInitNewRow(e) {
         e.data.isActive = true;
-
         this.loadDepartment();
     }
 
@@ -76,7 +78,6 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
 
     private loadDepartment() {
         this.fireSafetyDepartmentService.localized().subscribe(data => {
-            console.log('departments : ', data);
             this.departments = {
                 store: data,
                 select: ['id', 'name'],
@@ -85,7 +86,16 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
         });
     }
 
-    private loadBuilding() {
-        this.buildingService.getActive().subscribe(data => this.buildings = data);
+    private loadBuilding(idFireSafetyDepartment: string = '') {
+        if (idFireSafetyDepartment) {
+            this.buildingService.getActiveForFireSafetyDepartment(idFireSafetyDepartment).subscribe(data => {
+                this.buildings = data;
+            });
+        } else {
+            this.buildingService.getActive().subscribe(data => {
+                this.buildings = data;
+            });
+        }
+
     }
 }
