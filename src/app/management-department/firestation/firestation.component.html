@@ -11,7 +11,7 @@
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column dataField="name" caption="{{'name' | translate}}" sortOrder="asc" sortIndex="0"></dxi-column>
     <dxi-column dataField="idFireSafetyDepartment" caption="{{'fireSafetyDepartment' | translate}}">
-        <dxo-lookup [dataSource]="departments" [displayExpr]="getDepartmentName" valueExpr="id">
+        <dxo-lookup [dataSource]="departments" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column

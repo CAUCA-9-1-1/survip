@@ -21,7 +21,7 @@ import {Firestation} from '../shared/models/firestation.model';
     ]
 })
 export class FirestationComponent extends GridWithCrudService implements OnInit {
-    departments: FireSafetyDepartment[] = [];
+    departments: any = {};
     buildings: Building[] = [];
     buildingLookup: {
         closeOnOutsideClick: true,
@@ -43,12 +43,6 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
         this.loadSource();
         this.loadDepartment();
         this.loadBuilding();
-    }
-
-    getDepartmentName(data) {
-        const department = FireSafetyDepartment.fromJSON(data);
-
-        return department.getLocalization(config.locale);
     }
 
     getBuildingName(data) {
@@ -81,8 +75,13 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
     }
 
     private loadDepartment() {
-        this.fireSafetyDepartmentService.getAll().subscribe(data => {
-            this.departments = data;
+        this.fireSafetyDepartmentService.localized().subscribe(data => {
+            console.log('departments : ', data);
+            this.departments = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
         });
     }
 
