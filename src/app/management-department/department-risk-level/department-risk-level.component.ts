@@ -88,10 +88,24 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
         const riskLevels = [];
 
         if (this.riskLevels) {
-            option.data.riskLevelIds.forEach(id => {
+          this.riskLevels.sort((a, b) => {
+            if (a.sequence < b.sequence) {
+              return -1;
+            }
+            if (a.sequence > b.sequence) {
+              return 1;
+            }
+            return 0;
+          }).forEach(risk => {
+            if (option.data.riskLevelIds.some(id => risk.id === id)) {
+              riskLevels.push(risk.name);
+            }
+          });
+
+            /*option.data.riskLevelIds.forEach(id => {
                 const risk = this.riskLevels.find(item => item.id === id);
                 riskLevels.push(risk.name);
-            });
+            });*/
         }
 
         element.innerHTML = riskLevels.join(', ');
