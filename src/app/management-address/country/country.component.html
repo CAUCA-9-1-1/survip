@@ -18,7 +18,6 @@
     </dxi-column>
     <dxi-column dataField="codeAlpha2" caption="{{'codeAlpha2' | translate}}"></dxi-column>
     <dxi-column dataField="codeAlpha3" caption="{{'codeAlpha3' | translate}}"></dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -29,7 +28,6 @@
             <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
             <dxi-item dataField="codeAlpha2" [isRequired]="true"></dxi-item>
             <dxi-item dataField="codeAlpha3" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
 

@@ -24,7 +24,6 @@
     <dxi-column dataField="email" caption="{{'email' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="phoneNumber" caption="{{'telephone' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="faxNumber" caption="{{'fax' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="15%" [visible]="false"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -38,7 +37,6 @@
             <dxi-item dataField="email"></dxi-item>
             <dxi-item dataField="phoneNumber"></dxi-item>
             <dxi-item dataField="faxNumber"></dxi-item>
-            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
 </dx-data-grid>

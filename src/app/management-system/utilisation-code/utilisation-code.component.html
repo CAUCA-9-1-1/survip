@@ -16,7 +16,6 @@
             [calculateCellValue]="getCodeName"
             editCellTemplate="editname">
     </dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -27,7 +26,6 @@
             <dxi-item dataField="cubf" [isRequired]="true"></dxi-item>
             <dxi-item dataField="scian"></dxi-item>
             <dxi-item dataField="localizations"></dxi-item>
-            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
 

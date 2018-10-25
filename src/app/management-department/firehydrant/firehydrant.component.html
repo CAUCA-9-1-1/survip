@@ -76,7 +76,6 @@
     </dxi-column>
     <dxi-column dataField="comments" caption="{{'comments' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="physicalPosition" caption="{{'physicalPosition' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -87,7 +86,6 @@
             <dxi-item dataField="number" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idFireHydrantType" [isRequired]="true"></dxi-item>
             <dxi-item dataField="locationType" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
             <dxi-item itemType="group" colCount="2" colSpan="2">
                 <dxi-item dataField="civicNumber"></dxi-item>
                 <dxi-item dataField="addressLocationType"></dxi-item>

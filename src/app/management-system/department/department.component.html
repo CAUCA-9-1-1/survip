@@ -28,7 +28,6 @@
         <dxo-lookup [dataSource]="languages" displayExpr="name" valueExpr="code">
         </dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="15%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -39,7 +38,6 @@
             <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idCounty" [isRequired]="true"></dxi-item>
             <dxi-item dataField="language" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
 

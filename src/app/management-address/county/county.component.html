@@ -30,7 +30,6 @@
         <dxo-lookup [dataSource]="regions" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -41,7 +40,6 @@
             <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idState" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idRegion"></dxi-item>
-            <dxi-item dataField="isActive" editorType="dxCheckBox"></dxi-item>
         </dxo-form>
     </dxo-editing>
 
