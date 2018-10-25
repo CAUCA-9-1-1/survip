@@ -23,6 +23,8 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
     buildingLookup: {
         closeOnOutsideClick: true,
     };
+
+    public phoneEditorOptions = {mask : '(000) 000-0000', maskRules : { X: /[02-9]/ }, maxlength: 10, useMaskedValue: true };
     constructor(
         firestationService: FirestationService,
         private fireSafetyDepartmentService: FireSafetyDepartmentService,
@@ -31,21 +33,21 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
         super(firestationService);
     }
 
-    setModel(data: any) {
+    public setModel(data: any) {
         return Firestation.fromJSON(data);
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.loadSource();
         this.loadDepartment();
         this.loadBuilding();
     }
 
-    getBuildingName(data) {
+    public getBuildingName(data) {
         return data.civicNumber + ' ' + data.lane + ', ' + data.city + (data.name ? ' (' + data.name + ')' : '');
     }
 
-    onEditorPreparing(e: any): void {
+    public onEditorPreparing(e: any): void {
         if (e.dataField === 'idBuilding') {
             e.editorName = 'dxLookup';
             e.editorOptions.valueExpr = 'id';
@@ -67,12 +69,12 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
         }
     }
 
-    onInitNewRow(e) {
+    public onInitNewRow(e) {
         e.data.isActive = true;
         this.loadDepartment();
     }
 
-    onEditingStart(e) {
+    public onEditingStart(e) {
         this.loadDepartment();
     }
 

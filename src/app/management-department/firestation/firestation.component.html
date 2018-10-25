@@ -35,9 +35,11 @@
             <dxi-item dataField="name" [isRequired]="true" colSpan="2"></dxi-item>
             <dxi-item dataField="idFireSafetyDepartment" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idBuilding" editorType="dxLookup" [editorOptions]="buildingLookup"></dxi-item>
-            <dxi-item dataField="email"></dxi-item>
-            <dxi-item dataField="phoneNumber"></dxi-item>
-            <dxi-item dataField="faxNumber"></dxi-item>
+            <dxi-item dataField="email">
+                <dxi-validation-rule type="email"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="phoneNumber" editorType="dxTextBox" [editorOptions]="phoneEditorOptions"></dxi-item>
+            <dxi-item dataField="faxNumber" editorType="dxTextBox" [editorOptions]="phoneEditorOptions"></dxi-item>
         </dxo-form>
     </dxo-editing>
 </dx-data-grid>
