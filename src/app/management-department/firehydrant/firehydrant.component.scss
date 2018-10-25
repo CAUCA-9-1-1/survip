@@ -13,3 +13,6 @@
   height: 20px;
   border: solid 1px #000;
 }
+::ng-deep .dx-layout-manager .dx-field-item:not(.dx-last-col){
+  padding-right:0px;
+}

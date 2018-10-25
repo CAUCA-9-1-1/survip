@@ -185,8 +185,8 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         e.data.rateOperatorType = 'Equal';
         e.data.pressureOperatorType = 'Equal';
         e.data.coordinates = null;
-        e.data.idUnitOfMeasureRate = 'f13400a9-70b8-4325-b732-7fe7db72185c';
-        e.data.idUnitOfMeasurePressure = 'f13400a9-70b8-4325-b732-7fe7db721865';
+        e.data.idUnitOfMeasureRate = '';
+        e.data.idUnitOfMeasurePressure = '';
 
         this.displayLocationField(e.component, e.data.locationType);
     }
