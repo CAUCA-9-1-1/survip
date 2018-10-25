@@ -49,6 +49,7 @@
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
         <dxo-popup title="{{'departmentRiskLevel' | translate}}" [showTitle]="true"></dxo-popup>
         <dxo-form colCount="4">
           <dxi-item itemType="group" caption="{{'groupTitleFireSafetyDepartmentRiskLevel' | translate}}" [colSpan]="4" [colCount]="4">

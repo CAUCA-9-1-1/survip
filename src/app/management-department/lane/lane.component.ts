@@ -48,7 +48,7 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
         });
 
         this.translateService.get([
-            'selectCity'
+            'selectCity','add'
         ]).subscribe(labels => {
             this.labels = labels;
         });
@@ -80,6 +80,7 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
                 icon: 'plus',
                 width: 50,
                 disabled: true,
+                hint: this.labels['add'],
                 onInitialized: (ev) => {
                     this.addingButton = ev.component;
                 },

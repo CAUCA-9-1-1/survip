@@ -19,6 +19,7 @@
     <dxi-column dataField="pictures" [visible]="false" editCellTemplate="editphoto"></dxi-column>
 
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
         <dxo-popup title="{{'anomaly' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="2">

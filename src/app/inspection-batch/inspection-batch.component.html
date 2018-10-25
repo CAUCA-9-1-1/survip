@@ -24,6 +24,7 @@
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
         <dxo-popup title="{{'batch' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="4">
@@ -82,6 +83,7 @@
             </dxi-column>
 
             <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowDeleting]="true">
+                <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
             </dxo-editing>
 
             <div *dxTemplate="let field of 'showmove'">

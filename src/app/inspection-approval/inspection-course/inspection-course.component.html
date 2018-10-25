@@ -21,6 +21,7 @@
     <dxi-column dataField="lanes" caption="{{'course' | translate}}" cellTemplate="listLaneDescription" editCellTemplate="editCourseLane"></dxi-column>
 
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
         <dxo-popup title="{{'course' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="1"></dxo-form>
@@ -46,6 +47,7 @@
             <dxi-column dataField="direction" caption="{{'direction' | translate}}" [lookup]="lookupDirection"></dxi-column>
 
             <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+                <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
             </dxo-editing>
 
             <div *dxTemplate="let field of 'showmove'">
