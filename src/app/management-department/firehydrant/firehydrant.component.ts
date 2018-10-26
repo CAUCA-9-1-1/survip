@@ -43,7 +43,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     public addingButton: any;
     public selectedCity = '';
     public selectedCityGeometry: any = {};
-    public fireHydrantTypes: FireHydrantType[] = [];
+    public fireHydrantTypes: any = {store: []};
     public lanes: any = {};
     public lanesOfCity: any = {};
     public operatorTypes: EnumModel[] = [];
@@ -273,7 +273,11 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     private loadFireHydrantType() {
-        this.fireHydrantTypeService.getAll().subscribe(data => this.fireHydrantTypes = data);
+        this.fireHydrantTypeService.localized().subscribe(data => this.fireHydrantTypes = {
+          store: data,
+          select: ['id', 'name'],
+          sort: ['name'],
+        });
     }
 
     private loadOperatorType() {
