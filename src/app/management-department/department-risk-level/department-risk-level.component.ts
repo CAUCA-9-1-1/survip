@@ -101,11 +101,6 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
               riskLevels.push(risk.name);
             }
           });
-
-            /*option.data.riskLevelIds.forEach(id => {
-                const risk = this.riskLevels.find(item => item.id === id);
-                riskLevels.push(risk.name);
-            });*/
         }
 
         element.innerHTML = riskLevels.join(', ');
@@ -153,6 +148,18 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
     }
 
     private loadSurvey() {
-        this.surveyService.getAll().subscribe(data => this.surveys = data);
+      this.surveyService.getAll().subscribe(data => this.surveys = data);
+    }
+
+    public filterRiskLevels = (filterValue, selectedFilterOperation) => {
+      if (this.riskLevels) {
+        const riskLevelsFound = this.riskLevels.filter(risk => risk.name.toUpperCase().indexOf(filterValue.toUpperCase()) >= 0);
+        const filterExpression = [];
+
+        riskLevelsFound.forEach(riskLevel => {
+          filterExpression.push(['riskLevelIds', 'contains', riskLevel.id]);
+        });
+        return filterExpression;
+      }
     }
 }
