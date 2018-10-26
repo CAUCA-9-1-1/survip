@@ -19,6 +19,10 @@ export class FireSafetyDepartmentService extends RequestService {
     localized(): Observable<FireSafetyDepartment[]> {
         return this.get('FireSafetyDepartment/localized');
     }
+    
+    allLocalized(): Observable<FireSafetyDepartment[]> {
+       return this.get('FireSafetyDepartment/alllocalized');
+    }
 
     save(department: FireSafetyDepartment) {
         return this.post('FireSafetyDepartment', department);

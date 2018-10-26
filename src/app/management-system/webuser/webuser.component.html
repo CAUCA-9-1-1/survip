@@ -85,7 +85,7 @@
                     dataField="idFireSafetyDepartment"
                     [validationRules]="[{ type: 'required' }]"
                     caption="{{'fireSafetyDepartment' | translate}}">
-                <dxo-lookup [dataSource]="departments" [displayExpr]="getDepartmentName" valueExpr="id">
+                <dxo-lookup [dataSource]="departments" displayExpr="name" valueExpr="id">
                 </dxo-lookup>
             </dxi-column>
             <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
