@@ -23,7 +23,7 @@ import {Inspection} from '../../inspection-approval/shared/models/inspection.mod
     ]
 })
 export class DepartmentRiskLevelComponent extends GridWithCrudService implements OnInit {
-    fireSafetyDepartments: FireSafetyDepartment[];
+    fireSafetyDepartments: any = {store: []};
     riskLevels: RiskLevel[];
     availableRiskLevels: RiskLevel[] = [];
     surveys: Survey[];
@@ -137,7 +137,13 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
     }
 
     private loadFireSafetyDepartment() {
-        this.fireSafetyDepartmentService.getAll().subscribe(data => this.fireSafetyDepartments = data);
+        this.fireSafetyDepartmentService.localized().subscribe(data => {
+          this.fireSafetyDepartments = {
+            store: data,
+            select: ['id', 'name'],
+            sort: ['name'],
+          };
+        });
     }
 
     private loadRiskLevel() {
