@@ -6,10 +6,8 @@ import {
     InspectionBuildingHazardousMaterialService
 } from '../../inspection-approval/shared/services/inspection-building-hazardous-material.service';
 import {BuildingHazardousMaterialService} from '../shared/services/building-hazardous-material.service';
-import {HazardousMaterial} from '../../management-system/shared/models/hazardous-material.model';
 import {HazardousMaterialService} from '../../management-system/shared/services/hazardous-material.service';
 import {UnitOfMeasureService} from '../../management-type-system/shared/services/unit-of-measure.service';
-import {UnitOfMeasure} from '../../management-type-system/shared/models/unit-of-measure.model';
 import {BuildingHazardousMaterial} from '../shared/models/building-hazardous-material.model';
 
 
@@ -34,8 +32,8 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
     }
 
     idBuilding: string;
-    hazardousMaterials: HazardousMaterial[];
-    unitOfMeasures: UnitOfMeasure[];
+    hazardousMaterials: any = {store: []};
+    unitOfMeasures: any = {store: []};
     tankTypes: any = [];
 
     constructor(
@@ -102,10 +100,18 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
     }
 
     private loadHazardousMaterial() {
-        this.hazardousMaterialService.localized().subscribe(data => this.hazardousMaterials = data);
+        this.hazardousMaterialService.localized().subscribe(data => this.hazardousMaterials = {
+          store: data,
+          select: ['id', 'name', 'number'],
+          sort: ['number', 'name'],
+        });
     }
 
     private loadUnitOfMeasure() {
-        this.unitOfMeasureService.getCapacity().subscribe(data => this.unitOfMeasures = data);
+        this.unitOfMeasureService.getCapacity().subscribe(data => this.unitOfMeasures = {
+          store: data,
+          select: ['id', 'name'],
+          sort: ['name'],
+        });
     }
 }

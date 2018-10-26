@@ -27,7 +27,7 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
     }
 
     idBuilding: string;
-    pnapsType: PersonRequiringAssistanceType[];
+    pnapsType:  any = {store: []};
 
     constructor(
         private inspectionService: InspectionBuildingPnapsService,
@@ -69,6 +69,10 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
     }
 
     private loadType() {
-        this.pnapsTypeService.localized().subscribe(data => this.pnapsType = data);
+        this.pnapsTypeService.localized().subscribe(data => this.pnapsType = {
+            store: data,
+            select: ['id', 'name'],
+            sort: ['name'],
+          });
     }
 }
