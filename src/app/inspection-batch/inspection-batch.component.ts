@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DxDataGridComponent} from 'devextreme-angular';
+import {DxDataGridComponent, DxPopupComponent} from 'devextreme-angular';
 import {MatSnackBar} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -47,6 +47,10 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     popupBuildingSelected = [];
     popupButtons: any[];
     lastSelected: any = {};
+    editPopup: DxPopupComponent;
+    popupEditorOptions = {onKeyDown: e => this.onFormUpdated(e)};
+
+    private popupToolBarItems = [];
 
     constructor(
         translateService: TranslateService,
@@ -140,6 +144,21 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
             id: 'all',
             name: this.labels['all'],
         }]);
+    }
+
+    popupShown = (e) => {
+        this.editPopup = e.component;
+        this.managePopupCancelButton(true);
+    }
+
+    managePopupCancelButton(isDisabled: boolean) {
+        this.popupToolBarItems = this.editPopup['option']('toolbarItems');
+        this.popupToolBarItems[1].options.disabled = isDisabled;
+        this.editPopup['option']('toolbarItems', this.popupToolBarItems);
+    }
+
+    onFormUpdated(e) {
+        this.managePopupCancelButton(false);
     }
 
     onToolbarPreparing(e) {
