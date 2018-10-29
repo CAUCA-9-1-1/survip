@@ -77,7 +77,10 @@
 
 
   <div *dxTemplate="let cellData of 'fireSafetyDepartmentsTemplate'">
-    <dx-lookup [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName" valueExpr="id" [value]="cellData.value" (onValueChanged)="onFireSafetyValueChanged($event, cellData.setValue)">
+    <dx-lookup [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName"
+               valueExpr="id" [value]="cellData.value"
+               (onValueChanged)="onFireSafetyValueChanged($event, cellData.setValue)"
+                [closeOnOutsideClick]="true">
     </dx-lookup>
   </div>
 
