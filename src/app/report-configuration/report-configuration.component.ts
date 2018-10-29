@@ -1,10 +1,8 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
-
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {ReportTemplateService} from '../shared/services/report-template.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ConfigurationTemplate} from '../shared/models/configuration-template.model';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {SelectTemplateComponent} from './select-template/select-template.component';
 import {PlaceholderGroup} from './shared/models/placeholder-group';
 
 
@@ -12,7 +10,7 @@ import {PlaceholderGroup} from './shared/models/placeholder-group';
   selector: 'app-report-configuration',
   templateUrl: './report-configuration.component.html',
   styleUrls: ['./report-configuration.component.scss'],
-  providers: [/* ReportTemplateService */]
+  providers: []
 })
 export class ReportConfigurationComponent implements OnInit {
   selectedTemplate: ConfigurationTemplate;
@@ -24,8 +22,8 @@ export class ReportConfigurationComponent implements OnInit {
     private translateService: TranslateService,
     private reportConfigurationService: ReportTemplateService,
     private changeDetectorRef: ChangeDetectorRef,
-    private ngZone: NgZone,
-  ) { }
+  ) {   
+   }
 
   ngOnInit() {
     this.reportConfigurationService.getPlaceholderList().subscribe(res => {
@@ -68,26 +66,9 @@ export class ReportConfigurationComponent implements OnInit {
     });
   }
 
-  /* openDialog() {
-    // Needs tp be run inside the NgZone because the function is sometimes called as an emit from CKEditor
-    this.ngZone.run(() => {
-      const dialogConfig = new MatDialogConfig();
-
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-
-      dialogConfig.data = {
-        id: 1,
-        templateIdentifiers: this.templateIdentifiers
-      }; 
-
-      const dialogRef = this.dialog.open(SelectTemplateComponent, dialogConfig);
-
-      dialogRef.afterClosed().subscribe(result => {
-        this.selectOrCreateTemplate(result);
-      });
-    });
-  } */
+  loadTemplate(): void {
+    this.fetchTemplateData();
+  }
 
   selectOrCreateTemplate(template: ConfigurationTemplate) {
     if (template == null) {

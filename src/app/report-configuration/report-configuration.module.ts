@@ -1,11 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {DxDataGridModule} from 'devextreme-angular';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule, MatButtonToggleModule, MatDialogModule, MatSelectModule, MatOptionModule, MatInputModule, MatListModule} from '@angular/material';
 
 import {ReportConfigurationComponent} from './report-configuration.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {SelectTemplateComponent} from './select-template/select-template.component';
-import {MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatInputModule, MatListModule} from '@angular/material';
 import {TextEditorModule} from 'cause-report-configuration';
 import {ReportTemplateService} from '../shared/services/report-template.service';
 
@@ -21,7 +22,9 @@ import {ReportTemplateService} from '../shared/services/report-template.service'
     MatInputModule,
     MatListModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    DxDataGridModule,
+    MatButtonToggleModule,
   ],
   declarations: [
     ReportConfigurationComponent,
@@ -29,5 +32,6 @@ import {ReportTemplateService} from '../shared/services/report-template.service'
   ],
   providers: [
     ReportTemplateService,
+  ]
 })
 export class ReportConfigurationModule { }

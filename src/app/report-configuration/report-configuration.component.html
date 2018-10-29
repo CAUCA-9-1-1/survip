@@ -5,8 +5,7 @@
                    id="textEditor"
                    [(documentContent)]="selectedTemplate.data"
                    [(placeholders)]="placeholders"
-                   (loadDataEvent)="openDialog()"
+                   (loadDataEvent)="loadTemplate()"
                    (saveDataEvent)="saveTemplate()">
-
   </app-text-editor>
 </div>
