@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
@@ -8,10 +8,9 @@ import {ReportTemplateService} from '../../shared/services/report-template.servi
 @Component({
   selector: 'app-template-selection',
   templateUrl: './select-template.component.html',
-  styleUrls: ['./select-template.component.css'],
-  providers: [/* ReportTemplateService */]
+  styleUrls: ['./select-template.component.css']
 })
-export class SelectTemplateComponent implements OnInit, AfterViewInit {
+export class SelectTemplateComponent implements OnInit {
 
   form: FormGroup;
   dataSource: any = {};
@@ -41,41 +40,32 @@ export class SelectTemplateComponent implements OnInit, AfterViewInit {
     this.isOpenDisabled = true;
 
     this.translateService.get(['edit']).subscribe(labels => {
-      'edit'
-  ]).subscribe(labels => {
       this.labels = labels;
       this.checkLoadedElement();
-  });
-  }
-
-  ngAfterViewInit() {
-
+    });
   }
 
   private checkLoadedElement(): boolean {
     if (this.angularIsLoaded && this.labels !== {}) {
-        return true;
+      return true;
     }
     return false;
 }
-
-  openExistingTemplate(template: ConfigurationTemplate) {
-    //this.dialogRef.close(template);
-  }
 
   textAreaEmpty(name: string) {
     this.isOpenDisabled = name.trim().length === 0;
   }
 
-  create(name: string) {
+
+  onRowInserted(e){
     const template = new ConfigurationTemplate();
-    template.name = name;
+    template.name = e.data.name;
     template.data = '';
-    //this.dialogRef.close(template);
+    this.saveTemplate(template);
   }
 
   onRowUpdated(e){
-    console.log('updated');
+    this.saveTemplate(e.data);
   }
 
   onRowRemoved(e){
