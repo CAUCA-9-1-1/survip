@@ -153,12 +153,18 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
 
     public filterRiskLevels = (filterValue, selectedFilterOperation) => {
       if (this.riskLevels) {
-        const riskLevelsFound = this.riskLevels.filter(risk => risk.name.toUpperCase().indexOf(filterValue.toUpperCase()) >= 0);
+        const riskLevelsFound = this.riskLevels.filter(risk => {
+          const found = risk.name.toUpperCase().indexOf(filterValue.toUpperCase()) >= 0;
+          return found;
+        });
         const filterExpression = [];
 
         riskLevelsFound.forEach(riskLevel => {
           filterExpression.push(['riskLevelIds', 'contains', riskLevel.id]);
+          filterExpression.push('or');
         });
+
+        filterExpression.pop();
         return filterExpression;
       }
     }
