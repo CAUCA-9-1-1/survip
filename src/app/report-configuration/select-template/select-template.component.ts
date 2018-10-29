@@ -40,7 +40,7 @@ export class SelectTemplateComponent implements OnInit, AfterViewInit {
     this.form = this.formBuilder.group([]);
     this.isOpenDisabled = true;
 
-    this.translateService.get([
+    this.translateService.get(['edit']).subscribe(labels => {
       'edit'
   ]).subscribe(labels => {
       this.labels = labels;
@@ -84,14 +84,8 @@ export class SelectTemplateComponent implements OnInit, AfterViewInit {
     this.saveTemplate(selectedTemplate);
   }
 
-  editReport(id){
-    console.log(id);
-    let configurationToEdit = this.dataSource.filter(function(item){
-      return item.id === id;
-    });
-    console.log(configurationToEdit[0]);
-    this.reportConfigurationService.currentReport = configurationToEdit[0];
-    this.router.navigate(['report-edition']);
+  editReport(report){
+    this.router.navigate(['/report-edition', report.id.toString()]);
   }
 
   saveTemplate(selectedTemplate: ConfigurationTemplate): void {

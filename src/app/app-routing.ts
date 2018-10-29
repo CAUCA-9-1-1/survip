@@ -68,7 +68,7 @@ const appRoutes: Routes = [{
     path: 'report-configuration',
     component: SelectTemplateComponent,
 }, {
-    path: 'report-edition',
+    path: 'report-edition/:idReport',
     component: ReportConfigurationComponent,
 }, {
     path: '**',

@@ -20,7 +20,7 @@ export class ReportConfigurationComponent implements OnInit {
   placeholders: PlaceholderGroup[];
 
   constructor(
-    private dialog: MatDialog,
+    private activeRoute: ActivatedRoute,
     private translateService: TranslateService,
     private reportConfigurationService: ReportTemplateService,
     private changeDetectorRef: ChangeDetectorRef,
@@ -32,17 +32,23 @@ export class ReportConfigurationComponent implements OnInit {
       this.placeholders = res;
     });
     this.templateIdentifiers = [];
-    this.fetchTemplateIdentifiers();
-    //this.selectedTemplate = new ConfigurationTemplate();
-    this.selectedTemplate = this.reportConfigurationService.currentReport;
-    }
+    this.fetchRequiredData();
 
-  fetchTemplateIdentifiers(): void {
+    this.selectedTemplate = new ConfigurationTemplate();
+  }
+
+  fetchRequiredData(): void {
     this.reportConfigurationService.getTemplateList().subscribe(data => {
       data.forEach((templateIdentifier) => {
         this.templateIdentifiers.push(templateIdentifier);
       });
-      //this.openDialog();
+
+      this.activeRoute.params.subscribe(param => {
+        this.reportConfigurationService.getTemplate(param.idReport).subscribe(data => {
+            this.selectedTemplate = data;
+            this.fetchTemplateData();
+        });
+      });
     });
   }
 
