@@ -112,7 +112,9 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
                 anomalyPicture.idParent = this.selectRow.id || undefined;
 
                 this.sourceService.savePicture(anomalyPicture).subscribe(idAnomalyPicture => {
-                    images.push(idAnomalyPicture);
+                    images.push({
+                        picture: idAnomalyPicture
+                    });
 
                     this.formImageField.setValue(images);
                 });
