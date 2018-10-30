@@ -6,7 +6,6 @@ import packageInfo from '../../../assets/config/package.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
-import {County} from '../../management-address/shared/models/county.model';
 import {CountyService} from '../../management-address/shared/services/county.service';
 
 
@@ -20,7 +19,7 @@ import {CountyService} from '../../management-address/shared/services/county.ser
     ]
 })
 export class DepartmentComponent extends GridWithCrudService implements OnInit {
-    counties: County[] = [];
+    counties: any = {store: []};
     languages = [];
 
     constructor(
@@ -47,18 +46,16 @@ export class DepartmentComponent extends GridWithCrudService implements OnInit {
         return department.getLocalization(config.locale);
     }
 
-    getCountyName(data) {
-        const county = County.fromJSON(data);
-
-        return county.getLocalization(config.locale);
-    }
-
     onInitNewRow(e) {
         e.data.isActive = true;
     }
 
     private loadCounty() {
-        this.countyService.getAll().subscribe(data => this.counties = data);
+        this.countyService.localized().subscribe(data => this.counties = {
+          store: data,
+          select: ['id', 'name'],
+          sort: ['name'],
+        });
     }
 
     private loadTranslation() {

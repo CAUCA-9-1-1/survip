@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+
+import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {FirestationService} from '../shared/services/firestation.service';
 import {FireSafetyDepartmentService} from '../../management-system/shared/services/firesafetydepartment.service';
+import {FireSafetyDepartment} from '../../management-system/shared/models/firesafetydepartment.model';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 import {Firestation} from '../shared/models/firestation.model';
@@ -18,7 +21,7 @@ import {Firestation} from '../shared/models/firestation.model';
     ]
 })
 export class FirestationComponent extends GridWithCrudService implements OnInit {
-    departments: any = {};
+    departments: any = {store: []};
     buildings: Building[] = [];
     buildingLookup: {
         closeOnOutsideClick: true,

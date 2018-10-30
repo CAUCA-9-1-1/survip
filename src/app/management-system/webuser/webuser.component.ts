@@ -1,11 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-
-import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {Webuser} from '../shared/models/webuser.model';
 import {WebuserService} from '../shared/services/webuser.service';
-import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
 import {Password} from '../../shared/classes/password';
 import {Color} from '../../shared/classes/color';
@@ -25,7 +22,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     private selectedIdWebuser: string;
 
     labels = {};
-    departments: FireSafetyDepartment[] = [];
+    departments:  any = {store: []};
     departmentField: any;
     webuserFireSafetyDepartments = [];
     passwordOptions = {
@@ -80,12 +77,6 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
     getTelephone = (e) => {
         return this.getWebuserAttribute('telephone', e);
-    }
-
-    getDepartmentName(data) {
-        const departments = FireSafetyDepartment.fromJSON(data);
-
-        return departments.getLocalization(config.locale);
     }
 
     onPasswordChanged = (e) => {
@@ -232,6 +223,10 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     }
 
     private loadDepartments() {
-        this.departmentService.getAll().subscribe(data => this.departments = data);
+        this.departmentService.allLocalized().subscribe(data => this.departments = {
+          store: data,
+          select: ['id', 'name'],
+          sort: ['name'],
+        });
     }
 }

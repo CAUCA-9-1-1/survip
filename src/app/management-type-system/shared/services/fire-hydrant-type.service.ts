@@ -16,6 +16,10 @@ export class FireHydrantTypeService extends RequestService {
         return this.get('FireHydrantType');
     }
 
+    localized(): Observable<FireHydrantType[]> {
+      return this.get('FireHydrantType/localized');
+    }
+
     save(type: FireHydrantType) {
         return this.post('FireHydrantType', type);
     }

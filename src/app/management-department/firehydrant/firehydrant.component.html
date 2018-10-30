@@ -12,7 +12,7 @@
     <dxi-column
             dataField="idFireHydrantType"
             caption="{{'fireHydrantType' | translate}}">
-        <dxo-lookup [dataSource]="fireHydrantTypes" [displayExpr]="getFireHydrantTypeName" valueExpr="id">
+        <dxo-lookup [dataSource]="fireHydrantTypes" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="locationType" caption="{{'locationType' | translate}}" [visible]="false">
