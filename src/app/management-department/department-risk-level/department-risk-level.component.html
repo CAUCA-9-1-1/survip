@@ -17,7 +17,7 @@
             [sortIndex]="0"
             caption="{{'fireSafetyDepartment' | translate}}">
         <dxi-validation-rule type="required"></dxi-validation-rule>
-        <dxo-lookup [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName" valueExpr="id" [allowClearing]="true">
+        <dxo-lookup [dataSource]="fireSafetyDepartments" displayExpr="name" valueExpr="id" [allowClearing]="true">
         </dxo-lookup>
     </dxi-column>
     <dxi-column
@@ -31,7 +31,7 @@
     <dxi-column
             dataField="idSurvey"
             caption="{{'survey' | translate}}">
-        <dxo-lookup [dataSource]="surveys" [displayExpr]="getSurveyName" valueExpr="id" [allowClearing]="true">
+        <dxo-lookup [dataSource]="surveys" displayExpr="name" valueExpr="id" [allowClearing]="true">
         </dxo-lookup>
     </dxi-column>
     <dxi-column dataField="hasGeneralInformation" dataType="boolean" caption="{{'generalInformation' | translate}}" [visible]="false"></dxi-column>
@@ -79,7 +79,7 @@
 
 
   <div *dxTemplate="let cellData of 'fireSafetyDepartmentsTemplate'">
-    <dx-lookup [dataSource]="fireSafetyDepartments" [displayExpr]="getFireSafetyDepartmentName"
+    <dx-lookup [dataSource]="fireSafetyDepartments" displayExpr="name"
                valueExpr="id" [value]="cellData.value"
                (onValueChanged)="onFireSafetyValueChanged($event, cellData.setValue)"
                 [closeOnOutsideClick]="true">

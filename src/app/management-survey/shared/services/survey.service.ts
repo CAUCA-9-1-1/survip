@@ -16,7 +16,11 @@ export class SurveyService extends RequestService {
         return this.get('Survey');
     }
 
-    save(survey: Survey) {
+    localized(): Observable<Survey[]> {
+        return this.get('Survey/localized');
+    }
+
+  save(survey: Survey) {
         return this.post('Survey', survey);
     }
 

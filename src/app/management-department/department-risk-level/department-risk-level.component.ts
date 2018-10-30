@@ -1,14 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-
-import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {FireSafetyDepartmentRiskLevelService} from '../shared/services/fire-safety-department-risk-level.service';
 import {FireSafetyDepartmentService} from '../../management-system/shared/services/firesafetydepartment.service';
-import {FireSafetyDepartment} from '../../management-system/shared/models/firesafetydepartment.model';
 import {RiskLevel} from '../../management-system/shared/models/risk-level.model';
 import {RiskLevelService} from '../../management-system/shared/services/risk-level.service';
 import {SurveyService} from '../../management-survey/shared/services/survey.service';
-import {Survey} from '../../management-survey/shared/models/survey.model';
 import {Inspection} from '../../inspection-approval/shared/models/inspection.model';
 
 @Component({
@@ -124,18 +120,6 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
         e.data.isActive = true;
     }
 
-    public getFireSafetyDepartmentName(data) {
-        const ssi = FireSafetyDepartment.fromJSON(data);
-
-        return ssi.getLocalization(config.locale);
-    }
-
-    public getSurveyName(data) {
-        const survey = Survey.fromJSON(data);
-
-        return survey.getLocalization(config.locale);
-    }
-
     private loadFireSafetyDepartment() {
         this.fireSafetyDepartmentService.localized().subscribe(data => {
           this.fireSafetyDepartments = {
@@ -154,7 +138,7 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
     }
 
     private loadSurvey() {
-        this.surveyService.getAll().subscribe(data => this.surveys = {
+        this.surveyService.localized().subscribe(data => this.surveys = {
           store: data,
           select: ['id', 'name'],
           sort: ['name'],
