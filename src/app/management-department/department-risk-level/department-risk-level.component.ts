@@ -88,10 +88,19 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
         const riskLevels = [];
 
         if (this.riskLevels) {
-            option.data.riskLevelIds.forEach(id => {
-                const risk = this.riskLevels.find(item => item.id === id);
-                riskLevels.push(risk.name);
-            });
+          this.riskLevels.sort((a, b) => {
+            if (a.sequence < b.sequence) {
+              return -1;
+            }
+            if (a.sequence > b.sequence) {
+              return 1;
+            }
+            return 0;
+          }).forEach(risk => {
+            if (option.data.riskLevelIds.some(id => risk.id === id)) {
+              riskLevels.push(risk.name);
+            }
+          });
         }
 
         element.innerHTML = riskLevels.join(', ');
@@ -139,6 +148,24 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
     }
 
     private loadSurvey() {
-        this.surveyService.getAll().subscribe(data => this.surveys = data);
+      this.surveyService.getAll().subscribe(data => this.surveys = data);
+    }
+
+    public filterRiskLevels = (filterValue, selectedFilterOperation) => {
+      if (this.riskLevels) {
+        const riskLevelsFound = this.riskLevels.filter(risk => {
+          const found = risk.name.toUpperCase().indexOf(filterValue.toUpperCase()) >= 0;
+          return found;
+        });
+        const filterExpression = [];
+
+        riskLevelsFound.forEach(riskLevel => {
+          filterExpression.push(['riskLevelIds', 'contains', riskLevel.id]);
+          filterExpression.push('or');
+        });
+
+        filterExpression.pop();
+        return filterExpression;
+      }
     }
 }

@@ -21,6 +21,7 @@
         </dxo-lookup>
     </dxi-column>
     <dxi-column
+            [calculateFilterExpression]="filterRiskLevels"
             dataField="riskLevelIds"
             caption="{{'riskLevel' | translate}}"
             editCellTemplate="riskLevelTemplate"
