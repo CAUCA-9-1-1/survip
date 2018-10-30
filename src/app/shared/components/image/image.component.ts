@@ -25,21 +25,25 @@ export class ImageComponent implements OnInit {
         this.src = '';
         this.icon = 'plus';
         this.idPicture = id;
-
         if (id) {
             this.icon = 'image';
             if (this.useDataCopy) {
               this.inspectionPictureService.getOne(id).subscribe(data => {
                 this.src = data.dataUri;
                 this.picture = data;
+                console.log('use data copy', data);
+                console.log('src', this.src);
+                console.log('dataUri', data.dataUri);
               });
             } else {
               this.pictureService.getOne(id).subscribe(data => {
                 this.src = data.dataUri;
                 this.picture = data;
+                console.log('not use data copy', JSON.stringify(this.picture));
               });
             }
         }
+
     }
 
     public idPicture: string;
