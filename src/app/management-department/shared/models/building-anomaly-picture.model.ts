@@ -4,7 +4,7 @@ import {BaseModel} from '../../../shared/models/base.model';
 export class BuildingAnomalyPicture extends BaseModel {
     idParent: string;
     idPicture: string;
-    pictureData: string;
+    dataUri: string;
     sketchJson: string;
 
     static fromJSON(data: object): BuildingAnomalyPicture {

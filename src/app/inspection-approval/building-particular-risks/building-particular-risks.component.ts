@@ -96,7 +96,7 @@ export class BuildingParticularRisksComponent implements OnInit {
 
             this.particularRisksService.getPictures(data.id).subscribe( pictures => {
                 pictures.forEach(image => {
-                    images.push(image['pictureData']);
+                    images.push(image['dataUri']);
                 });
 
                 this.pictures[0] = images;
@@ -108,7 +108,7 @@ export class BuildingParticularRisksComponent implements OnInit {
 
             this.particularRisksService.getPictures(data.id).subscribe( pictures => {
                 pictures.forEach(image => {
-                    images.push(image['pictureData']);
+                    images.push(image['dataUri']);
                 });
 
                 this.pictures[1] = images;
@@ -120,7 +120,7 @@ export class BuildingParticularRisksComponent implements OnInit {
 
             this.particularRisksService.getPictures(data.id).subscribe( pictures => {
                 pictures.forEach(image => {
-                    images.push(image['pictureData']);
+                    images.push(image['dataUri']);
                 });
 
                 this.pictures[2] = images;
@@ -132,7 +132,7 @@ export class BuildingParticularRisksComponent implements OnInit {
 
             this.particularRisksService.getPictures(data.id).subscribe( pictures => {
                 pictures.forEach(image => {
-                    images.push(image['pictureData']);
+                    images.push(image['dataUri']);
                 });
 
                 this.pictures[3] = images;

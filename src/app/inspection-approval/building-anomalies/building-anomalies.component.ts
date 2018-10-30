@@ -112,7 +112,7 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         } else {
             if (this.selectRow.id) {
                 const anomalyPicture = new BuildingAnomalyPicture();
-                anomalyPicture.pictureData = picture.dataUri;
+                anomalyPicture.dataUri = picture.dataUri;
                 anomalyPicture.idParent = this.selectRow.id || undefined;
 
                 this.sourceService.savePicture(anomalyPicture).subscribe(idAnomalyPicture => {
