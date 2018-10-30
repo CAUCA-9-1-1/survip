@@ -26,7 +26,7 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
     fireSafetyDepartments: any = {store: []};
     riskLevels: RiskLevel[];
     availableRiskLevels: RiskLevel[] = [];
-    surveys: Survey[];
+    surveys: any = {store: []};
     loadingVisible = false;
     currentConfigurationId: string;
 
@@ -154,7 +154,11 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
     }
 
     private loadSurvey() {
-      this.surveyService.getAll().subscribe(data => this.surveys = data);
+        this.surveyService.getAll().subscribe(data => this.surveys = {
+          store: data,
+          select: ['id', 'name'],
+          sort: ['name'],
+        });
     }
 
     public filterRiskLevels = (filterValue, selectedFilterOperation) => {

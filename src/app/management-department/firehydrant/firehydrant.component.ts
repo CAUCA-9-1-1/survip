@@ -47,8 +47,8 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     public lanes: any = {};
     public lanesOfCity: any = {};
     public operatorTypes: EnumModel[] = [];
-    public rateUnits: UnitOfMeasure[] = [];
-    public pressureUnits: UnitOfMeasure[] = [];
+    public rateUnits: any = {store: []};
+    public pressureUnits: any = {store: []};
     public formFields = {
         idLane: null,
         idCity: null,
@@ -287,8 +287,16 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     private loadUnitOfMeasure() {
-        this.unitOfMeasureService.getRate().subscribe(data => this.rateUnits = data);
-        this.unitOfMeasureService.getPressure().subscribe(data => this.pressureUnits = data);
+        this.unitOfMeasureService.getRate().subscribe(data => this.rateUnits = {
+          store: data,
+          select: ['id', 'name'],
+          sort: ['name'],
+        });
+        this.unitOfMeasureService.getPressure().subscribe(data => this.pressureUnits = {
+          store: data,
+          select: ['id', 'name'],
+          sort: ['name'],
+        });
     }
 
     private loadCity() {
