@@ -25,8 +25,6 @@
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
-        <dxo-popup title="{{'batch' | translate}}" [showTitle]="true"></dxo-popup>
-
         <dxo-popup title="{{'batch' | translate}}" [showTitle]="true" [onShown]="popupShown"></dxo-popup>
 
         <dxo-form colCount="4">
