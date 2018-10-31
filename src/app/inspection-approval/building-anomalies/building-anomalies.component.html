@@ -5,8 +5,8 @@
         (onEditorPreparing)="onEditorPreparing($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onEditingStart)="onEditingStart($event)"
-        (onRowInserted)="onRowInserted($event)"
-        (onRowUpdated)="onRowUpdated($event)"
+        (onRowInserted)="onAddingNewRow($event)"
+        (onRowUpdated)="onModifyingRow($event)"
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
             dataField="theme"

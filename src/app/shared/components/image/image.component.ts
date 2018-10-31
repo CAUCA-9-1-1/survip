@@ -21,25 +21,34 @@ export class ImageComponent implements OnInit {
     @Input() autoApiChange = false;
     @Input() useDataCopy = false;
     @Input()
-    set idImage(id) {
-        this.src = '';
-        this.icon = 'plus';
-        this.idPicture = id;
-        if (id) {
-            this.icon = 'image';
-            if (this.useDataCopy) {
-              this.inspectionPictureService.getOne(id).subscribe(data => {
-                this.src = data.dataUri;
-                this.picture = data;
-              });
+    set idImage(img) {
+        if (img) {
+            if (typeof img === 'object' && (img.dataUri || img.data)) {
+                this.src = '';
+                this.idPicture = img.id;
+                this.icon = 'image';
+                this.src = img.dataUri ? img.dataUri : 'data:' + img.mimeType + ';base64,' + img.data;
+                this.picture = img;
             } else {
-              this.pictureService.getOne(id).subscribe(data => {
-                this.src = data.dataUri;
-                this.picture = data;
-              });
+                this.src = '';
+                this.icon = 'plus';
+                this.idPicture = img;
+                if (img) {
+                    this.icon = 'image';
+                    if (this.useDataCopy) {
+                        this.inspectionPictureService.getOne(img).subscribe(data => {
+                            this.src = data.dataUri;
+                            this.picture = data;
+                        });
+                    } else {
+                        this.pictureService.getOne(img).subscribe(data => {
+                            this.src = data.dataUri;
+                            this.picture = data;
+                        });
+                    }
+                }
             }
         }
-
     }
 
     public idPicture: string;
