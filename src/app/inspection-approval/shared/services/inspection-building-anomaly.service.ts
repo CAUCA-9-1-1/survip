@@ -25,6 +25,10 @@ export class InspectionBuildingAnomalyService extends RequestService {
         return this.post('inspection/building/anomaly/picture', anomalyPicture);
     }
 
+    savePictureCollection(anomalyPictures: BuildingAnomalyPicture[]) {
+        return this.post('inspection/building/anomaly/pictures', anomalyPictures);
+    }
+
     save(anomaly: BuildingAnomaly) {
         return this.post('inspection/building/anomaly', anomaly);
     }

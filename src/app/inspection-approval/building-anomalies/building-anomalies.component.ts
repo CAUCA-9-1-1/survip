@@ -7,7 +7,6 @@ import {MatDialog} from '@angular/material';
 import {AskNewThemeComponent} from '../ask-new-theme/ask-new-theme.component';
 import {InspectionPictureService} from '../shared/services/inspection-picture.service';
 
-
 @Component({
     selector: 'app-building-anomalies',
     templateUrl: './building-anomalies.component.html',
@@ -33,6 +32,7 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
     private selectRow: any;
     private idBuilding: string;
     private formImageField: any;
+    private imageList = [];
 
     public constructor(
         anomalyService: InspectionBuildingAnomalyService,
@@ -56,10 +56,8 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         this.formImageField = field;
         if (field.row.data.pictures) {
             field.row.data.pictures.forEach(image => {
-                if (image.picture.id) {
-                    images.push(image.picture.id);
-                } else {
-                    images.push(image.picture.dataUri);
+                if (image.picture) {
+                    images.push(image.picture);
                 }
             });
         }
@@ -100,6 +98,25 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         });
     }
 
+    public async onAddingNewRow(e) {
+        e.key['pictures'] = [];
+        await this.savePictureCollection();
+        this.onRowInserted(e);
+    }
+
+    public async onModifyingRow(e) {
+        e.key['pictures'] = [];
+        await this.savePictureCollection();
+        this.onRowUpdated(e);
+    }
+
+    private async savePictureCollection() {
+        console.log('saving pictures');
+        if (this.imageList.length > 0) {
+            await this.sourceService.savePictureCollection(this.imageList).toPromise();
+        }
+    }
+
     public uploadPicture(picture) {
         const images = this.formImageField.value || [];
 
@@ -107,22 +124,20 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
             this.pictureService.save(picture).subscribe();
         } else {
             if (this.selectRow.id) {
+                picture.idParent = this.selectRow.id || undefined;
                 const anomalyPicture = new BuildingAnomalyPicture();
+                anomalyPicture.idParent = picture.idParent;
                 anomalyPicture.dataUri = picture.dataUri;
-                anomalyPicture.idParent = this.selectRow.id || undefined;
-
-                this.sourceService.savePicture(anomalyPicture).subscribe(idAnomalyPicture => {
-                    images.push({
-                        picture: idAnomalyPicture
-                    });
-
-                    this.formImageField.setValue(images);
+                anomalyPicture.sketchJson = picture.sketchJson;
+                images.push({
+                    picture: picture
                 });
+                this.formImageField.setValue(images);
+                this.imageList.push(anomalyPicture);
             } else {
                 images.push({
                     picture: picture
                 });
-
                 this.formImageField.setValue(images);
             }
         }

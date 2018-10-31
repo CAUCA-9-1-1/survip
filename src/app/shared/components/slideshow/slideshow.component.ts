@@ -43,7 +43,6 @@ export class SlideshowComponent implements OnInit {
     @Input('images')
     set images(list: string[]) {
         this.items = list;
-        this.restart();
     }
 
     get images(): string[] {
@@ -60,6 +59,8 @@ export class SlideshowComponent implements OnInit {
     public ngOnInit() {
         this.container.nativeElement.style.height = this.height;
         this.container.nativeElement.style.width = '100%';
+
+        this.restart();
     }
 
     public getState(index: number) {
@@ -71,7 +72,7 @@ export class SlideshowComponent implements OnInit {
     }
 
     public isImage(url) {
-        if (url.indexOf('data:image') > -1 || url.indexOf('/') > -1) {
+        if ((typeof url !== 'object') && (url.indexOf('data:image') > -1 || url.indexOf('/') > -1)) {
             return true;
         }
 
