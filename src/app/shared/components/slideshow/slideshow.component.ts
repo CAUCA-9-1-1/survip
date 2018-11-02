@@ -43,6 +43,9 @@ export class SlideshowComponent implements OnInit {
     @Input('images')
     set images(list: string[]) {
         this.items = list;
+        if (!this.timer) {
+            this.restart();
+        }
     }
 
     get images(): string[] {
@@ -54,13 +57,11 @@ export class SlideshowComponent implements OnInit {
     private states: string[] = [];
     private selectedIndex = 0;
 
-    public constructor() { }
+    public constructor() {}
 
     public ngOnInit() {
         this.container.nativeElement.style.height = this.height;
         this.container.nativeElement.style.width = '100%';
-
-        this.restart();
     }
 
     public getState(index: number) {
