@@ -126,8 +126,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     }
 
     showBatch(field) {
-        if (field.data && field.data.items.length) {
-            this.router.navigate(['/inspection/batch', field.data.items[0].idBatch.toString()]);
+        if (field.data && (field.data.items || field.data.collapsedItems).length) {
+            this.router.navigate(['/inspection/batch', (field.data.items || field.data.collapsedItems)[0].idBatch.toString()]);
         }
     }
 
@@ -259,6 +259,12 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             },
             selection: {
                 mode: 'multiple'
+            },
+            summary: {
+              groupItems: [{
+                column: 'batchDescription',
+                summaryType: 'min'
+              }]
             },
             onToolbarPreparing: (e) => this.customizeToolbar(e)
         });
