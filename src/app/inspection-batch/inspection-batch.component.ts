@@ -328,12 +328,8 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     private onAddBuilding() {
 
-      console.log('selected', this.selectedBuildingIds);
-      console.log('selected', this.selectedBuildingIds[0]);
-
       const selectedIds = [];
       this.selectedBuildingIds.forEach(selection => selectedIds.push(selection._value));
-      console.log('selection', selectedIds);
 
       this.buildingService.getForInspectionlist(selectedIds).subscribe((buildings) => {
         buildings.forEach(building => {

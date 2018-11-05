@@ -26,7 +26,6 @@ export class InspectionBatchService extends RequestService {
     }
 
     getInspections(idBatch: string) {
-      console.log('icitte', idBatch);
       return this.get('Batch/' + idBatch + '/BuildingForManagement');
     }
 }
