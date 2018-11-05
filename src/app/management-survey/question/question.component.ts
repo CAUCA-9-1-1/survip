@@ -31,6 +31,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     public selectedIndex = -1;
     public editing: object = {};
     public timer = null;
+    public sequenceTimer = null;
     public messages: object = {};
     public isLoading = false;
     public optionsChoiceVisible = true;
@@ -40,6 +41,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     };
     public questionOccurrenceOptions = {displayExpr: 'text', valueExpr: 'value', maxValue: 4, MinValue: 0, defaultValue: 0};
     public questionTypeChoiceCanceled = false;
+    private questionTypeCollection = [];
 
     constructor(
         private questionService: QuestionService,
@@ -63,7 +65,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
             .subscribe(labels => {
                 this.messages = labels;
             });
-        this.questionTypeOptions.dataSource = this.questionService.getEnumsKeysCollection(SurveyQuestionTypeEnum);
+        this.questionTypeCollection = this.questionService.getEnumsKeysCollection(SurveyQuestionTypeEnum);
+        this.questionTypeOptions.dataSource = this.questionTypeCollection;
     }
 
     public getQuestionTreeviewTitle(data) {
@@ -139,6 +142,10 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     public onMoveUp() {
+        if (this.sequenceTimer) {
+            clearTimeout(this.sequenceTimer);
+        }
+        this.sequenceTimer = setTimeout(() => {
         const previousSequencedQuestion = this.questions
             .filter(question => question.sequence < this.questions[this.selectedIndex].sequence &&
                 question.idSurveyQuestionParent === this.questions[this.selectedIndex].idSurveyQuestionParent)
@@ -159,9 +166,14 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
             this.moveQuestion();
         }
+        }, 250);
     }
 
     public onMoveDown() {
+        if (this.sequenceTimer) {
+            clearTimeout(this.sequenceTimer);
+        }
+        this.sequenceTimer = setTimeout(() => {
         const nextSequencedQuestion = this.questions
             .filter(question => question.sequence > this.questions[this.selectedIndex].sequence &&
                 question.idSurveyQuestionParent === this.questions[this.selectedIndex].idSurveyQuestionParent);
@@ -181,6 +193,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
             this.moveQuestion();
         }
+        }, 250);
     }
 
     private orderQuestion(question1: Question, question2: Question) {
@@ -240,6 +253,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
             this.selectedIndex = e.itemIndex;
 
+            this.filterQuestionType();
+
             this.setNextQuestion();
 
             this.displayOptionDetails(this.questions[this.selectedIndex].questionType);
@@ -261,7 +276,6 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         }
         this.timer = setTimeout(() => {
             this.questionService.save(this.questions[this.selectedIndex]).subscribe();
-            console.log('save', this.questions[this.selectedIndex]);
         }, 500);
     }
 
@@ -358,6 +372,14 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         } else {
             this.optionsChoiceVisible = false;
         }
+    }
+
+    private filterQuestionType() {
+        let EnumSource = this.questionTypeCollection;
+        if (this.questions[this.selectedIndex].idSurveyQuestionParent) {
+            EnumSource = this.questionTypeCollection.filter(item => item.value !== SurveyQuestionTypeEnum.groupedQuestion);
+        }
+        this.questionTypeOptions.dataSource = EnumSource;
     }
 
     public getLastQuestionSequence(idParent: string = null) {
