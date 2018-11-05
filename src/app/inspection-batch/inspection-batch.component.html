@@ -60,7 +60,7 @@
     </div>
     <div *dxTemplate="let field of 'editBuildings'">
         <dx-data-grid
-                [dataSource]="buildingsInspected"
+                [dataSource]="inspectionBuildingList"
                 [hoverStateEnabled]="true"
                 [rowAlternationEnabled]="true"
                 (onInitialized)="onInitialized($event)"
@@ -69,15 +69,15 @@
                 (onRowUpdated)="onBuildingsUpdated($event)"
                 (onRowRemoved)="onBuildingsRemoved($event)">
             <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="90px" caption=" "></dxi-column>
-            <dxi-column dataField="civicNumber"
+            <dxi-column dataField="fullCivicNumber"
                     caption="{{'civicNumber' | translate}}"
                     [allowEditing]="false"
                     width="14%">
             </dxi-column>
-            <dxi-column dataField="lane" caption="{{'lane' | translate}}" [allowEditing]="false"></dxi-column>
-            <dxi-column dataField="city" caption="{{'city' | translate}}" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="fullLaneName" caption="{{'lane' | translate}}" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="cityName" caption="{{'city' | translate}}" [allowEditing]="false"></dxi-column>
             <dxi-column dataField="riskLevel" caption="{{'riskLevel' | translate}}" [allowEditing]="false" width="14%"></dxi-column>
-            <dxi-column dataField="assignedTo" caption="{{'assignedTo' | translate}}">
+            <dxi-column dataField="idWebUserAssignedTo" caption="{{'assignedTo' | translate}}">
                 <dxo-lookup [dataSource]="inspectorsList" displayExpr="name" valueExpr="id">
                 </dxo-lookup>
             </dxi-column>

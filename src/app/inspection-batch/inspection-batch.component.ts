@@ -14,6 +14,7 @@ import {InspectionService} from '../inspection-approval/shared/services/inspecti
 import {InspectionBatch} from './shared/models/inspection-batch.model';
 import {Inspection} from '../inspection-approval/shared/models/inspection.model';
 import {BuildingNotInspected} from './shared/models/building-not-inspected.model';
+import {InspectionBuilding} from '../management-department/shared/models/inspectionBuilding';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     inspectorsOn: WebuserForWeb[] = [];
     inspectorsOff: WebuserForWeb[] = [];
     inspectorsList: WebuserForWeb[] = [];
+    inspectionBuildingList: InspectionBuilding[] = [];
     buildings: Building[] = [];
     buildingsInspected: Building[] = [];
     buildingsNotInspected: BuildingNotInspected[] = [];
@@ -54,7 +56,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     constructor(
         translateService: TranslateService,
-        batchService: InspectionBatchService,
+        private batchService: InspectionBatchService,
         private webuserService: WebuserService,
         private buildingService: BuildingService,
         private inspectionService: InspectionService,
@@ -98,7 +100,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     ngOnInit() {
         this.loadSource(() => this.autoEditBatch());
         this.loadWebuser();
-        this.loadBuilding();
+        // this.loadBuilding();
         this.loadInspection();
     }
 
@@ -112,6 +114,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         e.data.isReadyForInspection = false;
         e.data.createOn = (new Date());
         e.data.isActive = true;
+        this.inspectionBuildingList = [];
 
         this.inspectorsList = this.inspectorsOn.concat([{
             id: 'all',
@@ -122,8 +125,10 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     onEditingStart(e) {
         this.inspectorsOn = [];
         this.inspectorsOff = [];
-        this.setBuildingInspected(e.data);
-        this.setBuildingNotInspected();
+        console.log('onEditingStart', e);
+        this.loadInspectionBuildingList(e.data.id);
+        // this.setBuildingInspected(e.data);
+        // this.setBuildingNotInspected();
 
         this.webusers.forEach(user => {
             let find = false;
@@ -419,6 +424,13 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
                 });
             }
         });
+    }
+
+    private loadInspectionBuildingList(idBatch: string) {
+      this.batchService.getInspections(idBatch).subscribe(data => {
+        this.inspectionBuildingList = data;
+        console.log('buildings', data);
+      });
     }
 
     private setBuildingNotInspected() {
