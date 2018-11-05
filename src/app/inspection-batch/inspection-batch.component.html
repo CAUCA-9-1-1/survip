@@ -101,8 +101,37 @@
         [toolbarItems]="popupButtons"
         [(visible)]="popupBuildingVisible">
     <div *dxTemplate="let data of 'content'">
-        <dx-list
-                [dataSource]="buildingsNotInspected"
+
+      <dx-data-grid
+        [dataSource]="availableBuildingsDataSource"
+        [hoverStateEnabled]="true"
+        [(selectedRowKeys)]="selectedBuildingIds"
+        [rowAlternationEnabled]="true">
+        <dxo-remote-operations
+          [filtering]="true"
+          [sorting]="true"
+          [paging]="true">
+        </dxo-remote-operations>
+        <dxo-selection
+          selectAllMode="allPages"
+          showCheckBoxesMode="always"
+          mode="multiple">
+        </dxo-selection>
+        <dxo-filter-row
+          [visible]="true">
+        </dxo-filter-row>
+
+        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+        <dxo-paging [pageSize]="15"></dxo-paging>
+        <dxi-column dataField="fullCivicNumberSortable" [customizeText]="civicNumber_customizeText" caption="{{'lane' | translate}}" [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="fullLaneName" caption="{{'lane' | translate}}" [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="cityName" caption="{{'city' | translate}}" [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="riskLevel" caption="{{'riskLevel' | translate}}" [allowEditing]="false" width="14%"></dxi-column>
+
+      </dx-data-grid>
+
+        <!--<dx-list
+                [dataSource]="availableBuildingsDataSource"
                 itemTemplate="listItem"
                 keyExpr="id"
                 height="90%"
@@ -116,6 +145,6 @@
                 <div>{{item.civicNumber}}</div>&nbsp;<div>{{item.laneName}}</div>,
                 <div>{{item.cityName}}</div>, <div>{{item.riskLevel}} ({{item.matricule}})</div>
             </div>
-        </dx-list>
+        </dx-list>-->
     </div>
 </dx-popup>

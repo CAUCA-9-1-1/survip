@@ -4,7 +4,7 @@ export class InspectionBuilding {
   idBuilding: string;
   idWebuserAssignedTo: string;
   idWebuserCreatedBy: string;
-  idRisklevel: string;
+  idRiskLevel: string;
   sequence: 0;
   matricule: '';
   fullCivicNumber: '';
