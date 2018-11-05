@@ -243,11 +243,9 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     onBuildingsRemoved(e) {
-        this.moveBuildingsSource('buildings', 'buildingsNotInspected', e.key.id);
-
         let find = -1;
         this.formInspectionField.data.inspections.forEach((inspection, index) => {
-            if (inspection.idBuilding === e.key.id) {
+            if (inspection.idBuilding === e.key.idBuilding) {
                 find = index;
             }
         });
@@ -265,7 +263,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     onBuildingsUpdated(e) {
         this.formInspectionField.data.inspections.forEach((inspection, index) => {
-            if (inspection.idBuilding === e.key.id) {
+            if (inspection.idBuilding === e.key.idBuilding) {
                 this.formInspectionField.data.inspections[index].idWebuserAssignedTo = (
                     e.key.idWebuserAssignedTo === 'all' ? null : e.key.idWebuserAssignedTo
                 );
@@ -375,28 +373,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         if (find > -1) {
             this[sourceTo].push(this[sourceFrom][find]);
             this[sourceFrom].splice(find, 1);
-        }
-    }
-
-    private moveBuildingsSource(sourceFrom, sourceTo, idBuilding) {
-        let find = -1;
-
-        this[sourceFrom].forEach((building, index) => {
-            if (building.id === idBuilding) {
-                find = index;
-            }
-        });
-
-        if (find > -1) {
-            const newBuilding = Object.assign({}, this[sourceFrom][find]);
-            newBuilding.assignedTo = 'all';
-            newBuilding.sequence = this[sourceTo].length;
-
-            this[sourceTo].push(newBuilding);
-
-            if (sourceFrom !== 'buildings') {
-                this[sourceFrom].splice(find, 1);
-            }
         }
     }
 
