@@ -364,5 +364,8 @@
     "textAnswer":"Réponse à développement",
     "dateAnswer":"Réponse avec date",
     "groupedQuestion":"Groupe de question"
-  }
+  },
+  "surveyCopy":"Copier ce questionnaire",
+  "surveyCopyQuestion":"Êtes-vous sûr de vouloir copier ce questionnaire?",
+  "copy":"Copier"
 }

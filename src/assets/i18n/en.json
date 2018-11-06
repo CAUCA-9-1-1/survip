@@ -363,5 +363,8 @@
   },
   "groupTitleFireSafetyDepartmentRiskLevel": "Fire safety department - risk levels",
   "groupTitleSurvey": "Survey",
-  "groupTitleConfiguration": "Configuration"
+  "groupTitleConfiguration": "Configuration",
+  "surveyCopy":"Copy this survey",
+  "surveyCopyQuestion":"Are you sure you want to copy this survey?",
+  "copy":"Copy"
 }

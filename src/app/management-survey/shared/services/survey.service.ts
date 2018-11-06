@@ -20,11 +20,15 @@ export class SurveyService extends RequestService {
         return this.get('Survey/localized');
     }
 
-  save(survey: Survey) {
+    save(survey: Survey) {
         return this.post('Survey', survey);
     }
 
     remove(id: string) {
         return this.delete('Survey/' + id);
+    }
+
+    copySurvey(idSurvey: string) {
+        return this.post('Survey/CopySurvey', idSurvey);
     }
 }
