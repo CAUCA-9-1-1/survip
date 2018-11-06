@@ -15,6 +15,9 @@ import {StatisticsModule} from './statistics/statistics.module';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {ReportConfigurationModule} from './report-configuration/report-configuration.module';
 import {ManagementSystemModule} from './management-system/management-system.module';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {ExpiredTokenInterceptor} from './shared/services/expired-token.interceptor';
+import {RefreshTokenService} from './shared/services/refresh-token.service';
 
 @NgModule({
     bootstrap: [
@@ -39,6 +42,13 @@ import {ManagementSystemModule} from './management-system/management-system.modu
         ReportConfigurationModule,
     ],
     providers: [
+      RefreshTokenService,
+      HttpClientModule,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ExpiredTokenInterceptor,
+        multi: true
+      },
       {
         provide: LocationStrategy,
         useClass: HashLocationStrategy,
