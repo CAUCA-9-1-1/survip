@@ -25,6 +25,7 @@
         </dxo-lookup>
     </dxi-column>
     <dxi-column alignment="center" caption="{{'modify' | translate}}" cellTemplate="editmode"></dxi-column>
+    <dxi-column alignment="center" caption="{{'copy' | translate}}" cellTemplate="copymode" [width]="60"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -38,6 +39,9 @@
 
     <div *dxTemplate="let data of 'editmode'">
         <a class="dx-link" (click)="onModifyQuestion(data.data.id)">{{'modifyQuestion' | translate}}</a>
+    </div>
+    <div *dxTemplate="let data of 'copymode'">
+        <i class="fa fa-paste dx-link" (click)="onCopySurvey(data.data.id)" title="{{'surveyCopy' | translate}}"></i>
     </div>
     <div *dxTemplate="let field of 'editname'">
         <app-multilang

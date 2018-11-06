@@ -5,6 +5,8 @@ import config from '../../../assets/config/config.json';
 import {Survey} from '../shared/models/survey.model';
 import {SurveyService} from '../shared/services/survey.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import {confirm} from 'devextreme/ui/dialog';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -15,9 +17,11 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 })
 export class ListComponent  extends GridWithCrudService implements OnInit {
 
+    private labels = {};
     constructor(
         private router: Router,
-        surveyService: SurveyService
+        private surveyService: SurveyService,
+        private translateService: TranslateService
     ) {
         super(surveyService);
     }
@@ -28,6 +32,15 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
 
     ngOnInit() {
         this.loadSource();
+        this.loadTranslation();
+    }
+
+    loadTranslation() {
+        this.translateService.get([
+            'surveyCopyQuestion', 'question'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     getSurveyName(data)  {
@@ -43,6 +56,15 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
         this.router.navigate(['management/survey'], {
             queryParams: {
                 id_survey: idSurvey
+            }
+        });
+    }
+
+    public onCopySurvey(idSurvey) {
+        confirm(this.labels['surveyCopyQuestion'], this.labels['question']).then((result) => {
+            if (result) {
+                this.surveyService.copySurvey(idSurvey)
+                    .subscribe(success => this.loadSource());
             }
         });
     }
