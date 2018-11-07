@@ -107,8 +107,11 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         return InspectionBatch.fromJSON(data);
     }
 
-    ngOnInit() {
-        this.loadSource(() => this.autoEditBatch());
+    async ngOnInit() {
+        await this.activeRoute.params.subscribe(param => {
+          this.loadOneWithCallBack(param.idBatch, () => this.autoEditBatch());
+        });
+
         this.loadWebuser();
     }
 
@@ -377,24 +380,20 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     private autoEditBatch() {
-        this.activeRoute.params.subscribe(param => {
-            const keys = this.dataSource.filter(row => {
-                if (row.id === param.idBatch) {
-                    return true;
-                }
+      this.activeRoute.params.subscribe(param => {
+        const idBatch = param.idBatch;
+        const keys = this.dataSource.filter(row => row.id === idBatch);
+
+        if (keys.length) {
+          setTimeout(() => {
+            const rowIndex = this.dataGrid.instance.getRowIndexByKey(keys[0]);
+            this.dataGrid.instance.editRow(rowIndex);
+            this.dataGrid.instance['getController']('editing')._editPopup.option('onHidden', () => {
+              this.router.navigate(['/inspection/dashboard']);
             });
-
-            if (keys.length) {
-                setTimeout(() => {
-                    const rowIndex = this.dataGrid.instance.getRowIndexByKey(keys[0]);
-                    this.dataGrid.instance.editRow(rowIndex);
-
-                    this.dataGrid.instance['getController']('editing')._editPopup.option('onHidden', () => {
-                        this.router.navigate(['/inspection/dashboard']);
-                    });
-                }, 200);
-            }
-        });
+          }, 200);
+        }
+      });
     }
 
     private loadInspectionBuildingList(idBatch: string) {
