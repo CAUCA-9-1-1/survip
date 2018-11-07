@@ -103,6 +103,7 @@
     <div *dxTemplate="let data of 'content'">
 
       <dx-data-grid
+        class="dx-grid-popup"
         [dataSource]="availableBuildingsDataSource"
         [hoverStateEnabled]="true"
         [(selectedRowKeys)]="selectedBuildingIds"
@@ -112,6 +113,7 @@
           [sorting]="true"
           [paging]="true">
         </dxo-remote-operations>
+        <dxo-scrolling mode="standard" ></dxo-scrolling>
         <dxo-selection
           selectAllMode="allPages"
           showCheckBoxesMode="always"
