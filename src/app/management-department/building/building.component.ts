@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Injector, Input, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {alert} from 'devextreme/ui/dialog';
 import Guid from 'devextreme/core/guid';
@@ -63,6 +63,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     private labels: any = {};
 
     public constructor(
+        private injector: Injector,
         private laneService: LaneService,
         private cityService: CityService,
         private utilisationCode: UtilisationCodeService,
@@ -71,15 +72,23 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     ) {
         super({
             expand: 'localizations',
-            store: new ODataService({
+            store: new ODataService(injector, {
                 url: 'Building',
                 key: 'id',
                 keyType: 'Guid',
+                onRefreshLogin: () => {
+                  return new ODataService(injector, {
+                    url: 'Building',
+                    key: 'id',
+                    keyType: 'Guid',
+                    onRefreshLogin: () => {}
+                  });
+                }
             }),
         });
 
         this.translateService.get([
-            'close', 'save', 'youNeedToSaveYourNewItem', 'selectCity','add'
+            'close', 'save', 'youNeedToSaveYourNewItem', 'selectCity', 'add'
         ]).subscribe(labels => {
             this.labels = labels;
 

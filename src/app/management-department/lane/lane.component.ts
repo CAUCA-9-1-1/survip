@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import Guid from 'devextreme/core/guid';
 
@@ -33,6 +33,7 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
     private labels: any = {};
 
     public constructor(
+        private injector: Injector,
         private cityService: CityService,
         private publicCode: LanePublicCodeService,
         private genericCode: LaneGenericCodeService,
@@ -40,15 +41,23 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
     ) {
         super({
             expand: 'localizations',
-            store: new ODataService({
+            store: new ODataService(injector, {
                 url: 'Lane',
                 key: 'id',
                 keyType: 'Guid',
+              onRefreshLogin: () => {
+                return new ODataService(injector, {
+                  url: 'Building',
+                  key: 'id',
+                  keyType: 'Guid',
+                  onRefreshLogin: () => {}
+                });
+              }
             }),
         });
 
         this.translateService.get([
-            'selectCity','add'
+            'selectCity', 'add'
         ]).subscribe(labels => {
             this.labels = labels;
         });

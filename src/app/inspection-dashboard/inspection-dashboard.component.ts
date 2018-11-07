@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {DxDataGridComponent} from 'devextreme-angular';
@@ -70,6 +70,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     private inspectionStatus: EnumModel[] = [];
 
     constructor(
+        private injector: Injector,
         private webuserService: WebuserService,
         private laneService: LaneService,
         private cityService: CityService,
@@ -662,10 +663,11 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     private createStore(url: string) {
         this.dataSource = {
-            store: new ODataService({
+            store: new ODataService(this.injector, {
                 url: url,
                 key: 'idBuilding',
                 keyType: 'Guid',
+                onRefreshLogin: () => this.createStore(url)
             }),
         };
     }
