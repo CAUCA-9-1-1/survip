@@ -24,4 +24,8 @@ export class InspectionBatchService extends RequestService {
     remove(idBatch: string) {
         return this.delete('Batch/' + idBatch);
     }
+
+    getInspections(idBatch: string) {
+      return this.get('Batch/' + idBatch + '/BuildingForManagement');
+    }
 }

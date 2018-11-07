@@ -39,3 +39,4 @@ export class Building extends WithLocalization {
         return Object.assign(building, data);
     }
 }
+

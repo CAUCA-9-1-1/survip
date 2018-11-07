@@ -6,14 +6,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {GridWithCrudService} from '../shared/classes/grid-with-crud-service';
 import {InspectionBatchService} from './shared/services/inspection-batch.service';
 import {WebuserService} from '../management-system/shared/services/webuser.service';
-import {Building} from '../management-department/shared/models/building.model';
 import {TranslateService} from '@ngx-translate/core';
 import {WebuserForWeb} from '../management-system/shared/models/webuser-for-web.model';
 import {BuildingService} from '../management-department/shared/services/building.service';
 import {InspectionService} from '../inspection-approval/shared/services/inspection.service';
 import {InspectionBatch} from './shared/models/inspection-batch.model';
-import {Inspection} from '../inspection-approval/shared/models/inspection.model';
-import {BuildingNotInspected} from './shared/models/building-not-inspected.model';
+import {InspectionBuilding} from '../management-department/shared/models/inspectionBuilding';
+import {ODataService} from '../shared/services/o-data.service';
 
 
 @Component({
@@ -31,7 +30,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
     labels = [];
-    timer: number;
     formUserField: any;
     formReadyField: any;
     formInspectionField: any;
@@ -39,14 +37,14 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     inspectorsOn: WebuserForWeb[] = [];
     inspectorsOff: WebuserForWeb[] = [];
     inspectorsList: WebuserForWeb[] = [];
-    buildings: Building[] = [];
-    buildingsInspected: Building[] = [];
-    buildingsNotInspected: BuildingNotInspected[] = [];
-    buildingsWithoutInspection: Inspection[] = [];
+
+    public inspectionBuildingList: InspectionBuilding[] = [];
+    public availableBuildingsDataSource: any = {};
+    public selectedBuildingIds: any[] = [];
+
     popupBuildingVisible = false;
     popupBuildingSelected = [];
     popupButtons: any[];
-    lastSelected: any = {};
     editPopup: DxPopupComponent;
     popupEditorOptions = {onKeyDown: e => this.onFormUpdated(e)};
 
@@ -54,7 +52,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     constructor(
         translateService: TranslateService,
-        batchService: InspectionBatchService,
+        private batchService: InspectionBatchService,
         private webuserService: WebuserService,
         private buildingService: BuildingService,
         private inspectionService: InspectionService,
@@ -63,7 +61,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         private activeRoute: ActivatedRoute,
     ) {
         super(batchService);
-
+        this.createStore('AvailableBuildingForManagement');
         translateService.get([
             'all', 'addBuildingsToInspection', 'add', 'cancel', 'needInspectorAndBuildingForReadyInspection'
         ]).subscribe(data => {
@@ -91,6 +89,20 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         });
     }
 
+  private createStore(url: string) {
+    this.availableBuildingsDataSource = {
+      store: new ODataService({
+        url: url,
+        key: 'idBuilding',
+        keyType: 'Guid',
+      }),
+    };
+  }
+
+  civicNumber_customizeText(cellInfo) {
+      return cellInfo.value.replace(/^0+/, '');
+  }
+
     setModel(data: any) {
         return InspectionBatch.fromJSON(data);
     }
@@ -98,20 +110,17 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     ngOnInit() {
         this.loadSource(() => this.autoEditBatch());
         this.loadWebuser();
-        this.loadBuilding();
-        this.loadInspection();
     }
 
     onInitNewRow(e) {
         this.inspectorsOn = [];
         this.inspectorsOff = Object.assign([], this.webusers);
-        this.setBuildingInspected({});
-        this.setBuildingNotInspected();
 
         e.data.idWebuserCreatedBy = sessionStorage.getItem('currentWebuser');
         e.data.isReadyForInspection = false;
         e.data.createOn = (new Date());
         e.data.isActive = true;
+        this.inspectionBuildingList = [];
 
         this.inspectorsList = this.inspectorsOn.concat([{
             id: 'all',
@@ -122,8 +131,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     onEditingStart(e) {
         this.inspectorsOn = [];
         this.inspectorsOff = [];
-        this.setBuildingInspected(e.data);
-        this.setBuildingNotInspected();
+        this.loadInspectionBuildingList(e.data.id);
 
         this.webusers.forEach(user => {
             let find = false;
@@ -235,11 +243,9 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     onBuildingsRemoved(e) {
-        this.moveBuildingsSource('buildings', 'buildingsNotInspected', e.key.id);
-
         let find = -1;
         this.formInspectionField.data.inspections.forEach((inspection, index) => {
-            if (inspection.idBuilding === e.key.id) {
+            if (inspection.idBuilding === e.key.idBuilding) {
                 find = index;
             }
         });
@@ -257,9 +263,9 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     onBuildingsUpdated(e) {
         this.formInspectionField.data.inspections.forEach((inspection, index) => {
-            if (inspection.idBuilding === e.key.id) {
+            if (inspection.idBuilding === e.key.idBuilding) {
                 this.formInspectionField.data.inspections[index].idWebuserAssignedTo = (
-                    e.key.assignedTo === 'all' ? null : e.key.assignedTo
+                    e.key.idWebuserAssignedTo === 'all' ? null : e.key.idWebuserAssignedTo
                 );
                 this.formInspectionField.data.inspections[index].sequence = (
                     e.key.sequence || 0
@@ -283,7 +289,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     moveDown(field) {
-        if (field.rowIndex < this.buildingsInspected.length - 1) {
+        if (field.rowIndex < this.inspectionBuildingList.length - 1) {
             field.component.editCell(field.rowIndex + 1, 0);
             field.component.cellValue(field.rowIndex + 1, 0, field.data.sequence);
 
@@ -319,24 +325,40 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     private onAddBuilding() {
-        const buildingToInsert = Object.assign([], this.popupBuildingSelected);
-        this.popupBuildingSelected = [];
 
-        buildingToInsert.forEach(building => {
-            const inspection = {
-                sequence: (this.formInspectionField.data.inspections ? this.formInspectionField.data.inspections.length : 0),
-                idBatch: this.formInspectionField.data.id,
-                idBuilding: building.id,
-                idWebuserAssignedTo: null,
-                idWebuserCreatedBy: sessionStorage.getItem('currentWebuser'),
-            };
+      const selectedIds = [];
+      this.selectedBuildingIds.forEach(selection => selectedIds.push(selection._value));
 
-            this.moveBuildingsSource('buildingsNotInspected', 'buildingsInspected', building.id);
-            this.formInspectionField.value.push(inspection);
-            this.popupBuildingVisible = false;
+      this.buildingService.getForInspectionlist(selectedIds).subscribe((buildings) => {
+        buildings.forEach(building => {
+          const inspection = {
+            sequence: (this.formInspectionField.data.inspections ? this.formInspectionField.data.inspections.length : 0),
+            idBatch: this.formInspectionField.data.id,
+            idBuilding: building.idBuilding,
+            idWebuserAssignedTo: null,
+            idWebuserCreatedBy: sessionStorage.getItem('currentWebuser'),
+          };
+
+          const toAdd = new InspectionBuilding();
+          toAdd.cityName = building.cityName;
+          toAdd.fullCivicNumber = building.fullCivicNumber;
+          toAdd.fullCivicNumberSortable = building.fullCivicNumberSortable;
+          toAdd.fullLaneName = building.fullLaneName;
+          toAdd.idBuilding = building.idBuilding;
+          toAdd.idRiskLevel = building.idRiskLevel;
+          toAdd.idWebuserAssignedTo = null;
+          toAdd.idWebuserCreatedBy = inspection.idWebuserAssignedTo;
+          toAdd.idBatch = this.formInspectionField.data.id;
+          toAdd.sequence = inspection.sequence;
+          toAdd.matricule = building.matricule;
+          toAdd.riskLevel = building.riskLevel;
+          this.inspectionBuildingList.push(toAdd);
+
+          this.formInspectionField.value.push(inspection);
+          this.popupBuildingVisible = false;
         });
-
         this.formInspectionField.setValue(this.formInspectionField.value);
+      });
     }
 
     private moveInspectorsSource(sourceFrom, sourceTo, idWebuser) {
@@ -351,28 +373,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         if (find > -1) {
             this[sourceTo].push(this[sourceFrom][find]);
             this[sourceFrom].splice(find, 1);
-        }
-    }
-
-    private moveBuildingsSource(sourceFrom, sourceTo, idBuilding) {
-        let find = -1;
-
-        this[sourceFrom].forEach((building, index) => {
-            if (building.id === idBuilding) {
-                find = index;
-            }
-        });
-
-        if (find > -1) {
-            const newBuilding = Object.assign({}, this[sourceFrom][find]);
-            newBuilding.assignedTo = 'all';
-            newBuilding.sequence = this[sourceTo].length;
-
-            this[sourceTo].push(newBuilding);
-
-            if (sourceFrom !== 'buildings') {
-                this[sourceFrom].splice(find, 1);
-            }
         }
     }
 
@@ -397,74 +397,14 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         });
     }
 
-    private setBuildingInspected(info?: any) {
-        if (!info) {
-            info = this.lastSelected;
-        } else {
-            this.lastSelected = info;
-        }
-
-        this.buildingsInspected = [];
-        this.buildings.forEach(building => {
-            if (info.inspections && info.inspections.length) {
-                info.inspections.forEach(inspection => {
-                    if (building.id === inspection.idBuilding) {
-                        building = Object.assign({
-                            assignedTo: inspection.idWebuserAssignedTo || 'all',
-                            sequence: inspection.sequence,
-                        }, building);
-
-                        this.buildingsInspected.push(building);
-                    }
-                });
-            }
-        });
-    }
-
-    private setBuildingNotInspected() {
-        this.buildingsNotInspected = [];
-
-        this.buildings.forEach(building => {
-            this.buildingsWithoutInspection.forEach(inspection => {
-                if (building.id === inspection['idBuilding']) {
-                    building = Object.assign({}, building);
-
-                    this.buildingsNotInspected.push(BuildingNotInspected.fromJSON({
-                        id: building.id,
-                        civicNumber: inspection['fullCivicNumber'],
-                        laneName: inspection['fullLaneName'],
-                        cityName: building['city'],
-                        matricule: inspection['matricule'],
-                        riskLevel: building['riskLevel'],
-                    }));
-                }
-            });
-        });
+    private loadInspectionBuildingList(idBatch: string) {
+      this.batchService.getInspections(idBatch).subscribe(data => {
+        this.inspectionBuildingList = data;
+        console.log('buildings', data);
+      });
     }
 
     private loadWebuser() {
         this.webuserService.getActive().subscribe(data => this.webusers = data);
-    }
-
-    private loadBuilding() {
-        this.buildingService.getActive().subscribe(data => {
-            this.buildings = data;
-
-            if (this.buildingsWithoutInspection.length) {
-                this.setBuildingInspected();
-                this.setBuildingNotInspected();
-            }
-        });
-    }
-
-    private loadInspection() {
-        this.inspectionService.getBuildingToDo().subscribe(data => {
-            this.buildingsWithoutInspection = data;
-
-            if (this.buildings.length) {
-                this.setBuildingInspected();
-                this.setBuildingNotInspected();
-            }
-        });
     }
 }

@@ -16,6 +16,10 @@ export class BuildingService extends RequestService {
         return this.get('Building/Active/' + idFireSafetyDepartment);
     }
 
+    getForInspectionlist(ids: string[]) {
+      return this.post('building/ForInspectionList', ids);
+    }
+
     getActive(): Observable<Building[]> {
         return this.get('Building/Active');
     }
