@@ -17,6 +17,10 @@ export class InspectionBatchService extends RequestService {
         return this.get('Batch');
     }
 
+    getOne(idBatch: string): Observable<InspectionBatch> {
+      return this.get('Batch/' + idBatch);
+    }
+
     save(batch: InspectionBatch): Observable<PostModel> {
         return this.post('Batch', batch);
     }

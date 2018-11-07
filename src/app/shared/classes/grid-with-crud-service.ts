@@ -101,4 +101,13 @@ export abstract class GridWithCrudService {
             }
         });
     }
+
+  protected loadOneWithCallBack(id: string, callback: () => void) {
+    this.sourceService.getOne(id).subscribe(data => {
+      this.dataSource = [data];
+      if (callback) {
+        callback();
+      }
+    });
+  }
 }

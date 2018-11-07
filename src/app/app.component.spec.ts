@@ -7,10 +7,8 @@ import {UserAccessModule} from './user-access/user-access.module';
 import {InspectionApprovalModule} from './inspection-approval/inspection-approval.module';
 import {ManagementDepartmentModule} from './management-department/management-department.module';
 import {ManagementTypeSystemModule} from './management-type-system/management-type-system.module';
-import {InspectionManagementModule} from './management-department/department-risk-level/inspection-management.module';
 import {InspectionBatchModule} from './inspection-batch/inspection-batch.module';
 import {ManagementAddressModule} from './management-address/management-address.module';
-import {ManagementBuildingModule} from './management-building/management-building.module';
 import {StatisticsModule} from './statistics/statistics.module';
 import {InspectionDashboardModule} from './inspection-dashboard/inspection-dashboard.module';
 import {ManagementSurveyModule} from './management-survey/management-survey.module';
@@ -24,10 +22,8 @@ describe('AppComponent', () => {
                 InspectionApprovalModule,
                 InspectionBatchModule,
                 InspectionDashboardModule,
-                InspectionManagementModule,
                 ManagementAddressModule,
                 ManagementDepartmentModule,
-                ManagementBuildingModule,
                 ManagementTypeSystemModule,
                 ManagementSurveyModule,
                 UserAccessModule,
