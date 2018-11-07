@@ -56,7 +56,7 @@
             <dxi-item dataField="confirmPassword" [editorOptions]="passwordOptions">
                 <dxi-validation-rule type="compare" [comparisonTarget]="onPasswordCompare"></dxi-validation-rule>
             </dxi-item>
-            <dxi-item dataField="resetPassword" editorType="dxCheckBox"></dxi-item>
+            <dxi-item dataField="resetPassword" editorType="dxCheckBox" colSpan="2"></dxi-item>
             <dxi-item dataField="fireSafetyDepartments" colSpan="2"></dxi-item>
             <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
                 <dxi-item dataField="firstName" [isRequired]="true"></dxi-item>
