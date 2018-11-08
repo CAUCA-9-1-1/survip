@@ -99,12 +99,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                 key: 'id',
                 keyType: 'Guid',
               onRefreshLogin: () => {
-                return new ODataService(injector, {
-                  url: 'FireHydrant',
-                  key: 'id',
-                  keyType: 'Guid',
-                  onRefreshLogin: () => {}
-                });
+                this.dataGrid.instance.refresh();
               }
             }),
         });

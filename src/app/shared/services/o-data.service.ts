@@ -34,20 +34,6 @@ export class ODataService extends ODataStore {
     configOData: ODataConfig) {
     super({
       beforeSend: (request) => {
-
-        /*let currentToken = null;
-
-        await this.tokenSubject.pipe(
-          filter(token => token != null),
-          take(1),
-          switchMap(token => {
-            currentToken = token;
-            return token;
-          })).toPromise<any>();
-
-        console.log('token subject?', currentToken);
-        console.log('token session?', sessionStorage.getItem('accessToken'));*/
-
         request.headers['Authorization'] =
           sessionStorage.getItem('authorizationType') + ' ' + sessionStorage.getItem('accessToken');
         request.headers['Language-Code'] = config.locale;
@@ -64,8 +50,35 @@ export class ODataService extends ODataStore {
     this.router = injector.get(Router);
   }
 
+  private onError(error) {
+    if (error.httpStatus === 401) {
+      this.refreshToken();
+    }
+  }
+
+  private refreshToken() {
+    if (this.isRefreshingToken) {
+      this.tokenSubject.pipe(
+        filter(token => token != null),
+        take(1)).subscribe(() => {
+        this.onRefreshLogin();
+      });
+    } else {
+      this.isRefreshingToken = true;
+      this.tokenSubject.next(null);
+      console.log('Token will be refreshed via odata.');
+      this.refreshService.getNewToken()
+        .subscribe(
+          response => this.onTokenRefreshed(response),
+          error => this.onLogout(error)
+        )
+        .add(() => {
+          this.isRefreshingToken = false;
+        });
+    }
+  }
+
   private onTokenRefreshed(response) {
-    console.log('Token refreshed...', response);
     if (response.accessToken) {
       sessionStorage.setItem('accessToken', response.accessToken);
       this.tokenSubject.next(sessionStorage.getItem('accessToken'));
@@ -73,27 +86,7 @@ export class ODataService extends ODataStore {
     }
   }
 
-  private onError(error) {
-    if (error.httpStatus === 401) {
-      this.refresh();
-    }
-  }
-
-  private refresh() {
-    console.log('refreshing token starting...');
-    this.isRefreshingToken = true;
-    this.refreshService.getNewToken()
-      .subscribe(
-        response => this.onTokenRefreshed(response),
-        error => this.onLogout(error)
-      )
-      .add(() => {
-        this.isRefreshingToken = false;
-      });
-  }
-
   private onLogout(error) {
-    console.log('refresh error, logout.');
     if (this.router) {
       sessionStorage.clear();
       this.router.navigate(['login']);

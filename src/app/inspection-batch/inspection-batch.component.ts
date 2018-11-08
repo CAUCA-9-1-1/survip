@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent, DxPopupComponent} from 'devextreme-angular';
 import {MatSnackBar} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -59,6 +59,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         private notification: MatSnackBar,
         private router: Router,
         private activeRoute: ActivatedRoute,
+        private injector: Injector,
     ) {
         super(batchService);
         this.createStore('AvailableBuildingForManagement');
@@ -91,10 +92,13 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
   private createStore(url: string) {
     this.availableBuildingsDataSource = {
-      store: new ODataService({
+      store: new ODataService(this.injector, {
         url: url,
         key: 'idBuilding',
         keyType: 'Guid',
+        onRefreshLogin: () => {
+          this.dataGrid.instance.refresh();
+        }
       }),
     };
   }
@@ -399,7 +403,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     private loadInspectionBuildingList(idBatch: string) {
       this.batchService.getInspections(idBatch).subscribe(data => {
         this.inspectionBuildingList = data;
-        console.log('buildings', data);
       });
     }
 

@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import Guid from 'devextreme/core/guid';
 
@@ -10,6 +10,7 @@ import {CityService} from '../../management-address/shared/services/city.service
 import {LaneGenericCodeService} from '../../management-address/shared/services/lane-generic-code.service';
 import {LanePublicCodeService} from '../../management-address/shared/services/lane-public-code.service';
 import {ODataService} from '../../shared/services/o-data.service';
+import {DxDataGridComponent} from 'devextreme-angular';
 
 
 @Component({
@@ -24,6 +25,8 @@ import {ODataService} from '../../shared/services/o-data.service';
     ]
 })
 export class LaneComponent extends GridWithOdataService implements OnInit {
+    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+
     public addingButton: any;
     public publicCodes: any = [];
     public genericCodes: any = [];
@@ -46,12 +49,7 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
                 key: 'id',
                 keyType: 'Guid',
               onRefreshLogin: () => {
-                return new ODataService(injector, {
-                  url: 'Building',
-                  key: 'id',
-                  keyType: 'Guid',
-                  onRefreshLogin: () => {}
-                });
+                this.dataGrid.instance.refresh();
               }
             }),
         });
