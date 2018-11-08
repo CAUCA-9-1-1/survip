@@ -11,10 +11,21 @@ import {RefreshTokenService} from './refresh-token.service';
 @Injectable()
 export class ExpiredTokenInterceptor implements HttpInterceptor {
 
-  private isRefreshingToken = false;
-  private tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  get isRefreshingToken() {
+    return window['isRefreshingToken'] as boolean;
+  }
+
+  set isRefreshingToken(newValue: boolean) {
+    window['isRefreshingToken'] = newValue;
+  }
+
+  get tokenSubject() {
+    return window['tokenSubject'] as BehaviorSubject<string>;
+  }
 
   constructor(private injector: Injector) {
+    window['isRefreshingToken'] = false;
+    window['tokenSubject'] = new BehaviorSubject<string>(null);
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler)

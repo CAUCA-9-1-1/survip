@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {TranslateService} from '@ngx-translate/core';
 import Guid from 'devextreme/core/guid';
@@ -83,6 +83,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     private labels: any = {};
 
     public constructor(
+        private injector: Injector,
         private fireHydrantTypeService: FireHydrantTypeService,
         private operatorTypeService: OperatorTypeService,
         private locationTypeService: LocationTypeService,
@@ -93,10 +94,13 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         private translateService: TranslateService,
     ) {
         super({
-            store: new ODataService({
+            store: new ODataService(injector, {
                 url: 'FireHydrant',
                 key: 'id',
                 keyType: 'Guid',
+              onRefreshLogin: () => {
+                this.dataGrid.instance.refresh();
+              }
             }),
         });
 

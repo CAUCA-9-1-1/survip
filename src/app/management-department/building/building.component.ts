@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {alert} from 'devextreme/ui/dialog';
 import Guid from 'devextreme/core/guid';
@@ -12,6 +12,7 @@ import {RiskLevelService} from '../../management-system/shared/services/risk-lev
 import {GridWithOdataService} from '../../shared/classes/grid-with-odata-service';
 import {CityService} from '../../management-address/shared/services/city.service';
 import {ODataService} from '../../shared/services/o-data.service';
+import {DxDataGridComponent} from 'devextreme-angular';
 
 
 @Component({
@@ -27,6 +28,8 @@ import {ODataService} from '../../shared/services/o-data.service';
     ]
 })
 export class BuildingComponent extends GridWithOdataService implements OnInit {
+    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+
     @Input()
     set parentBuilding(building: Building) {
         this.parent = building;
@@ -63,6 +66,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     private labels: any = {};
 
     public constructor(
+        private injector: Injector,
         private laneService: LaneService,
         private cityService: CityService,
         private utilisationCode: UtilisationCodeService,
@@ -71,15 +75,18 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     ) {
         super({
             expand: 'localizations',
-            store: new ODataService({
+            store: new ODataService(injector, {
                 url: 'Building',
                 key: 'id',
                 keyType: 'Guid',
+              onRefreshLogin: () => {
+                this.dataGrid.instance.refresh();
+              }
             }),
         });
 
         this.translateService.get([
-            'close', 'save', 'youNeedToSaveYourNewItem', 'selectCity','add'
+            'close', 'save', 'youNeedToSaveYourNewItem', 'selectCity', 'add'
         ]).subscribe(labels => {
             this.labels = labels;
 
