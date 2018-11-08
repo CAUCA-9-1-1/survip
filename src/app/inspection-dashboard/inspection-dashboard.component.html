@@ -47,7 +47,9 @@
         <div fxFlex="">{{((field.data.items || field.data.collapsedItems) ? (field.data.items || field.data.collapsedItems)[0].shouldStartOn : '') | date:'yyyy-MM-dd'}}</div>
         <div fxFlex="">{{((field.data.items || field.data.collapsedItems) && (field.data.items || field.data.collapsedItems)[0].isReadyForInspection ? 'isReadyForInspection' : '') | translate}}</div>
         <div fxFlex="5">
-            <button mat-button [fxShow]="accessTo.batchManagement && selectedMode == 'mode1'" color="primary" (click)="removeBatch(field)"><mat-icon>delete</mat-icon></button>
+            <button mat-button
+                    [fxShow]="accessTo.batchManagement && selectedMode == 'mode1'" color="primary"
+                    (click)="removeBatch(field)"><mat-icon>delete</mat-icon></button>
         </div>
     </div>
 </dx-data-grid>

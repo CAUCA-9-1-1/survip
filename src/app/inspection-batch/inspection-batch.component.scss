@@ -14,3 +14,18 @@
 .dx-grid-popup {
   display: inline;
 }
+
+button.dx-link{
+  background-color: transparent;
+  border:none;
+}
+
+a.dx-link-delete[disabled]{
+  opacity: 0.5;
+  color: #959595;
+}
+
+div.dx-command-edit.dx-command-edit-with-icons{
+  width: 66px !important;
+  min-width: 66px !important;
+}
