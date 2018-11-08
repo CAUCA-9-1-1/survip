@@ -24,10 +24,8 @@ export class ExpiredTokenInterceptor implements HttpInterceptor {
   }
 
   constructor(private injector: Injector) {
-    console.log('interceptor');
     window['isRefreshingToken'] = false;
     window['tokenSubject'] = new BehaviorSubject<string>(null);
-    // console.log();
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler)

@@ -66,7 +66,6 @@ export class ODataService extends ODataStore {
     } else {
       this.isRefreshingToken = true;
       this.tokenSubject.next(null);
-      console.log('Token will be refreshed via odata.');
       this.refreshService.getNewToken()
         .subscribe(
           response => this.onTokenRefreshed(response),
