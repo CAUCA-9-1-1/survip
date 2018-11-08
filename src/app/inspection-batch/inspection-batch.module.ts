@@ -25,7 +25,7 @@ import {InspectionBatchComponent} from './inspection-batch.component';
         DxListModule,
         DxSelectBoxModule,
         DxPopupModule,
-        DxToolbarModule,
+        DxToolbarModule
     ],
 })
 export class InspectionBatchModule { }

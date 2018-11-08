@@ -67,7 +67,8 @@
                 (onToolbarPreparing)="onToolbarPreparing($event)"
                 (onInitialized)="setFormInspectionField(field)"
                 (onRowUpdated)="onBuildingsUpdated($event)"
-                (onRowRemoved)="onBuildingsRemoved($event)">
+                (onRowRemoved)="onBuildingsRemoved($event)"
+                (onCellPrepared)="onDeletingValidation($event)">
             <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="90px" caption=" "></dxi-column>
             <dxi-column dataField="fullCivicNumber"
                     caption="{{'civicNumber' | translate}}"
@@ -81,7 +82,10 @@
                 <dxo-lookup [dataSource]="inspectorsList" displayExpr="name" valueExpr="id">
                 </dxo-lookup>
             </dxi-column>
-
+            <dxi-column dataField="inspectionStatus" caption="{{'status' | translate}}" [allowEditing]="false">
+                <dxo-lookup [dataSource]="inspectionStatuses" displayExpr="text" valueExpr="value">
+                </dxo-lookup>
+            </dxi-column>
             <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowDeleting]="true">
                 <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
             </dxo-editing>

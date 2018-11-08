@@ -89,7 +89,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     ) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.templateIdentifiers = [];
 
         this.inspectionStatusService.getAll().subscribe(data => this.inspectionStatus = data);
@@ -106,7 +106,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see', 'vacantLand', 'delete',
             'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building', 'approve', 'todo', 'absent',
             'started', 'waitingApprobation', 'approved', 'refused', 'canceled', 'collapseAll', 'expandAll', 'wantToDeleteBatch',
-            'generateReport'
+            'generateReport', 'deleteBatchStartedMessage'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -116,37 +116,44 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         this.accessTo.batchManagement = this.authGuardService.hasRight('RightBatchManagement');
     }
 
-    ngAfterViewInit() {
+    public ngAfterViewInit() {
         this.angularIsLoaded = true;
         this.checkLoadedElement();
     }
 
-    changeMode(mode) {
+    public changeMode(mode) {
         this.selectedMode = mode;
         this.checkLoadedElement();
     }
 
-    showBatch(field) {
+    public showBatch(field) {
         if (field.data && (field.data.items || field.data.collapsedItems).length) {
             this.router.navigate(['/inspection/batch', (field.data.items || field.data.collapsedItems)[0].idBatch.toString()]);
         }
     }
 
-    removeBatch(field) {
-        confirm(this.labels['wantToDeleteBatch'], this.labels['delete']).then((result) => {
-            if (result) {
-                this.batchService.remove(field.data.items[0].idBatch.toString()).subscribe(() => this.loadData());
-            }
-        });
+    public removeBatch(field) {
+        if (!field.data.items[0].isBatchStarted) {
+            confirm(this.labels['wantToDeleteBatch'], this.labels['delete']).then((result) => {
+                if (result) {
+                    this.batchService.remove(field.data.items[0].idBatch.toString()).subscribe(() => this.loadData());
+                }
+            });
+        } else {
+            this.notification.open(this.labels['deleteBatchStartedMessage'], '', {
+                duration: 5000,
+                panelClass: ['error-toasts']
+            });
+        }
     }
 
-    showInspection(field) {
+    public showInspection(field) {
         if (field.data) {
             this.router.navigate(['/inspection/dashboard', field.data.idInspection.toString()]);
         }
     }
 
-    fetchTemplateIdentifiers(): void {
+    public fetchTemplateIdentifiers(): void {
         this.reportTemplateService.getTemplateList().subscribe(data => {
             data.forEach((templateIdentifier) => {
                 this.templateIdentifiers.push(templateIdentifier);
@@ -154,7 +161,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         });
     }
 
-    generateReport(buildingId: string, templateId: string) {
+    public generateReport(buildingId: string, templateId: string) {
         this.reportGenerationService.generateReport(buildingId, templateId).subscribe(data => {
             const blob = new Blob([data], {type: 'application/pdf'});
             saveAs(blob, buildingId);
@@ -262,10 +269,10 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 mode: 'multiple'
             },
             summary: {
-              groupItems: [{
-                column: 'batchDescription',
-                summaryType: 'min'
-              }]
+                groupItems: [{
+                    column: 'batchDescription',
+                    summaryType: 'min'
+                }]
             },
             onToolbarPreparing: (e) => this.customizeToolbar(e)
         });
@@ -304,7 +311,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             e.dataField === 'numberOfFloor' || e.dataField === 'yearOfConstruction') {
             const keys = [8, 13, 9, 46];
 
-            e.editorOptions.inputAttr = { maxLength: 4};
+            e.editorOptions.inputAttr = {maxLength: 4};
 
             this.initDigitEditorEvents(e, keys);
         }
@@ -314,7 +321,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         if (e.dataField === 'matricule') {
             const keys = [8, 13, 9, 46];
 
-            e.editorOptions.inputAttr = { maxLength: 18};
+            e.editorOptions.inputAttr = {maxLength: 18};
 
             this.initDigitEditorEvents(e, keys);
         }
@@ -330,7 +337,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     private initDigitEditorEvents(e, keys) {
         e.editorOptions.onKeyDown = (ev) => {
-           ev.component.instance('dxNumberBox').option('min', 0);
+            ev.component.instance('dxNumberBox').option('min', 0);
             if (!ev.event.key.match(/[0-9]/) && (keys.indexOf(ev.event.keyCode) < 0)) {
                 ev.event.preventDefault();
             }
@@ -685,7 +692,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             this.lanes = {
                 store: data,
                 select: ['id', 'name', 'cityName'],
-                sort: [ 'name', 'cityName'],
+                sort: ['name', 'cityName'],
             };
             this.checkLoadedElement();
         });
@@ -716,13 +723,13 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         });
     }
 
-  private getLaneName(lane) {
-      if (lane != null) {
-        if (this.rawLanes.some(currentLane => currentLane.id !== lane.id && currentLane.name === lane.name)) {
-          return lane.name + ' (' + lane.cityName + ')';
+    private getLaneName(lane) {
+        if (lane != null) {
+            if (this.rawLanes.some(currentLane => currentLane.id !== lane.id && currentLane.name === lane.name)) {
+                return lane.name + ' (' + lane.cityName + ')';
+            }
+            return lane.name;
         }
-      return lane.name;
+        return '';
     }
-    return '';
-  }
 }
