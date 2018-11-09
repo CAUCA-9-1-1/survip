@@ -408,9 +408,9 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     private loadInspectionBuildingList(idBatch: string) {
-      this.batchService.getInspections(idBatch).subscribe(data => {
-        this.inspectionBuildingList = data;
-      });
+        this.batchService.getInspections(idBatch).subscribe(data => {
+            this.inspectionBuildingList = data;
+        });
     }
 
     private loadWebuser() {
@@ -418,7 +418,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     public onDeletingValidation(e) {
-        if (e.data.inspectionStatus !== 0 && e.columnIndex === 7) {
+        if (e.data && e.data.inspectionStatus !== 0 && e.columnIndex === 7) {
             e.cellElement.querySelector('.dx-link-delete').style.opacity =  '0.5';
             e.cellElement.querySelector('.dx-link-delete').style.pointerEvents = 'none';
             e.cellElement.querySelector('.dx-link-delete').style.color = '#959595';
