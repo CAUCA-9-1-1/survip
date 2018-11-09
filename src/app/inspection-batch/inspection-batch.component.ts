@@ -249,7 +249,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     public onBuildingsRemoved(e) {
-        if (e.data.inspectionStatus !== 0) {
             let find = -1;
             this.formInspectionField.data.inspections.forEach((inspection, index) => {
                 if (inspection.idBuilding === e.key.idBuilding) {
@@ -266,12 +265,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
             if (this.formInspectionField.data.inspections.length === 0) {
                 this.formReadyField.setValue(false);
             }
-        } else {
-            this.notification.open(this.labels['deleteInspectionStartedMessage'], '', {
-                duration: 5000,
-                panelClass: ['error-toasts']
-            });
-        }
     }
 
     public onBuildingsUpdated(e) {
