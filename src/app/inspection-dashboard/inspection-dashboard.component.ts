@@ -121,7 +121,34 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         this.checkLoadedElement();
     }
 
-    public changeMode(mode) {
+  private getGroupItem(field) {
+    if (field.data != null) {
+      if (field.data.items && field.data.items.length > 0) {
+        return field.data.items[0];
+      }
+      if (field.data.collapsedItems && field.data.collapsedItems.length > 0) {
+        return field.data.collapsedItems[0];
+      }
+    }
+    return null;
+  }
+
+  public getGroupBatchDescription(field) {
+    const item = this.getGroupItem(field);
+    return item ? item.batchDescription : '';
+  }
+
+  public getGroupBatchStartOn(field) {
+    const item = this.getGroupItem(field);
+    return item ? item.shouldStartOn : '';
+  }
+
+  public getGroupBatchIsReadyForInspection(field) {
+    const item = this.getGroupItem(field);
+    return item && item.isReadyForInspection ? 'isReadyForInspection' : '';
+  }
+
+    changeMode(mode) {
         this.selectedMode = mode;
         this.checkLoadedElement();
     }
@@ -269,10 +296,10 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 mode: 'multiple'
             },
             summary: {
-                groupItems: [{
-                    column: 'batchDescription',
-                    summaryType: 'min'
-                }]
+              groupItems: [{
+                column: 'idBuilding',
+                summaryType: 'min'
+              }]
             },
             onToolbarPreparing: (e) => this.customizeToolbar(e)
         });
