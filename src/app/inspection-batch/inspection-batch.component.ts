@@ -95,7 +95,18 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         });
     }
 
-  private createStore(url: string) {
+    private createStore(url: string) {
+        this.availableBuildingsDataSource = {
+            store: new ODataService(this.injector, {
+                url: url,
+                key: 'idBuilding',
+                keyType: 'Guid',
+                onRefreshLogin: () => {
+                    this.dataGrid.instance.refresh();
+                }
+            }),
+        };
+    }
 
     public civicNumber_customizeText(cellInfo) {
         return cellInfo.value.replace(/^0+/, '');
@@ -163,7 +174,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     public popupShown = (e) => {
         this.editPopup = e.component;
         this.managePopupCancelButton(true);
-    };
+    }
 
     public managePopupCancelButton(isDisabled: boolean) {
         this.popupToolBarItems = this.editPopup['option']('toolbarItems');
@@ -249,22 +260,22 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     public onBuildingsRemoved(e) {
-            let find = -1;
-            this.formInspectionField.data.inspections.forEach((inspection, index) => {
-                if (inspection.idBuilding === e.key.idBuilding) {
-                    find = index;
-                }
-            });
-
-            if (find > -1) {
-                this.formInspectionField.data.inspections.splice(find, 1);
+        let find = -1;
+        this.formInspectionField.data.inspections.forEach((inspection, index) => {
+            if (inspection.idBuilding === e.key.idBuilding) {
+                find = index;
             }
+        });
 
-            this.formInspectionField.setValue(this.formInspectionField.data.inspections);
+        if (find > -1) {
+            this.formInspectionField.data.inspections.splice(find, 1);
+        }
 
-            if (this.formInspectionField.data.inspections.length === 0) {
-                this.formReadyField.setValue(false);
-            }
+        this.formInspectionField.setValue(this.formInspectionField.data.inspections);
+
+        if (this.formInspectionField.data.inspections.length === 0) {
+            this.formReadyField.setValue(false);
+        }
     }
 
     public onBuildingsUpdated(e) {
@@ -412,7 +423,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     public onDeletingValidation(e) {
         if (e.data && e.data.inspectionStatus !== 0 && e.columnIndex === 7) {
-            e.cellElement.querySelector('.dx-link-delete').style.opacity =  '0.5';
+            e.cellElement.querySelector('.dx-link-delete').style.opacity = '0.5';
             e.cellElement.querySelector('.dx-link-delete').style.pointerEvents = 'none';
             e.cellElement.querySelector('.dx-link-delete').style.color = '#959595';
         }
