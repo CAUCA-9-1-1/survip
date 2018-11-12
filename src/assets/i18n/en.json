@@ -366,7 +366,7 @@
   "groupTitleConfiguration": "Configuration",
   "surveyCopy":"Copy this survey",
   "surveyCopyQuestion":"Are you sure you want to copy this survey?",
-  "copy":"Copy",
+  "duplicate":"Duplicate",
   "deleteBatchStartedMessage":"This batch can't be deleted because on of his inspection is being processed.",
   "edit":"Edit",
   "deleteInspectionStartedMessage":"This inspection is being processed and can't be deleted."
