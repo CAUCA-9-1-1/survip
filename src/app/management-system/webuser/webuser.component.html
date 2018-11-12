@@ -53,7 +53,7 @@
             <dxi-item dataField="password" [editorOptions]="passwordOptions">
                 <dxi-validation-rule type="custom" message="{{'passwordError' | translate}}" [validationCallback]="onPasswordChanged"></dxi-validation-rule>
             </dxi-item>
-            <dxi-item dataField="confirmPassword" [editorOptions]="passwordOptions">
+            <dxi-item dataField="passwordConfirm" [editorOptions]="passwordOptions">
                 <dxi-validation-rule type="compare" [comparisonTarget]="onPasswordCompare"></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="resetPassword" editorType="dxCheckBox" colSpan="2"></dxi-item>

@@ -367,7 +367,7 @@
   },
   "surveyCopy":"Copier ce questionnaire",
   "surveyCopyQuestion":"Êtes-vous sûr de vouloir copier ce questionnaire?",
-  "copy":"Copier",
+  "duplicate":"Dupliquer",
   "deleteBatchStartedMessage":"Ce lot ne pas être supprimé car au moins une de ses inspections est en traitement.",
   "edit":"Éditer",
   "deleteInspectionStartedMessage":"Cette inspection ne peut pas être supprimée car elle en cours."
