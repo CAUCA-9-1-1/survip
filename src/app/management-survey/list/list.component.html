@@ -13,15 +13,12 @@
             sortOrder="asc"
             sortIndex="0">
     </dxi-column>
-    <dxi-column dataField="surveyType" caption="{{'surveyType' | translate}}">
+    <dxi-column dataField="surveyType" caption="{{'surveyType' | translate}}" sortOrder="asc"
+                sortIndex="0">
         <dxo-lookup
-                [dataSource]="[
-                    {value: '1', text: 'residential' | translate},
-                    {value: '2', text: 'general' | translate},
-                    {value: '3', text: 'agricultural' | translate}
-                ]"
-                displayExpr="text"
-                valueExpr="value">
+                [dataSource]="surveyTypes"
+                valueExpr="ID"
+                displayExpr="name">
         </dxo-lookup>
     </dxi-column>
     <dxi-column alignment="center" caption="{{'modify' | translate}}" cellTemplate="editmode"></dxi-column>
@@ -31,10 +28,6 @@
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
-        <dxo-form colCount="2">
-            <dxi-item dataField="name" colSpan="2"></dxi-item>
-            <dxi-item dataField="surveyType"></dxi-item>
-        </dxo-form>
     </dxo-editing>
 
     <div *dxTemplate="let data of 'editmode'">

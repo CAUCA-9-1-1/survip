@@ -18,6 +18,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class ListComponent  extends GridWithCrudService implements OnInit {
 
     private labels = {};
+    public surveyTypes = [];
     constructor(
         private router: Router,
         private surveyService: SurveyService,
@@ -31,16 +32,22 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
     }
 
     ngOnInit() {
-        this.loadSource();
         this.loadTranslation();
     }
 
     loadTranslation() {
         this.translateService.get([
-            'surveyCopyQuestion', 'question'
+            'surveyCopyQuestion', 'question', 'residential', 'general', 'agricultural'
         ]).subscribe(labels => {
             this.labels = labels;
+
+            this.surveyTypes = [{value: 1, text: this.labels['residential']},
+                                {value: 2, text: this.labels['general']},
+                                {value: 3, text: this.labels['agricultural']}];
+
+            this.loadSource();
         });
+
     }
 
     getSurveyName(data)  {
