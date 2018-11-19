@@ -264,10 +264,12 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     public onFormUpdated(item, e) {
-        if (item !== 'form') {
-            this.questions[this.selectedIndex][item] = e.value;
+        if (!this.isLoading) {
+            if (item !== 'form') {
+                this.questions[this.selectedIndex][item] = e.value;
+            }
+            this.saveQuestion();
         }
-        this.saveQuestion();
     }
 
     public saveQuestion() {
