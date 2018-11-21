@@ -56,12 +56,13 @@ export class SelectTemplateComponent implements OnInit {
     this.isOpenDisabled = name.trim().length === 0;
   }
 
+  onInitNewRow(e) {
+    e.data = new ConfigurationTemplate();
+    e.data.isActive = true;
+}
 
-  onRowInserted(e){
-    const template = new ConfigurationTemplate();
-    template.name = e.data.name;
-    template.data = '';
-    this.saveTemplate(template);
+  onRowInserting(e){
+    this.saveTemplate(e.data);
   }
 
   onRowUpdated(e){
@@ -75,12 +76,12 @@ export class SelectTemplateComponent implements OnInit {
   }
 
   editReport(report){
-    this.router.navigate(['/report-edition', report.id.toString()]);
+    this.router.navigate(['/report-edition', report.id]);
   }
 
   saveTemplate(selectedTemplate: ConfigurationTemplate): void {
     this.reportConfigurationService.saveTemplate(selectedTemplate).subscribe(res => {
-      if (selectedTemplate.id == null) {
+      if (!selectedTemplate.id) {
         selectedTemplate.id = res.id;
       }
     });

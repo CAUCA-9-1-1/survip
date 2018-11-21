@@ -2,7 +2,8 @@
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
-        (onRowInserted)="onRowInserted($event)"
+        (onInitNewRow)="onInitNewRow($event)"
+        (onRowInserting)="onRowInserting($event)"
         (onRowUpdated)="onRowUpdated($event)"
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column
@@ -10,7 +11,7 @@
             caption="{{'name' | translate}}"
             
             sortIndex="0"
-            sortOrder="desc">
+            sortOrder="asc">
     </dxi-column>
     <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
     <dxi-column cellTemplate="cellTemplate" [width]="50" alignment="center">
