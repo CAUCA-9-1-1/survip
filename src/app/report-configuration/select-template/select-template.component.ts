@@ -18,6 +18,7 @@ export class SelectTemplateComponent implements OnInit {
   templateIdentifiers: ConfigurationTemplate[];
   isOpenDisabled: boolean;
   angularIsLoaded = false;
+  editedTemplate: ConfigurationTemplate;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,14 +59,26 @@ export class SelectTemplateComponent implements OnInit {
 
   onInitNewRow(e) {
     e.data = new ConfigurationTemplate();
+    e.data.data = '';
     e.data.isActive = true;
-}
+  }
 
   onRowInserting(e){
     this.saveTemplate(e.data);
   }
 
+  onEditingStart(e){
+    this.editedTemplate = new ConfigurationTemplate();
+    this.editedTemplate.id = e.data.id;
+    this.editedTemplate.isActive = e.data.isActive;
+    this.reportConfigurationService.getTemplate(e.data.id).subscribe( res => {
+      this.editedTemplate.data = res.data;
+    });
+  }
+
   onRowUpdated(e){
+    this.editedTemplate.name = e.data.name;
+    e.data = this.editedTemplate;
     this.saveTemplate(e.data);
   }
 
