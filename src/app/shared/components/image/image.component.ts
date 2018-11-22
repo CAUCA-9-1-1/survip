@@ -123,8 +123,16 @@ export class ImageComponent implements OnInit {
         this.picture.dataUri = this.canvas.toDataURL();
         this.src = this.picture.dataUri;
         this.picture.sketchJson = JSON.stringify(this.canvas.toJSON(['width', 'height']));
+        const fullQualityCanvas = this.getFullSizeImage(JSON.parse(this.picture.sketchJson));
+        this.picture.dataUri = fullQualityCanvas.toDataURL();
+        this.src = this.picture.dataUri;
 
         this.valueChanged.emit(this.picture);
       }
     }
-}
+    private getFullSizeImage(json: JSON){
+        let fullSizeCanvas = this.canvas = new fabric.Canvas('1');
+        fullSizeCanvas = this.canvas.loadFromJSON(json, this.canvas.renderAll.bind(this.canvas));
+        fullSizeCanvas.renderAll();
+        return fullSizeCanvas;
+    }
