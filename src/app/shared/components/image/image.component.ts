@@ -134,5 +134,11 @@ export class ImageComponent implements OnInit {
         let fullSizeCanvas = this.canvas = new fabric.Canvas('1');
         fullSizeCanvas = this.canvas.loadFromJSON(json, this.canvas.renderAll.bind(this.canvas));
         fullSizeCanvas.renderAll();
+        const width = backgroundImage.scaleX * backgroundImage.width;
+        const height = backgroundImage.scaleY * backgroundImage.height;
+        const canvasWidth = backgroundImage.width;
+        const canvasHeight = backgroundImage.height;
+        const canvasAspect = canvasWidth / canvasHeight;
+        const imgAspect = width / height;
         return fullSizeCanvas;
     }
