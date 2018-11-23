@@ -149,5 +149,17 @@ export class ImageComponent implements OnInit {
         }
         fullSizeCanvas.setWidth(width * scaleFactor);
         fullSizeCanvas.setHeight(height * scaleFactor);
+        //const objects = json['objects'];
+        const objects = fullSizeCanvas.getObjects();
+        for (const obj of objects) {
+            obj.left *= scaleFactor;
+            obj.scaleX *= scaleFactor;
+            obj.scaleY *= scaleFactor;
+            obj.top *= scaleFactor;
+            obj.setCoords();
+          }
+    
+          //fullSizeCanvas.selectable = true;
+          //fullSizeCanvas.selection = true;
         return fullSizeCanvas;
     }
