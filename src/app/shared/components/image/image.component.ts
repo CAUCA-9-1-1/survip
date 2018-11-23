@@ -134,6 +134,7 @@ export class ImageComponent implements OnInit {
         let fullSizeCanvas = this.canvas = new fabric.Canvas('1');
         fullSizeCanvas = this.canvas.loadFromJSON(json, this.canvas.renderAll.bind(this.canvas));
         fullSizeCanvas.renderAll();
+        const backgroundImage = json['backgroundImage'];
         const width = backgroundImage.scaleX * backgroundImage.width;
         const height = backgroundImage.scaleY * backgroundImage.height;
         const canvasWidth = backgroundImage.width;
@@ -147,6 +148,9 @@ export class ImageComponent implements OnInit {
         } else {
           scaleFactor = canvasHeight / height;
         }
+        const objectScale = scaleFactor / backgroundImage['scaleX'];
+        backgroundImage['scaleX'] *= scaleFactor;
+        backgroundImage['scaleY'] *= scaleFactor;
         fullSizeCanvas.setWidth(width * scaleFactor);
         fullSizeCanvas.setHeight(height * scaleFactor);
         //const objects = json['objects'];
@@ -161,5 +165,6 @@ export class ImageComponent implements OnInit {
     
           //fullSizeCanvas.selectable = true;
           //fullSizeCanvas.selection = true;
+          fullSizeCanvas.renderAll();
         return fullSizeCanvas;
     }
