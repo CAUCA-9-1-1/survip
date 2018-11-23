@@ -140,5 +140,14 @@ export class ImageComponent implements OnInit {
         const canvasHeight = backgroundImage.height;
         const canvasAspect = canvasWidth / canvasHeight;
         const imgAspect = width / height;
+        let scaleFactor;
+    
+        if (canvasAspect <= imgAspect) {
+          scaleFactor = canvasWidth / width;
+        } else {
+          scaleFactor = canvasHeight / height;
+        }
+        fullSizeCanvas.setWidth(width * scaleFactor);
+        fullSizeCanvas.setHeight(height * scaleFactor);
         return fullSizeCanvas;
     }
