@@ -1,23 +1,23 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TestModule} from '../../../test.module.spec';
-import {SelectTemplateDialogComponent} from './select-template-dialog.component';
+//import {TestModule} from '../../../test.module.spec';
+import {SelectTemplateComponent} from './select-template.component';
 
 
 describe('SlideshowComponent', () => {
-  let component: SelectTemplateDialogComponent;
-  let fixture: ComponentFixture<SelectTemplateDialogComponent>;
+  let component: SelectTemplateComponent;
+  let fixture: ComponentFixture<SelectTemplateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [TestModule],
+      //imports: [TestModule],
       declarations: []
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectTemplateDialogComponent);
+    fixture = TestBed.createComponent(SelectTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
