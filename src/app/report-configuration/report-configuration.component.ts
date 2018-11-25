@@ -12,7 +12,7 @@ import {PlaceholderGroup} from './shared/models/placeholder-group';
   selector: 'app-report-configuration',
   templateUrl: './report-configuration.component.html',
   styleUrls: ['./report-configuration.component.scss'],
-  providers: [ReportTemplateService]
+  providers: [/* ReportTemplateService */]
 })
 export class ReportConfigurationComponent implements OnInit {
   selectedTemplate: ConfigurationTemplate;
@@ -33,7 +33,8 @@ export class ReportConfigurationComponent implements OnInit {
     });
     this.templateIdentifiers = [];
     this.fetchTemplateIdentifiers();
-    this.selectedTemplate = new ConfigurationTemplate();
+    //this.selectedTemplate = new ConfigurationTemplate();
+    this.selectedTemplate = this.reportConfigurationService.currentReport;
     }
 
   fetchTemplateIdentifiers(): void {
@@ -41,7 +42,7 @@ export class ReportConfigurationComponent implements OnInit {
       data.forEach((templateIdentifier) => {
         this.templateIdentifiers.push(templateIdentifier);
       });
-      this.openDialog();
+      //this.openDialog();
     });
   }
 
@@ -61,7 +62,7 @@ export class ReportConfigurationComponent implements OnInit {
     });
   }
 
-  openDialog() {
+  /* openDialog() {
     // Needs tp be run inside the NgZone because the function is sometimes called as an emit from CKEditor
     this.ngZone.run(() => {
       const dialogConfig = new MatDialogConfig();
@@ -72,15 +73,15 @@ export class ReportConfigurationComponent implements OnInit {
       dialogConfig.data = {
         id: 1,
         templateIdentifiers: this.templateIdentifiers
-      };
+      }; 
 
-      const dialogRef = this.dialog.open(SelectTemplateDialogComponent, dialogConfig);
+      const dialogRef = this.dialog.open(SelectTemplateComponent, dialogConfig);
 
       dialogRef.afterClosed().subscribe(result => {
         this.selectOrCreateTemplate(result);
       });
     });
-  }
+  } */
 
   selectOrCreateTemplate(template: ConfigurationTemplate) {
     if (template == null) {
