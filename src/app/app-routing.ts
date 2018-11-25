@@ -13,6 +13,7 @@ import {LoginComponent} from './user-access/login/login.component';
 import {InspectionApprovalComponent} from './inspection-approval/inspection-approval.component';
 import {StatisticsComponent} from './statistics/statistics.component';
 import {ReportConfigurationComponent} from './report-configuration/report-configuration.component';
+import {SelectTemplateComponent} from './report-configuration/select-template/select-template.component';
 import {PermissionService} from './user-access/shared/services/permission.service';
 import {ManagementSystemComponent} from './management-system/management-system.component';
 
@@ -65,7 +66,10 @@ const appRoutes: Routes = [{
     }]
 }, {
     path: 'report-configuration',
-    component: ReportConfigurationComponent
+    component: SelectTemplateComponent,
+}, {
+    path: 'report-edition',
+    component: ReportConfigurationComponent,
 }, {
     path: '**',
     component: PageNotFoundComponent,
