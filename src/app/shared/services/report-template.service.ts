@@ -12,6 +12,7 @@ import {PlaceholderGroup} from '../../report-configuration/shared/models/placeho
 
 @Injectable()
 export class ReportTemplateService extends RequestService {
+  currentReport = null;
 
   constructor(http: HttpClient, injector: Injector) {
     super(injector);
