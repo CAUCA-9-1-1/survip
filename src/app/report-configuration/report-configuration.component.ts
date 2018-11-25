@@ -4,7 +4,7 @@ import {ReportTemplateService} from '../shared/services/report-template.service'
 import {TranslateService} from '@ngx-translate/core';
 import {ConfigurationTemplate} from '../shared/models/configuration-template.model';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {SelectTemplateDialogComponent} from './select-template/select-template-dialog.component';
+import {SelectTemplateComponent} from './select-template/select-template.component';
 import {PlaceholderGroup} from './shared/models/placeholder-group';
 
 
