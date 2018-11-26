@@ -10,11 +10,9 @@
     <dxi-column
             dataField="name"
             caption="{{'name' | translate}}"
-            
             sortIndex="0"
             sortOrder="asc">
     </dxi-column>
-    <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
     <dxi-column cellTemplate="cellTemplate" [width]="50" alignment="center">
       <div *dxTemplate="let data of 'cellTemplate'">
         <div>
@@ -24,7 +22,7 @@
     </dxi-column>
 
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-        <dxo-popup title="{{'Modifier' | translate}}" [showTitle]="true"  [height]="220" [width]="350"></dxo-popup>
+        <dxo-popup title="{{'modify' | translate}}" [showTitle]="true"  [height]="220" [width]="350"></dxo-popup>
           <dxo-form colCount="1">
             <dxi-item dataField="name" [isRequired]="true"></dxi-item>
           </dxo-form>
