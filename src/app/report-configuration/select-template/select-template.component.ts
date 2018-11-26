@@ -74,5 +74,31 @@ export class SelectTemplateComponent implements OnInit, AfterViewInit {
     //this.dialogRef.close(template);
   }
 
+  onRowUpdated(e){
+    console.log('updated');
+  }
 
+  onRowRemoved(e){
+    let selectedTemplate = e.data;
+    selectedTemplate.isActive = false;
+    this.saveTemplate(selectedTemplate);
+  }
+
+  editReport(id){
+    console.log(id);
+    let configurationToEdit = this.dataSource.filter(function(item){
+      return item.id === id;
+    });
+    console.log(configurationToEdit[0]);
+    this.reportConfigurationService.currentReport = configurationToEdit[0];
+    this.router.navigate(['report-edition']);
+  }
+
+  saveTemplate(selectedTemplate: ConfigurationTemplate): void {
+    this.reportConfigurationService.saveTemplate(selectedTemplate).subscribe(res => {
+      if (selectedTemplate.id == null) {
+        selectedTemplate.id = res.id;
+      }
+    });
+  }
 }
