@@ -3,6 +3,7 @@ import {PictureService} from '../../services/picture.service';
 import {Picture} from '../../models/picture.model';
 import {InspectionPictureService} from '../../../inspection-approval/shared/services/inspection-picture.service';
 import { v4 as uuid } from 'uuid';
+import { fabric } from 'fabric';
 
 @Component({
     selector: 'app-image',
@@ -120,51 +121,96 @@ export class ImageComponent implements OnInit {
     public saveModifiedPicture() {
       if (this.canvas && this.picture) {
 
-        this.picture.dataUri = this.canvas.toDataURL();
-        this.src = this.picture.dataUri;
-        this.picture.sketchJson = JSON.stringify(this.canvas.toJSON(['width', 'height']));
-        const fullQualityCanvas = this.getFullSizeImage(JSON.parse(this.picture.sketchJson));
-        this.picture.dataUri = fullQualityCanvas.toDataURL();
-        this.src = this.picture.dataUri;
+        const json = this.canvas.toJSON(['width', 'height']);
 
-        this.valueChanged.emit(this.picture);
+        this.picture.sketchJson = JSON.stringify(json);
+        this.getFullSizeImage(json).then(() => {
+            //this.picture.dataUri = this.src;
+            this.src = this.picture.dataUri;
+    
+            this.valueChanged.emit(this.picture);
+        });
+       
       }
     }
-    private getFullSizeImage(json: JSON){
-        let fullSizeCanvas = this.canvas = new fabric.Canvas('1');
-        fullSizeCanvas = this.canvas.loadFromJSON(json, this.canvas.renderAll.bind(this.canvas));
-        fullSizeCanvas.renderAll();
-        const backgroundImage = json['backgroundImage'];
-        const width = backgroundImage.scaleX * backgroundImage.width;
-        const height = backgroundImage.scaleY * backgroundImage.height;
-        const canvasWidth = backgroundImage.width;
-        const canvasHeight = backgroundImage.height;
-        const canvasAspect = canvasWidth / canvasHeight;
-        const imgAspect = width / height;
-        let scaleFactor;
-    
-        if (canvasAspect <= imgAspect) {
-          scaleFactor = canvasWidth / width;
-        } else {
-          scaleFactor = canvasHeight / height;
-        }
-        const objectScale = scaleFactor / backgroundImage['scaleX'];
-        backgroundImage['scaleX'] *= scaleFactor;
-        backgroundImage['scaleY'] *= scaleFactor;
-        fullSizeCanvas.setWidth(width * scaleFactor);
-        fullSizeCanvas.setHeight(height * scaleFactor);
-        //const objects = json['objects'];
-        const objects = fullSizeCanvas.getObjects();
-        for (const obj of objects) {
-            obj.left *= scaleFactor;
-            obj.scaleX *= scaleFactor;
-            obj.scaleY *= scaleFactor;
-            obj.top *= scaleFactor;
-            obj.setCoords();
-          }
-    
-          //fullSizeCanvas.selectable = true;
-          //fullSizeCanvas.selection = true;
-          fullSizeCanvas.renderAll();
-        return fullSizeCanvas;
+
+    private getFullSizeImage(json: JSON) : Promise<void> {
+        let fullSizeCanvas = new fabric.Canvas('1');
+        return new Promise(
+            (resolve, reject): void => {
+            fullSizeCanvas = fullSizeCanvas.loadFromJSON(json, 
+                () => {
+                    fullSizeCanvas.renderAll.bind(fullSizeCanvas);
+                fullSizeCanvas.renderAll();
+                const backgroundImage = json['backgroundImage'];
+
+                //const container = this.divCanvasContainer;
+            
+                //const width = backgroundImage.width;
+                //const height = backgroundImage.height;
+
+                const width = json['width'];
+                const height = json['height'];
+
+                const previousScale = backgroundImage['scaleX'];
+                let scaleFactor = 1 / backgroundImage.scaleX;
+
+                fullSizeCanvas.setWidth(width * scaleFactor);
+                fullSizeCanvas.setHeight(height * scaleFactor);
+
+                const left = backgroundImage.left;
+                const top = backgroundImage.top;
+                
+                fullSizeCanvas.setBackgroundImage(fullSizeCanvas.backgroundImage, fullSizeCanvas.renderAll.bind(fullSizeCanvas), {
+                    top: top * scaleFactor,
+                    left: left * scaleFactor,
+                    originX: 'left',
+                    originY: 'top',
+                    scaleX: 1,
+                    scaleY: 1
+                });
+                //canvas.renderAll();
+            
+                const canvasWidth = backgroundImage.width;
+                const canvasHeight = backgroundImage.height;
+            
+                const canvasAspect = canvasWidth / canvasHeight;
+                const imgAspect = width / height;
+                
+        
+
+                console.log(scaleFactor);
+                
+                const objectScale = scaleFactor / backgroundImage['scaleX'];
+            
+                //backgroundImage['scaleX'] *= scaleFactor;
+                //backgroundImage['scaleY'] *= scaleFactor;
+            
+
+                //this.setCanvasSize(width * scaleFactor, height * scaleFactor);
+
+            
+                //const objects = json['objects'];
+                const objects = fullSizeCanvas.getObjects();
+            
+                for (const obj of objects) {
+                    obj.left *= scaleFactor;
+                    obj.scaleX *= scaleFactor;
+                    obj.scaleY *= scaleFactor;
+                    obj.top *= scaleFactor;
+                    obj.setCoords();
+                }
+            
+                //fullSizeCanvas.selectable = true;
+                //fullSizeCanvas.selection = true;
+            
+                fullSizeCanvas.renderAll();
+
+                //fullSizeCanvas.toDataURL();
+                this.picture.dataUri = fullSizeCanvas.toDataURL();
+                resolve();
+            }
+          );
+        })
     }
+}
