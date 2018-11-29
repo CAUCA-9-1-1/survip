@@ -27,6 +27,7 @@ export class ReportConfigurationComponent implements OnInit {
     public ngOnInit() {
         this.reportConfigurationService.getPlaceholderList().subscribe(res => {
             this.placeholders = res;
+            console.log('placeHolder : ', this.placeholders);
         });
         this.templateIdentifiers = [];
         this.fetchRequiredData();
