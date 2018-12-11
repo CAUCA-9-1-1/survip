@@ -5,8 +5,6 @@ import {DxDataGridComponent} from 'devextreme-angular';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {confirm} from 'devextreme/ui/dialog';
 import {saveAs} from 'file-saver';
-
-import config from '../../assets/config/config.json';
 import {LaneService} from '../management-department/shared/services/lane.service';
 import {RiskLevelService} from '../management-system/shared/services/risk-level.service';
 import {RiskLevel} from '../management-system/shared/models/risk-level.model';
@@ -121,34 +119,34 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         this.checkLoadedElement();
     }
 
-  private getGroupItem(field) {
-    if (field.data != null) {
-      if (field.data.items && field.data.items.length > 0) {
-        return field.data.items[0];
-      }
-      if (field.data.collapsedItems && field.data.collapsedItems.length > 0) {
-        return field.data.collapsedItems[0];
-      }
+    private getGroupItem(field) {
+        if (field.data != null) {
+            if (field.data.items && field.data.items.length > 0) {
+                return field.data.items[0];
+            }
+            if (field.data.collapsedItems && field.data.collapsedItems.length > 0) {
+                return field.data.collapsedItems[0];
+            }
+        }
+        return null;
     }
-    return null;
-  }
 
-  public getGroupBatchDescription(field) {
-    const item = this.getGroupItem(field);
-    return item ? item.batchDescription : '';
-  }
+    public getGroupBatchDescription(field) {
+        const item = this.getGroupItem(field);
+        return item ? item.batchDescription : '';
+    }
 
-  public getGroupBatchStartOn(field) {
-    const item = this.getGroupItem(field);
-    return item ? item.shouldStartOn : '';
-  }
+    public getGroupBatchStartOn(field) {
+        const item = this.getGroupItem(field);
+        return item ? item.shouldStartOn : '';
+    }
 
-  public getGroupBatchIsReadyForInspection(field) {
-    const item = this.getGroupItem(field);
-    return item && item.isReadyForInspection ? 'isReadyForInspection' : '';
-  }
+    public getGroupBatchIsReadyForInspection(field) {
+        const item = this.getGroupItem(field);
+        return item && item.isReadyForInspection ? 'isReadyForInspection' : '';
+    }
 
-    changeMode(mode) {
+    public changeMode(mode) {
         this.selectedMode = mode;
         this.checkLoadedElement();
     }
@@ -296,10 +294,10 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 mode: 'multiple'
             },
             summary: {
-              groupItems: [{
-                column: 'idBuilding',
-                summaryType: 'min'
-              }]
+                groupItems: [{
+                    column: 'idBuilding',
+                    summaryType: 'min'
+                }]
             },
             onToolbarPreparing: (e) => this.customizeToolbar(e)
         });

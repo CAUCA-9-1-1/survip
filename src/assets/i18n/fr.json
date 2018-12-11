@@ -25,7 +25,6 @@
   "refuseQuestion": "Êtes-vous certain de vouloir décliner/refuser cette inspection?",
   "cancelInspectionQuestion": "Êtes-vous certain de vouloir annuler cette inspection?",
   "generalInformation": "Information général",
-  "implantationPlan": "Plan d'implantation",
   "buildingContacts": "Contacts du bâtiment",
   "buildingPnaps": "PNAPs du bâtiment",
   "buildingHazardousMaterials": "Matériels dangereux du bâtiment",
@@ -370,5 +369,6 @@
   "duplicate":"Dupliquer",
   "deleteBatchStartedMessage":"Ce lot ne pas être supprimé car au moins une de ses inspections est en traitement.",
   "edit":"Éditer",
-  "deleteInspectionStartedMessage":"Cette inspection ne peut pas être supprimée car elle en cours."
+  "deleteInspectionStartedMessage":"Cette inspection ne peut pas être supprimée car elle en cours.",
+  "imageSizeWarning": "L'image que vous voulez sauvegarder est trop volumineuse."
 }

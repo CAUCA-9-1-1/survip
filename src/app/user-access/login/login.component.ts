@@ -5,6 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 
 import {AuthenticationService} from '../shared/services/authentification.service';
 import {PermissionService} from '../shared/services/permission.service';
+import {ConfigurationService} from '../shared/services/configuration.service';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
         private permissionService: PermissionService,
         private notification: MatSnackBar,
         private translateService: TranslateService,
+        private configService: ConfigurationService,
     ) { }
 
     ngOnInit() {
@@ -46,11 +48,8 @@ export class LoginComponent implements OnInit {
 
         this.auth.login(this.username, this.password).subscribe(token => {
             if (token.accessToken) {
-                this.permissionService.getUserPermission(token.idWebuser).subscribe(data => {
-                    sessionStorage.setItem('currentPermission', JSON.stringify(data));
-
-                    this.router.navigate([this.returnUrl]);
-                });
+                this.loadGeneralConfiguration();
+                this.loadUserPermission(token.idWebuser);
             } else {
                 this.notify(this.labels['badLogin']);
             }
@@ -66,5 +65,18 @@ export class LoginComponent implements OnInit {
             duration: 5000,
             panelClass: ['error-toasts']
         });
+    }
+
+    private loadUserPermission(idWebUser: string) {
+        this.permissionService.getUserPermission(idWebUser).subscribe(data => {
+            sessionStorage.setItem('currentPermission', JSON.stringify(data));
+
+            this.router.navigate([this.returnUrl]);
+        });
+    }
+
+    private loadGeneralConfiguration() {
+        this.configService.getConfiguration()
+            .subscribe(data => {}, error => console.log(error.message));
     }
 }
