@@ -47,7 +47,6 @@
   "building": "Building",
   "buildings": "Building(s)",
   "generalInfo": "General informations",
-  "implantationPlan": "Implantation plan",
   "hazardousMaterials": "Hazardous material",
   "contacts": "Contacts",
   "personRequiringAssistance": "P.R.A.",
@@ -369,5 +368,6 @@
   "duplicate":"Duplicate",
   "deleteBatchStartedMessage":"This batch can't be deleted because on of his inspection is being processed.",
   "edit":"Edit",
-  "deleteInspectionStartedMessage":"This inspection is being processed and can't be deleted."
+  "deleteInspectionStartedMessage":"This inspection is being processed and can't be deleted.",
+  "imageSizeWarning": "The image you are trying to send is too large."
 }

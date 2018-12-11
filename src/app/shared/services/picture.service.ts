@@ -3,12 +3,13 @@ import {Observable} from 'rxjs/Observable';
 
 import {RequestService} from './request.service';
 import {Picture} from '../models/picture.model';
+import {ConfigurationService} from '../../user-access/shared/services/configuration.service';
 
 
 @Injectable()
 export class PictureService extends RequestService {
 
-    constructor(injector: Injector) {
+    constructor(injector: Injector, private config: ConfigurationService) {
         super(injector);
     }
 
@@ -18,6 +19,30 @@ export class PictureService extends RequestService {
 
     save(picture: Picture): Observable<string> {
         return this.put('Picture', picture);
+    }
+
+    public async isPictureSizeValid(picUrl: string){
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', picUrl, true);
+        xhr.responseType = 'blob';
+        const imageBlob = await new Promise((resolve) => {
+            xhr.onload = e => {
+                console.log("taille de l'image : ", xhr.response.size);
+                if (xhr.status === 200 && xhr.response.type.startsWith('image/')) {
+                    if ((xhr.response.size / 1000000.0) < this.config.generalConfiguration.maximumUploadSize) {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                } else {
+                    resolve(false);
+                }
+            }
+            xhr.send();
+        });
+
+        return imageBlob;
     }
 }
 

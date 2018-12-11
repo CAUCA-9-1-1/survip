@@ -16,6 +16,7 @@ import {ReportConfigurationComponent} from './report-configuration/report-config
 import {SelectTemplateComponent} from './report-configuration/select-template/select-template.component';
 import {PermissionService} from './user-access/shared/services/permission.service';
 import {ManagementSystemComponent} from './management-system/management-system.component';
+import {ConfigurationService} from './user-access/shared/services/configuration.service';
 
 
 const appRoutes: Routes = [{
@@ -85,6 +86,7 @@ const appRoutes: Routes = [{
     providers: [
         AuthGuardService,
         PermissionService,
+        ConfigurationService,
     ]
 })
 

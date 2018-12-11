@@ -4,6 +4,8 @@ import {Picture} from '../../models/picture.model';
 import {InspectionPictureService} from '../../../inspection-approval/shared/services/inspection-picture.service';
 import { v4 as uuid } from 'uuid';
 import { fabric } from 'fabric';
+import {MatSnackBar} from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-image',
@@ -60,41 +62,56 @@ export class ImageComponent implements OnInit {
     public picture: Picture;
     public icon = 'plus';
     public isPopupVisible = false;
-
+    private labels = {};
     private canvas = null;
 
     public constructor(
         private pictureService: PictureService,
         private inspectionPictureService: InspectionPictureService,
+        private notification: MatSnackBar,
+        private translateService: TranslateService,
     ) { }
 
     public ngOnInit() {
         this.container.nativeElement.style.height = this.height;
+        this.translateService.get([
+            'imageSizeWarning'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
-    public uploadPicture(e) {
-        const picture = new Picture();
-        picture.id = this.idPicture ? this.idPicture : uuid();
-        picture.name = e.name;
-        picture.mimeType = '';
-        picture.dataUri = e.content;
+    public async uploadPicture(e) {
+        const picSizeValid = await this.isPictureSizeValid(e.content);
+        if (picSizeValid) {
+            const picture = new Picture();
+            picture.id = this.idPicture ? this.idPicture : uuid();
+            picture.name = e.name;
+            picture.mimeType = '';
+            picture.dataUri = e.content;
 
-        this.src = e.content;
-        this.sketchName = e.name;
-        this.picture = picture;
+            this.src = e.content;
+            this.sketchName = e.name;
+            this.picture = picture;
 
-        if (this.autoApiChange) {
-          if (this.useDataCopy) {
-            this.inspectionPictureService.save(picture).subscribe(id => {
-              this.emitValueChanged(id);
-            });
-          } else {
-            this.pictureService.save(picture).subscribe(id => {
-              this.emitValueChanged(id);
-            });
-          }
+            if (this.autoApiChange) {
+                if (this.useDataCopy) {
+                    this.inspectionPictureService.save(picture).subscribe(id => {
+                        this.emitValueChanged(id);
+                    });
+                } else {
+                    this.pictureService.save(picture).subscribe(id => {
+                        this.emitValueChanged(id);
+                    });
+                }
+            } else {
+                this.valueChanged.emit(picture);
+            }
         } else {
-            this.valueChanged.emit(picture);
+            this.notification.open( this.labels['imageSizeWarning'], '', {
+                duration: 5000,
+                panelClass: ['error-toasts']
+            });
         }
     }
 
@@ -130,29 +147,29 @@ export class ImageComponent implements OnInit {
       }
     }
 
-    private getFullSizeImage(json: JSON) : Promise<void> {
+    private getFullSizeImage(json: JSON): Promise<void> {
         let fullSizeCanvas = new fabric.Canvas('1');
         return new Promise(
             (resolve): void => {
-            fullSizeCanvas = fullSizeCanvas.loadFromJSON(json, 
+            fullSizeCanvas = fullSizeCanvas.loadFromJSON(json,
                 () => {
                     fullSizeCanvas.renderAll.bind(fullSizeCanvas);
                 fullSizeCanvas.renderAll();
                 const backgroundImage = json['backgroundImage'];
 
-                let scaleFactor = 1 / backgroundImage.scaleX;
+                const scaleFactor = 1 / backgroundImage.scaleX;
 
                 this.setFullSizeCanvasSize(fullSizeCanvas, json, scaleFactor);
                 this.setFullSizeBackground(fullSizeCanvas, scaleFactor, backgroundImage);
                 const objects = fullSizeCanvas.getObjects();
                 this.setFullsizeObjects(objects, scaleFactor);
-            
+
                 fullSizeCanvas.renderAll();
-                this.picture.dataUri = fullSizeCanvas.toDataURL();
+                this.picture.dataUri = fullSizeCanvas.toDataURL({format: 'jpeg', quality: 0.9});
                 resolve();
             }
           );
-        })
+        });
     }
 
     private setFullSizeCanvasSize(fullSizeCanvas: fabric.Canvas, json: JSON, scaleFactor: number) {
@@ -163,7 +180,7 @@ export class ImageComponent implements OnInit {
     private setFullSizeBackground(fullSizeCanvas: fabric.Canvas, scaleFactor: number, backgroundImage: fabric.Image) {
         const left = backgroundImage.left;
         const top = backgroundImage.top;
-        
+
         fullSizeCanvas.setBackgroundImage(fullSizeCanvas.backgroundImage, fullSizeCanvas.renderAll.bind(fullSizeCanvas), {
             top: top * scaleFactor,
             left: left * scaleFactor,
@@ -182,5 +199,9 @@ export class ImageComponent implements OnInit {
             obj.top *= scaleFactor;
             obj.setCoords();
         }
+    }
+
+    private async isPictureSizeValid(pic: string) {
+        return this.pictureService.isPictureSizeValid(pic);
     }
 }
