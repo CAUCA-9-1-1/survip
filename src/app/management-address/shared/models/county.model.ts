@@ -3,7 +3,6 @@ import {WithLocalization} from '../../../shared/models/with-localization';
 
 export class County extends WithLocalization {
     idRegion: string;
-    idState: string;
 
     static fromJSON(data: object): County {
         const county = new County();
