@@ -17,14 +17,6 @@
             sortIndex="1">
     </dxi-column>
     <dxi-column
-            dataField="idState"
-            caption="{{'state' | translate}}"
-            sortOrder="asc"
-            sortIndex="0">
-        <dxo-lookup [dataSource]="states" displayExpr="name" valueExpr="id">
-        </dxo-lookup>
-    </dxi-column>
-    <dxi-column
             dataField="idRegion"
             caption="{{'region' | translate}}">
         <dxo-lookup [dataSource]="regions" displayExpr="name" valueExpr="id">
@@ -39,7 +31,6 @@
 
         <dxo-form colCount="1">
             <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="idState" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idRegion"></dxi-item>
         </dxo-form>
     </dxo-editing>

@@ -19,7 +19,6 @@ import {RegionService} from '../shared/services/region.service';
     ]
     })
 export class CountyComponent extends GridWithCrudService implements OnInit {
-    states: any = {};
     regions: any = {};
 
     constructor(
@@ -36,7 +35,6 @@ export class CountyComponent extends GridWithCrudService implements OnInit {
 
     ngOnInit() {
         this.loadSource();
-        this.loadState();
         this.loadRegion();
     }
 
@@ -48,16 +46,6 @@ export class CountyComponent extends GridWithCrudService implements OnInit {
 
     onInitNewRow(e) {
         e.data.isActive = true;
-    }
-
-    private loadState() {
-        this.stateService.localized().subscribe(data => {
-            this.states = {
-                store: data,
-                select: ['id', 'name'],
-                sort: ['name'],
-            };
-        });
     }
 
     private loadRegion() {

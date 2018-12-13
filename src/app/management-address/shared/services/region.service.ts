@@ -24,7 +24,7 @@ export class RegionService extends RequestService {
         return this.post('Region', region);
     }
 
-    remove(idState: string) {
-        return this.delete('Region/' + idState);
+    remove(idRegion: string) {
+        return this.delete('Region/' + idRegion);
     }
 }
