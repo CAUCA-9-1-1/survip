@@ -2,8 +2,8 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {PictureService} from '../../services/picture.service';
 import {Picture} from '../../models/picture.model';
 import {InspectionPictureService} from '../../../inspection-approval/shared/services/inspection-picture.service';
-import { v4 as uuid } from 'uuid';
-import { fabric } from 'fabric';
+import {v4 as uuid} from 'uuid';
+import {fabric} from 'fabric';
 import {MatSnackBar} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 
