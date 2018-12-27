@@ -384,5 +384,6 @@
     "pushToBack": "Mettre à l'arrière",
     "delete": "Supprimer",
     "download": "Télécharger"
-  }
+  },
+  "imageSizeWarning": "L'image que vous voulez sauvegarder est trop volumineuse."
 }
