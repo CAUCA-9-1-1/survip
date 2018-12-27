@@ -383,5 +383,6 @@
     "pushToBack": "Push to back",
     "delete": "Delete",
     "download": "Download"
-  }
+  },
+  "imageSizeWarning": "The image you are trying to send is too large."
 }
