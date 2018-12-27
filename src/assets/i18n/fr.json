@@ -372,6 +372,7 @@
   "edit":"Éditer",
   "deleteInspectionStartedMessage":"Cette inspection ne peut pas être supprimée car elle en cours.",
   "sketchToolTip": {
+    "addPictograms": "Ajouter des pictogrammes",
     "square": "Carré",
     "circle": "Cercle",
     "triangle": "Triangle",

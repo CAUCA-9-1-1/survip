@@ -371,6 +371,7 @@
   "edit":"Edit",
   "deleteInspectionStartedMessage":"This inspection is being processed and can't be deleted.",
   "sketchToolTip": {
+    "addPictograms": "Add pictograms",
     "square": "Square",
     "circle": "Circle",
     "triangle": "Triangle",
