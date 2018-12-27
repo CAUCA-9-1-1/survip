@@ -8,10 +8,10 @@
     <img [src]="src" />
 </div>
 
-<dx-popup [title]="sketchName" [(visible)]="isPopupVisible" [deferRendering]="false" (onHiding)="saveModifiedPicture()">
+<dx-popup [(visible)]="isPopupVisible" [deferRendering]="false" (onHiding)="saveModifiedPicture()">
 
   <div *dxTemplate="let data of 'content'">
-      <lib-web-sketch-tool [imageData]="sketchImage" [loadedJson]="sketchJson" (canvas)="updateCanvas($event)"></lib-web-sketch-tool>
+      <lib-web-sketch-tool [imageData]="sketchImage" [loadedJson]="sketchJson" [pictogramsPath]="pictogramsPath" [pictograms]="pictograms" (canvas)="updateCanvas($event)"></lib-web-sketch-tool>
   </div>
 </dx-popup>
 

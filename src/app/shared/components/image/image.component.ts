@@ -62,6 +62,10 @@ export class ImageComponent implements OnInit {
     public picture: Picture;
     public icon = 'plus';
     public isPopupVisible = false;
+    public pictogramsPath = "./assets/pictograms/";
+    public pictograms =["AccesPrincipal.png", "Annonciateur.png", "BoiteClees.png", "BorneIncendie.png",
+                        "CamionPompier.png", "GazNaturel.png", "GazPropane.png", "Generatrice.png"];  
+
     private labels = {};
     private canvas = null;
 
