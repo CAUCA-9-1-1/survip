@@ -13,6 +13,13 @@
             sortIndex="0"
             sortOrder="asc">
     </dxi-column>
+
+    <dxi-column alignment="center" caption="{{'duplicate' | translate}}" cellTemplate="copymode" [width]="60">
+      <div *dxTemplate="let data of 'copymode'">
+        <i class="fa fa-paste dx-link" (click)="onCopyReport(data.data)" title="{{'reportCopy' | translate}}"></i>
+    </div>
+    </dxi-column>
+
     <dxi-column cellTemplate="cellTemplate" [width]="50" alignment="center">
       <div *dxTemplate="let data of 'cellTemplate'">
         <div>
@@ -20,6 +27,7 @@
         </div>
       </div>
     </dxi-column>
+
 
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-popup title="{{'modify' | translate}}" [showTitle]="true"  [height]="220" [width]="350"></dxo-popup>

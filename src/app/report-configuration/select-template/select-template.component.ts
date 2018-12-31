@@ -92,4 +92,23 @@ export class SelectTemplateComponent implements OnInit {
             }
         });
     }
+
+    public onCopyReport(e) {
+/*         confirm(this.labels['surveyCopyQuestion'], this.labels['question']).then((result) => {
+            if (result) {
+                this.surveyService.copySurvey(idSurvey)
+                    .subscribe(success => this.loadSource());
+            }
+        }); */
+        let reportCopy = new ConfigurationTemplate();
+        reportCopy.data = e.data;
+        reportCopy.name = e.name + ' (Copie)';
+        console.log(e);
+        //this.saveTemplate(reportCopy);
+
+        this.reportConfigurationService.saveTemplate(reportCopy).subscribe(res => {
+            reportCopy.id = res.id;
+            this.dataSource.push(reportCopy);
+        });
+    }
 }
