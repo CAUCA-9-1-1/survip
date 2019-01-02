@@ -43,4 +43,12 @@ export class ReportTemplateService extends RequestService {
         headers: this.headers,
     });
   }
+
+  copyTemplate(id: string) {
+    return this.http.post<PostModel>(this.apiUrl + 'ReportConfigurationTemplate/CopyReportConfiguration/',
+      JSON.stringify(id),
+      {
+        headers: this.headers,
+    });
+  }
 }
