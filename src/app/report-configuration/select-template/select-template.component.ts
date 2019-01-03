@@ -4,13 +4,16 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {ConfigurationTemplate} from '../../shared/models/configuration-template.model';
 import {ReportTemplateService} from '../../shared/services/report-template.service';
+import {confirm} from 'devextreme/ui/dialog';
+import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+
 
 @Component({
     selector: 'app-template-selection',
     templateUrl: './select-template.component.html',
     styleUrls: ['./select-template.component.css']
 })
-export class SelectTemplateComponent implements OnInit {
+export class SelectTemplateComponent extends GridWithCrudService  implements OnInit {
 
     public form: FormGroup;
     public dataSource: any = {};
@@ -26,6 +29,7 @@ export class SelectTemplateComponent implements OnInit {
         private translateService: TranslateService,
         private reportConfigurationService: ReportTemplateService
     ) {
+        super(reportConfigurationService);
         this.templateIdentifiers = [];
         this.reportConfigurationService.getTemplateList().subscribe(data => {
             data.forEach((templateIdentifier) => {
@@ -40,10 +44,14 @@ export class SelectTemplateComponent implements OnInit {
         this.form = this.formBuilder.group([]);
         this.isOpenDisabled = true;
 
-        this.translateService.get(['edit']).subscribe(labels => {
+        this.translateService.get(['edit', 'reportTemplateCopyQuestion', 'question']).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
         });
+    }
+
+    setModel(data: any) {
+        return ConfigurationTemplate.fromJSON(data);
     }
 
     private checkLoadedElement(): boolean {
@@ -94,10 +102,17 @@ export class SelectTemplateComponent implements OnInit {
     }
 
     public onCopyReport(e) {
-        this.reportConfigurationService.copyTemplate(e.id).subscribe(res => {
-            if(res.id) {
-                this.templateIdentifiers.push(JSON.parse(JSON.stringify(res)));
+        confirm(this.labels['reportTemplateCopyQuestion'], this.labels['question']).then((result) => {
+            if (result) {
+/*                 this.surveyService.copySurvey(idSurvey)
+                .subscribe(success => this.loadSource()); */
+                this.reportConfigurationService.copyTemplate(e.id).subscribe(res => {
+                    if(res.id) {
+                        this.templateIdentifiers.push(JSON.parse(JSON.stringify(res)));
+                    }
+                });
             }
         });
+
     }
 }
