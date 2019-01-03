@@ -16,14 +16,14 @@
 
     <dxi-column alignment="center" caption="{{'duplicate' | translate}}" cellTemplate="copymode" [width]="60">
       <div *dxTemplate="let data of 'copymode'">
-        <i class="fa fa-paste dx-link" (click)="onCopyReport(data.data)" title="{{'reportCopy' | translate}}"></i>
+        <i class="fa fa-paste dx-link" (click)="onCopyReport(data.data)" title="{{'reportTemplateCopy' | translate}}"></i>
     </div>
     </dxi-column>
 
-    <dxi-column cellTemplate="cellTemplate" [width]="50" alignment="center">
+    <dxi-column cellTemplate="cellTemplate" [width]="50" alignment="center" caption="{{'modify' | translate}}">
       <div *dxTemplate="let data of 'cellTemplate'">
         <div>
-        <span class="dx-icon-preferences dx-link" (click)=editReport(data.data)></span>
+        <span class="dx-icon-preferences dx-link" (click)=editReport(data.data) title="{{'reportTemplateModify' | translate}}"></span>
         </div>
       </div>
     </dxi-column>
