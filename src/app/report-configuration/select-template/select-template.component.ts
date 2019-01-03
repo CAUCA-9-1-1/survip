@@ -104,8 +104,6 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
     public onCopyReport(e) {
         confirm(this.labels['reportTemplateCopyQuestion'], this.labels['question']).then((result) => {
             if (result) {
-/*                 this.surveyService.copySurvey(idSurvey)
-                .subscribe(success => this.loadSource()); */
                 this.reportConfigurationService.copyTemplate(e.id).subscribe(res => {
                     if(res.id) {
                         this.templateIdentifiers.push(JSON.parse(JSON.stringify(res)));
