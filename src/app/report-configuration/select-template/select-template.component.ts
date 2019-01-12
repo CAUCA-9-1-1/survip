@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {ConfigurationTemplate} from '../../shared/models/configuration-template.model';
 import {ReportTemplateService} from '../../shared/services/report-template.service';
+import {FireSafetyDepartmentService} from '../../management-system/shared/services/firesafetydepartment.service';
 import {confirm} from 'devextreme/ui/dialog';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 
@@ -11,13 +12,16 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 @Component({
     selector: 'app-template-selection',
     templateUrl: './select-template.component.html',
-    styleUrls: ['./select-template.component.css']
+    styleUrls: ['./select-template.component.css'],
+    providers: [
+        FireSafetyDepartmentService,
+    ]
 })
 export class SelectTemplateComponent extends GridWithCrudService  implements OnInit {
-
     public form: FormGroup;
     public dataSource: any = {};
     public labels = {};
+    public departments: any = {store: []};
     public templateIdentifiers: ConfigurationTemplate[];
     public isOpenDisabled: boolean;
     public angularIsLoaded = false;
@@ -27,7 +31,8 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
         private formBuilder: FormBuilder,
         private router: Router,
         private translateService: TranslateService,
-        private reportConfigurationService: ReportTemplateService
+        private reportConfigurationService: ReportTemplateService,
+        private fireSafetyDepartmentService: FireSafetyDepartmentService
     ) {
         super(reportConfigurationService);
         this.templateIdentifiers = [];
@@ -42,6 +47,7 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
 
     public ngOnInit() {
         this.form = this.formBuilder.group([]);
+        this.loadDepartment();
         this.isOpenDisabled = true;
 
         this.translateService.get(['edit', 'reportTemplateCopyQuestion', 'question']).subscribe(labels => {
@@ -56,6 +62,16 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
 
     private checkLoadedElement(): boolean {
         return this.angularIsLoaded && this.labels !== {};
+    }
+
+    private loadDepartment() {
+        this.fireSafetyDepartmentService.localized().subscribe(data => {
+            this.departments = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
     }
 
     public onInitNewRow(e) {

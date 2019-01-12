@@ -20,6 +20,20 @@
     </div>
     </dxi-column>
 
+
+    <dxi-column dataField="idFireSafetyDepartment" caption="{{'fireSafetyDepartment' | translate}}">
+      <dxo-lookup [dataSource]="departments" displayExpr="name" valueExpr="id">
+      </dxo-lookup>
+    </dxi-column>
+
+    <dxi-column dataField="isDefault" dataType="boolean" caption="{{'isDefault' | translate}}"></dxi-column>
+
+    <dxi-column alignment="center" caption="{{'duplicate' | translate}}" cellTemplate="copymode" [width]="60">
+      <div *dxTemplate="let data of 'copymode'">
+        <i class="fa fa-paste dx-link" (click)="onCopyReport(data.data)" title="{{'reportTemplateCopy' | translate}}"></i>
+    </div>
+    </dxi-column>
+
     <dxi-column cellTemplate="cellTemplate" [width]="50" alignment="center" caption="{{'modify' | translate}}">
       <div *dxTemplate="let data of 'cellTemplate'">
         <div>
