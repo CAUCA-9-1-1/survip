@@ -28,6 +28,12 @@
         <dxo-lookup [dataSource]="languages" displayExpr="name" valueExpr="code">
         </dxo-lookup>
     </dxi-column>
+    <dxi-column
+            dataField="picture"
+            caption="{{'picture' | translate}}"
+            editCellTemplate="editphoto"
+            [visible]="false">
+    </dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -39,6 +45,9 @@
             <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idCounty" [isRequired]="true"></dxi-item>
             <dxi-item dataField="language" [isRequired]="true"></dxi-item>
+            <dxi-item itemType="group">
+                <dxi-item dataField="picture" [label]="{visible: false}"></dxi-item>
+            </dxi-item>
         </dxo-form>
     </dxo-editing>
 
@@ -49,5 +58,9 @@
                 [value]="field.row.data.localizations"
                 (valueChanged)="field.setValue($event.value);">
         </app-multilang>
+    </div>
+    <div *dxTemplate="let field of 'editphoto'">
+        <span class="dx-field-item-label-text">{{'picture' | translate}}:</span>
+        <app-image [idImage]="field.row.data.idPicture" height="350px" [allowChange]="true" (valueChanged)="field.setValue($event)"></app-image>
     </div>
 </dx-data-grid>
