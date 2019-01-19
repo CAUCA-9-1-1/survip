@@ -78,6 +78,7 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
         e.data = new ConfigurationTemplate();
         e.data.data = '';
         e.data.isActive = true;
+        e.data.isDefault = false;
     }
 
     public onRowInserting(e) {
@@ -95,6 +96,8 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
 
     public onRowUpdated(e) {
         this.editedTemplate.name = e.data.name;
+        this.editedTemplate.isDefault = e.data.isDefault;
+        this.editedTemplate.idFireSafetyDepartment = e.data.idFireSafetyDepartment;
         e.data = this.editedTemplate;
         this.saveTemplate(e.data);
     }
