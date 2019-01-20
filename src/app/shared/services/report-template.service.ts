@@ -24,7 +24,7 @@ export class ReportTemplateService extends RequestService {
   }
 
   getTemplateList() {
-    return this.http.get<ConfigurationTemplate[]>(this.apiUrl + 'ReportConfigurationTemplate', {
+    return this.http.get<ConfigurationTemplate[]>(this.apiUrl + 'ReportConfigurationTemplate/list', {
       headers: this.headers
     });
   }
