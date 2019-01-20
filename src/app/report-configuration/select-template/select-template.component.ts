@@ -36,7 +36,7 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
     ) {
         super(reportConfigurationService);
         this.templateIdentifiers = [];
-        this.reportConfigurationService.getTemplateList().subscribe(data => {
+        this.reportConfigurationService.getPlaceholderList().subscribe(data => {
             data.forEach((templateIdentifier) => {
                 this.templateIdentifiers.push(templateIdentifier);
             });
@@ -89,16 +89,17 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
         this.editedTemplate = new ConfigurationTemplate();
         this.editedTemplate.id = e.data.id;
         this.editedTemplate.isActive = e.data.isActive;
+        this.editedTemplate.isDefault = e.data.isDefault;
+        if (e.data.idFireSafetyDepartment != null)
+            this.editedTemplate.idFireSafetyDepartment = e.data.idFireSafetyDepartment;
         this.reportConfigurationService.getTemplate(e.data.id).subscribe(res => {
             this.editedTemplate.data = res.data;
         });
     }
 
     public onRowUpdated(e) {
-        this.editedTemplate.name = e.data.name;
-        this.editedTemplate.isDefault = e.data.isDefault;
-        this.editedTemplate.idFireSafetyDepartment = e.data.idFireSafetyDepartment;
-        e.data = this.editedTemplate;
+        e.data.id = this.editedTemplate.id;
+        e.data.data = this.editedTemplate.data;
         this.saveTemplate(e.data);
     }
 
