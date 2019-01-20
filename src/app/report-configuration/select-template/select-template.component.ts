@@ -36,7 +36,7 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
     ) {
         super(reportConfigurationService);
         this.templateIdentifiers = [];
-        this.reportConfigurationService.getPlaceholderList().subscribe(data => {
+        this.reportConfigurationService.getTemplateList().subscribe(data => {
             data.forEach((templateIdentifier) => {
                 this.templateIdentifiers.push(templateIdentifier);
             });
@@ -87,20 +87,20 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
 
     public onEditingStart(e) {
         this.editedTemplate = new ConfigurationTemplate();
-        this.editedTemplate.id = e.data.id;
-        this.editedTemplate.isActive = e.data.isActive;
-        this.editedTemplate.isDefault = e.data.isDefault;
-        if (e.data.idFireSafetyDepartment != null)
-            this.editedTemplate.idFireSafetyDepartment = e.data.idFireSafetyDepartment;
+        Object.assign(this.editedTemplate, e.data);
         this.reportConfigurationService.getTemplate(e.data.id).subscribe(res => {
             this.editedTemplate.data = res.data;
         });
     }
 
     public onRowUpdated(e) {
-        e.data.id = this.editedTemplate.id;
-        e.data.data = this.editedTemplate.data;
-        this.saveTemplate(e.data);
+        Object.assign(this.editedTemplate, e.data);
+        if(e.data.isDefault && e.data.isDefault==true){
+            var data = this.templateIdentifiers.filter(
+                templateIdentifier => templateIdentifier.idFireSafetyDepartment === this.editedTemplate.idFireSafetyDepartment && templateIdentifier.isDefault === true);
+                console.log(data);
+        }
+        this.saveTemplate(this.editedTemplate);
     }
 
     public onRowRemoved(e) {
