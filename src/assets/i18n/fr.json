@@ -389,5 +389,6 @@
     "delete": "Supprimer",
     "download": "Télécharger"
   },
-  "imageSizeWarning": "L'image que vous voulez sauvegarder est trop volumineuse."
+  "imageSizeWarning": "L'image que vous voulez sauvegarder est trop volumineuse.",
+  "isDefaultReport": "Rapport par défault"
 }

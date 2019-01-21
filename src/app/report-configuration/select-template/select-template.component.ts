@@ -64,6 +64,12 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
         return this.angularIsLoaded && this.labels !== {};
     }
 
+    private checkIfPreviousDefaultTemplate(templateIdentifier): boolean {
+        return templateIdentifier.idFireSafetyDepartment === this.editedTemplate.idFireSafetyDepartment 
+            && templateIdentifier.isDefault === true 
+            && templateIdentifier.id != this.editedTemplate.id
+    }
+
     private loadDepartment() {
         this.fireSafetyDepartmentService.localized().subscribe(data => {
             this.departments = {
@@ -94,12 +100,15 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
     }
 
     public onRowUpdated(e) {
-        Object.assign(this.editedTemplate, e.data);
         if(e.data.isDefault && e.data.isDefault==true){
-            var data = this.templateIdentifiers.filter(
-                templateIdentifier => templateIdentifier.idFireSafetyDepartment === this.editedTemplate.idFireSafetyDepartment && templateIdentifier.isDefault === true);
-                console.log(data);
+            let data = this.templateIdentifiers.filter(
+                templateIdentifier => this.checkIfPreviousDefaultTemplate(templateIdentifier));
+        for (let template of data) {
+            template.isDefault = false;
+            }
         }
+        Object.assign(this.editedTemplate, e.data);
+
         this.saveTemplate(this.editedTemplate);
     }
 
