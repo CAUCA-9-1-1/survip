@@ -64,12 +64,6 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
         return this.angularIsLoaded && this.labels !== {};
     }
 
-    private checkIfPreviousDefaultTemplate(templateIdentifier): boolean {
-        return templateIdentifier.idFireSafetyDepartment === this.editedTemplate.idFireSafetyDepartment 
-            && templateIdentifier.isDefault === true 
-            && templateIdentifier.id != this.editedTemplate.id
-    }
-
     private loadDepartment() {
         this.fireSafetyDepartmentService.localized().subscribe(data => {
             this.departments = {
@@ -88,27 +82,27 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
     }
 
     public onRowInserting(e) {
+        this.editedTemplate = e.data;
+        this.updateDefaultReport(e);
         this.saveTemplate(e.data);
     }
 
     public onEditingStart(e) {
         this.editedTemplate = new ConfigurationTemplate();
         Object.assign(this.editedTemplate, e.data);
+        
+        if(e.data.idFireSafetyDepartment.toString() === '00000000-0000-0000-0000-000000000000') {
+            e.data.idFireSafetyDepartment = null;
+        }
+
         this.reportConfigurationService.getTemplate(e.data.id).subscribe(res => {
             this.editedTemplate.data = res.data;
         });
     }
 
     public onRowUpdated(e) {
-        if(e.data.isDefault && e.data.isDefault==true){
-            let data = this.templateIdentifiers.filter(
-                templateIdentifier => this.checkIfPreviousDefaultTemplate(templateIdentifier));
-        for (let template of data) {
-            template.isDefault = false;
-            }
-        }
         Object.assign(this.editedTemplate, e.data);
-
+        this.updateDefaultReport(e);
         this.saveTemplate(this.editedTemplate);
     }
 
@@ -141,5 +135,21 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
             }
         });
 
+    }
+
+    private updateDefaultReport(e) {
+        if(e.data.isDefault && e.data.isDefault === true){
+            let data = this.templateIdentifiers.filter(
+                templateIdentifier => this.checkIfPreviousDefaultTemplate(templateIdentifier));
+        for (let template of data) {
+            template.isDefault = false;
+            }
+        }
+    }
+
+    private checkIfPreviousDefaultTemplate(templateIdentifier): boolean {
+        return templateIdentifier.idFireSafetyDepartment === this.editedTemplate.idFireSafetyDepartment 
+            && templateIdentifier.isDefault === true 
+            && templateIdentifier.id != this.editedTemplate.id
     }
 }
