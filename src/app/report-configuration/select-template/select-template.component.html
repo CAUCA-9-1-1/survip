@@ -19,7 +19,7 @@
       </dxo-lookup>
     </dxi-column>
 
-    <dxi-column dataField="isDefault" dataType="boolean" caption="{{'isDefault' | translate}}"></dxi-column>
+    <dxi-column dataField="isDefault" dataType="boolean" [width]="100" caption="{{'isDefaultReport' | translate}}"></dxi-column>
 
     <dxi-column alignment="center" caption="{{'duplicate' | translate}}" cellTemplate="copymode" [width]="60">
       <div *dxTemplate="let data of 'copymode'">
