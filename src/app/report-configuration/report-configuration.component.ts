@@ -30,12 +30,11 @@ export class ReportConfigurationComponent implements OnInit {
         });
 
         this.activeRoute.params.subscribe(param => {
-            //this.selectedTemplate.id = param.idReport;
             this.loadTemplate(param.idReport);
         });
     }
 
-    public loadTemplate(id: string): void {
+    public loadTemplate(id): void {
         this.reportConfigurationService.getTemplate(id).subscribe(res => {
             this.selectedTemplate = res;
         });
