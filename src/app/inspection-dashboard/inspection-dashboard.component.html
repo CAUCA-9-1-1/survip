@@ -32,9 +32,15 @@
       <mat-form-field>
         <mat-select placeholder="{{'generate' | translate}}" (selectionChange)="generateReport(field.data.id, $event.value)">
           <mat-select-trigger>{{'generate' | translate}}</mat-select-trigger>
-          <mat-option *ngFor="let template of templateIdentifiers" [value]="template.id">
+          <mat-option *ngFor="let template of defaultTemplateIdentifiers" [value]="template.id">
             {{template.name}}
           </mat-option>
+          <mat-divider></mat-divider>
+          <mat-optgroup [label]="labels['nonDefaultReports']">
+            <mat-option *ngFor="let template of nonDefaultTemplateIdentifiers" [value]="template.id">
+                {{template.name}}
+            </mat-option>
+        </mat-optgroup>
         </mat-select>
       </mat-form-field>
     </div>
