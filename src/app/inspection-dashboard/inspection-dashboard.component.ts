@@ -47,7 +47,8 @@ import {EnumModel} from '../management-type-system/shared/models/enum.model';
 export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-    public templateIdentifiers: ConfigurationTemplate[];
+    public nonDefaultTemplateIdentifiers: ConfigurationTemplate[]; 
+    public defaultTemplateIdentifiers: ConfigurationTemplate[];
     public dataSource: any = {};
     public webusers: WebuserForWeb[] = [];
     public lanes: any = {store: []};
@@ -88,7 +89,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     }
 
     public ngOnInit() {
-        this.templateIdentifiers = [];
+        this.defaultTemplateIdentifiers = [];
+        this.nonDefaultTemplateIdentifiers = [];
 
         this.inspectionStatusService.getAll().subscribe(data => this.inspectionStatus = data);
         this.loadRiskLevel();
@@ -104,7 +106,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see', 'vacantLand', 'delete',
             'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building', 'approve', 'todo', 'absent',
             'started', 'waitingApprobation', 'approved', 'refused', 'canceled', 'collapseAll', 'expandAll', 'wantToDeleteBatch',
-            'generateReport', 'deleteBatchStartedMessage'
+            'generateReport', 'deleteBatchStartedMessage', 'nonDefaultReports'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -181,7 +183,11 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     public fetchTemplateIdentifiers(): void {
         this.reportTemplateService.getTemplateList().subscribe(data => {
             data.forEach((templateIdentifier) => {
-                this.templateIdentifiers.push(templateIdentifier);
+                if (templateIdentifier.isDefault) {
+                    this.defaultTemplateIdentifiers.push(templateIdentifier);
+                } else {
+                    this.nonDefaultTemplateIdentifiers.push(templateIdentifier);
+                }
             });
         });
     }
