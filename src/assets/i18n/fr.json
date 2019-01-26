@@ -390,5 +390,6 @@
     "download": "Télécharger"
   },
   "imageSizeWarning": "L'image que vous voulez sauvegarder est trop volumineuse.",
-  "isDefaultReport": "Rapport par défault"
+  "isDefaultReport": "Rapport par défault",
+  "nonDefaultReports": "Autres rapports"
 }
