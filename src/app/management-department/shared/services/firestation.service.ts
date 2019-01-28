@@ -13,7 +13,7 @@ export class FirestationService extends RequestService {
     }
 
     getAll(): Observable<Firestation[]> {
-        return this.get('Firestation');
+        return this.get('Firestation/localized');
     }
 
     getAllOfCity(idCity: string): Observable<Firestation[]> {
