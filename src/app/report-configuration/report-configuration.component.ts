@@ -27,10 +27,9 @@ export class ReportConfigurationComponent implements OnInit {
 
         this.reportConfigurationService.getPlaceholderList().subscribe(res => {
             this.placeholders = res;
-        });
-
-        this.activeRoute.params.subscribe(param => {
+          this.activeRoute.params.subscribe(param => {
             this.loadTemplate(param.idReport);
+          });
         });
     }
 
