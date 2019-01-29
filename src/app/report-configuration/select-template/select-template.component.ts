@@ -83,7 +83,7 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
 
     public onRowInserting(e) {
         this.editedTemplate = e.data;
-        this.updateDefaultReport(e);
+        this.updateDefaultReport();
         this.saveTemplate(e.data);
     }
 
@@ -102,7 +102,7 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
 
     public onRowUpdated(e) {
         Object.assign(this.editedTemplate, e.data);
-        this.updateDefaultReport(e);
+        this.updateDefaultReport();
         this.saveTemplate(this.editedTemplate);
     }
 
@@ -137,8 +137,8 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
 
     }
 
-    private updateDefaultReport(e) {
-        if(e.data.isDefault && e.data.isDefault === true){
+    private updateDefaultReport() {
+        if(this.editedTemplate.isDefault === true){
             let data = this.templateIdentifiers.filter(
                 templateIdentifier => this.checkIfPreviousDefaultTemplate(templateIdentifier));
         for (let template of data) {
