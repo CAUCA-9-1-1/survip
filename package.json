@@ -28,7 +28,7 @@
     "@ngx-translate/http-loader": "^2.0.1",
     "@types/fabric": "^1.5.40",
     "@types/file-saver": "^1.3.0",
-    "cause-report-configuration": "^0.2.22",
+    "cause-report-configuration": "^0.7.0",
     "core-js": "^2.5.7",
     "devextreme": "^18.1.5",
     "devextreme-angular": "^18.1.5",
