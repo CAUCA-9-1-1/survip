@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DxDataGridModule} from 'devextreme-angular';
+import {DxDataGridModule, DxLoadPanelModule} from 'devextreme-angular';
 import {MatButtonToggleModule, MatDialogModule, MatSelectModule, MatOptionModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -25,6 +25,7 @@ import {AskBatchDescriptionComponent} from './ask-batch-description/ask-batch-de
         MatSelectModule,
         MatOptionModule,
         DxDataGridModule,
+        DxLoadPanelModule
     ],
 })
 export class InspectionDashboardModule { }

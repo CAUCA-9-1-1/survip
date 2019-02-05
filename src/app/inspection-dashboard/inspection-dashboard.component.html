@@ -59,3 +59,10 @@
         </div>
     </div>
 </dx-data-grid>
+
+<dx-load-panel
+    shadingColor="rgba(0,0,0,0.4)"
+    [(visible)]="loadingVisible"
+    [closeOnOutsideClick]="false"
+    message="{{'generatingReport' | translate}}">
+</dx-load-panel>
