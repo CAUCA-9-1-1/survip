@@ -8,7 +8,8 @@
         (onInitNewRow)="onInitNewRow($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
-        (onRowRemoved)="onRowRemoved($event)">
+        (onRowRemoved)="onRowRemoved($event)"
+        (onRowValidating)="ondRowValidating($event)">
     <dxi-column
             dataField="firstName"
             caption="{{'firstName' | translate}}"

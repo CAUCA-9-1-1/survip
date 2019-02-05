@@ -129,6 +129,12 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         super.onRowUpdated(e);
     }
 
+    ondRowValidating(e) {
+        if(!e.isValid && e.brokenRules[0].type == "compare" && e.newData.password == null) {
+            e.isValid = true;
+        }
+    }
+
     setDepartmentField(field) {
         this.departmentField = field;
 
