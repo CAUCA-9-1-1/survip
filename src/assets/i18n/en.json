@@ -245,6 +245,7 @@
   "approve": "Approve",
   "generateReport": "Generate report",
   "generate": "Generate",
+  "generatingReport": "Generating report",
   "chooseTemplate": "Choose existing template",
   "refuse": "Reject",
   "utilisationDescription": "Utilisation description",

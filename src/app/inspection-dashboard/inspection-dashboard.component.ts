@@ -87,6 +87,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
         private authGuardService: AuthGuardService,
     ) {
     }
+    private loadingVisible = false;
 
     public ngOnInit() {
         this.defaultTemplateIdentifiers = [];
@@ -193,9 +194,11 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     }
 
     public generateReport(buildingId: string, templateId: string) {
+        this.loadingVisible = true;
         this.reportGenerationService.generateReport(buildingId, templateId).subscribe(data => {
             const blob = new Blob([data], {type: 'application/pdf'});
             saveAs(blob, buildingId);
+            this.loadingVisible = false;
         });
     }
 

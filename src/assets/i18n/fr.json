@@ -247,6 +247,7 @@
   "approve": "Approuver",
   "generateReport": "Générer le rapport",
   "generate": "Générer",
+  "generatingReport": "Génération du rapport",
   "chooseTemplate": "Choisir un gabarit existant",
   "refuse": "Décliner / Refus",
   "utilisationDescription": "Description de l'utilisation",
