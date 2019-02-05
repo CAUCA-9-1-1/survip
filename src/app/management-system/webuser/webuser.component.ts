@@ -93,7 +93,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     }
 
     onEditorPreparing(e) {
-        if (e.dataField === 'password') {
+        if (e.dataField === 'password'  || e.dataField == 'passwordConfirm') {
             e.editorOptions.mode = 'password';
         }
     }
