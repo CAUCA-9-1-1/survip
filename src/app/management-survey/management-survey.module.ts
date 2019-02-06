@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DxButtonModule, DxDataGridModule, DxFormModule, DxTreeViewModule} from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxFormModule, DxTreeViewModule, DxPopupModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {ManagementSurveyComponent} from './management-survey.component';
@@ -19,6 +19,7 @@ import {QuestionComponent} from './question/question.component';
     DxDataGridModule,
     DxFormModule,
     DxTreeViewModule,
+    DxPopupModule,
   ],
   providers: [],
 })
