@@ -17,6 +17,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class ListComponent  extends GridWithCrudService implements OnInit {
 
+    private errorPopupVisibled = false;
     private labels = {};
     public surveyTypes = [];
     constructor(
@@ -60,11 +61,19 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
     }
 
     public onModifyQuestion(idSurvey) {
-        this.router.navigate(['management/survey'], {
-            queryParams: {
-                id_survey: idSurvey
+        this.surveyService.checkIfSurveyIsUsed(idSurvey).subscribe(bool => {
+            this.errorPopupVisibled = bool;
+            if(this.errorPopupVisibled == false) {
+                this.router.navigate(['management/survey'], {
+                    queryParams: {
+                        id_survey: idSurvey
+                    }
+                });
             }
         });
+        
+
+
     }
 
     public onCopySurvey(idSurvey) {

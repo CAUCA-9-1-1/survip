@@ -31,4 +31,8 @@ export class SurveyService extends RequestService {
     copySurvey(idSurvey: string) {
         return this.post('Survey/CopySurvey', idSurvey);
     }
+
+    checkIfSurveyIsUsed(idSurvey: string) {
+        return this.get('Survey/CheckIfUsed/'+ idSurvey);
+    }
 }

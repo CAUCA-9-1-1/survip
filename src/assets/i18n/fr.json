@@ -391,5 +391,7 @@
   },
   "imageSizeWarning": "L'image que vous voulez sauvegarder est trop volumineuse.",
   "isDefaultReport": "Rapport par défault",
-  "nonDefaultReports": "Autres rapports"
+  "nonDefaultReports": "Autres rapports",
+  "cantModifySurvey": "Impossible de modifier le questionnaire, car il est utilisé",
+  "error": "Erreur"
 }
