@@ -14,7 +14,7 @@ export class LocationTypeService extends RequestService {
 
     getAll(): Observable<EnumModel[]> {
         return this.translateService.get([
-            'address', 'laneAndIntersection', 'coordinates', 'text'
+            'address', 'laneAndTransversal', 'coordinates', 'text'
         ]).pipe(
             map(labels => {
                 return [
@@ -25,8 +25,8 @@ export class LocationTypeService extends RequestService {
                     }),
                     EnumModel.fromJSON({
                         value: 1,
-                        name: 'LaneAndIntersection',
-                        text: labels['laneAndIntersection'],
+                        name: 'laneAndTransversal',
+                        text: labels['laneAndTransversal'],
                     }),
                     EnumModel.fromJSON({
                         value: 2,
