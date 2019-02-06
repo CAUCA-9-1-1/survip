@@ -45,10 +45,10 @@
             <dxi-item dataField="idCityType" [isRequired]="true"></dxi-item>
             <dxi-item dataField="idCounty" [isRequired]="true"></dxi-item>
             <dxi-item dataField="code" [isRequired]="true">
-                    <dxi-validation-rule type="stringLength" [max]="10" message="Doit contenir 10 lettres au maximum"></dxi-validation-rule>
+                    <dxi-validation-rule type="stringLength" [max]="10" message="{{'max10letters' | translate}}"></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="code3Letters" [isRequired]="true">
-                    <dxi-validation-rule type="stringLength" [max]="3" message="Doit contenir 3 lettres au maximum"></dxi-validation-rule>
+                    <dxi-validation-rule type="stringLength" [max]="3" message="{{'max3letters' | translate}}"></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="emailAddress"></dxi-item>
         </dxo-form>

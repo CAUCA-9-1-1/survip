@@ -28,10 +28,10 @@
         <dxo-form colCount="1">
             <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
             <dxi-item dataField="codeAlpha2" [isRequired]="true">
-                    <dxi-validation-rule type="stringLength" [max]="2" message="Doit contenir 2 lettres au maximum"></dxi-validation-rule>
+                    <dxi-validation-rule type="stringLength" [max]="2" message="{{'max2letters' | translate}}"></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="codeAlpha3" [isRequired]="true">
-                    <dxi-validation-rule type="stringLength" [max]="3" message="Doit contenir 3 lettres au maximum"></dxi-validation-rule>
+                    <dxi-validation-rule type="stringLength" [max]="3" message="{{'max3letters' | translate}}"></dxi-validation-rule>
             </dxi-item>
         </dxo-form>
     </dxo-editing>
