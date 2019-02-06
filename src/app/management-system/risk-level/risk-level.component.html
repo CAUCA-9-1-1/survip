@@ -21,7 +21,9 @@
             sortOrder="asc"
             sortIndex="0"></dxi-column>
     <dxi-column dataField="code" caption="{{'code' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="color" caption="{{'color' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="color" caption="{{'color' | translate}}" editCellTemplate="colorBox" [visible]="false">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -36,6 +38,15 @@
             <dxi-item dataField="color"></dxi-item>
         </dxo-form>
     </dxo-editing>
+
+    <div *dxTemplate="let field of 'colorBox'">
+        <dxi-item>
+            <dx-color-box
+                [value]="field.data.color"
+                (onValueChanged)="field.setValue($event.value);">
+            </dx-color-box>
+        </dxi-item>
+    </div> 
 
     <div *dxTemplate="let field of 'editname'">
         <app-multilang
