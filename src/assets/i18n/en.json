@@ -391,5 +391,7 @@
   },
   "imageSizeWarning": "The image you are trying to send is too large.",
   "isDefaultReport": "Default Report",
-  "nonDefaultReports": "Other reports"
+  "nonDefaultReports": "Other reports",
+  "cantModifySurvey": "Can't modified survey because it is used.",
+  "error": "Error"
 }
