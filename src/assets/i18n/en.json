@@ -209,6 +209,7 @@
   "locationType": "Localization type",
   "addressLocationType": "Position type",
   "laneAndIntersection": "lane and intersection",
+  "laneAndTransversal": "lane and transversal",
   "coordinates": "Geolocation",
   "locate": "Locate",
   "text": "Approximate location",
