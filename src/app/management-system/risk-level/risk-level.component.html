@@ -35,7 +35,7 @@
             <dxi-item dataField="localizations"></dxi-item>
             <dxi-item dataField="sequence" [isRequired]="true"></dxi-item>
             <dxi-item dataField="code" [isRequired]="true">
-                    <dxi-validation-rule type="stringLength" [max]="10" message="Doit contenir 10 lettres au maximum"></dxi-validation-rule>
+                    <dxi-validation-rule type="stringLength" [max]="10" message="{{'max10letters' | translate}}"></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="color"></dxi-item>
         </dxo-form>

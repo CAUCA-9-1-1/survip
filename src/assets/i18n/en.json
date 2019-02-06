@@ -392,6 +392,12 @@
   "imageSizeWarning": "The image you are trying to send is too large.",
   "isDefaultReport": "Default Report",
   "nonDefaultReports": "Other reports",
+  "max2letters": "Can have maximum 2 letters",
+  "max3letters": "Can have maximum 3 letters.",
+  "max5letters": "Can have maximum 5 letters.",
+  "max10letters": "Can have maximum 10 letters"
+
+  "nonDefaultReports": "Other reports",
   "cantModifySurvey": "This survey can't be modified because it is used in some inspection.",
   "information": "Information"
 }
