@@ -88,12 +88,12 @@
             <dxi-item dataField="locationType" [isRequired]="true"></dxi-item>
             <dxi-item dataField="color" [isRequired]="true"></dxi-item>
             <dxi-item itemType="group" colCount="2" colSpan="2">
-                <dxi-item dataField="civicNumber"></dxi-item>
-                <dxi-item dataField="addressLocationType"></dxi-item>
-                <dxi-item dataField="idLane"></dxi-item>
-                <dxi-item dataField="coordinates" [visible]="false"></dxi-item>
-                <dxi-item dataField="idIntersection" [visible]="false"></dxi-item>
-                <dxi-item dataField="physicalPosition" [visible]="false"></dxi-item>
+                <dxi-item dataField="civicNumber" *ngIf="selectedLocationType == 'Address'"></dxi-item>
+                <dxi-item dataField="addressLocationType" *ngIf="selectedLocationType == 'Address'"></dxi-item>
+                <dxi-item dataField="idLane" *ngIf="selectedLocationType == 'Address' || selectedLocationType == 'LaneAndTransversal'"></dxi-item>
+                <dxi-item dataField="idIntersection" *ngIf="selectedLocationType == 'LaneAndTransversal'"></dxi-item>
+                <dxi-item dataField="physicalPosition" *ngIf="selectedLocationType == 'Text'"></dxi-item>
+                <dxi-item dataField="coordinates"></dxi-item>
             </dxi-item>
             <dxi-item itemType="group" caption="{{'rate' | translate}}">
                 <dxi-item dataField="rateOperatorType" [isRequired]="true"></dxi-item>
