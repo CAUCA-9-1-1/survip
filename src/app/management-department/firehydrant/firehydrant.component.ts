@@ -38,6 +38,7 @@ import {EnumModel} from '../../management-type-system/shared/models/enum.model';
 export class FirehydrantComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
+    public selectedLocationType: string = "Address";
     public locationTypes: EnumModel[] = [];
     public addressLocationTypes: EnumModel[] = [];
     public addingButton: any;
@@ -202,12 +203,14 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     public onEditorPreparing(e) {
         if (e.dataField === 'locationType') {
+            console.log("je me prépare 1");
             e.editorOptions.onValueChanged = (ev) => {
                 e.setValue(ev.value);
 
                 this.displayLocationField(e.component, ev.value);
             };
         } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
+            console.log("je me prépare 2");
             e.editorName = 'dxLookup';
             e.editorOptions.showClearButton = true;
             e.editorOptions.closeOnOutsideClick = true;
@@ -248,28 +251,8 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     private displayLocationField(component, value) {
-        const columns = component.option('columns');
-        const fieldToCheck = ['civicNumber', 'addressLocationType', 'coordinates', 'idLane', 'idIntersection', 'physicalPosition'];
-        const hiddenFields = {
-            'Address': ['idIntersection', 'coordinates', 'physicalPosition'],
-            'LaneAndIntersection': ['civicNumber', 'addressLocationType', 'coordinates', 'physicalPosition'],
-            'Coordinates': ['civicNumber', 'addressLocationType', 'idLane', 'idIntersection', 'physicalPosition'],
-            'Text': ['civicNumber', 'addressLocationType', 'idLane', 'idIntersection', 'coordinates']
-        };
-
-        if (this.form) {
-            columns.forEach(column => {
-                if (fieldToCheck.indexOf(column.dataField) > -1) {
-                    const visible = this.form.itemOption(column.dataField, 'visible') || true;
-
-                    if (hiddenFields[value].indexOf(column.dataField) > -1 && visible) {
-                        this.form.itemOption(column.dataField, 'visible', false);
-                    } else {
-                        this.form.itemOption(column.dataField, 'visible', true);
-                    }
-                }
-            });
-        } else {
+        this.selectedLocationType = value;
+        if (!this.form) {
             setTimeout(() => {
                 this.displayLocationField(component, value);
             }, 10);
