@@ -33,8 +33,8 @@
         </dxo-lookup>
     </dxi-column>
     <dxi-column
-            dataField="idIntersection"
-            caption="{{'intersection' | translate}}">
+            dataField="idLaneTransversal"
+            caption="{{'transversal' | translate}}">
         <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
@@ -91,7 +91,7 @@
                 <dxi-item dataField="civicNumber" *ngIf="selectedLocationType == 'Address'"></dxi-item>
                 <dxi-item dataField="addressLocationType" *ngIf="selectedLocationType == 'Address'"></dxi-item>
                 <dxi-item dataField="idLane" *ngIf="selectedLocationType == 'Address' || selectedLocationType == 'LaneAndTransversal'"></dxi-item>
-                <dxi-item dataField="idIntersection" *ngIf="selectedLocationType == 'LaneAndTransversal'"></dxi-item>
+                <dxi-item dataField="idLaneTransversal" *ngIf="selectedLocationType == 'LaneAndTransversal'"></dxi-item>
                 <dxi-item dataField="physicalPosition" *ngIf="selectedLocationType == 'Text'"></dxi-item>
                 <dxi-item dataField="coordinates"></dxi-item>
             </dxi-item>

@@ -108,7 +108,7 @@ export class InspectionWaterSupplyComponent extends GridWithCrudService implemen
         this.lanes.forEach((item) => {
             if (item.id === fireHydrant.idLane) {
                 names[0] = item.name;
-            } else if (item.id === fireHydrant.idIntersection) {
+            } else if (item.id === fireHydrant.idLaneTransversal) {
                 names[1] = item.name;
             }
         });
