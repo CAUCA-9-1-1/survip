@@ -53,7 +53,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     public formFields = {
         idLane: null,
         idCity: null,
-        idIntersection: null,
+        idLaneTransversal: null,
     };
     public colors = [{
         id: '#000000',
@@ -209,8 +209,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
                 this.displayLocationField(e.component, ev.value);
             };
-        } else if (e.dataField === 'idLane' || e.dataField === 'idIntersection') {
-            console.log("je me prépare 2");
+        } else if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal') {
             e.editorName = 'dxLookup';
             e.editorOptions.showClearButton = true;
             e.editorOptions.closeOnOutsideClick = true;

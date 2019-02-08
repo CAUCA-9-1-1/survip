@@ -3,7 +3,7 @@ export class FireHydrant {
     isActive: boolean;
     idLane: string;
     idCity: string;
-    idIntersection: string;
+    idLaneTransversal: string;
     idFireHydrantType: string;
     geojson: object;
     altitude: number;
