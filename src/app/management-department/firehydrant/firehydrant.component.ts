@@ -82,6 +82,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }];
 
     private labels: any = {};
+    private cityId: string = '';
 
     public constructor(
         private injector: Injector,
@@ -166,12 +167,14 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                 closeOnOutsideClick: true,
                 onInitialized: (ev) => {
                     this.formFields.idCity = ev.component;
+                    this.loadCity();
                 },
                 onValueChanged: (ev) => {
                     this.cityService.geolocation(ev.value).subscribe(data => {
                         this.selectedCityGeometry = data['features'][0];
                     });
 
+                    this.cityId = this.selectedCity;
                     this.selectedCity = ev.value;
                     this.addingButton.option('disabled', false);
                     this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
@@ -193,21 +196,23 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         e.data.coordinates = null;
         e.data.idUnitOfMeasureRate = '';
         e.data.idUnitOfMeasurePressure = '';
-
-        this.displayLocationField(e.component, e.data.locationType);
+        this.selectedLocationType = 'Address';
+        this.cityId = this.selectedCity
     }
 
     public onEditingStart(e) {
-        this.displayLocationField(e.component, e.data.locationType);
+        this.selectedLocationType = e.data.locationType;
+        this.cityId = this.selectedCity
     }
 
     public onEditorPreparing(e) {
         if (e.dataField === 'locationType') {
-            console.log("je me prépare 1");
             e.editorOptions.onValueChanged = (ev) => {
                 e.setValue(ev.value);
-
-                this.displayLocationField(e.component, ev.value);
+                this.selectedLocationType = ev.value;
+                if(this.cityId != null) {
+                    this.formFields.idCity.option('value', this.cityId);
+                }
             };
         } else if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal') {
             e.editorName = 'dxLookup';
@@ -249,15 +254,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         }
     }
 
-    private displayLocationField(component, value) {
-        this.selectedLocationType = value;
-        if (!this.form) {
-            setTimeout(() => {
-                this.displayLocationField(component, value);
-            }, 10);
-        }
-    }
-
     private loadFireHydrantType() {
         this.fireHydrantTypeService.localized().subscribe(data => this.fireHydrantTypes = {
           store: data,
@@ -287,7 +283,11 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     private loadCity() {
         this.cityService.localized().subscribe(data => {
-            this.formFields.idCity.option('value', (data[0] ? data[0].id : ''));
+            if(this.cityId != '') {
+                this.formFields.idCity.option('value', this.cityId);
+            } else {
+                this.formFields.idCity.option('value', (data[0] ? data[0].id : ''));
+            }
             this.formFields.idCity.option('dataSource', {
                 store: data,
                 select: ['id', 'name'],
