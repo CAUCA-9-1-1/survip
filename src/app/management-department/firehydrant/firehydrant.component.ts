@@ -213,7 +213,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     public onEditorPreparing(e) {
         if (e.dataField === 'locationType') {
-            console.log("je me prépare 1");
             e.editorOptions.onValueChanged = (ev) => {
                 e.setValue(ev.value);
                 this.selectedLocationType = ev.value;
