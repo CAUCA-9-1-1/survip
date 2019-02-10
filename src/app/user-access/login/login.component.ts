@@ -6,6 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from '../shared/services/authentification.service';
 import {PermissionService} from '../shared/services/permission.service';
 import {ConfigurationService} from '../shared/services/configuration.service';
+import * as info from './../../../../package.json';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     password = '';
     labels = {};
     returnUrl: string;
+    version = (<any>info).version;
 
     constructor(
         private route: ActivatedRoute,
