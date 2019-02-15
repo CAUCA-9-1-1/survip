@@ -27,12 +27,8 @@
 
         <dxo-form colCount="1">
             <dxi-item dataField="localizations" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="codeAlpha2" [isRequired]="true">
-                    <dxi-validation-rule type="stringLength" [max]="2" message="{{'max2letters' | translate}}"></dxi-validation-rule>
-            </dxi-item>
-            <dxi-item dataField="codeAlpha3" [isRequired]="true">
-                    <dxi-validation-rule type="stringLength" [max]="3" message="{{'max3letters' | translate}}"></dxi-validation-rule>
-            </dxi-item>
+            <dxi-item dataField="codeAlpha2" [isRequired]="true" [editorOptions]="{maxLength: 2}"></dxi-item>
+            <dxi-item dataField="codeAlpha3" [isRequired]="true" [editorOptions]="{maxLength: 3}"></dxi-item>
         </dxo-form>
     </dxo-editing>
 
