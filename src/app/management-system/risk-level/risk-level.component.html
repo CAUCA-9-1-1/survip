@@ -34,9 +34,7 @@
         <dxo-form colCount="1">
             <dxi-item dataField="localizations"></dxi-item>
             <dxi-item dataField="sequence" [isRequired]="true"></dxi-item>
-            <dxi-item dataField="code" [isRequired]="true">
-                    <dxi-validation-rule type="stringLength" [max]="10" message="{{'max10letters' | translate}}"></dxi-validation-rule>
-            </dxi-item>
+            <dxi-item dataField="code" [isRequired]="true" [editorOptions]="{maxLength: 10}"></dxi-item>
             <dxi-item dataField="color"></dxi-item>
         </dxo-form>
     </dxo-editing>
