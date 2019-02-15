@@ -393,5 +393,5 @@
   "isDefaultReport": "Default Report",
   "nonDefaultReports": "Other reports",
   "cantModifySurvey": "Can't modified survey because it is used.",
-  "error": "Error"
+  "information": "Information"
 }

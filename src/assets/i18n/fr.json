@@ -394,5 +394,5 @@
   "isDefaultReport": "Rapport par défault",
   "nonDefaultReports": "Autres rapports",
   "cantModifySurvey": "Impossible de modifier le questionnaire, car il est utilisé",
-  "error": "Erreur"
+  "information": "Information"
 }
