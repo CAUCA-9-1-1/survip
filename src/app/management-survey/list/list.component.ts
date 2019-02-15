@@ -5,7 +5,7 @@ import config from '../../../assets/config/config.json';
 import {Survey} from '../shared/models/survey.model';
 import {SurveyService} from '../shared/services/survey.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
-import {confirm} from 'devextreme/ui/dialog';
+import {confirm, alert} from 'devextreme/ui/dialog';
 import {TranslateService} from '@ngx-translate/core';
 
 
@@ -17,7 +17,6 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class ListComponent  extends GridWithCrudService implements OnInit {
 
-    private errorPopupVisibled = false;
     private labels = {};
     public surveyTypes = [];
     constructor(
@@ -38,7 +37,7 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
 
     loadTranslation() {
         this.translateService.get([
-            'surveyCopyQuestion', 'question', 'residential', 'general', 'agricultural'
+            'surveyCopyQuestion', 'question', 'residential', 'general', 'agricultural', 'information', 'cantModifySurvey'
         ]).subscribe(labels => {
             this.labels = labels;
 
@@ -62,8 +61,9 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
 
     public onModifyQuestion(idSurvey) {
         this.surveyService.checkIfSurveyIsUsed(idSurvey).subscribe(bool => {
-            this.errorPopupVisibled = bool;
-            if(this.errorPopupVisibled == false) {
+            if(bool == true) {
+                alert(this.labels['cantModifySurvey'], this.labels['information'])
+            } else {
                 this.router.navigate(['management/survey'], {
                     queryParams: {
                         id_survey: idSurvey

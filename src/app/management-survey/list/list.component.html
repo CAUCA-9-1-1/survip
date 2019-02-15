@@ -45,14 +45,3 @@
         </app-multilang>
     </div>
 </dx-data-grid>
-
-<dx-popup
-    [(visible)]="errorPopupVisibled"
-    [closeOnOutsideClick]="true"
-    height="auto"
-    width="auto"
-    title="{{'error' | translate}}">
-    <div *dxTemplate="let data of 'content'">
-        <div>{{'cantModifySurvey' | translate}}</div>
-    </div>
-</dx-popup>
