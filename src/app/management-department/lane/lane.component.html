@@ -5,6 +5,7 @@
         [rowAlternationEnabled]="true"
         (onToolbarPreparing)="onToolbarPreparing($event)"
         (onInitialized)="onInitialized($event)"
+        (onEditorPreparing)="onEditorPreparing($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onRowValidating)="onRowValidating($event)">
     <dxi-column
@@ -44,6 +45,7 @@
                 [validationGroup]="validationGroup"
                 [dataField]="field"
                 [value]="field.row.data.localizations"
+                [(readOnly)]="readOnly"
                 (valueChanged)="field.setValue($event.value);">
         </app-multilang>
     </div>
