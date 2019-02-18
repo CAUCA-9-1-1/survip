@@ -18,6 +18,8 @@ import {StateService} from '../shared/services/state.service';
 })
 export class RegionComponent extends GridWithCrudService implements OnInit {
     states: any = {};
+    readOnly: boolean;
+    public readOnlyImported = !this.stateService.readOnlyImported;
 
     constructor(regionService: RegionService, private stateService: StateService) {
         super(regionService);
@@ -50,5 +52,27 @@ export class RegionComponent extends GridWithCrudService implements OnInit {
                 sort: ['name'],
             };
         });
+    }
+    
+    public onEditorPreparing(e: any): void {
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e);
+            } else {
+                this.readOnly = false;
+            }
+        }
+    }
+
+    private setPopupName(e: any) {
+        if (this.gridPopup != null && e.editorOptions.disabled) {
+            if (this.notLoopPopupName == false) {
+                let title = this.gridPopup.option('title');
+                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.notLoopPopupName = true;
+            }
+        }
     }
 }
