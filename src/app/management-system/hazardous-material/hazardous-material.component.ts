@@ -15,9 +15,12 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
     ]
 })
 export class HazardousMaterialComponent extends GridWithCrudService implements OnInit {
+    readOnly: boolean;
+    public readOnlyImported = !this.hazardousMaterialService.readOnlyImported;
 
+    
     constructor(
-        hazardousMaterialService: HazardousMaterialService
+        private hazardousMaterialService: HazardousMaterialService
     ) {
         super(hazardousMaterialService);
     }
@@ -38,5 +41,27 @@ export class HazardousMaterialComponent extends GridWithCrudService implements O
 
     onInitNewRow(e) {
         e.data = Object.assign(new HazardousMaterial(), {});
+    }
+    
+    public onEditorPreparing(e: any): void {
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e);
+            } else {
+                this.readOnly = false;
+            }
+        }
+    }
+
+    private setPopupName(e: any) {
+        if (this.gridPopup != null && e.editorOptions.disabled) {
+            if (this.notLoopPopupName == false) {
+                let title = this.gridPopup.option('title');
+                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.notLoopPopupName = true;
+            }
+        }
     }
 }
