@@ -15,9 +15,11 @@ import {UtilisationCodeService} from '../shared/services/utilisation-code.servic
     ]
 })
 export class UtilisationCodeComponent extends GridWithCrudService implements OnInit {
+    readOnly: boolean;
+    public readOnlyImported = !this.utilisationCodeService.readOnlyImported;
 
     constructor(
-        utilisationCodeService: UtilisationCodeService
+        private utilisationCodeService: UtilisationCodeService
     ) {
         super(utilisationCodeService);
     }
@@ -38,5 +40,27 @@ export class UtilisationCodeComponent extends GridWithCrudService implements OnI
 
     onInitNewRow(e) {
         e.data.isActive = true;
+    }
+
+    public onEditorPreparing(e: any): void {
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e);
+            } else {
+                this.readOnly = false;
+            }
+        }
+    }
+
+    private setPopupName(e: any) {
+        if (this.gridPopup != null && e.editorOptions.disabled) {
+            if (this.notLoopPopupName == false) {
+                let title = this.gridPopup.option('title');
+                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.notLoopPopupName = true;
+            }
+        }
     }
 }

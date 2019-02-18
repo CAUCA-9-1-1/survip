@@ -40,6 +40,8 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         }
     };
 
+    public readOnlyImported = !this.departmentService.readOnlyImported;
+
     constructor(
         webuserService: WebuserService,
         translateService: TranslateService,
@@ -95,6 +97,13 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     onEditorPreparing(e) {
         if (e.dataField === 'password'  || e.dataField === 'passwordConfirm') {
             e.editorOptions.mode = 'password';
+        }
+
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.setPopupName(e);
+            }
         }
     }
 
@@ -251,5 +260,15 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
           select: ['id', 'name'],
           sort: ['name'],
         });
+    }
+
+    private setPopupName(e: any) {
+        if (this.gridPopup != null && e.editorOptions.disabled) {
+            if (this.notLoopPopupName == false) {
+                let title = this.gridPopup.option('title');
+                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.notLoopPopupName = true;
+            }
+        }
     }
 }
