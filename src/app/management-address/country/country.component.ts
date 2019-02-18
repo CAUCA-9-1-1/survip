@@ -14,8 +14,12 @@ import {CountryService} from '../shared/services/country.service';
 })
 export class CountryComponent extends GridWithCrudService implements OnInit {
 
-    constructor(countryService: CountryService) {
+    readOnly: boolean;
+    public readOnlyImported: boolean;
+
+    constructor(private countryService: CountryService) {
         super(countryService);
+        this.readOnlyImported = !countryService.readOnlyImported;
     }
 
     setModel(data: any) {
@@ -34,5 +38,27 @@ export class CountryComponent extends GridWithCrudService implements OnInit {
 
     onInitNewRow(e) {
         e.data.isActive = true;
+    }
+
+    public onEditorPreparing(e: any): void {
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e);
+            } else {
+                this.readOnly = false;
+            }
+        }
+    }
+
+    private setPopupName(e: any) {
+        if (this.gridPopup != null && e.editorOptions.disabled) {
+            if (this.notLoopPopupName == false) {
+                let title = this.gridPopup.option('title');
+                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.notLoopPopupName = true;
+            }
+        }
     }
 }
