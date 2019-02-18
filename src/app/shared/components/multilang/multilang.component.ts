@@ -18,6 +18,7 @@ export class MultilangComponent implements OnInit {
     @Input() fieldName = 'name';
     @Input() dataField: any;
     @Input() value: any = [];
+    @Input() readOnly: boolean;
 
     public get languageValue() {
         let text = '';

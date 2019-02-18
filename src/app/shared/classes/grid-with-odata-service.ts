@@ -3,6 +3,8 @@ import DataSource from 'devextreme/data/data_source';
 
 
 export abstract class GridWithOdataService {
+    gridPopup: any;
+    notLoopPopupName = false;
     public dataSource: DataSource;
     public validationGroup = 'custom-validation-group-' + (new Date()).getTime();
 
@@ -24,8 +26,11 @@ export abstract class GridWithOdataService {
             };
             options.popup.onHiding = (ev) => {
                 this.dataSource.load();
+                this.notLoopPopupName = false;
             };
-
+            options.popup.onTitleRendered = (ev) => {
+                this.gridPopup = ev.component;
+            }
             e.component.option('editing', options);
         }
     }

@@ -27,6 +27,7 @@ import {DxDataGridComponent} from 'devextreme-angular';
 export class LaneComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
+    public readOnly: boolean;
     public addingButton: any;
     public publicCodes: any = [];
     public genericCodes: any = [];
@@ -79,23 +80,27 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
 
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
+        console.log(this.readOnly);
 
-        toolbarItems.unshift({
-            widget: 'dxButton',
-            location: 'after',
-            options: {
-                icon: 'plus',
-                width: 50,
-                disabled: true,
-                hint: this.labels['add'],
-                onInitialized: (ev) => {
-                    this.addingButton = ev.component;
-                },
-                onClick: (ev) => {
-                    e.component.addRow();
-                },
-            }
-        });
+        if(!this.cityService.readOnlyImported) {
+            toolbarItems.unshift({
+                widget: 'dxButton',
+                location: 'after',
+                options: {
+                    icon: 'plus',
+                    width: 50,
+                    disabled: false,
+                    hint: this.labels['add'],
+                    onInitialized: (ev) => {
+                        this.addingButton = ev.component;
+                    },
+                    onClick: (ev) => {
+                        e.component.addRow();
+                    },
+                }
+            });
+        }
+
         toolbarItems.unshift({
             widget: 'dxLookup',
             options: {
@@ -110,7 +115,6 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
                 },
                 onValueChanged: (ev) => {
                     this.selectedCity = ev.value;
-                    this.addingButton.option('disabled', false);
                     this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
                     this.dataSource.load();
                 }
@@ -153,5 +157,27 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
                 sort: ['description'],
             };
         });
+    }
+
+    public onEditorPreparing(e: any): void {
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e);
+            } else {
+                this.readOnly = false;
+            }
+        }
+    }
+
+    private setPopupName(e: any) {
+        if (this.gridPopup != null && e.editorOptions.disabled) {
+            if (this.notLoopPopupName == false) {
+                let title = this.gridPopup.option('title');
+                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.notLoopPopupName = true;
+            }
+        }
     }
 }
