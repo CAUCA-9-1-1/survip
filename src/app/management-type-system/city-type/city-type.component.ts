@@ -13,8 +13,10 @@ import {CityTypeService} from '../shared/services/citytype.service';
     providers: [CityTypeService]
 })
 export class CityTypeComponent extends GridWithCrudService implements OnInit {
+    readOnly: boolean;
+    public readOnlyImported = !this.cityTypeService.readOnlyImported;
 
-    constructor(cityTypeService: CityTypeService) {
+    constructor( private cityTypeService: CityTypeService) {
         super(cityTypeService);
     }
 
@@ -34,5 +36,30 @@ export class CityTypeComponent extends GridWithCrudService implements OnInit {
 
     onInitNewRow(e) {
         e.data.isActive = true;
+    }
+
+    public onEditorPreparing(e: any): void {
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e);
+            } else {
+                this.readOnly = false;
+            }
+        } else {
+            this.readOnly = true;
+        }
+    }
+
+    private setPopupName(e: any) {
+        if (this.gridPopup != null && e.editorOptions.disabled) {
+            if (this.notLoopPopupName == false) {
+                let title = this.gridPopup.option('title');
+                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.notLoopPopupName = true;
+            }
+        }
     }
 }

@@ -15,10 +15,12 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class UnitOfMeasureComponent extends GridWithCrudService implements OnInit {
     measureTypes: any = {store: []};
+    readOnly: boolean;
+    public readOnlyImported = !this.unitOfMeasureService.readOnlyImported;
 
     constructor(
         translateService: TranslateService,
-        unitOfMeasureService: UnitOfMeasureService
+        private unitOfMeasureService: UnitOfMeasureService
     ) {
       super(unitOfMeasureService);
 
@@ -55,5 +57,28 @@ export class UnitOfMeasureComponent extends GridWithCrudService implements OnIni
 
     onInitNewRow(e) {
         e.data.isActive = true;
+    }
+
+    public onEditorPreparing(e: any): void {
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e);
+            } else {
+                this.readOnly = false;
+            }
+        }
+    }
+
+    private setPopupName(e: any) {
+        if (this.gridPopup != null && e.editorOptions.disabled) {
+            if (this.notLoopPopupName == false) {
+                let title = this.gridPopup.option('title');
+                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.notLoopPopupName = true;
+            }
+        }
     }
 }
