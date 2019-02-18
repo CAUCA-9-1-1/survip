@@ -20,6 +20,7 @@ export class RequestService {
     protected http: HttpClient;
     protected headers: any;
     protected apiUrl: string;
+    public readOnlyImported: boolean;
 
     constructor(
         @Inject(Injector) injector: Injector,
@@ -40,8 +41,8 @@ export class RequestService {
             'Content-Type': 'application/json; charset=UTF-8',
             'Language-Code': config.locale,
         };
-
         this.apiUrl = requestConfig.url || config.apiUrl;
+        this.readOnlyImported = config.readOnlyImported == 'false' ? false : true;
     }
 
     get(url: string): Observable<any> {

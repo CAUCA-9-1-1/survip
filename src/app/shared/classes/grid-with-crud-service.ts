@@ -2,6 +2,8 @@ import validationEngine from 'devextreme/ui/validation_engine';
 
 
 export abstract class GridWithCrudService {
+    gridPopup: any;
+    notLoopPopupName = false;
     public dataSource = [];
     public validationGroup = 'custom-validation-group-' + (new Date()).getTime();
 
@@ -22,8 +24,11 @@ export abstract class GridWithCrudService {
             };
             options.popup.onHiding = (ev) => {
                 this.loadSource(this.loadSpecificOpts);
+                this.notLoopPopupName = false;
             };
-
+            options.popup.onShowing = (ev) => {
+                this.gridPopup = ev.component;
+            }
             e.component.option('editing', options);
         }
     }

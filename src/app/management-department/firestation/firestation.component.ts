@@ -26,7 +26,6 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
     buildingLookup: {
         closeOnOutsideClick: true,
     };
-
     public phoneEditorOptions = {mask : '(000) 000-0000', maskRules : { X: /[02-9]/ }, maxlength: 10, useMaskedValue: true };
     constructor(
         firestationService: FirestationService,
@@ -35,6 +34,8 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
     ) {
         super(firestationService);
     }
+    
+    public readOnlyImported = !this.buildingService.readOnlyImported;
 
     public setModel(data: any) {
         return Firestation.fromJSON(data);
@@ -51,6 +52,11 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
     }
 
     public onEditorPreparing(e: any): void {
+        if(e.row != null && e.row.data != null) {
+            e.editorOptions.disabled = e.row.data.idExtern != null;
+            this.setPopupName(e);
+
+        }
         if (e.dataField === 'idBuilding') {
             e.editorName = 'dxLookup';
             e.editorOptions.valueExpr = 'id';
@@ -69,6 +75,16 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
                 this.loadBuilding(ev.value);
                 defaultValueChanged(ev);
             };
+        }
+    }
+
+    private setPopupName(e: any) {
+        if (this.gridPopup != null && e.editorOptions.disabled) {
+            if (this.notLoopPopupName == false) {
+                let title = this.gridPopup.option('title');
+                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.notLoopPopupName = true;
+            }
         }
     }
 
