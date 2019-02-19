@@ -15,7 +15,6 @@ import {RiskLevel} from '../shared/models/risk-level.model';
     ]
 })
 export class RiskLevelComponent extends GridWithCrudService implements OnInit {
-    readOnly: boolean;
     public readOnlyImported = !this.riskLevelService.readOnlyImported;
 
     constructor(

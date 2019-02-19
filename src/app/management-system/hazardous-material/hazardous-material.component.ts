@@ -15,9 +15,7 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
     ]
 })
 export class HazardousMaterialComponent extends GridWithCrudService implements OnInit {
-    readOnly: boolean;
     public readOnlyImported = !this.hazardousMaterialService.readOnlyImported;
-
     
     constructor(
         private hazardousMaterialService: HazardousMaterialService

@@ -15,7 +15,6 @@ import {PersonRequiringAssistanceTypeService} from '../shared/services/person-re
     ]
 })
 export class PersonRequiringAssistanceTypeComponent extends GridWithCrudService implements OnInit {
-    readOnly: boolean;
     public readOnlyImported = !this.personRequiringAssistanceTypeService.readOnlyImported;
 
     constructor(

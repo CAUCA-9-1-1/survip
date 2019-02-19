@@ -13,7 +13,6 @@ import {CityTypeService} from '../shared/services/citytype.service';
     providers: [CityTypeService]
 })
 export class CityTypeComponent extends GridWithCrudService implements OnInit {
-    readOnly: boolean;
     public readOnlyImported = !this.cityTypeService.readOnlyImported;
 
     constructor( private cityTypeService: CityTypeService) {

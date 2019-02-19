@@ -21,7 +21,6 @@ import {CountyService} from '../shared/services/county.service';
 export class CityComponent extends GridWithCrudService implements OnInit {
     citiesType: any = {};
     counties: any = {};
-    readOnly: boolean;
 
     public readOnlyImported = !this.cityTypeService.readOnlyImported;
 
