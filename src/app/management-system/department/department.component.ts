@@ -21,7 +21,6 @@ import {CountyService} from '../../management-address/shared/services/county.ser
 export class DepartmentComponent extends GridWithCrudService implements OnInit {
     counties: any = {store: []};
     languages = [];
-    readOnly: boolean;
     public readOnlyImported = !this.countyService.readOnlyImported;
 
 
@@ -82,16 +81,6 @@ export class DepartmentComponent extends GridWithCrudService implements OnInit {
                 this.setPopupName(e);
             } else {
                 this.readOnly = false;
-            }
-        }
-    }
-
-    private setPopupName(e: any) {
-        if (this.gridPopup != null && e.editorOptions.disabled) {
-            if (this.notLoopPopupName == false) {
-                let title = this.gridPopup.option('title');
-                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
-                this.notLoopPopupName = true;
             }
         }
     }

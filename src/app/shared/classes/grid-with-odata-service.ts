@@ -5,6 +5,8 @@ import DataSource from 'devextreme/data/data_source';
 export abstract class GridWithOdataService {
     gridPopup: any;
     notLoopPopupName = false;
+    readOnly: boolean;
+
     public dataSource: DataSource;
     public validationGroup = 'custom-validation-group-' + (new Date()).getTime();
 
@@ -62,4 +64,14 @@ export abstract class GridWithOdataService {
     }
 
     protected abstract setModel(data: any): any;
+
+    public setPopupName(e: any) {
+        if (this.gridPopup != null && e.editorOptions.disabled) {
+            if (this.notLoopPopupName == false) {
+                let title = this.gridPopup.option('title');
+                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.notLoopPopupName = true;
+            }
+        }
+    }
 }

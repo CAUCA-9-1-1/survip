@@ -51,14 +51,4 @@ export class CountryComponent extends GridWithCrudService implements OnInit {
             }
         }
     }
-
-    private setPopupName(e: any) {
-        if (this.gridPopup != null && e.editorOptions.disabled) {
-            if (this.notLoopPopupName == false) {
-                let title = this.gridPopup.option('title');
-                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
-                this.notLoopPopupName = true;
-            }
-        }
-    }
 }
