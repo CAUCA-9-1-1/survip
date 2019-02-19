@@ -13,7 +13,6 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
     providers: [FireHydrantConnectionTypeService]
 })
 export class ConnectionTypeComponent extends GridWithCrudService implements OnInit {
-    readOnly: boolean;
     public readOnlyImported = !this.connectionTypeService.readOnlyImported;
 
     constructor(private connectionTypeService: FireHydrantConnectionTypeService) {

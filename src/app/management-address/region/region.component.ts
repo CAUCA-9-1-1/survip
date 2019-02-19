@@ -18,7 +18,6 @@ import {StateService} from '../shared/services/state.service';
 })
 export class RegionComponent extends GridWithCrudService implements OnInit {
     states: any = {};
-    readOnly: boolean;
     public readOnlyImported = !this.stateService.readOnlyImported;
 
     constructor(regionService: RegionService, private stateService: StateService) {

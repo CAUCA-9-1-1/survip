@@ -15,7 +15,6 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class UnitOfMeasureComponent extends GridWithCrudService implements OnInit {
     measureTypes: any = {store: []};
-    readOnly: boolean;
     public readOnlyImported = !this.unitOfMeasureService.readOnlyImported;
 
     constructor(

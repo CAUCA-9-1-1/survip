@@ -27,7 +27,6 @@ import {DxDataGridComponent} from 'devextreme-angular';
 export class LaneComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-    public readOnly: boolean;
     public addingButton: any;
     public publicCodes: any = [];
     public genericCodes: any = [];
@@ -80,7 +79,6 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
 
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
-        console.log(this.readOnly);
 
         if(!this.cityService.readOnlyImported) {
             toolbarItems.unshift({

@@ -20,7 +20,6 @@ import {RegionService} from '../shared/services/region.service';
     })
 export class CountyComponent extends GridWithCrudService implements OnInit {
     regions: any = {};
-    readOnly: boolean;
     public readOnlyImported = !this.stateService.readOnlyImported;
 
     constructor(

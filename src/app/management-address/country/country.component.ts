@@ -13,8 +13,6 @@ import {CountryService} from '../shared/services/country.service';
   providers: [CountryService]
 })
 export class CountryComponent extends GridWithCrudService implements OnInit {
-
-    readOnly: boolean;
     public readOnlyImported: boolean;
 
     constructor(private countryService: CountryService) {

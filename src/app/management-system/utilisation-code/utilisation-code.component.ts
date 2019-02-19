@@ -15,7 +15,6 @@ import {UtilisationCodeService} from '../shared/services/utilisation-code.servic
     ]
 })
 export class UtilisationCodeComponent extends GridWithCrudService implements OnInit {
-    readOnly: boolean;
     public readOnlyImported = !this.utilisationCodeService.readOnlyImported;
 
     constructor(
