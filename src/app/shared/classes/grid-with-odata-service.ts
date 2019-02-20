@@ -65,12 +65,24 @@ export abstract class GridWithOdataService {
 
     protected abstract setModel(data: any): any;
 
-    public setPopupName(e: any) {
+    public setPopupName(e: any, translation: string) {
         if (this.gridPopup != null && e.editorOptions.disabled) {
             if (this.notLoopPopupName == false) {
                 let title = this.gridPopup.option('title');
-                this.gridPopup.option('title', title + ' - Modification impossible, car les données sont externe');
+                this.gridPopup.option('title', title + translation);
                 this.notLoopPopupName = true;
+            }
+        }
+    }
+
+    public onCellPrepared(e) {
+        if(e.column.command == "edit" && e.column.type == "buttons") {
+            if(e.data != null && e.data.idExtern != null) {
+                if(e.data.idExtern.toString() != null) {
+                    e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-link-delete');
+                    e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-link');
+                    e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-icon-trash');
+                }
             }
         }
     }
