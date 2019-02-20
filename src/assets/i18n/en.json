@@ -392,6 +392,6 @@
   "imageSizeWarning": "The image you are trying to send is too large.",
   "isDefaultReport": "Default Report",
   "nonDefaultReports": "Other reports",
-  "cantModifySurvey": "Can't modified survey because it is used.",
+  "cantModifySurvey": "This survey can't be modified because it is used in some inspection.",
   "information": "Information"
 }
