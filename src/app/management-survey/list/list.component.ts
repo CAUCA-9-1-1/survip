@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-
 import config from '../../../assets/config/config.json';
 import {Survey} from '../shared/models/survey.model';
 import {SurveyService} from '../shared/services/survey.service';
@@ -60,9 +59,9 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
     }
 
     public onModifyQuestion(idSurvey) {
-        this.surveyService.checkIfSurveyIsUsed(idSurvey).subscribe(bool => {
-            if(bool == true) {
-                alert(this.labels['cantModifySurvey'], this.labels['information'])
+        this.surveyService.checkIfSurveyIsUsed(idSurvey).subscribe(result => {
+            if (result) {
+                alert(this.labels['cantModifySurvey'], this.labels['information']);
             } else {
                 this.router.navigate(['management/survey'], {
                     queryParams: {
@@ -71,9 +70,6 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
                 });
             }
         });
-        
-
-
     }
 
     public onCopySurvey(idSurvey) {
