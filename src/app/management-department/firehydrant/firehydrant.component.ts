@@ -38,7 +38,7 @@ import {EnumModel} from '../../management-type-system/shared/models/enum.model';
 export class FirehydrantComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-    public selectedLocationType: string = "Address";
+    public selectedLocationType = 'Address';
     public locationTypes: EnumModel[] = [];
     public addressLocationTypes: EnumModel[] = [];
     public addingButton: any;
@@ -82,7 +82,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }];
 
     private labels: any = {};
-    private cityId: string = '';
+    private cityId = '';
 
     public constructor(
         private injector: Injector,
@@ -111,6 +111,8 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         ]).subscribe(labels => {
             this.labels = labels;
         });
+
+        console.log('fireHydrant component');
     }
 
     public setModel(data: any) {
@@ -123,18 +125,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         this.loadFireHydrantType();
         this.loadOperatorType();
         this.loadUnitOfMeasure();
-    }
-
-    public getFireHydrantTypeName(data) {
-        const type = FireHydrantType.fromJSON(data);
-
-        return type.getLocalization(config.locale);
-    }
-
-    public getUnitOfMeasureName(data) {
-        const unit = UnitOfMeasure.fromJSON(data);
-
-        return unit.getLocalization(config.locale);
     }
 
     public onToolbarPreparing(e) {
@@ -197,12 +187,12 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         e.data.idUnitOfMeasureRate = '';
         e.data.idUnitOfMeasurePressure = '';
         this.selectedLocationType = 'Address';
-        this.cityId = this.selectedCity
+        this.cityId = this.selectedCity;
     }
 
     public onEditingStart(e) {
         this.selectedLocationType = e.data.locationType;
-        this.cityId = this.selectedCity
+        this.cityId = this.selectedCity;
     }
 
     public onEditorPreparing(e) {
@@ -210,13 +200,10 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
             e.editorOptions.onValueChanged = (ev) => {
                 e.setValue(ev.value);
                 this.selectedLocationType = ev.value;
-                if(this.cityId != null) {
+                if (this.cityId) {
                     this.formFields.idCity.option('value', this.cityId);
                 }
             };
-            e.editorOptions.onSelectionChanged = (ev) => {
-                ev.component.option('value', this.locationTypes.find(c => c.name == this.selectedLocationType).name);
-            }
         } else if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal') {
             e.editorName = 'dxLookup';
             e.editorOptions.showClearButton = true;
@@ -286,7 +273,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     private loadCity() {
         this.cityService.localized().subscribe(data => {
-            if(this.cityId != '') {
+            if (this.cityId) {
                 this.formFields.idCity.option('value', this.cityId);
             } else {
                 this.formFields.idCity.option('value', (data[0] ? data[0].id : ''));
