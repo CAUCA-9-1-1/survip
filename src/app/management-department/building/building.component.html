@@ -7,7 +7,9 @@
         (onInitialized)="onInitialized($event)"
         (onEditorPreparing)="onEditorPreparing($event)"
         (onInitNewRow)="onInitNewRow($event)"
-        (onEditingStart)="onEditingStart($event)">
+        (onEditingStart)="onEditingStart($event)"
+        (onRowValidating)="onRowValidating($event)"
+        (onCellPrepared)="onCellPrepared($event)">
     <dxi-column
             dataField="picture"
             caption="{{'picture' | translate}}"
