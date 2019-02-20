@@ -4,6 +4,7 @@ import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {PersonRequiringAssistanceType} from '../shared/models/person-requiring-assistance-type.model';
 import {PersonRequiringAssistanceTypeService} from '../shared/services/person-requiring-assistance-type.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -16,11 +17,19 @@ import {PersonRequiringAssistanceTypeService} from '../shared/services/person-re
 })
 export class PersonRequiringAssistanceTypeComponent extends GridWithCrudService implements OnInit {
     public readOnlyImported = !this.personRequiringAssistanceTypeService.readOnlyImported;
+    private labels: any = {};
 
     constructor(
-        private personRequiringAssistanceTypeService: PersonRequiringAssistanceTypeService
+        private personRequiringAssistanceTypeService: PersonRequiringAssistanceTypeService,
+        private translateService: TranslateService
     ) {
         super(personRequiringAssistanceTypeService);
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -47,7 +56,7 @@ export class PersonRequiringAssistanceTypeComponent extends GridWithCrudService 
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
 
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

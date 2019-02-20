@@ -106,7 +106,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         });
 
         this.translateService.get([
-            'selectCity', 'add'
+            'selectCity', 'add', 'cannotModifyExternalData'
         ]).subscribe(labels => {
             this.labels = labels;
         });
@@ -144,22 +144,25 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
-        toolbarItems.unshift({
-            widget: 'dxButton',
-            location: 'after',
-            options: {
-                icon: 'plus',
-                width: 50,
-                disabled: true,
-                hint: this.labels['add'],
-                onInitialized: (ev) => {
-                    this.addingButton = ev.component;
-                },
-                onClick: (ev) => {
-                    e.component.addRow();
-                },
-            }
-        });
+        if(!this.cityService.readOnlyImported) {
+            toolbarItems.unshift({
+                widget: 'dxButton',
+                location: 'after',
+                options: {
+                    icon: 'plus',
+                    width: 50,
+                    disabled: true,
+                    hint: this.labels['add'],
+                    onInitialized: (ev) => {
+                        this.addingButton = ev.component;
+                    },
+                    onClick: (ev) => {
+                        e.component.addRow();
+                    },
+                }
+            });
+        }
+        
         toolbarItems.unshift({
             widget: 'dxLookup',
             options: {
@@ -238,6 +241,16 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
             e.editorOptions.itemTemplate = (data, index, container) => {
                 container.innerHTML = '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>';
             };
+        }
+
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
+            } else {
+                this.readOnly = false;
+            }
         }
     }
 

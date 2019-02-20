@@ -6,6 +6,7 @@ import {InspectionBuildingPnapsService} from '../../inspection-approval/shared/s
 import {PersonRequiringAssistanceTypeService} from '../../management-type-system/shared/services/person-requiring-assistance-type.service';
 import {PersonRequiringAssistanceType} from '../../management-type-system/shared/models/person-requiring-assistance-type.model';
 import {BuildingPnaps} from '../shared/models/building-pnaps.model';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -29,13 +30,21 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
 
     idBuilding: string;
     pnapsType:  any = {store: []};
+    private labels: any = {};
 
     constructor(
         private inspectionService: InspectionBuildingPnapsService,
         private buildingService: BuildingPnapsService,
         private pnapsTypeService: PersonRequiringAssistanceTypeService,
+        private translateService: TranslateService
     ) {
         super();
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -64,7 +73,7 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

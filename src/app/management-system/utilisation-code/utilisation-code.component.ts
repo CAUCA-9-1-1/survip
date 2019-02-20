@@ -4,6 +4,7 @@ import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {UtilisationCode} from '../shared/models/utilisation-code.model';
 import {UtilisationCodeService} from '../shared/services/utilisation-code.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -16,11 +17,19 @@ import {UtilisationCodeService} from '../shared/services/utilisation-code.servic
 })
 export class UtilisationCodeComponent extends GridWithCrudService implements OnInit {
     public readOnlyImported = !this.utilisationCodeService.readOnlyImported;
+    private labels: any = {};
 
     constructor(
-        private utilisationCodeService: UtilisationCodeService
+        private utilisationCodeService: UtilisationCodeService,
+        private translateService: TranslateService
     ) {
         super(utilisationCodeService);
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -46,7 +55,7 @@ export class UtilisationCodeComponent extends GridWithCrudService implements OnI
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

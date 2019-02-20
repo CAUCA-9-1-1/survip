@@ -6,6 +6,7 @@ import {City} from '../shared/models/city.model';
 import {CityService} from '../shared/services/city.service';
 import {CityTypeService} from '../../management-type-system/shared/services/citytype.service';
 import {CountyService} from '../shared/services/county.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -23,13 +24,21 @@ export class CityComponent extends GridWithCrudService implements OnInit {
     counties: any = {};
 
     public readOnlyImported = !this.cityTypeService.readOnlyImported;
+    private labels: any = {};
 
     constructor(
         cityService: CityService,
         private cityTypeService: CityTypeService,
-        private countyService: CountyService
+        private countyService: CountyService,
+        private translateService: TranslateService
     ) {
         super(cityService);
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -78,7 +87,7 @@ export class CityComponent extends GridWithCrudService implements OnInit {
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }
