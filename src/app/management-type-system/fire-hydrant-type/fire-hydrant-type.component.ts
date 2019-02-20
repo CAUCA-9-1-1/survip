@@ -4,6 +4,7 @@ import config from '../../../assets/config/config.json';
 import {FireHydrantType} from '../shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../shared/services/fire-hydrant-type.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -14,9 +15,19 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 })
 export class FireHydrantTypeComponent extends GridWithCrudService implements OnInit {
     public readOnlyImported = !this.fireHydrantTypeService.readOnlyImported;
+    private labels: any = {};
 
-    constructor(private fireHydrantTypeService: FireHydrantTypeService) {
+    constructor(
+        private fireHydrantTypeService: FireHydrantTypeService,
+        private translateService: TranslateService
+        ) {
         super(fireHydrantTypeService);
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -43,7 +54,7 @@ export class FireHydrantTypeComponent extends GridWithCrudService implements OnI
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
 
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

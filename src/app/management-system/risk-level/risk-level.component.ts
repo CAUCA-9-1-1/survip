@@ -4,6 +4,7 @@ import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {RiskLevelService} from '../shared/services/risk-level.service';
 import {RiskLevel} from '../shared/models/risk-level.model';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -16,11 +17,19 @@ import {RiskLevel} from '../shared/models/risk-level.model';
 })
 export class RiskLevelComponent extends GridWithCrudService implements OnInit {
     public readOnlyImported = !this.riskLevelService.readOnlyImported;
+    private labels: any = {};
 
     constructor(
-        private riskLevelService: RiskLevelService
+        private riskLevelService: RiskLevelService,
+        private translateService: TranslateService
     ) {
         super(riskLevelService);
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -46,7 +55,7 @@ export class RiskLevelComponent extends GridWithCrudService implements OnInit {
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

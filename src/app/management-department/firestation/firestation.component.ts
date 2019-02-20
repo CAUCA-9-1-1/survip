@@ -8,6 +8,7 @@ import {FireSafetyDepartment} from '../../management-system/shared/models/firesa
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 import {Firestation} from '../shared/models/firestation.model';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -27,12 +28,21 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
         closeOnOutsideClick: true,
     };
     public phoneEditorOptions = {mask : '(000) 000-0000', maskRules : { X: /[02-9]/ }, maxlength: 10, useMaskedValue: true };
+    private labels: any = {};
+    
     constructor(
         firestationService: FirestationService,
         private fireSafetyDepartmentService: FireSafetyDepartmentService,
         private buildingService: BuildingService,
+        private translateService: TranslateService
     ) {
         super(firestationService);
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
     
     public readOnlyImported = !this.buildingService.readOnlyImported;
@@ -54,7 +64,7 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
     public onEditorPreparing(e: any): void {
         if(e.row != null && e.row.data != null) {
             e.editorOptions.disabled = e.row.data.idExtern != null;
-            this.setPopupName(e);
+            this.setPopupName(e, this.labels['cannotModifyExternalData']);
 
         }
         if (e.dataField === 'idBuilding') {

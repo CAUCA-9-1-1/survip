@@ -5,6 +5,7 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {Region} from '../shared/models/region.model';
 import {RegionService} from '../shared/services/region.service';
 import {StateService} from '../shared/services/state.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -19,9 +20,20 @@ import {StateService} from '../shared/services/state.service';
 export class RegionComponent extends GridWithCrudService implements OnInit {
     states: any = {};
     public readOnlyImported = !this.stateService.readOnlyImported;
+    private labels: any = {};
 
-    constructor(regionService: RegionService, private stateService: StateService) {
+    constructor(
+        regionService: RegionService,
+        private stateService: StateService,
+        private translateService: TranslateService
+        ) {
         super(regionService);
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -58,7 +70,7 @@ export class RegionComponent extends GridWithCrudService implements OnInit {
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

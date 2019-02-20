@@ -4,6 +4,7 @@ import config from '../../../assets/config/config.json';
 import {HazardousMaterial} from '../shared/models/hazardous-material.model';
 import {HazardousMaterialService} from '../shared/services/hazardous-material.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -16,11 +17,19 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 })
 export class HazardousMaterialComponent extends GridWithCrudService implements OnInit {
     public readOnlyImported = !this.hazardousMaterialService.readOnlyImported;
-    
+    private labels: any = {};
+
     constructor(
-        private hazardousMaterialService: HazardousMaterialService
+        private hazardousMaterialService: HazardousMaterialService,
+        private translateService: TranslateService
     ) {
         super(hazardousMaterialService);
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -46,7 +55,7 @@ export class HazardousMaterialComponent extends GridWithCrudService implements O
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

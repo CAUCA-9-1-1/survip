@@ -8,7 +8,8 @@
         (onEditingStart)="onEditingStart($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
-        (onRowRemoved)="onRowRemoved($event)">
+        (onRowRemoved)="onRowRemoved($event)"
+        (onCellPrepared)="onCellPrepared($event)">
     <dxi-column dataField="name" caption="{{'name' | translate}}" sortOrder="asc" sortIndex="0"></dxi-column>
     <dxi-column dataField="idFireSafetyDepartment" caption="{{'fireSafetyDepartment' | translate}}">
         <dxo-lookup [dataSource]="departments" displayExpr="name" valueExpr="id">

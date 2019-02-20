@@ -16,6 +16,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class UnitOfMeasureComponent extends GridWithCrudService implements OnInit {
     measureTypes: any = {store: []};
     public readOnlyImported = !this.unitOfMeasureService.readOnlyImported;
+    private labels: any = {};
 
     constructor(
         translateService: TranslateService,
@@ -24,8 +25,9 @@ export class UnitOfMeasureComponent extends GridWithCrudService implements OnIni
       super(unitOfMeasureService);
 
       translateService.get([
-        'rate', 'pressure', 'diameter', 'capacity', 'dimension'
+        'rate', 'pressure', 'diameter', 'capacity', 'dimension', 'cannotModifyExternalData'
       ]).subscribe(labels => {
+        this.labels = labels;
         const types = [];
         types.push({id: 0, name: labels['rate']});
         types.push({id: 1, name: labels['pressure']});
@@ -64,7 +66,7 @@ export class UnitOfMeasureComponent extends GridWithCrudService implements OnIni
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
 
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

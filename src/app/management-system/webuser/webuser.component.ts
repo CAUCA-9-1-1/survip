@@ -50,7 +50,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         super(webuserService);
 
         translateService.get([
-            'passwordError'
+            'passwordError', 'cannotModifyExternalData'
         ]).subscribe(labels => {
             this.labels = labels;
         });
@@ -102,7 +102,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         if(e.row != null && e.row.data != null) {
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             }
         }
     }

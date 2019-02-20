@@ -36,6 +36,8 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
     hazardousMaterials: any = {store: []};
     unitOfMeasures: any = {store: []};
     tankTypes: any = [];
+    private labels: any = {};
+
 
     constructor(
         private translateService: TranslateService,
@@ -47,8 +49,10 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
         super();
 
         this.translateService.get([
-            'unknown', 'underground', 'aboveground'
+            'unknown', 'underground', 'aboveground', 'cannotModifyExternalData'
         ]).subscribe(labels => {
+            this.labels = labels;
+
             this.tankTypes = [{
                 id: 0,
                 name: labels['unknown'],
@@ -98,7 +102,7 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

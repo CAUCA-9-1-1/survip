@@ -55,7 +55,7 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
         });
 
         this.translateService.get([
-            'selectCity', 'add'
+            'selectCity', 'add', 'cannotModifyExternalData'
         ]).subscribe(labels => {
             this.labels = labels;
         });
@@ -162,7 +162,7 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e , this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

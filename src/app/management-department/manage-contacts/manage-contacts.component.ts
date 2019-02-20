@@ -4,6 +4,7 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {BuildingContactService} from '../shared/services/building-contact.service';
 import {InspectionBuildingContactService} from '../../inspection-approval/shared/services/inspection-building-contact.service';
 import {BuildingContact} from '../shared/models/building-contact.model';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -25,12 +26,20 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
     @Input() readOnly: boolean;
 
     idBuilding: string;
+    private labels: any = {};
 
     constructor(
         private inspectionService: InspectionBuildingContactService,
-        private buildingService: BuildingContactService
+        private buildingService: BuildingContactService,
+        private translateService: TranslateService
     ) {
         super();
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -59,7 +68,7 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }

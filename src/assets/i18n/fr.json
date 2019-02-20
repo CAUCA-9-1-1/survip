@@ -400,13 +400,9 @@
   "imageSizeWarning": "L'image que vous voulez sauvegarder est trop volumineuse.",
   "isDefaultReport": "Rapport par défault",
   "nonDefaultReports": "Autres rapports",
-  "max2letters": "Peut contenir 2 lettres maximum.",
-  "max3letters": "Peut contenir 3 lettres maximum.",
-  "max5letters": "Peut contenir 5 lettres maximum.",
-  "max10letters": "Peut contenir 10 lettres maximum.",
-  "nonDefaultReports": "Autres rapports",
   "cantModifySurvey": "Ce questionnaire n'est pas modifiable, car il est utilisé dans des inspections.",
   "downloaded": "Téléchargé",
+  "cannotModifyExternalData": " - Impossible de modifier, car les données sont externe",
   "information": "Information",
   "version": "Version"
 }

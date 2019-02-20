@@ -22,7 +22,7 @@ export class DepartmentComponent extends GridWithCrudService implements OnInit {
     counties: any = {store: []};
     languages = [];
     public readOnlyImported = !this.countyService.readOnlyImported;
-
+    private labels: any = {};
 
     constructor(
         fireSafetyDepartmentService: FireSafetyDepartmentService,
@@ -30,6 +30,12 @@ export class DepartmentComponent extends GridWithCrudService implements OnInit {
         private translateService: TranslateService
     ) {
         super(fireSafetyDepartmentService);
+
+        this.translateService.get([
+            'cannotModifyExternalData'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     setModel(data: any) {
@@ -78,7 +84,7 @@ export class DepartmentComponent extends GridWithCrudService implements OnInit {
             if(e.row.data.idExtern != null) {
                 e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e);
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
             } else {
                 this.readOnly = false;
             }
