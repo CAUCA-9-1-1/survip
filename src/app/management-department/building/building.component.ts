@@ -43,6 +43,8 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         this.dataSource.load();
     }
 
+    @Input() readOnly = false;
+
     public addingButton: any;
     public lanes: any = [];
     public lanesOfCity: any = [];
@@ -60,6 +62,8 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         hazardousMaterials: false,
     };
     public toolbarItems = [];
+
+    public readOnlyImported = !this.laneService.readOnlyImported;
 
     private formFieldLane: any = null;
     private formFieldCity: any = null;
@@ -85,7 +89,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         });
 
         this.translateService.get([
-            'close', 'save', 'youNeedToSaveYourNewItem', 'selectCity', 'add'
+            'close', 'save', 'youNeedToSaveYourNewItem', 'selectCity', 'add', 'cannotModifyExternalData'
         ]).subscribe(labels => {
             this.labels = labels;
 
@@ -134,22 +138,24 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
-        toolbarItems.unshift({
-            widget: 'dxButton',
-            location: 'after',
-            options: {
-                icon: 'plus',
-                width: 50,
-                disabled: true,
-                hint: this.labels['add'],
-                onInitialized: (ev) => {
-                    this.addingButton = ev.component;
-                },
-                onClick: () => {
-                    e.component.addRow();
-                },
-            }
-        });
+        if(!this.cityService.readOnlyImported) {
+            toolbarItems.unshift({
+                widget: 'dxButton',
+                location: 'after',
+                options: {
+                    icon: 'plus',
+                    width: 50,
+                    hint: this.labels['add'],
+                    onInitialized: (ev) => {
+                        this.addingButton = ev.component;
+                    },
+                    onClick: (ev) => {
+                        e.component.addRow();
+                    },
+                }
+            });
+        }
+        
         toolbarItems.unshift({
             widget: 'dxLookup',
             options: {
@@ -165,8 +171,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                 },
                 onValueChanged: (ev) => {
                     this.selectedCity = ev.value;
-                    this.addingButton.option('disabled', false);
-                    if (this.isParent) {
+                    if(this.isParent) {
                         this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
                         this.dataSource.load();
                     }
@@ -202,6 +207,16 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         } else if (e.dataField === 'idUtilisationCode') {
             e.editorName = 'dxLookup';
             e.editorOptions.closeOnOutsideClick = true;
+        }
+
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
+            } else {
+                this.readOnly = false;
+            }
         }
     }
 

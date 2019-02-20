@@ -22,6 +22,7 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
         this.idBuilding = id;
         this.loadData();
     }
+    @Input() readOnly: boolean;
 
     idBuilding: string;
 
@@ -51,5 +52,17 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
         e.data.idBuilding = this.idBuilding;
         e.data.isOwner = false;
         e.data.isActive = true;
+    }
+
+    public onEditorPreparing(e: any): void {
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e);
+            } else {
+                this.readOnly = false;
+            }
+        }
     }
 }
