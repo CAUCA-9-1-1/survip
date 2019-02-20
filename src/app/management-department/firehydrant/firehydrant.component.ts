@@ -214,6 +214,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                     this.formFields.idCity.option('value', this.cityId);
                 }
             };
+            e.editorOptions.onSelectionChanged = (ev) => {
+                ev.component.option('value', this.locationTypes.find(c => c.name == this.selectedLocationType).name);
+            }
         } else if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal') {
             e.editorName = 'dxLookup';
             e.editorOptions.showClearButton = true;
