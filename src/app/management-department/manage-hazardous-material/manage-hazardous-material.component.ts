@@ -30,6 +30,7 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
         this.idBuilding = id;
         this.loadData();
     }
+    @Input() readOnly: boolean;
 
     idBuilding: string;
     hazardousMaterials: any = {store: []};
@@ -91,6 +92,16 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
             e.editorOptions.closeOnOutsideClick = true;
         } else if (e.dataField === 'securityPerimeter' || e.dataField === 'otherInformation') {
             e.editorName = 'dxTextArea';
+        }
+        
+        if(e.row != null && e.row.data != null) {
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e);
+            } else {
+                this.readOnly = false;
+            }
         }
     }
 
