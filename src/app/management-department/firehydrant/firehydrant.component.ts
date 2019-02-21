@@ -14,6 +14,7 @@ import {ODataService} from '../../shared/services/o-data.service';
 import {LocationTypeService} from '../../management-type-system/shared/services/location-type.service';
 import {AddressLocationTypeService} from '../../management-type-system/shared/services/address-location-type.service';
 import {EnumModel} from '../../management-type-system/shared/models/enum.model';
+import {BehaviorSubject} from 'rxjs';
 
 
 @Component({
@@ -113,6 +114,39 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     public setModel(data: any) {
         return FireHydrant.fromJSON(data);
+    }
+
+    public onInitialized(e) {
+        const options = e.component.option('editing');
+
+        if (options.popup) {
+            options.form.validationGroup = this.validationGroup;
+            options.form.onInitialized = (ev) => {
+                this.form = ev.component;
+                this.InitLocationTypeDisplay();
+            };
+            options.popup.onHiding = (ev) => {
+                this.dataSource.load();
+            };
+
+            e.component.option('editing', options);
+        }
+    }
+
+    private InitLocationTypeDisplay() {
+        this.AddressVisible.subscribe(result => {
+            this.form.itemOption('addressLocationType', 'visible', result);
+            this.form.itemOption('civicNumber', 'visible', result);
+        });
+        this.LaneVisible.subscribe(result => {
+            this.form.itemOption('idLane', 'visible', result);
+        });
+        this.TransversalVisible.subscribe(result => {
+            this.form.itemOption('idLaneTransversal', 'visible', result);
+        });
+        this.PhysicalLocationVisible.subscribe(result => {
+            this.form.itemOption('physicalPosition', 'visible', result);
+        });
     }
 
     public ngOnInit() {
@@ -221,6 +255,10 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                     this.formFields.idCity.option('value', this.cityId);
                 }
             };
+
+            e.editorOptions.onOpened = (ev) => {
+                ev.component.option('dataSource', this.lanesOfCity);
+            };
         } else if (e.dataField === 'color') {
             e.editorName = 'dxSelectBox';
             e.editorOptions.fieldTemplate = (data, container) => {
@@ -240,37 +278,11 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         }
     }
 
-    public addressLocationOnInitialized(field: any, e: any) {
-        if (field.data[field.column.dataField]) {
-            const data = field.data[field.column.dataField].toString();
-            if (data) {
-                const location = this.addressLocationTypes.find(c => c.name === data);
-                e.component.option('value', location.value);
-            }
-        }
-    }
-
-    public laneOnInitialized(field: any, e: any) {
-        this.formFields[field.column.dataField] = e.component;
-        if (field.data[field.column.dataField]) {
-            const data = field.data[field.column.dataField].toString();
-            if (data) {
-                const lane = this.lanesOfCity.store.find(c => c.id === data);
-                this.formFields[field.column.dataField].option('value', lane.id);
-            }
-        }
-    }
-
-    public laneOnValueChanged(field: any, e: any) {
-        if (e.element.parentNode.className.indexOf('dx-editor-container') > -1) {
-            if (e.value) {
-                field.component.filter(field.column.dataField, '=', new Guid(e.value));
-            } else {
-                field.component.clearFilter();
-            }
-        } else {
-            field.setValue(e.value);
-        }
+    private displayLocationField(locationType) {
+        this.LaneVisible.next(locationType === 'Address' || locationType === 'LaneAndTransversal');
+        this.AddressVisible.next(locationType === 'Address');
+        this.TransversalVisible.next(locationType === 'LaneAndTransversal');
+        this.PhysicalLocationVisible.next(locationType === 'Text');
     }
 
     public laneOnOpened(e) {
