@@ -2,14 +2,10 @@ import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {TranslateService} from '@ngx-translate/core';
 import Guid from 'devextreme/core/guid';
-
-import config from '../../../assets/config/config.json';
 import {FireHydrantService} from '../shared/services/fire-hydrant.service';
-import {FireHydrantType} from '../../management-type-system/shared/models/fire-hydrant-type.model';
 import {FireHydrantTypeService} from '../../management-type-system/shared/services/fire-hydrant-type.service';
 import {LaneService} from '../shared/services/lane.service';
 import {OperatorTypeService} from '../../management-type-system/shared/services/operator-type.service';
-import {UnitOfMeasure} from '../../management-type-system/shared/models/unit-of-measure.model';
 import {UnitOfMeasureService} from '../../management-type-system/shared/services/unit-of-measure.service';
 import {GridWithOdataService} from '../../shared/classes/grid-with-odata-service';
 import {CityService} from '../../management-address/shared/services/city.service';
@@ -18,6 +14,7 @@ import {ODataService} from '../../shared/services/o-data.service';
 import {LocationTypeService} from '../../management-type-system/shared/services/location-type.service';
 import {AddressLocationTypeService} from '../../management-type-system/shared/services/address-location-type.service';
 import {EnumModel} from '../../management-type-system/shared/models/enum.model';
+import {BehaviorSubject} from 'rxjs';
 
 
 @Component({
@@ -38,7 +35,10 @@ import {EnumModel} from '../../management-type-system/shared/models/enum.model';
 export class FirehydrantComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-    public selectedLocationType = 'Address';
+    private AddressVisible = new BehaviorSubject<boolean>(false);
+    private LaneVisible = new BehaviorSubject<boolean>(false);
+    private TransversalVisible = new BehaviorSubject<boolean>(false);
+    private PhysicalLocationVisible = new BehaviorSubject<boolean>(false);
     public locationTypes: EnumModel[] = [];
     public addressLocationTypes: EnumModel[] = [];
     public addingButton: any;
@@ -100,9 +100,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                 url: 'FireHydrant',
                 key: 'id',
                 keyType: 'Guid',
-              onRefreshLogin: () => {
-                this.dataGrid.instance.refresh();
-              }
+                onRefreshLogin: () => {
+                    this.dataGrid.instance.refresh();
+                }
             }),
         });
 
@@ -115,6 +115,39 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     public setModel(data: any) {
         return FireHydrant.fromJSON(data);
+    }
+
+    public onInitialized(e) {
+        const options = e.component.option('editing');
+
+        if (options.popup) {
+            options.form.validationGroup = this.validationGroup;
+            options.form.onInitialized = (ev) => {
+                this.form = ev.component;
+                this.InitLocationTypeDisplay();
+            };
+            options.popup.onHiding = (ev) => {
+                this.dataSource.load();
+            };
+
+            e.component.option('editing', options);
+        }
+    }
+
+    private InitLocationTypeDisplay() {
+        this.AddressVisible.subscribe(result => {
+            this.form.itemOption('addressLocationType', 'visible', result);
+            this.form.itemOption('civicNumber', 'visible', result);
+        });
+        this.LaneVisible.subscribe(result => {
+            this.form.itemOption('idLane', 'visible', result);
+        });
+        this.TransversalVisible.subscribe(result => {
+            this.form.itemOption('idLaneTransversal', 'visible', result);
+        });
+        this.PhysicalLocationVisible.subscribe(result => {
+            this.form.itemOption('physicalPosition', 'visible', result);
+        });
     }
 
     public ngOnInit() {
@@ -184,36 +217,48 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         e.data.coordinates = null;
         e.data.idUnitOfMeasureRate = '';
         e.data.idUnitOfMeasurePressure = '';
-        this.selectedLocationType = 'Address';
-        this.cityId = this.selectedCity;
-    }
-
-    public onEditingStart(e) {
-        this.selectedLocationType = e.data.locationType;
-        this.cityId = this.selectedCity;
     }
 
     public onEditorPreparing(e) {
         if (e.dataField === 'locationType') {
             e.editorOptions.onValueChanged = (ev) => {
                 e.setValue(ev.value);
-                this.selectedLocationType = ev.value;
-                if (this.cityId) {
-                    this.formFields.idCity.option('value', this.cityId);
+                this.displayLocationField(ev.value);
+            };
+        } else if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal') {
+            e.editorName = 'dxLookup';
+            e.editorOptions.showClearButton = true;
+            e.editorOptions.closeOnOutsideClick = true;
+            e.editorOptions.onInitialized = (ev) => {
+                this.formFields[e.dataField] = ev.component;
+            };
+            e.editorOptions.onValueChanged = (ev) => {
+                if (ev.element.parentNode.className.indexOf('dx-editor-container') > -1) {
+                    if (ev.value) {
+                        e.component.filter(e.dataField, '=', new Guid(ev.value));
+                    } else {
+                        e.component.clearFilter();
+                    }
+                } else {
+                    e.setValue(ev.value);
                 }
+            };
+
+            e.editorOptions.onOpened = (ev) => {
+                ev.component.option('dataSource', this.lanesOfCity);
             };
         } else if (e.dataField === 'color') {
             e.editorName = 'dxSelectBox';
             e.editorOptions.fieldTemplate = (data, container) => {
                 container.innerHTML = '<div class="dx-texteditor-container">' +
                     '<div class="fireHydrantField">' +
-                        '<div class="textbox">' +
-                            '<input class="dx-texteditor-input" value="' + (data ? data.color : '') + '" readOnly="true" />' +
-                        '</div>' +
-                        '<div class="fireHydrant" style="background-color: ' + (data ? data.color : '') + '"></div>' +
+                    '<div class="textbox">' +
+                    '<input class="dx-texteditor-input" value="' + (data ? data.color : '') + '" readOnly="true" />' +
+                    '</div>' +
+                    '<div class="fireHydrant" style="background-color: ' + (data ? data.color : '') + '"></div>' +
                     '</div>' +
                     '<div class="dx-texteditor-buttons-container"></div>' +
-                '</div>';
+                    '</div>';
             };
             e.editorOptions.itemTemplate = (data, index, container) => {
                 container.innerHTML = '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>';
@@ -221,37 +266,11 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         }
     }
 
-    public addressLocationOnInitialized(field: any, e: any) {
-        if (field.data[field.column.dataField]) {
-            const data = field.data[field.column.dataField].toString();
-            if (data) {
-                const location = this.addressLocationTypes.find(c => c.name === data);
-                e.component.option('value', location.value);
-            }
-        }
-    }
-
-    public laneOnInitialized(field: any, e: any) {
-        this.formFields[field.column.dataField] = e.component;
-        if (field.data[field.column.dataField]) {
-            const data = field.data[field.column.dataField].toString();
-            if (data) {
-                const lane = this.lanesOfCity.store.find(c => c.id === data);
-                this.formFields[field.column.dataField].option('value', lane.id);
-            }
-        }
-    }
-
-    public laneOnValueChanged(field: any, e: any) {
-        if (e.element.parentNode.className.indexOf('dx-editor-container') > -1) {
-            if (e.value) {
-                field.component.filter(field.column.dataField, '=', new Guid(e.value));
-            } else {
-                field.component.clearFilter();
-            }
-        } else {
-            field.setValue(e.value);
-        }
+    private displayLocationField(locationType) {
+        this.LaneVisible.next(locationType === 'Address' || locationType === 'LaneAndTransversal');
+        this.AddressVisible.next(locationType === 'Address');
+        this.TransversalVisible.next(locationType === 'LaneAndTransversal');
+        this.PhysicalLocationVisible.next(locationType === 'Text');
     }
 
     public laneOnOpened(e) {
@@ -260,9 +279,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     private loadFireHydrantType() {
         this.fireHydrantTypeService.localized().subscribe(data => this.fireHydrantTypes = {
-          store: data,
-          select: ['id', 'name'],
-          sort: ['name'],
+            store: data,
+            select: ['id', 'name'],
+            sort: ['name'],
         });
     }
 
@@ -274,14 +293,14 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     private loadUnitOfMeasure() {
         this.unitOfMeasureService.getRate().subscribe(data => this.rateUnits = {
-          store: data,
-          select: ['id', 'name'],
-          sort: ['name'],
+            store: data,
+            select: ['id', 'name'],
+            sort: ['name'],
         });
         this.unitOfMeasureService.getPressure().subscribe(data => this.pressureUnits = {
-          store: data,
-          select: ['id', 'name'],
-          sort: ['name'],
+            store: data,
+            select: ['id', 'name'],
+            sort: ['name'],
         });
     }
 

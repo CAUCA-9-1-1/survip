@@ -1,4 +1,4 @@
-<br />
+<br/>
 <dx-data-grid
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
@@ -6,77 +6,53 @@
         (onToolbarPreparing)="onToolbarPreparing($event)"
         (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
-        (onEditingStart)="onEditingStart($event)"
         (onEditorPreparing)="onEditorPreparing($event)">
     <dxi-column dataField="number" caption="{{'fireHydrantNumber' | translate}}"></dxi-column>
-    <dxi-column
-            dataField="idFireHydrantType"
-            caption="{{'fireHydrantType' | translate}}">
-        <dxo-lookup [dataSource]="fireHydrantTypes" displayExpr="name" valueExpr="id">
-        </dxo-lookup>
+    <dxi-column dataField="idFireHydrantType" caption="{{'fireHydrantType' | translate}}">
+        <dxo-lookup [dataSource]="fireHydrantTypes" displayExpr="name" valueExpr="id"></dxo-lookup>
     </dxi-column>
     <dxi-column dataField="locationType" caption="{{'locationType' | translate}}" [visible]="false">
-        <dxo-lookup [dataSource]="locationTypes" displayExpr="text" valueExpr="name">
-        </dxo-lookup>
+        <dxo-lookup [dataSource]="locationTypes" displayExpr="text" valueExpr="name"></dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="coordinates" caption="{{'coordinates' | translate}}" editCellTemplate="editcoordinates" [visible]="false"></dxi-column>
-    <dxi-column dataField="physicalPosition" editCellTemplate="physicalPositionTemplate" caption="{{'physicalPosition' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="civicNumber" editCellTemplate="civicNumberTemplate" caption="{{'civicNumber' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="addressLocationType" editCellTemplate="addressLocationTemplate" caption="{{'addressLocationType' | translate}}" [visible]="false">
-        <dxo-lookup [dataSource]="addressLocationTypes" displayExpr="text" valueExpr="name">
-        </dxo-lookup>
+    <dxi-column dataField="coordinates" caption="{{'coordinates' | translate}}" editCellTemplate="editcoordinates"
+                [visible]="false"></dxi-column>
+    <dxi-column dataField="physicalPosition" caption="{{'physicalPosition' | translate}}"
+                [visible]="false"></dxi-column>
+    <dxi-column dataField="civicNumber" caption="{{'civicNumber' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="addressLocationType" caption="{{'addressLocationType' | translate}}" [visible]="false">
+        <dxo-lookup [dataSource]="addressLocationTypes" displayExpr="text" valueExpr="name"></dxo-lookup>
     </dxi-column>
-    <dxi-column
-            dataField="idLane"
-            editCellTemplate="laneTemplate"
-            caption="{{'lane' | translate}}">
-        <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
-        </dxo-lookup>
+    <dxi-column dataField="idLane" caption="{{'lane' | translate}}">
+        <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id"></dxo-lookup>
     </dxi-column>
-    <dxi-column
-            dataField="idLaneTransversal"
-            editCellTemplate="transversalTemplate"
-            caption="{{'transversal' | translate}}">
-        <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
-        </dxo-lookup>
+    <dxi-column dataField="idLaneTransversal" caption="{{'transversal' | translate}}">
+        <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id"></dxo-lookup>
     </dxi-column>
     <dxi-column
             dataField="rateOperatorType"
             caption="{{'operator' | translate}}"
             [visible]="false">
-        <dxo-lookup [dataSource]="operatorTypes" displayExpr="text" valueExpr="name">
-        </dxo-lookup>
+        <dxo-lookup [dataSource]="operatorTypes" displayExpr="text" valueExpr="name"></dxo-lookup>
     </dxi-column>
     <dxi-column dataField="rateFrom" caption="{{'from' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="rateTo" caption="{{'to' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column
-            dataField="idUnitOfMeasureRate"
-            caption="{{'unitOfMeasure' | translate}}"
-            [visible]="false">
-        <dxo-lookup [dataSource]="rateUnits" displayExpr="name" valueExpr="id">
-        </dxo-lookup>
+    <dxi-column dataField="idUnitOfMeasureRate" caption="{{'unitOfMeasure' | translate}}" [visible]="false">
+        <dxo-lookup [dataSource]="rateUnits" displayExpr="name" valueExpr="id"></dxo-lookup>
     </dxi-column>
-    <dxi-column
-            dataField="pressureOperatorType"
-            caption="{{'operator' | translate}}"
-            [visible]="false">
-        <dxo-lookup [dataSource]="operatorTypes" displayExpr="text" valueExpr="name">
-        </dxo-lookup>
+    <dxi-column dataField="pressureOperatorType" caption="{{'operator' | translate}}" [visible]="false">
+        <dxo-lookup [dataSource]="operatorTypes" displayExpr="text" valueExpr="name"></dxo-lookup>
     </dxi-column>
     <dxi-column dataField="pressureFrom" caption="{{'from' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="pressureTo" caption="{{'to' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column
-            dataField="idUnitOfMeasurePressure"
-            caption="{{'unitOfMeasure' | translate}}"
-            [visible]="false">
-        <dxo-lookup [dataSource]="pressureUnits" displayExpr="name" valueExpr="id">
-        </dxo-lookup>
+    <dxi-column dataField="idUnitOfMeasurePressure" caption="{{'unitOfMeasure' | translate}}" [visible]="false">
+        <dxo-lookup [dataSource]="pressureUnits" displayExpr="name" valueExpr="id"></dxo-lookup>
     </dxi-column>
     <dxi-column dataField="color" caption="{{'color' | translate}}" [visible]="false">
-        <dxo-lookup [dataSource]="colors" displayExpr="color" valueExpr="id">
-        </dxo-lookup>
+        <dxo-lookup [dataSource]="colors" displayExpr="color" valueExpr="id"></dxo-lookup>
     </dxi-column>
     <dxi-column dataField="comments" caption="{{'comments' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="physicalPosition" caption="{{'physicalPosition' | translate}}"
+                [visible]="false"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -89,13 +65,13 @@
             <dxi-item dataField="locationType" [isRequired]="true"></dxi-item>
             <dxi-item dataField="color" [isRequired]="true"></dxi-item>
             <dxi-item itemType="group" colCount="2" colSpan="2">
-                <dxi-item dataField="civicNumber" [label]="{visible: false}"></dxi-item>
-                <dxi-item dataField="addressLocationType" [label]="{visible: false}"></dxi-item>
-                <dxi-item dataField="idLane" [label]="{visible: false}"></dxi-item>
-                <dxi-item dataField="idLaneTransversal" [label]="{visible: false}"></dxi-item>
-                <dxi-item dataField="physicalPosition" [label]="{visible: false}"></dxi-item>
-                <dxi-item dataField="coordinates"></dxi-item>
+                <dxi-item dataField="idLane"></dxi-item>
+                <dxi-item dataField="addressLocationType"></dxi-item>
+                <dxi-item dataField="civicNumber"></dxi-item>
+                <dxi-item dataField="idLaneTransversal"></dxi-item>
+                <dxi-item dataField="physicalPosition"></dxi-item>
             </dxi-item>
+            <dxi-item colCount="2" colSpan="2" dataField="coordinates"></dxi-item>
             <dxi-item itemType="group" caption="{{'rate' | translate}}">
                 <dxi-item dataField="rateOperatorType" [isRequired]="true"></dxi-item>
                 <dxi-item dataField="rateFrom"></dxi-item>
@@ -108,59 +84,14 @@
                 <dxi-item dataField="pressureTo"></dxi-item>
                 <dxi-item dataField="idUnitOfMeasurePressure" [isRequired]="true"></dxi-item>
             </dxi-item>
-
             <dxi-item dataField="comments"></dxi-item>
         </dxo-form>
     </dxo-editing>
 
-    <div *dxTemplate="let field of 'civicNumberTemplate'">
-        <div class="dx-field" *ngIf="selectedLocationType == 'Address'">
-            <div class="dx-field-label">{{'civicNumber' | translate}}</div>
-            <div class="dx-field-value">
-                <dx-text-box [value]="field.row.data.civicNumber" (onValueChanged)="field.setValue($event.value)"></dx-text-box>
-            </div>
-        </div>
-    </div>
-
-    <div *dxTemplate="let field of 'addressLocationTemplate'">
-        <div class="dx=field" *ngIf="selectedLocationType == 'Address'">
-            <div class="dx-field-label">{{'addressLocationType' | translate}}</div>
-            <div class="dx-field-value">
-                <dx-lookup [dataSource]="addressLocationTypes" (onInitialized)="addressLocationOnInitialized(field, $event)" displayExpr="text" valueExpr="value" [value]="field.row.data.addressLocationType" (onValueChanged)="field.setValue($event.value)"></dx-lookup>
-            </div>
-        </div>
-    </div>
-
-    <div *dxTemplate="let field of 'laneTemplate'">
-        <div class="dx-field" *ngIf="selectedLocationType == 'Address' || selectedLocationType == 'LaneAndTransversal'">
-            <div class="dx-field-label">{{'lane' | translate}}</div>
-            <div class="dx-field-value">
-                <dx-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id" (onOpened)="laneOnOpened($event)" (onValueChanged)="laneOnValueChanged(field, $event)" (onInitialized)="laneOnInitialized(field, $event)" [showClearButton]="true" [closeOnOutsideClick]="true" [value]="field.row.data.idLane"></dx-lookup>
-            </div>
-        </div>
-    </div>
-
-    <div *dxTemplate="let field of 'transversalTemplate'">
-        <div class="dx-field" *ngIf="selectedLocationType == 'LaneAndTransversal'">
-            <div class="dx-field-label">{{'transversal' | translate}}</div>
-            <div class="dx-field-value">
-                <dx-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id" (onOpened)="laneOnOpened($event)" (onValueChanged)="laneOnValueChanged(field, $event)" (onInitialized)="laneOnInitialized(field, $event)" [showClearButton]="true" [closeOnOutsideClick]="true" [value]="field.row.data.idLaneTransversal"></dx-lookup>
-            </div>
-        </div>
-    </div>
-
-    <div *dxTemplate="let field of 'physicalPositionTemplate'">
-        <div class="dx-field" *ngIf="selectedLocationType == 'Text'">
-            <div class="dx-field-label">{{'physicalPosition' | translate}}</div>
-            <div class="dx-field-value">
-                <dx-text-box [value]="field.row.data.physicalPosition" (onValueChanged)="field.setValue($event.value)"></dx-text-box>
-            </div>
-        </div>
-    </div>
-
     <div *dxTemplate="let field of 'editcoordinates'">
         <ng-container>
-            <app-geolocation [limitTo]="selectedCityGeometry" [value]="field.row.data.coordinates" (valueChanged)="field.setValue($event)"></app-geolocation>
+            <app-geolocation [limitTo]="selectedCityGeometry" [value]="field.row.data.coordinates"
+                             (valueChanged)="field.setValue($event)"></app-geolocation>
         </ng-container>
     </div>
 </dx-data-grid>
