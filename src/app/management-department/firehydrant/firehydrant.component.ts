@@ -109,8 +109,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         ]).subscribe(labels => {
             this.labels = labels;
         });
-
-        console.log('fireHydrant component');
     }
 
     public setModel(data: any) {
