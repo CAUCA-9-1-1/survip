@@ -222,10 +222,10 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public addressLocationOnInitialized(field: any, e: any) {
-        if(field.data[field.column.dataField]) {
-            let data = field.data[field.column.dataField].toString();
-            if(data) {
-                let location = this.addressLocationTypes.find(c => c.name == data);
+        if (field.data[field.column.dataField]) {
+            const data = field.data[field.column.dataField].toString();
+            if (data) {
+                const location = this.addressLocationTypes.find(c => c.name === data);
                 e.component.option('value', location.value);
             }
         }
@@ -233,10 +233,10 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     public laneOnInitialized(field: any, e: any) {
         this.formFields[field.column.dataField] = e.component;
-        if(field.data[field.column.dataField]) {
-            let data = field.data[field.column.dataField].toString();
-            if(data) {
-                let lane = this.lanesOfCity.store.find(c => c.id == data);
+        if (field.data[field.column.dataField]) {
+            const data = field.data[field.column.dataField].toString();
+            if (data) {
+                const lane = this.lanesOfCity.store.find(c => c.id === data);
                 this.formFields[field.column.dataField].option('value', lane.id);
             }
         }
