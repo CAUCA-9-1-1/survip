@@ -5,7 +5,9 @@
     </div>
 </ng-container>
 <div #container>
-    <img [src]="src" />
+    <div *ngIf="src">
+        <img [src]="src">
+    </div>
 </div>
 
 <dx-popup [(visible)]="isPopupVisible" [deferRendering]="false" (onHiding)="saveModifiedPicture()">
