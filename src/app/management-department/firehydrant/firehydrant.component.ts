@@ -111,8 +111,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         ]).subscribe(labels => {
             this.labels = labels;
         });
-
-        console.log('fireHydrant component');
     }
 
     public setModel(data: any) {
@@ -204,27 +202,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                     this.formFields.idCity.option('value', this.cityId);
                 }
             };
-        } else if (e.dataField === 'idLane' || e.dataField === 'idLaneTransversal') {
-            e.editorName = 'dxLookup';
-            e.editorOptions.showClearButton = true;
-            e.editorOptions.closeOnOutsideClick = true;
-            e.editorOptions.onInitialized = (ev) => {
-                this.formFields[e.dataField] = ev.component;
-            };
-            e.editorOptions.onValueChanged = (ev) => {
-                if (ev.element.parentNode.className.indexOf('dx-editor-container') > -1) {
-                    if (ev.value) {
-                        e.component.filter(e.dataField, '=', new Guid(ev.value));
-                    } else {
-                        e.component.clearFilter();
-                    }
-                } else {
-                    e.setValue(ev.value);
-                }
-            };
-            e.editorOptions.onOpened = (ev) => {
-                ev.component.option('dataSource', this.lanesOfCity);
-            };
         } else if (e.dataField === 'color') {
             e.editorName = 'dxSelectBox';
             e.editorOptions.fieldTemplate = (data, container) => {
@@ -242,6 +219,43 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                 container.innerHTML = '<div class="fireHydrant" style="background-color: ' + data.color + '"></div>';
             };
         }
+    }
+
+    public addressLocationOnInitialized(field: any, e: any) {
+        if(field.data[field.column.dataField]) {
+            let data = field.data[field.column.dataField].toString();
+            if(data) {
+                let location = this.addressLocationTypes.find(c => c.name == data);
+                e.component.option('value', location.value);
+            }
+        }
+    }
+
+    public laneOnInitialized(field: any, e: any) {
+        this.formFields[field.column.dataField] = e.component;
+        if(field.data[field.column.dataField]) {
+            let data = field.data[field.column.dataField].toString();
+            if(data) {
+                let lane = this.lanesOfCity.store.find(c => c.id == data);
+                this.formFields[field.column.dataField].option('value', lane.id);
+            }
+        }
+    }
+
+    public laneOnValueChanged(field: any, e: any) {
+        if (e.element.parentNode.className.indexOf('dx-editor-container') > -1) {
+            if (e.value) {
+                field.component.filter(field.column.dataField, '=', new Guid(e.value));
+            } else {
+                field.component.clearFilter();
+            }
+        } else {
+            field.setValue(e.value);
+        }
+    }
+
+    public laneOnOpened(e) {
+        e.component.option('dataSource', this.lanesOfCity);
     }
 
     private loadFireHydrantType() {
