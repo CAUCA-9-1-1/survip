@@ -30,7 +30,7 @@ export class PictureService extends RequestService {
             xhr.onload = e => {
                 console.log("taille de l'image : ", xhr.response.size);
                 if (xhr.status === 200 && xhr.response.type.startsWith('image/')) {
-                    if ((xhr.response.size / 1000000.0) < this.config.generalConfiguration.maximumUploadSize) {
+                    if ((xhr.response.size / 1000000.0) < this.config.maximumUploadSize) {
                         resolve(true);
                     } else {
                         resolve(false);
