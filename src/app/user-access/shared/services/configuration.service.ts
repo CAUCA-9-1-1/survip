@@ -8,7 +8,9 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class ConfigurationService extends RequestService {
 
-    public generalConfiguration: Configuration;
+    get maximumUploadSize(): number {
+        return +sessionStorage.getItem('maximumUploadSize');
+    };
 
     public constructor(injector: Injector) {
         super(injector);
@@ -17,7 +19,8 @@ export class ConfigurationService extends RequestService {
     public getConfiguration(): Observable<any> {
         return this.get('GeneralConfiguration/configuration')
             .pipe(map(result => {
-                this.generalConfiguration = result;
+                sessionStorage.setItem('maximumUploadSize', result.maximumUploadSize);
+
                 return true;
             }));
     }
