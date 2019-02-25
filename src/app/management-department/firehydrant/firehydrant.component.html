@@ -17,15 +17,19 @@
     </dxi-column>
     <dxi-column dataField="coordinates" caption="{{'coordinates' | translate}}" editCellTemplate="editcoordinates"
                 [visible]="false"></dxi-column>
-    <dxi-column dataField="physicalPosition" editCellTemplate="physicalPositionTemplate" caption="{{'physicalPosition' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="civicNumber" editCellTemplate="civicNumberTemplate" caption="{{'civicNumber' | translate}}" [visible]="false"></dxi-column>
-    <dxi-column dataField="addressLocationType" editCellTemplate="addressLocationTemplate" caption="{{'addressLocationType' | translate}}" [visible]="false">
+    <dxi-column dataField="physicalPosition" editCellTemplate="physicalPositionTemplate"
+                caption="{{'physicalPosition' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="civicNumber" editCellTemplate="civicNumberTemplate" caption="{{'civicNumber' | translate}}"
+                [visible]="false"></dxi-column>
+    <dxi-column dataField="addressLocationType" editCellTemplate="addressLocationTemplate"
+                caption="{{'addressLocationType' | translate}}" [visible]="false">
         <dxo-lookup [dataSource]="addressLocationTypes" displayExpr="text" valueExpr="name"></dxo-lookup>
     </dxi-column>
     <dxi-column dataField="idLane" editCellTemplate="laneTemplate" caption="{{'lane' | translate}}">
         <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id"></dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="idLaneTransversal" editCellTemplate="transversalTemplate" caption="{{'transversal' | translate}}">
+    <dxi-column dataField="idLaneTransversal" editCellTemplate="transversalTemplate"
+                caption="{{'transversal' | translate}}">
         <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id"></dxo-lookup>
     </dxi-column>
     <dxi-column
@@ -62,13 +66,13 @@
             <dxi-item dataField="idFireHydrantType" [isRequired]="true"></dxi-item>
             <dxi-item dataField="locationType" [isRequired]="true"></dxi-item>
             <dxi-item dataField="color" [isRequired]="true"></dxi-item>
-            <dxi-item itemType="group" colCount="2" colSpan="2">
-                <dxi-item dataField="civicNumber" [label]="{visible: false}"></dxi-item>
-                <dxi-item dataField="addressLocationType" [label]="{visible: false}"></dxi-item>
-                <dxi-item dataField="idLane" [label]="{visible: false}"></dxi-item>
-                <dxi-item dataField="idLaneTransversal" [label]="{visible: false}"></dxi-item>
-                <dxi-item dataField="physicalPosition" [label]="{visible: false}"></dxi-item>
-            </dxi-item>
+
+                <dxi-item id="civicNumber" dataField="civicNumber" [label]="{visible: false}"></dxi-item>
+                <dxi-item id="addressLocationType" dataField="addressLocationType" [label]="{visible: false}"></dxi-item>
+                <dxi-item id="idLane" dataField="idLane" [label]="{visible: false}"></dxi-item>
+                <dxi-item id="idLaneTransversal" dataField="idLaneTransversal" [label]="{visible: false}"></dxi-item>
+                <dxi-item colSpan="2" id="physicalPosition" dataField="physicalPosition" [label]="{visible: false}"></dxi-item>
+
             <dxi-item colCount="2" colSpan="2" dataField="coordinates"></dxi-item>
             <dxi-item itemType="group" caption="{{'rate' | translate}}">
                 <dxi-item dataField="rateOperatorType" [isRequired]="true"></dxi-item>
@@ -87,49 +91,60 @@
     </dxo-editing>
 
     <div *dxTemplate="let field of 'civicNumberTemplate'">
-            <div class="dx-field" *ngIf="selectedLocationType == 'Address'">
-                <div class="dx-field-label">{{'civicNumber' | translate}}</div>
-                <div class="dx-field-value">
-                    <dx-text-box [value]="field.row.data.civicNumber" (onValueChanged)="field.setValue($event.value)"></dx-text-box>
-                </div>
+        <div id="civicNumberTemplate"  class="dx-field">
+            <div class="dx-field-label">{{'civicNumber' | translate}}</div>
+            <div class="dx-field-value">
+                <dx-text-box [value]="field.row.data.civicNumber"
+                             (onValueChanged)="field.setValue($event.value)"></dx-text-box>
             </div>
         </div>
-    
-        <div *dxTemplate="let field of 'addressLocationTemplate'">
-            <div class="dx=field" *ngIf="selectedLocationType == 'Address'">
-                <div class="dx-field-label">{{'addressLocationType' | translate}}</div>
-                <div class="dx-field-value">
-                    <dx-lookup [dataSource]="addressLocationTypes" (onInitialized)="addressLocationOnInitialized(field, $event)" displayExpr="text" valueExpr="value" [value]="field.row.data.addressLocationType" (onValueChanged)="field.setValue($event.value)"></dx-lookup>
-                </div>
+    </div>
+
+    <div *dxTemplate="let field of 'addressLocationTemplate'">
+        <div id="addressLocationTemplate" class="dx-field">
+            <div class="dx-field-label">{{'addressLocationType' | translate}}</div>
+            <div class="dx-field-value">
+                <dx-lookup [dataSource]="addressLocationTypes"
+                           (onInitialized)="addressLocationOnInitialized(field, $event)" displayExpr="text"
+                           valueExpr="value" [value]="field.row.data.addressLocationType"
+                           (onValueChanged)="field.setValue($event.value)"></dx-lookup>
             </div>
         </div>
-    
-        <div *dxTemplate="let field of 'laneTemplate'">
-            <div class="dx-field" *ngIf="selectedLocationType == 'Address' || selectedLocationType == 'LaneAndTransversal'">
-                <div class="dx-field-label">{{'lane' | translate}}</div>
-                <div class="dx-field-value">
-                    <dx-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id" (onOpened)="laneOnOpened($event)" (onValueChanged)="laneOnValueChanged(field, $event)" (onInitialized)="laneOnInitialized(field, $event)" [showClearButton]="true" [closeOnOutsideClick]="true" [value]="field.row.data.idLane"></dx-lookup>
-                </div>
+    </div>
+
+    <div *dxTemplate="let field of 'laneTemplate'">
+        <div id="laneTemplate" class="dx-field">
+            <div class="dx-field-label">{{'lane' | translate}}</div>
+            <div class="dx-field-value">
+                <dx-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id" (onOpened)="laneOnOpened($event)"
+                           (onValueChanged)="laneOnValueChanged(field, $event)"
+                           (onInitialized)="laneOnInitialized(field, $event)" [showClearButton]="true"
+                           [closeOnOutsideClick]="true" [value]="field.row.data.idLane"></dx-lookup>
             </div>
         </div>
-    
-        <div *dxTemplate="let field of 'transversalTemplate'">
-            <div class="dx-field" *ngIf="selectedLocationType == 'LaneAndTransversal'">
-                <div class="dx-field-label">{{'transversal' | translate}}</div>
-                <div class="dx-field-value">
-                    <dx-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id" (onOpened)="laneOnOpened($event)" (onValueChanged)="laneOnValueChanged(field, $event)" (onInitialized)="laneOnInitialized(field, $event)" [showClearButton]="true" [closeOnOutsideClick]="true" [value]="field.row.data.idLaneTransversal"></dx-lookup>
-                </div>
+    </div>
+
+    <div *dxTemplate="let field of 'transversalTemplate'">
+        <div id="transversalTemplate"  class="dx-field">
+            <div class="dx-field-label">{{'transversal' | translate}}</div>
+            <div class="dx-field-value">
+                <dx-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id" (onOpened)="laneOnOpened($event)"
+                           (onValueChanged)="laneOnValueChanged(field, $event)"
+                           (onInitialized)="laneOnInitialized(field, $event)" [showClearButton]="true"
+                           [closeOnOutsideClick]="true" [value]="field.row.data.idLaneTransversal"></dx-lookup>
             </div>
         </div>
-    
-        <div *dxTemplate="let field of 'physicalPositionTemplate'">
-            <div class="dx-field" *ngIf="selectedLocationType == 'Text'">
-                <div class="dx-field-label">{{'physicalPosition' | translate}}</div>
-                <div class="dx-field-value">
-                    <dx-text-box [value]="field.row.data.physicalPosition" (onValueChanged)="field.setValue($event.value)"></dx-text-box>
-                </div>
+    </div>
+
+    <div *dxTemplate="let field of 'physicalPositionTemplate'">
+        <div id="physicalPositionTemplate" class="dx-field">
+            <div class="dx-field-label">{{'physicalPosition' | translate}}</div>
+            <div class="dx-field-value">
+                <dx-text-box [value]="field.row.data.physicalPosition"
+                             (onValueChanged)="field.setValue($event.value)"></dx-text-box>
             </div>
         </div>
+    </div>
 
     <div *dxTemplate="let field of 'editcoordinates'">
         <ng-container>

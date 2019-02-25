@@ -16,3 +16,11 @@
 ::ng-deep .dx-layout-manager .dx-field-item:not(.dx-last-col){
   padding-right:0px;
 }
+
+::ng-deep .display-locationType{
+  display: none !important;
+}
+
+::ng-deep .dx-item.dx-box-item{}:has(.display-locationType){
+  display: none !important;
+}
