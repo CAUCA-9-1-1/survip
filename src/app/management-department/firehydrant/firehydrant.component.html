@@ -149,7 +149,7 @@
 
     <div *dxTemplate="let field of 'editcoordinates'">
         <ng-container>
-            <app-geolocation [limitTo]="selectedCityGeometry" [value]="field.row.data.coordinates"
+            <app-geolocation [limitTo]="selectedCityGeometry" [value]="field.row.data.coordinates" (valueChanged)="field.setValue($event)" [(readOnly)]="readOnly"></app-geolocation>
                              (valueChanged)="field.setValue($event)"></app-geolocation>
         </ng-container>
     </div>

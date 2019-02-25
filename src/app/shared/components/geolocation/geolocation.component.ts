@@ -16,6 +16,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class GeolocationComponent implements OnInit {
     @ViewChild('map') mapElement: ElementRef;
     @Output() valueChanged = new EventEmitter();
+    @Input() readOnly: boolean;
     @Input()
     set limitTo(coordinates) {
         if (coordinates && this.originalLimitOfMap !== JSON.stringify(coordinates)) {
@@ -54,6 +55,7 @@ export class GeolocationComponent implements OnInit {
         return '';
     }
 
+    
     public popupIsVisible = false;
     public toolbarItems = [];
 
@@ -66,21 +68,25 @@ export class GeolocationComponent implements OnInit {
     private map: Map;
 
     public constructor(
-        translateService: TranslateService,
+        private translateService: TranslateService,
     ) {
-        translateService.get(['locate']).subscribe(labels => {
-            this.toolbarItems.push({
-                widget: 'dxButton',
-                location: 'center',
-                options: {
-                    text: labels['locate'],
-                    onClick: () => this.onLocate()
-                }
-            });
-        });
+        
     }
 
-    public ngOnInit() { }
+    public ngOnInit() {
+        if(this.readOnly == false) {
+            this.translateService.get(['locate']).subscribe(labels => {
+                this.toolbarItems.push({
+                    widget: 'dxButton',
+                    location: 'center',
+                    options: {
+                        text: labels['locate'],
+                        onClick: () => this.onLocate()
+                    }
+                });
+            });
+        }
+     }
 
     public openMap() {
         this.layerWithStreet = new TileLayer({
