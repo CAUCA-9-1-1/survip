@@ -63,10 +63,15 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
 
     public onEditorPreparing(e: any): void {
         if(e.row != null && e.row.data != null) {
-            e.editorOptions.disabled = e.row.data.idExtern != null;
-            this.setPopupName(e, this.labels['cannotModifyExternalData']);
-
+            if(e.row.data.idExtern != null) {
+                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.disabled;
+                this.setPopupName(e, this.labels['cannotModifyExternalData']);
+            } else {
+                this.readOnly = false;
+            }
         }
+        
         if (e.dataField === 'idBuilding') {
             e.editorName = 'dxLookup';
             e.editorOptions.valueExpr = 'id';
