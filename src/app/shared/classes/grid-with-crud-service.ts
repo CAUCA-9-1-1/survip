@@ -119,7 +119,7 @@ export abstract class GridWithCrudService {
     }
 
     public setPopupName(e: any, translation: string) {
-        if (this.gridPopup != null && e.editorOptions.disabled) {
+        if (this.gridPopup && e.editorOptions.disabled) {
             if (this.notLoopPopupName == false) {
                 let title = this.gridPopup.option('title');
                 this.gridPopup.option('title', title + translation);
@@ -129,9 +129,9 @@ export abstract class GridWithCrudService {
     }
 
     public onCellPrepared(e) {
-        if(e.column.command == "edit" && e.column.type == "buttons") {
-            if(e.data != null && e.data.idExtern != null) {
-                if(e.data.idExtern.toString() != null) {
+        if(e.column.command == "edit") {
+            if(e.data && e.data.idExtern) {
+                if(e.data.idExtern.toString()) {
                     e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-link-delete');
                     e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-link');
                     e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-icon-trash');
