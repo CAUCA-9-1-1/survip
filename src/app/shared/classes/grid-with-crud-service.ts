@@ -31,6 +31,14 @@ export abstract class GridWithCrudService {
             options.popup.onTitleRendered = (ev) => {
                 this.gridPopup = ev.component;
             }
+            options.popup.onShowing = (ev) => {
+                if(this.readOnly) {
+                    const toolbar = ev.component.option('toolbarItems')
+                    toolbar[0].options.visible = false;
+                    toolbar[1].options.text = "Fermer";
+                    ev.component.option('toolbarItems', toolbar);    
+                }
+            }
             e.component.option('editing', options);
         }
     }

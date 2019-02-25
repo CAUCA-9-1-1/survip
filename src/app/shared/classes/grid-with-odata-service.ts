@@ -1,5 +1,7 @@
 import validationEngine from 'devextreme/ui/validation_engine';
 import DataSource from 'devextreme/data/data_source';
+import { Button } from 'protractor';
+import { DxButtonModule } from 'devextreme-angular';
 
 
 export abstract class GridWithOdataService {
@@ -32,6 +34,14 @@ export abstract class GridWithOdataService {
             };
             options.popup.onOptionChanged = (ev) => {
                 this.gridPopup = ev.component;
+            }
+            options.popup.onShowing = (ev) => {
+                if(this.readOnly) {
+                    const toolbar = ev.component.option('toolbarItems')
+                    toolbar[0].options.visible = false;
+                    toolbar[1].options.text = "Fermer";
+                    ev.component.option('toolbarItems', toolbar);    
+                }
             }
             e.component.option('editing', options);
         }
