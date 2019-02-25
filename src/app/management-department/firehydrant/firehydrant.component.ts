@@ -183,7 +183,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
                     this.cityId = this.selectedCity;
                     this.selectedCity = ev.value;
-                    this.addingButton.option('disabled', false);
                     this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
                     this.dataSource.load();
                     this.loadLaneByCity(ev.value);
