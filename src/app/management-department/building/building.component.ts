@@ -13,6 +13,7 @@ import {GridWithOdataService} from '../../shared/classes/grid-with-odata-service
 import {CityService} from '../../management-address/shared/services/city.service';
 import {ODataService} from '../../shared/services/o-data.service';
 import {DxDataGridComponent} from 'devextreme-angular';
+import DataSource from 'devextreme/data/data_source';
 
 
 @Component({
@@ -35,10 +36,9 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         this.parent = building;
         this.isParent = (building ? false : true);
 
-        if (this.isParent && this.selectedCity) {
-            this.dataSource.filter(['idCity', '=', new Guid(this.selectedCity)]);
-        } else {
-            this.dataSource.filter(null);
+        if(this.parent) {
+            this.setBuildingChildDataSource();
+            this.dataSource.filter(['idParentBuilding', '=', new Guid(building.id.toString())]);
         }
 
         this.dataSource.load();
@@ -108,6 +108,20 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         });
     }
 
+    private setBuildingChildDataSource() {
+        this.dataSource = new DataSource({
+            expand: 'localizations',
+            store: new ODataService(this.injector, {
+                url: 'BuildingChild',
+                key: 'id',
+                keyType: 'Guid',
+                onRefreshLogin: () => {
+                    this.dataGrid.instance.refresh();
+                }
+            })
+        });
+    }
+
     public setModel(data: any) {
         return Building.fromJSON(data);
     }
@@ -147,6 +161,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         toolbarItems.unshift({
             widget: 'dxLookup',
             options: {
+                visible: this.isParent,
                 displayExpr: 'name',
                 valueExpr: 'id',
                 width: 300,
@@ -159,8 +174,10 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                 onValueChanged: (ev) => {
                     this.selectedCity = ev.value;
                     this.addingButton.option('disabled', false);
-                    this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
-                    this.dataSource.load();
+                    if(this.isParent) {
+                        this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
+                        this.dataSource.load();
+                    }
                     this.loadLaneByCity(ev.value);
                 }
             }
