@@ -342,6 +342,10 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         });
     }
 
+    public onContentReady(e) {
+        //this.displayLocationType();
+    }
+
     private displayLocationType() {
         if (document.querySelector('#civicNumberTemplate')) {
             document.querySelector('#civicNumberTemplate').className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
