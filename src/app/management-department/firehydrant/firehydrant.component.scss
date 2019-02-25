@@ -20,7 +20,3 @@
 ::ng-deep .display-locationType{
   display: none !important;
 }
-
-::ng-deep .dx-item.dx-box-item{}:has(.display-locationType){
-  display: none !important;
-}
