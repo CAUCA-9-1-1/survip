@@ -7,7 +7,8 @@
         (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onEditorPreparing)="onEditorPreparing($event)"
-        (onEditingStart)="onEditingStart($event)">
+        (onEditingStart)="onEditingStart($event)"
+        (onContentReady)="onContentReady($event)">
     <dxi-column dataField="number" caption="{{'fireHydrantNumber' | translate}}"></dxi-column>
     <dxi-column dataField="idFireHydrantType" caption="{{'fireHydrantType' | translate}}">
         <dxo-lookup [dataSource]="fireHydrantTypes" displayExpr="name" valueExpr="id"></dxo-lookup>
