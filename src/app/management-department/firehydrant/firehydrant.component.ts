@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Injector, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {TranslateService} from '@ngx-translate/core';
 import Guid from 'devextreme/core/guid';
@@ -14,7 +14,6 @@ import {ODataService} from '../../shared/services/o-data.service';
 import {LocationTypeService} from '../../management-type-system/shared/services/location-type.service';
 import {AddressLocationTypeService} from '../../management-type-system/shared/services/address-location-type.service';
 import {EnumModel} from '../../management-type-system/shared/models/enum.model';
-import {BehaviorSubject} from 'rxjs';
 
 
 @Component({
@@ -214,6 +213,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     public onEditorPreparing(e) {
         if (e.dataField === 'locationType') {
+            /*e.editorOptions.onInitialized = (ev) => {
+                this.displayLocationType();
+            };*/
             e.editorOptions.onValueChanged = (ev) => {
                 e.setValue(ev.value);
                 this.selectedLocationType = ev.value;
@@ -242,10 +244,10 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public addressLocationOnInitialized(field: any, e: any) {
-        if(field.data[field.column.dataField]) {
-            let data = field.data[field.column.dataField].toString();
-            if(data) {
-                let location = this.addressLocationTypes.find(c => c.name == data);
+        if (field.data[field.column.dataField]) {
+            const data = field.data[field.column.dataField].toString();
+            if (data) {
+                const location = this.addressLocationTypes.find(c => c.name === data);
                 e.component.option('value', location.value);
             }
         }
@@ -253,10 +255,10 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     public laneOnInitialized(field: any, e: any) {
         this.formFields[field.column.dataField] = e.component;
-        if(field.data[field.column.dataField]) {
-            let data = field.data[field.column.dataField].toString();
-            if(data) {
-                let lane = this.lanesOfCity.store.find(c => c.id == data);
+        if (field.data[field.column.dataField]) {
+            const data = field.data[field.column.dataField].toString();
+            if (data) {
+                const lane = this.lanesOfCity.store.find(c => c.id === data);
                 this.formFields[field.column.dataField].option('value', lane.id);
             }
         }
