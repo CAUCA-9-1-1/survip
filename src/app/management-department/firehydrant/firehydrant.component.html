@@ -58,7 +58,7 @@
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
-    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="false" [allowDeleting]="true" >
+    <dxo-editing [popup]="{onDisposing:editingEnd(), onShown: editingShow()}" mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="false" [allowDeleting]="true" >
         <dxo-popup title="{{'fireHydrant' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="2">
@@ -71,9 +71,8 @@
             <dxi-item id="addressLocationType" dataField="addressLocationType" [label]="{visible: false}"></dxi-item>
             <dxi-item id="idLane" dataField="idLane" [label]="{visible: false}"></dxi-item>
             <dxi-item id="idLaneTransversal" dataField="idLaneTransversal" [label]="{visible: false}"></dxi-item>
+            <dxi-item id="physicalPosition"colSpan="2" dataField="physicalPosition" [label]="{visible: false}"></dxi-item>
 
-            <dxi-item colCount="2" colSpan="2" id="physicalPosition" dataField="physicalPosition"
-                      [label]="{visible: false}"></dxi-item>
             <dxi-item colCount="2" colSpan="2" dataField="coordinates"></dxi-item>
             <dxi-item itemType="group" caption="{{'rate' | translate}}">
                 <dxi-item dataField="rateOperatorType" [isRequired]="true"></dxi-item>
@@ -92,7 +91,7 @@
     </dxo-editing>
 
     <div *dxTemplate="let field of 'civicNumberTemplate'">
-        <div id="civicNumberTemplate" class="dx-field">
+        <div id="civicNumberTemplate"class="dx-field">
             <div class="dx-field-label">{{'civicNumber' | translate}}</div>
             <div class="dx-field-value">
                 <dx-text-box [value]="field.row.data.civicNumber"

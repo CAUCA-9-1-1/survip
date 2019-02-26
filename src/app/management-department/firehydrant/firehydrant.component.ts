@@ -1,4 +1,4 @@
-import {Component, ElementRef, Injector, OnInit, ViewChild} from '@angular/core';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {TranslateService} from '@ngx-translate/core';
 import Guid from 'devextreme/core/guid';
@@ -34,6 +34,7 @@ import {EnumModel} from '../../management-type-system/shared/models/enum.model';
 export class FirehydrantComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
+    protected form: any;
     public selectedLocationType: string;
     public locationTypes: EnumModel[] = [];
     public addressLocationTypes: EnumModel[] = [];
@@ -79,6 +80,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     private labels: any = {};
     private cityId = '';
+    private popupInitialized = false;
 
     public constructor(
         private injector: Injector,
@@ -120,6 +122,23 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         this.loadOperatorType();
         this.loadUnitOfMeasure();
     }
+
+    public onInitialized(e) {
+        const options = e.component.option('editing');
+
+        if (options.popup) {
+            options.form.validationGroup = this.validationGroup;
+            options.form.onInitialized = (ev) => {
+                this.form = ev.component;
+            };
+            options.popup.onHiding = (ev) => {
+                this.dataSource.load();
+            };
+
+            e.component.option('editing', options);
+        }
+    }
+
 
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
@@ -187,13 +206,11 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     public onEditingStart(e) {
         this.selectedLocationType = e.data.locationType;
         this.cityId = this.selectedCity;
+
     }
 
     public onEditorPreparing(e) {
         if (e.dataField === 'locationType') {
-            e.editorOptions.onInitialized = (ev) => {
-                this.displayLocationType();
-            };
             e.editorOptions.onValueChanged = (ev) => {
                 e.setValue(ev.value);
                 this.selectedLocationType = ev.value;
@@ -321,28 +338,55 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     private displayLocationType() {
-        document.querySelector('#civicNumberTemplate').className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
-        document.querySelector('#addressLocationTemplate').className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
-        document.querySelector('#laneTemplate').className = this.selectedLocationType === 'Address' || 'LaneAndTransversal' ? 'dx-field' : 'display-locationType';
-        document.querySelector('#transversalTemplate').className = this.selectedLocationType === 'LaneAndTransversal' ? 'dx-field' : 'display-locationType';
-        document.querySelector('#physicalPositionTemplate').className = this.selectedLocationType === 'Text' ? 'dx-field' : 'display-locationType';
+        if (document.querySelector('#civicNumberTemplate')) {
+            document.querySelector('#civicNumberTemplate').className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
+            this.changeParentDisplay(document.querySelector('#civicNumberTemplate'));
+        }
+        if (document.querySelector('#addressLocationTemplate')) {
+            document.querySelector('#addressLocationTemplate').className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
+            this.changeParentDisplay(document.querySelector('#addressLocationTemplate'));
+        }
 
-        this.changeParentDisplay(document.querySelector('#civicNumberTemplate'));
-        this.changeParentDisplay(document.querySelector('#addressLocationTemplate'));
-        this.changeParentDisplay(document.querySelector('#laneTemplate'));
-        this.changeParentDisplay(document.querySelector('#transversalTemplate'));
-        this.changeParentDisplay(document.querySelector('#physicalPositionTemplate'));
+        if (document.querySelector('#transversalTemplate')) {
+            document.querySelector('#transversalTemplate').className = this.selectedLocationType === 'LaneAndTransversal' ? 'dx-field' : 'display-locationType';
+            this.changeParentDisplay(document.querySelector('#transversalTemplate'));
+        }
 
+        if (document.querySelector('#laneTemplate')) {
+            document.querySelector('#laneTemplate').className = (this.selectedLocationType === 'Address' || this.selectedLocationType === 'LaneAndTransversal') ? 'dx-field' : 'display-locationType';
+            this.changeParentDisplay(document.querySelector('#laneTemplate'));
+        }
+
+        if (document.querySelector('#physicalPositionTemplate')) {
+            document.querySelector('#physicalPositionTemplate').className = this.selectedLocationType === 'Text' ? 'dx-field' : 'display-locationType';
+            this.changeParentDisplay(document.querySelector('#physicalPositionTemplate'));
+        }
     }
 
     private changeParentDisplay(elem) {
+        const id = elem.id;
         const childDisplay = elem.className;
-        for ( ; elem && elem !== document; elem = elem.parentNode ) {
-            if ( elem.className === 'dx-item dx-box-item' && childDisplay === 'display-locationType') {
-                elem.style.display = 'none';
-            } else if (elem.className === 'dx-item dx-box-item' && childDisplay === 'dx-field' && elem.style.display === 'none') {
-                elem.style.display = 'flex';
+        for (; elem && elem !== document; elem = elem.parentNode) {
+            if (elem.className === 'dx-item dx-box-item') {
+                if (childDisplay === 'display-locationType' && (id !== 'transversalTemplate' && this.selectedLocationType !== 'Address')) {
+                    elem.style.display = 'none';
+                } else if (elem.className === 'dx-item dx-box-item' && childDisplay === 'dx-field' && elem.style.display === 'none') {
+                    elem.style.display = 'flex';
+                }
             }
+        }
+    }
+
+    public editingShow() {
+        if (this.form && !this.popupInitialized) {
+            this.displayLocationType();
+            this.popupInitialized = true;
+        }
+    }
+
+    public editingEnd() {
+        if (this.form && this.popupInitialized) {
+            this.popupInitialized = false;
         }
     }
 }

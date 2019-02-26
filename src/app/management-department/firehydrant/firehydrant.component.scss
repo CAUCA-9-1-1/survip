@@ -18,5 +18,31 @@
 }
 
 ::ng-deep .display-locationType{
-  display: none !important;
+  display: none;
+}
+
+::ng-deep #civicNumberTemplate .dx-field-label{
+ width:auto;
+}
+::ng-deep #civicNumberTemplate .dx-field-value{
+  width:80%;
+}
+::ng-deep #addressLocationTemplate .dx-field-label{
+  width:auto;
+}
+::ng-deep #addressLocationTemplate .dx-field-value{
+  width:72%;
+}
+::ng-deep #laneTemplate .dx-field-label{
+  width:auto;
+}
+::ng-deep #laneTemplate .dx-field-value{
+  width:80%;
+}
+
+::ng-deep #physicalPositionTemplate .dx-field-label{
+  width:auto;
+}
+::ng-deep #physicalPositionTemplate .dx-field-value{
+  width:90%;
 }
