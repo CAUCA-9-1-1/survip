@@ -191,9 +191,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     public onEditorPreparing(e) {
         if (e.dataField === 'locationType') {
-            /*e.editorOptions.onInitialized = (ev) => {
+            e.editorOptions.onInitialized = (ev) => {
                 this.displayLocationType();
-            };*/
+            };
             e.editorOptions.onValueChanged = (ev) => {
                 e.setValue(ev.value);
                 this.selectedLocationType = ev.value;
@@ -320,10 +320,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         });
     }
 
-    public onContentReady(e) {
-        //this.displayLocationType();
-    }
-
     private displayLocationType() {
         document.querySelector('#civicNumberTemplate').className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
         document.querySelector('#addressLocationTemplate').className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
@@ -343,9 +339,8 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         const childDisplay = elem.className;
         for ( ; elem && elem !== document; elem = elem.parentNode ) {
             if ( elem.className === 'dx-item dx-box-item' && childDisplay === 'display-locationType') {
-                console.log('element parent: ', elem);
                 elem.style.display = 'none';
-            } else if(elem.className === 'dx-item dx-box-item' && childDisplay === 'dx-field' && elem.style.display === 'none') {
+            } else if (elem.className === 'dx-item dx-box-item' && childDisplay === 'dx-field' && elem.style.display === 'none') {
                 elem.style.display = 'flex';
             }
         }

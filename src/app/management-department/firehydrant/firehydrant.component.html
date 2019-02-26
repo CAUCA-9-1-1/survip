@@ -7,8 +7,7 @@
         (onInitialized)="onInitialized($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onEditorPreparing)="onEditorPreparing($event)"
-        (onEditingStart)="onEditingStart($event)"
-        (onContentReady)="onContentReady($event)">
+        (onEditingStart)="onEditingStart($event)">
     <dxi-column dataField="number" caption="{{'fireHydrantNumber' | translate}}"></dxi-column>
     <dxi-column dataField="idFireHydrantType" caption="{{'fireHydrantType' | translate}}">
         <dxo-lookup [dataSource]="fireHydrantTypes" displayExpr="name" valueExpr="id"></dxo-lookup>
@@ -59,7 +58,7 @@
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
-    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="false" [allowDeleting]="true">
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="false" [allowDeleting]="true" >
         <dxo-popup title="{{'fireHydrant' | translate}}" [showTitle]="true"></dxo-popup>
 
         <dxo-form colCount="2">
@@ -68,12 +67,13 @@
             <dxi-item dataField="locationType" [isRequired]="true"></dxi-item>
             <dxi-item dataField="color" [isRequired]="true"></dxi-item>
 
-                <dxi-item id="civicNumber" dataField="civicNumber" [label]="{visible: false}"></dxi-item>
-                <dxi-item id="addressLocationType" dataField="addressLocationType" [label]="{visible: false}"></dxi-item>
-                <dxi-item id="idLane" dataField="idLane" [label]="{visible: false}"></dxi-item>
-                <dxi-item id="idLaneTransversal" dataField="idLaneTransversal" [label]="{visible: false}"></dxi-item>
-                <dxi-item colSpan="2" id="physicalPosition" dataField="physicalPosition" [label]="{visible: false}"></dxi-item>
+            <dxi-item id="civicNumber" dataField="civicNumber" [label]="{visible: false}"></dxi-item>
+            <dxi-item id="addressLocationType" dataField="addressLocationType" [label]="{visible: false}"></dxi-item>
+            <dxi-item id="idLane" dataField="idLane" [label]="{visible: false}"></dxi-item>
+            <dxi-item id="idLaneTransversal" dataField="idLaneTransversal" [label]="{visible: false}"></dxi-item>
 
+            <dxi-item colCount="2" colSpan="2" id="physicalPosition" dataField="physicalPosition"
+                      [label]="{visible: false}"></dxi-item>
             <dxi-item colCount="2" colSpan="2" dataField="coordinates"></dxi-item>
             <dxi-item itemType="group" caption="{{'rate' | translate}}">
                 <dxi-item dataField="rateOperatorType" [isRequired]="true"></dxi-item>
@@ -92,7 +92,7 @@
     </dxo-editing>
 
     <div *dxTemplate="let field of 'civicNumberTemplate'">
-        <div id="civicNumberTemplate"  class="dx-field">
+        <div id="civicNumberTemplate" class="dx-field">
             <div class="dx-field-label">{{'civicNumber' | translate}}</div>
             <div class="dx-field-value">
                 <dx-text-box [value]="field.row.data.civicNumber"
@@ -126,7 +126,7 @@
     </div>
 
     <div *dxTemplate="let field of 'transversalTemplate'">
-        <div id="transversalTemplate"  class="dx-field">
+        <div id="transversalTemplate" class="dx-field">
             <div class="dx-field-label">{{'transversal' | translate}}</div>
             <div class="dx-field-value">
                 <dx-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id" (onOpened)="laneOnOpened($event)"
