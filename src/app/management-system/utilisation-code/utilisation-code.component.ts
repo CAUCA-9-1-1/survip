@@ -21,9 +21,9 @@ export class UtilisationCodeComponent extends GridWithCrudService implements OnI
 
     constructor(
         private utilisationCodeService: UtilisationCodeService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super(utilisationCodeService);
+        super(translateService, utilisationCodeService);
 
         this.translateService.get([
             'cannotModifyExternalData'

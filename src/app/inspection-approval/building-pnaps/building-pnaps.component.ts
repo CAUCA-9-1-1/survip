@@ -34,7 +34,7 @@ export class BuildingPnapsComponent extends GridWithCrudService implements OnIni
         inspectionBuildingPnapsService: InspectionBuildingPnapsService,
         private pnapsTypeService: PersonRequiringAssistanceTypeService,
     ) {
-        super(inspectionBuildingPnapsService);
+        super(null, inspectionBuildingPnapsService);
     }
 
     public ngOnInit() {

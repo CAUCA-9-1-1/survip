@@ -19,9 +19,9 @@ export class FireHydrantTypeComponent extends GridWithCrudService implements OnI
 
     constructor(
         private fireHydrantTypeService: FireHydrantTypeService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
         ) {
-        super(fireHydrantTypeService);
+        super(translateService, fireHydrantTypeService);
 
         this.translateService.get([
             'cannotModifyExternalData'

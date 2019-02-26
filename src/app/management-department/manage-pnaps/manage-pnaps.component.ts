@@ -36,9 +36,9 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
         private inspectionService: InspectionBuildingPnapsService,
         private buildingService: BuildingPnapsService,
         private pnapsTypeService: PersonRequiringAssistanceTypeService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super();
+        super(translateService);
 
         this.translateService.get([
             'cannotModifyExternalData'

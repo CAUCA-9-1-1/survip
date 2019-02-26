@@ -25,9 +25,9 @@ export class RegionComponent extends GridWithCrudService implements OnInit {
     constructor(
         regionService: RegionService,
         private stateService: StateService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
         ) {
-        super(regionService);
+        super(translateService, regionService);
 
         this.translateService.get([
             'cannotModifyExternalData'

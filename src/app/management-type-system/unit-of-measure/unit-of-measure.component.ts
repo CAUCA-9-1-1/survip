@@ -19,10 +19,10 @@ export class UnitOfMeasureComponent extends GridWithCrudService implements OnIni
     private labels: any = {};
 
     constructor(
-        translateService: TranslateService,
+        protected translateService: TranslateService,
         private unitOfMeasureService: UnitOfMeasureService
     ) {
-      super(unitOfMeasureService);
+      super(translateService, unitOfMeasureService);
 
       translateService.get([
         'rate', 'pressure', 'diameter', 'capacity', 'dimension', 'cannotModifyExternalData'

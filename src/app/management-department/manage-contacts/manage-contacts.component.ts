@@ -31,9 +31,9 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
     constructor(
         private inspectionService: InspectionBuildingContactService,
         private buildingService: BuildingContactService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super();
+        super(translateService);
 
         this.translateService.get([
             'cannotModifyExternalData'

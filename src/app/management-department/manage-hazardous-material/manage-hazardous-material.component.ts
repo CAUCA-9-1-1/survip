@@ -40,13 +40,13 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
 
 
     constructor(
-        private translateService: TranslateService,
+        protected translateService: TranslateService,
         private inspectionService: InspectionBuildingHazardousMaterialService,
         private buildingService: BuildingHazardousMaterialService,
         private hazardousMaterialService: HazardousMaterialService,
         private unitOfMeasureService: UnitOfMeasureService,
     ) {
-        super();
+        super(translateService);
 
         this.translateService.get([
             'unknown', 'underground', 'aboveground', 'cannotModifyExternalData'

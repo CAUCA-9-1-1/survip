@@ -39,7 +39,7 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         private pictureService: InspectionPictureService,
         private dialog: MatDialog,
     ) {
-        super(anomalyService);
+        super(null, anomalyService);
     }
 
     public ngOnInit() {

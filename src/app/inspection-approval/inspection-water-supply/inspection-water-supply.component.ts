@@ -48,7 +48,7 @@ export class InspectionWaterSupplyComponent extends GridWithCrudService implemen
         private fireHydrantService: FireHydrantService,
         private laneService: LaneService,
     ) {
-        super(inspectionFireHydrantService);
+        super(null, inspectionFireHydrantService);
     }
 
     public ngOnInit() { }

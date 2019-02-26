@@ -32,7 +32,7 @@ export class DepartmentRiskLevelComponent extends GridWithCrudService implements
         private riskLevelService: RiskLevelService,
         private surveyService: SurveyService,
     ) {
-        super(inspectionManagementService);
+        super(null, inspectionManagementService);
     }
 
     setModel(data: any) {

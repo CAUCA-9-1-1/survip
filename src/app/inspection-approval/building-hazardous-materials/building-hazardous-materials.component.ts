@@ -40,9 +40,9 @@ export class BuildingHazardousMaterialsComponent extends GridWithCrudService imp
         inspectionBuildingHazardousMaterialService: InspectionBuildingHazardousMaterialService,
         private hazardousMaterialService: HazardousMaterialService,
         private unitOfMeasureService: UnitOfMeasureService,
-        private translateService: TranslateService,
+        protected translateService: TranslateService,
     ) {
-        super(inspectionBuildingHazardousMaterialService);
+        super(translateService, inspectionBuildingHazardousMaterialService);
 
         this.translateService.get([
             'unknown', 'underground', 'aboveground'

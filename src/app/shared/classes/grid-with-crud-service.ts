@@ -1,10 +1,12 @@
 import validationEngine from 'devextreme/ui/validation_engine';
+import { TranslateService } from '@ngx-translate/core';
 
 
 export abstract class GridWithCrudService {
     gridPopup: any;
     notLoopPopupName = false;
     readOnly: boolean;
+    closedTranslation: string;
 
     public dataSource = [];
     public validationGroup = 'custom-validation-group-' + (new Date()).getTime();
@@ -13,8 +15,13 @@ export abstract class GridWithCrudService {
     protected loadSpecificOpts: any;
 
     constructor(
+        protected translateService?: TranslateService,
         protected sourceService?: any,
-    ) { }
+    ) { 
+        if(this.translateService) {
+            this.translateService.get(['close']).subscribe(c => this.closedTranslation = c['close']);
+        } 
+    }
 
     public onInitialized(e) {
         const options = e.component.option('editing');
@@ -35,7 +42,7 @@ export abstract class GridWithCrudService {
                 if(this.readOnly) {
                     const toolbar = ev.component.option('toolbarItems')
                     toolbar[0].options.visible = false;
-                    toolbar[1].options.text = "Fermer";
+                    toolbar[1].options.text = this.closedTranslation;
                     ev.component.option('toolbarItems', toolbar);    
                 }
             }

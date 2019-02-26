@@ -44,10 +44,10 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
     constructor(
         webuserService: WebuserService,
-        translateService: TranslateService,
+        protected translateService: TranslateService,
         private departmentService: FireSafetyDepartmentService,
     ) {
-        super(webuserService);
+        super(translateService, webuserService);
 
         translateService.get([
             'passwordError', 'cannotModifyExternalData'

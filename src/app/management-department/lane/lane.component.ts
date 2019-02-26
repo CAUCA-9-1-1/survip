@@ -40,9 +40,9 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
         private cityService: CityService,
         private publicCode: LanePublicCodeService,
         private genericCode: LaneGenericCodeService,
-        private translateService: TranslateService,
+        protected translateService: TranslateService,
     ) {
-        super({
+        super(translateService, {
             expand: 'localizations',
             store: new ODataService(injector, {
                 url: 'Lane',

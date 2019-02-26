@@ -21,9 +21,9 @@ export class PersonRequiringAssistanceTypeComponent extends GridWithCrudService 
 
     constructor(
         private personRequiringAssistanceTypeService: PersonRequiringAssistanceTypeService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super(personRequiringAssistanceTypeService);
+        super(translateService, personRequiringAssistanceTypeService);
 
         this.translateService.get([
             'cannotModifyExternalData'
