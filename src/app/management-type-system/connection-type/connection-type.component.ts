@@ -19,9 +19,9 @@ export class ConnectionTypeComponent extends GridWithCrudService implements OnIn
 
     constructor(
         private connectionTypeService: FireHydrantConnectionTypeService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
         ) {
-        super(connectionTypeService);
+        super(translateService, connectionTypeService);
 
         this.translateService.get([
             'cannotModifyExternalData'

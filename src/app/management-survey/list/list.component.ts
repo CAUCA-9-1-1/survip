@@ -21,9 +21,9 @@ export class ListComponent  extends GridWithCrudService implements OnInit {
     constructor(
         private router: Router,
         private surveyService: SurveyService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super(surveyService);
+        super(null, surveyService);
     }
 
     setModel(data: any) {

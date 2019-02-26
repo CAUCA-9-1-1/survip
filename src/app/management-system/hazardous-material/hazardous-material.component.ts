@@ -21,9 +21,9 @@ export class HazardousMaterialComponent extends GridWithCrudService implements O
 
     constructor(
         private hazardousMaterialService: HazardousMaterialService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super(hazardousMaterialService);
+        super(translateService, hazardousMaterialService);
 
         this.translateService.get([
             'cannotModifyExternalData'

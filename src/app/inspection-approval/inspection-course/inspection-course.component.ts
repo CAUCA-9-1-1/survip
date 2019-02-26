@@ -42,9 +42,9 @@ export class InspectionCourseComponent extends GridWithCrudService implements On
         inspectionCourseService: InspectionCourseService,
         private firestationService: FirestationService,
         private laneService: LaneService,
-        private translateService: TranslateService,
+        protected translateService: TranslateService,
     ) {
-        super(inspectionCourseService);
+        super(translateService, inspectionCourseService);
 
         this.translateService.get(['right', 'left', 'straightAhead']).subscribe(labels => {
             this.lookupDirection.dataSource = [{

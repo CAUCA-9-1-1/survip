@@ -92,9 +92,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         private unitOfMeasureService: UnitOfMeasureService,
         private cityService: CityService,
         private laneService: LaneService,
-        private translateService: TranslateService,
+        protected translateService: TranslateService,
     ) {
-        super({
+        super(translateService, {
             store: new ODataService(injector, {
                 url: 'FireHydrant',
                 key: 'id',

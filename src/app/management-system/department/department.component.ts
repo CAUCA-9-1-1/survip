@@ -27,9 +27,9 @@ export class DepartmentComponent extends GridWithCrudService implements OnInit {
     constructor(
         fireSafetyDepartmentService: FireSafetyDepartmentService,
         private countyService: CountyService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super(fireSafetyDepartmentService);
+        super(translateService, fireSafetyDepartmentService);
 
         this.translateService.get([
             'cannotModifyExternalData'

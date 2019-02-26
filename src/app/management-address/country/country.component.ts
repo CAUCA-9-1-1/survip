@@ -19,9 +19,9 @@ export class CountryComponent extends GridWithCrudService implements OnInit {
 
     constructor(
         private countryService: CountryService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
         ) {
-        super(countryService);
+        super(translateService, countryService);
         this.readOnlyImported = !countryService.readOnlyImported;
 
         this.translateService.get([

@@ -30,9 +30,9 @@ export class CityComponent extends GridWithCrudService implements OnInit {
         cityService: CityService,
         private cityTypeService: CityTypeService,
         private countyService: CountyService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super(cityService);
+        super(translateService, cityService);
 
         this.translateService.get([
             'cannotModifyExternalData'

@@ -66,7 +66,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         private activeRoute: ActivatedRoute,
         private injector: Injector,
     ) {
-        super(batchService);
+        super(null, batchService);
         this.createStore('AvailableBuildingForManagement');
         translateService.get([
             'all', 'addBuildingsToInspection', 'add', 'cancel', 'needInspectorAndBuildingForReadyInspection',

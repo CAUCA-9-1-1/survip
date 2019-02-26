@@ -49,7 +49,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         private translate: TranslateService,
         private notification: MatSnackBar,
     ) {
-        super(choiceService);
+        super(null, choiceService);
         this.occurrenceValidation = this.occurrenceValidation.bind(this);
     }
 

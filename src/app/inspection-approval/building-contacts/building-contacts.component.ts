@@ -29,7 +29,7 @@ export class BuildingContactsComponent extends GridWithCrudService implements On
     public constructor(
         inspectionBuildingContactService: InspectionBuildingContactService,
     ) {
-        super(inspectionBuildingContactService);
+        super(null, inspectionBuildingContactService);
     }
 
     public ngOnInit() {

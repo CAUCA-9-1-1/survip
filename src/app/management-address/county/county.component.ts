@@ -28,9 +28,9 @@ export class CountyComponent extends GridWithCrudService implements OnInit {
         countyService: CountyService,
         private stateService: StateService,
         private regionService: RegionService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super(countyService);
+        super(translateService, countyService);
 
         this.translateService.get([
             'cannotModifyExternalData'

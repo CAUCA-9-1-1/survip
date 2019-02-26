@@ -21,9 +21,9 @@ export class RiskLevelComponent extends GridWithCrudService implements OnInit {
 
     constructor(
         private riskLevelService: RiskLevelService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super(riskLevelService);
+        super(translateService, riskLevelService);
 
         this.translateService.get([
             'cannotModifyExternalData'

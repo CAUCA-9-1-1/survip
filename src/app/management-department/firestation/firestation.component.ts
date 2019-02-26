@@ -34,9 +34,9 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
         firestationService: FirestationService,
         private fireSafetyDepartmentService: FireSafetyDepartmentService,
         private buildingService: BuildingService,
-        private translateService: TranslateService
+        protected translateService: TranslateService
     ) {
-        super(firestationService);
+        super(translateService, firestationService);
 
         this.translateService.get([
             'cannotModifyExternalData'

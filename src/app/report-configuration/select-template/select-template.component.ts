@@ -30,11 +30,11 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private translateService: TranslateService,
+        protected translateService: TranslateService,
         private reportConfigurationService: ReportTemplateService,
         private fireSafetyDepartmentService: FireSafetyDepartmentService
     ) {
-        super(reportConfigurationService);
+        super(null, reportConfigurationService);
         this.templateIdentifiers = [];
         this.reportConfigurationService.getTemplateList().subscribe(data => {
             data.forEach((templateIdentifier) => {
