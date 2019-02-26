@@ -213,9 +213,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     public onEditorPreparing(e) {
         if (e.dataField === 'locationType') {
-            /*e.editorOptions.onInitialized = (ev) => {
+            e.editorOptions.onInitialized = (ev) => {
                 this.displayLocationType();
-            };*/
+            };
             e.editorOptions.onValueChanged = (ev) => {
                 e.setValue(ev.value);
                 this.selectedLocationType = ev.value;
@@ -340,10 +340,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                 sort: ['name'],
             };
         });
-    }
-
-    public onContentReady(e) {
-        //this.displayLocationType();
     }
 
     private displayLocationType() {
