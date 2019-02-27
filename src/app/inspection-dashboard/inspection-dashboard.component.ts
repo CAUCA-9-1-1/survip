@@ -107,7 +107,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see', 'vacantLand', 'delete',
             'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building', 'approve', 'todo', 'absent',
             'started', 'waitingApprobation', 'approved', 'refused', 'canceled', 'collapseAll', 'expandAll', 'wantToDeleteBatch',
-            'generateReport', 'deleteBatchStartedMessage', 'nonDefaultReports'
+            'generateReport', 'deleteBatchStartedMessage', 'nonDefaultReports', 'downloaded'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -416,7 +416,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     private getDefaultColumnVisible() {
         const visible = [
             false, true, true, true, false, false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false, false, false, false, false
+            false, false, false, false, false, false, false, false, false, false, false, false, false
         ];
 
         switch (this.selectedMode) {
@@ -424,6 +424,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 visible[7] = true;
                 visible[8] = true;
                 visible[9] = true;
+                visible[25] = true;
                 break;
             case 'mode2':
                 visible[0] = true;
@@ -677,6 +678,14 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             width: width[24] || null,
             cellTemplate: 'generateReport',
             showInColumnChooser: false,
+        }, {
+            dataField: 'hasBeenDownloaded',
+            caption: this.labels['downloaded'],
+            dataType: 'boolean',
+            visible: visible[25],
+            width: width[25] || null,
+            cellTemplate: 'iconHasBeenDownloaded',
+            showInColumnChooser: this.selectedMode == 'mode1'
         }];
     }
 
