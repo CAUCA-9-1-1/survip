@@ -422,7 +422,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     public onDeletingValidation(e) {
-        if (e.data && e.data.inspectionStatus !== 0 && e.columnIndex === 7) {
+        if (e.data && e.data.inspectionStatus !== 0 && e.column.command === "edit") {
             e.cellElement.querySelector('.dx-link-delete').style.opacity = '0.5';
             e.cellElement.querySelector('.dx-link-delete').style.pointerEvents = 'none';
             e.cellElement.querySelector('.dx-link-delete').style.color = '#959595';

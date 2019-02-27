@@ -7,6 +7,7 @@ export class InspectionBuilding {
   idRiskLevel: string;
   sequence: 0;
   matricule: '';
+  hasBeenDownloaded: boolean;
   fullCivicNumber: '';
   fullCivicNumberSortable: '';
   fullLaneName: '';
