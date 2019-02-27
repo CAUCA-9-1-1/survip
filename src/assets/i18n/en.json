@@ -398,6 +398,7 @@
   "max10letters": "Can have maximum 10 letters",
   "nonDefaultReports": "Other reports",
   "cantModifySurvey": "This survey can't be modified because it is used in some inspection.",
+  "downloaded": "Downloaded",
   "information": "Information",
   "version": "Version"
 }

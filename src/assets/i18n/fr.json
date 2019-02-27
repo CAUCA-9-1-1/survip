@@ -399,6 +399,7 @@
   "max10letters": "Peut contenir 10 lettres maximum.",
   "nonDefaultReports": "Autres rapports",
   "cantModifySurvey": "Ce questionnaire n'est pas modifiable, car il est utilisé dans des inspections.",
+  "downloaded": "Téléchargé",
   "information": "Information",
   "version": "Version"
 }

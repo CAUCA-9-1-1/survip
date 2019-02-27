@@ -86,6 +86,7 @@
                 <dxo-lookup [dataSource]="inspectionStatuses" displayExpr="text" valueExpr="value">
                 </dxo-lookup>
             </dxi-column>
+            <dxi-column dataField="hasBeenDownloaded" cellTemplate="iconHasBeenDownloaded" caption="{{'downloaded' | translate}}"></dxi-column>
             <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowDeleting]="true">
                 <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
             </dxo-editing>
@@ -93,6 +94,12 @@
             <div *dxTemplate="let field of 'showmove'">
                 <dx-button icon="arrowup" (onClick)="moveUp(field)"></dx-button>
                 <dx-button icon="arrowdown" (onClick)="moveDown(field)"></dx-button>
+            </div>
+
+            <div *dxTemplate="let field of 'iconHasBeenDownloaded'">
+                <div *ngIf="field.value">
+                    <i class="material-icons">cloud_done</i>
+                </div>
             </div>
         </dx-data-grid>
     </div>
