@@ -301,6 +301,7 @@
   "collapseAll": "Masquer tout",
   "delete": "Supprimer",
   "wantToDeleteBatch": "Êtes-vous certain de vouloir supprimer ce lot?",
+  "wantToDeleteBatchWithDownloadedInspection": "Êtes-vous certain de vouloir supprimer ce lot? </br> Une ou plusieurs inspection(s) ont été téléchargées sur un appareil mobile.",
   "logout": "Déconnecter",
   "badLogin": "Mauvais nom d'utilisateur ou mot de passe",
   "errorDuringLogin": "Une erreur est survenue durant la connexion",
@@ -375,6 +376,8 @@
   "deleteBatchStartedMessage":"Ce lot ne pas être supprimé car au moins une de ses inspections est en traitement.",
   "edit":"Éditer",
   "deleteInspectionStartedMessage":"Cette inspection ne peut pas être supprimée car elle en cours.",
+  "deleteDownloadedInspection":"Voulez-vous supprimer cette inspection? </br> Elle a été téléchargée sur un appareil mobile.",
+  "deleteInspection":"Voulez-vous supprimer cette inspection?",
   "sketchToolTip": {
     "addPictograms": "Ajouter des pictogrammes",
     "square": "Carré",
