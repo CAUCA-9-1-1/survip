@@ -59,7 +59,7 @@
         </div>
     </div>
     <div *dxTemplate="let field of 'iconHasBeenDownloaded'" [fxShow]="selectedMode == 'mode1'">
-        <div *ngIf="field.row.data.hasBeenDownloaded == true">
+        <div *ngIf="field.row.data.hasBeenDownloaded">
             <i class="material-icons">cloud_done</i>
         </div>
     </div>
