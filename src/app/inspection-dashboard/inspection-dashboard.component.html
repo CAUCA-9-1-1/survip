@@ -58,6 +58,11 @@
                     (click)="removeBatch(field)"><mat-icon>delete</mat-icon></button>
         </div>
     </div>
+    <div *dxTemplate="let field of 'iconHasBeenDownloaded'" [fxShow]="selectedMode == 'mode1'">
+        <div *ngIf="field.row.data.hasBeenDownloaded == true">
+            <i class="material-icons">cloud_done</i>
+        </div>
+    </div>
 </dx-data-grid>
 
 <dx-load-panel
