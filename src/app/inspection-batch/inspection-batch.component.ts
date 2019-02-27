@@ -2,6 +2,7 @@ import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent, DxPopupComponent} from 'devextreme-angular';
 import {MatSnackBar} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
+import {confirm} from 'devextreme/ui/dialog';
 
 import {GridWithCrudService} from '../shared/classes/grid-with-crud-service';
 import {InspectionBatchService} from './shared/services/inspection-batch.service';
@@ -69,7 +70,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         this.createStore('AvailableBuildingForManagement');
         translateService.get([
             'all', 'addBuildingsToInspection', 'add', 'cancel', 'needInspectorAndBuildingForReadyInspection',
-            'delete', 'deleteInspectionStartedMessage'
+            'delete', 'deleteInspectionStartedMessage', 'deleteDownloadedInspection', 'deleteInspection'
         ]).subscribe(data => {
             this.labels = data;
 
@@ -257,6 +258,29 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
                 this.formReadyField.setValue(false);
             }
         }
+    }
+
+    public onRowRemoving(e) {
+        let message: string;
+        if(e.data.hasBeenDownloaded) {
+            message = this.labels['deleteDownloadedInspection'];
+        } else {
+            message = this.labels['deleteInspection'];
+        }
+
+        let index = e.component.getRowIndexByKey(e.key);
+        let rowEl = e.component.getRowElement(index);
+        rowEl[0].classList.add("rowToDelete");
+
+        let res = confirm(message ,this.labels['delete']);
+
+        e.cancel = new Promise((resolve, reject) => {
+            res.then((dialogResult) => {
+              rowEl[0].classList.remove("rowToDelete");
+              resolve(!dialogResult)
+            });
+      
+          })
     }
 
     public onBuildingsRemoved(e) {

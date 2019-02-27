@@ -299,6 +299,7 @@
   "collapseAll": "Collapse all",
   "delete": "Delete",
   "wantToDeleteBatch": "Are you sure you want to delete this batch?",
+  "wantToDeleteBatchWithDownloadedInspection": "Are you sure you sure you want to delete this batch? </br> One or many inspection(s) have been downloaded on a mobile device.",
   "logout": "Logout",
   "badLogin": "Bad username or password",
   "errorDuringLogin": "An error occur during connection",
@@ -374,6 +375,8 @@
   "deleteBatchStartedMessage":"This batch can't be deleted because on of his inspection is being processed.",
   "edit":"Edit",
   "deleteInspectionStartedMessage":"This inspection is being processed and can't be deleted.",
+  "deleteDownloadedInspection":"Are you sure you want to delete this inspection? </br> It has been downloaded on a mobile device.",
+  "deleteInspection":"Are you sure you want to delete this inspection?",
   "sketchToolTip": {
     "addPictograms": "Add pictograms",
     "square": "Square",

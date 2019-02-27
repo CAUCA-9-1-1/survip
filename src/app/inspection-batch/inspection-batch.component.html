@@ -68,6 +68,7 @@
                 (onInitialized)="setFormInspectionField(field)"
                 (onRowUpdated)="onBuildingsUpdated($event)"
                 (onRowRemoved)="onBuildingsRemoved($event)"
+                (onRowRemoving)="onRowRemoving($event)"
                 (onCellPrepared)="onDeletingValidation($event)">
             <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="90px" caption=" "></dxi-column>
             <dxi-column dataField="fullCivicNumber"
@@ -89,6 +90,7 @@
             <dxi-column dataField="hasBeenDownloaded" cellTemplate="iconHasBeenDownloaded" caption="{{'downloaded' | translate}}"></dxi-column>
             <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowDeleting]="true">
                 <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
+                <dxo-texts confirmDeleteMessage=""></dxo-texts>
             </dxo-editing>
 
             <div *dxTemplate="let field of 'showmove'">

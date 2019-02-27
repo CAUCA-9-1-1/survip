@@ -107,7 +107,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see', 'vacantLand', 'delete',
             'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building', 'approve', 'todo', 'absent',
             'started', 'waitingApprobation', 'approved', 'refused', 'canceled', 'collapseAll', 'expandAll', 'wantToDeleteBatch',
-            'generateReport', 'deleteBatchStartedMessage', 'nonDefaultReports', 'downloaded'
+            'generateReport', 'deleteBatchStartedMessage', 'nonDefaultReports', 'downloaded', 'wantToDeleteBatchWithDownloadedInspection'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -162,7 +162,13 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
 
     public removeBatch(field) {
         if (!field.data.items[0].isBatchStarted) {
-            confirm(this.labels['wantToDeleteBatch'], this.labels['delete']).then((result) => {
+            let message: string;
+            if(this.hasVisit(field.data.items)) {
+                message = this.labels['wantToDeleteBatchWithDownloadedInspection'];
+            } else {
+                message = this.labels['wantToDeleteBatch'];
+            }
+            confirm(message, this.labels['delete']).then((result) => {
                 if (result) {
                     this.batchService.remove(field.data.items[0].idBatch.toString()).subscribe(() => this.loadData());
                 }
@@ -173,6 +179,16 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 panelClass: ['error-toasts']
             });
         }
+    }
+
+    private hasVisit(items: any[]): boolean {
+        let toReturn = false;    
+        items.forEach(c => {
+                if(c.hasBeenDownloaded) {
+                    toReturn = true;
+                }
+            });
+        return toReturn;
     }
 
     public showInspection(field) {
