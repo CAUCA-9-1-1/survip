@@ -25,7 +25,7 @@ export class UnitOfMeasureComponent extends GridWithCrudService implements OnIni
       super(translateService, unitOfMeasureService);
 
       translateService.get([
-        'rate', 'pressure', 'diameter', 'capacity', 'dimension', 'cannotModifyExternalData'
+        'rate', 'pressure', 'diameter', 'capacity', 'dimension',
       ]).subscribe(labels => {
         this.labels = labels;
         const types = [];
@@ -63,10 +63,9 @@ export class UnitOfMeasureComponent extends GridWithCrudService implements OnIni
     public onEditorPreparing(e: any): void {
         if(e.row != null && e.row.data != null) {
             if(e.row.data.idExtern != null) {
-                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
 
-                this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e, this.labels['cannotModifyExternalData']);
+                this.readOnly = e.editorOptions.readOnly;
             } else {
                 this.readOnly = false;
             }

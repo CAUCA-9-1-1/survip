@@ -22,12 +22,6 @@ export class FireHydrantTypeComponent extends GridWithCrudService implements OnI
         protected translateService: TranslateService
         ) {
         super(translateService, fireHydrantTypeService);
-
-        this.translateService.get([
-            'cannotModifyExternalData'
-        ]).subscribe(labels => {
-            this.labels = labels;
-        });
     }
 
     setModel(data: any) {
@@ -51,10 +45,9 @@ export class FireHydrantTypeComponent extends GridWithCrudService implements OnI
     public onEditorPreparing(e: any): void {
         if(e.row != null && e.row.data != null) {
             if(e.row.data.idExtern != null) {
-                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
+                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
 
-                this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e, this.labels['cannotModifyExternalData']);
+                this.readOnly = e.editorOptions.readOnly;
             } else {
                 this.readOnly = false;
             }
