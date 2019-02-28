@@ -95,7 +95,8 @@
         <div id="civicNumberTemplate"class="dx-field">
             <div class="dx-field-label">{{'civicNumber' | translate}}</div>
             <div class="dx-field-value">
-                <dx-text-box [value]="field.row.data.civicNumber"
+                <dx-text-box [disabled]="readOnly"
+                             [value]="field.row.data.civicNumber"
                              (onValueChanged)="field.setValue($event.value)"></dx-text-box>
             </div>
         </div>
@@ -105,9 +106,12 @@
         <div id="addressLocationTemplate" class="dx-field">
             <div class="dx-field-label">{{'addressLocationType' | translate}}</div>
             <div class="dx-field-value">
-                <dx-lookup [dataSource]="addressLocationTypes"
-                           (onInitialized)="addressLocationOnInitialized(field, $event)" displayExpr="text"
-                           valueExpr="value" [value]="field.row.data.addressLocationType"
+                <dx-lookup [disabled]="readOnly" 
+                           [dataSource]="addressLocationTypes"
+                           (onInitialized)="addressLocationOnInitialized(field, $event)"
+                           displayExpr="text"
+                           valueExpr="value"
+                           [value]="field.row.data.addressLocationType"
                            (onValueChanged)="field.setValue($event.value)"></dx-lookup>
             </div>
         </div>
@@ -117,10 +121,16 @@
         <div id="laneTemplate" class="dx-field">
             <div class="dx-field-label">{{'lane' | translate}}</div>
             <div class="dx-field-value">
-                <dx-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id" (onOpened)="laneOnOpened($event)"
+                <dx-lookup [disabled]="readOnly"
+                           [dataSource]="lanes"
+                           displayExpr="name"
+                           valueExpr="id"
+                           (onOpened)="laneOnOpened($event)"
                            (onValueChanged)="laneOnValueChanged(field, $event)"
-                           (onInitialized)="laneOnInitialized(field, $event)" [showClearButton]="true"
-                           [closeOnOutsideClick]="true" [value]="field.row.data.idLane"></dx-lookup>
+                           (onInitialized)="laneOnInitialized(field, $event)"
+                           [showClearButton]="true"
+                           [closeOnOutsideClick]="true"
+                           [value]="field.row.data.idLane"></dx-lookup>
             </div>
         </div>
     </div>
@@ -129,10 +139,16 @@
         <div id="transversalTemplate" class="dx-field">
             <div class="dx-field-label">{{'transversal' | translate}}</div>
             <div class="dx-field-value">
-                <dx-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id" (onOpened)="laneOnOpened($event)"
+                <dx-lookup [disabled]="readOnly"
+                           [dataSource]="lanes"
+                           displayExpr="name"
+                           valueExpr="id"
+                           (onOpened)="laneOnOpened($event)"
                            (onValueChanged)="laneOnValueChanged(field, $event)"
-                           (onInitialized)="laneOnInitialized(field, $event)" [showClearButton]="true"
-                           [closeOnOutsideClick]="true" [value]="field.row.data.idLaneTransversal"></dx-lookup>
+                           (onInitialized)="laneOnInitialized(field, $event)"
+                           [showClearButton]="true"
+                           [closeOnOutsideClick]="true"
+                           [value]="field.row.data.idLaneTransversal"></dx-lookup>
             </div>
         </div>
     </div>
@@ -141,15 +157,16 @@
         <div id="physicalPositionTemplate" class="dx-field">
             <div class="dx-field-label">{{'physicalPosition' | translate}}</div>
             <div class="dx-field-value">
-                <dx-text-box [value]="field.row.data.physicalPosition"
+                <dx-text-box [disabled]="readOnly"
+                             [value]="field.row.data.physicalPosition"
                              (onValueChanged)="field.setValue($event.value)"></dx-text-box>
             </div>
         </div>
     </div>
 
     <div *dxTemplate="let field of 'editcoordinates'">
-        <ng-container>
-            <app-geolocation [limitTo]="selectedCityGeometry" [value]="field.row.data.coordinates" (valueChanged)="field.setValue($event)" [(readOnly)]="readOnly"></app-geolocation>
-        </ng-container>
+            <ng-container>
+                <app-geolocation [readOnly]="field.row.data.idExtern" [limitTo]="selectedCityGeometry" [value]="field.row.data.coordinates" (valueChanged)="field.setValue($event)"></app-geolocation>
+            </ng-container>
     </div>
 </dx-data-grid>
