@@ -294,7 +294,6 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             },
             onEditorPreparing: (e) => {
                 this.prepareEditorForLaneTransversalAndCity(e);
-                this.prepareEditorForRiskLevel(e);
                 this.prepareEditorForNumber(e);
                 this.prepareEditorForDecimal(e);
                 this.prepareEditorForMatricule(e);
@@ -318,25 +317,6 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             e.editorName = 'dxLookup';
             e.editorOptions.showClearButton = true;
             e.editorOptions.closeOnOutsideClick = true;
-            e.editorOptions.onValueChanged = (ev) => {
-                if (ev.value) {
-                    e.component.filter(e.dataField, '=', new Guid(ev.value));
-                } else {
-                    e.component.clearFilter();
-                }
-            };
-        }
-    }
-
-    private prepareEditorForRiskLevel(e) {
-        if (e.dataField === 'idRiskLevel') {
-            e.editorOptions.onValueChanged = (ev) => {
-                if (ev.value) {
-                    e.component.filter(e.dataField, '=', new Guid(ev.value));
-                } else {
-                    e.component.clearFilter();
-                }
-            };
         }
     }
 
@@ -502,6 +482,11 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                     return data.name;
                 }
             },
+            calculateFilterExpression: function(
+                filterValue,
+            ) {
+                return [this.dataField, "=", new Guid(filterValue)];
+            },
             visible: visible[1],
             width: width[1] || null,
         }, {
@@ -515,6 +500,11 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             dataField: 'idLane',
             caption: this.labels['lane'],
             dataType: 'string',
+            calculateFilterExpression: function(
+                filterValue,
+            ) {
+                return [this.dataField, "=", new Guid(filterValue)];
+            },
             lookup: {
                 dataSource: this.lanes,
                 valueExpr: 'id',
@@ -526,6 +516,11 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             dataField: 'idLaneTransversal',
             caption: this.labels['transversal'],
             dataType: 'string',
+            calculateFilterExpression: function(
+                filterValue,
+            ) {
+                return [this.dataField, "=", new Guid(filterValue)];
+            },
             lookup: {
                 dataSource: this.lanes,
                 valueExpr: 'id',
@@ -539,6 +534,11 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             dataType: 'string',
             visible: visible[5],
             width: width[5] || null,
+            calculateFilterExpression: function(
+                filterValue,
+            ) {
+                return [this.dataField, "=", new Guid(filterValue)];
+            },
             lookup: {
                 dataSource: this.cities,
                 valueExpr: 'id',
@@ -605,6 +605,12 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             dataField: 'idUtilisationCode',
             caption: this.labels['utilisationCode'],
             dataType: 'string',
+            calculateFilterExpression: function(
+                filterValue,
+            ) {
+                console.log("City");    
+                return [this.dataField, "=", new Guid(filterValue)];
+            },
             lookup: {
                 dataSource: this.utilisationCodes,
                 valueExpr: 'id',
