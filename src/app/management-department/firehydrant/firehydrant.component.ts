@@ -106,7 +106,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         });
 
         this.translateService.get([
-            'selectCity', 'add', 'cannotModifyExternalData'
+            'selectCity', 'add',
         ]).subscribe(labels => {
             this.labels = labels;
         });
@@ -122,22 +122,6 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         this.loadFireHydrantType();
         this.loadOperatorType();
         this.loadUnitOfMeasure();
-    }
-
-    public onInitialized(e) {
-        const options = e.component.option('editing');
-
-        if (options.popup) {
-            options.form.validationGroup = this.validationGroup;
-            options.form.onInitialized = (ev) => {
-                this.form = ev.component;
-            };
-            options.popup.onHiding = (ev) => {
-                this.dataSource.load();
-            };
-
-            e.component.option('editing', options);
-        }
     }
 
 
@@ -244,9 +228,8 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
         if(e.row != null && e.row.data != null) {
             if(e.row.data.idExtern != null) {
-                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
-                this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e, this.labels['cannotModifyExternalData']);
+                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.readOnly;
             } else {
                 this.readOnly = false;
             }
@@ -254,6 +237,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public addressLocationOnInitialized(field: any, e: any) {
+        if(this.readOnly) {
+            e.component.option('readOnly', true);
+        }
         if(field.data[field.column.dataField]) {
             let data = field.data[field.column.dataField].toString();
             if(data) {
@@ -264,6 +250,9 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public laneOnInitialized(field: any, e: any) {
+        if(this.readOnly) {
+            e.component.option('readOnly', true);
+        }
         this.formFields[field.column.dataField] = e.component;
         if(field.data[field.column.dataField]) {
             let data = field.data[field.column.dataField].toString();

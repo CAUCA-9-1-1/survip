@@ -402,7 +402,7 @@
   "nonDefaultReports": "Autres rapports",
   "cantModifySurvey": "Ce questionnaire n'est pas modifiable, car il est utilisé dans des inspections.",
   "downloaded": "Téléchargé",
-  "cannotModifyExternalData": " - Impossible de modifier, car les données proviennent d'un système externe.",
+  "cannotModifyExternalData": "Impossible de modifier, car les données proviennent d'un système externe.",
   "information": "Information",
   "version": "Version"
 }

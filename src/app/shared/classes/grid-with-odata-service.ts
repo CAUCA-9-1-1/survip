@@ -7,9 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 
 export abstract class GridWithOdataService {
     gridPopup: any;
-    notLoopPopupName = false;
     readOnly: boolean;
     closedTranslation: string;
+    readOnlyTranslation: string;
 
     public dataSource: DataSource;
     public validationGroup = 'custom-validation-group-' + (new Date()).getTime();
@@ -22,7 +22,10 @@ export abstract class GridWithOdataService {
     ) {
         this.dataSource = new DataSource(sourceConfig);
         if(this.translateService) {
-            this.translateService.get(['close']).subscribe(c => this.closedTranslation = c['close']);
+            this.translateService.get(['close', 'cannotModifyExternalData']).subscribe(c => {
+                this.closedTranslation = c['close'];
+                this.readOnlyTranslation = c['cannotModifyExternalData']
+            });
         } 
     }
 
@@ -36,17 +39,22 @@ export abstract class GridWithOdataService {
             };
             options.popup.onHiding = (ev) => {
                 this.dataSource.load();
-                this.notLoopPopupName = false;
             };
             options.popup.onOptionChanged = (ev) => {
                 this.gridPopup = ev.component;
             }
             options.popup.onShowing = (ev) => {
                 if(this.readOnly) {
-                    const toolbar = ev.component.option('toolbarItems')
+                    let toolbar = this.gridPopup.option('toolbarItems');
+                    toolbar.push({
+                        toolbar: "bottom",
+                        location: "before",
+                        html: '<i style="color:black;display:inline-block" class="material-icons">lock</i> <div style="color:red;display:inline-block">' + this.readOnlyTranslation + '</div>',
+                    });
+                    this.gridPopup.option('toolbarItems', toolbar);   
                     toolbar[0].options.visible = false;
                     toolbar[1].options.text = this.closedTranslation;
-                    ev.component.option('toolbarItems', toolbar);    
+                    this.gridPopup.option('toolbarItems', toolbar);    
                 }
             }
             e.component.option('editing', options);
@@ -80,16 +88,6 @@ export abstract class GridWithOdataService {
     }
 
     protected abstract setModel(data: any): any;
-
-    public setPopupName(e: any, translation: string) {
-        if (this.notLoopPopupName == false) {
-            if (this.gridPopup && e.editorOptions.disabled) {
-                let title = this.gridPopup.option('title');
-                this.gridPopup.option('title', title + translation);
-                this.notLoopPopupName = true;
-            }
-        }
-    }
 
     public onCellPrepared(e) {
         if(e.column.command == "edit") {

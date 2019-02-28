@@ -399,7 +399,7 @@
   "imageSizeWarning": "The image you are trying to send is too large.",
   "isDefaultReport": "Default Report",
   "nonDefaultReports": "Other reports",
-  "cannotModifyExternalData": " - Can't modify because this has been imported from an external system.",
+  "cannotModifyExternalData": "Can't modify because this has been imported from an external system.",
   "nonDefaultReports": "Other reports",
   "cantModifySurvey": "This survey can't be modified because it is used in some inspection.",
   "downloaded": "Downloaded",

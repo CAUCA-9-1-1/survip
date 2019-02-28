@@ -49,7 +49,7 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
         super(translateService);
 
         this.translateService.get([
-            'unknown', 'underground', 'aboveground', 'cannotModifyExternalData'
+            'unknown', 'underground', 'aboveground',
         ]).subscribe(labels => {
             this.labels = labels;
 
@@ -100,9 +100,8 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
         
         if(e.row != null && e.row.data != null) {
             if(e.row.data.idExtern != null) {
-                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
-                this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e, this.labels['cannotModifyExternalData']);
+                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.readOnly;
             } else {
                 this.readOnly = false;
             }

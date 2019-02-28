@@ -33,12 +33,6 @@ export class CityComponent extends GridWithCrudService implements OnInit {
         protected translateService: TranslateService
     ) {
         super(translateService, cityService);
-
-        this.translateService.get([
-            'cannotModifyExternalData'
-        ]).subscribe(labels => {
-            this.labels = labels;
-        });
     }
 
     setModel(data: any) {
@@ -85,9 +79,8 @@ export class CityComponent extends GridWithCrudService implements OnInit {
     public onEditorPreparing(e: any): void {
         if(e.row != null && e.row.data != null) {
             if(e.row.data.idExtern != null) {
-                e.editorOptions.disabled = e.row.data.idExtern.toString() != null;
-                this.readOnly = e.editorOptions.disabled;
-                this.setPopupName(e, this.labels['cannotModifyExternalData']);
+                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
+                this.readOnly = e.editorOptions.readOnly;
             } else {
                 this.readOnly = false;
             }

@@ -95,7 +95,7 @@
         <div id="civicNumberTemplate"class="dx-field">
             <div class="dx-field-label">{{'civicNumber' | translate}}</div>
             <div class="dx-field-value">
-                <dx-text-box [disabled]="readOnly"
+                <dx-text-box [readOnly]="readOnly"
                              [value]="field.row.data.civicNumber"
                              (onValueChanged)="field.setValue($event.value)"></dx-text-box>
             </div>
@@ -106,7 +106,7 @@
         <div id="addressLocationTemplate" class="dx-field">
             <div class="dx-field-label">{{'addressLocationType' | translate}}</div>
             <div class="dx-field-value">
-                <dx-lookup [disabled]="readOnly" 
+                <dx-lookup 
                            [dataSource]="addressLocationTypes"
                            (onInitialized)="addressLocationOnInitialized(field, $event)"
                            displayExpr="text"
@@ -121,7 +121,7 @@
         <div id="laneTemplate" class="dx-field">
             <div class="dx-field-label">{{'lane' | translate}}</div>
             <div class="dx-field-value">
-                <dx-lookup [disabled]="readOnly"
+                <dx-lookup 
                            [dataSource]="lanes"
                            displayExpr="name"
                            valueExpr="id"
@@ -139,7 +139,7 @@
         <div id="transversalTemplate" class="dx-field">
             <div class="dx-field-label">{{'transversal' | translate}}</div>
             <div class="dx-field-value">
-                <dx-lookup [disabled]="readOnly"
+                <dx-lookup 
                            [dataSource]="lanes"
                            displayExpr="name"
                            valueExpr="id"
@@ -157,7 +157,7 @@
         <div id="physicalPositionTemplate" class="dx-field">
             <div class="dx-field-label">{{'physicalPosition' | translate}}</div>
             <div class="dx-field-value">
-                <dx-text-box [disabled]="readOnly"
+                <dx-text-box [readOnly]="readOnly"
                              [value]="field.row.data.physicalPosition"
                              (onValueChanged)="field.setValue($event.value)"></dx-text-box>
             </div>
