@@ -173,6 +173,7 @@
   "publicLaneCode": "Code de voie public",
   "genericCode": "Code générique",
   "code3Letters": "Code à 3 lettres",
+  "utilizationCodeYear": "Année du code d'utilisation",
   "inspections": "Inspections",
   "inspector": "Inspecteur",
   "createdOn": "Date de création",
