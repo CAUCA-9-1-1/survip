@@ -7,7 +7,7 @@ export class City extends WithLocalization {
     emailAddress: string;
     idCounty: string;
     idCityType: string;
-
+    utilizationCodeYear: number;
     static fromJSON(data: object): City {
         const city = new City();
 

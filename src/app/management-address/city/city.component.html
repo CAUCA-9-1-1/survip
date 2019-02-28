@@ -33,6 +33,7 @@
     <dxi-column dataField="code" caption="{{'code' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="code3Letters" caption="{{'code3Letters' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="emailAddress" caption="{{'email' | translate}}" [visible]="false"></dxi-column>
+    <dxi-column dataField="utilizationCodeYear" caption="{{'utilizationCodeYear' | translate}}" [visible]="false"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -47,6 +48,7 @@
             <dxi-item dataField="code" [isRequired]="true" [editorOptions]="{maxLength: 10}"></dxi-item>
             <dxi-item dataField="code3Letters" [isRequired]="true" [editorOptions]="{maxLength: 3}"></dxi-item>
             <dxi-item dataField="emailAddress"></dxi-item>
+            <dxi-item dataField="utilizationCodeYear"></dxi-item>
         </dxo-form>
     </dxo-editing>
 
