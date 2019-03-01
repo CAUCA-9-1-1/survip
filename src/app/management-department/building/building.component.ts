@@ -48,6 +48,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     public lanes: any = [];
     public lanesOfCity: any = [];
     public utilisationCodes: any = [];
+    public utilisationCodesOfCity: any = [];
     public riskLevels: any = [];
     public selectedCity: string;
     public selectedBuidling: string;
@@ -179,6 +180,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                         this.dataSource.load();
                     }
                     this.loadLaneByCity(ev.value);
+                    this.loadUtilizationCodeByCity(ev.value);
                 }
             }
         });
@@ -298,5 +300,15 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                 sort: ['name'],
             };
         });
+    }
+
+    private loadUtilizationCodeByCity(idCity: string) {
+      this.utilisationCode.localizedByCity(idCity).subscribe( data => {
+        this.utilisationCodesOfCity = {
+          store: data,
+          select: ['id', 'name'],
+          sort: ['name']
+        };
+      });
     }
 }
