@@ -20,6 +20,10 @@ export class UtilisationCodeService extends RequestService {
         return this.get('UtilisationCode/localized');
     }
 
+    localizedByCity(cityId: string): Observable<UtilisationCode[]> {
+      return this.get('UtilisationCode/localizedByCity/' + cityId);
+    }
+
     save(code: UtilisationCode) {
         return this.post('UtilisationCode', code);
     }
