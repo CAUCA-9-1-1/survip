@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {DxChartModule, DxPieChartModule} from 'devextreme-angular';
+import { NgModule } from '@angular/core';
+import { DxChartModule, DxPieChartModule } from 'devextreme-angular';
 
-import {SharedModule} from '../shared/shared.module';
-import {StatisticsComponent} from './statistics.component';
+import { SharedModule } from '../shared/shared.module';
+import { StatisticsComponent } from './statistics.component';
 
 
 @NgModule({
