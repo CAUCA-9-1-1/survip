@@ -47,7 +47,7 @@ import {EnumModel} from '../management-type-system/shared/models/enum.model';
 export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-    public nonDefaultTemplateIdentifiers: ConfigurationTemplate[]; 
+    public nonDefaultTemplateIdentifiers: ConfigurationTemplate[];
     public defaultTemplateIdentifiers: ConfigurationTemplate[];
     public dataSource: any = {};
     public webusers: WebuserForWeb[] = [];
@@ -182,7 +182,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     }
 
     private hasVisit(items: any[]): boolean {
-        let toReturn = false;    
+        let toReturn = false;
         items.forEach(c => {
                 if(c.hasBeenDownloaded) {
                     toReturn = true;
@@ -625,7 +625,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             calculateFilterExpression: function(
                 filterValue,
             ) {
-                console.log("City");    
+                console.log("City");
                 return [this.dataField, "=", new Guid(filterValue)];
             },
             lookup: {
