@@ -33,7 +33,7 @@ export class UtilisationCodeComponent extends GridWithCrudService implements OnI
     getCodeName(data) {
         const code = UtilisationCode.fromJSON(data);
 
-        return code.getLocalization(config.locale, 'description');
+        return code.getLocalization(config.locale, 'name');
     }
 
     onInitNewRow(e) {
