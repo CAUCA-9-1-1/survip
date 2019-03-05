@@ -117,7 +117,7 @@ export class PermissionComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.permissionObjectService.remove(this.selectedPermissionObject.id).subscribe(data => {
-                    this.loadPermissionObject();
+                this.loadPermissionObject();
                 });
             }
         });
@@ -173,19 +173,21 @@ export class PermissionComponent implements OnInit {
     }
 
     private loadUsers() {
-        this.webuserService.getActive().subscribe(data => {
+        this.webuserService.getActiveForPermissions().subscribe(data => {
             this.users = data.sort((a, b) => {
-                return a.name > b.name ? 1 : -1;
-            });
-
-            this.users.forEach((user, index) => {
-                const find = this.permissionObjects.filter(obj => obj.genericId === user.id);
-
-                if (find.length > 0) {
-                    this.users.splice(index, 1);
-                }
-            });
+            return a.name > b.name ? 1 : -1;
+          });
+            this.showUsersThatAreNotInAGroup();
         });
+    }
+
+    private showUsersThatAreNotInAGroup() {
+      for (let index = (this.users.length - 1) ; index >= 0 ; index--) {
+        const find = this.permissionObjects.filter(obj => obj.genericId === this.users[index].id);
+        if (find.length > 0) {
+          this.users.splice(index, 1);
+        }
+      }
     }
 
     private loadSystemFeature() {

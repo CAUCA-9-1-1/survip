@@ -18,7 +18,11 @@ export class WebuserService extends RequestService {
     }
 
     getActive(): Observable<WebuserForWeb[]> {
-        return this.get('Webuser/Active');
+        return this.get('Webuser/Active/Departments');
+    }
+
+    getActiveForPermissions(): Observable<WebuserForWeb[]> {
+      return this.get('Webuser/Active');
     }
 
     save(webuser: Webuser) {
