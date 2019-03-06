@@ -10,6 +10,7 @@
         (onRowRemoved)="onRowRemoved($event)">
     <dxi-column dataField="cubf" caption="{{'cubf' | translate}}"></dxi-column>
     <dxi-column dataField="scian" caption="{{'scian' | translate}}"></dxi-column>
+    <dxi-column dataField="year" caption="{{'year' | translate}}" [visible]="false"></dxi-column>
     <dxi-column
             dataField="localizations"
             caption="{{'name' | translate}}"
@@ -26,6 +27,7 @@
         <dxo-form colCount="1">
             <dxi-item dataField="cubf" [isRequired]="true"></dxi-item>
             <dxi-item dataField="scian"></dxi-item>
+            <dxi-item dataField="year"></dxi-item>
             <dxi-item dataField="localizations"></dxi-item>
         </dxo-form>
     </dxo-editing>
