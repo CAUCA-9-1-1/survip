@@ -111,7 +111,6 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     onEditingStart(e) {
         e.data.password = '';
         e.data.resetPassword = this.getWebuserAttribute('reset_password', e.data);
-
         this.webuserFireSafetyDepartments = e.data.fireSafetyDepartments;
         this.selectedIdWebuser = e.data.id;
         this.selectedPassword = '';
@@ -182,6 +181,24 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         }
 
         this.departmentField.setValue(this.departmentField.data.fireSafetyDepartments);
+    }
+
+    public departmentEditorPreparing(e) {
+        if(e.dataField == 'idFireSafetyDepartment') {
+            e.editorOptions.onOpened = (e) => {
+                let ids = this.webuserFireSafetyDepartments.map(({ idFireSafetyDepartment }) => idFireSafetyDepartment);
+                let dataSource = Object.create(this.departments);
+                dataSource.store = [];
+                this.departments.store.forEach(c => {
+                    const index = ids.indexOf(c.id); 
+                    const selectedItemId = e.component.option('selectedItem');
+                    if(index && index == -1 || (selectedItemId && selectedItemId.id == c.id)) {
+                        dataSource.store.push({ id: c.id, name: c.name });
+                    }
+                });
+                e.component.option('dataSource', dataSource);
+            };
+        }
     }
 
     private setWebuserAttributes(e) {
