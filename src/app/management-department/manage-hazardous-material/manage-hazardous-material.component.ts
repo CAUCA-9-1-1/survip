@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {
     InspectionBuildingHazardousMaterialService
@@ -49,7 +48,7 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
         super(translateService);
 
         this.translateService.get([
-            'unknown', 'underground', 'aboveground',
+            'unknown', 'underground', 'aboveground'
         ]).subscribe(labels => {
             this.labels = labels;
 
@@ -98,8 +97,8 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
             e.editorName = 'dxTextArea';
         }
         
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
+        if (e.row != null && e.row.data != null) {
+            if (e.row.data.idExtern != null) {
                 e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.readOnly;
             } else {

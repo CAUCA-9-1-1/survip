@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-
 import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {RiskLevelService} from '../shared/services/risk-level.service';
 import {RiskLevel} from '../shared/models/risk-level.model';
 import { TranslateService } from '@ngx-translate/core';
-
 
 @Component({
     selector: 'app-management-system-risk-level',
@@ -17,7 +15,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class RiskLevelComponent extends GridWithCrudService implements OnInit {
     public readOnlyImported = !this.riskLevelService.readOnlyImported;
-    private labels: any = {};
 
     constructor(
         private riskLevelService: RiskLevelService,
@@ -44,9 +41,9 @@ export class RiskLevelComponent extends GridWithCrudService implements OnInit {
         e.data.isActive = true;
     }
 
-    public onEditorPreparing(e: any): void {
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
+    public onEditorPreparing(e) {
+        if (e.row != null && e.row.data != null) {
+            if (e.row.data.idExtern != null) {
                 e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.readOnly;
             } else {

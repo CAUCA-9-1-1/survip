@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-
 import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {UtilisationCode} from '../shared/models/utilisation-code.model';
@@ -17,7 +16,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class UtilisationCodeComponent extends GridWithCrudService implements OnInit {
     public readOnlyImported = !this.utilisationCodeService.readOnlyImported;
-    private labels: any = {};
 
     constructor(
         private utilisationCodeService: UtilisationCodeService,
@@ -44,9 +42,9 @@ export class UtilisationCodeComponent extends GridWithCrudService implements OnI
         e.data.isActive = true;
     }
 
-    public onEditorPreparing(e: any): void {
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
+    public onEditorPreparing(e) {
+        if (e.row != null && e.row.data != null) {
+            if (e.row.data.idExtern != null) {
                 e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.readOnly;
             } else {

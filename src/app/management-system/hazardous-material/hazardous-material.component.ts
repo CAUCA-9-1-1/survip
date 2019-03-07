@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-
 import config from '../../../assets/config/config.json';
 import {HazardousMaterial} from '../shared/models/hazardous-material.model';
 import {HazardousMaterialService} from '../shared/services/hazardous-material.service';
@@ -17,7 +16,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HazardousMaterialComponent extends GridWithCrudService implements OnInit {
     public readOnlyImported = !this.hazardousMaterialService.readOnlyImported;
-    private labels: any = {};
 
     constructor(
         private hazardousMaterialService: HazardousMaterialService,
@@ -44,9 +42,9 @@ export class HazardousMaterialComponent extends GridWithCrudService implements O
         e.data = Object.assign(new HazardousMaterial(), {});
     }
     
-    public onEditorPreparing(e: any): void {
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
+    public onEditorPreparing(e) {
+        if (e.row != null && e.row.data != null) {
+            if (e.row.data.idExtern != null) {
                 e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.readOnly;
             } else {

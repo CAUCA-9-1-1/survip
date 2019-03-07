@@ -28,7 +28,6 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
         closeOnOutsideClick: true,
     };
     public phoneEditorOptions = {mask : '(000) 000-0000', maskRules : { X: /[02-9]/ }, maxlength: 10, useMaskedValue: true };
-    private labels: any = {};
     
     constructor(
         firestationService: FirestationService,
@@ -55,9 +54,9 @@ export class FirestationComponent extends GridWithCrudService implements OnInit 
         return data.civicNumber + ' ' + data.lane + ', ' + data.city + (data.name ? ' (' + data.name + ')' : '');
     }
 
-    public onEditorPreparing(e: any): void {
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
+    public onEditorPreparing(e) {
+        if (e.row != null && e.row.data != null) {
+            if (e.row.data.idExtern != null) {
                 e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.readOnly;
             } else {

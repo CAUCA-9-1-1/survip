@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {BuildingContactService} from '../shared/services/building-contact.service';
 import {InspectionBuildingContactService} from '../../inspection-approval/shared/services/inspection-building-contact.service';
@@ -26,7 +25,6 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
     @Input() readOnly: boolean;
 
     idBuilding: string;
-    private labels: any = {};
 
     constructor(
         private inspectionService: InspectionBuildingContactService,
@@ -57,9 +55,9 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
         e.data.isActive = true;
     }
 
-    public onEditorPreparing(e: any): void {
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
+    public onEditorPreparing(e) {
+        if (e.row != null && e.row.data != null) {
+            if (e.row.data.idExtern != null) {
                 e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.readOnly;
             } else {
