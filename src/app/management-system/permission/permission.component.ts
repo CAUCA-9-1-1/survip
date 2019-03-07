@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 import {DxButtonComponent} from 'devextreme-angular';
-
 import {PermissionObjectService} from '../shared/services/permission-object.service';
 import {PermissionObject} from '../shared/models/permissionobject.model';
 import {PermissionService} from '../../user-access/shared/services/permission.service';
@@ -49,9 +48,7 @@ export class PermissionComponent implements OnInit {
     ) {
         this.editing = {
             mode: 'cell',
-            allowUpdating: true,
-            // allowAdding: true,
-            // allowDeleting: true,
+            allowUpdating: true
         };
         this.filter = {
             visible: true
@@ -203,9 +200,5 @@ export class PermissionComponent implements OnInit {
 
             this.loadUsers();
         });
-    }
-
-    private onCalculateDisplayValue(column, data) {
-        return (data[column] === true ? this.labels['yes'] : (data[column] === false ? this.labels['no'] : this.labels['seeParent']));
     }
 }
