@@ -57,15 +57,4 @@ export class StateComponent extends GridWithCrudService implements OnInit {
             };
         });
     }
-
-    public onEditorPreparing(e) {
-        if (e.row != null && e.row.data != null) {
-            if (e.row.data.idExtern != null) {
-                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
-                this.readOnly = e.editorOptions.readOnly;
-            } else {
-                this.readOnly = false;
-            }
-        }
-    }
 }

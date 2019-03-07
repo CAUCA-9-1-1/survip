@@ -41,15 +41,4 @@ export class HazardousMaterialComponent extends GridWithCrudService implements O
     onInitNewRow(e) {
         e.data = Object.assign(new HazardousMaterial(), {});
     }
-    
-    public onEditorPreparing(e) {
-        if (e.row != null && e.row.data != null) {
-            if (e.row.data.idExtern != null) {
-                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
-                this.readOnly = e.editorOptions.readOnly;
-            } else {
-                this.readOnly = false;
-            }
-        }
-    }
 }

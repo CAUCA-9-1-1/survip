@@ -153,4 +153,14 @@ export abstract class GridWithCrudService {
             }
         }
     }
+
+    public onEditorPreparing(e) {
+        this.readOnly = false;
+        if (e.row && e.row.data) {
+            if (e.row.data.idExtern) {
+                e.editorOptions.readOnly = true;
+                this.readOnly = e.editorOptions.readOnly;
+            }
+        }
+    }
 }
