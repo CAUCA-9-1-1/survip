@@ -16,13 +16,13 @@ export abstract class GridWithCrudService {
     constructor(
         protected translateService?: TranslateService,
         protected sourceService?: any,
-    ) { 
-        if(this.translateService) {
+    ) {
+        if (this.translateService) {
             this.translateService.get(['close', 'cannotModifyExternalData']).subscribe(c => {
                 this.closedTranslation = c['close'];
                 this.readOnlyTranslation = c['cannotModifyExternalData']
             });
-        } 
+        }
     }
 
     public onInitialized(e) {
@@ -40,19 +40,19 @@ export abstract class GridWithCrudService {
                 this.gridPopup = ev.component;
             }
             options.popup.onShowing = (ev) => {
-                if(this.readOnly) {
+                if (this.readOnly) {
                     let toolbar = this.gridPopup.option('toolbarItems');
                     toolbar.push({
-                        toolbar: "bottom",
-                        location: "before",
+                        toolbar: 'bottom',
+                        location: 'before',
                         html: '<i style="color:black;display:inline-block" class="material-icons">lock</i> <div style="color:red;display:inline-block">' + this.readOnlyTranslation + '</div>',
                     });
                     console.log(toolbar);
-                    this.gridPopup.option('toolbarItems', toolbar);   
+                    this.gridPopup.option('toolbarItems', toolbar);
                     toolbar = ev.component.option('toolbarItems')
                     toolbar[0].options.visible = false;
                     toolbar[1].options.text = this.closedTranslation;
-                    this.gridPopup.option('toolbarItems', toolbar);    
+                    this.gridPopup.option('toolbarItems', toolbar);
                 }
             }
             e.component.option('editing', options);
@@ -143,9 +143,9 @@ export abstract class GridWithCrudService {
     }
 
     public onCellPrepared(e) {
-        if(e.column.command == "edit") {
-            if(e.data && e.data.idExtern) {
-                if(e.data.idExtern.toString()) {
+        if (e.column.command === 'edit') {
+            if (e.data && e.data.idExtern) {
+                if (e.data.idExtern.toString()) {
                     e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-link-delete');
                     e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-link');
                     e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-icon-trash');

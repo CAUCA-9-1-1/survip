@@ -1,7 +1,6 @@
 import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import Guid from 'devextreme/core/guid';
-
 import config from '../../../assets/config/config.json';
 import {GridWithOdataService} from '../../shared/classes/grid-with-odata-service';
 import {Lane} from '../shared/models/lane.model';
@@ -48,14 +47,14 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
                 url: 'Lane',
                 key: 'id',
                 keyType: 'Guid',
-              onRefreshLogin: () => {
-                this.dataGrid.instance.refresh();
-              }
+                onRefreshLogin: () => {
+                    this.dataGrid.instance.refresh();
+                }
             }),
         });
 
         this.translateService.get([
-            'selectCity', 'add', 
+            'selectCity', 'add'
         ]).subscribe(labels => {
             this.labels = labels;
         });
@@ -80,7 +79,7 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
-        if(!this.cityService.readOnlyImported) {
+        if (!this.cityService.readOnlyImported) {
             toolbarItems.unshift({
                 widget: 'dxButton',
                 location: 'after',
@@ -157,9 +156,9 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
         });
     }
 
-    public onEditorPreparing(e: any): void {
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
+    public onEditorPreparing(e) {
+        if (e.row != null && e.row.data != null) {
+            if (e.row.data.idExtern != null) {
                 e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.readOnly;
             } else {

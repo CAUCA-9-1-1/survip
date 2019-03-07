@@ -22,7 +22,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class CountyComponent extends GridWithCrudService implements OnInit {
     regions: any = {};
     public readOnlyImported = !this.stateService.readOnlyImported;
-    private labels: any = {};
 
     constructor(
         countyService: CountyService,
@@ -62,9 +61,9 @@ export class CountyComponent extends GridWithCrudService implements OnInit {
         });
     }
 
-    public onEditorPreparing(e: any): void {
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
+    public onEditorPreparing(e) {
+        if (e.row != null && e.row.data != null) {
+            if (e.row.data.idExtern != null) {
                 e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
                 this.readOnly = e.editorOptions.readOnly;
             } else {

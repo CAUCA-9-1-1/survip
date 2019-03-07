@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import config from '../../../assets/config/config.json';
 import {UnitOfMeasureService} from '../shared/services/unit-of-measure.service';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {UnitOfMeasure} from '../shared/models/unit-of-measure.model';
 import {TranslateService} from '@ngx-translate/core';
-
 
 @Component({
     selector: 'app-management-system-unit-of-measure',
@@ -60,11 +58,10 @@ export class UnitOfMeasureComponent extends GridWithCrudService implements OnIni
         e.data.isActive = true;
     }
 
-    public onEditorPreparing(e: any): void {
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
+    public onEditorPreparing(e) {
+        if (e.row != null && e.row.data != null) {
+            if (e.row.data.idExtern != null) {
                 e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
-
                 this.readOnly = e.editorOptions.readOnly;
             } else {
                 this.readOnly = false;

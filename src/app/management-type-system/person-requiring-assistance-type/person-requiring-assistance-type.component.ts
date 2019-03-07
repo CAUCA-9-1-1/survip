@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-
 import config from '../../../assets/config/config.json';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {PersonRequiringAssistanceType} from '../shared/models/person-requiring-assistance-type.model';
 import {PersonRequiringAssistanceTypeService} from '../shared/services/person-requiring-assistance-type.service';
 import { TranslateService } from '@ngx-translate/core';
-
 
 @Component({
     selector: 'app-management-system-person-requiring-assistance-type',
@@ -17,7 +15,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class PersonRequiringAssistanceTypeComponent extends GridWithCrudService implements OnInit {
     public readOnlyImported = !this.personRequiringAssistanceTypeService.readOnlyImported;
-    private labels: any = {};
 
     constructor(
         private personRequiringAssistanceTypeService: PersonRequiringAssistanceTypeService,
@@ -44,11 +41,10 @@ export class PersonRequiringAssistanceTypeComponent extends GridWithCrudService 
         e.data.isActive = true;
     }
 
-    public onEditorPreparing(e: any): void {
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
+    public onEditorPreparing(e) {
+        if (e.row != null && e.row.data != null) {
+            if (e.row.data.idExtern != null) {
                 e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
-
                 this.readOnly = e.editorOptions.readOnly;
             } else {
                 this.readOnly = false;
