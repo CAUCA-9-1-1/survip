@@ -146,10 +146,12 @@ export class PermissionComponent implements OnInit {
     }
 
     public onAddUser() {
+        let usersNotInGroup = this.getUsersWhoAreNotInTheSelectedGroup();
+
         const dialogRef = this.dialog.open(AddUserInGroupComponent, {
             width: '400px',
             data: {
-                users: this.users,
+                users: usersNotInGroup,
             },
         });
 
@@ -170,6 +172,21 @@ export class PermissionComponent implements OnInit {
                 });
             }
         });
+    }
+
+    private getUsersWhoAreNotInTheSelectedGroup() {
+        const selectedGroupId = this.selectedPermissionObject.isGroup ?
+            this.selectedPermissionObject.id :
+            this.selectedPermissionObject.idPermissionObjectParent;
+        const groupUserIds = this.permissionObjects.filter(c => c.idPermissionObjectParent == selectedGroupId).map(({ genericId }) => genericId);
+        let usersNotInGroup = [];
+        this.users.forEach(user => {
+            const index = groupUserIds.indexOf(user.id);
+            if (index && index == -1) {
+                usersNotInGroup.push(user);
+            }
+        });
+        return usersNotInGroup;
     }
 
     private loadUsers() {
