@@ -93,7 +93,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     }
 
     onEditorPreparing(e) {
-        if (e.dataField === 'password'  || e.dataField == 'passwordConfirm') {
+        if (e.dataField === 'password'  || e.dataField === 'passwordConfirm') {
             e.editorOptions.mode = 'password';
         }
     }
@@ -129,7 +129,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     }
 
     ondRowValidating(e) {
-        if(!e.isValid && e.brokenRules[0].type == "compare" && e.newData.password == null) {
+        if (!e.isValid && e.brokenRules[0].type === 'compare' && !e.newData.password) {
             e.isValid = true;
         }
     }
@@ -184,19 +184,19 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     }
 
     public departmentEditorPreparing(e) {
-        if(e.dataField == 'idFireSafetyDepartment') {
-            e.editorOptions.onOpened = (e) => {
-                let ids = this.webuserFireSafetyDepartments.map(({ idFireSafetyDepartment }) => idFireSafetyDepartment);
-                let dataSource = Object.create(this.departments);
+        if (e.dataField === 'idFireSafetyDepartment') {
+            e.editorOptions.onOpened = (ev) => {
+                const ids = this.webuserFireSafetyDepartments.map(({ idFireSafetyDepartment }) => idFireSafetyDepartment);
+                const dataSource = Object.create(this.departments);
                 dataSource.store = [];
                 this.departments.store.forEach(c => {
-                    const index = ids.indexOf(c.id); 
+                    const index = ids.indexOf(c.id);
                     const selectedItemId = e.component.option('selectedItem');
-                    if(index && index == -1 || (selectedItemId && selectedItemId.id == c.id)) {
+                    if (index && index === -1 || (selectedItemId && selectedItemId.id === c.id)) {
                         dataSource.store.push({ id: c.id, name: c.name });
                     }
                 });
-                e.component.option('dataSource', dataSource);
+                ev.component.option('dataSource', dataSource);
             };
         }
     }
