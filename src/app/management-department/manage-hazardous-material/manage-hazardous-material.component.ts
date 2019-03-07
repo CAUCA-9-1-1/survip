@@ -97,9 +97,9 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
             e.editorName = 'dxTextArea';
         }
         
-        if (e.row != null && e.row.data != null) {
-            if (e.row.data.idExtern != null) {
-                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
+        if (e.row && e.row.data) {
+            if (e.row.data.idExtern) {
+                e.editorOptions.readOnly = true;
                 this.readOnly = e.editorOptions.readOnly;
             } else {
                 this.readOnly = false;

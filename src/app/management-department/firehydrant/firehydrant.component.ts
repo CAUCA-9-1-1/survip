@@ -226,14 +226,13 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
             };
         }
 
-        if(e.row != null && e.row.data != null) {
-            if(e.row.data.idExtern != null) {
-                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
-                this.readOnly = e.editorOptions.readOnly;
-            } else {
-                this.readOnly = false;
+            this.readOnly = false;
+            if (e.row && e.row.data) {
+                if (e.row.data.idExtern) {
+                    e.editorOptions.readOnly = true;
+                    this.readOnly = e.editorOptions.readOnly;
+                }
             }
-        }
     }
 
     public addressLocationOnInitialized(field: any, e: any) {

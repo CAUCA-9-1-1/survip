@@ -40,16 +40,13 @@ export class ConnectionTypeComponent extends GridWithCrudService implements OnIn
         e.data.isActive = true;
     }
 
-    public onEditorPreparing(e) {
-        if (e.row != null && e.row.data != null) {
-            if (e.row.data.idExtern != null) {
-                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
-                this.readOnly = e.editorOptions.readOnly;
-            } else {
-                this.readOnly = false;
+    public onEditingStart(e) {
+        this.readOnly = false;
+        if (e.data) {
+            if (e.data.idExtern) {
+                console.log(e);
+                this.readOnly = true;
             }
-        } else {
-            this.readOnly = true;
         }
     }
 }

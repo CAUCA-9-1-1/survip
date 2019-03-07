@@ -157,12 +157,11 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
     }
 
     public onEditorPreparing(e) {
-        if (e.row != null && e.row.data != null) {
-            if (e.row.data.idExtern != null) {
-                e.editorOptions.readOnly = e.row.data.idExtern.toString() != null;
+        this.readOnly = false;
+        if (e.row && e.row.data) {
+            if (e.row.data.idExtern) {
+                e.editorOptions.readOnly = true;
                 this.readOnly = e.editorOptions.readOnly;
-            } else {
-                this.readOnly = false;
             }
         }
     }
