@@ -212,6 +212,7 @@
   "laneAndIntersection": "lane and intersection",
   "laneAndTransversal": "lane and transversal",
   "coordinates": "Geolocation",
+  "NotSpecified": "Not specified",
   "locate": "Locate",
   "text": "Approximate location",
   "physicalPosition": "Physical position",
