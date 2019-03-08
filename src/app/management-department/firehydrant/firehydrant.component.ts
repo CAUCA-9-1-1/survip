@@ -387,12 +387,8 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public editingEnd() {
-        /*if (this.form && this.popupInitialized) {
+        if (this.form && this.popupInitialized) {
             this.popupInitialized = false;
-        }*/
-    }
-
-    public ngOnDestroy() {
-        this.popupInitialized = false;
+        }
     }
 }
