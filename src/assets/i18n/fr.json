@@ -213,6 +213,7 @@
   "laneAndIntersection": "Rue et intersection",
   "laneAndTransversal": "Rue et transversale",
   "coordinates": "Geolocalisation",
+  "NotSpecified": "Non spécifié",
   "locate": "Localiser",
   "text": "Location approximative",
   "physicalPosition": "Position physique",

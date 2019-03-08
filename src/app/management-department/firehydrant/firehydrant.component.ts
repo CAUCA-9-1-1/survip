@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit, ViewChild} from '@angular/core';
+import {Component, Injector, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {TranslateService} from '@ngx-translate/core';
 import Guid from 'devextreme/core/guid';
@@ -31,7 +31,7 @@ import {EnumModel} from '../../management-type-system/shared/models/enum.model';
         LaneService,
     ]
 })
-export class FirehydrantComponent extends GridWithOdataService implements OnInit {
+export class FirehydrantComponent extends GridWithOdataService implements OnInit, OnDestroy {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
     protected form: any;
@@ -193,14 +193,16 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
         e.data.color = '#FF0000';
         e.data.isActive = true;
         e.data.idCity = this.selectedCity;
-        e.data.locationType = 'Address';
+        e.data.locationType = 'NotSpecified';
         e.data.rateOperatorType = 'Equal';
         e.data.pressureOperatorType = 'Equal';
         e.data.coordinates = null;
         e.data.idUnitOfMeasureRate = '';
         e.data.idUnitOfMeasurePressure = '';
-        this.selectedLocationType = 'Address';
+        this.selectedLocationType = 'NotSpecified';
         this.cityId = this.selectedCity;
+        this.displayLocationType();
+        console.log('onInitNewRow', e);
     }
 
     public onEditingStart(e) {
@@ -347,14 +349,14 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
             this.changeParentDisplay(document.querySelector('#addressLocationTemplate'));
         }
 
-        if (document.querySelector('#transversalTemplate')) {
-            document.querySelector('#transversalTemplate').className = this.selectedLocationType === 'LaneAndTransversal' ? 'dx-field' : 'display-locationType';
-            this.changeParentDisplay(document.querySelector('#transversalTemplate'));
+        if (document.querySelector('.dx-popup-content #transversalTemplate')) {
+            document.querySelector('.dx-popup-content #transversalTemplate').className = this.selectedLocationType === 'LaneAndTransversal' ? 'dx-field' : 'display-locationType';
+            this.changeParentDisplay(document.querySelector('.dx-popup-content #transversalTemplate'));
         }
 
-        if (document.querySelector('#laneTemplate')) {
-            document.querySelector('#laneTemplate').className = (this.selectedLocationType === 'Address' || this.selectedLocationType === 'LaneAndTransversal') ? 'dx-field' : 'display-locationType';
-            this.changeParentDisplay(document.querySelector('#laneTemplate'));
+        if (document.querySelector('.dx-popup-content #laneTemplate')) {
+            document.querySelector('.dx-popup-content #laneTemplate').className = (this.selectedLocationType === 'Address' || this.selectedLocationType === 'LaneAndTransversal') ? 'dx-field' : 'display-locationType';
+            this.changeParentDisplay(document.querySelector('.dx-popup-content #laneTemplate'));
         }
 
         if (document.querySelector('#physicalPositionTemplate')) {
@@ -385,8 +387,12 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public editingEnd() {
-        if (this.form && this.popupInitialized) {
+        /*if (this.form && this.popupInitialized) {
             this.popupInitialized = false;
-        }
+        }*/
+    }
+
+    public ngOnDestroy() {
+        this.popupInitialized = false;
     }
 }
