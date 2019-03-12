@@ -1,4 +1,4 @@
-import {Component, Injector, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {TranslateService} from '@ngx-translate/core';
 import Guid from 'devextreme/core/guid';
@@ -31,7 +31,7 @@ import {EnumModel} from '../../management-type-system/shared/models/enum.model';
         LaneService,
     ]
 })
-export class FirehydrantComponent extends GridWithOdataService implements OnInit, OnDestroy {
+export class FirehydrantComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
     protected form: any;
