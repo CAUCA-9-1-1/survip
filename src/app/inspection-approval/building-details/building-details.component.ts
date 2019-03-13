@@ -4,6 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ConstructionService} from '../../management-system/shared/services/construction.service';
 import {UnitOfMeasureService} from '../../management-type-system/shared/services/unit-of-measure.service';
 import {InspectionBuildingService} from '../shared/services/inspection-building.service';
+import {BuildingResume} from '../../management-department/shared/models/building.model';
 
 
 @Component({
@@ -19,12 +20,14 @@ import {InspectionBuildingService} from '../shared/services/inspection-building.
 })
 export class BuildingDetailsComponent implements OnInit {
     @Input()
-    set building(id: string) {
-        this.idBuilding = id;
-        this.detail = {};
-        this.loadData();
+    set building(building: BuildingResume) {
+      this.idBuilding = building.id;
+      this.currentBuilding = building;
+      this.detail = {};
+      this.loadData();
     }
 
+    public currentBuilding: any = {};
     private idBuilding: string;
     private isInitialize = false;
 
@@ -78,6 +81,13 @@ export class BuildingDetailsComponent implements OnInit {
             this.inspectionBuildingService.saveDetail(this.detail).subscribe();
         }
     }
+
+  public onChangeBuilding(e) {
+    if (this.currentBuilding[e.component.option('name')] !== e.component.option('value')) {
+      this.currentBuilding[e.component.option('name')] = e.component.option('value');
+      this.inspectionBuildingService.saveBuilding(this.currentBuilding).subscribe();
+    }
+  }
 
     private loadData() {
         if (!this.idBuilding) {

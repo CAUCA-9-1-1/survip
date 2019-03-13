@@ -4,7 +4,7 @@ import {map} from 'rxjs/operators';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {Inspection} from '../models/inspection.model';
-import {Building} from '../../../management-department/shared/models/building.model';
+import {BuildingResume} from '../../../management-department/shared/models/building.model';
 
 
 @Injectable()
@@ -34,8 +34,8 @@ export class InspectionService extends RequestService {
         return this.get('InspectionSurveyAnswer/Inspection/' + id + '/Summary');
     }
 
-    getBuildings(id: string): Observable<Building[]> {
-        return this.get('inspection/' + id + '/building');
+    getBuildings(id: string): Observable<BuildingResume[]> {
+        return this.get('inspection/' + id + '/buildingresume');
     }
 
     approve(id: string): Observable<Boolean> {

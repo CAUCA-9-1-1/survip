@@ -4,18 +4,18 @@
     </mat-toolbar-row>
 </mat-toolbar>
 <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedIndexChange)="selectBuilding($event)">
-    <mat-tab *ngFor="let building of buildings" [label]="building.name">
+    <mat-tab *ngFor="let building of buildings; let i = index" [label]="getBuildingDescription(building, i)">
         <div [fxShow]="selected == 'buildingDetails'">
-            <app-building-details [building]="selected == 'buildingDetails' ? selectedIdBuilding : ''"></app-building-details>
+            <app-building-details [building]="selected == 'buildingDetails' ? selectedBuilding : {}"></app-building-details>
         </div>
         <div [fxShow]="selected == 'contacts'">
             <app-building-contacts [building]="selected == 'contacts' ? selectedIdBuilding : ''"></app-building-contacts>
         </div>
         <div [fxShow]="selected == 'pnaps'">
-            <app-building-pnaps [building]="selected == 'pnaps' ? selectedIdBuilding : ''"></app-building-pnaps>
+            <app-building-pnaps [building]="selected == 'pnaps' ?selectedIdBuilding : ''"></app-building-pnaps>
         </div>
         <div [fxShow]="selected == 'hazardousMaterials'">
-            <app-building-hazardous-materials [building]="selected == 'hazardousMaterials' ? selectedIdBuilding : ''"></app-building-hazardous-materials>
+            <app-building-hazardous-materials [building]="selected == 'hazardousMaterials' ?selectedIdBuilding : ''"></app-building-hazardous-materials>
         </div>
         <div [fxShow]="selected == 'fireProtection'">
             <app-building-fire-protection [building]="selected == 'fireProtection' ? selectedIdBuilding : ''"></app-building-fire-protection>
