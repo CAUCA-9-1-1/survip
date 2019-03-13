@@ -50,7 +50,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     public utilisationCodesOfCity: any = [];
     public riskLevels: any = [];
     public selectedCity: string;
-    public selectedBuidling: string;
+    public selectedBuilding: any;
     public parent: Building;
     public isParent = true;
     public popupVisible = {
@@ -208,7 +208,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     public onInitNewRow(e) {
         const building = new Building();
 
-        this.selectedBuidling = null;
+        this.selectedBuilding = null;
 
         if (this.parent) {
             e.data = Object.assign(this.parent, {
@@ -228,11 +228,11 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     }
 
     public onEditingStart(e) {
-        this.selectedBuidling = e.data;
+        this.selectedBuilding = e.data;
     }
 
     public showPopup(popupName: string) {
-        if (!this.selectedBuidling) {
+        if (!this.selectedBuilding) {
             alert(this.labels['youNeedToSaveYourNewItem'], this.labels['save']);
 
             return null;
