@@ -1,11 +1,19 @@
-import {WithLocalization} from '../../../shared/models/with-localization';
 import {Picture} from '../../../shared/models/picture.model';
 
 
-export class Building extends WithLocalization {
+export class BuildingResume {
+  id: string;
+  isMainBuilding: boolean;
+  aliasName: string;
+  corporateName: string;
+  idLaneTransversal: string;
+}
+
+export class Building {
+    id: string;
     appartmentNumber = '';
     buildingValue = 0.0;
-    childType = 0;
+    childType: 0;
     civicLetter = '';
     civicLetterSupp = '';
     civicNumber = '';
@@ -15,6 +23,8 @@ export class Building extends WithLocalization {
     details = '';
     floor = '';
     idLane: string;
+    aliasName: '';
+    corporateName: '';
     idLaneTransversal: string = null;
     idParentBuilding: string = null;
     idPicture: string = null;

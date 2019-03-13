@@ -10,13 +10,6 @@
         (onEditingStart)="onEditingStart($event)"
         (onRowValidating)="onRowValidating($event)">
     <dxi-column
-            dataField="localizations"
-            caption="{{'name' | translate}}"
-            [allowSorting]="false"
-            [calculateCellValue]="getBuildingName"
-            editCellTemplate="editname">
-    </dxi-column>
-    <dxi-column
             dataField="picture"
             caption="{{'picture' | translate}}"
             editCellTemplate="editphoto"
@@ -30,6 +23,8 @@
         <dxo-lookup [dataSource]="lanes" displayExpr="name" valueExpr="id">
         </dxo-lookup>
     </dxi-column>
+  <dxi-column dataField="aliasName" caption="{{'name' | translate}}"></dxi-column>
+  <dxi-column dataField="corporateName" caption="{{'corporateName' | translate}}"></dxi-column>
     <dxi-column dataField="suite" caption="{{'suite' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="appartmentNumber" caption="{{'appartmentNumber' | translate}}" [visible]="false"></dxi-column>
     <dxi-column dataField="floor" caption="{{'floor' | translate}}" [visible]="false"></dxi-column>
@@ -73,7 +68,8 @@
             <dxi-item itemType="tabbed" [tabPanelOptions]="{ deferRendering: false }">
                 <dxi-tab title="{{'general' | translate}}" colCount="2">
                     <dxi-item itemType="group" colCount="2">
-                        <dxi-item dataField="localizations" [isRequired]="true" colSpan="2"></dxi-item>
+                        <dxi-item dataField="aliasName" [isRequired]="true" colSpan="2"></dxi-item>
+                        <dxi-item dataField="corporateName" [isRequired]="true" colSpan="2"></dxi-item>
                         <dxi-item dataField="matricule" colSpan="2"></dxi-item>
                         <dxi-item dataField="vacantLand" editorType="dxCheckBox"></dxi-item>
                     </dxi-item>
