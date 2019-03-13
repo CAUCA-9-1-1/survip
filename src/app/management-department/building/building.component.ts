@@ -3,7 +3,6 @@ import {TranslateService} from '@ngx-translate/core';
 import {alert} from 'devextreme/ui/dialog';
 import Guid from 'devextreme/core/guid';
 
-import config from '../../../assets/config/config.json';
 import {BuildingService} from '../shared/services/building.service';
 import {Building} from '../shared/models/building.model';
 import {LaneService} from '../shared/services/lane.service';
@@ -34,9 +33,9 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     @Input()
     set parentBuilding(building: Building) {
         this.parent = building;
-        this.isParent = (building ? false : true);
+        this.isParent = (!building);
 
-        if(this.parent) {
+        if (this.parent) {
             this.setBuildingChildDataSource();
             this.dataSource.filter(['idParentBuilding', '=', new Guid(building.id.toString())]);
         }
@@ -75,7 +74,6 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         private translateService: TranslateService,
     ) {
         super({
-            expand: 'localizations',
             store: new ODataService(injector, {
                 url: 'Building',
                 key: 'id',
@@ -111,7 +109,6 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
 
     private setBuildingChildDataSource() {
         this.dataSource = new DataSource({
-            expand: 'localizations',
             store: new ODataService(this.injector, {
                 url: 'BuildingChild',
                 key: 'id',
@@ -134,12 +131,6 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         this.loadRiskLevel();
     }
 
-    public getBuildingName(data) {
-        const building = Building.fromJSON(data);
-
-        return building.getLocalization(config.locale);
-    }
-
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
@@ -154,7 +145,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                 onInitialized: (ev) => {
                     this.addingButton = ev.component;
                 },
-                onClick: (ev) => {
+                onClick: () => {
                     e.component.addRow();
                 },
             }
@@ -175,7 +166,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                 onValueChanged: (ev) => {
                     this.selectedCity = ev.value;
                     this.addingButton.option('disabled', false);
-                    if(this.isParent) {
+                    if (this.isParent) {
                         this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
                         this.dataSource.load();
                     }
@@ -222,7 +213,6 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         if (this.parent) {
             e.data = Object.assign(this.parent, {
                 id: new Guid(),
-                localizations: undefined,
                 createdOn: undefined,
                 idPicture: undefined,
                 idParentBuilding: this.parent.id,

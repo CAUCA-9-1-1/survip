@@ -376,6 +376,7 @@
   "reportTemplateModify":"Modifier ce rapport",
   "reportTemplateCopyQuestion":"Êtes-vous sûr de vouloir copier ce rapport?",
   "duplicate":"Dupliquer",
+  "corporateName": "Raison sociale",
   "deleteBatchStartedMessage":"Ce lot ne pas être supprimé car au moins une de ses inspections est en traitement.",
   "edit":"Éditer",
   "deleteInspectionStartedMessage":"Cette inspection ne peut pas être supprimée car elle en cours.",
