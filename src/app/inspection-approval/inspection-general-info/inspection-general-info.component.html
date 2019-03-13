@@ -19,8 +19,12 @@
         </div>
         <div fxLayout="row">
             <div fxFlex="30%">{{'name' | translate}}</div>
-            <div fxFlex="70%">{{generalInfo.mainBuildingName}}</div>
+            <div fxFlex="70%">{{generalInfo.mainBuildingAliasName}}</div>
         </div>
+      <div fxLayout="row">
+        <div fxFlex="30%">{{'corporateName' | translate}}</div>
+        <div fxFlex="70%">{{generalInfo.mainBuildingCorporateName}}</div>
+      </div>
         <div fxLayout="row">
             <div fxFlex="30%">{{'lane' | translate}}</div>
             <div fxFlex="70%">{{lane}}</div>
