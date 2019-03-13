@@ -7,8 +7,7 @@
         (onInitialized)="onInitialized($event)"
         (onEditorPreparing)="onEditorPreparing($event)"
         (onInitNewRow)="onInitNewRow($event)"
-        (onEditingStart)="onEditingStart($event)"
-        (onRowValidating)="onRowValidating($event)">
+        (onEditingStart)="onEditingStart($event)">
     <dxi-column
             dataField="picture"
             caption="{{'picture' | translate}}"
@@ -112,14 +111,6 @@
         &nbsp;
         <dx-button text="{{'hazardousMaterials' | translate}}" (onClick)="showPopup('hazardousMaterials')"></dx-button>
     </div>
-    <div *dxTemplate="let field of 'editname'">
-        <app-multilang
-                [validationGroup]="validationGroup"
-                [dataField]="field"
-                [value]="field.row.data.localizations"
-                (valueChanged)="field.setValue($event.value);">
-        </app-multilang>
-    </div>
     <div *dxTemplate="let field of 'editphoto'">
         <span class="dx-field-item-label-text">{{'picture' | translate}}:</span>
         <app-image [idImage]="field.row.data.idPicture" height="350px" [allowChange]="true" (valueChanged)="field.setValue($event)"></app-image>
@@ -133,7 +124,7 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.childBuildings">
     <div *dxTemplate="let data of 'content'">
-        <app-management-department-building [parentBuilding]="selectedBuidling"></app-management-department-building>
+        <app-management-department-building [parentBuilding]="selectedBuilding"></app-management-department-building>
     </div>
 </dx-popup>
 <dx-popup
@@ -144,7 +135,7 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.contacts">
     <div *dxTemplate="let data of 'content'">
-        <app-manage-contacts [service]="'building'" [building]="selectedBuidling.id"></app-manage-contacts>
+        <app-manage-contacts [service]="'building'" [building]="selectedBuilding.id"></app-manage-contacts>
     </div>
 </dx-popup>
 <dx-popup
@@ -155,7 +146,7 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.pnap">
     <div *dxTemplate="let data of 'content'">
-        <app-manage-pnaps [service]="'building'" [building]="selectedBuidling.id"></app-manage-pnaps>
+        <app-manage-pnaps [service]="'building'" [building]="selectedBuilding.id"></app-manage-pnaps>
     </div>
 </dx-popup>
 <dx-popup
@@ -166,6 +157,6 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.hazardousMaterials">
     <div *dxTemplate="let data of 'content'">
-        <app-manage-hazardous-material [service]="'building'" [building]="selectedBuidling.id"></app-manage-hazardous-material>
+        <app-manage-hazardous-material [service]="'building'" [building]="selectedBuilding.id"></app-manage-hazardous-material>
     </div>
 </dx-popup>
