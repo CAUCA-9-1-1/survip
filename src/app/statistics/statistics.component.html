@@ -3,49 +3,46 @@
     <div fxFlex="50%"></div>
     <div fxFlex="50%"></div>
 </div>
-<div fxLayout="row">
-    <div fxFlex="48%">
-        <dx-pie-chart title="Impact des visites" [palette]="colors.visites" [dataSource]="visites">
-            <dxi-series argumentField="description" valueField="total">
-                <dxo-label [visible]="true">
-                    <dxo-connector [visible]="true" [width]="1"></dxo-connector>
-                </dxo-label>
-                <dxo-label
-                        [visible]="true"
-                        [customizeText]="customizePieLabel">
-                    <dxo-font [size]="16"></dxo-font>
-                    <dxo-connector
-                            [visible]="true"
-                            [width]="0.5">
-                    </dxo-connector>
-                </dxo-label>
-            </dxi-series>
-            <dxo-tooltip [enabled]="true" [customizeTooltip]="showPourcent"></dxo-tooltip>
-            <dxo-export [enabled]="true"></dxo-export>
-        </dx-pie-chart>
-    </div>
-    <div fxFlex="4%"></div>
-    <div fxFlex="48%">
-        <dx-chart
-                [palette]="colors.resultats"
-                [dataSource]="resultats"
-                [customizeLabel]="customizeBarLabel">
-            <dxo-title text="Résultat vs Objectif"></dxo-title>
-            <dxo-common-series-settings
-                    argumentField="description"
-                    type="bar"
-                    valueField="total"
-                    [ignoreEmptyPoints]="true">
-            </dxo-common-series-settings>
-            <dxo-series-template nameField="description"></dxo-series-template>
-            <dxo-tooltip [enabled]="true" [customizeTooltip]="showTooltip"></dxo-tooltip>
-            <dxo-export [enabled]="true"></dxo-export>
-        </dx-chart>
-    </div>
+
+<div id="form-container">
+    <dx-tag-box [dataSource]="departments" displayExpr="name" valueExpr="id" (onValueChanged)="updateGraphics($event)"></dx-tag-box>
 </div>
 
-<div>
-    <dx-chart [dataSource]="timeline">
-        <dxi-series argumentField="month" valueField="count" name="Inspections par mois"></dxi-series>
-    </dx-chart>
+<div *ngIf="isLoaded">
+    <div fxLayout="row">
+        <div fxFlex="48%" class="graph">
+            <dx-pie-chart title="Impact des visites" [palette]="colors.visits" [dataSource]="visits">
+                <dxi-series argumentField="description" valueField="total">
+                    <dxo-label [visible]="true">
+                        <dxo-connector [visible]="true" [width]="1"></dxo-connector>
+                    </dxo-label>
+                    <dxo-label [visible]="true" [customizeText]="customizePieLabel">
+                        <dxo-font [size]="16"></dxo-font>
+                        <dxo-connector [visible]="true" [width]="0.5">
+                        </dxo-connector>
+                    </dxo-label>
+                </dxi-series>
+                <dxo-tooltip [enabled]="true" [customizeTooltip]="showPercent"></dxo-tooltip>
+                <dxo-export [enabled]="true"></dxo-export>
+            </dx-pie-chart>
+        </div>
+        <div fxFlex="4%"></div>
+        <div fxFlex="48%" class="graph">
+            <dx-chart [palette]="colors.results" [dataSource]="results" [customizeLabel]="customizeBarLabel">
+                <dxo-title text="Résultat vs Objectif"></dxo-title>
+                <dxo-common-series-settings argumentField="description" type="bar" valueField="total"
+                    [ignoreEmptyPoints]="true">
+                </dxo-common-series-settings>
+                <dxo-series-template nameField="description"></dxo-series-template>
+                <dxo-tooltip [enabled]="true" [customizeTooltip]="showTooltip"></dxo-tooltip>
+                <dxo-export [enabled]="true"></dxo-export>
+            </dx-chart>
+        </div>
+    </div>
+
+    <div>
+        <dx-chart [dataSource]="timeline">
+            <dxi-series argumentField="month" valueField="count" name="Inspections par mois"></dxi-series>
+        </dx-chart>
+    </div>
 </div>
