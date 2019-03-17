@@ -1,17 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { FireSafetyDepartmentService } from '../management-system/shared/services/firesafetydepartment.service';
+import {
+    DxSelectBoxModule,
+    DxTextAreaModule,
+    DxFormModule,
+    DxFormComponent
+} from 'devextreme-angular';
 
 @Component({
-  selector: 'app-statistics',
-  templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+    selector: 'app-statistics',
+    templateUrl: './statistics.component.html',
+    styleUrls: ['./statistics.component.scss'],
+    providers: [FireSafetyDepartmentService]
 })
 export class StatisticsComponent implements OnInit {
+    public departments: any = { store: [] };
+    public idFireSafetyDeparment: string = null;
+    public statsLoaded = false;
+    public currentDepartment: string[] = null;
+
+    get isLoaded() {
+        // console.log(this.currentDepartment);
+        return (this.currentDepartment != null);
+    }
+
     colors = {
-        visites: ['#447bdd', '#ff8a2f', '#fd9e54', '#c4c4c4'],
-        resultats: ['#ffff0a', '#447bdd'],
+        visits: ['#447bdd', '#ff8a2f', '#fd9e54', '#c4c4c4'],
+        results: ['#ffff0a', '#447bdd'],
     };
 
-    visites: any = [{
+    visits: any = [{
         description: 'Nombre de réponse avec succès',
         total: 128,
     }, {
@@ -25,7 +43,7 @@ export class StatisticsComponent implements OnInit {
         total: 11,
     }];
 
-    resultats: any = [{
+    results: any = [{
         description: 'Objectif',
         total: 270
     }, {
@@ -33,12 +51,32 @@ export class StatisticsComponent implements OnInit {
         total: 128
     }];
 
-    constructor() { }
+    timeline = [
+        { month: 'Janvier', count: 110 },
+        { month: 'Février', count: 112 },
+        { month: 'Mars', count: 55 },
+        { month: 'Avril', count: 200 },
+        { month: 'Mai', count: 39 }
+    ];
 
-    ngOnInit() {
+    constructor(private fireSafetyDepartmentService: FireSafetyDepartmentService) {
     }
 
-    showPourcent(arg: any) {
+    ngOnInit() {
+        this.loadDepartment();
+    }
+
+    private loadDepartment() {
+        this.fireSafetyDepartmentService.allLocalized().subscribe(data => {
+            this.departments = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name'],
+            };
+        });
+    }
+
+    showPercent(arg: any) {
         return {
             text: arg.argumentText + '<br/><b>' + arg.percentText + '</b>'
         };
@@ -62,5 +100,10 @@ export class StatisticsComponent implements OnInit {
                 return e.valueText;
             }
         };
+    }
+
+    updateGraphics(e) {
+        this.currentDepartment = e.value;
+        console.log(this.currentDepartment);
     }
 }
