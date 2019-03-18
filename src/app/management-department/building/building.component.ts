@@ -77,7 +77,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         private riskLevelService: RiskLevelService,
         protected translateService: TranslateService,
     ) {
-        super({
+        super(translateService, {
             store: new ODataService(injector, {
                 url: 'Building',
                 key: 'id',
