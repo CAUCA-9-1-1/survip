@@ -7,7 +7,6 @@ import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartme
 import {Password} from '../../shared/classes/password';
 import {Color} from '../../shared/classes/color';
 
-
 @Component({
     selector: 'app-management-system-webuser',
     templateUrl: './webuser.component.html',
@@ -95,16 +94,18 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     }
 
     onEditorPreparing(e) {
-        if (e.dataField === 'password'  || e.dataField === 'passwordConfirm') {
+        if (e.dataField === 'password' || e.dataField === 'passwordConfirm') {
             e.editorOptions.mode = 'password';
         }
+        if (e.dataField === 'password' || e.dataField === 'passwordConfirm') {
+            e.editorOptions = {inputAttr: {autocomplete: 'off'}};
+        }
 
-        if(e.row && e.row.data) {
-            if(e.row.data.idExtern) {
+        if (e.row && e.row.data) {
+            if (e.row.data.idExtern) {
                 e.editorOptions.readOnly = true;
                 this.readOnly = e.editorOptions.readOnly;
-            }
-            else {
+            } else {
                 this.readOnly = false;
             }
         }
@@ -129,6 +130,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     }
 
     onRowInserted(e) {
+
         e.data.attributes = this.setWebuserAttributes(e);
 
         super.onRowInserted(e);

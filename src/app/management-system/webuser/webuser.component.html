@@ -15,15 +15,15 @@
             dataField="firstName"
             caption="{{'firstName' | translate}}"
             [calculateCellValue]="getFirstname"
-            sortOrder="asc"
-            sortIndex="0">
+            sortIndex="0"
+            sortOrder="asc">
     </dxi-column>
     <dxi-column
             dataField="lastName"
             caption="{{'lastName' | translate}}"
             [calculateCellValue]="getLastname"
-            sortOrder="asc"
-            sortIndex="1">
+            sortIndex="1"
+            sortOrder="asc">
     </dxi-column>
 
     <dxi-column [visible]="false" dataField="username" caption="{{'username' | translate}}"></dxi-column>
@@ -46,7 +46,7 @@
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
-    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="readOnlyImported" [allowDeleting]="true">
+    <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
         <dxo-popup title="{{'webuser' | translate}}" [showTitle]="true"></dxo-popup>
         <dxo-form colCount="2">
