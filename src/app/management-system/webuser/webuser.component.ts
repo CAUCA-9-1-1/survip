@@ -26,6 +26,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     webuserFireSafetyDepartments = [];
     passwordOptions = {
         mode: 'password',
+        inputAttr: {autocomplete: 'off'},
         onKeyUp: (ev) => {
             const password = new Password();
             const color = new Color();
@@ -94,13 +95,6 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     }
 
     onEditorPreparing(e) {
-        if (e.dataField === 'password' || e.dataField === 'passwordConfirm') {
-            e.editorOptions.mode = 'password';
-        }
-        if (e.dataField === 'password' || e.dataField === 'passwordConfirm') {
-            e.editorOptions = {inputAttr: {autocomplete: 'off'}};
-        }
-
         if (e.row && e.row.data) {
             if (e.row.data.idExtern) {
                 e.editorOptions.readOnly = true;
