@@ -24,6 +24,7 @@
   "approveQuestion": "Êtes-vous certain de vouloir approuver cette inspection?",
   "refuseQuestion": "Êtes-vous certain de vouloir décliner/refuser cette inspection?",
   "cancelInspectionQuestion": "Êtes-vous certain de vouloir annuler cette inspection?",
+  "completedOn": "Complétée le",
   "generalInformation": "Information général",
   "implantationPlan": "Plan d'implantation",
   "buildingContacts": "Contacts du bâtiment",
