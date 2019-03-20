@@ -38,15 +38,14 @@ export class BuildingListComponent implements OnInit {
 
         this.inspectionService.getBuildings(this.idInspection).subscribe(data => {
           this.buildings = data.sort((a, b) => a.isMainBuilding === b.isMainBuilding ? 0 : a.isMainBuilding ? -1 : 1);
-          this.selectedBuilding = this.buildings[this.selectedIndex];
-          this.selectedIdBuilding = this.selectedBuilding.id;
+          this.selectBuilding(this.selectedIndex);
         });
     }
 
     selectBuilding(index) {
         this.selectedIndex = index;
         this.selectedBuilding = this.buildings[this.selectedIndex];
-        this.selectedIdBuilding = this.selectedBuilding.id;
+        this.selectedIdBuilding = this.selectedBuilding.idBuilding;
     }
 
     public getBuildingDescription(building: BuildingResume, index): string {
