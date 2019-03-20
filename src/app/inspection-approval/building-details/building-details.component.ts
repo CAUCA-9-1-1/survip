@@ -21,7 +21,7 @@ import {BuildingResume} from '../../management-department/shared/models/building
 export class BuildingDetailsComponent implements OnInit {
     @Input()
     set building(building: BuildingResume) {
-      this.idBuilding = building.id;
+      this.idBuilding = building.idBuilding;
       this.currentBuilding = building;
       this.detail = {};
       this.loadData();

@@ -2,7 +2,7 @@ import {Picture} from '../../../shared/models/picture.model';
 
 
 export class BuildingResume {
-  id: string;
+  idBuilding: string;
   isMainBuilding: boolean;
   aliasName: string;
   corporateName: string;
