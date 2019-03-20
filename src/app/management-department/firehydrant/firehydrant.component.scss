@@ -17,32 +17,39 @@
   padding-right:0px;
 }
 
-::ng-deep .display-locationType{
+ ::ng-deep .display-locationType{
   display: none;
 }
 
 ::ng-deep #civicNumberTemplate .dx-field-label{
- width:auto;
+ width:25%;
 }
 ::ng-deep #civicNumberTemplate .dx-field-value{
-  width:79%;
+  width:75%;
 }
 ::ng-deep #addressLocationTemplate .dx-field-label{
-  width:auto;
+  width:25%;
 }
 ::ng-deep #addressLocationTemplate .dx-field-value{
-  width:71%;
+  width:75%;
+}
+::ng-deep #transversalTemplate .dx-field-label{
+  width:25%;
+}
+::ng-deep #transversalTemplate .dx-field-value{
+  width:75%;
 }
 ::ng-deep #laneTemplate .dx-field-label{
-  width:auto;
+  width:25%;
 }
 ::ng-deep #laneTemplate .dx-field-value{
-  width:79%;
+  width:75%;
 }
 
 ::ng-deep #physicalPositionTemplate .dx-field-label{
-  width:auto;
+  width:20%;
 }
 ::ng-deep #physicalPositionTemplate .dx-field-value{
-  width:89%;
+  width:80%;
 }
+
