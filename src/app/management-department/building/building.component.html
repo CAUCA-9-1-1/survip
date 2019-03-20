@@ -1,4 +1,3 @@
-<br />
 <dx-data-grid
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
@@ -147,9 +146,7 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.contacts">
     <div *dxTemplate="let data of 'content'">
-        <div *ngIf="selectedBuilding != null">
             <app-manage-contacts [service]="'building'" [building]="selectedBuilding.id" [(readOnly)]="readOnly"></app-manage-contacts>
-        </div>
     </div>
 </dx-popup>
 <dx-popup

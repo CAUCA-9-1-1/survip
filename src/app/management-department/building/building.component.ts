@@ -138,13 +138,13 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
-        if(!this.cityService.readOnlyImported) {
+        if (!this.cityService.readOnlyImported) {
             toolbarItems.unshift({
                 widget: 'dxButton',
                 location: 'after',
                 options: {
                     icon: 'plus',
-                    width: 50,
+                    width: 36,
                     hint: this.labels['add'],
                     onInitialized: (ev) => {
                         this.addingButton = ev.component;
@@ -171,7 +171,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                 },
                 onValueChanged: (ev) => {
                     this.selectedCity = ev.value;
-                    if(this.isParent) {
+                    if (this.isParent) {
                         this.dataSource.filter(['idCity', '=', new Guid(ev.value)]);
                         this.dataSource.load();
                     }
