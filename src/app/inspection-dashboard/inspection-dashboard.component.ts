@@ -107,7 +107,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             'numberOfAppartment', 'numberOfBuilding', 'numberOfFloor', 'utilisationCode', 'see', 'vacantLand', 'delete',
             'yearOfConstruction', 'webuserAssignedTo', 'createBatch', 'needMinimum1Building', 'approve', 'todo', 'absent',
             'started', 'waitingApprobation', 'approved', 'refused', 'canceled', 'collapseAll', 'expandAll', 'wantToDeleteBatch',
-            'generateReport', 'deleteBatchStartedMessage', 'nonDefaultReports', 'downloaded', 'wantToDeleteBatchWithDownloadedInspection'
+            'generateReport', 'deleteBatchStartedMessage', 'nonDefaultReports', 'downloaded', 'wantToDeleteBatchWithDownloadedInspection',
+            'completedOn'
         ]).subscribe(labels => {
             this.labels = labels;
             this.checkLoadedElement();
@@ -163,7 +164,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     public removeBatch(field) {
         if (!field.data.items[0].isBatchStarted) {
             let message: string;
-            if(this.hasVisit(field.data.items)) {
+            if (this.hasVisit(field.data.items)) {
                 message = this.labels['wantToDeleteBatchWithDownloadedInspection'];
             } else {
                 message = this.labels['wantToDeleteBatch'];
@@ -184,7 +185,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     private hasVisit(items: any[]): boolean {
         let toReturn = false;
         items.forEach(c => {
-                if(c.hasBeenDownloaded) {
+                if (c.hasBeenDownloaded) {
                     toReturn = true;
                 }
             });
@@ -432,7 +433,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
     private getDefaultColumnVisible() {
         const visible = [
             false, true, true, true, false, false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false, false, false, false, false, false
+            false, false, false, false, false, false, false, false, false, false, false, false, false, false
         ];
 
         switch (this.selectedMode) {
@@ -502,7 +503,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             calculateFilterExpression: function(
                 filterValue,
             ) {
-                return [this.dataField, "=", new Guid(filterValue)];
+                return [this.dataField, '=', new Guid(filterValue)];
             },
             visible: visible[1],
             width: width[1] || null,
@@ -520,7 +521,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             calculateFilterExpression: function(
                 filterValue,
             ) {
-                return [this.dataField, "=", new Guid(filterValue)];
+                return [this.dataField, '=', new Guid(filterValue)];
             },
             lookup: {
                 dataSource: this.lanes,
@@ -536,7 +537,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             calculateFilterExpression: function(
                 filterValue,
             ) {
-                return [this.dataField, "=", new Guid(filterValue)];
+                return [this.dataField, '=', new Guid(filterValue)];
             },
             lookup: {
                 dataSource: this.lanes,
@@ -554,7 +555,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             calculateFilterExpression: function(
                 filterValue,
             ) {
-                return [this.dataField, "=", new Guid(filterValue)];
+                return [this.dataField, '=', new Guid(filterValue)];
             },
             lookup: {
                 dataSource: this.cities,
@@ -625,8 +626,8 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             calculateFilterExpression: function(
                 filterValue,
             ) {
-                console.log("City");
-                return [this.dataField, "=", new Guid(filterValue)];
+                console.log('City');
+                return [this.dataField, '=', new Guid(filterValue)];
             },
             lookup: {
                 dataSource: this.utilisationCodes,
@@ -701,8 +702,16 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             visible: visible[25],
             width: width[25] || null,
             cellTemplate: 'iconHasBeenDownloaded',
-            showInColumnChooser: this.selectedMode == 'mode1'
-        }];
+            showInColumnChooser: this.selectedMode === 'mode1'
+        }, {
+            dataField: 'completedOn',
+            caption: this.labels['completedOn'],
+            dataType: 'date',
+            visible: visible[26],
+            width: width[26] || null,
+            showInColumnChooser: this.selectedMode === 'mode3'
+          }
+        ];
     }
 
     private showPicture(container, options) {
