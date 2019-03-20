@@ -136,7 +136,7 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.childBuildings">
     <div *dxTemplate="let data of 'content'">
-        <app-management-department-building [parentBuilding]="selectedBuidling" [readOnly]="readOnly"></app-management-department-building>
+        <app-management-department-building [parentBuilding]="selectedBuilding" [readOnly]="readOnly"></app-management-department-building>
     </div>
 </dx-popup>
 <dx-popup
@@ -147,8 +147,8 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.contacts">
     <div *dxTemplate="let data of 'content'">
-        <div *ngIf="selectedBuidling != null">
-            <app-manage-contacts [service]="'building'" [building]="selectedBuidling.id" [(readOnly)]="readOnly"></app-manage-contacts>
+        <div *ngIf="selectedBuilding != null">
+            <app-manage-contacts [service]="'building'" [building]="selectedBuilding.id" [(readOnly)]="readOnly"></app-manage-contacts>
         </div>
     </div>
 </dx-popup>
@@ -160,7 +160,7 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.pnap">
     <div *dxTemplate="let data of 'content'">
-        <app-manage-pnaps [service]="'building'" [building]="selectedBuidling.id" [readOnly]="readOnly"></app-manage-pnaps>
+        <app-manage-pnaps [service]="'building'" [building]="selectedBuilding.id" [readOnly]="readOnly"></app-manage-pnaps>
     </div>
 </dx-popup>
 <dx-popup
@@ -171,6 +171,6 @@
         [toolbarItems]="toolbarItems"
         [(visible)]="popupVisible.hazardousMaterials">
     <div *dxTemplate="let data of 'content'">
-        <app-manage-hazardous-material [service]="'building'" [building]="selectedBuidling.id" [readOnly]="readOnly"></app-manage-hazardous-material>
+        <app-manage-hazardous-material [service]="'building'" [building]="selectedBuilding.id" [readOnly]="readOnly"></app-manage-hazardous-material>
     </div>
 </dx-popup>
