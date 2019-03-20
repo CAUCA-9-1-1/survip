@@ -128,7 +128,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
-        if(!this.cityService.readOnlyImported) {
+        if (!this.cityService.readOnlyImported) {
             toolbarItems.unshift({
                 widget: 'dxButton',
                 location: 'after',
