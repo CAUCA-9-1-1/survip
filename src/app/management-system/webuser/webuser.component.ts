@@ -21,12 +21,10 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     private selectedIdWebuser: string;
 
     labels = {};
-    departments:  any = {store: []};
+    departments: any = {store: []};
     departmentField: any;
     webuserFireSafetyDepartments = [];
     passwordOptions = {
-        mode: 'password',
-        inputAttr: {autocomplete: 'off'},
         onKeyUp: (ev) => {
             const password = new Password();
             const color = new Color();
@@ -37,6 +35,9 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
             if (input.value) {
                 input.style.backgroundColor = ['rgb(', rgb[0], ',', rgb[1], ',', rgb[2], ')'].join('');
             }
+        },
+        onInitialized: (ev) => {
+            ev.component.option('mode', 'password');
         }
     };
 
@@ -83,7 +84,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
     onPasswordChanged = (e) => {
         if (e.value && e.value.length < 8) {
-          return false;
+            return false;
         }
 
         this.selectedPassword = e.value;
@@ -95,6 +96,14 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     }
 
     onEditorPreparing(e) {
+        if (e.dataField === 'username') {
+            e.editorOptions.onFocusIn = ((ev) => {
+                console.log('onInitialized username', ev);
+                if (ev.component.option('value') === ' ') {
+                    (ev.component.element().querySelector('input')  as HTMLInputElement).select();
+                }
+            });
+        }
         if (e.row && e.row.data) {
             if (e.row.data.idExtern) {
                 e.editorOptions.readOnly = true;
@@ -109,6 +118,9 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         e.data.isActive = true;
         e.data.resetPassword = true;
         e.data.fireSafetyDepartments = [];
+        e.data.username = ' ';
+        e.data.password = '';
+        e.data.passwordConfirm = '';
 
         this.webuserFireSafetyDepartments = [];
         this.selectedIdWebuser = undefined;
@@ -194,14 +206,14 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
     public departmentEditorPreparing(e) {
         if (e.dataField === 'idFireSafetyDepartment') {
             e.editorOptions.onOpened = (ev) => {
-                const ids = this.webuserFireSafetyDepartments.map(({ idFireSafetyDepartment }) => idFireSafetyDepartment);
+                const ids = this.webuserFireSafetyDepartments.map(({idFireSafetyDepartment}) => idFireSafetyDepartment);
                 const dataSource = Object.create(this.departments);
                 dataSource.store = [];
                 this.departments.store.forEach(c => {
                     const index = ids.indexOf(c.id);
                     const selectedItemId = e.component.option('selectedItem');
                     if (index && index === -1 || (selectedItemId && selectedItemId.id === c.id)) {
-                        dataSource.store.push({ id: c.id, name: c.name });
+                        dataSource.store.push({id: c.id, name: c.name});
                     }
                 });
                 ev.component.option('dataSource', dataSource);
@@ -255,9 +267,9 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
 
     private loadDepartments() {
         this.departmentService.allLocalized().subscribe(data => this.departments = {
-          store: data,
-          select: ['id', 'name'],
-          sort: ['name'],
+            store: data,
+            select: ['id', 'name'],
+            sort: ['name'],
         });
     }
 }

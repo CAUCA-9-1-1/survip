@@ -236,13 +236,13 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public addressLocationOnInitialized(field: any, e: any) {
-        if(this.readOnly) {
+        if (this.readOnly) {
             e.component.option('readOnly', true);
         }
-        if(field.data[field.column.dataField]) {
-            let data = field.data[field.column.dataField].toString();
-            if(data) {
-                let location = this.addressLocationTypes.find(c => c.name == data);
+        if (field.data[field.column.dataField]) {
+            const data = field.data[field.column.dataField].toString();
+            if (data) {
+                const location = this.addressLocationTypes.find(c => c.name === data);
                 e.component.option('value', location.value);
             }
         }

@@ -28,8 +28,10 @@
 
     <dxi-column [visible]="false" dataField="username" caption="{{'username' | translate}}"></dxi-column>
     <dxi-column [visible]="false" dataField="password" caption="{{'password' | translate}}"></dxi-column>
-    <dxi-column [visible]="false" dataField="passwordConfirm" caption="{{'passwordConfirm' | translate}}"></dxi-column>
-    <dxi-column [visible]="false" dataField="resetPassword" dataType="boolean" caption="{{'passwordReset' | translate}}"></dxi-column>
+    <dxi-column [visible]="false" dataField="passwordConfirm"
+                caption="{{'passwordConfirm' | translate}}"></dxi-column>
+    <dxi-column [visible]="false" dataField="resetPassword" dataType="boolean"
+                caption="{{'passwordReset' | translate}}"></dxi-column>
     <dxi-column
             [visible]="false"
             [calculateCellValue]="getEmail"
@@ -42,7 +44,8 @@
             dataField="telephone"
             caption="{{'telephone' | translate}}">
     </dxi-column>
-    <dxi-column [visible]="false" dataField="fireSafetyDepartments" editCellTemplate="editDepartments" caption="{{'fireSafetyDepartment' | translate}}"></dxi-column>
+    <dxi-column [visible]="false" dataField="fireSafetyDepartments" editCellTemplate="editDepartments"
+                caption="{{'fireSafetyDepartment' | translate}}"></dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -53,7 +56,8 @@
             <dxi-item dataField="username" [isRequired]="true"></dxi-item>
             <dxi-item itemType="empty"></dxi-item>
             <dxi-item dataField="password" [editorOptions]="passwordOptions">
-                <dxi-validation-rule type="custom" message="{{'passwordError' | translate}}" [validationCallback]="onPasswordChanged"></dxi-validation-rule>
+                <dxi-validation-rule type="custom" message="{{'passwordError' | translate}}"
+                                     [validationCallback]="onPasswordChanged"></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="passwordConfirm" [editorOptions]="passwordOptions">
                 <dxi-validation-rule type="compare" [comparisonTarget]="onPasswordCompare"></dxi-validation-rule>
@@ -91,9 +95,11 @@
                 <dxo-lookup [dataSource]="departments" displayExpr="name" valueExpr="id">
                 </dxo-lookup>
             </dxi-column>
-            <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}" width="10%"></dxi-column>
+            <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}"
+                        width="10%"></dxi-column>
 
-            <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true"></dxo-editing>
+            <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true"
+                         [allowDeleting]="true"></dxo-editing>
         </dx-data-grid>
     </div>
 </dx-data-grid>
