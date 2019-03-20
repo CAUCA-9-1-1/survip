@@ -85,7 +85,7 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
                 location: 'after',
                 options: {
                     icon: 'plus',
-                    width: 50,
+                    width: 36,
                     disabled: false,
                     hint: this.labels['add'],
                     onInitialized: (ev) => {
