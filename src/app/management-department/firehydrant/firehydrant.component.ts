@@ -135,7 +135,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                 options: {
                     icon: 'plus',
                     width: 50,
-                    disabled: true,
+                    disabled: false,
                     hint: this.labels['add'],
                     onInitialized: (ev) => {
                         this.addingButton = ev.component;
