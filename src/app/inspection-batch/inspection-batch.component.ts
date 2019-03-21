@@ -3,7 +3,6 @@ import {DxDataGridComponent, DxPopupComponent} from 'devextreme-angular';
 import {MatSnackBar} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {confirm} from 'devextreme/ui/dialog';
-
 import {GridWithCrudService} from '../shared/classes/grid-with-crud-service';
 import {InspectionBatchService} from './shared/services/inspection-batch.service';
 import {WebuserService} from '../management-system/shared/services/webuser.service';
@@ -32,27 +31,25 @@ import {InspectionStatusService} from '../inspection-dashboard/shared/services/i
 export class InspectionBatchComponent extends GridWithCrudService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 
-    labels = [];
-    formUserField: any;
-    formReadyField: any;
-    formInspectionField: any;
-    webusers: WebuserForWeb[];
-    inspectorsOn: WebuserForWeb[] = [];
-    inspectorsOff: WebuserForWeb[] = [];
-    inspectorsList: WebuserForWeb[] = [];
-    public inspectionStatuses: EnumModel[] = [];
+    private labels = [];
+    private selectedBuildingIds: any[] = [];
+    private popupBuildingSelected = [];
+    private editPopup: DxPopupComponent;
+    private popupToolBarItems = [];
+    private formUserField: any;
+    private formReadyField: any;
+    private formInspectionField: any;
+    private webusers: WebuserForWeb[];
 
+    public inspectorsOn: WebuserForWeb[] = [];
+    public inspectorsOff: WebuserForWeb[] = [];
+    public inspectorsList: WebuserForWeb[] = [];
+    public inspectionStatuses: EnumModel[] = [];
     public inspectionBuildingList: InspectionBuilding[] = [];
     public availableBuildingsDataSource: any = {};
-    public selectedBuildingIds: any[] = [];
-
-    popupBuildingVisible = false;
-    popupBuildingSelected = [];
-    popupButtons: any[];
-    editPopup: DxPopupComponent;
-    popupEditorOptions = {onKeyDown: e => this.onFormUpdated(e)};
-
-    private popupToolBarItems = [];
+    public popupBuildingVisible = false;
+    public popupButtons: any[];
+    public popupEditorOptions = {onKeyDown: e => this.onFormUpdated(e)};
 
     constructor(
         translateService: TranslateService,
@@ -117,7 +114,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         return InspectionBatch.fromJSON(data);
     }
 
-    async ngOnInit() {
+    public async ngOnInit() {
         await this.activeRoute.params.subscribe(param => {
             this.loadOneWithCallBack(param.idBatch, () => this.autoEditBatch());
         });
@@ -139,17 +136,21 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         e.data.createOn = (new Date());
         e.data.isActive = true;
         this.inspectionBuildingList = [];
+    }
 
-        this.inspectorsList = this.inspectorsOn.concat([{
-            id: 'all',
-            name: this.labels['all'],
-        }]);
+    private createAllUserChoice(): WebuserForWeb {
+        const allUser = new WebuserForWeb;
+        allUser.id = null;
+        allUser.name = this.labels['all'];
+        return allUser;
     }
 
     public onEditingStart(e) {
         this.inspectorsOn = [];
         this.inspectorsOff = [];
+
         this.loadInspectionBuildingList(e.data.id);
+        this.inspectorsList.push(this.createAllUserChoice());
 
         this.webusers.forEach(user => {
             let find = false;
@@ -166,16 +167,13 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
             }
         });
 
-        this.inspectorsList = this.inspectorsOn.concat([{
-            id: 'all',
-            name: this.labels['all'],
-        }]);
+        this.inspectorsList = this.inspectorsList.concat(this.inspectorsOn);
     }
 
     public popupShown = (e) => {
         this.editPopup = e.component;
         this.managePopupCancelButton(true);
-    }
+    };
 
     public managePopupCancelButton(isDisabled: boolean) {
         this.popupToolBarItems = this.editPopup['option']('toolbarItems');
@@ -272,14 +270,14 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         const rowEl = e.component.getRowElement(index);
         rowEl[0].classList.add('rowToDelete');
 
-        const res = confirm(message ,this.labels['delete']);
+        const res = confirm(message, this.labels['delete']);
 
         e.cancel = new Promise((resolve, reject) => {
             res.then((dialogResult) => {
-              rowEl[0].classList.remove('rowToDelete');
-              resolve(!dialogResult);
+                rowEl[0].classList.remove('rowToDelete');
+                resolve(!dialogResult);
             });
-          });
+        });
     }
 
     public onBuildingsRemoved(e) {
@@ -305,7 +303,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         this.formInspectionField.data.inspections.forEach((inspection, index) => {
             if (inspection.idBuilding === e.key.idBuilding) {
                 this.formInspectionField.data.inspections[index].idWebuserAssignedTo = (
-                    e.key.idWebuserAssignedTo === 'all' ? null : e.key.idWebuserAssignedTo
+                    e.key.idWebuserAssignedTo || null
                 );
                 this.formInspectionField.data.inspections[index].sequence = (
                     e.key.sequence || 0
@@ -314,7 +312,6 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         });
 
         this.formInspectionField.setValue(this.formInspectionField.data.inspections);
-
     }
 
     public moveUp(field) {
@@ -444,11 +441,16 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         this.webuserService.getActive().subscribe(data => this.webusers = data);
     }
 
-    public onDeletingValidation(e) {
+    public onStatusActionValidation(e) {
         if (e.data && e.data.inspectionStatus !== 0 && e.column.command === 'edit') {
             e.cellElement.querySelector('.dx-link-delete').style.opacity = '0.5';
             e.cellElement.querySelector('.dx-link-delete').style.pointerEvents = 'none';
             e.cellElement.querySelector('.dx-link-delete').style.color = '#959595';
+        }
+        if (e.data && ([2, 3, 4, 5].includes(e.data.inspectionStatus)) && e.column.command === 'edit') {
+            e.cellElement.querySelector('.dx-link-edit').style.opacity = '0.5';
+            e.cellElement.querySelector('.dx-link-edit').style.pointerEvents = 'none';
+            e.cellElement.querySelector('.dx-link-edit').style.color = '#959595';
         }
     }
 }
