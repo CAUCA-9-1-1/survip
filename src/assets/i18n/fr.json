@@ -405,5 +405,6 @@
   "downloaded": "Téléchargé",
   "cannotModifyExternalData": "Impossible de modifier, car les données proviennent d'un système externe.",
   "information": "Information",
-  "version": "Version"
+  "version": "Version",
+  "civicNumberGrid": "# Civique"
 }
