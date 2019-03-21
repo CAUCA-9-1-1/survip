@@ -72,23 +72,23 @@
                 (onCellPrepared)="onDeletingValidation($event)">
             <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="90px" caption=" "></dxi-column>
             <dxi-column dataField="fullCivicNumber"
-                    caption="{{'civicNumber' | translate}}"
+                    caption="{{'civicNumberGrid' | translate}}"
                     [allowEditing]="false"
-                    width="14%">
+                    width="8%">
             </dxi-column>
-            <dxi-column dataField="fullLaneName" caption="{{'lane' | translate}}" [allowEditing]="false"></dxi-column>
-            <dxi-column dataField="cityName" caption="{{'city' | translate}}" [allowEditing]="false"></dxi-column>
-            <dxi-column dataField="riskLevel" caption="{{'riskLevel' | translate}}" [allowEditing]="false" width="14%"></dxi-column>
-            <dxi-column dataField="idWebUserAssignedTo" caption="{{'assignedTo' | translate}}">
+            <dxi-column dataField="fullLaneName" caption="{{'lane' | translate}}" [allowEditing]="false" width="25%"></dxi-column>
+            <dxi-column dataField="cityName" caption="{{'city' | translate}}" [allowEditing]="false" width="17%"></dxi-column>
+            <dxi-column dataField="riskLevel" caption="{{'riskLevel' | translate}}" [allowEditing]="false" width="11%"></dxi-column>
+            <dxi-column dataField="idWebUserAssignedTo" caption="{{'assignedTo' | translate}}" width="15%">
                 <dxo-lookup [dataSource]="inspectorsList" displayExpr="name" valueExpr="id">
                 </dxo-lookup>
             </dxi-column>
-            <dxi-column dataField="inspectionStatus" caption="{{'status' | translate}}" [allowEditing]="false">
+            <dxi-column dataField="inspectionStatus" caption="{{'status' | translate}}" [allowEditing]="false" width="15%">
                 <dxo-lookup [dataSource]="inspectionStatuses" displayExpr="text" valueExpr="value">
                 </dxo-lookup>
             </dxi-column>
-            <dxi-column dataField="hasBeenDownloaded" cellTemplate="iconHasBeenDownloaded" caption="{{'downloaded' | translate}}"></dxi-column>
-            <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowDeleting]="true">
+            <dxi-column dataField="hasBeenDownloaded" cellTemplate="iconHasBeenDownloaded" caption="{{'downloaded' | translate}}" width="8%"></dxi-column>
+            <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowDeleting]="true" width="72px">
                 <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
                 <dxo-texts confirmDeleteMessage=""></dxo-texts>
             </dxo-editing>
@@ -138,10 +138,10 @@
 
         <dxo-load-panel [enabled]="true"></dxo-load-panel>
         <dxo-paging [pageSize]="15"></dxo-paging>
-        <dxi-column dataField="fullCivicNumberSortable" [customizeText]="civicNumber_customizeText" caption="{{'civicNumber' | translate}}" [allowEditing]="false"></dxi-column>
-        <dxi-column dataField="fullLaneName" caption="{{'lane' | translate}}" [allowEditing]="false"></dxi-column>
-        <dxi-column dataField="cityName" caption="{{'city' | translate}}" [allowEditing]="false"></dxi-column>
-        <dxi-column dataField="riskLevel" caption="{{'riskLevel' | translate}}" [allowEditing]="false" width="14%"></dxi-column>
+        <dxi-column dataField="fullCivicNumberSortable" [customizeText]="civicNumber_customizeText" caption="{{'civicNumberGrid' | translate}}" [allowEditing]="false" width="10%"></dxi-column>
+        <dxi-column dataField="fullLaneName" caption="{{'lane' | translate}}" [allowEditing]="false" width="50%"></dxi-column>
+        <dxi-column dataField="cityName" caption="{{'city' | translate}}" [allowEditing]="false" width="25%"></dxi-column>
+        <dxi-column dataField="riskLevel" caption="{{'riskLevel' | translate}}" [allowEditing]="false" width="15%"></dxi-column>
 
       </dx-data-grid>
     </div>

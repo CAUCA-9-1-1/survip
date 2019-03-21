@@ -405,5 +405,7 @@
   "cantModifySurvey": "This survey can't be modified because it is used in some inspection.",
   "downloaded": "Downloaded",
   "information": "Information",
-  "version": "Version"
+  "version": "Version",
+  "civicNumberGrid": "Civic #",
+  "riskLevelAbbreviation": "Risque"
 }
