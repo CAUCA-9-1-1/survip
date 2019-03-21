@@ -6,6 +6,7 @@ import {WebuserService} from '../shared/services/webuser.service';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
 import {Password} from '../../shared/classes/password';
 import {Color} from '../../shared/classes/color';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
     selector: 'app-management-system-webuser',
@@ -19,12 +20,13 @@ import {Color} from '../../shared/classes/color';
 export class WebuserComponent extends GridWithCrudService implements OnInit {
     private selectedPassword: string;
     private selectedIdWebuser: string;
+    private labels = {};
+    private departmentField: any;
 
-    labels = {};
-    departments: any = {store: []};
-    departmentField: any;
-    webuserFireSafetyDepartments = [];
-    passwordOptions = {
+    public displayDepartmentValidationError = false;
+    public departments: any = {store: []};
+    public webuserFireSafetyDepartments = [];
+    public passwordOptions = {
         onKeyUp: (ev) => {
             const password = new Password();
             const color = new Color();
@@ -40,7 +42,6 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
             ev.component.option('mode', 'password');
         }
     };
-
     public readOnlyImported = !this.departmentService.readOnlyImported;
 
     constructor(
@@ -95,10 +96,15 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         return (this.selectedPassword ? this.selectedPassword : null);
     }
 
+    isDepartmentValid(): boolean {
+        const retValue = this.webuserFireSafetyDepartments !== null ? this.webuserFireSafetyDepartments.length > 0 : false;
+        this.displayDepartmentValidationError = !retValue;
+        return retValue;
+    }
+
     onEditorPreparing(e) {
         if (e.dataField === 'username') {
             e.editorOptions.onFocusIn = ((ev) => {
-                console.log('onInitialized username', ev);
                 if (ev.component.option('value') === ' ') {
                     (ev.component.element().querySelector('input')  as HTMLInputElement).select();
                 }
@@ -152,9 +158,12 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         if (!e.isValid && e.brokenRules[0].type === 'compare' && !e.newData.password) {
             e.isValid = true;
         }
+
+        e.isValid = this.isDepartmentValid();
     }
 
     setDepartmentField(field) {
+        console.log(field);
         this.departmentField = field;
 
         if (!this.departmentField.value) {
@@ -187,6 +196,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         }
 
         this.departmentField.setValue(this.departmentField.data.fireSafetyDepartments);
+        this.isDepartmentValid();
     }
 
     onUserDepartmentRemoved(e) {
