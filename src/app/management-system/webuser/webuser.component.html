@@ -45,7 +45,8 @@
             caption="{{'telephone' | translate}}">
     </dxi-column>
     <dxi-column [visible]="false" dataField="fireSafetyDepartments" editCellTemplate="editDepartments"
-                caption="{{'fireSafetyDepartment' | translate}}"></dxi-column>
+                caption="{{'fireSafetyDepartment' | translate}}">
+    </dxi-column>
 
     <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -63,9 +64,13 @@
                 <dxi-validation-rule type="compare" [comparisonTarget]="onPasswordCompare"></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="resetPassword" editorType="dxCheckBox" colSpan="2"></dxi-item>
+            <div class="errorWarning">
+                L'assignation à un service incendie est obligatoire.
+            </div>
             <dxi-item dataField="fireSafetyDepartments" colSpan="2"></dxi-item>
             <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
-                <dxi-item dataField="firstName" [isRequired]="true"></dxi-item>
+                <dxi-item dataField="firstName" [isRequired]="true">
+                </dxi-item>
                 <dxi-item dataField="lastName" [isRequired]="true"></dxi-item>
                 <dxi-item dataField="email" [editorOptions]="{mode: 'email'}">
                     <dxi-validation-rule type="email"></dxi-validation-rule>
@@ -90,16 +95,16 @@
                 (onEditorPreparing)="departmentEditorPreparing($event)">
             <dxi-column
                     dataField="idFireSafetyDepartment"
-                    [validationRules]="[{ type: 'required' }]"
-                    caption="{{'fireSafetyDepartment' | translate}}">
+                    caption="{{'fireSafetyDepartment' | translate}}"
+                    [validationRules]="[{type:'required', message:'Error'}]">
                 <dxo-lookup [dataSource]="departments" displayExpr="name" valueExpr="id">
                 </dxo-lookup>
             </dxi-column>
             <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}"
                         width="10%"></dxi-column>
-
             <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true"
-                         [allowDeleting]="true"></dxo-editing>
+                         [allowDeleting]="true">
+            </dxo-editing>
         </dx-data-grid>
     </div>
 </dx-data-grid>

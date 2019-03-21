@@ -20,7 +20,7 @@ export abstract class GridWithCrudService {
         if (this.translateService) {
             this.translateService.get(['close', 'cannotModifyExternalData']).subscribe(c => {
                 this.closedTranslation = c['close'];
-                this.readOnlyTranslation = c['cannotModifyExternalData']
+                this.readOnlyTranslation = c['cannotModifyExternalData'];
             });
         }
     }
