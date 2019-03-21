@@ -232,6 +232,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                 buildingValue: building.buildingValue,
                 yearOfConstruction: building.yearOfConstruction,
                 childType: 1,
+                idExtern: null
             });
         } else {
             e.data = Object.assign({}, building);
