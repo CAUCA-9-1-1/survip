@@ -69,7 +69,7 @@
                 (onRowUpdated)="onBuildingsUpdated($event)"
                 (onRowRemoved)="onBuildingsRemoved($event)"
                 (onRowRemoving)="onRowRemoving($event)"
-                (onCellPrepared)="onDeletingValidation($event)">
+                (onCellPrepared)="onStatusActionValidation($event)">
             <dxi-column dataField="sequence" cellTemplate="showmove" sortOrder="asc" sortIndex="0" width="90px" caption=" "></dxi-column>
             <dxi-column dataField="fullCivicNumber"
                     caption="{{'civicNumberGrid' | translate}}"
@@ -79,7 +79,7 @@
             <dxi-column dataField="fullLaneName" caption="{{'lane' | translate}}" [allowEditing]="false" width="25%"></dxi-column>
             <dxi-column dataField="cityName" caption="{{'city' | translate}}" [allowEditing]="false" width="17%"></dxi-column>
             <dxi-column dataField="riskLevel" caption="{{'riskLevel' | translate}}" [allowEditing]="false" width="11%"></dxi-column>
-            <dxi-column dataField="idWebUserAssignedTo" caption="{{'assignedTo' | translate}}" width="15%">
+            <dxi-column dataField="idWebuserAssignedTo" caption="{{'assignedTo' | translate}}" width="15%">
                 <dxo-lookup [dataSource]="inspectorsList" displayExpr="name" valueExpr="id">
                 </dxo-lookup>
             </dxi-column>
