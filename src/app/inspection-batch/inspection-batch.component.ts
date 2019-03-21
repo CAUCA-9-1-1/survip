@@ -262,25 +262,24 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
     public onRowRemoving(e) {
         let message: string;
-        if(e.data.hasBeenDownloaded) {
+        if (e.data.hasBeenDownloaded) {
             message = this.labels['deleteDownloadedInspection'];
         } else {
             message = this.labels['deleteInspection'];
         }
 
-        let index = e.component.getRowIndexByKey(e.key);
-        let rowEl = e.component.getRowElement(index);
-        rowEl[0].classList.add("rowToDelete");
+        const index = e.component.getRowIndexByKey(e.key);
+        const rowEl = e.component.getRowElement(index);
+        rowEl[0].classList.add('rowToDelete');
 
-        let res = confirm(message ,this.labels['delete']);
+        const res = confirm(message ,this.labels['delete']);
 
         e.cancel = new Promise((resolve, reject) => {
             res.then((dialogResult) => {
-              rowEl[0].classList.remove("rowToDelete");
-              resolve(!dialogResult)
+              rowEl[0].classList.remove('rowToDelete');
+              resolve(!dialogResult);
             });
-      
-          })
+          });
     }
 
     public onBuildingsRemoved(e) {
@@ -446,7 +445,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     }
 
     public onDeletingValidation(e) {
-        if (e.data && e.data.inspectionStatus !== 0 && e.column.command === "edit") {
+        if (e.data && e.data.inspectionStatus !== 0 && e.column.command === 'edit') {
             e.cellElement.querySelector('.dx-link-delete').style.opacity = '0.5';
             e.cellElement.querySelector('.dx-link-delete').style.pointerEvents = 'none';
             e.cellElement.querySelector('.dx-link-delete').style.color = '#959595';
