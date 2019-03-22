@@ -1,15 +1,12 @@
 import validationEngine from 'devextreme/ui/validation_engine';
 import DataSource from 'devextreme/data/data_source';
-import { Button } from 'protractor';
-import { DxButtonModule } from 'devextreme-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 
 export abstract class GridWithOdataService {
     gridPopup: any;
     readOnly: boolean;
-    closedTranslation: string;
-    readOnlyTranslation: string;
+    private labelLocalized = {};
 
     public dataSource: DataSource;
     public validationGroup = 'custom-validation-group-' + (new Date()).getTime();
@@ -21,12 +18,13 @@ export abstract class GridWithOdataService {
         protected sourceConfig?: any,
     ) {
         this.dataSource = new DataSource(sourceConfig);
-        if(this.translateService) {
-            this.translateService.get(['close', 'cannotModifyExternalData']).subscribe(c => {
-                this.closedTranslation = c['close'];
-                this.readOnlyTranslation = c['cannotModifyExternalData']
+        if (this.translateService) {
+            this.translateService.get([
+                'close', 'cannotModifyExternalData'
+            ]).subscribe(labels => {
+                this.labelLocalized = labels;
             });
-        } 
+        }
     }
 
     public onInitialized(e) {
@@ -44,17 +42,17 @@ export abstract class GridWithOdataService {
                 this.gridPopup = ev.component;
             }
             options.popup.onShowing = (ev) => {
-                if(this.readOnly) {
-                    let toolbar = this.gridPopup.option('toolbarItems');
+                if (this.readOnly) {
+                    const toolbar = this.gridPopup.option('toolbarItems');
                     toolbar.push({
-                        toolbar: "bottom",
-                        location: "before",
-                        html: '<i style="color:black;display:inline-block" class="material-icons">lock</i> <div style="color:red;display:inline-block">' + this.readOnlyTranslation + '</div>',
+                        toolbar: 'bottom',
+                        location: 'before',
+                        html: '<i style="color:black;display:inline-block" class="material-icons">lock</i> <div style="color:red;display:inline-block">' + this.labelLocalized['cannotModifyExternalData'] + '</div>',
                     });
-                    this.gridPopup.option('toolbarItems', toolbar);   
+                    this.gridPopup.option('toolbarItems', toolbar);
                     toolbar[0].options.visible = false;
-                    toolbar[1].options.text = this.closedTranslation;
-                    this.gridPopup.option('toolbarItems', toolbar);    
+                    toolbar[1].options.text = this.labelLocalized['close'];
+                    this.gridPopup.option('toolbarItems', toolbar);
                 }
             }
             e.component.option('editing', options);

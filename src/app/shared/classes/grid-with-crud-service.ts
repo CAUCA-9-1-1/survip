@@ -1,12 +1,11 @@
 import validationEngine from 'devextreme/ui/validation_engine';
 import { TranslateService } from '@ngx-translate/core';
 
-
 export abstract class GridWithCrudService {
     gridPopup: any;
     readOnly: boolean;
-    closedTranslation: string;
-    readOnlyTranslation: string;
+    private labelLocalized = {};
+
     public dataSource = [];
     public validationGroup = 'custom-validation-group-' + (new Date()).getTime();
 
@@ -18,9 +17,10 @@ export abstract class GridWithCrudService {
         protected sourceService?: any,
     ) {
         if (this.translateService) {
-            this.translateService.get(['close', 'cannotModifyExternalData']).subscribe(c => {
-                this.closedTranslation = c['close'];
-                this.readOnlyTranslation = c['cannotModifyExternalData'];
+            this.translateService.get([
+                'close', 'cannotModifyExternalData'
+            ]).subscribe(labels => {
+                this.labelLocalized = labels;
             });
         }
     }
@@ -40,17 +40,18 @@ export abstract class GridWithCrudService {
                 this.gridPopup = ev.component;
             }
             options.popup.onShowing = (ev) => {
+                console.log('showing popup');
                 if (this.readOnly) {
                     let toolbar = this.gridPopup.option('toolbarItems');
                     toolbar.push({
                         toolbar: 'bottom',
                         location: 'before',
-                        html: '<i style="color:black;display:inline-block" class="material-icons">lock</i> <div style="color:red;display:inline-block">' + this.readOnlyTranslation + '</div>',
+                        html: '<i style="color:black;display:inline-block" class="material-icons">lock</i> <div style="color:red;display:inline-block">' + this.labelLocalized['cannotModifyExternalData'] + '</div>',
                     });
                     this.gridPopup.option('toolbarItems', toolbar);
                     toolbar = ev.component.option('toolbarItems')
                     toolbar[0].options.visible = false;
-                    toolbar[1].options.text = this.closedTranslation;
+                    toolbar[1].options.text = this.labelLocalized['close'];
                     this.gridPopup.option('toolbarItems', toolbar);
                 }
             }
