@@ -100,9 +100,6 @@ export class ManageHazardousMaterialComponent extends GridWithCrudService implem
         if (e.row && e.row.data) {
             if (e.row.data.idExtern) {
                 e.editorOptions.readOnly = true;
-                this.readOnly = e.editorOptions.readOnly;
-            } else {
-                this.readOnly = false;
             }
         }
     }

@@ -47,7 +47,6 @@ export abstract class GridWithCrudService {
                         location: 'before',
                         html: '<i style="color:black;display:inline-block" class="material-icons">lock</i> <div style="color:red;display:inline-block">' + this.readOnlyTranslation + '</div>',
                     });
-                    console.log(toolbar);
                     this.gridPopup.option('toolbarItems', toolbar);
                     toolbar = ev.component.option('toolbarItems')
                     toolbar[0].options.visible = false;
