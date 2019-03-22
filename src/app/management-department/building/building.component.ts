@@ -138,6 +138,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
+        console.log('toolbar preparing');
         if (!this.cityService.readOnlyImported) {
             toolbarItems.unshift({
                 widget: 'dxButton',
