@@ -54,4 +54,12 @@ export class ManageContactsComponent extends GridWithCrudService implements OnIn
         e.data.isOwner = false;
         e.data.isActive = true;
     }
+
+    onEditorPreparing(e) {
+        if (e.row && e.row.data) {
+            if (e.row.data.idExtern) {
+                e.editorOptions.readOnly = true;
+            }
+        }
+    }
 }

@@ -42,7 +42,7 @@ export class RequestService {
             'Language-Code': config.locale,
         };
         this.apiUrl = requestConfig.url || config.apiUrl;
-        this.readOnlyImported = config.readOnlyImported === 'false' ? false : true;
+        this.readOnlyImported = config.readOnlyImported || false;
     }
 
     get(url: string): Observable<any> {

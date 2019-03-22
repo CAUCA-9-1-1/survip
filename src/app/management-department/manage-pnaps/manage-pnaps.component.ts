@@ -4,7 +4,6 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {BuildingPnapsService} from '../shared/services/building-pnaps.service';
 import {InspectionBuildingPnapsService} from '../../inspection-approval/shared/services/inspection-building-pnaps.service';
 import {PersonRequiringAssistanceTypeService} from '../../management-type-system/shared/services/person-requiring-assistance-type.service';
-import {PersonRequiringAssistanceType} from '../../management-type-system/shared/models/person-requiring-assistance-type.model';
 import {BuildingPnaps} from '../shared/models/building-pnaps.model';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -30,7 +29,6 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
 
     idBuilding: string;
     pnapsType:  any = {store: []};
-    private labels: any = {};
 
     constructor(
         private inspectionService: InspectionBuildingPnapsService,
@@ -63,12 +61,9 @@ export class ManagePnapsComponent extends GridWithCrudService implements OnInit 
             e.editorName = 'dxTextArea';
         }
         
-        if(e.row && e.row.data) {
-            if(e.row.data.idExtern) {
+        if (e.row && e.row.data) {
+            if (e.row.data.idExtern) {
                 e.editorOptions.readOnly = true;
-                this.readOnly = e.editorOptions.readOnly;
-            } else {
-                this.readOnly = false;
             }
         }
     }

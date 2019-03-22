@@ -43,7 +43,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         this.dataSource.load();
     }
 
-    @Input() readOnly = false;
+    @Input() readOnly = this.laneService.readOnlyImported;
 
     public addingButton: any;
     public lanes: any = [];
@@ -138,7 +138,6 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
-        console.log('toolbar preparing');
         if (!this.cityService.readOnlyImported) {
             toolbarItems.unshift({
                 widget: 'dxButton',
@@ -210,11 +209,9 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
             e.editorOptions.closeOnOutsideClick = true;
         }
 
-        this.readOnly = false;
         if (e.row && e.row.data) {
             if (e.row.data.idExtern) {
                 e.editorOptions.readOnly = true;
-                this.readOnly = e.editorOptions.readOnly;
             }
         }
     }
