@@ -209,9 +209,10 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
             e.editorOptions.closeOnOutsideClick = true;
         }
 
+        this.readOnly = false;
         if (e.row && e.row.data) {
             if (e.row.data.idExtern) {
-                e.editorOptions.readOnly = true;
+                e.editorOptions.readOnly = this.readOnly = true;
             }
         }
     }
