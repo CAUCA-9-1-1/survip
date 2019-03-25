@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {AuthGuardService} from '../../services/auth-guard.service';
-import * as info from './../../../../../package.json';
+import * as info from './../../../../assets/config/package.json';
 
 
 @Component({
