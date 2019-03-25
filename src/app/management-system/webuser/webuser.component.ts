@@ -6,7 +6,6 @@ import {WebuserService} from '../shared/services/webuser.service';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
 import {Password} from '../../shared/classes/password';
 import {Color} from '../../shared/classes/color';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
     selector: 'app-management-system-webuser',
@@ -169,6 +168,7 @@ export class WebuserComponent extends GridWithCrudService implements OnInit {
         if (!this.departmentField.value) {
             this.departmentField.value = [];
         }
+        this.onUserDepartmentUpdated(field);
     }
 
     onNewUserDepartment(e) {
