@@ -406,5 +406,6 @@
   "cannotModifyExternalData": "Impossible de modifier, car les données proviennent d'un système externe.",
   "information": "Information",
   "version": "Version",
-  "civicNumberGrid": "# Civique"
+  "civicNumberGrid": "# Civique",
+  "userDepartmentWarning": "L'assignation à un service incendie est obligatoire."
 }

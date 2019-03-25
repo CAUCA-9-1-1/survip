@@ -67,7 +67,7 @@
             <div class="errorWarning">
                 L'assignation à un service incendie est obligatoire.
             </div>
-            <dxi-item dataField="fireSafetyDepartments" colSpan="2"></dxi-item>
+            <dxi-item dataField="fireSafetyDepartments" colSpan="2" [isRequired]="true"></dxi-item>
             <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
                 <dxi-item dataField="firstName" [isRequired]="true">
                 </dxi-item>
@@ -92,11 +92,11 @@
                 (onRowInserted)="onUserDepartmentInserted($event)"
                 (onRowUpdated)="onUserDepartmentUpdated($event)"
                 (onRowRemoved)="onUserDepartmentRemoved($event)"
-                (onEditorPreparing)="departmentEditorPreparing($event)">
+                (onEditorPreparing)="departmentEditorPreparing($event)"
+                noDataText="{{'userDepartmentWarning' | translate}}">
             <dxi-column
                     dataField="idFireSafetyDepartment"
-                    caption="{{'fireSafetyDepartment' | translate}}"
-                    [validationRules]="[{type:'required', message:'Error'}]">
+                    caption="{{'fireSafetyDepartment' | translate}}">
                 <dxo-lookup [dataSource]="departments" displayExpr="name" valueExpr="id">
                 </dxo-lookup>
             </dxi-column>
