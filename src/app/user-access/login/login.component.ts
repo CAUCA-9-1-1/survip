@@ -6,7 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from '../shared/services/authentification.service';
 import {PermissionService} from '../shared/services/permission.service';
 import {ConfigurationService} from '../shared/services/configuration.service';
-import * as info from './../../../../package.json';
+import * as info from './../../../assets/config/package.json';
 
 
 @Component({
