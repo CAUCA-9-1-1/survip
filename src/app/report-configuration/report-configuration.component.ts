@@ -39,11 +39,15 @@ export class ReportConfigurationComponent implements OnInit {
         });
     }
 
-    public saveTemplate(): void {
+    public saveTemplate(e): void {
+        this.selectedTemplate.data = e;
         this.reportConfigurationService.saveTemplate(this.selectedTemplate).subscribe(res => {
             if (this.selectedTemplate.id == null) {
                 this.selectedTemplate.id = res.id;
             }
         });
+    }
+    public onReportEditorChanged(e) {
+        this.selectedTemplate.data = e;
     }
 }
