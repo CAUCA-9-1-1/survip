@@ -21,7 +21,7 @@
               "src/favicon.ico",
               {
                 "glob": "**/*",
-                "input": "./node_modules/cause-report-configuration/assets/",
+                "input": "./node_modules/@cause-911/report-configuration/assets/",
                 "output": "./assets/"
               }
             ],
