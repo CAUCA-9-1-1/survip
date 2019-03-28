@@ -3,4 +3,5 @@ export class ODataConfig {
     key: string;
     keyType: string;
     onRefreshLogin: () => void;
+    onLoaded: (result) => void;
 }
