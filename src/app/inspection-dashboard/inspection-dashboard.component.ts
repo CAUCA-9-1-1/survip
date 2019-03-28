@@ -226,9 +226,9 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
             this.cities.store.length && this.utilisationCodes.length &&
             this.webusers.length
         ) {
+            this.everythingIsLoaded = false;
             this.setDatagrid();
             this.loadData();
-            this.everythingIsLoaded = true;
 
             return true;
         }
@@ -748,6 +748,9 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 url: url,
                 key: 'idBuilding',
                 keyType: 'Guid',
+                onLoaded: () => {
+                  this.everythingIsLoaded = true;
+                },
                 onRefreshLogin: () => this.createStore(url)
             }),
         };

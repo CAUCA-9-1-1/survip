@@ -33,11 +33,13 @@ export class ODataService extends ODataStore {
     injector: Injector,
     configOData: ODataConfig) {
     super({
+      onLoaded: configOData.onLoaded,
       beforeSend: (request) => {
         request.headers['Authorization'] =
           sessionStorage.getItem('authorizationType') + ' ' + sessionStorage.getItem('accessToken');
         request.headers['Language-Code'] = config.locale;
       },
+
       errorHandler: (error) => this.onError(error),
       url: config.apiUrl + 'odata/' + configOData.url,
       key: configOData.key,
