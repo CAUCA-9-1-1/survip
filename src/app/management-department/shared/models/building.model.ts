@@ -42,6 +42,7 @@ export class Building {
     utilisationDescription = '';
     vacantLand = false;
     yearOfConstruction = 2000;
+    idExtern = '';
 
     static fromJSON(data: object): Building {
         const building = new Building();
