@@ -29,20 +29,6 @@ import DataSource from 'devextreme/data/data_source';
 })
 export class BuildingComponent extends GridWithOdataService implements OnInit {
     @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
-
-    @Input()
-    set parentBuilding(building: Building) {
-        this.parent = building;
-        this.isParent = (!building);
-
-        if (this.parent) {
-            this.setBuildingChildDataSource();
-            this.dataSource.filter(['idParentBuilding', '=', new Guid(building.id.toString())]);
-        }
-
-        this.dataSource.load();
-    }
-
     @Input() readOnly = this.laneService.readOnlyImported;
 
     public addingButton: any;
@@ -62,12 +48,26 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         hazardousMaterials: false,
     };
     public toolbarItems = [];
-
     public readOnlyImported = !this.laneService.readOnlyImported;
 
     private formFieldLane: any = null;
     private formFieldCity: any = null;
     private labels: any = {};
+    private isAddingChild = false;
+
+    @Input()
+    set parentBuilding(building: Building) {
+        this.parent = building;
+        this.isParent = (!building);
+
+        if (this.parent) {
+            this.setBuildingChildDataSource();
+            this.dataSource.filter(['idParentBuilding', '=', new Guid(building.id.toString())]);
+        }
+
+        this.dataSource.load();
+        this.addChildBuildingOptionDisplay(building);
+    }
 
     public constructor(
         private injector: Injector,
@@ -82,9 +82,9 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                 url: 'Building',
                 key: 'id',
                 keyType: 'Guid',
-              onRefreshLogin: () => {
-                this.dataGrid.instance.refresh();
-              }
+                onRefreshLogin: () => {
+                    this.dataGrid.instance.refresh();
+                }
             }),
         });
 
@@ -138,7 +138,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     public onToolbarPreparing(e) {
         const toolbarItems = e.toolbarOptions.items;
 
-        if (!this.cityService.readOnlyImported) {
+        if ((!this.cityService.readOnlyImported && this.isParent) || (this.isAddingChild)) {
             toolbarItems.unshift({
                 widget: 'dxButton',
                 location: 'after',
@@ -154,8 +154,9 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                     },
                 }
             });
+            this.isAddingChild = false;
         }
-        
+
         toolbarItems.unshift({
             widget: 'dxLookup',
             options: {
@@ -254,6 +255,17 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
         this.popupVisible[popupName] = true;
     }
 
+    private addChildBuildingOptionDisplay(building: Building) {
+        if (building && !building.idExtern) {
+            this.isAddingChild = true;
+        } else {
+            this.isAddingChild = false;
+        }
+        if (this.dataGrid.instance) {
+            this.dataGrid.instance.repaint();
+        }
+    }
+
     private loadLane() {
         this.laneService.localized().subscribe(data => {
             this.lanes = {
@@ -306,12 +318,12 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
     }
 
     private loadUtilizationCodeByCity(idCity: string) {
-      this.utilisationCode.localizedByCity(idCity).subscribe( data => {
-        this.utilisationCodesOfCity = {
-          store: data,
-          select: ['id', 'name'],
-          sort: ['name']
-        };
-      });
+        this.utilisationCode.localizedByCity(idCity).subscribe(data => {
+            this.utilisationCodesOfCity = {
+                store: data,
+                select: ['id', 'name'],
+                sort: ['name']
+            };
+        });
     }
 }
