@@ -49,7 +49,8 @@ export class LaneComponent extends GridWithOdataService implements OnInit {
                 keyType: 'Guid',
                 onRefreshLogin: () => {
                     this.dataGrid.instance.refresh();
-                }
+                },
+                onLoaded: () => {}
             }),
         });
 

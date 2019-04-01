@@ -13,7 +13,7 @@ export abstract class GridWithOdataService {
 
     protected form: any;
 
-    constructor(
+    protected constructor(
         protected translateService?: TranslateService,
         protected sourceConfig?: any,
     ) {
@@ -35,7 +35,7 @@ export abstract class GridWithOdataService {
             options.form.onInitialized = (ev) => {
                 this.form = ev.component;
             };
-            options.popup.onHiding = (ev) => {
+            options.popup.onHiding = () => {
                 this.dataSource.load();
             };
             options.popup.onOptionChanged = (ev) => {
@@ -54,7 +54,7 @@ export abstract class GridWithOdataService {
                     toolbar[1].options.text = this.labelLocalized['close'];
                     this.gridPopup.option('toolbarItems', toolbar);
                 }
-            }
+            };
             e.component.option('editing', options);
         }
     }
@@ -88,9 +88,9 @@ export abstract class GridWithOdataService {
     protected abstract setModel(data: any): any;
 
     public onCellPrepared(e) {
-        if(e.column.command == "edit") {
-            if(e.data && e.data.idExtern) {
-                if(e.data.idExtern.toString()) {
+        if (e.column.command === 'edit') {
+            if (e.data && e.data.idExtern) {
+                if (e.data.idExtern.toString()) {
                     e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-link-delete');
                     e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-link');
                     e.cellElement.children[e.cellElement.children.length - 1].classList.remove('dx-icon-trash');
