@@ -14,7 +14,6 @@ import {ODataService} from '../../shared/services/o-data.service';
 import {LocationTypeService} from '../../management-type-system/shared/services/location-type.service';
 import {AddressLocationTypeService} from '../../management-type-system/shared/services/address-location-type.service';
 import {EnumModel} from '../../management-type-system/shared/models/enum.model';
-import {BehaviorSubject} from 'rxjs';
 
 
 @Component({
@@ -101,7 +100,8 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                 keyType: 'Guid',
                 onRefreshLogin: () => {
                     this.dataGrid.instance.refresh();
-                }
+                },
+                onLoaded: () => {}
             }),
         });
 
@@ -146,7 +146,7 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
                 }
             });
         }
-        
+
         toolbarItems.unshift({
             widget: 'dxLookup',
             options: {
@@ -249,14 +249,14 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
     }
 
     public laneOnInitialized(field: any, e: any) {
-        if(this.readOnly) {
+        if (this.readOnly) {
             e.component.option('readOnly', true);
         }
         this.formFields[field.column.dataField] = e.component;
-        if(field.data[field.column.dataField]) {
-            let data = field.data[field.column.dataField].toString();
-            if(data) {
-                let lane = this.lanesOfCity.store.find(c => c.id == data);
+        if (field.data[field.column.dataField]) {
+            const data = field.data[field.column.dataField].toString();
+            if (data) {
+                const lane = this.lanesOfCity.store.find(c => c.id === data);
                 this.formFields[field.column.dataField].option('value', lane.id);
             }
         }
@@ -342,26 +342,33 @@ export class FirehydrantComponent extends GridWithOdataService implements OnInit
 
     private displayLocationType() {
         if (document.querySelector('#civicNumberTemplate')) {
-            document.querySelector('#civicNumberTemplate').className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
+            const className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
+            document.querySelector('#civicNumberTemplate').className = className;
             this.changeParentDisplay(document.querySelector('#civicNumberTemplate'));
         }
         if (document.querySelector('#addressLocationTemplate')) {
-            document.querySelector('#addressLocationTemplate').className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
+            const className = this.selectedLocationType === 'Address' ? 'dx-field' : 'display-locationType';
+            document.querySelector('#addressLocationTemplate').className = className;
             this.changeParentDisplay(document.querySelector('#addressLocationTemplate'));
         }
 
         if (document.querySelector('.dx-popup-content #transversalTemplate')) {
-            document.querySelector('.dx-popup-content #transversalTemplate').className = this.selectedLocationType === 'LaneAndTransversal' ? 'dx-field' : 'display-locationType';
+            const className = this.selectedLocationType === 'LaneAndTransversal' ? 'dx-field' : 'display-locationType';
+            document.querySelector('.dx-popup-content #transversalTemplate').className = className;
             this.changeParentDisplay(document.querySelector('.dx-popup-content #transversalTemplate'));
         }
 
         if (document.querySelector('.dx-popup-content #laneTemplate')) {
-            document.querySelector('.dx-popup-content #laneTemplate').className = (this.selectedLocationType === 'Address' || this.selectedLocationType === 'LaneAndTransversal') ? 'dx-field' : 'display-locationType';
+            const className = (this.selectedLocationType === 'Address' || this.selectedLocationType === 'LaneAndTransversal')
+              ? 'dx-field'
+              : 'display-locationType';
+            document.querySelector('.dx-popup-content #laneTemplate').className = className;
             this.changeParentDisplay(document.querySelector('.dx-popup-content #laneTemplate'));
         }
 
         if (document.querySelector('#physicalPositionTemplate')) {
-            document.querySelector('#physicalPositionTemplate').className = this.selectedLocationType === 'Text' ? 'dx-field' : 'display-locationType';
+            const className = this.selectedLocationType === 'Text' ? 'dx-field' : 'display-locationType';
+            document.querySelector('#physicalPositionTemplate').className = className;
             this.changeParentDisplay(document.querySelector('#physicalPositionTemplate'));
         }
     }

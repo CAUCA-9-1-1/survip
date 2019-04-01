@@ -49,7 +49,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
     public availableBuildingsDataSource: any = {};
     public popupBuildingVisible = false;
     public popupButtons: any[];
-    public popupEditorOptions = {onKeyDown: e => this.onFormUpdated(e)};
+    public popupEditorOptions = {onKeyDown: e => this.onFormUpdated()};
 
     constructor(
         translateService: TranslateService,
@@ -101,7 +101,8 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
                 keyType: 'Guid',
                 onRefreshLogin: () => {
                     this.dataGrid.instance.refresh();
-                }
+                },
+                onLoaded: () => {}
             }),
         };
     }
@@ -181,7 +182,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         this.editPopup['option']('toolbarItems', this.popupToolBarItems);
     }
 
-    public onFormUpdated(e) {
+    public onFormUpdated() {
         this.managePopupCancelButton(false);
     }
 
@@ -192,7 +193,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
             widget: 'dxButton',
             options: {
                 text: this.labels['addBuildingsToInspection'],
-                onClick: (ev) => {
+                onClick: () => {
                     this.popupBuildingSelected = [];
                     this.popupBuildingVisible = true;
                 }
@@ -221,7 +222,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
         }
     }
 
-    public addInspector(e, field) {
+    public addInspector(e) {
         const inspector = Object.assign({}, e.selectedItem);
         const users = this.formUserField.value;
 
@@ -272,7 +273,7 @@ export class InspectionBatchComponent extends GridWithCrudService implements OnI
 
         const res = confirm(message, this.labels['delete']);
 
-        e.cancel = new Promise((resolve, reject) => {
+        e.cancel = new Promise((resolve) => {
             res.then((dialogResult) => {
                 rowEl[0].classList.remove('rowToDelete');
                 resolve(!dialogResult);

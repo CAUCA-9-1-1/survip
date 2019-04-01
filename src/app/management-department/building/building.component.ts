@@ -83,8 +83,9 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                 key: 'id',
                 keyType: 'Guid',
                 onRefreshLogin: () => {
-                    this.dataGrid.instance.refresh();
-                }
+                  this.dataGrid.instance.refresh();
+                },
+                onLoaded: () => {}
             }),
         });
 
@@ -119,7 +120,8 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                 keyType: 'Guid',
                 onRefreshLogin: () => {
                     this.dataGrid.instance.refresh();
-                }
+                },
+                onLoaded: () => {}
             })
         });
     }
@@ -149,7 +151,7 @@ export class BuildingComponent extends GridWithOdataService implements OnInit {
                     onInitialized: (ev) => {
                         this.addingButton = ev.component;
                     },
-                    onClick: (ev) => {
+                    onClick: () => {
                         e.component.addRow();
                     },
                 }
