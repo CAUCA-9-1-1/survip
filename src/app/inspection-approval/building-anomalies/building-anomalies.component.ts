@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {InspectionBuildingAnomalyService} from '../shared/services/inspection-building-anomaly.service';
 import {BuildingAnomaly} from '../../management-department/shared/models/building-anomaly.model';
 import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
@@ -6,6 +6,7 @@ import {BuildingAnomalyPicture} from '../../management-department/shared/models/
 import {MatDialog} from '@angular/material';
 import {AskNewThemeComponent} from '../ask-new-theme/ask-new-theme.component';
 import {InspectionPictureService} from '../shared/services/inspection-picture.service';
+import {DxSelectBoxComponent} from 'devextreme-angular';
 
 @Component({
     selector: 'app-building-anomalies',
@@ -17,6 +18,8 @@ import {InspectionPictureService} from '../shared/services/inspection-picture.se
     ]
 })
 export class BuildingAnomaliesComponent extends GridWithCrudService implements OnInit {
+    @ViewChild(DxSelectBoxComponent) selectBox: DxSelectBoxComponent;
+
     @Input()
     set building(id: string) {
         this.idBuilding = id;
@@ -94,6 +97,7 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         dialogRef.afterClosed().subscribe(result => {
             if (result && result.name) {
                 this.themes.push(result.name);
+                this.selectBox.instance.getDataSource().load();
             }
         });
     }
