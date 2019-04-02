@@ -17,7 +17,7 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
         FireSafetyDepartmentService,
     ]
 })
-export class SelectTemplateComponent extends GridWithCrudService  implements OnInit {
+export class SelectTemplateComponent extends GridWithCrudService implements OnInit {
     public form: FormGroup;
     public dataSource: any = {};
     public labels = {};
@@ -90,8 +90,8 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
     public onEditingStart(e) {
         this.editedTemplate = new ConfigurationTemplate();
         Object.assign(this.editedTemplate, e.data);
-        
-        if(e.data.idFireSafetyDepartment.toString() === '00000000-0000-0000-0000-000000000000') {
+
+        if (e.data.idFireSafetyDepartment.toString() === '00000000-0000-0000-0000-000000000000') {
             e.data.idFireSafetyDepartment = null;
         }
 
@@ -128,7 +128,7 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
         confirm(this.labels['reportTemplateCopyQuestion'], this.labels['question']).then((result) => {
             if (result) {
                 this.reportConfigurationService.copyTemplate(e.id).subscribe(res => {
-                    if(res.id) {
+                    if (res.id) {
                         this.templateIdentifiers.push(JSON.parse(JSON.stringify(res)));
                     }
                 });
@@ -138,18 +138,18 @@ export class SelectTemplateComponent extends GridWithCrudService  implements OnI
     }
 
     private updateDefaultReport() {
-        if(this.editedTemplate.isDefault === true){
-            let data = this.templateIdentifiers.filter(
+        if (this.editedTemplate.isDefault === true) {
+            const data = this.templateIdentifiers.filter(
                 templateIdentifier => this.checkIfPreviousDefaultTemplate(templateIdentifier));
-        for (let template of data) {
-            template.isDefault = false;
+            for (const template of data) {
+                template.isDefault = false;
             }
         }
     }
 
     private checkIfPreviousDefaultTemplate(templateIdentifier): boolean {
-        return templateIdentifier.idFireSafetyDepartment === this.editedTemplate.idFireSafetyDepartment 
-            && templateIdentifier.isDefault === true 
-            && templateIdentifier.id != this.editedTemplate.id
+        return templateIdentifier.idFireSafetyDepartment === this.editedTemplate.idFireSafetyDepartment
+            && templateIdentifier.isDefault === true
+            && templateIdentifier.id !== this.editedTemplate.id;
     }
 }

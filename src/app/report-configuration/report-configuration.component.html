@@ -1,11 +1,11 @@
 <h1 align="center">{{selectedTemplate.name == null ? ('newDocument' | translate) : selectedTemplate.name}}</h1>
 
 <div name="mainArea">
-  <cause-text-editor #textEditor
-                   id="textEditor"
-                   [(documentContent)]="selectedTemplate.data"
-                   [(placeholders)]="placeholders"
-                   (saveDataEvent)="saveTemplate($event)"
-                    (documentContentChange)="onReportEditorChanged($event)">
-  </cause-text-editor>
+    <cause-text-editor #textEditor
+                       id="textEditor"
+                       [documentContent]="selectedTemplate.data"
+                       [placeholders]="placeholders"
+                       (saveDataEvent)="saveTemplate($event)"
+                       (documentContentChange)="onReportEditorChanged($event)">
+    </cause-text-editor>
 </div>
