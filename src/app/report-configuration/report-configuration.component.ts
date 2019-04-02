@@ -48,6 +48,6 @@ export class ReportConfigurationComponent implements OnInit {
         });
     }
     public onReportEditorChanged(e) {
-        this.selectedTemplate.data = e;
+        // this.selectedTemplate.data = e;
     }
 }
