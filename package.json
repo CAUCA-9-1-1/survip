@@ -24,7 +24,7 @@
     "@angular/platform-browser": "^6.1.6",
     "@angular/platform-browser-dynamic": "^6.1.6",
     "@angular/router": "^6.1.6",
-    "@cause-911/report-configuration": "^1.0.1",
+    "@cause-911/report-configuration": "^1.0.5",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "@types/fabric": "^1.5.40",
