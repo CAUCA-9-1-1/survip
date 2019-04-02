@@ -15,6 +15,7 @@ import {PlaceholderGroup} from './shared/models/placeholder-group';
 export class ReportConfigurationComponent implements OnInit {
     public selectedTemplate: ConfigurationTemplate;
     public placeholders: PlaceholderGroup[];
+    public data = '';
 
     constructor(
         private activeRoute: ActivatedRoute,
@@ -36,6 +37,7 @@ export class ReportConfigurationComponent implements OnInit {
     public loadTemplate(id): void {
         this.reportConfigurationService.getTemplate(id).subscribe(res => {
             this.selectedTemplate = res;
+            this.data = res.data;
         });
     }
 
@@ -46,8 +48,5 @@ export class ReportConfigurationComponent implements OnInit {
                 this.selectedTemplate.id = res.id;
             }
         });
-    }
-    public onReportEditorChanged(e) {
-        // this.selectedTemplate.data = e;
     }
 }

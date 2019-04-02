@@ -3,9 +3,8 @@
 <div name="mainArea">
     <cause-text-editor #textEditor
                        id="textEditor"
-                       [documentContent]="selectedTemplate.data"
+                       [documentContent]="data"
                        [placeholders]="placeholders"
-                       (saveDataEvent)="saveTemplate($event)"
-                       (documentContentChange)="onReportEditorChanged($event)">
+                       (saveDataEvent)="saveTemplate($event)">
     </cause-text-editor>
 </div>
