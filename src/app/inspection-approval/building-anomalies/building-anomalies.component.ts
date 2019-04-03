@@ -38,7 +38,7 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
     private imageList = [];
 
     public constructor(
-        anomalyService: InspectionBuildingAnomalyService,
+        private anomalyService: InspectionBuildingAnomalyService,
         private pictureService: InspectionPictureService,
         private dialog: MatDialog,
     ) {
@@ -103,9 +103,9 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
     }
 
     public async onAddingNewRow(e) {
-        e.key['pictures'] = [];
+        e.data['pictures'] = [];
         await this.savePictureCollection();
-        this.onRowInserted(e);
+        this.saveInspectionBuildingAnomaly(e.data);
     }
 
     public async onModifyingRow(e) {
@@ -119,6 +119,15 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         if (this.imageList.length > 0) {
             await this.sourceService.savePictureCollection(this.imageList).toPromise();
         }
+    }
+
+    private saveInspectionBuildingAnomaly(data: any) {
+        this.anomalyService.save(data).subscribe(info => {
+            this.ValidateUnlinkedPictures(info.id);
+            this.loadSource(this.idBuilding);
+        }, error => {
+            this.loadSource(this.idBuilding);
+        });
     }
 
     public uploadPicture(picture) {
@@ -144,6 +153,22 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
                 });
                 this.formImageField.setValue(images);
             }
+        }
+    }
+
+    private ValidateUnlinkedPictures(idInspectionBuildingAnomaly: string) {
+        const images = this.formImageField.value
+        if (images.length > 0) {
+            images.forEach(image => {
+                if (!image.picture.idParent && idInspectionBuildingAnomaly) {
+                    const anomalyPicture = new BuildingAnomalyPicture();
+                    anomalyPicture.idParent = idInspectionBuildingAnomaly;
+                    anomalyPicture.dataUri = image.picture.dataUri;
+                    anomalyPicture.sketchJson = image.picture.sketchJson;
+                    this.imageList.push(anomalyPicture);
+                }
+            });
+            this.savePictureCollection();
         }
     }
 }
