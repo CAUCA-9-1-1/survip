@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-
+import {v4 as uuid} from 'uuid';
 import {Picture} from '../../models/picture.model';
 
 
@@ -107,8 +107,6 @@ export class SlideshowComponent implements OnInit {
 
         picture.id = undefined;
         picture.name = e.name;
-        picture.data = '';
-        picture.mimeType = '';
         picture.dataUri = e.content;
 
         this.valueChanged.emit(picture);
