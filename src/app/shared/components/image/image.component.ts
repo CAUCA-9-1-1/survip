@@ -64,7 +64,7 @@ export class ImageComponent implements OnInit {
     public isPopupVisible = false;
     public pictogramsPath = "./assets/pictograms/";
     public pictograms =["AccesPrincipal.png", "Annonciateur.png", "BoiteClees.png", "BorneIncendie.png",
-                        "CamionPompier.png", "GazNaturel.png", "GazPropane.png", "Generatrice.png"];  
+                        "CamionPompier.png", "GazNaturel.png", "GazPropane.png", "Generatrice.png"];
 
     private labels = {};
     private canvas = null;
@@ -91,7 +91,6 @@ export class ImageComponent implements OnInit {
             const picture = new Picture();
             picture.id = this.idPicture ? this.idPicture : uuid();
             picture.name = e.name;
-            picture.mimeType = '';
             picture.dataUri = e.content;
 
             this.src = e.content;

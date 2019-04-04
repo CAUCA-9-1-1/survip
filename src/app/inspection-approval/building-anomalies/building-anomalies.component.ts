@@ -7,6 +7,8 @@ import {MatDialog} from '@angular/material';
 import {AskNewThemeComponent} from '../ask-new-theme/ask-new-theme.component';
 import {InspectionPictureService} from '../shared/services/inspection-picture.service';
 import {DxSelectBoxComponent} from 'devextreme-angular';
+import {v4 as uuid} from 'uuid';
+import {Picture} from '../../shared/models/picture.model';
 
 @Component({
     selector: 'app-building-anomalies',
@@ -35,7 +37,7 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
     private selectRow: any;
     private idBuilding: string;
     private formImageField: any;
-    private imageList = [];
+    private imageList: BuildingAnomalyPicture[] = [];
 
     public constructor(
         private anomalyService: InspectionBuildingAnomalyService,
@@ -115,31 +117,30 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
     }
 
     private async savePictureCollection() {
-        console.log('saving pictures');
-        if (this.imageList.length > 0) {
+        if (this.imageList.length > 0 /*&& this.selectRow.id*/) {
             await this.sourceService.savePictureCollection(this.imageList).toPromise();
         }
     }
 
     private saveInspectionBuildingAnomaly(data: any) {
-        this.anomalyService.save(data).subscribe(info => {
-            this.ValidateUnlinkedPictures(info.id);
+        this.anomalyService.save(data).subscribe(async(info) => {
+            await this.validateUnlinkedPictures(info.id);
             this.loadSource(this.idBuilding);
-        }, error => {
+        }, () => {
             this.loadSource(this.idBuilding);
         });
     }
 
-    public uploadPicture(picture) {
+    public uploadPicture(picture: Picture) {
         const images = this.formImageField.value || [];
 
         if (picture.id) {
             this.pictureService.save(picture).subscribe();
         } else {
             if (this.selectRow.id) {
-                picture.idParent = this.selectRow.id || undefined;
                 const anomalyPicture = new BuildingAnomalyPicture();
-                anomalyPicture.idParent = picture.idParent;
+                anomalyPicture.id = uuid();
+                anomalyPicture.idParent = this.selectRow.id;
                 anomalyPicture.dataUri = picture.dataUri;
                 anomalyPicture.sketchJson = picture.sketchJson;
                 images.push({
@@ -156,19 +157,22 @@ export class BuildingAnomaliesComponent extends GridWithCrudService implements O
         }
     }
 
-    private ValidateUnlinkedPictures(idInspectionBuildingAnomaly: string) {
-        const images = this.formImageField.value
+    private async validateUnlinkedPictures(idInspectionBuildingAnomaly: string) {
+        const images = this.formImageField.value;
         if (images.length > 0) {
             images.forEach(image => {
+
                 if (!image.picture.idParent && idInspectionBuildingAnomaly) {
+
                     const anomalyPicture = new BuildingAnomalyPicture();
+                    anomalyPicture.id = uuid();
                     anomalyPicture.idParent = idInspectionBuildingAnomaly;
                     anomalyPicture.dataUri = image.picture.dataUri;
                     anomalyPicture.sketchJson = image.picture.sketchJson;
                     this.imageList.push(anomalyPicture);
                 }
             });
-            this.savePictureCollection();
+            await this.savePictureCollection();
         }
     }
 }
