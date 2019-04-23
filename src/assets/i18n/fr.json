@@ -407,5 +407,6 @@
   "information": "Information",
   "version": "Version",
   "civicNumberGrid": "# Civique",
-  "userDepartmentWarning": "L'assignation à un service incendie est obligatoire."
+  "userDepartmentWarning": "L'assignation à un service incendie est obligatoire.",
+  "objective": "Objectif(s)"
 }
