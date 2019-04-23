@@ -19,8 +19,10 @@ export class StatisticsComponent implements OnInit {
     public statsLoaded = false;
     public currentDepartment: string[] = null;
 
+    public case: number;
+    public objective: number = 100;
+
     get isLoaded() {
-        // console.log(this.currentDepartment);
         return (this.currentDepartment != null);
     }
 
@@ -67,7 +69,7 @@ export class StatisticsComponent implements OnInit {
     }
 
     private loadDepartment() {
-        this.fireSafetyDepartmentService.allLocalized().subscribe(data => {
+        this.fireSafetyDepartmentService.localized().subscribe(data => {
             this.departments = {
                 store: data,
                 select: ['id', 'name'],

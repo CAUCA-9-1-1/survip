@@ -6,6 +6,7 @@
 
 <div id="form-container">
     <dx-tag-box [dataSource]="departments" displayExpr="name" valueExpr="id" (onValueChanged)="updateGraphics($event)"></dx-tag-box>
+    <input [(ngModel)]="objective" (keyup.enter)="update()">
 </div>
 
 <div *ngIf="isLoaded">
@@ -13,14 +14,6 @@
         <div fxFlex="48%" class="graph">
             <dx-pie-chart title="Impact des visites" [palette]="colors.visits" [dataSource]="visits">
                 <dxi-series argumentField="description" valueField="total">
-                    <dxo-label [visible]="true">
-                        <dxo-connector [visible]="true" [width]="1"></dxo-connector>
-                    </dxo-label>
-                    <dxo-label [visible]="true" [customizeText]="customizePieLabel">
-                        <dxo-font [size]="16"></dxo-font>
-                        <dxo-connector [visible]="true" [width]="0.5">
-                        </dxo-connector>
-                    </dxo-label>
                 </dxi-series>
                 <dxo-tooltip [enabled]="true" [customizeTooltip]="showPercent"></dxo-tooltip>
                 <dxo-export [enabled]="true"></dxo-export>
@@ -41,8 +34,6 @@
     </div>
 
     <div>
-        <dx-chart [dataSource]="timeline">
-            <dxi-series argumentField="month" valueField="count" name="Inspections par mois"></dxi-series>
-        </dx-chart>
+        <p>TABLEAU</p>
     </div>
 </div>
