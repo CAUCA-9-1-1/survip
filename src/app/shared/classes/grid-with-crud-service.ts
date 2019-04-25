@@ -46,7 +46,7 @@ export abstract class GridWithCrudService {
                     toolbar.push({
                         toolbar: 'bottom',
                         location: 'before',
-                        html: '<i style="color:black;display:inline-block" class="material-icons">lock</i> <div style="color:red;display:inline-block">' + this.labelLocalized['cannotModifyExternalData'] + '</div>',
+                        html: '<i style="color:black;display:inline-block" class="material-icons">lock</i> <div style="color:red;display:inline-block;background-color: rgb(255,255,255,0.5);border: 1px solid black;padding-left:10px; padding-right: 10px;">' + this.labelLocalized['cannotModifyExternalData'] + '</div>',
                     });
                     this.gridPopup.option('toolbarItems', toolbar);
                     toolbar = ev.component.option('toolbarItems')

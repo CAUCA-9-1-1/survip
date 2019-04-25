@@ -8,3 +8,19 @@
   overflow: hidden;
   transition: width 0.5s ease-in;
 }
+
+
+::ng-deep {
+  .dx-toolbar.dx-popup-bottom {
+    background-color: #b32017;
+  }
+
+  .dx-toolbar.dx-popup-title {
+    background-color: #b32017;
+    color: white;
+  }
+
+  .dx-button {
+    background-color: #cbb677;
+  }
+}

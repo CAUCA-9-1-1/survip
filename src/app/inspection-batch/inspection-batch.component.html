@@ -1,4 +1,5 @@
 <dx-data-grid
+        cssClass="siboulo"
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
@@ -25,7 +26,7 @@
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
-        <dxo-popup title="{{'batch' | translate}}" [showTitle]="true" [onShown]="popupShown"></dxo-popup>
+        <dxo-popup title="{{'batch' | translate}}" [showTitle]="true" [fullScreen]="true" [onShown]="popupShown"></dxo-popup>
 
         <dxo-form colCount="4">
             <dxi-item dataField="description" [isRequired]="true" [colSpan]="4" [editorOptions]="popupEditorOptions"></dxi-item>
@@ -63,6 +64,7 @@
                 [dataSource]="inspectionBuildingList"
                 [hoverStateEnabled]="true"
                 [rowAlternationEnabled]="true"
+                [allowColumnResizing]="true"
                 (onInitialized)="onInitialized($event)"
                 (onToolbarPreparing)="onToolbarPreparing($event)"
                 (onInitialized)="setFormInspectionField(field)"
