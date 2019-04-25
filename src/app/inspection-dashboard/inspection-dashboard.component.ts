@@ -455,6 +455,7 @@ export class InspectionDashboardComponent implements OnInit, AfterViewInit {
                 visible[10] = true;
                 visible[11] = true;
                 visible[12] = true;
+                visible[24] = true;
                 break;
             case 'mode4':
                 visible[5] = true;
