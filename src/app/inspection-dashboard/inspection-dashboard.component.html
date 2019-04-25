@@ -16,6 +16,7 @@
 <dx-data-grid
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
+
         [rowAlternationEnabled]="true">
     <dxo-remote-operations
             [filtering]="true"
@@ -23,6 +24,7 @@
             [paging]="true">
     </dxo-remote-operations>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
+  <dxo-sorting mode="multiple"></dxo-sorting>
     <dxo-paging [pageSize]="20"></dxo-paging>
 
     <div *dxTemplate="let field of 'approveInspection'">
