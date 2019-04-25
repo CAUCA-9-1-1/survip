@@ -257,9 +257,9 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
             this.setNextQuestion();
 
-            this.displayOptionDetails(this.questions[this.selectedIndex].questionType);
+            this.displayOptionDetails(e.itemData.questionType);
 
-            this.loadSource(this.questions[this.selectedIndex].id);
+            this.loadSource(e.itemData.id);
         }
     }
 
@@ -282,7 +282,8 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
     }
 
     public moveQuestion() {
-        this.questionService.move(this.questions[this.selectedIndex].id, this.questions[this.selectedIndex].sequence).subscribe();
+        this.questionService.move(this.questions[this.selectedIndex].id, this.questions[this.selectedIndex].sequence).subscribe(
+            () => {this.loadQuestion(this.questions[this.selectedIndex].id); });
     }
 
     public onRemoveQuestion() {
