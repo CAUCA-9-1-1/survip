@@ -6,6 +6,7 @@ import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
 import {CountyService} from '../../management-address/shared/services/county.service';
+import { ObjectiveComponent } from '../../statistics/objective-configuration/objective.component';
 
 
 @Component({
