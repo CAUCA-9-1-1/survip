@@ -21,7 +21,7 @@ import { StatisticsComponent } from './statistics.component';
         DxPieChartModule,
         DxFormModule,
         DxSelectBoxModule,
-        DxTextAreaModule, 
+        DxTextAreaModule,
         DxTagBoxModule
     ],
 })
