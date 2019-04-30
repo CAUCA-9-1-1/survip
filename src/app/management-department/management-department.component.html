@@ -15,4 +15,7 @@
     <mat-tab label="{{'fireHydrants' | translate}}" [disabled]="!accessTo.fireHydrant">
         <app-management-department-firehydrant [fxShow]="accessTo.fireHydrant"></app-management-department-firehydrant>
     </mat-tab>
+    <mat-tab label="{{'objective' | translate}}" [disabled]="!accessTo.department">
+        <app-manage-objectives [fxShow]="accessTo.department"></app-manage-objectives>
+    </mat-tab>
 </mat-tab-group>

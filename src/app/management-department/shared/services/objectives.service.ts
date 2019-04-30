@@ -1,8 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
 import { RequestService } from '../../../shared/services/request.service';
 import { Observable } from 'rxjs/Observable';
-import { Objective } from '../models/objective.model';
-
+import { Objective } from '../../../statistics/shared/models/objective.model';
 
 @Injectable()
 export class ObjectivesService extends RequestService {

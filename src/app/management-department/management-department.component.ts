@@ -15,6 +15,7 @@ export class ManagementDepartmentComponent implements OnInit {
         fireHydrant: false,
         firestation: false,
         lane: false,
+        department: false,
     };
 
     public constructor(
@@ -27,5 +28,6 @@ export class ManagementDepartmentComponent implements OnInit {
         this.accessTo.fireHydrant = this.authGuardService.hasRight('RightFireHydrantManagement');
         this.accessTo.firestation = this.authGuardService.hasRight('RightFireStationManagement');
         this.accessTo.lane = this.authGuardService.hasRight('RightLaneManagement');
+        this.accessTo.department = this.authGuardService.hasRight('RightDepartmentManagement');
     }
 }

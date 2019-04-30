@@ -21,6 +21,7 @@ import {ManagePnapsComponent} from './manage-pnaps/manage-pnaps.component';
 import {ManageHazardousMaterialComponent} from './manage-hazardous-material/manage-hazardous-material.component';
 import {LaneComponent} from './lane/lane.component';
 import {DepartmentRiskLevelComponent} from './department-risk-level/department-risk-level.component';
+import {ObjectiveComponent} from './objective/objective.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {DepartmentRiskLevelComponent} from './department-risk-level/department-r
         FirehydrantComponent,
         LaneComponent,
         DepartmentRiskLevelComponent,
+        ObjectiveComponent,
     ],
     exports: [],
     imports: [
