@@ -10,8 +10,8 @@ export class ObjectivesService extends RequestService {
     super(injector);
   }
 
-  getAll(): Observable<Objective[]> {
-    return this.get('Objectives');
+  getAll(isHighRisk: boolean): Observable<Objective[]> {
+    return this.get('Objectives/Risk/' + isHighRisk);
   }
 
   save(objective: Objective): Observable<Objective[]> {
