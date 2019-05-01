@@ -10,16 +10,15 @@ export class ObjectivesService extends RequestService {
     super(injector);
   }
 
-  getLocalized(idFireSafetyDeparment: string): Observable<Objective[]> {
-    return this.get('Objectives/' + idFireSafetyDeparment);
+  getAll(): Observable<Objective[]> {
+    return this.get('Objectives');
   }
 
-  save(objective: Objective): Observable<any> {
+  save(objective: Objective): Observable<Objective[]> {
     return this.post('Objectives/', objective);
   }
 
-  remove(id: string): Observable<boolean> {
-    console.log(id);
-    return this.delete('Objectives/' + id);
+  remove(idObjective: string): Observable<boolean> {
+    return this.delete('Objectives/' + idObjective);
   }
 }

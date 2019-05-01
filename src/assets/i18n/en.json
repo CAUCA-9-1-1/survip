@@ -410,5 +410,7 @@
   "civicNumberGrid": "Civic #",
   "riskLevelAbbreviation": "Risque",
   "userDepartmentWarning": "User's fire department assignment is required.",
-  "objective": "Objective(s)"
+  "objectives": "Objective(s)",
+  "objective": "Objective",
+  "year": "Year"
 }
