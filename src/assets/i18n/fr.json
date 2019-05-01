@@ -411,5 +411,7 @@
   "userDepartmentWarning": "L'assignation à un service incendie est obligatoire.",
   "objectives": "Objectif(s)",
   "objective": "Objectif",
-  "year": "Année"
+  "year": "Année",
+  "lowRisk": "Risques faibles et moyens", 
+  "highRisk": "Risque élevés et très élevés"
 }

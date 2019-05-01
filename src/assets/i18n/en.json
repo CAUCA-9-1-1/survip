@@ -412,5 +412,7 @@
   "userDepartmentWarning": "User's fire department assignment is required.",
   "objectives": "Objective(s)",
   "objective": "Objective",
-  "year": "Year"
+  "year": "Year", 
+  "lowRisk": "Low and medium risk", 
+  "highRisk": "High and very high risk"
 }

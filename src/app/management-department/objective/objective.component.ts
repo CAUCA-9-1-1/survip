@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 import { ObjectivesService } from '../shared/services/objectives.service';
@@ -7,16 +7,17 @@ import { Objective } from '../../statistics/shared/models/objective.model';
 import { FireSafetyDepartmentService } from '../../management-system/shared/services/firesafetydepartment.service';
 
 @Component({
-  selector: 'app-manage-objectives',
+  selector: 'app-objective',
   templateUrl: './objective.component.html',
   styleUrls: ['./objective.component.scss'],
   providers: [ObjectivesService, FireSafetyDepartmentService]
 })
 export class ObjectiveComponent implements OnInit {
   @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+  @Input() isHighRisk: boolean;
 
   public isLoading = false;
-  public lowRisk: Objective[] = [];
+  public filteredObjectives: Objective[] = [];
 
   private dataSource: Objective[] = [];
   private formFieldFireSafetyDepartment: any = null;
@@ -60,12 +61,11 @@ export class ObjectiveComponent implements OnInit {
         closeOnOutsideClick: true,
         onInitialized: (ev) => {
           this.formFieldFireSafetyDepartment = ev.component;
+          this.filterList(this.selectedFireSafetyDepartment);
         },
         onValueChanged: (ev) => {
           this.selectedFireSafetyDepartment = ev.value;
-          this.lowRisk = this.dataSource.filter((el) => {
-            return (el.idFireSafetyDepartment === ev.value);
-          });
+          this.filterList(ev.value);
         }
       }
     });
@@ -73,6 +73,7 @@ export class ObjectiveComponent implements OnInit {
 
   onInitNewRow(e) {
     e.data.isActive = true;
+    e.data.isHighRisk = this.isHighRisk;
     e.data.idFireSafetyDepartment = this.selectedFireSafetyDepartment;
   }
 
@@ -89,17 +90,26 @@ export class ObjectiveComponent implements OnInit {
   }
 
   private loadObjectives() {
-    this.objectiveService.getAll();
+    this.objectiveService.getAll(this.isHighRisk).subscribe(objectives => {
+      this.dataSource = objectives;
+    });
   }
 
   private loadFireSafetyDepartment() {
     this.fireSafetyDepartmentService.localized().subscribe(data => {
+      this.selectedFireSafetyDepartment = (data[0] ? data[0].id : '');
       this.formFieldFireSafetyDepartment.option('value', (data[0] ? data[0].id : ''));
       this.formFieldFireSafetyDepartment.option('dataSource', {
         store: data,
         select: ['id', 'name'],
         sort: ['name'],
       });
+    });
+  }
+
+  private filterList(value: string) {
+    this.filteredObjectives = this.dataSource.filter((el) => {
+      return (el.idFireSafetyDepartment === value);
     });
   }
 }

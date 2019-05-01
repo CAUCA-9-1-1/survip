@@ -22,6 +22,7 @@ import {ManageHazardousMaterialComponent} from './manage-hazardous-material/mana
 import {LaneComponent} from './lane/lane.component';
 import {DepartmentRiskLevelComponent} from './department-risk-level/department-risk-level.component';
 import {ObjectiveComponent} from './objective/objective.component';
+import {ObjectiveManagementComponent} from './objective/objective-management/objective-management.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {ObjectiveComponent} from './objective/objective.component';
         LaneComponent,
         DepartmentRiskLevelComponent,
         ObjectiveComponent,
+        ObjectiveManagementComponent,
     ],
     exports: [],
     imports: [

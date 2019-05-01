@@ -1,0 +1,13 @@
+<div>
+  <mat-tab-group>
+
+    <mat-tab label="{{'lowRisk' | translate}}">
+      <app-objective [isHighRisk]="false"></app-objective>
+    </mat-tab>
+
+    <mat-tab label="{{'highRisk' | translate}}">
+      <app-objective [isHighRisk]="true"></app-objective>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

@@ -1,18 +1,11 @@
-<mat-tab-group>
-    <mat-tab label="Risques Faible - Moyen">
-        <dx-data-grid [dataSource]="lowRisk" [rowAlternationEnabled]="true" (onInitNewRow)="onInitNewRow($event)"
-            (onRowInserted)="onRowInserted($event)" (onRowUpdated)="onRowUpdated($event)"
-            (onRowRemoved)="onRowRemoved($event)" (onToolbarPreparing)="onToolbarPreparing($event)">
-            <dxo-editing [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
-                <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
-            </dxo-editing>
-            <dxi-column caption="{{'year' | translate}}" sortOrder="asc" sortIndex="0" dataField="year"></dxi-column>
-            <dxi-column caption="{{'objective' | translate}}" dataField="objective" [allowSorting]="false"></dxi-column>
-            <dxo-filter-row [visible]="true"></dxo-filter-row>
-            <dxo-load-panel [enabled]="true"></dxo-load-panel>
-        </dx-data-grid>
-    </mat-tab>
-
-    <mat-tab label="Risques Élevé - Très élevé">
-    </mat-tab>
-</mat-tab-group>
+<dx-data-grid [dataSource]="filteredObjectives" [rowAlternationEnabled]="true" (onInitNewRow)="onInitNewRow($event)"
+    (onRowInserted)="onRowInserted($event)" (onRowUpdated)="onRowUpdated($event)" (onRowRemoved)="onRowRemoved($event)"
+    (onToolbarPreparing)="onToolbarPreparing($event)">
+    <dxo-editing [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
+    </dxo-editing>
+    <dxi-column caption="{{'year' | translate}}" sortOrder="asc" sortIndex="0" dataField="year"></dxi-column>
+    <dxi-column caption="{{'objective' | translate}}" dataField="objective" [allowSorting]="false"></dxi-column>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+</dx-data-grid>
