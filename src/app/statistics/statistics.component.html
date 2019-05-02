@@ -4,36 +4,61 @@
     <div fxFlex="50%"></div>
 </div>
 
-<div id="form-container">
-    <dx-tag-box [dataSource]="departments" displayExpr="name" valueExpr="id" (onValueChanged)="updateGraphics($event)"></dx-tag-box>
-    <input [(ngModel)]="objective" (keyup.enter)="update()">
+<div id="drow-down-container">
+    <dx-drop-down-box id="form-container" *ngIf="departments" #ddBox [dataSource]="departments" [value]="departmentName"
+        [(opened)]="isDropDownBoxOpened">
+        <div *dxTemplate="let contentData of 'content'">
+            <dx-list [dataSource]="departments" displayExpr="name" valueExpr="id" selectionMode="single"
+                (onSelectionChanged)="updateGraphics($event)">
+            </dx-list>
+        </div>
+    </dx-drop-down-box>
 </div>
 
-<div *ngIf="isLoaded">
-    <div fxLayout="row">
-        <div fxFlex="48%" class="graph">
-            <dx-pie-chart title="Impact des visites" [palette]="colors.visits" [dataSource]="visits">
-                <dxi-series argumentField="description" valueField="total">
-                </dxi-series>
-                <dxo-tooltip [enabled]="true" [customizeTooltip]="showPercent"></dxo-tooltip>
-                <dxo-export [enabled]="true"></dxo-export>
-            </dx-pie-chart>
-        </div>
-        <div fxFlex="4%"></div>
-        <div fxFlex="48%" class="graph">
-            <dx-chart [palette]="colors.results" [dataSource]="results" [customizeLabel]="customizeBarLabel">
-                <dxo-title text="Résultat vs Objectif"></dxo-title>
-                <dxo-common-series-settings argumentField="description" type="bar" valueField="total"
-                    [ignoreEmptyPoints]="true">
-                </dxo-common-series-settings>
-                <dxo-series-template nameField="description"></dxo-series-template>
-                <dxo-tooltip [enabled]="true" [customizeTooltip]="showTooltip"></dxo-tooltip>
-                <dxo-export [enabled]="true"></dxo-export>
-            </dx-chart>
-        </div>
-    </div>
+<div *ngIf="currentDepartment">
+    <div *ngIf="isLoaded">
+        <div fxLayout="row">
+            <div fxFlex="50%" class="graph">
+                <dx-pie-chart title="Impact des visites" [palette]="colors.visits" [dataSource]="visits">
+                    <dxi-series argumentField="description" valueField="total">
+                        <dxo-label [visible]="true">
+                            <dxo-connector [visible]="true" [width]="1"></dxo-connector>
+                        </dxo-label>
+                        <dxo-label [visible]="true" [customizeText]="customizePieLabel">
+                            <dxo-font [size]="16"></dxo-font>
+                            <dxo-connector [visible]="true" [width]="0.5">
+                            </dxo-connector>
+                        </dxo-label>
+                    </dxi-series>
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="showPercent"></dxo-tooltip>
+                    <dxo-export [enabled]="true"></dxo-export>
+                </dx-pie-chart>
+            </div>
 
-    <div>
-        <p>TABLEAU</p>
+            <div fxFlex="50%" class="graph">
+                <dx-chart [palette]="colors.results" [dataSource]="results" [customizeLabel]="customizeBarLabel">
+                    <dxo-title text="{{'objectiveVsResults' | translate}}"></dxo-title>
+                    <dxo-common-series-settings argumentField="description" type="bar" valueField="total"
+                        [ignoreEmptyPoints]="true">
+                    </dxo-common-series-settings>
+                    <dxo-series-template nameField="description"></dxo-series-template>
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="showTooltip"></dxo-tooltip>
+                    <dxo-export [enabled]="true"></dxo-export>
+                </dx-chart>
+            </div>
+        </div>
+
+        <div fxLayout="row">
+            <div fxFlex="50%" class="graph">
+                <div>
+                    <app-objective-grid [objectives]="filteredLowRisk" [isHighRisk]="false"></app-objective-grid>
+                </div>
+            </div>
+            <div fxFlex="50%" class="graph">
+                <div>
+                    <app-objective-grid [objectives]="filteredHighRisk" [isHighRisk]="true"></app-objective-grid>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

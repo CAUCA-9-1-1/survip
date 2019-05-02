@@ -413,5 +413,9 @@
   "objective": "Objectif",
   "year": "Année",
   "lowRisk": "Risques faibles et moyens", 
-  "highRisk": "Risque élevés et très élevés"
+  "highRisk": "Risque élevés et très élevés",
+  "visitsResults": "Résultats des visites de prévention",
+  "results": "Résultats",
+  "visitsImpact": "Impact des visites",
+  "objectiveVsResults": "Objectifs vs. Résultats"
 }

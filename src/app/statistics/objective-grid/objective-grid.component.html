@@ -1,0 +1,12 @@
+<h3>{{title}}</h3>
+
+<dx-data-grid class="grid" [dataSource]="dataSource" [rowAlternationEnabled]="false">
+  <dxo-editing [allowUpdating]="false" [allowAdding]="false" [allowDeleting]="false">
+  </dxo-editing>
+  <dxi-column caption="{{'year' | translate}}" sortOrder="asc" sortIndex="0" dataField="year" [allowSorting]="false">
+  </dxi-column>
+  <dxi-column caption="{{'objective' | translate}}" dataField="objective" [allowSorting]="false"></dxi-column>
+  <dxi-column caption="{{'results' | translate}}" dataField="value" [allowSorting]="false"
+    ></dxi-column>
+  <dxo-load-panel [enabled]="true"></dxo-load-panel>
+</dx-data-grid>
