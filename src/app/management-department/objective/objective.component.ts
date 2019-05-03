@@ -42,11 +42,6 @@ export class ObjectiveComponent implements OnInit {
     this.loadObjectives();
   }
 
-  setModel(data: any) {
-    return Objective.fromJSON(data);
-  }
-
-
   public onToolbarPreparing(e) {
     const toolbarItems = e.toolbarOptions.items;
 
@@ -71,7 +66,7 @@ export class ObjectiveComponent implements OnInit {
     });
   }
 
-  onInitNewRow(e) {
+  public onInitNewRow(e) {
     e.data.isActive = true;
     e.data.isHighRisk = this.isHighRisk;
     e.data.idFireSafetyDepartment = this.selectedFireSafetyDepartment;

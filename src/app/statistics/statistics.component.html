@@ -1,4 +1,4 @@
-<h2>Résultats des visites de prévention</h2>
+<h2>{{'visitsResults' | translate}}</h2>
 <div fxLayout="row">
     <div fxFlex="50%"></div>
     <div fxFlex="50%"></div>
@@ -7,6 +7,14 @@
 <div id="drow-down-container">
     <dx-drop-down-box id="form-container" *ngIf="departments" #ddBox [dataSource]="departments" [value]="departmentName"
         [(opened)]="isDropDownBoxOpened">
+        <div *dxTemplate="let contentData of 'content'">
+            <dx-list [dataSource]="departments" displayExpr="name" valueExpr="id" selectionMode="single"
+                (onSelectionChanged)="updateGraphics($event)">
+            </dx-list>
+        </div>
+    </dx-drop-down-box>
+<div id="form-container" *ngIf="departments">
+    <dx-drop-down-box #ddBox [dataSource]="departments" [value]="departmentName" [(opened)]="isDropDownBoxOpened">
         <div *dxTemplate="let contentData of 'content'">
             <dx-list [dataSource]="departments" displayExpr="name" valueExpr="id" selectionMode="single"
                 (onSelectionChanged)="updateGraphics($event)">
@@ -58,6 +66,20 @@
                 <div>
                     <app-objective-grid [objectives]="filteredHighRisk" [isHighRisk]="true"></app-objective-grid>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div fxFlex="48%" class="graph">
+            <div *ngIf="currentDepartment">
+                <app-objective-grid [objectives]="filteredLowRisk" [isHighRisk]="false"></app-objective-grid>
+            </div>
+        </div>
+        <div fxFlex="4%"></div>
+        <div fxFlex="48%" class="graph">
+            <div *ngIf="currentDepartment">
+                <app-objective-grid [objectives]="filteredHighRisk" [isHighRisk]="true"></app-objective-grid>
             </div>
         </div>
     </div>

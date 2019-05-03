@@ -4,16 +4,21 @@ import {
     DxSelectBoxModule,
     DxTextAreaModule,
     DxFormModule,
-    DxTagBoxModule
+    DxTagBoxModule,
+    DxDropDownBoxModule,
+    DxListModule,
+    DxDataGridModule,
 } from 'devextreme-angular';
 
 import { SharedModule } from '../shared/shared.module';
 import { StatisticsComponent } from './statistics.component';
+import { ObjectiveGridComponent } from './objective-grid/objective-grid.component';
 
 
 @NgModule({
     declarations: [
         StatisticsComponent,
+        ObjectiveGridComponent,
     ],
     imports: [
         SharedModule,
@@ -22,7 +27,10 @@ import { StatisticsComponent } from './statistics.component';
         DxFormModule,
         DxSelectBoxModule,
         DxTextAreaModule,
-        DxTagBoxModule
+        DxTagBoxModule,
+        DxDropDownBoxModule,
+        DxListModule,
+        DxDataGridModule
     ],
 })
 export class StatisticsModule { }

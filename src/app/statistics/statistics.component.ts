@@ -12,11 +12,12 @@ import { Objective } from './shared/models/objective.model';
     styleUrls: ['./statistics.component.scss'],
     providers: [FireSafetyDepartmentService, ObjectivesService, StatisticService, InspectionService]
 })
+
 export class StatisticsComponent implements OnInit {
     public departments: any = { store: [] };
     public idFireSafetyDeparment: string = null;
     public statsLoaded = false;
-    public currentDepartment: string[] = null;
+    public currentDepartment = null;
 
     public isDropDownBoxOpened = false;
     public isLoaded = false;
@@ -27,42 +28,33 @@ export class StatisticsComponent implements OnInit {
     public filteredHighRisk: Objective[];
     public inspections: InspectionForStatistics[];
 
+    public lowRisk;
+    public highRisk;
+    public filteredLowRisk;
+    public filteredHighRisk;
+
     colors = {
         visits: ['#447bdd', '#ff8a2f', '#fd9e54', '#c4c4c4'],
         results: ['#ffff0a', '#447bdd'],
     };
 
-    visits: any = [{
-        description: 'Nombre de réponse avec succès',
-        total: 128,
-    }, {
-        description: 'Nombre de visite avec absence',
-        total: 27,
-    }, {
-        description: 'Nombre d\'accroche porte répondu',
-        total: 32,
-    }, {
-        description: 'Nombre d\'inspection refusée',
-        total: 11,
-    }];
+    get departmentName() {
+        return (this.currentDepartment) ? this.currentDepartment.name : '';
+    }
 
-    results: any = [{
-        description: 'Objectif',
-        total: 270
-    }, {
-        description: 'Réponses',
-        total: 128
-    }];
+    visits: any;
+    results: any;
 
-    timeline = [
-        { month: 'Janvier', count: 110 },
-        { month: 'Février', count: 112 },
-        { month: 'Mars', count: 55 },
-        { month: 'Avril', count: 200 },
-        { month: 'Mai', count: 39 }
-    ];
-
-    constructor(private fireSafetyDepartmentService: FireSafetyDepartmentService) {
+    constructor(private fireSafetyDepartmentService: FireSafetyDepartmentService,
+        private objectiveService: ObjectivesService,
+        private statisticService: StatisticService) {
+        this.results = [{
+            description: 'Objectif',
+            total: 100
+        }, {
+            description: 'Réponses',
+            total: 0
+        }];
     }
 
     ngOnInit() {
@@ -79,6 +71,7 @@ export class StatisticsComponent implements OnInit {
                 select: ['id', 'name'],
                 sort: ['name'],
             };
+            this.currentDepartment = this.departments[0];
         });
     }
 
@@ -144,7 +137,15 @@ export class StatisticsComponent implements OnInit {
     }
 
     updateGraphics(e) {
-        this.currentDepartment = e.value;
-        console.log(this.currentDepartment);
+        this.currentDepartment = e.addedItems[0];
+        this.isDropDownBoxOpened = false;
+
+        this.filteredLowRisk = this.lowRisk.filter((el) => {
+            return (el.idFireSafetyDepartment === this.currentDepartment.id);
+        });
+
+        this.filteredHighRisk = this.highRisk.filter((el) => {
+            return (el.idFireSafetyDepartment === this.currentDepartment.id);
+        });
     }
 }
