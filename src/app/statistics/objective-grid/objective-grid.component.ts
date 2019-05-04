@@ -12,9 +12,9 @@ import { InspectionForStatistics } from '../../statistics/shared/models/inspecti
   styleUrls: ['./objective-grid.component.scss']
 })
 export class ObjectiveGridComponent implements OnInit {
-  @Input() isHighRisk: boolean;
-  @Input() objectives: Objective[];
-  @Input() inspectionStatistics: InspectionForStatistics[];
+  @Input() isHighRisk: boolean = false;
+  @Input() objectives: Objective[] = [];
+  @Input() inspectionStatistics: InspectionForStatistics[] = [];
 
   public dataSource: ResultTableCell[] = [];
 
@@ -42,8 +42,6 @@ export class ObjectiveGridComponent implements OnInit {
       this.labels = labels;
     });
 
-    this.objectives.forEach(element => {
-      this.dataSource.push(ResultTableCell.tableCell(element, this.inspectionStatistics));
-    });
+    this.dataSource = ResultTableCell.tableCells(this.objectives, this.inspectionStatistics, this.isHighRisk);
   }
 }

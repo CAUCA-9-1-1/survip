@@ -5,8 +5,14 @@
   </dxo-editing>
   <dxi-column caption="{{'year' | translate}}" sortOrder="asc" sortIndex="0" dataField="year" [allowSorting]="false">
   </dxi-column>
+
   <dxi-column caption="{{'objective' | translate}}" dataField="objective" [allowSorting]="false"></dxi-column>
-  <dxi-column caption="{{'results' | translate}}" dataField="value" [allowSorting]="false"
-    ></dxi-column>
+
+  <dxi-column caption="{{'results' | translate}}" dataField="result" [allowSorting]="false"></dxi-column>
+
+  <dxi-column caption="{{'annualResult' | translate}}" dataField="annualResult" [allowSorting]="false"></dxi-column>
+
+  <dxi-column caption="{{'cumulativeResult' | translate}}" dataField="cumulativeResult" formant="percent" [allowSorting]="false"></dxi-column>
+
   <dxo-load-panel [enabled]="true"></dxo-load-panel>
 </dx-data-grid>

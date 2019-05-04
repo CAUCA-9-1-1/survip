@@ -412,13 +412,14 @@
   "userDepartmentWarning": "User's fire department assignment is required.",
   "objectives": "Objective(s)",
   "objective": "Objective",
+  "cumulativeOjective": "Cumulative objective",
   "year": "Year", 
   "lowRisk": "Low and medium risk", 
   "highRisk": "High and very high risk", 
   "visitsResults": "Results from prevention visits",
   "results": "Results",
+  "annualResult": "Annual result",
+  "cumulativeResults": "Cumulative result",
   "visitsImpact": "Impact of visits",
   "objectiveVsResults": "Objectives vs. Results"
-
-
 }
