@@ -28,11 +28,6 @@ export class StatisticsComponent implements OnInit {
     public filteredHighRisk: Objective[];
     public inspections: InspectionForStatistics[];
 
-    public lowRisk;
-    public highRisk;
-    public filteredLowRisk;
-    public filteredHighRisk;
-
     colors = {
         visits: ['#447bdd', '#ff8a2f', '#fd9e54', '#c4c4c4'],
         results: ['#ffff0a', '#447bdd'],
