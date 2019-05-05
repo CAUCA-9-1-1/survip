@@ -415,9 +415,9 @@
   "lowRisk": "Risques faibles et moyens", 
   "highRisk": "Risque élevés et très élevés",
   "visitsResults": "Résultats des visites de prévention",
-  "results": "Résultats",
+  "visits": "Visites",
   "annualResult": "Résultat annuel",
-  "cumulativeResult": "Résultats cumulatif",
+  "cumulativeResult": "Résultat cumulatif",
   "visitsImpact": "Impact des visites",
   "objectiveVsResults": "Objectifs vs. Résultats"
 }

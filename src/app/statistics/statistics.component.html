@@ -1,23 +1,23 @@
-<h2>{{'visitsResults' | translate}}</h2>
-<div fxLayout="row">
-    <div fxFlex="50%"></div>
-    <div fxFlex="50%"></div>
+
+<div class="padded-div">
+    <h2>{{'visitsResults' | translate}}</h2>
+
+    <div id="form-container" *ngIf="departments">
+        <dx-drop-down-box #ddBox [dataSource]="departments" [value]="departmentName" [(opened)]="isDropDownBoxOpened">
+            <div *dxTemplate="let contentData of 'content'">
+                <dx-list [dataSource]="departments" displayExpr="name" valueExpr="id" selectionMode="single"
+                    (onSelectionChanged)="updateGraphics($event)">
+                </dx-list>
+            </div>
+        </dx-drop-down-box>
+    </div>
 </div>
 
-<div id="form-container" *ngIf="departments">
-    <dx-drop-down-box #ddBox [dataSource]="departments" [value]="departmentName" [(opened)]="isDropDownBoxOpened">
-        <div *dxTemplate="let contentData of 'content'">
-            <dx-list [dataSource]="departments" displayExpr="name" valueExpr="id" selectionMode="single"
-                (onSelectionChanged)="updateGraphics($event)">
-            </dx-list>
-        </div>
-    </dx-drop-down-box>
-</div>
 
-<div *ngIf="currentDepartment">
+<div *ngIf="isEverythingLoaded">
     <div>
         <div fxLayout="row">
-            <div fxFlex="50%" class="graph">
+            <div fxFlex="50%" class="padded-div">
                 <dx-pie-chart title="Impact des visites" [palette]="colors.visits" [dataSource]="visits">
                     <dxi-series argumentField="description" valueField="total">
                         <dxo-label [visible]="true">
@@ -34,7 +34,7 @@
                 </dx-pie-chart>
             </div>
 
-            <div fxFlex="50%" class="graph">
+            <div fxFlex="50%" class="padded-div">
                 <dx-chart [palette]="colors.results" [dataSource]="results" [customizeLabel]="customizeBarLabel">
                     <dxo-title text="{{'objectiveVsResults' | translate}}"></dxo-title>
                     <dxo-common-series-settings argumentField="description" type="bar" valueField="total"
@@ -48,12 +48,12 @@
         </div>
 
         <div fxLayout="row">
-            <div fxFlex="50%" class="graph">
-                <div>
+            <div fxFlex="50%" class="padded-div">
+                <div> 
                     <app-objective-grid [objectives]="filteredLowRisk" [inspectionStatistics]="filteredInspections" [isHighRisk]="false"></app-objective-grid>
                 </div>
             </div>
-            <div fxFlex="50%" class="graph">
+            <div fxFlex="50%" class="padded-div">
                 <div>
                     <app-objective-grid [objectives]="filteredHighRisk" [inspectionStatistics]="filteredInspections" [isHighRisk]="true"></app-objective-grid>
                 </div>
