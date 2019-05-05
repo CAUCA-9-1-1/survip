@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DxDataGridComponent } from 'devextreme-angular';
 import { Objective } from '../../statistics/shared/models/objective.model';
@@ -11,7 +11,7 @@ import { InspectionForStatistics } from '../../statistics/shared/models/inspecti
   templateUrl: './objective-grid.component.html',
   styleUrls: ['./objective-grid.component.scss']
 })
-export class ObjectiveGridComponent implements OnInit {
+export class ObjectiveGridComponent implements OnInit, OnChanges {
   @Input() isHighRisk: boolean = false;
   @Input() objectives: Objective[] = [];
   @Input() inspectionStatistics: InspectionForStatistics[] = [];
@@ -42,6 +42,10 @@ export class ObjectiveGridComponent implements OnInit {
       this.labels = labels;
     });
 
+    this.dataSource = ResultTableCell.tableCells(this.objectives, this.inspectionStatistics, this.isHighRisk);
+  }
+
+  public ngOnChanges() {
     this.dataSource = ResultTableCell.tableCells(this.objectives, this.inspectionStatistics, this.isHighRisk);
   }
 }

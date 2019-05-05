@@ -15,7 +15,7 @@
 </div>
 
 <div *ngIf="currentDepartment">
-    <div *ngIf="isLoaded">
+    <div>
         <div fxLayout="row">
             <div fxFlex="50%" class="graph">
                 <dx-pie-chart title="Impact des visites" [palette]="colors.visits" [dataSource]="visits">
@@ -50,12 +50,12 @@
         <div fxLayout="row">
             <div fxFlex="50%" class="graph">
                 <div>
-                    <app-objective-grid [objectives]="filteredLowRisk" [inspectionStatistics]="inspections" [isHighRisk]="false"></app-objective-grid>
+                    <app-objective-grid [objectives]="filteredLowRisk" [inspectionStatistics]="filteredInspections" [isHighRisk]="false"></app-objective-grid>
                 </div>
             </div>
             <div fxFlex="50%" class="graph">
                 <div>
-                    <app-objective-grid [objectives]="filteredHighRisk" [inspectionStatistics]="inspections" [isHighRisk]="true"></app-objective-grid>
+                    <app-objective-grid [objectives]="filteredHighRisk" [inspectionStatistics]="filteredInspections" [isHighRisk]="true"></app-objective-grid>
                 </div>
             </div>
         </div>

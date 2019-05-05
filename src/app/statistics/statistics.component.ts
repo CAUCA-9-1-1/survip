@@ -27,6 +27,8 @@ export class StatisticsComponent implements OnInit {
     public filteredLowRisk: Objective[];
     public filteredHighRisk: Objective[];
     public inspections: InspectionForStatistics[];
+    public filteredInspections: InspectionForStatistics[];
+    public currentYearInspections: InspectionForStatistics[];
 
     colors = {
         visits: ['#447bdd', '#ff8a2f', '#fd9e54', '#c4c4c4'],
@@ -55,7 +57,6 @@ export class StatisticsComponent implements OnInit {
     ngOnInit() {
         this.loadDepartment();
         this.loadObjectives();
-        this.loadStatiticsForFireSafetyDepartment();
         this.getInspections();
     }
 
@@ -67,25 +68,6 @@ export class StatisticsComponent implements OnInit {
                 sort: ['name'],
             };
             this.currentDepartment = this.departments[0];
-        });
-    }
-
-    private loadStatiticsForFireSafetyDepartment() {
-        this.statisticService.getStatus().subscribe(data => {
-            this.visits = [{
-                description: 'Nombre de réponse avec succès',
-                total: data.success,
-            }, {
-                description: 'Nombre de visite avec absence',
-                total: data.ownerWasAbsent,
-            }, {
-                description: 'Nombre d\'accroche porte répondu',
-                total: data.doorHangerHasBeenLeft,
-            }, {
-                description: 'Nombre d\'inspection refusée',
-                total: data.inspectionRefused,
-            }];
-            this.isLoaded = true;
         });
     }
 
@@ -133,6 +115,7 @@ export class StatisticsComponent implements OnInit {
 
     updateGraphics(e) {
         this.currentDepartment = e.addedItems[0];
+
         this.isDropDownBoxOpened = false;
 
         this.filteredLowRisk = this.lowRisk.filter((el) => {
@@ -142,5 +125,65 @@ export class StatisticsComponent implements OnInit {
         this.filteredHighRisk = this.highRisk.filter((el) => {
             return (el.idFireSafetyDepartment === this.currentDepartment.id);
         });
+
+        this.filteredInspections = this.inspections.filter((el) => {
+            return (el.idFireSafetyDepartment === this.currentDepartment.id);
+        });
+
+        this.currentYearInspections = this.filteredInspections.filter((el) => {
+            return (new Date(el.completedOn).getFullYear() === ((new Date()).getFullYear()));
+        });
+
+        this.visits = [{
+            description: 'Nombre de réponse avec succès',
+            total: this.currentYearInspections.filter((el) => {
+                return (el.status === 2);
+            }).length,
+        }, {
+            description: 'Nombre de visite avec absence',
+            total: this.currentYearInspections.filter((el) => {
+                return (el.ownerWasAbsent && !el.doorHangerHasBeenLeft);
+            }).length,
+        }, {
+            description: 'Nombre d\'accroche porte répondu',
+            total: this.currentYearInspections.filter((el) => {
+                return (el.doorHangerHasBeenLeft === true);
+            }).length,
+        }, {
+            description: 'Nombre d\'inspection refusée',
+            total: this.currentYearInspections.filter((el) => {
+                return (el.hasBeenRefused === true);
+            }).length,
+        }];
+
+        this.results = [{
+            description: 'Objectif',
+            total: this.getCurrentObjective(),
+        }, {
+            description: 'Visites',
+            total: this.currentYearInspections.length
+        }];
+    }
+
+    private getCurrentObjective(): number {
+        let count = 0;
+
+        const lowRiskObjective = this.filteredLowRisk.filter((el) => {
+            return (el.year === (new Date()).getFullYear());
+        });
+
+        if (lowRiskObjective.length > 0) {
+            count += lowRiskObjective[0].objective;
+        }
+
+        const highRiskObjective = this.filteredHighRisk.filter((el) => {
+            return (el.year === (new Date()).getFullYear());
+        });
+
+        if (highRiskObjective.length > 0) {
+            count += highRiskObjective[0].objective;
+        }
+
+        return count;
     }
 }
