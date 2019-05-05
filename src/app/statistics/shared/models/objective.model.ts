@@ -4,7 +4,7 @@ export class Objective extends BaseModel {
     year: number;
     objective: number;
     idFireSafetyDepartment: string;
-    isHighRist: boolean;
+    isHighRisk: boolean;
 
     static fromJSON(data: object): Objective {
         const objective = new Objective();

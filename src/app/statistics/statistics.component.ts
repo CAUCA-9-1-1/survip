@@ -82,7 +82,7 @@ export class StatisticsComponent implements OnInit {
     }
 
     private getInspections() {
-        this.statisticService.getInspections().subscribe(inspectionsStatistics => {
+        this.statisticService.getInspectionVisitsStatistics().subscribe(inspectionsStatistics => {
             this.inspections = inspectionsStatistics;
         });
     }
