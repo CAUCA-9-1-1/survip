@@ -6,7 +6,7 @@
         <dx-drop-down-box #ddBox [dataSource]="departments" [value]="departmentName" [(opened)]="isDropDownBoxOpened">
             <div *dxTemplate="let contentData of 'content'">
                 <dx-list [dataSource]="departments" displayExpr="name" valueExpr="id" selectionMode="single"
-                    (onSelectionChanged)="updateGraphics($event)">
+                    (onSelectionChanged)="onSelectionChanged($event)">
                 </dx-list>
             </div>
         </dx-drop-down-box>
