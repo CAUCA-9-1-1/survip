@@ -35,8 +35,12 @@ export class StatisticsComponent implements OnInit {
         results: ['#ffff0a', '#447bdd'],
     };
 
-    get departmentName() {
+    get departmentName(): string {
         return (this.currentDepartment) ? this.currentDepartment.name : '';
+    }
+
+    get isEverythingLoaded(): boolean {
+        return (this.lowRisk && this.highRisk && this.currentDepartment);
     }
 
     visits: any;
@@ -45,19 +49,18 @@ export class StatisticsComponent implements OnInit {
     constructor(private fireSafetyDepartmentService: FireSafetyDepartmentService,
         private objectiveService: ObjectivesService,
         private statisticService: StatisticService) {
-        this.results = [{
-            description: 'Objectif',
-            total: 100
-        }, {
-            description: 'Réponses',
-            total: 0
-        }];
     }
 
     ngOnInit() {
         this.loadDepartment();
         this.loadObjectives();
-        this.getInspections();
+        this.getInspectionVisits();
+    }
+
+    private setUp() {
+        if (this.isEverythingLoaded) {
+            this.setValue();
+        }
     }
 
     private loadDepartment() {
@@ -67,21 +70,28 @@ export class StatisticsComponent implements OnInit {
                 select: ['id', 'name'],
                 sort: ['name'],
             };
-            this.currentDepartment = this.departments[0];
+            this.currentDepartment = this.departments.store[0];
+
+            if (this.lowRisk && this.highRisk) {
+                this.setUp();
+            }
         });
+
     }
 
     private loadObjectives() {
         this.objectiveService.getAll(false).subscribe(lowRisk => {
             this.lowRisk = lowRisk;
+            this.setUp();
         });
 
         this.objectiveService.getAll(true).subscribe(highRisk => {
             this.highRisk = highRisk;
+            this.setUp();
         });
     }
 
-    private getInspections() {
+    private getInspectionVisits() {
         this.statisticService.getInspectionVisitsStatistics().subscribe(inspectionsStatistics => {
             this.inspections = inspectionsStatistics;
         });
@@ -113,11 +123,7 @@ export class StatisticsComponent implements OnInit {
         };
     }
 
-    updateGraphics(e) {
-        this.currentDepartment = e.addedItems[0];
-
-        this.isDropDownBoxOpened = false;
-
+    private setValue() {
         this.filteredLowRisk = this.lowRisk.filter((el) => {
             return (el.idFireSafetyDepartment === this.currentDepartment.id);
         });
@@ -163,6 +169,14 @@ export class StatisticsComponent implements OnInit {
             description: 'Visites',
             total: this.currentYearInspections.length
         }];
+    }
+
+    updateGraphics(e) {
+        this.currentDepartment = e.addedItems[0];
+
+        this.isDropDownBoxOpened = false;
+
+        this.setValue();
     }
 
     private getCurrentObjective(): number {
