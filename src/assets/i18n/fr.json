@@ -416,8 +416,13 @@
   "highRisk": "Risque élevés et très élevés",
   "visitsResults": "Résultats des visites de prévention",
   "visits": "Visites",
+  "result": "Résultat",
   "annualResult": "Résultat annuel",
   "cumulativeResult": "Résultat cumulatif",
   "visitsImpact": "Impact des visites",
-  "objectiveVsResults": "Objectifs vs. Résultats"
+  "objectiveVsResults": "Objectif vs. Visites",
+  "numberResponseSuccess": "Nombre de réponse avec succès",
+  "numberResponseAbsent": "Nombre de visite avec absence",
+  "numberDoorHangerLeft": "Nombre d'accroche porte répondu",
+  "numberInspectionRefused": "Nombre d'inspection refusée"
 }

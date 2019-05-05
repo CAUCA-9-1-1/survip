@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { FireSafetyDepartmentService } from '../management-system/shared/services/firesafetydepartment.service';
 import { ObjectivesService } from '../management-department/shared/services/objectives.service';
 import { StatisticService } from './shared/services/statistic.service';
@@ -30,6 +31,8 @@ export class StatisticsComponent implements OnInit {
     public filteredInspections: InspectionForStatistics[];
     public currentYearInspections: InspectionForStatistics[];
 
+    public labels: string[];
+
     colors = {
         visits: ['#447bdd', '#ff8a2f', '#fd9e54', '#c4c4c4'],
         results: ['#ffff0a', '#447bdd'],
@@ -40,7 +43,8 @@ export class StatisticsComponent implements OnInit {
     }
 
     get isEverythingLoaded(): boolean {
-        return (this.lowRisk && this.highRisk && this.currentDepartment);
+        return (this.lowRisk && this.highRisk
+            && this.currentDepartment && (this.inspections != null));
     }
 
     visits: any;
@@ -48,7 +52,14 @@ export class StatisticsComponent implements OnInit {
 
     constructor(private fireSafetyDepartmentService: FireSafetyDepartmentService,
         private objectiveService: ObjectivesService,
-        private statisticService: StatisticService) {
+        private statisticService: StatisticService,
+        public translateService: TranslateService
+    ) {
+        this.translateService.get([
+            'visits', 'objective', 'numberResponseSuccess', 'numberResponseAbsent', 'numberDoorHangerLeft', 'numberInspectionRefused'
+        ]).subscribe(labels => {
+            this.labels = labels;
+        });
     }
 
     ngOnInit() {
@@ -124,13 +135,9 @@ export class StatisticsComponent implements OnInit {
     }
 
     private setValue() {
-        this.filteredLowRisk = this.lowRisk.filter((el) => {
-            return (el.idFireSafetyDepartment === this.currentDepartment.id);
-        });
+        this.filteredLowRisk = this.filterByFireSafetyDeparment(this.lowRisk);
+        this.filteredHighRisk = this.filterByFireSafetyDeparment(this.highRisk);
 
-        this.filteredHighRisk = this.highRisk.filter((el) => {
-            return (el.idFireSafetyDepartment === this.currentDepartment.id);
-        });
 
         this.filteredInspections = this.inspections.filter((el) => {
             return (el.idFireSafetyDepartment === this.currentDepartment.id);
@@ -141,63 +148,62 @@ export class StatisticsComponent implements OnInit {
         });
 
         this.visits = [{
-            description: 'Nombre de réponse avec succès',
+            description: this.labels['numberResponseSuccess'],
             total: this.currentYearInspections.filter((el) => {
                 return (el.status === 2);
             }).length,
         }, {
-            description: 'Nombre de visite avec absence',
+            description: this.labels['numberResponseAbsent'],
             total: this.currentYearInspections.filter((el) => {
                 return (el.ownerWasAbsent && !el.doorHangerHasBeenLeft);
             }).length,
         }, {
-            description: 'Nombre d\'accroche porte répondu',
+            description: this.labels['numberDoorHangerLeft'],
             total: this.currentYearInspections.filter((el) => {
                 return (el.doorHangerHasBeenLeft === true);
             }).length,
         }, {
-            description: 'Nombre d\'inspection refusée',
+            description: this.labels['numberInspectionRefused'],
             total: this.currentYearInspections.filter((el) => {
                 return (el.hasBeenRefused === true);
             }).length,
         }];
 
         this.results = [{
-            description: 'Objectif',
-            total: this.getCurrentObjective(),
+            description: this.labels['objective'],
+            total: this.getTotalCurrentObjective(),
         }, {
-            description: 'Visites',
+            description: this.labels['visits'],
             total: this.currentYearInspections.length
         }];
     }
 
-    updateGraphics(e) {
+    public onSelectionChanged(e) {
         this.currentDepartment = e.addedItems[0];
 
         this.isDropDownBoxOpened = false;
-
+        this.lowRisk.filter((el) => {
+            this.lowRisk.filter((el) => {
+                return (el.idFireSafetyDepartment === this.currentDepartment.id);
+            });
+            return (el.idFireSafetyDepartment === this.currentDepartment.id);
+        });
         this.setValue();
     }
 
-    private getCurrentObjective(): number {
-        let count = 0;
-
-        const lowRiskObjective = this.filteredLowRisk.filter((el) => {
-            return (el.year === (new Date()).getFullYear());
+    private filterByFireSafetyDeparment(array: Objective[]): Objective[] {
+        return array.filter((el) => {
+            return (el.idFireSafetyDepartment === this.currentDepartment.id);
         });
+    }
 
-        if (lowRiskObjective.length > 0) {
-            count += lowRiskObjective[0].objective;
-        }
+    private getTotalCurrentObjective(): number {
+        return this.getCurrentObjective(this.lowRisk) + this.getCurrentObjective(this.highRisk);
+    }
 
-        const highRiskObjective = this.filteredHighRisk.filter((el) => {
-            return (el.year === (new Date()).getFullYear());
-        });
-
-        if (highRiskObjective.length > 0) {
-            count += highRiskObjective[0].objective;
-        }
-
-        return count;
+    private getCurrentObjective(objectives: Objective[]): number {
+        const currentObjective = objectives.find(objective => (objective.year === new Date().getFullYear()
+            && objective.idFireSafetyDepartment === this.currentDepartment.id));
+        return ((currentObjective) ? currentObjective.objective : 0);
     }
 }
