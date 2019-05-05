@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatDialog } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 import { ObjectivesService } from '../shared/services/objectives.service';
 import { DxDataGridComponent } from 'devextreme-angular';
@@ -16,16 +15,14 @@ export class ObjectiveComponent implements OnInit {
   @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
   @Input() isHighRisk: boolean;
 
-  public isLoading = false;
-  public filteredObjectives: Objective[] = [];
+  public isReady = false;
+  public dataSource: Objective[] = [];
+  public IdSelectedFireSafetyDepartment: string = null;
 
-  private dataSource: Objective[] = [];
   private formFieldFireSafetyDepartment: any = null;
   private labels: any = {};
-  private selectedFireSafetyDepartment: string = null;
 
   constructor(
-    private dialog: MatDialog,
     public translateService: TranslateService,
     private objectiveService: ObjectivesService,
     private fireSafetyDepartmentService: FireSafetyDepartmentService,
@@ -56,11 +53,9 @@ export class ObjectiveComponent implements OnInit {
         closeOnOutsideClick: true,
         onInitialized: (ev) => {
           this.formFieldFireSafetyDepartment = ev.component;
-          this.filterList(this.selectedFireSafetyDepartment);
         },
         onValueChanged: (ev) => {
-          this.selectedFireSafetyDepartment = ev.value;
-          this.filterList(ev.value);
+          this.IdSelectedFireSafetyDepartment = ev.value;
         }
       }
     });
@@ -69,11 +64,13 @@ export class ObjectiveComponent implements OnInit {
   public onInitNewRow(e) {
     e.data.isActive = true;
     e.data.isHighRisk = this.isHighRisk;
-    e.data.idFireSafetyDepartment = this.selectedFireSafetyDepartment;
+    e.data.idFireSafetyDepartment = this.IdSelectedFireSafetyDepartment;
   }
 
   public onRowInserted(e) {
-    this.objectiveService.save(e.data);
+    this.objectiveService.save(e.data).subscribe(idObjective => {
+      e.data.id = idObjective;
+    });
   }
 
   public onRowUpdated(e) {
@@ -87,24 +84,19 @@ export class ObjectiveComponent implements OnInit {
   private loadObjectives() {
     this.objectiveService.getAll(this.isHighRisk).subscribe(objectives => {
       this.dataSource = objectives;
+      this.isReady = true;
     });
   }
 
   private loadFireSafetyDepartment() {
     this.fireSafetyDepartmentService.localized().subscribe(data => {
-      this.selectedFireSafetyDepartment = (data[0] ? data[0].id : '');
+      this.IdSelectedFireSafetyDepartment = (data[0] ? data[0].id : '');
       this.formFieldFireSafetyDepartment.option('value', (data[0] ? data[0].id : ''));
       this.formFieldFireSafetyDepartment.option('dataSource', {
         store: data,
         select: ['id', 'name'],
         sort: ['name'],
       });
-    });
-  }
-
-  private filterList(value: string) {
-    this.filteredObjectives = this.dataSource.filter((el) => {
-      return (el.idFireSafetyDepartment === value);
     });
   }
 }

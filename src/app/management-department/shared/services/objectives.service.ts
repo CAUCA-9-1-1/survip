@@ -11,14 +11,14 @@ export class ObjectivesService extends RequestService {
   }
 
   getAll(isHighRisk: boolean): Observable<Objective[]> {
-    return this.get('Objectives/Risk/' + isHighRisk);
+    return this.get('Statistics/Objectives/Risk/' + isHighRisk);
   }
 
-  save(objective: Objective): Observable<Objective[]> {
-    return this.post('Objectives/', objective);
+  save(objective: Objective): Observable<string> {
+    return this.post('Statistics/Objectives', objective);
   }
 
   remove(idObjective: string): Observable<boolean> {
-    return this.delete('Objectives/' + idObjective);
+    return this.delete('Statistics/Objectives/' + idObjective);
   }
 }

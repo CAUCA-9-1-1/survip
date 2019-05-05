@@ -12,7 +12,7 @@ import { InspectionForStatistics } from '../../statistics/shared/models/inspecti
   styleUrls: ['./objective-grid.component.scss']
 })
 export class ObjectiveGridComponent implements OnInit, OnChanges {
-  @Input() isHighRisk: boolean = false;
+  @Input() isHighRisk = false;
   @Input() objectives: Objective[] = [];
   @Input() inspectionStatistics: InspectionForStatistics[] = [];
 
@@ -23,11 +23,6 @@ export class ObjectiveGridComponent implements OnInit, OnChanges {
 
   get title() {
     return (this.isHighRisk) ? this.labels['highRisk'] : this.labels['lowRisk'];
-  }
-
-  getValue(rowData): number {
-    console.log(1);
-    return 1;
   }
 
   constructor(
@@ -41,8 +36,6 @@ export class ObjectiveGridComponent implements OnInit, OnChanges {
     ]).subscribe(labels => {
       this.labels = labels;
     });
-
-    this.dataSource = ResultTableCell.tableCells(this.objectives, this.inspectionStatistics, this.isHighRisk);
   }
 
   public ngOnChanges() {
