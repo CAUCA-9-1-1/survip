@@ -1,6 +1,6 @@
 {
   "name": "SURVI-Prevention",
-  "version": "0.3.0",
+  "version": "1.7.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
