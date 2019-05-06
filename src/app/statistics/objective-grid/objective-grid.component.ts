@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { DxDataGridComponent } from 'devextreme-angular';
 import { Objective } from '../../statistics/shared/models/objective.model';
 import { ResultTableCell } from '../../statistics/shared/models/result-table-cell.model';
 import { InspectionForStatistics } from '../../statistics/shared/models/inspection-for-statistics.model';
@@ -13,13 +12,16 @@ import { InspectionForStatistics } from '../../statistics/shared/models/inspecti
 })
 export class ObjectiveGridComponent implements OnInit, OnChanges {
   @Input() isHighRisk = false;
-  @Input() objectives: Objective[] = [];
-  @Input() inspectionStatistics: InspectionForStatistics[] = [];
+  @Input() objectives: Objective[] = null;
+  @Input() inspectionStatistics: InspectionForStatistics[] = null;
 
   public dataSource: ResultTableCell[] = [];
 
-  public isLoading = false;
   public labels: string[];
+
+  get isEverythingLoaded(): boolean {
+    return (this.objectives != null && this.inspectionStatistics != null);
+}
 
   get title() {
     return (this.isHighRisk) ? this.labels['highRisk'] : this.labels['lowRisk'];
@@ -39,6 +41,8 @@ export class ObjectiveGridComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges() {
-    this.dataSource = ResultTableCell.tableCells(this.objectives, this.inspectionStatistics, this.isHighRisk);
+    if (this.isEverythingLoaded) {
+      this.dataSource = ResultTableCell.tableCells(this.objectives, this.inspectionStatistics, this.isHighRisk);
+    }
   }
 }
