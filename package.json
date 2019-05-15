@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^7.2.15",
     "@angular/router": "^7.2.15",
     "@cause-911/report-configuration": "^1.0.7",
+    "@fortawesome/fontawesome-free": "^5.8.2",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "@types/fabric": "^1.5.40",

@@ -96,7 +96,7 @@ $theme:   mat-light-theme($theme-primary, $theme-accent);
   }
 
   .mat-button-toggle-checked {
-    color: mat-color($theme-primary, default-contrast);
+    color: mat-color($theme-primary, default-contrast) !important;
     background-color: mat-color($theme-primary);
   }
 
@@ -124,11 +124,5 @@ $theme:   mat-light-theme($theme-primary, $theme-accent);
 
 // Include the mixin
 @include mix-app-theme($theme);
-
-// Font Awesome
-$fa-font-path: './assets/fonts/fontawesome/webfonts';
-@import 'assets/fonts/fontawesome/css/fontawesome.css';
-@import 'assets/fonts/fontawesome/css/regular.css';
-@import 'assets/fonts/fontawesome/css/solid.css';
 
 
