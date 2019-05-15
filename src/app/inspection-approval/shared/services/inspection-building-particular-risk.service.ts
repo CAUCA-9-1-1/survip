@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {ParticularRiskFoundation} from '../models/particular-risk-foundation.model';

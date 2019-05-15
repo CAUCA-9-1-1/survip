@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { RequestService } from '../../../shared/services/request.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Objective } from '../../../statistics/shared/models/objective.model';
 
 @Injectable()

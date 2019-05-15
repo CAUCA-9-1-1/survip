@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 import {FireHydrantType} from '../models/fire-hydrant-type.model';
 import {RequestService} from '../../../shared/services/request.service';

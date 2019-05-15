@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {Webuser} from '../models/webuser.model';
 import {RequestService} from '../../../shared/services/request.service';
 import {WebuserForWeb} from '../models/webuser-for-web.model';

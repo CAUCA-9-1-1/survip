@@ -1,6 +1,5 @@
 import { Objective } from './objective.model';
 import { InspectionForStatistics } from './inspection-for-statistics.model';
-import { isComponent } from '@angular/core/src/render3/instructions';
 
 export class ResultTableCell extends Objective {
     result: number;
