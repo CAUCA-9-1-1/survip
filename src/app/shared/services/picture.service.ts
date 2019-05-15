@@ -21,7 +21,7 @@ export class PictureService extends RequestService {
         return this.put('Picture', picture);
     }
 
-    public async isPictureSizeValid(picUrl: string){
+    public async isPictureSizeValid(picUrl: string) {
 
         const xhr = new XMLHttpRequest();
         xhr.open('GET', picUrl, true);

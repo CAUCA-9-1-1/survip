@@ -40,9 +40,16 @@ export class InspectionImplantationPlanComponent implements OnInit {
 
     public uploadImage(e) {
         this.picture = e;
-        this.picture.id = this.idImplantationPlan;
+        let hasChangedId = false;
+        if (this.idImplantationPlan !== null) {
+            this.picture.id = this.idImplantationPlan;
+            hasChangedId = true;
+        }
         this.picturePlan = e.dataUri;
         this.saveImage();
+        if (hasChangedId){
+            this.idImplantationPlan = this.picture.id;
+        }
     }
 
     private loadData() {
