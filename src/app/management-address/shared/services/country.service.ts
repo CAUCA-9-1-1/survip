@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 import {RequestService} from '../../../shared/services/request.service';
 import {Country} from '../models/country.model';

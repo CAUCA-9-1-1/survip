@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 import {CityType} from '../models/citytype.model';
 import {RequestService} from '../../../shared/services/request.service';

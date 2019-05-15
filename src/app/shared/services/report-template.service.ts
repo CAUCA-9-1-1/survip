@@ -1,11 +1,11 @@
 import {Injectable, Injector} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/catch';
+
 
 import {RequestService} from './request.service';
 import {ConfigurationTemplate} from '../models/configuration-template.model';
 import {templateCSSPreprocessor} from '../../report-configuration/shared/models/template-preprocessor';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {PostModel} from '../models/post.model';
 import {PlaceholderGroup} from '../../report-configuration/shared/models/placeholder-group';
 
