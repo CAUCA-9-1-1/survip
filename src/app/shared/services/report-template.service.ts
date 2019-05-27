@@ -36,7 +36,7 @@ export class ReportTemplateService extends RequestService {
   }
 
   saveTemplate(template: ConfigurationTemplate): Observable<PostModel> {
-    if (template.data.indexOf('/* Minimal styling to center the editor in this sample */') === -1) {
+    if (template.data && template.data.indexOf('/* Minimal styling to center the editor in this sample */') === -1) {
       template.data = templateCSSPreprocessor + template.data;
     }
     return this.http.post<PostModel>(this.apiUrl + 'ReportConfigurationTemplate/',
@@ -44,6 +44,10 @@ export class ReportTemplateService extends RequestService {
       {
         headers: this.headers,
     });
+  }
+
+  removeTemplate(selectedTemplate: ConfigurationTemplate) {
+    return this.http.delete(this.apiUrl + 'ReportConfigurationTemplate/' + selectedTemplate.id);
   }
 
   copyTemplate(id: string) {

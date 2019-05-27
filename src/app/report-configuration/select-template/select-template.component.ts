@@ -109,11 +109,15 @@ export class SelectTemplateComponent extends GridWithCrudService implements OnIn
     public onRowRemoved(e) {
         const selectedTemplate = e.data;
         selectedTemplate.isActive = false;
-        this.saveTemplate(selectedTemplate);
+        this.removeTemplate(selectedTemplate);
     }
 
     public editReport(report) {
         this.router.navigate(['/report-edition', report.id]);
+    }
+
+    public removeTemplate(selectedTemplate: ConfigurationTemplate) {
+        this.reportConfigurationService.removeTemplate(selectedTemplate).subscribe();
     }
 
     public saveTemplate(selectedTemplate: ConfigurationTemplate) {
