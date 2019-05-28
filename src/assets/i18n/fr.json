@@ -424,5 +424,6 @@
   "numberResponseSuccess": "Nombre de réponse avec succès",
   "numberResponseAbsent": "Nombre de visite avec absence",
   "numberDoorHangerLeft": "Nombre d'accroche porte répondu",
-  "numberInspectionRefused": "Nombre d'inspection refusée"
+  "numberInspectionRefused": "Nombre d'inspection refusée",
+  "removeQuestionUsedAsNext": "Cette question est utilisée comme question suivante. La supprimer effacera donc son lien avec tout autre question. Voulez-vous continuer?"
 }

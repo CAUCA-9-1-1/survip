@@ -61,7 +61,7 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
         this.loadQuestion();
         this.translate.get(['removeQuestion', 'question', 'newTitle', 'newQuestion', 'choiceAnswer',
             'textAnswer', 'dateAnswer', 'removeQuestionChoices', 'groupedQuestion',
-            'endGroupQuestion', 'groupedQuestionTypeChangedWarning', 'warning'])
+            'endGroupQuestion', 'groupedQuestionTypeChangedWarning', 'warning', 'removeQuestionUsedAsNext'])
             .subscribe(labels => {
                 this.messages = labels;
             });
@@ -288,13 +288,29 @@ export class QuestionComponent extends GridWithCrudService implements OnInit {
 
     public onRemoveQuestion() {
         if (this.selectedIndex > -1) {
-            confirm(this.messages['removeQuestion'], this.messages['question']).then((result) => {
-                if (result) {
-                    this.questionService.remove(this.questions[this.selectedIndex].id)
-                        .subscribe(() => {
-                            this.selectedIndex = 0;
-                            this.loadQuestion();
-                        });
+            this.questionService.checkIfUsedAsNextQuestion(this.questions[this.selectedIndex].id).subscribe(usedAsNextQuestion => {
+                if (usedAsNextQuestion) {
+                    confirm(this.messages['removeQuestionUsedAsNext'], this.messages['removeQuestion']).then((result) => {
+                        if (result) {
+                            this.questionService.remove(this.questions[this.selectedIndex].id)
+                                .subscribe(() => {
+                                    this.questionService.removeFromChoice(this.questions[this.selectedIndex].id).subscribe(() => {
+                                        this.selectedIndex = 0;
+                                        this.loadQuestion();
+                                    });
+                                });
+                        }
+                    });
+                } else {
+                    confirm(this.messages['removeQuestion'], this.messages['question']).then((result) => {
+                        if (result) {
+                            this.questionService.remove(this.questions[this.selectedIndex].id)
+                                .subscribe(() => {
+                                    this.selectedIndex = 0;
+                                    this.loadQuestion();
+                                });
+                        }
+                    });
                 }
             });
         }
