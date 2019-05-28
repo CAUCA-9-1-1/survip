@@ -426,5 +426,6 @@
   "numberResponseSuccess": "Number of successful responses",
   "numberResponseAbsent": "Number of visit where no one was present",
   "numberDoorHangerLeft": "Number of door hangers left",
-  "numberInspectionRefused": "Number of refused inspections"
+  "numberInspectionRefused": "Number of refused inspections",
+  "removeQuestionUsedAsNext": "This question is used as next question. Removing it will erase is link with every questions. Do you want to continue?"
 }

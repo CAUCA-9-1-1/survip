@@ -32,6 +32,10 @@ export class QuestionService extends RequestService {
         return this.delete('SurveyQuestion/' + id);
     }
 
+    removeFromChoice(id: string) {
+        return this.delete('SurveyQuestion/Choice/' + id);
+    }
+
     move(id: string, sequence: number) {
         return this.post('SurveyQuestion/' + id + '/Sequence/' + sequence, {});
     }
@@ -46,6 +50,10 @@ export class QuestionService extends RequestService {
             retValue.push({value: k, text:  this.translateService.instant('enumQuestionType.' + enumCollection[k])});
         });
         return retValue;
+    }
+
+    checkIfUsedAsNextQuestion(id: string) {
+        return this.get('SurveyQuestion/CheckIfQuestionUsedAsNext/' + id);
     }
 }
 
