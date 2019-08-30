@@ -41,7 +41,7 @@ export class AuthGuardService implements CanActivate {
         this.checkToLoadPermission();
 
         const access = this.permissions.filter(item => {
-            if (item.feature.featureName === right) {
+            if (item.featureName === right) {
                 return item.access;
             }
 
