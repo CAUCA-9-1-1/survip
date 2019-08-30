@@ -44,7 +44,6 @@ export class CityTypeComponent extends GridWithCrudService implements OnInit {
         this.readOnly = false;
         if (e.data) {
             if (e.data.idExtern) {
-                console.log(e);
                 this.readOnly = true;
             }
         }

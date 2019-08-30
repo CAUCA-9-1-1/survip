@@ -1,5 +1,5 @@
 export class PermissionSystemFeature {
-  idPermission: string;
+  access: boolean;
+  description: string;
   featureName: string;
-  defaultValue: boolean;
 }

@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
         this.auth.login(this.username, this.password).subscribe(token => {
             if (token.accessToken) {
                 this.loadGeneralConfiguration();
-                this.loadUserPermission(token.idWebuser);
+                this.loadUserPermission(token.idUser);
             } else {
                 this.notify(this.labels['badLogin']);
             }

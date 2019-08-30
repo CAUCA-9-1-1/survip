@@ -14,16 +14,16 @@ export class AuthenticationService {
         private http: HttpClient,
     ) {
         this.isLogged.next(sessionStorage.getItem('accessToken') ? true : false);
-        this.status().subscribe(logged => {
+        /*this.status().subscribe(logged => {
             this.isLogged.next(logged);
         }, error => {
             this.isLogged.next(false);
-        });
+        });*/
     }
 
     login(username: string, password: string): Observable<any> {
         return this.http.post<any>(config.apiUrl + 'Authentification/Logon', {
-            username: username,
+            userName: username,
             password: password,
         }).pipe(
             tap(() => this.isLogged.next(true)),
@@ -46,13 +46,13 @@ export class AuthenticationService {
     }
 
     private onResponse(response) {
-        if (response.data.accessToken) {
-            sessionStorage.setItem('refreshToken', response.data.refreshToken);
+        if (response.accessToken) {
+            sessionStorage.setItem('refreshToken', response.refreshToken);
             sessionStorage.setItem('authorizationType', 'Bearer');
-            sessionStorage.setItem('accessToken', response.data.accessToken);
-            sessionStorage.setItem('currentWebuser', response.data.idWebuser);
+            sessionStorage.setItem('accessToken', response.accessToken);
+            sessionStorage.setItem('currentWebuser', response.idUser);
         }
 
-        return response.data;
+        return response;
     }
 }

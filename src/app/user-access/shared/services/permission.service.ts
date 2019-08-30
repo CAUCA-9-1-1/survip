@@ -17,7 +17,7 @@ export class PermissionService extends RequestService {
     }
 
     public getUserPermission(idWebuser): Observable<Permission[]> {
-        return this.get('permission/webuser/' + idWebuser);
+        return this.get(`UserManagement/${idWebuser}/Permissions`);
     }
 
     public save(object: Permission) {
