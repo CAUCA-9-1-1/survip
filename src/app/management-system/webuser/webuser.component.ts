@@ -10,6 +10,7 @@ import {UserFireSafetyDepartmentModel} from '../shared/models/user-fire-safety-d
 import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
+import {FireSafetyDepartmentLocalizedModel} from '../shared/models/fire-safety-department-localized-model';
 
 @Component({
     selector: 'app-management-system-webuser',
@@ -27,7 +28,7 @@ export class WebuserComponent implements OnInit {
     private labels = {};
     private departmentField: any;
     fireSafetyDepartments: DataSource;
-    allFireSafetyDepartments: FireSafetyDepartment[] = [];
+    allFireSafetyDepartments: FireSafetyDepartmentLocalizedModel[] = [];
     showColumnXS = true;
 
     public displayDepartmentValidationError = false;
@@ -66,7 +67,7 @@ export class WebuserComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loadDepartments();
+        this.getFireSafetyDepartments();
         this.getUsers();
     }
 
@@ -107,77 +108,23 @@ export class WebuserComponent implements OnInit {
     }
 
     onInitNewRow(e) {
-        e.data.isActive = true;
-        e.data.resetPassword = true;
-        e.data.fireSafetyDepartments = [];
-        e.data.username = ' ';
-        e.data.password = '';
-        e.data.passwordConfirm = '';
-
-        this.webuserFireSafetyDepartments = [];
-        this.selectedIdWebuser = undefined;
-        this.selectedPassword = '';
+        e.data = new Webuser();
     }
 
     onEditingStart(e) {
-      console.log(e);
         e.data.password = '';
         e.data.resetPassword = this.getWebuserAttribute('reset_password', e.data);
-        // this.webuserFireSafetyDepartments = e.data.fireSafetyDepartments;
         this.selectedIdWebuser = e.data.id;
         this.selectedPassword = '';
     }
 
     onRowInserted(e) {
-
-       // e.data.attributes = this.setWebuserAttributes(e);
-
-       // super.onRowInserted(e);
+      this.saveUser(e.data as Webuser);
     }
 
     onRowUpdated(e) {
-       // e.key.attributes = this.setWebuserAttributes(e);
-
-      //  super.onRowUpdated(e);
+      this.saveUser(e.data as Webuser);
     }
-
-    ondRowValidating(e) {
-        if (!e.isValid && e.brokenRules[0].type === 'compare' && !e.newData.password) {
-            e.isValid = true;
-        }
-
-        e.isValid = this.isDepartmentValid();
-    }
-
-   /* private setWebuserAttributes(e) {
-        const fieldUser = ['__KEY__', 'id', 'createOn', 'isActive', 'password', 'username', 'fireSafetyDepartments'];
-
-        for (const attr in e.data) {
-            if (e.data[attr] && fieldUser.indexOf(attr) === -1) {
-                let selectAttr = -1;
-
-                if (e.key.attributes) {
-                    selectAttr = e.key.attributes.findIndex(item => {
-                        return item.attributeName === attr;
-                    });
-                } else {
-                    e.key.attributes = [];
-                }
-
-                if (selectAttr > -1) {
-                    e.key.attributes[selectAttr].attributeValue = e.data[attr];
-                } else {
-                    e.key.attributes.push({
-                        attributeName: attr.toSnakeCase(),
-                        attributeValue: e.data[attr],
-                        idWebuser: e.key.id,
-                    });
-                }
-            }
-        }
-
-        return e.key.attributes;
-    }*/
 
     private getWebuserAttribute(field, e) {
         let name = '';
@@ -192,25 +139,8 @@ export class WebuserComponent implements OnInit {
         return name;
     }
 
-    private loadDepartments() {
-     this.departmentService.allLocalized().subscribe(fireSafetyDepartments => {
-        this.allFireSafetyDepartments = fireSafetyDepartments;
-        this.addAllFireSafetyDepartments();
-        this.fireSafetyDepartments = new DataSource({
-          pageSize: 25,
-          store: new ArrayStore({
-            data: fireSafetyDepartments,
-            key: 'id'
-          }),
-          map: function(item) {
-            return item;
-          },
-        });
-        console.log(this.fireSafetyDepartments);
-      });
-    }
-
     getUserFireSafetyDepartment(field, e) {
+      console.log(e);
       const userFireSafetyDepartments: string[] = [];
       if (field.value) {
         field.value.forEach((userFireSafetyDepartment: UserFireSafetyDepartmentModel) => {
@@ -236,9 +166,8 @@ export class WebuserComponent implements OnInit {
   }
 
   private getFireSafetyDepartments() {
-    this.departmentService.getAll().subscribe(fireSafetyDepartments => {
+    this.departmentService.allLocalizedForUser().subscribe(fireSafetyDepartments => {
       this.allFireSafetyDepartments = fireSafetyDepartments;
-      this.addAllFireSafetyDepartments();
       this.fireSafetyDepartments = new DataSource({
         pageSize: 25,
         store: new ArrayStore({
@@ -249,15 +178,7 @@ export class WebuserComponent implements OnInit {
           return item;
         },
       });
-      console.log(fireSafetyDepartments);
     });
-  }
-
-  private addAllFireSafetyDepartments() {
-    const all = new FireSafetyDepartment();
-    all.id = 'ALL';
-    all.name = this.labels['all'];
-    this.allFireSafetyDepartments.unshift(all);
   }
 
   calculateFireSafetyDepartmentsDisplayValue = (e) => {
@@ -266,11 +187,7 @@ export class WebuserComponent implements OnInit {
     userFireSafetyDepartments.forEach(userFireSafetyDepartment => {
       const fireSafetyDepartment = this.allFireSafetyDepartments.filter(f => f.id === userFireSafetyDepartment.fireSafetyDepartmentId);
       if (fireSafetyDepartment && fireSafetyDepartment[0]) {
-        if (e.id === 'ALL') {
-          fireSafetyDepartmentsName.push(e.name);
-        } else {
-          fireSafetyDepartmentsName.push(this.getLocalizedFireSafetyDepartmentName(fireSafetyDepartment[0]));
-        }
+        fireSafetyDepartmentsName.push(fireSafetyDepartment[0].name);
       }
     });
     fireSafetyDepartmentsName = fireSafetyDepartmentsName.sort((one, two) => (one < two ? -1 : 1));
@@ -285,21 +202,18 @@ export class WebuserComponent implements OnInit {
     });
   }
 
-  private getLocalizedFireSafetyDepartmentName(fireSafetyDepartment: FireSafetyDepartment) {
-    const langage = localStorage.getItem('locale');
-    return fireSafetyDepartment.localizations.filter(c => c.languageCode === langage)[0].name;
-  }
-
-  fireSafetyDepartmentDisplayExpr(e) {
-    const langage = localStorage.getItem('locale');
-    if (e.id === 'ALL') {
-      return e.name;
-    } else if (e.localizations) {
-      const department = e.localizations.find(c => c.languageCode.toLowerCase() === langage);
-      if (department) {
-        return department.name;
-      }
+  private saveUser(user: Webuser) {
+    if (user.groups) {
+      user.groups.forEach(userGroup => {
+        userGroup.idUser = user.id;
+      });
     }
-    return '';
+    user.fireSafetyDepartments.forEach(userFireSafetyDepartment => {
+      userFireSafetyDepartment.userId = user.id;
+    });
+  console.log(user);
+    /*this.managementUserService.saveUser(user).subscribe(data => {
+      this.getUsers();
+    });*/
   }
 }

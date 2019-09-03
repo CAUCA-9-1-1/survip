@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 
 import {FireSafetyDepartment} from '../models/firesafetydepartment.model';
 import {RequestService} from '../../../shared/services/request.service';
+import {FireSafetyDepartmentLocalizedModel} from '../models/fire-safety-department-localized-model';
 
 
 @Injectable()
@@ -19,7 +20,7 @@ export class FireSafetyDepartmentService extends RequestService {
     localized(): Observable<FireSafetyDepartment[]> {
         return this.get('FireSafetyDepartment/localized');
     }
-    
+
     allLocalized(): Observable<FireSafetyDepartment[]> {
        return this.get('FireSafetyDepartment/alllocalized');
     }
@@ -30,5 +31,9 @@ export class FireSafetyDepartmentService extends RequestService {
 
     remove(idDepartment: string) {
         return this.delete('FireSafetyDepartment/' + idDepartment);
+    }
+
+    allLocalizedForUser(): Observable<FireSafetyDepartmentLocalizedModel[]> {
+      return this.get('FireSafetyDepartment/alllocalized');
     }
 }

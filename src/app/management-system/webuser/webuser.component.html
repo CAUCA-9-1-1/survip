@@ -25,7 +25,6 @@
     <dxo-form colCount="1" [labelLocation]="showColumnXS ? 'left' : 'top'" [onInitialized]="onFormInitialized">
       <dxi-item itemType="group" colCount="2">
         <dxi-item dataField="userName" [isRequired]="true"></dxi-item>
-        <dxi-item dataField="isActive"></dxi-item>
         <dxi-item dataField="password" [editorOptions]="passwordOptions">
           <dxi-validation-rule type="custom" [message]="'user.passwordError' | translate"
                                [validationCallback]="onPasswordChanged"></dxi-validation-rule>
@@ -49,10 +48,12 @@
       </dxi-item>
     </dxo-form>
   </dxo-editing>
+
+
   <div *dxTemplate="let field of 'fireSafetyDepartmentsEditTemplate'">
     <dx-tag-box
       valueExpr="id"
-      [displayExpr]="fireSafetyDepartmentDisplayExpr"
+      displayExpr="name"
       [dataSource]="fireSafetyDepartments"
       [searchEnabled]="true"
       (onInitialized)="getUserFireSafetyDepartment(field, $event)"
