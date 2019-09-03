@@ -24,7 +24,7 @@ import {DxDataGridComponent} from 'devextreme-angular';
     ]
 })
 export class LaneComponent extends GridWithOdataService implements OnInit {
-    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+    @ViewChild(DxDataGridComponent, {static: false}) dataGrid: DxDataGridComponent;
 
     public addingButton: any;
     public publicCodes: any = [];

@@ -45,7 +45,7 @@ import {EnumModel} from '../management-type-system/shared/models/enum.model';
     ]
 })
 export class InspectionDashboardComponent implements OnInit, AfterViewInit {
-    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+    @ViewChild(DxDataGridComponent, {static: false}) dataGrid: DxDataGridComponent;
 
     public nonDefaultTemplateIdentifiers: ConfigurationTemplate[];
     public defaultTemplateIdentifiers: ConfigurationTemplate[];

@@ -11,6 +11,7 @@ import config from '../assets/config/config.json';
 import packageInfo from '../assets/config/package.json';
 import {AuthenticationService} from './user-access/shared/services/authentification.service';
 import {MainMenuComponent} from './shared/components/main-menu/main-menu.component';
+import {DxDataGridComponent} from 'devextreme-angular';
 
 
 @Component({
@@ -22,8 +23,8 @@ import {MainMenuComponent} from './shared/components/main-menu/main-menu.compone
     ]
 })
 export class AppComponent {
-    @ViewChild('menuContainer') menuContainer: ElementRef;
-    @ViewChild(MainMenuComponent) menu: MainMenuComponent;
+    @ViewChild('menuContainer', {static: false}) menuContainer: ElementRef;
+    @ViewChild(MainMenuComponent, {static: false}) menu: MainMenuComponent;
 
     title = 'app';
     isLogged = false;

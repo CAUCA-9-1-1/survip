@@ -1,4 +1,5 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {DxDataGridComponent} from 'devextreme-angular';
 
 @Component({
     selector: 'app-upload',
@@ -6,7 +7,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
     styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-    @ViewChild('file') file: ElementRef;
+    @ViewChild('file', {static: false}) file: ElementRef;
     @Output() readend = new EventEmitter();
     @Input() accept: string;
     @Input() multiple = false;

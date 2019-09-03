@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {DxTabPanelComponent} from 'devextreme-angular';
+import {DxDataGridComponent, DxTabPanelComponent} from 'devextreme-angular';
 
 import packageInfo from '../../../../assets/config/package.json';
 
@@ -12,7 +12,7 @@ import packageInfo from '../../../../assets/config/package.json';
 })
 
 export class MultilangComponent implements OnInit {
-    @ViewChild(DxTabPanelComponent) tabs: DxTabPanelComponent;
+    @ViewChild(DxTabPanelComponent, {static: false}) tabs: DxTabPanelComponent;
     @Output() valueChanged = new EventEmitter();
     @Input() validationGroup: string;
     @Input() fieldName = 'name';

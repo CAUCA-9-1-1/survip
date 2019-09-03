@@ -6,7 +6,7 @@ import {BuildingAnomalyPicture} from '../../management-department/shared/models/
 import {MatDialog} from '@angular/material';
 import {AskNewThemeComponent} from '../ask-new-theme/ask-new-theme.component';
 import {InspectionPictureService} from '../shared/services/inspection-picture.service';
-import {DxSelectBoxComponent} from 'devextreme-angular';
+import {DxDataGridComponent, DxSelectBoxComponent} from 'devextreme-angular';
 import {v4 as uuid} from 'uuid';
 import {Picture} from '../../shared/models/picture.model';
 
@@ -20,7 +20,7 @@ import {Picture} from '../../shared/models/picture.model';
     ]
 })
 export class BuildingAnomaliesComponent extends GridWithCrudService implements OnInit {
-    @ViewChild(DxSelectBoxComponent) selectBox: DxSelectBoxComponent;
+    @ViewChild(DxSelectBoxComponent, {static: false}) selectBox: DxSelectBoxComponent;
 
     @Input()
     set building(id: string) {

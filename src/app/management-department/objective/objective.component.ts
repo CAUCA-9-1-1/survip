@@ -12,7 +12,7 @@ import { FireSafetyDepartmentService } from '../../management-system/shared/serv
   providers: [ObjectivesService, FireSafetyDepartmentService]
 })
 export class ObjectiveComponent implements OnInit {
-  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+  @ViewChild(DxDataGridComponent, {static: false}) dataGrid: DxDataGridComponent;
   @Input() isHighRisk: boolean;
 
   public isReady = false;

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
-import {DxButtonComponent} from 'devextreme-angular';
+import {DxButtonComponent, DxDataGridComponent} from 'devextreme-angular';
 import {PermissionObjectService} from '../shared/services/permission-object.service';
 import {PermissionObject} from '../shared/models/permissionobject.model';
 import {PermissionService} from '../../user-access/shared/services/permission.service';
@@ -24,8 +24,8 @@ import {PermissionSystemFeatureService} from '../shared/services/permission-syst
     ]
 })
 export class PermissionComponent implements OnInit {
-    @ViewChild('removeItem') removeItem: DxButtonComponent;
-    @ViewChild('addUser') addUser: DxButtonComponent;
+    @ViewChild('removeItem', {static: false}) removeItem: DxButtonComponent;
+    @ViewChild('addUser', {static: false}) addUser: DxButtonComponent;
 
     features: Permission[] = [];
     permissionObjects: PermissionObject[] = [];

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {MatSnackBar} from '@angular/material';
-import {DxTreeViewComponent} from 'devextreme-angular';
+import {DxDataGridComponent, DxTreeViewComponent} from 'devextreme-angular';
 import {confirm, alert} from 'devextreme/ui/dialog';
 
 import config from '../../../assets/config/config.json';
@@ -23,7 +23,7 @@ import {Choice} from '../shared/models/choice.model';
 })
 export class QuestionComponent extends GridWithCrudService implements OnInit {
     @Input() survey = '';
-    @ViewChild(DxTreeViewComponent) treeViewQuestion: DxTreeViewComponent;
+    @ViewChild(DxTreeViewComponent, {static: false}) treeViewQuestion: DxTreeViewComponent;
 
     public questionTypeEnum = SurveyQuestionTypeEnum;
     public questions: Question[] = [];

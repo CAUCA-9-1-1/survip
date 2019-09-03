@@ -29,7 +29,7 @@ import {InspectionStatusService} from '../inspection-dashboard/shared/services/i
     ],
 })
 export class InspectionBatchComponent extends GridWithCrudService implements OnInit {
-    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+    @ViewChild(DxDataGridComponent, {static: false}) dataGrid: DxDataGridComponent;
 
     private labels = [];
     private selectedBuildingIds: any[] = [];
