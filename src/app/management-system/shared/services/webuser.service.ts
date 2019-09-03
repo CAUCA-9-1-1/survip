@@ -13,7 +13,7 @@ export class WebuserService extends RequestService {
     }
 
     getAll(): Observable<Webuser[]> {
-        return this.get('Webuser');
+        return this.get('UserManagement');
     }
 
     getActive(): Observable<WebuserForWeb[]> {

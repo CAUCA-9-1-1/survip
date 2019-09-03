@@ -1,16 +1,76 @@
 <dx-data-grid
+  keyExpr="id"
+  [dataSource]="users"
+  (onInitNewRow)="onInitNewRow($event)"
+  (onRowInserted)="onRowInserted($event)"
+  (onRowUpdated)="onRowUpdated($event)"
+  (onRowRemoved)="onRowRemoved($event)">
+  <dxi-column dataField="userName" [caption]="'username' | translate"></dxi-column>
+  <dxi-column dataField="firstName" [caption]="'firstName' | translate"></dxi-column>
+  <dxi-column dataField="lastName" [caption]="'lastName' | translate"></dxi-column>
+  <dxi-column dataField="password" [caption]="'password' | translate" [visible]="false"></dxi-column>
+  <dxi-column dataField="confirmPassword" [caption]="'password' | translate" [visible]="false"></dxi-column>
+  <dxi-column dataField="email" [caption]="'email' | translate" [visible]="false"></dxi-column>
+  <dxi-column dataField="phoneNumber" [caption]="'telephone' | translate" [visible]="false"></dxi-column>
+  <dxi-column
+    dataField="userFireSafetyDepartments"
+    [caption]="'fireSafetyDepartment' | translate"
+    editCellTemplate="fireSafetyDepartmentsEditTemplate"
+    [visible]="showColumnXS"
+    [calculateDisplayValue]="calculateFireSafetyDepartmentsDisplayValue">
+  </dxi-column>
+
+  <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true" [useIcons]="true">
+    <dxo-popup [title]="'user.user' | translate" [showTitle]="true"></dxo-popup>
+    <dxo-form colCount="1" [labelLocation]="showColumnXS ? 'left' : 'top'" [onInitialized]="onFormInitialized">
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item dataField="userName" [isRequired]="true"></dxi-item>
+        <dxi-item dataField="isActive"></dxi-item>
+        <dxi-item dataField="password" [editorOptions]="passwordOptions">
+          <dxi-validation-rule type="custom" [message]="'user.passwordError' | translate"
+                               [validationCallback]="onPasswordChanged"></dxi-validation-rule>
+          <dxi-validation-rule type="custom" [message]="'user.passwordRequired' | translate"
+                               [validationCallback]="isPasswordRequired"></dxi-validation-rule>
+        </dxi-item>
+        <dxi-item dataField="confirmPassword" [editorOptions]="passwordOptions">
+          <dxo-label [text]="'passwordConfirm' | translate"></dxo-label>
+          <dxi-validation-rule
+            type="compare"
+            [comparisonTarget]="passwordComparison"
+            [message]="'user.yourConfirmationMustBeTheSameAsYourPassword' | translate"></dxi-validation-rule>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item dataField="userFireSafetyDepartments"></dxi-item>
+      <dxi-item itemType="group" colCount="2" [caption]="'user.personalInfo' | translate">
+        <dxi-item dataField="firstName" [isRequired]="true"></dxi-item>
+        <dxi-item dataField="lastName" [isRequired]="true"></dxi-item>
+        <dxi-item dataField="email"></dxi-item>
+        <dxi-item dataField="phoneNumber" [editorOptions]="{ mask: '+1 (XXX) XXX-XXXX', maskRules: rules}"></dxi-item>
+      </dxi-item>
+    </dxo-form>
+  </dxo-editing>
+  <div *dxTemplate="let field of 'fireSafetyDepartmentsEditTemplate'">
+    <dx-tag-box
+      valueExpr="id"
+      [displayExpr]="fireSafetyDepartmentDisplayExpr"
+      [dataSource]="fireSafetyDepartments"
+      [searchEnabled]="true"
+      (onInitialized)="getUserFireSafetyDepartment(field, $event)"
+      (onValueChanged)="setUserFireSafetyDepartment(field, $event)">
+    </dx-tag-box>
+  </div>
+</dx-data-grid>
+
+<!-- <dx-data-grid
         [dataSource]="dataSource"
         [hoverStateEnabled]="true"
         [rowAlternationEnabled]="true"
-        (onInitialized)="onInitialized($event)"
         (onEditingStart)="onEditingStart($event)"
         (onEditorPreparing)="onEditorPreparing($event)"
         (onInitNewRow)="onInitNewRow($event)"
         (onRowInserted)="onRowInserted($event)"
         (onRowUpdated)="onRowUpdated($event)"
-        (onRowRemoved)="onRowRemoved($event)"
-        (onRowValidating)="ondRowValidating($event)"
-        (onCellPrepared)="onCellPrepared($event)">
+        (onRowValidating)="ondRowValidating($event)">
     <dxi-column
             dataField="firstName"
             caption="{{'firstName' | translate}}"
@@ -26,12 +86,20 @@
             sortOrder="asc">
     </dxi-column>
 
-    <dxi-column [visible]="false" dataField="username" caption="{{'username' | translate}}"></dxi-column>
+    <dxi-column [visible]="false" dataField="userName" caption="{{'username' | translate}}"></dxi-column>
+    <dxi-column [visible]="false" dataField="isActive" caption="{{'isActive' | translate}}"></dxi-column>
     <dxi-column [visible]="false" dataField="password" caption="{{'password' | translate}}"></dxi-column>
     <dxi-column [visible]="false" dataField="passwordConfirm"
                 caption="{{'passwordConfirm' | translate}}"></dxi-column>
     <dxi-column [visible]="false" dataField="resetPassword" dataType="boolean"
                 caption="{{'passwordReset' | translate}}"></dxi-column>
+  <dxi-column
+    dataField="userFireSafetyDepartments"
+    [caption]="'user.fireSafetyDepartments' | translate"
+    editCellTemplate="fireSafetyDepartmentsEditTemplate"
+    [visible]="true"
+    [calculateDisplayValue]="calculateFireSafetyDepartmentsDisplayValue">
+  </dxi-column>
     <dxi-column
             [visible]="false"
             [calculateCellValue]="getEmail"
@@ -53,10 +121,11 @@
     <dxo-editing mode="popup" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
         <dxo-texts addRow="{{'add' | translate}}"></dxo-texts>
         <dxo-popup title="{{'webuser' | translate}}" [showTitle]="true"></dxo-popup>
-        <dxo-form colCount="2">
-            <dxi-item dataField="username" [isRequired]="true"></dxi-item>
-            <dxi-item itemType="empty"></dxi-item>
+        <dxo-form colCount="2" [alignItemLabels]="true" [alignItemLabelsInAllGroups]="false">
+            <dxi-item dataField="userName" [isRequired]="true"></dxi-item>
+            <dxi-item dataField="isActive"></dxi-item>
             <dxi-item dataField="password" [editorOptions]="passwordOptions">
+            <dxi-item dataField="userFireSafetyDepartments"></dxi-item>
                 <dxi-validation-rule type="custom" message="{{'passwordError' | translate}}"
                                      [validationCallback]="onPasswordChanged"></dxi-validation-rule>
             </dxi-item>
@@ -64,10 +133,6 @@
                 <dxi-validation-rule type="compare" [comparisonTarget]="onPasswordCompare"></dxi-validation-rule>
             </dxi-item>
             <dxi-item dataField="resetPassword" editorType="dxCheckBox" colSpan="2"></dxi-item>
-            <div class="errorWarning">
-                L'assignation à un service incendie est obligatoire.
-            </div>
-            <dxi-item dataField="fireSafetyDepartments" colSpan="2" [isRequired]="true"></dxi-item>
             <dxi-item itemType="group" colSpan="2" colCount="2" caption="{{'personnalInformation' | translate}}">
                 <dxi-item dataField="firstName" [isRequired]="true">
                 </dxi-item>
@@ -82,29 +147,14 @@
         </dxo-form>
     </dxo-editing>
 
-    <div *dxTemplate="let field of 'editDepartments'">
-        <dx-data-grid
-                [dataSource]="webuserFireSafetyDepartments"
-                [hoverStateEnabled]="true"
-                [rowAlternationEnabled]="true"
-                (onInitialized)="setDepartmentField(field)"
-                (onInitNewRow)="onNewUserDepartment($event)"
-                (onRowInserted)="onUserDepartmentInserted($event)"
-                (onRowUpdated)="onUserDepartmentUpdated($event)"
-                (onRowRemoved)="onUserDepartmentRemoved($event)"
-                (onEditorPreparing)="departmentEditorPreparing($event)"
-                noDataText="{{'userDepartmentWarning' | translate}}">
-            <dxi-column
-                    dataField="idFireSafetyDepartment"
-                    caption="{{'fireSafetyDepartment' | translate}}">
-                <dxo-lookup [dataSource]="departments" displayExpr="name" valueExpr="id">
-                </dxo-lookup>
-            </dxi-column>
-            <dxi-column dataField="isActive" dataType="boolean" caption="{{'isActive' | translate}}"
-                        width="10%"></dxi-column>
-            <dxo-editing mode="row" [useIcons]="true" [allowUpdating]="true" [allowAdding]="true"
-                         [allowDeleting]="true">
-            </dxo-editing>
-        </dx-data-grid>
-    </div>
-</dx-data-grid>
+  <div *dxTemplate="let field of 'fireSafetyDepartmentsEditTemplate'">
+    <dx-tag-box
+      valueExpr="id"
+      displayExpr="name"
+      [dataSource]="fireSafetyDepartments"
+      [searchEnabled]="true"
+      (onInitialized)="getUserFireSafetyDepartment(field, $event)"
+      (onValueChanged)="setUserFireSafetyDepartment(field, $event)">
+    </dx-tag-box>
+  </div>
+</dx-data-grid> -->

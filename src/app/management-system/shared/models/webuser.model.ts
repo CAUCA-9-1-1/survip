@@ -1,15 +1,16 @@
 import { BaseModel } from '../../../shared/models/base.model';
+import {Permission} from '../../../user-access/shared/models/permission.model';
 
 
 export class Webuser extends BaseModel {
-    username: string;
+    id: string;
+    userName: string;
     password: string;
-    attributes: any[];
+    firstName: string;
+    lastName: string;
+    email: string;
+    isActive: boolean;
     fireSafetyDepartments: any[];
-
-    static fromJSON(data: object): Webuser {
-        const webuser = new Webuser();
-
-        return Object.assign(webuser, data);
-    }
+    phoneNumber: string;
+    permissions: Permission[];
 }
