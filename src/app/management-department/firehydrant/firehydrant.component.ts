@@ -32,21 +32,21 @@ import {EnumModel} from '../../management-type-system/shared/models/enum.model';
     ]
 })
 export class FirehydrantComponent extends GridWithOdataService implements OnInit {
-    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+    @ViewChild(DxDataGridComponent, {static: false}) dataGrid: DxDataGridComponent;
 
-    protected form: any;
-    public selectedLocationType: string;
-    public locationTypes: EnumModel[] = [];
-    public addressLocationTypes: EnumModel[] = [];
-    public addingButton: any;
-    public selectedCity = '';
-    public selectedCityGeometry: any = {};
-    public fireHydrantTypes: any = {store: []};
-    public lanes: any = {};
-    public lanesOfCity: any = {};
-    public operatorTypes: EnumModel[] = [];
-    public rateUnits: any = {store: []};
-    public pressureUnits: any = {store: []};
+  protected form: any;
+  public selectedLocationType: string;
+  public locationTypes: EnumModel[] = [];
+  public addressLocationTypes: EnumModel[] = [];
+  public addingButton: any;
+  public selectedCity = '';
+  public selectedCityGeometry: any = {};
+  public fireHydrantTypes: any = {store: []};
+  public lanes: any = {};
+  public lanesOfCity: any = {};
+  public operatorTypes: EnumModel[] = [];
+  public rateUnits: any = {store: []};
+  public pressureUnits: any = {store: []};
     public formFields = {
         idLane: null,
         idCity: null,

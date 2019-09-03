@@ -6,6 +6,7 @@ import {v4 as uuid} from 'uuid';
 import {fabric} from 'fabric';
 import {MatSnackBar} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
+import {DxDataGridComponent} from 'devextreme-angular';
 
 @Component({
     selector: 'app-image',
@@ -17,7 +18,7 @@ import {TranslateService} from '@ngx-translate/core';
     ]
 })
 export class ImageComponent implements OnInit {
-    @ViewChild('container') container: ElementRef;
+    @ViewChild('container', {static: false}) container: ElementRef;
     @Output() valueChanged = new EventEmitter();
     @Input() height = '150px';
     @Input() allowChange = false;

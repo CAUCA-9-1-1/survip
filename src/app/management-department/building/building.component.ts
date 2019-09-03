@@ -28,7 +28,7 @@ import DataSource from 'devextreme/data/data_source';
     ]
 })
 export class BuildingComponent extends GridWithOdataService implements OnInit {
-    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+    @ViewChild(DxDataGridComponent, {static: false}) dataGrid: DxDataGridComponent;
     @Input() readOnly = this.laneService.readOnlyImported;
 
     public addingButton: any;

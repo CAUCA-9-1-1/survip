@@ -2,6 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {v4 as uuid} from 'uuid';
 import {Picture} from '../../models/picture.model';
+import {DxDataGridComponent} from 'devextreme-angular';
 
 
 @Component({
@@ -34,7 +35,7 @@ import {Picture} from '../../models/picture.model';
     ],
 })
 export class SlideshowComponent implements OnInit {
-    @ViewChild('container') container: ElementRef;
+    @ViewChild('container', {static: false}) container: ElementRef;
     @Output() valueChanged = new EventEmitter();
     @Input() height = '150px';
     @Input() autoPlay = true;

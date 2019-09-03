@@ -7,6 +7,7 @@ import {defaults as defaultInteractions, MouseWheelZoom} from 'ol/interaction';
 import {GeoJSON, Polygon, WKT} from 'ol/format';
 import {Point} from 'ol/geom';
 import {TranslateService} from '@ngx-translate/core';
+import {DxDataGridComponent} from 'devextreme-angular';
 
 @Component({
     selector: 'app-geolocation',
@@ -14,7 +15,7 @@ import {TranslateService} from '@ngx-translate/core';
     styleUrls: ['./geolocation.component.scss']
 })
 export class GeolocationComponent implements OnInit {
-    @ViewChild('map') mapElement: ElementRef;
+    @ViewChild('map', {static: false}) mapElement: ElementRef;
     @Output() valueChanged = new EventEmitter();
     @Input() readOnly: any;
     @Input()
@@ -55,7 +56,7 @@ export class GeolocationComponent implements OnInit {
         return '';
     }
 
-    
+
     public popupIsVisible = false;
     public toolbarItems = [];
 
@@ -70,7 +71,7 @@ export class GeolocationComponent implements OnInit {
     public constructor(
         private translateService: TranslateService,
     ) {
-        
+
     }
 
     public ngOnInit() {
