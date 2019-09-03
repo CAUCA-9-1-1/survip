@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule, MatSelectModule} from '@angular/material';
-import {DxButtonModule, DxDataGridModule, DxFormModule, DxTreeViewModule, DxColorBoxModule} from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxFormModule, DxTreeViewModule, DxColorBoxModule, DxTagBoxModule} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {ManagementSystemComponent} from './management-system.component';
@@ -46,6 +46,7 @@ import {UtilisationCodeComponent} from './utilisation-code/utilisation-code.comp
         DxFormModule,
         DxTreeViewModule,
         DxColorBoxModule,
+        DxTagBoxModule
     ],
     providers: [],
 })
