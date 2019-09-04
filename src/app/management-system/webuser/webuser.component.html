@@ -9,7 +9,7 @@
   <dxi-column dataField="firstName" [caption]="'firstName' | translate"></dxi-column>
   <dxi-column dataField="lastName" [caption]="'lastName' | translate"></dxi-column>
   <dxi-column dataField="password" [caption]="'password' | translate" [visible]="false"></dxi-column>
-  <dxi-column dataField="confirmPassword" [caption]="'password' | translate" [visible]="false"></dxi-column>
+  <dxi-column dataField="confirmPassword" [caption]="'passwordConfirm' | translate" [visible]="false"></dxi-column>
   <dxi-column dataField="email" [caption]="'email' | translate" [visible]="false"></dxi-column>
   <dxi-column dataField="phoneNumber" [caption]="'telephone' | translate" [visible]="false"></dxi-column>
   <dxi-column
@@ -24,7 +24,13 @@
     editCellTemplate="permissionsEditTemplate"
     [visible]="false">
   </dxi-column>
-
+  <dxi-column
+    dataField="groups"
+    [caption]="'user.groups' | translate"
+    editCellTemplate="groupsEditTemplate"
+    [visible]="showColumnXS"
+    [calculateDisplayValue]="calculateGroupsDisplayValue">
+  </dxi-column>
   <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true" [useIcons]="true">
     <dxo-popup [title]="'webuser' | translate" [showTitle]="true"></dxo-popup>
     <dxo-form colCount="1" [labelLocation]="showColumnXS ? 'left' : 'top'" [onInitialized]="onFormInitialized">
@@ -32,9 +38,9 @@
         <dxi-item dataField="userName" [isRequired]="true"></dxi-item>
         <dxi-item dataField="userFireSafetyDepartments"></dxi-item>
         <dxi-item dataField="password" [editorOptions]="passwordOptions">
-          <dxi-validation-rule type="custom" [message]="'user.passwordError' | translate"
+          <dxi-validation-rule type="custom" [message]="'passwordError' | translate"
                                [validationCallback]="onPasswordChanged"></dxi-validation-rule>
-          <dxi-validation-rule type="custom" [message]="'user.passwordRequired' | translate"
+          <dxi-validation-rule type="custom" [message]="'passwordRequired' | translate"
                                [validationCallback]="isPasswordRequired"></dxi-validation-rule>
         </dxi-item>
         <dxi-item dataField="confirmPassword" [editorOptions]="passwordOptions">
@@ -44,6 +50,7 @@
             [comparisonTarget]="passwordComparison"
             [message]="'user.yourConfirmationMustBeTheSameAsYourPassword' | translate"></dxi-validation-rule>
         </dxi-item>
+        <dxi-item dataField="groups"></dxi-item>
       </dxi-item>
       <dxi-item itemType="group" colCount="2" [caption]="'user.personalInfo' | translate">
         <dxi-item dataField="firstName" [isRequired]="true"></dxi-item>
@@ -84,6 +91,16 @@
         </dx-check-box>
       </div>
     </dx-list>
+  </div>
+
+  <div *dxTemplate="let field of 'groupsEditTemplate'">
+    <dx-tag-box
+      valueExpr="id"
+      displayExpr="name"
+      [dataSource]="groups"
+      (onInitialized)="getUserGroup(field, $event)"
+      (onValueChanged)="setUserGroup(field, $event)">
+    </dx-tag-box>
   </div>
 </dx-data-grid>
 <!-- <dx-data-grid
