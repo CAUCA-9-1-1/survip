@@ -3,7 +3,7 @@
     <mat-tab label="{{'webuser' | translate}}" [disabled]="!accessTo.webuser">
         <app-management-system-webuser [fxShow]="accessTo.webuser"></app-management-system-webuser>
     </mat-tab>
-    <mat-tab label="{{'permission' | translate}}" [disabled]="!accessTo.permission">
+    <mat-tab label="{{'groups' | translate}}" [disabled]="!accessTo.permission">
         <app-management-system-permission [fxShow]="accessTo.permission"></app-management-system-permission>
     </mat-tab>
     <mat-tab label="{{'fireSafetyDepartment' | translate}}" [disabled]="!accessTo.department">

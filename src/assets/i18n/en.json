@@ -433,6 +433,7 @@
     "name": "Name",
     "users": "Users",
     "permissions" : "Permissions",
-    "title" : "Management"
+    "title" : "Management",
+    "yourConfirmationMustBeTheSameAsYourPassword": "Your confirmation must be the same as your password"
   }
 }

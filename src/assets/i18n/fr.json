@@ -430,7 +430,8 @@
     "name": "Nom",
     "users": "Utilisateurs",
     "permissions" : "Permissions",
-    "title" : "Gestion"
+    "title" : "Gestion",
+    "yourConfirmationMustBeTheSameAsYourPassword": "Votre confirmation doit être identique à votre mot de passe"
   },
   "personalInfo" : "Informations personnelles",
   "groups" : "Groupes"
