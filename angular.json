@@ -23,6 +23,21 @@
                 "glob": "**/*",
                 "input": "./node_modules/@cause-911/report-configuration/assets/",
                 "output": "./assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@cause-911/core/assets",
+                "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@cause-911/devextreme/assets",
+                "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@cause-911/management/assets",
+                "output": "/assets"
               }
             ],
             "styles": [

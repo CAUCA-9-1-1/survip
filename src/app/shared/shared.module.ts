@@ -28,7 +28,10 @@ import {UploadComponent} from './components/upload/upload.component';
 import {FilterByPipe} from './pipes/filter.pipe';
 import { NoAccessComponent } from './components/no-access/no-access.component';
 import { GeolocationComponent } from './components/geolocation/geolocation.component';
-
+import {CauseCoreModule, Configuration} from '@cause-911/core';
+const config = new Configuration();
+config.languages = ['fr', 'en'];
+config.libraries = ['devextreme', 'management'];
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -106,6 +109,7 @@ export function HttpLoaderFactory(http: HttpClient) {
                 deps: [HttpClient]
             }
         }),
+      CauseCoreModule.forRoot(config),
     ],
     providers: [
     ]
