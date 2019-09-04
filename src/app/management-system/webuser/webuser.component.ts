@@ -11,7 +11,8 @@ import ArrayStore from 'devextreme/data/array_store';
 import {FireSafetyDepartmentLocalizedModel} from '../shared/models/fire-safety-department-localized-model';
 import {PermissionManagementService} from '../shared/services/permission-management.service';
 import {PermissionManagement} from '../shared/models/permission-management';
-import {UserPermissionModel} from '@cause-911/management';
+import {GroupModel, ManagementGroupService, UserGroupModel, UserPermissionModel} from '@cause-911/management';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 
 @Component({
@@ -25,7 +26,6 @@ import {UserPermissionModel} from '@cause-911/management';
 })
 export class WebuserComponent implements OnInit {
     users: Webuser[] = [];
-    private selectedPassword: string;
     private selectedIdWebuser: string;
     private labels = {};
     fireSafetyDepartments: DataSource;
@@ -33,6 +33,10 @@ export class WebuserComponent implements OnInit {
     showColumnXS = true;
     permissions: PermissionManagement[] = [];
     rules: Object;
+    password = '';
+    dxForm: any;
+    validateOnce = false;
+  groups: GroupModel[] = [];
 
     public passwordOptions = {
         onKeyUp: (ev) => {
@@ -56,7 +60,9 @@ export class WebuserComponent implements OnInit {
         private webuserService: WebuserService,
         protected translateService: TranslateService,
         private departmentService: FireSafetyDepartmentService,
-        private managementPermissionService: PermissionManagementService
+        private managementPermissionService: PermissionManagementService,
+        private managementGroupService: ManagementGroupService,
+        breakpointObserver: BreakpointObserver,
     ) {
         translateService.get([
             'passwordError',
@@ -65,6 +71,9 @@ export class WebuserComponent implements OnInit {
             this.labels = labels;
         });
         this.rules = { 'X': /[0-9]/ };
+      breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+        this.showColumnXS = !result.matches;
+      });
         this.getFireSafetyDepartments();
         this.managementPermissionService.getAllPermissions().subscribe(permission => this.permissions = permission);
     }
@@ -72,53 +81,30 @@ export class WebuserComponent implements OnInit {
     ngOnInit() {
         this.getFireSafetyDepartments();
         this.getUsers();
-    }
-
-    getFirstname = (e) => {
-      return e.firstName;
-    }
-
-    getLastname = (e) => {
-        return e.lastName;
-    }
-
-    getEmail = (e) => {
-        return e.email;
-    }
-
-    getTelephone = (e) => {
-        return e.phoneNumber;
+        this.getGroups();
     }
 
     onPasswordChanged = (e) => {
-        if (e.value && e.value.length < 8) {
-            return false;
-        }
-
-        this.selectedPassword = e.value;
-        return true;
+      if (e.value && e.value.length < 6) {
+        return false;
+      }
+      this.password = e.value;
+      const editData = e.validator.option('validationGroup');
+      if (this.validateOnce) {
+        this.dxForm.validate();
+      } else {
+        this.validateOnce = true;
+      }
+      return true;
     }
 
-    onPasswordCompare = (e) => {
-        return (this.selectedPassword ? this.selectedPassword : null);
-    }
-
-    isDepartmentValid(): boolean {
-        return true;
-    }
-
-    onEditorPreparing(e) {
+    onFormInitialized = (e) => {
+      this.dxForm = e.component;
+      console.log(e);
     }
 
     onInitNewRow(e) {
         e.data = new Webuser();
-    }
-
-    onEditingStart(e) {
-        e.data.password = '';
-        e.data.resetPassword = this.getWebuserAttribute('reset_password', e.data);
-        this.selectedIdWebuser = e.data.id;
-        this.selectedPassword = '';
     }
 
     onRowInserted(e) {
@@ -127,19 +113,6 @@ export class WebuserComponent implements OnInit {
 
     onRowUpdated(e) {
       this.saveUser(e.data as Webuser);
-    }
-
-    private getWebuserAttribute(field, e) {
-        let name = '';
-
-        if (e.attributes) {
-            e.attributes.forEach(attribute => {
-                if (attribute.attributeName === field) {
-                    name = attribute.attributeValue;
-                }
-            });
-        }
-        return name;
     }
 
     getUserFireSafetyDepartment(field, e) {
@@ -197,7 +170,17 @@ export class WebuserComponent implements OnInit {
     return fireSafetyDepartmentsName.join(', ');
   }
 
-  onRowRemoved(e){}
+  onRowRemoved(e) {
+    const user = (e.data as Webuser);
+
+    if (!user.password) {
+      user.password = null;
+    }
+
+   /* this.managementUserService.delete(user.id).subscribe(data => {
+      this.getUsers();
+    });*/
+  }
 
   private getUsers() {
     this.webuserService.getAll().subscribe(users => {
@@ -262,5 +245,62 @@ export class WebuserComponent implements OnInit {
     }
 
     field.setValue(JSON.parse(JSON.stringify(userPermissions)));
+  }
+
+  isPasswordRequired(e) {
+    const editData = e.validator.option('validationGroup');
+    if (editData.type === 'insert' && !e.value) {
+      return false;
+    }
+    return true;
+  }
+
+  passwordComparison = () => {
+    return this.password;
+  }
+
+  calculateGroupsDisplayValue = (e) => {
+    const userGroups = (e.groups ? e.groups as UserGroupModel[] : []);
+    let groupsName: any[] = [];
+    userGroups.forEach(userGroup => {
+      const index = this.groups.findIndex(c => c.id === userGroup.idGroup);
+      if (index !== -1) {
+        groupsName.push(this.groups[index].name);
+      }
+    });
+    groupsName = groupsName.sort((one, two) => (one < two ? -1 : 1));
+    return groupsName.join(', ');
+  }
+
+  getUserGroup(field, e) {
+    const groups: string[] = [];
+
+    if (field.value) {
+      field.value.forEach((userGroup: UserGroupModel) => {
+        groups.push(userGroup.idGroup);
+      });
+    }
+
+    e.component.option('value', groups);
+  }
+
+  setUserGroup(field, e) {
+    const userGroup: UserGroupModel[] = [];
+
+    e.value.forEach(idGroup => {
+      const groupIndex = (field.value || []).findIndex(u => u.idGroup === idGroup);
+
+      if (groupIndex === -1) {
+        userGroup.push({ idGroup, } as UserGroupModel);
+      } else {
+        userGroup.push(field.value[groupIndex]);
+      }
+    });
+
+    field.setValue( JSON.parse(JSON.stringify(userGroup)));
+  }
+
+  private getGroups() {
+    this.managementGroupService.getAll().subscribe(groups => this.groups = groups);
   }
 }
