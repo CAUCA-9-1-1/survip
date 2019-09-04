@@ -113,13 +113,10 @@ export class WebuserComponent implements OnInit {
     }
 
     onRowUpdated(e) {
-      console.log('EEEE');
-      console.log(e);
       this.saveUser(e.data as UserModel);
     }
 
     getUserFireSafetyDepartment(field, e) {
-      console.log(e);
       const userFireSafetyDepartments: string[] = [];
       if (field.value) {
         field.value.forEach((userFireSafetyDepartment: UserFireSafetyDepartmentModel) => {
@@ -197,13 +194,11 @@ export class WebuserComponent implements OnInit {
         userGroup.idUser = user.id;
       });
     }
-    console.log(user);
     if (user.userFireSafetyDepartments) {
       user.userFireSafetyDepartments.forEach(userFireSafetyDepartment => {
         userFireSafetyDepartment.userId = user.id;
       });
     }
-    console.log('allo22');
     this.managementUserService.save(user).subscribe(data => {
       this.getUsers();
     });

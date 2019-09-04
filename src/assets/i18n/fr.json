@@ -57,7 +57,6 @@
   "pleaseWait": "Veuillez patienter",
   "building": "Bâtiment",
   "buildings": "Bâtiment(s)",
-  "implantationPlan": " Plan d'implantation",
   "contacts": "Personnes contacts",
   "fireProtection": "Protection incendie",
   "particularRisk": "Risques particuliers",
@@ -145,7 +144,9 @@
   "accessValue": "Valeur de l'élément",
   "seeParent": "Voir le parent",
   "permission": "Permission",
+  "permissions": "Permissions",
   "fireSafetyDepartment": "SSI",
+  "fireSafetyDepartments" : "Services incendie",
   "language": "Langue",
   "apisAction": "Logs des actions",
   "statistics": "Statistiques",
@@ -262,7 +263,6 @@
   "inspectionBatch": "Lots",
   "inspectionBatchManagement": "Lots d'inspection",
   "inspectionDashboard": "Tableau de bord",
-  "management": "Gestion",
   "createBatch": "Créer un lot",
   "isReadyForInspection": "Prêt pour l'inspection",
   "shouldStartOn": "Date de début prévue",
@@ -412,7 +412,7 @@
   "objectives": "Objectif(s)",
   "objective": "Objectif",
   "year": "Année",
-  "lowRisk": "Risques faibles et moyens", 
+  "lowRisk": "Risques faibles et moyens",
   "highRisk": "Risque élevés et très élevés",
   "visitsResults": "Résultats des visites de prévention",
   "visits": "Visites",
@@ -425,5 +425,13 @@
   "numberResponseAbsent": "Nombre de visite avec absence",
   "numberDoorHangerLeft": "Nombre d'accroche porte répondu",
   "numberInspectionRefused": "Nombre d'inspection refusée",
-  "removeQuestionUsedAsNext": "Cette question est utilisée comme question suivante. La supprimer effacera donc son lien avec tout autre question. Voulez-vous continuer?"
+  "removeQuestionUsedAsNext": "Cette question est utilisée comme question suivante. La supprimer effacera donc son lien avec tout autre question. Voulez-vous continuer?",
+  "management": {
+    "name": "Nom",
+    "users": "Utilisateurs",
+    "permissions" : "Permissions",
+    "title" : "Gestion"
+  },
+  "personalInfo" : "Informations personnelles",
+  "groups" : "Groupes"
 }
