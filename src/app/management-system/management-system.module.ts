@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDialogModule, MatSelectModule, MatTabsModule} from '@angular/material';
+import {MatDialogModule, MatSelectModule, MatSnackBarModule, MatTabsModule} from '@angular/material';
 import {
   DxButtonModule,
   DxDataGridModule,
@@ -52,6 +52,7 @@ import {CauseDxModule} from '@cause-911/devextreme';
         MatSelectModule,
         MatTabsModule,
         CauseDxModule,
+        MatSnackBarModule,
 
         DxButtonModule,
         DxDataGridModule,

@@ -27,7 +27,6 @@ import {UserModel} from '../shared/models/user-model';
 })
 export class WebuserComponent implements OnInit {
     users: Webuser[] = [];
-    private selectedIdWebuser: string;
     private labels = {};
     fireSafetyDepartments: DataSource;
     allFireSafetyDepartments: FireSafetyDepartmentLocalizedModel[] = [];
@@ -40,20 +39,19 @@ export class WebuserComponent implements OnInit {
     groups: GroupModel[] = [];
 
     public passwordOptions = {
-        onKeyUp: (ev) => {
-            const password = new Password();
-            const color = new Color();
-            const input = ev.component.element().querySelector('input');
-            const hue = password.quality(input.value) * 1.2 / 360;
-            const rgb = color.hslToRgb(hue, 1, 0.5);
-
-            if (input.value) {
-                input.style.backgroundColor = ['rgb(', rgb[0], ',', rgb[1], ',', rgb[2], ')'].join('');
-            }
-        },
-        onInitialized: (ev) => {
-            ev.component.option('mode', 'password');
+      onKeyUp: (ev) => {
+        const password = new Password();
+        const color = new Color();
+        const input = ev.component.element().querySelector('input');
+        const hue = password.quality(input.value) * 1.2 / 360;
+        const rgb = color.hslToRgb(hue, 1, 0.5);
+        if (input.value) {
+          input.style.backgroundColor = ['rgb(', rgb[0], ',', rgb[1], ',', rgb[2], ')'].join('');
         }
+      },
+      onInitialized: (ev) => {
+        ev.component.option('mode', 'password');
+      }
     };
     public readOnlyImported = !this.departmentService.readOnlyImported;
 
@@ -91,12 +89,12 @@ export class WebuserComponent implements OnInit {
         return false;
       }
       this.password = e.value;
-      const editData = e.validator.option('validationGroup');
       if (this.validateOnce) {
         this.dxForm.validate();
       } else {
         this.validateOnce = true;
       }
+
       return true;
     }
 
@@ -177,9 +175,9 @@ export class WebuserComponent implements OnInit {
       user.password = null;
     }
 
-   /* this.managementUserService.delete(user.id).subscribe(data => {
+    this.managementUserService.delete(user.id).subscribe(data => {
       this.getUsers();
-    });*/
+    });
   }
 
   private getUsers() {
@@ -253,6 +251,8 @@ export class WebuserComponent implements OnInit {
     const editData = e.validator.option('validationGroup');
     if (editData.type === 'insert' && !e.value) {
       return false;
+    } else if (editData.type === 'update' && !e.value) {
+      return true;
     }
     return true;
   }

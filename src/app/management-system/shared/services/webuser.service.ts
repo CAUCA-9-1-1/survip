@@ -4,6 +4,7 @@ import {Webuser} from '../models/webuser.model';
 import {RequestService} from '../../../shared/services/request.service';
 import {WebuserForWeb} from '../models/webuser-for-web.model';
 import {UserModel} from '@cause-911/management';
+import {map} from 'rxjs/operators';
 
 
 @Injectable()
@@ -14,7 +15,14 @@ export class WebuserService extends RequestService {
     }
 
     getAll(): Observable<Webuser[]> {
-        return this.get('UserManagement/GetAllUsersWithInfo');
+        return this.get('UserManagement/GetAllUsersWithInfo').pipe(
+          map( items => {
+            items.forEach(item => {
+              item.password = '';
+            });
+            return items;
+          })
+        );
     }
 
     getActive(): Observable<WebuserForWeb[]> {
