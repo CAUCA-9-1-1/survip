@@ -11,8 +11,9 @@ import ArrayStore from 'devextreme/data/array_store';
 import {FireSafetyDepartmentLocalizedModel} from '../shared/models/fire-safety-department-localized-model';
 import {PermissionManagementService} from '../shared/services/permission-management.service';
 import {PermissionManagement} from '../shared/models/permission-management';
-import {GroupModel, ManagementGroupService, UserGroupModel, UserPermissionModel} from '@cause-911/management';
+import {GroupModel, ManagementGroupService, ManagementUserService, UserGroupModel, UserPermissionModel} from '@cause-911/management';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {UserModel} from '../shared/models/user-model';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class WebuserComponent implements OnInit {
     password = '';
     dxForm: any;
     validateOnce = false;
-  groups: GroupModel[] = [];
+    groups: GroupModel[] = [];
 
     public passwordOptions = {
         onKeyUp: (ev) => {
@@ -62,6 +63,7 @@ export class WebuserComponent implements OnInit {
         private departmentService: FireSafetyDepartmentService,
         private managementPermissionService: PermissionManagementService,
         private managementGroupService: ManagementGroupService,
+        private managementUserService: ManagementUserService,
         breakpointObserver: BreakpointObserver,
     ) {
         translateService.get([
@@ -100,19 +102,20 @@ export class WebuserComponent implements OnInit {
 
     onFormInitialized = (e) => {
       this.dxForm = e.component;
-      console.log(e);
     }
 
     onInitNewRow(e) {
-        e.data = new Webuser();
+      e.data = new UserModel();
     }
 
     onRowInserted(e) {
-      this.saveUser(e.data as Webuser);
+      this.saveUser(e.data as UserModel);
     }
 
     onRowUpdated(e) {
-      this.saveUser(e.data as Webuser);
+      console.log('EEEE');
+      console.log(e);
+      this.saveUser(e.data as UserModel);
     }
 
     getUserFireSafetyDepartment(field, e) {
@@ -171,7 +174,7 @@ export class WebuserComponent implements OnInit {
   }
 
   onRowRemoved(e) {
-    const user = (e.data as Webuser);
+    const user = (e.data as UserModel);
 
     if (!user.password) {
       user.password = null;
@@ -188,18 +191,22 @@ export class WebuserComponent implements OnInit {
     });
   }
 
-  private saveUser(user: Webuser) {
+  private saveUser(user: UserModel) {
     if (user.groups) {
       user.groups.forEach(userGroup => {
         userGroup.idUser = user.id;
       });
     }
-    user.fireSafetyDepartments.forEach(userFireSafetyDepartment => {
-      userFireSafetyDepartment.userId = user.id;
-    });
-    /*this.managementUserService.saveUser(user).subscribe(data => {
+    console.log(user);
+    if (user.userFireSafetyDepartments) {
+      user.userFireSafetyDepartments.forEach(userFireSafetyDepartment => {
+        userFireSafetyDepartment.userId = user.id;
+      });
+    }
+    console.log('allo22');
+    this.managementUserService.save(user).subscribe(data => {
       this.getUsers();
-    });*/
+    });
   }
 
   getPermissionStatus(field, permission, e) {

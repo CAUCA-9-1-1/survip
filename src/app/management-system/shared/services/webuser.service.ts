@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Webuser} from '../models/webuser.model';
 import {RequestService} from '../../../shared/services/request.service';
 import {WebuserForWeb} from '../models/webuser-for-web.model';
+import {UserModel} from '@cause-911/management';
 
 
 @Injectable()
@@ -12,7 +13,7 @@ export class WebuserService extends RequestService {
         super(injector);
     }
 
-    getAll(): Observable<Webuser[]> {
+    getAll(): Observable<UserModel[]> {
         return this.get('UserManagement/GetAllUsersWithInfo');
     }
 
