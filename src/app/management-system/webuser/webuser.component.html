@@ -19,12 +19,18 @@
     [visible]="showColumnXS"
     [calculateDisplayValue]="calculateFireSafetyDepartmentsDisplayValue">
   </dxi-column>
+  <dxi-column
+    dataField="permissions"
+    editCellTemplate="permissionsEditTemplate"
+    [visible]="false">
+  </dxi-column>
 
   <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true" [useIcons]="true">
-    <dxo-popup [title]="'user.user' | translate" [showTitle]="true"></dxo-popup>
+    <dxo-popup [title]="'webuser' | translate" [showTitle]="true"></dxo-popup>
     <dxo-form colCount="1" [labelLocation]="showColumnXS ? 'left' : 'top'" [onInitialized]="onFormInitialized">
       <dxi-item itemType="group" colCount="2">
         <dxi-item dataField="userName" [isRequired]="true"></dxi-item>
+        <dxi-item dataField="userFireSafetyDepartments"></dxi-item>
         <dxi-item dataField="password" [editorOptions]="passwordOptions">
           <dxi-validation-rule type="custom" [message]="'user.passwordError' | translate"
                                [validationCallback]="onPasswordChanged"></dxi-validation-rule>
@@ -39,12 +45,14 @@
             [message]="'user.yourConfirmationMustBeTheSameAsYourPassword' | translate"></dxi-validation-rule>
         </dxi-item>
       </dxi-item>
-      <dxi-item dataField="userFireSafetyDepartments"></dxi-item>
       <dxi-item itemType="group" colCount="2" [caption]="'user.personalInfo' | translate">
         <dxi-item dataField="firstName" [isRequired]="true"></dxi-item>
         <dxi-item dataField="lastName" [isRequired]="true"></dxi-item>
         <dxi-item dataField="email"></dxi-item>
         <dxi-item dataField="phoneNumber" [editorOptions]="{ mask: '+1 (XXX) XXX-XXXX', maskRules: rules}"></dxi-item>
+      </dxi-item>
+      <dxi-item itemType="group" colCount="2" [caption]="'user.permissions' | translate">
+        <dxi-item dataField="permissions" colSpan="2"></dxi-item>
       </dxi-item>
     </dxo-form>
   </dxo-editing>
@@ -59,6 +67,23 @@
       (onInitialized)="getUserFireSafetyDepartment(field, $event)"
       (onValueChanged)="setUserFireSafetyDepartment(field, $event)">
     </dx-tag-box>
+  </div>
+
+  <div *dxTemplate="let field of 'permissionsEditTemplate'">
+    <dx-list
+      [dataSource]="permissions"
+      itemTemplate="rowTemplate"
+      [searchEnabled]="true"
+      [searchExpr]="['name', 'tag']"
+      [hoverStateEnabled]="false">
+      <div *dxTemplate="let permission of 'rowTemplate'">
+        <dx-check-box
+          [text]="permission.name"
+          (onInitialized)="getPermissionStatus(field, permission, $event)"
+          (onValueChanged)="checkBoxToggled(field, permission, $event)">
+        </dx-check-box>
+      </div>
+    </dx-list>
   </div>
 </dx-data-grid>
 <!-- <dx-data-grid

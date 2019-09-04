@@ -1,7 +1,15 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDialogModule, MatSelectModule} from '@angular/material';
-import {DxButtonModule, DxDataGridModule, DxFormModule, DxTreeViewModule, DxColorBoxModule, DxTagBoxModule} from 'devextreme-angular';
+import {MatDialogModule, MatSelectModule, MatTabsModule} from '@angular/material';
+import {
+  DxButtonModule,
+  DxDataGridModule,
+  DxFormModule,
+  DxTreeViewModule,
+  DxColorBoxModule,
+  DxTagBoxModule,
+  DxListModule, DxCheckBoxModule
+} from 'devextreme-angular';
 
 import {SharedModule} from '../shared/shared.module';
 import {ManagementSystemComponent} from './management-system.component';
@@ -41,6 +49,7 @@ import config from '../../assets/config/config.json';
         ReactiveFormsModule,
         MatDialogModule,
         MatSelectModule,
+        MatTabsModule,
 
         DxButtonModule,
         DxDataGridModule,
@@ -48,6 +57,8 @@ import config from '../../assets/config/config.json';
         DxTreeViewModule,
         DxColorBoxModule,
         DxTagBoxModule,
+        DxListModule,
+        DxCheckBoxModule,
         CauseManagementModule.forRoot({
           apiUrl: config.apiUrl
         })
