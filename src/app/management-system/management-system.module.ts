@@ -24,6 +24,7 @@ import {RiskLevelComponent} from './risk-level/risk-level.component';
 import {UtilisationCodeComponent} from './utilisation-code/utilisation-code.component';
 import {CauseManagementModule} from '@cause-911/management';
 import config from '../../assets/config/config.json';
+import {CauseDxModule} from '@cause-911/devextreme';
 @NgModule({
     declarations: [
         ManagementSystemComponent,
@@ -50,6 +51,7 @@ import config from '../../assets/config/config.json';
         MatDialogModule,
         MatSelectModule,
         MatTabsModule,
+        CauseDxModule,
 
         DxButtonModule,
         DxDataGridModule,
