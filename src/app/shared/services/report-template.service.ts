@@ -36,7 +36,7 @@ export class ReportTemplateService extends RequestService {
   }
 
   saveTemplate(template: ConfigurationTemplate): Observable<PostModel> {
-    if (template.data && template.data.indexOf('/* Minimal styling to center the editor in this sample */') === -1) {
+    if (template.data !== undefined && template.data.indexOf('/* Minimal styling to center the editor in this sample */') === -1) {
       template.data = templateCSSPreprocessor + template.data;
     }
     return this.http.post<PostModel>(this.apiUrl + 'ReportConfigurationTemplate/',
