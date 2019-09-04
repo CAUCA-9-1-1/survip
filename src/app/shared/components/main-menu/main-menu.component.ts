@@ -29,7 +29,7 @@ export class MainMenuComponent implements OnInit {
     public refresh() {
         const items = [];
         const management = {
-            name: 'management',
+            name: 'management.title',
             path: '',
             items: [],
         };
