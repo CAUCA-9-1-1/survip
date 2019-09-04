@@ -14,7 +14,8 @@ import {DepartmentComponent} from './department/department.component';
 import {HazardousMaterialComponent} from './hazardous-material/hazardous-material.component';
 import {RiskLevelComponent} from './risk-level/risk-level.component';
 import {UtilisationCodeComponent} from './utilisation-code/utilisation-code.component';
-
+import {CauseManagementModule} from '@cause-911/management';
+import config from '../../assets/config/config.json';
 @NgModule({
     declarations: [
         ManagementSystemComponent,
@@ -46,7 +47,10 @@ import {UtilisationCodeComponent} from './utilisation-code/utilisation-code.comp
         DxFormModule,
         DxTreeViewModule,
         DxColorBoxModule,
-        DxTagBoxModule
+        DxTagBoxModule,
+        CauseManagementModule.forRoot({
+          apiUrl: config.apiUrl
+        })
     ],
     providers: [],
 })
