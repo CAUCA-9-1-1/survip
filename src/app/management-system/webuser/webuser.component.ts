@@ -1,16 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {GridWithCrudService} from '../../shared/classes/grid-with-crud-service';
 import {Webuser} from '../shared/models/webuser.model';
 import {WebuserService} from '../shared/services/webuser.service';
 import {FireSafetyDepartmentService} from '../shared/services/firesafetydepartment.service';
 import {Password} from '../../shared/classes/password';
 import {Color} from '../../shared/classes/color';
 import {UserFireSafetyDepartmentModel} from '../shared/models/user-fire-safety-department-model';
-import {FireSafetyDepartment} from '../shared/models/firesafetydepartment.model';
 import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
 import {FireSafetyDepartmentLocalizedModel} from '../shared/models/fire-safety-department-localized-model';
+import {PermissionManagementService} from '../shared/services/permission-management.service';
+import {PermissionManagement} from '../shared/models/permission-management';
+import {UserPermissionModel} from '@cause-911/management';
+
 
 @Component({
     selector: 'app-management-system-webuser',
@@ -26,14 +28,12 @@ export class WebuserComponent implements OnInit {
     private selectedPassword: string;
     private selectedIdWebuser: string;
     private labels = {};
-    private departmentField: any;
     fireSafetyDepartments: DataSource;
     allFireSafetyDepartments: FireSafetyDepartmentLocalizedModel[] = [];
     showColumnXS = true;
+    permissions: PermissionManagement[] = [];
+    rules: Object;
 
-    public displayDepartmentValidationError = false;
-    public departments: any = {store: []};
-    public webuserFireSafetyDepartments = [];
     public passwordOptions = {
         onKeyUp: (ev) => {
             const password = new Password();
@@ -56,6 +56,7 @@ export class WebuserComponent implements OnInit {
         private webuserService: WebuserService,
         protected translateService: TranslateService,
         private departmentService: FireSafetyDepartmentService,
+        private managementPermissionService: PermissionManagementService
     ) {
         translateService.get([
             'passwordError',
@@ -63,7 +64,9 @@ export class WebuserComponent implements OnInit {
         ]).subscribe(labels => {
             this.labels = labels;
         });
+        this.rules = { 'X': /[0-9]/ };
         this.getFireSafetyDepartments();
+        this.managementPermissionService.getAllPermissions().subscribe(permission => this.permissions = permission);
     }
 
     ngOnInit() {
@@ -211,9 +214,53 @@ export class WebuserComponent implements OnInit {
     user.fireSafetyDepartments.forEach(userFireSafetyDepartment => {
       userFireSafetyDepartment.userId = user.id;
     });
-  console.log(user);
     /*this.managementUserService.saveUser(user).subscribe(data => {
       this.getUsers();
     });*/
+  }
+
+  getPermissionStatus(field, permission, e) {
+    const userPermission = (field.value || []).find(p => p.idModulePermission === permission.id);
+
+    if (userPermission) {
+      e.component.option('value', userPermission.isAllowed);
+    } else {
+      e.component.option('value', undefined);
+    }
+  }
+
+  checkBoxToggled(field, permission, e) {
+    if (e.component.skipOnValueChanged) {
+      e.component.skipOnValueChanged = false;
+      return;
+    }
+    if (e.component.setUndefinedNextTime) {
+      e.component.setUndefinedNextTime = false;
+      e.component.skipOnValueChanged = true;
+      e.component.option('value', undefined);
+      this.setPermissionStatus(field, permission, undefined);
+      return;
+    }
+    if (e.value === false) {
+      e.component.setUndefinedNextTime = true;
+    }
+
+    this.setPermissionStatus(field, permission, e.value);
+  }
+
+  private setPermissionStatus(field, permission, value) {
+    const userPermissions = field.value || [];
+    const groupIndex = userPermissions.findIndex(p => p.idModulePermission === permission.id);
+
+    if (groupIndex > -1) {
+      userPermissions[groupIndex].isAllowed = value;
+    } else {
+      userPermissions.push({
+        idModulePermission: permission.id,
+        isAllowed: value,
+      } as UserPermissionModel);
+    }
+
+    field.setValue(JSON.parse(JSON.stringify(userPermissions)));
   }
 }
