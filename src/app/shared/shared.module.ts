@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {
@@ -15,8 +15,6 @@ import {
     MatToolbarModule
 } from '@angular/material';
 import {DxButtonModule, DxPopupModule, DxTabPanelModule, DxTextBoxModule, DxValidatorModule} from 'devextreme-angular';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {WebSketchToolModule} from 'lib-sketch-tool';
 
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
@@ -33,9 +31,6 @@ const config = new Configuration();
 config.languages = ['fr', 'en'];
 config.libraries = ['devextreme', 'management'];
 
-export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http);
-}
 
 @NgModule({
     declarations: [
@@ -71,7 +66,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         DxValidatorModule,
         DxPopupModule,
 
-        TranslateModule,
         MainMenuComponent,
         MultilangComponent,
         SlideshowComponent,
@@ -79,6 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         UploadComponent,
         NoAccessComponent,
         GeolocationComponent,
+        CauseCoreModule
     ],
     imports: [
         BrowserModule,
@@ -102,13 +97,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         DxValidatorModule,
         DxPopupModule,
         WebSketchToolModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        }),
       CauseCoreModule.forRoot(config),
     ],
     providers: [
