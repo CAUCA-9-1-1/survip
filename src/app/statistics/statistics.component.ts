@@ -34,7 +34,7 @@ export class StatisticsComponent implements OnInit {
     public labels: string[];
 
     colors = {
-        visits: ['#447bdd', '#ff8a2f', '#fd9e54', '#c4c4c4'],
+        visits: ['#447bdd', '#ff8a2f', '#c4c4c4'],
         results: ['#ffff0a', '#447bdd'],
     };
 
@@ -56,7 +56,7 @@ export class StatisticsComponent implements OnInit {
         public translateService: TranslateService
     ) {
         this.translateService.get([
-            'visits', 'objective', 'numberResponseSuccess', 'numberResponseAbsent', 'numberDoorHangerLeft', 'numberInspectionRefused'
+            'visits', 'objective', 'numberResponseSuccess', 'numberResponseAbsent', 'numberInspectionRefused'
         ]).subscribe(labels => {
             this.labels = labels;
         });
@@ -156,11 +156,6 @@ export class StatisticsComponent implements OnInit {
             description: this.labels['numberResponseAbsent'],
             total: this.currentYearInspections.filter((el) => {
                 return (el.ownerWasAbsent && !el.doorHangerHasBeenLeft);
-            }).length,
-        }, {
-            description: this.labels['numberDoorHangerLeft'],
-            total: this.currentYearInspections.filter((el) => {
-                return (el.doorHangerHasBeenLeft === true);
             }).length,
         }, {
             description: this.labels['numberInspectionRefused'],
