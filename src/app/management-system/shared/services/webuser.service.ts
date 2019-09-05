@@ -29,12 +29,8 @@ export class WebuserService extends RequestService {
         return this.get('Webuser/Active/Departments');
     }
 
-    getActiveForPermissions(): Observable<WebuserForWeb[]> {
-      return this.get('Webuser/Active');
-    }
-
-    save(webuser: Webuser) {
-        return this.post('Webuser', webuser);
+    save(webuser: UserModel): Observable<any> {
+        return this.post('UserManagement/SaveUserWithFireSafetyDepartments', webuser);
     }
 
     remove(idWebuser: string) {

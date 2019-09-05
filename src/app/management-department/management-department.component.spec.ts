@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TestModule} from '../test.module.spec';
 import {ManagementDepartmentComponent} from './management-department.component';
-import {PermissionComponent} from '../management-system/permission/permission.component';
+import {GroupsComponent} from '../management-system/groups/groups.component';
 import {WebuserComponent} from '../management-system/webuser/webuser.component';
 import {ApisactionComponent} from './apisaction/apisaction.component';
 import {DepartmentComponent} from '../management-system/department/department.component';
@@ -21,7 +21,7 @@ describe('ManagementDepartmentComponent', () => {
                 ApisactionComponent,
                 DepartmentComponent,
                 FirestationComponent,
-                PermissionComponent,
+                GroupsComponent,
                 WebuserComponent,
             ],
             providers: []

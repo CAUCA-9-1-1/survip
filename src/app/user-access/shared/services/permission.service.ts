@@ -13,7 +13,7 @@ export class PermissionService extends RequestService {
     }
 
     public getObjectPermission(idPermissionObject): Observable<Permission[]> {
-        return this.get('permission/' + idPermissionObject);
+        return this.get('groups/' + idPermissionObject);
     }
 
     public getUserPermission(idWebuser): Observable<Permission[]> {
