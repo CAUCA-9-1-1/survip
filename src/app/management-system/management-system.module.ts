@@ -16,7 +16,7 @@ import {ManagementSystemComponent} from './management-system.component';
 import {AddUserInGroupComponent} from './add-user-in-group/add-user-in-group.component';
 import {AddGroupComponent} from './add-group/add-group.component';
 import {AskRemoveItemComponent} from './ask-remove-item/ask-remove-item.component';
-import {PermissionComponent} from './permission/permission.component';
+import {GroupsComponent} from './groups/groups.component';
 import {WebuserComponent} from './webuser/webuser.component';
 import {DepartmentComponent} from './department/department.component';
 import {HazardousMaterialComponent} from './hazardous-material/hazardous-material.component';
@@ -35,7 +35,7 @@ import {CauseDxModule} from '@cause-911/devextreme';
         HazardousMaterialComponent,
         RiskLevelComponent,
         UtilisationCodeComponent,
-        PermissionComponent,
+        GroupsComponent,
         WebuserComponent,
     ],
     entryComponents: [

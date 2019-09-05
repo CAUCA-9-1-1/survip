@@ -1,10 +1,13 @@
 <app-no-access [fxShow]="!accessTo.webuser && !accessTo.permission && !accessTo.department && !accessTo.hazardousMaterial && !accessTo.riskLevel && !accessTo.utilisationCode"></app-no-access>
-<mat-tab-group [selectedIndex]="accessTo.webuser ? 0 : accessTo.permission ? 1 : accessTo.department ? 2 : accessTo.hazardousMaterial ? 3 : accessTo.riskLevel ? 4 : 5">
+<mat-tab-group [selectedIndex]="accessTo.webuser ? 0 : accessTo.permission ? 1 : accessTo.department ? 2 : accessTo.hazardousMaterial ? 3 : accessTo.riskLevel ? 4 : 5"
+               (selectedTabChange)="selectedIndexChanged($event)">
     <mat-tab label="{{'webuser' | translate}}" [disabled]="!accessTo.webuser">
         <app-management-system-webuser [fxShow]="accessTo.webuser"></app-management-system-webuser>
     </mat-tab>
     <mat-tab label="{{'groups' | translate}}" [disabled]="!accessTo.permission">
-        <app-management-system-permission [fxShow]="accessTo.permission"></app-management-system-permission>
+        <span *ngIf="showGroupTab">
+            <app-management-system-permission [fxShow]="accessTo.permission"></app-management-system-permission>
+        </span>
     </mat-tab>
     <mat-tab label="{{'fireSafetyDepartment' | translate}}" [disabled]="!accessTo.department">
         <app-management-system-department [fxShow]="accessTo.department"></app-management-system-department>

@@ -26,6 +26,7 @@ import {UserModel} from '../shared/models/user-model';
     ]
 })
 export class WebuserComponent implements OnInit {
+
     users: Webuser[] = [];
     private labels = {};
     fireSafetyDepartments: DataSource;
@@ -169,15 +170,15 @@ export class WebuserComponent implements OnInit {
   }
 
   onRowRemoved(e) {
-    const user = (e.data as UserModel);
+      const user = (e.data as UserModel);
 
-    if (!user.password) {
-      user.password = null;
-    }
+      if (!user.password) {
+          user.password = null;
+      }
 
-    this.managementUserService.delete(user.id).subscribe(data => {
-      this.getUsers();
-    });
+      this.managementUserService.delete(user.id).subscribe(data => {
+          this.getUsers();
+      });
   }
 
   private getUsers() {
@@ -197,8 +198,8 @@ export class WebuserComponent implements OnInit {
         userFireSafetyDepartment.userId = user.id;
       });
     }
-    this.managementUserService.save(user).subscribe(data => {
-      this.getUsers();
+    this.webuserService.save(user).subscribe(users => {
+        this.getUsers();
     });
   }
 

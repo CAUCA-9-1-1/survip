@@ -19,6 +19,7 @@ export class ManagementSystemComponent implements OnInit {
         utilisationCode: false,
         webuser: false,
     };
+    showGroupTab = false;
 
     public constructor(
         private activeRoute: ActivatedRoute,
@@ -40,5 +41,9 @@ export class ManagementSystemComponent implements OnInit {
         this.accessTo.riskLevel = this.authGuardService.hasRight('RightRiskLevelManagement');
         this.accessTo.webuser = this.authGuardService.hasRight('RightUserManagement');
         this.accessTo.utilisationCode = this.authGuardService.hasRight('RightUtilisationCodeManagement');
+    }
+
+    selectedIndexChanged(e) {
+        this.showGroupTab = e.index === 1;
     }
 }
