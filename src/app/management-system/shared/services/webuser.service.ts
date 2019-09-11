@@ -26,7 +26,7 @@ export class WebuserService extends RequestService {
     }
 
     getActive(): Observable<WebuserForWeb[]> {
-        return this.get('Webuser/Active/Departments');
+        return this.get('User/Active/Departments');
     }
 
     save(webuser: UserModel): Observable<any> {
