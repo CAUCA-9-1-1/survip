@@ -14,11 +14,11 @@ export class AuthenticationService {
         private http: HttpClient,
     ) {
         this.isLogged.next(sessionStorage.getItem('accessToken') ? true : false);
-        /*this.status().subscribe(logged => {
+        this.status().subscribe(logged => {
             this.isLogged.next(logged);
         }, error => {
             this.isLogged.next(false);
-        });*/
+        });
     }
 
     login(username: string, password: string): Observable<any> {
