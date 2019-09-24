@@ -20,6 +20,7 @@ export class ManagementSystemComponent implements OnInit {
         webuser: false,
     };
     showGroupTab = false;
+    showUserTab = true;
 
     public constructor(
         private activeRoute: ActivatedRoute,
@@ -45,5 +46,6 @@ export class ManagementSystemComponent implements OnInit {
 
     selectedIndexChanged(e) {
         this.showGroupTab = e.index === 1;
+        this.showUserTab = e.index === 0;
     }
 }

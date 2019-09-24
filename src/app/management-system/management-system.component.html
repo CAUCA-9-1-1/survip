@@ -2,7 +2,9 @@
 <mat-tab-group [selectedIndex]="accessTo.webuser ? 0 : accessTo.permission ? 1 : accessTo.department ? 2 : accessTo.hazardousMaterial ? 3 : accessTo.riskLevel ? 4 : 5"
                (selectedTabChange)="selectedIndexChanged($event)">
     <mat-tab label="{{'webuser' | translate}}" [disabled]="!accessTo.webuser">
+      <span *ngIf="showUserTab">
         <app-management-system-webuser [fxShow]="accessTo.webuser"></app-management-system-webuser>
+      </span>
     </mat-tab>
     <mat-tab label="{{'groups' | translate}}" [disabled]="!accessTo.permission">
         <span *ngIf="showGroupTab">
