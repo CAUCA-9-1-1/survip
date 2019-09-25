@@ -38,8 +38,11 @@ export class WebuserComponent implements OnInit {
     dxForm: any;
     validateOnce = false;
     groups: GroupModel[] = [];
+    isPasswordEnabled = false;
 
     public passwordOptions = {
+      readOnly: true,
+      onContentReady: (ev) => { this.activeAfterBrowserAutoComplete(ev); },
       onKeyUp: (ev) => {
         const password = new Password();
         const color = new Color();
@@ -80,23 +83,40 @@ export class WebuserComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getFireSafetyDepartments();
-        this.getUsers();
-        this.getGroups();
+          this.getFireSafetyDepartments();
+          this.getUsers();
+          this.getGroups();
+    }
+
+    activeAfterBrowserAutoComplete(e) {
+      setTimeout(() => {
+        e.component.option('readOnly', false);
+      }, 1000);
     }
 
     onPasswordChanged = (e) => {
+      let isPasswordRequired = false;
+      const editData = e.validator.option('validationGroup');
+      if (editData.type === 'insert' && !e.value) {
+        isPasswordRequired = false;
+      } else if (editData.type === 'update' && !e.value) {
+        isPasswordRequired =  true;
+      } else {
+        isPasswordRequired =  true;
+      }
+
+      let passwordIsValid = false;
       if (e.value && e.value.length < 6) {
-        return false;
+        passwordIsValid = false;
       }
       this.password = e.value;
-      if (this.validateOnce) {
+      if (this.validateOnce && this.dxForm) {
         this.dxForm.validate();
       } else {
         this.validateOnce = true;
       }
 
-      return true;
+      return passwordIsValid && isPasswordRequired;
     }
 
     onFormInitialized = (e) => {
@@ -104,7 +124,7 @@ export class WebuserComponent implements OnInit {
     }
 
     onInitNewRow(e) {
-      e.data = new UserModel();
+        e.data = new UserModel();
     }
 
     onRowInserted(e) {

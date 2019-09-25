@@ -432,6 +432,7 @@
     "permissions" : "Permissions",
     "yourConfirmationMustBeTheSameAsYourPassword": "Votre confirmation doit être identique à votre mot de passe"
   },
+  "yourConfirmationMustBeTheSameAsYourPassword": "Votre confirmation doit être identique à votre mot de passe",
   "managementTitle" : "Gestion",
   "personalInfo" : "Informations personnelles",
   "groups" : "Groupes"
