@@ -435,5 +435,6 @@
     "permissions" : "Permissions",
     "yourConfirmationMustBeTheSameAsYourPassword": "Your confirmation must be the same as your password"
   },
+  "yourConfirmationMustBeTheSameAsYourPassword": "Your confirmation must be the same as your password",
   "managementTitle" : "Gestion"
 }
