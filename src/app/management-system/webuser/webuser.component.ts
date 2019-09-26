@@ -38,7 +38,7 @@ export class WebuserComponent implements OnInit {
     dxForm: any;
     validateOnce = false;
     groups: GroupModel[] = [];
-    isPasswordEnabled = false;
+    count = 1;
 
     public passwordOptions = {
       readOnly: true,
@@ -95,6 +95,8 @@ export class WebuserComponent implements OnInit {
     }
 
     onPasswordChanged = (e) => {
+      this.password = e.value;
+      this.count++;
       let isPasswordRequired = false;
       const editData = e.validator.option('validationGroup');
       if (editData.type === 'insert' && !e.value) {
@@ -105,17 +107,16 @@ export class WebuserComponent implements OnInit {
         isPasswordRequired =  true;
       }
 
-      let passwordIsValid = false;
+      let passwordIsValid = true;
       if (e.value && e.value.length < 6) {
         passwordIsValid = false;
       }
       this.password = e.value;
-      if (this.validateOnce && this.dxForm) {
+      if (this.validateOnce && this.dxForm && e.value.length === this.count + 1 || e.value.length === this.count -1) {
         this.dxForm.validate();
       } else {
         this.validateOnce = true;
       }
-
       return passwordIsValid && isPasswordRequired;
     }
 
