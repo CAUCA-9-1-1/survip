@@ -42,15 +42,13 @@
         <dxi-item dataField="password" [editorOptions]="passwordOptions">
           <dxi-validation-rule type="custom" [message]="'passwordError' | translate"
                                [validationCallback]="onPasswordChanged"></dxi-validation-rule>
-          <dxi-validation-rule type="custom" [message]="'passwordRequired' | translate"
-                               [validationCallback]="isPasswordRequired"></dxi-validation-rule>
         </dxi-item>
         <dxi-item dataField="confirmPassword" [editorOptions]="passwordOptions">
           <dxo-label [text]="'passwordConfirm' | translate"></dxo-label>
           <dxi-validation-rule
             type="compare"
             [comparisonTarget]="passwordComparison"
-            [message]="'management.yourConfirmationMustBeTheSameAsYourPassword' | translate"></dxi-validation-rule>
+            [message]="'yourConfirmationMustBeTheSameAsYourPassword' | translate"></dxi-validation-rule>
         </dxi-item>
         <dxi-item dataField="groups"></dxi-item>
       </dxi-item>
