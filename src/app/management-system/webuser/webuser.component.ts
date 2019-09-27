@@ -177,7 +177,7 @@ export class WebuserComponent implements OnInit {
     });
   }
 
-  calculateFireSafetyDepartmentsDisplayValue = (e) => {
+  calculateFireSafetyDepartmentsCellValue = (e) => {
     const userFireSafetyDepartments = (e.userFireSafetyDepartments ? e.userFireSafetyDepartments as UserFireSafetyDepartmentModel[] : []);
     let fireSafetyDepartmentsName: any[] = [];
     userFireSafetyDepartments.forEach(userFireSafetyDepartment => {
@@ -269,21 +269,11 @@ export class WebuserComponent implements OnInit {
     field.setValue(JSON.parse(JSON.stringify(userPermissions)));
   }
 
-  isPasswordRequired(e) {
-    const editData = e.validator.option('validationGroup');
-    if (editData.type === 'insert' && !e.value) {
-      return false;
-    } else if (editData.type === 'update' && !e.value) {
-      return true;
-    }
-    return true;
-  }
-
   passwordComparison = () => {
     return this.password;
   }
 
-  calculateGroupsDisplayValue = (e) => {
+  calculateGroupsCellValue = (e) => {
     const userGroups = (e.groups ? e.groups as UserGroupModel[] : []);
     let groupsName: any[] = [];
     userGroups.forEach(userGroup => {
