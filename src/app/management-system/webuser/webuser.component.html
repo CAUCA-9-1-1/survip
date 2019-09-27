@@ -17,7 +17,7 @@
     [caption]="'fireSafetyDepartments' | translate"
     editCellTemplate="fireSafetyDepartmentsEditTemplate"
     [visible]="showColumnXS"
-    [calculateDisplayValue]="calculateFireSafetyDepartmentsDisplayValue">
+    [calculateCellValue]="calculateFireSafetyDepartmentsCellValue">
   </dxi-column>
   <dxi-column
     dataField="permissions"
@@ -30,7 +30,7 @@
     [caption]="'groups' | translate"
     editCellTemplate="groupsEditTemplate"
     [visible]="showColumnXS"
-    [calculateDisplayValue]="calculateGroupsDisplayValue"
+    [calculateCellValue]="calculateGroupsCellValue"
    >
   </dxi-column>
   <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true" [useIcons]="true">

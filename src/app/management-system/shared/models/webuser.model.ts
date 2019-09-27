@@ -11,8 +11,8 @@ export class Webuser extends BaseModel {
     lastName: string;
     email: string;
     isActive: boolean;
-    fireSafetyDepartments: any[];
+    userFireSafetyDepartments: any[];
     phoneNumber: string;
     permissions: Permission[];
-    groups: UserGroupModel[];
+    userGroup: UserGroupModel[];
 }
