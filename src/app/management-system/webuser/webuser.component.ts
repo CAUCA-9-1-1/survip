@@ -225,6 +225,8 @@ export class WebuserComponent implements OnInit {
     this.webuserService.save(user).subscribe(users => {
         this.getUsers();
     });
+    this.userFireSafetyDepartments = [];
+    this.userGroups = [];
   }
 
   getPermissionStatus(field, permission, e) {
