@@ -58,6 +58,8 @@ export class WebuserComponent implements OnInit {
       }
     };
     public readOnlyImported = !this.departmentService.readOnlyImported;
+  private userFireSafetyDepartments: any[] | UserFireSafetyDepartmentModel[];
+  private userGroups: any;
 
     constructor(
         private webuserService: WebuserService,
@@ -138,9 +140,9 @@ export class WebuserComponent implements OnInit {
 
     getUserFireSafetyDepartment(field, e) {
       const userFireSafetyDepartments: string[] = [];
-      if (field.value) {
-        field.value.forEach((userFireSafetyDepartment: UserFireSafetyDepartmentModel) => {
-          userFireSafetyDepartments.push(userFireSafetyDepartment.fireSafetyDepartmentId);
+      if (this.userFireSafetyDepartments) {
+        this.userFireSafetyDepartments.forEach(department => {
+          userFireSafetyDepartments.push(department.fireSafetyDepartmentId);
         });
       }
       e.component.option('value', userFireSafetyDepartments);
@@ -150,12 +152,13 @@ export class WebuserComponent implements OnInit {
     const userFireSafetyDepartments: UserFireSafetyDepartmentModel[] = [];
     const fireSafetyDepartmentIds: string[] = [];
     e.value.forEach(fireSafetyDepartmentId => {
-      const fireSafetyDepartmentIndex = (field.value || []).findIndex(u => u.fireSafetyDepartmentId === fireSafetyDepartmentId);
+      const fireSafetyDepartmentIndex = (field.data.userFireSafetyDepartments || [])
+        .findIndex(u => u.fireSafetyDepartmentId === fireSafetyDepartmentId);
       fireSafetyDepartmentIds.push(fireSafetyDepartmentId);
       if (fireSafetyDepartmentIndex === -1) {
         userFireSafetyDepartments.push({ fireSafetyDepartmentId, } as UserFireSafetyDepartmentModel);
       } else {
-        userFireSafetyDepartments.push(field.value[fireSafetyDepartmentIndex]);
+        userFireSafetyDepartments.push(field.data.userFireSafetyDepartments[fireSafetyDepartmentIndex]);
       }
     });
     field.setValue(JSON.parse(JSON.stringify(userFireSafetyDepartments)));
@@ -288,13 +291,11 @@ export class WebuserComponent implements OnInit {
 
   getUserGroup(field, e) {
     const groups: string[] = [];
-
-    if (field.value) {
-      field.value.forEach((userGroup: UserGroupModel) => {
-        groups.push(userGroup.idGroup);
+    if (this.userGroups) {
+      this.userGroups.forEach(group => {
+        groups.push(group.idGroup);
       });
     }
-
     e.component.option('value', groups);
   }
 
@@ -302,12 +303,12 @@ export class WebuserComponent implements OnInit {
     const userGroup: UserGroupModel[] = [];
 
     e.value.forEach(idGroup => {
-      const groupIndex = (field.value || []).findIndex(u => u.idGroup === idGroup);
+      const groupIndex = (field.data.groups || []).findIndex(u => u.idGroup === idGroup);
 
       if (groupIndex === -1) {
         userGroup.push({ idGroup, } as UserGroupModel);
       } else {
-        userGroup.push(field.value[groupIndex]);
+        userGroup.push(field.data.groups[groupIndex]);
       }
     });
 
@@ -316,5 +317,10 @@ export class WebuserComponent implements OnInit {
 
   private getGroups() {
     this.managementGroupService.getAll().subscribe(groups => this.groups = groups);
+  }
+
+  onEditingStart(e: any) {
+    this.userFireSafetyDepartments = e.data.userFireSafetyDepartments;
+    this.userGroups = e.data.groups;
   }
 }

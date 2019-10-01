@@ -3,6 +3,7 @@
   [dataSource]="users"
   (onInitNewRow)="onInitNewRow($event)"
   (onRowInserted)="onRowInserted($event)"
+  (onEditingStart)="onEditingStart($event)"
   (onRowUpdated)="onRowUpdated($event)"
   (onRowRemoved)="onRowRemoved($event)">
   <dxi-column dataField="userName" [caption]="'username' | translate"></dxi-column>
