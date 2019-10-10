@@ -6,7 +6,6 @@ import {v4 as uuid} from 'uuid';
 import {fabric} from 'fabric';
 import {MatSnackBar} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
-import {DxDataGridComponent} from 'devextreme-angular';
 
 @Component({
     selector: 'app-image',
@@ -18,7 +17,7 @@ import {DxDataGridComponent} from 'devextreme-angular';
     ]
 })
 export class ImageComponent implements OnInit {
-    @ViewChild('container', {static: false}) container: ElementRef;
+    @ViewChild('container', {static: true}) container: ElementRef;
     @Output() valueChanged = new EventEmitter();
     @Input() height = '150px';
     @Input() allowChange = false;
@@ -63,9 +62,9 @@ export class ImageComponent implements OnInit {
     public picture: Picture;
     public icon = 'plus';
     public isPopupVisible = false;
-    public pictogramsPath = "./assets/pictograms/";
-    public pictograms =["AccesPrincipal.png", "Annonciateur.png", "BoiteClees.png", "BorneIncendie.png",
-                        "CamionPompier.png", "GazNaturel.png", "GazPropane.png", "Generatrice.png"];
+    public pictogramsPath = './assets/pictograms/';
+    public pictograms = ['AccesPrincipal.png', 'Annonciateur.png', 'BoiteClees.png', 'BorneIncendie.png',
+                        'CamionPompier.png', 'GazNaturel.png', 'GazPropane.png', 'Generatrice.png'];
 
     private labels = {};
     private canvas = null;
